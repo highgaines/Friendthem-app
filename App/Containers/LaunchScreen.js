@@ -33,11 +33,13 @@ export default class LaunchScreen extends Component {
           >
           <ScrollView style={styles.container}>
             <View style={styles.centered}>
-              <Image source={Images.launch} style={styles.logo} />
+              <Image
+                style={{ marginTop: 150 }} source={require('../Images/logo.png')}
+              />
             </View>
 
             <View style={styles.section} >
-              <Image source={Images.ready} />
+
               <TouchableOpacity onPress={this._fbAuth}>
                 <Text style={styles.sectionText}>
                   Login with Facebook
