@@ -18,7 +18,7 @@ export default class LaunchScreen extends Component {
   }
 
   render () {
-    debugger
+
     return (
       <View style={styles.mainContainer}>
         <LinearGradient
@@ -29,9 +29,9 @@ export default class LaunchScreen extends Component {
           >
           <ScrollView style={styles.container}>
             <View style={styles.centered}>
-              <Text style={styles.title}>
-                FriendThem
-              </Text>
+              <Image
+                style={{ marginTop: 150 }} source={require('../Images/logo.png')}
+              />
             </View>
 
             <View style={styles.section} >
