@@ -1,13 +1,28 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Image, View } from 'react-native'
+import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
 import { Images } from '../Themes'
 import LinearGradient from 'react-native-linear-gradient';
+import FBSDK, { LoginManager } from 'react-native-fbsdk'
 
 // Styles
 import styles from './Styles/LaunchScreenStyles'
 
 export default class LaunchScreen extends Component {
+
+  _fbAuth() {
+    LoginManager.logInWithReadPermissions(['public_profile']).then(function(result) {
+      if(result.isCancelled) {
+        console.log('Login cancelled')
+      } else {
+        console.log('Login Success:' + result.grantedPermissions)
+      }
+    }, function(error) {
+        console.log('An error occured:' + error)
+      })
+  }
+
   render () {
+    this._fbAuth = this._fbAuth.bind(this)
     return (
       <View style={styles.mainContainer}>
         <LinearGradient
@@ -23,9 +38,11 @@ export default class LaunchScreen extends Component {
 
             <View style={styles.section} >
               <Image source={Images.ready} />
-              <Text style={styles.sectionText}>
-                Naz is a noob
-              </Text>
+              <TouchableOpacity onPress={this._fbAuth}>
+                <Text style={styles.sectionText}>
+                  Login with Facebook
+                </Text>
+              </TouchableOpacity>
             </View>
           </ScrollView>
         </LinearGradient>

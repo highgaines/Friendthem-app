@@ -3,6 +3,7 @@ package com.friendthem;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.facebook.react.ReactNativeHost;
@@ -25,6 +26,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new FBSDKPackage(),
             new LinearGradientPackage(),
             new ReactNativeConfigPackage()
       );
