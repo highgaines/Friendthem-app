@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Metrics, ApplicationStyles } from '../../Themes/'
+import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
@@ -17,5 +17,13 @@ export default StyleSheet.create({
   },
   linearGradient: {
     flex: 1
+  },
+  title: {
+    marginTop: 30,
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'white',
+    fontFamily: Fonts.type.base,
   }
 })

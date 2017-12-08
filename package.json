@@ -32,10 +32,12 @@
     "querystringify": "1.0.0",
     "ramda": "^0.25.0",
     "react": "16.0.0",
+    "react-icons": "^2.2.7",
     "react-native": "0.50.4",
     "react-native-config": "^0.10.0",
     "react-native-linear-gradient": "react-native-community/react-native-linear-gradient",
     "react-native-router-flux": "^4.0.0-beta.24",
+    "react-native-vector-icons": "^4.4.2",
     "react-navigation": "^1.0.0-beta.21",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
@@ -45,6 +47,7 @@
     "seamless-immutable": "^7.1.2"
   },
   "devDependencies": {
+    "@expo/vector-icons": "^6.2.1",
     "@storybook/addon-storyshots": "^3.2.16",
     "@storybook/addons": "^3.2.16",
     "@storybook/channels": "^3.2.16",
@@ -64,6 +67,7 @@
     "jest": "21.2.1",
     "mockery": "^2.1.0",
     "react-dom": "16.0.0",
+    "react-native-elements": "^0.18.5",
     "react-test-renderer": "16.0.0",
     "reactotron-react-native": "^1.13.2",
     "reactotron-redux": "^1.13.0",
