@@ -8,8 +8,13 @@ import styles from './Styles/LaunchScreenStyles';
 import { SocialIcon } from 'react-native-elements';
 
 export default class LaunchScreen extends Component {
+
   LogInWithFacebook() {
-    console.log('logging in')
+    console.log('logging in to facebook!')
+  }
+
+  LogInWithTwitter() {
+    console.log('logging in to twitter!')
   }
 
   render () {
@@ -30,18 +35,16 @@ export default class LaunchScreen extends Component {
             </View>
 
             <View style={styles.section} >
-              <Image source={Images.ready} />
-              <Text style={styles.sectionText}>
-                Naz is a noob
-              </Text>
               <SocialIcon
-                title='Sign In With Facebook'
                 button
+                title='Sign In With Facebook'
+                onPress={this.LogInWithFacebook}
                 type='facebook'
               />
               <SocialIcon
-                title='Sign In With Twitter'
                 button
+                title='Sign In With Twitter'
+                onPress={this.LogInWithTwitter}
                 type='twitter'
               />
             </View>

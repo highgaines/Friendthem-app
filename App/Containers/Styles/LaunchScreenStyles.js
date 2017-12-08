@@ -19,8 +19,8 @@ export default StyleSheet.create({
     flex: 1
   },
   title: {
-    marginTop: 30,
-    fontSize: 20,
+    marginTop: 100,
+    fontSize: 50,
     fontWeight: 'bold',
     textAlign: 'center',
     color: 'white',
