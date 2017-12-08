@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
 import { Images } from '../Themes'
 import LinearGradient from 'react-native-linear-gradient';
+import { SocialIcon } from 'react-native-elements';
 import FBSDK, { LoginManager } from 'react-native-fbsdk'
 
 // Styles
@@ -21,6 +22,10 @@ export default class LaunchScreen extends Component {
       })
   }
 
+  _twitterAuth() {
+    console.log('twitter auth')
+  }
+
   render () {
     this._fbAuth = this._fbAuth.bind(this)
     return (
@@ -37,14 +42,19 @@ export default class LaunchScreen extends Component {
                 style={{ marginTop: 150 }} source={require('../Images/logo.png')}
               />
             </View>
-
             <View style={styles.section} >
-
-              <TouchableOpacity onPress={this._fbAuth}>
-                <Text style={styles.sectionText}>
-                  Login with Facebook
-                </Text>
-              </TouchableOpacity>
+              <SocialIcon
+                button
+                title='Sign In With Facebook'
+                onPress={this._fbAuth}
+                type='facebook'
+              />
+              <SocialIcon
+                button
+                title='Sign In With Twitter'
+                onPress={this._twitterAuth}
+                type='twitter'
+              />
             </View>
           </ScrollView>
         </LinearGradient>
