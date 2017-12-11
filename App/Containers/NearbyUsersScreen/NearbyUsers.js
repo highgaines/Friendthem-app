@@ -15,7 +15,7 @@ export default class NearbyUsers extends Component {
   render() {
     const { users, numUsers } = this.props
     return(
-      <View>
+      <View style={styles.nearbyUsersContainer}>
         <SearchBar numUsers={numUsers}/>
         <UsersContainer users={users}/>
       </View>

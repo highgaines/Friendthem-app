@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import { ScrollView, Text, Image, View, TouchableOpacity, Button } from 'react-native'
-import { Images } from '../Themes'
+import React, { Component } from 'react';
+import { ScrollView, Text, Image, View, TouchableOpacity, Button } from 'react-native';
+import { Images } from '../Themes';
+import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import { SocialIcon } from 'react-native-elements';
 import FBSDK, { LoginManager } from 'react-native-fbsdk';
@@ -8,7 +9,7 @@ import FBSDK, { LoginManager } from 'react-native-fbsdk';
 // Styles
 import styles from './Styles/LaunchScreenStyles'
 
-export default class LaunchScreen extends Component {
+class LaunchScreen extends Component {
 
   _fbAuth() {
     LoginManager.logInWithReadPermissions(['public_profile']).then(function(result) {
@@ -28,7 +29,9 @@ export default class LaunchScreen extends Component {
 
   render () {
     const { navigate } = this.props.navigation
+    const { users } = this.props
     this._fbAuth = this._fbAuth.bind(this)
+
     return (
       <View style={styles.mainContainer}>
         <LinearGradient
@@ -64,7 +67,7 @@ export default class LaunchScreen extends Component {
               />
               <Button
                 title='Go to Nearby Users'
-                onPress={() => navigate('NearbyUsersScreen', {numUsers: 2})}
+                onPress={() => navigate('NearbyUsersScreen', {numUsers: 2, users: users })}
               />
             </View>
           </ScrollView>
@@ -73,3 +76,9 @@ export default class LaunchScreen extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  users: state.facebook.users
+})
+
+export default connect(mapStateToProps)(LaunchScreen)

@@ -3,7 +3,7 @@ import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
-  container: {
-    paddingBottom: Metrics.baseMargin
+  nearbyUsersContainer: {
+    flex: 1
   }
 })
