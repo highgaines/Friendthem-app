@@ -5,14 +5,22 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   card: {
     backgroundColor: 'white',
-    borderRadius: 10,
-    height: 100,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    height: 130,
     margin: 3,
-    width: 120
+    width: 125
   },
   cardImage: {
     borderRadius: 100/2,
+    justifyContent: 'center',
     height: 100,
-    width: 100
+    width: 100,
+
+  },
+  cardText: {
+    marginTop: 5,
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10
   }
 })

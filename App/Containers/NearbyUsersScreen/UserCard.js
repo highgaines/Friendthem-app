@@ -11,7 +11,9 @@ export default function UserCard(props) {
   return(
     <View style={styles.card}>
       <Image style={styles.cardImage} source={image} />
-      <Text> {name} </Text>
+      <View style={styles.cardText}>
+        <Text > {name} </Text>
+      </View>
     </View>
   )
 }
