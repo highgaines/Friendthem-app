@@ -91,6 +91,9 @@
     ],
     "preset": "react-native"
   },
+  "nrpm": {
+    "assets": [ "/assets/Fonts" ]
+  },
   "config": {},
   "standard": {
     "parser": "babel-eslint",

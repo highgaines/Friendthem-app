@@ -3,7 +3,7 @@ import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
 import { Images } from '../Themes'
 import LinearGradient from 'react-native-linear-gradient';
 import { SocialIcon } from 'react-native-elements';
-import FBSDK, { LoginManager } from 'react-native-fbsdk'
+import FBSDK, { LoginManager } from 'react-native-fbsdk';
 
 // Styles
 import styles from './Styles/LaunchScreenStyles'
@@ -41,6 +41,12 @@ export default class LaunchScreen extends Component {
               <Image
                 style={{ marginTop: 150 }} source={require('../Images/logo.png')}
               />
+              <Text style={styles.primSubText}>
+                CONNECTING THE WORLD
+              </Text>
+              <Text style={styles.secSubText}>
+                Life Happens when people connect
+              </Text>
             </View>
             <View style={styles.section} >
               <SocialIcon
