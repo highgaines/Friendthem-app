@@ -25,8 +25,18 @@ class LaunchScreen extends Component {
       })
   }
 
-  _twitterAuth() {
-    console.log('twitter auth')
+  _fbProfileGetCallback(error, result) {
+    if (error) {
+      debugger
+    } else {
+      debugger
+    }
+  }
+
+  _getFbProfile() {
+    const getProfRequest = new GraphRequest('/me', null, this._fbProfileGetCallback,)
+
+    new GraphRequestManager().addRequest(getProfRequest).start()
   }
 
   render () {
