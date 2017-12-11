@@ -1,11 +1,13 @@
 import { StackNavigator } from 'react-navigation'
 import LaunchScreen from '../Containers/LaunchScreen'
+import NearbyUsers from '../Containers/NearbyUsersScreen/NearbyUsers'
 
 import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
-  LaunchScreen: { screen: LaunchScreen }
+  LaunchScreen: { screen: LaunchScreen },
+  NearbyUsersScreen: { screen: NearbyUsers }
 }, {
   // Default config for all screens
   headerMode: 'none',

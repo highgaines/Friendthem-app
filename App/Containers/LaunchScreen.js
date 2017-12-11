@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
+import { ScrollView, Text, Image, View, TouchableOpacity, Button } from 'react-native'
 import { Images } from '../Themes'
 import LinearGradient from 'react-native-linear-gradient';
 import { SocialIcon } from 'react-native-elements';
@@ -27,6 +27,7 @@ export default class LaunchScreen extends Component {
   }
 
   render () {
+    const { navigate } = this.props.navigation
     this._fbAuth = this._fbAuth.bind(this)
     return (
       <View style={styles.mainContainer}>
@@ -60,6 +61,10 @@ export default class LaunchScreen extends Component {
                 title='Sign In With Twitter'
                 onPress={this._twitterAuth}
                 type='twitter'
+              />
+              <Button
+                title='Go to Nearby Users'
+                onPress={() => navigate('NearbyUsersScreen', {numUsers: 2})}
               />
             </View>
           </ScrollView>

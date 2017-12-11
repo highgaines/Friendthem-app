@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Metrics, ApplicationStyles } from '../../Themes/'
+import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
@@ -16,11 +16,11 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   primSubText: {
-    marginTop:10,
+    marginTop:20,
     fontWeight: 'bold',
     fontStyle: 'italic',
     color: 'white',
-    fontSize: 20
+    fontSize: 15
   },
   secSubText: {
     marginTop: 2,
