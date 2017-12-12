@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { ScrollView, Text, Image, View, TouchableOpacity, Button } from 'react-native';
 import { Images } from '../Themes';
 import { connect } from 'react-redux';
-import LinearGradient from 'react-native-linear-gradient';
 import { SocialIcon } from 'react-native-elements';
+import LinearGradient from 'react-native-linear-gradient';
 import FBSDK, { LoginManager, LoginButton, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk';
 
 //Redux Actions
@@ -11,10 +11,6 @@ import UserStoreActions from '../Redux/UserStore';
 
 // Styles
 import styles from './Styles/LaunchScreenStyles';
-import { SocialIcon } from 'react-native-elements';
-
-
-class LaunchScreen extends Component {
 
 //Child Components
 import FBLogin from './FBLogin'
@@ -26,24 +22,27 @@ class LaunchScreen extends Component {
     this.state = {
       user: ''
     }
+
+    this.getFbProfile = this.getFbProfile.bind(this)
   }
 
   componentWillUpdate(nextProps) {
-    const { fbAuthToken } = this.props;
+    const { fbAuthToken, navigation } = this.props;
     const { navigate } = this.props.navigation
+
     if (!fbAuthToken && nextProps.fbAuthToken) {
-      this.getFbProfile(nextProps.fbAuthToken).then(result =>
-        navigate('UserProfileScreen')
-      )
+      this.getFbProfile(nextProps.fbAuthToken)
     }
   }
 
-  getFbProfile = (accessToken) => {
+  getFbProfile(accessToken) {
     const responseInfoCallback = (error, result) => {
       if (error) {
         console.log(error)
+        return error
       } else {
         this.props.userInfoRequestSuccess(result)
+        this.props.navigation.navigate('UserProfileScreen')
         // SInfo is a storage library for React Native that securely stores
         // any sensitive information using the iOS keychain, still contemplating
         // whether it is necessary at this stage of development
