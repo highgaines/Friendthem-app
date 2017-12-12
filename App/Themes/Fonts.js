@@ -1,5 +1,4 @@
 const type = {
-  base: 'Montserrat',
   bold: 'Avenir-Black',
   emphasis: 'HelveticaNeue-Italic'
 }

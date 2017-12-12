@@ -4,13 +4,20 @@ import { Images } from '../Themes';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import { SocialIcon } from 'react-native-elements';
-import FBSDK, { LoginManager } from 'react-native-fbsdk';
+import FBSDK, { LoginManager, LoginButton, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk';
+
+//Redux Actions
+import UserStoreActions from '../Redux/UserStore';
+
 // Styles
 import styles from './Styles/LaunchScreenStyles';
 import { SocialIcon } from 'react-native-elements';
 
 
 class LaunchScreen extends Component {
+
+//Child Components
+import FBLogin from './FBLogin'
 
 class LaunchScreen extends Component {
   constructor(props) {
@@ -21,10 +28,49 @@ class LaunchScreen extends Component {
     }
   }
 
+  componentWillUpdate(nextProps) {
+    const { fbAuthToken } = this.props;
+    const { navigate } = this.props.navigation
+    if (!fbAuthToken && nextProps.fbAuthToken) {
+      this.getFbProfile(nextProps.fbAuthToken).then(result =>
+        navigate('UserProfileScreen')
+      )
+    }
+  }
+
+  getFbProfile = (accessToken) => {
+    const responseInfoCallback = (error, result) => {
+      if (error) {
+        console.log(error)
+      } else {
+        this.props.userInfoRequestSuccess(result)
+        // SInfo is a storage library for React Native that securely stores
+        // any sensitive information using the iOS keychain, still contemplating
+        // whether it is necessary at this stage of development
+        //SInfo.setItem('userFBProfile', result, {})
+      }
+    }
+    const infoRequest = new GraphRequest(
+      '/me',
+      {
+        accessToken: accessToken,
+        parameters: {
+          fields: {
+            string: 'email,name,first_name,middle_name,last_name,id,picture'
+          }
+        }
+      },
+      responseInfoCallback
+    );
+
+  // Start the graph request.
+    new GraphRequestManager().addRequest(infoRequest).start();
+
+  }
+
   render () {
     const { navigate } = this.props.navigation
     const { users } = this.props
-    this._fbAuth = this._fbAuth.bind(this)
 
     return (
       <View style={styles.mainContainer}>
@@ -47,17 +93,7 @@ class LaunchScreen extends Component {
               </Text>
             </View>
             <View style={styles.section} >
-              <SocialIcon
-                button
-                title='Sign In With Facebook'
-                onPress={fbLogin}
-                type='facebook'
-              />
-              <LoginButton
-                publishPermissions={["publish_actions"]}
-                permissions={["public_profile", "user_friends", "user_location", "user_photos"]}
-                onLoginFinished={fbLogin}
-                onLogoutFinished={() => console.log('logged out')} />
+              <FBLogin />
               <SocialIcon
                 button
                 title='Sign In With Twitter'
@@ -83,7 +119,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    fbLogin: (error, result) => dispatch(FBStoreActions.login(error, result))
+    userInfoRequestSuccess: (userInfo) =>
+      dispatch(UserStoreActions.fbUserInfo(userInfo))
   }
 }
 

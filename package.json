@@ -96,7 +96,9 @@
     "preset": "react-native"
   },
   "nrpm": {
-    "assets": [ "/assets/Fonts" ]
+    "assets": [
+      "/assets/Fonts"
+    ]
   },
   "config": {},
   "standard": {
