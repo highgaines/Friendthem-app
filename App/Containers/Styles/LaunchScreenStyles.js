@@ -28,5 +28,13 @@ export default StyleSheet.create({
   },
   linearGradient: {
     flex: 1
+  },
+  title: {
+    marginTop: 100,
+    fontSize: 50,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'white',
+    fontFamily: Fonts.type.base,
   }
 })

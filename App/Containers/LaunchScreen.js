@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { ScrollView, Text, Image, View, TouchableOpacity, Button } from 'react-native';
 import { Images } from '../Themes';
@@ -5,9 +6,10 @@ import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import { SocialIcon } from 'react-native-elements';
 import FBSDK, { LoginManager } from 'react-native-fbsdk';
-
 // Styles
-import styles from './Styles/LaunchScreenStyles'
+import styles from './Styles/LaunchScreenStyles';
+import { SocialIcon } from 'react-native-elements';
+
 
 class LaunchScreen extends Component {
 
