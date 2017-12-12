@@ -15,6 +15,17 @@ export default StyleSheet.create({
   centered: {
     alignItems: 'center'
   },
+  primSubText: {
+    marginTop:20,
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+    color: 'white',
+    fontSize: 15
+  },
+  secSubText: {
+    marginTop: 2,
+    color: 'white'
+  },
   linearGradient: {
     flex: 1
   },

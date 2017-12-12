@@ -1,23 +1,38 @@
-import React, { Component } from 'react'
-import { ScrollView, Text, Image, View, Button } from 'react-native'
-import { Images } from '../Themes'
+
+import React, { Component } from 'react';
+import { ScrollView, Text, Image, View, TouchableOpacity, Button } from 'react-native';
+import { Images } from '../Themes';
+import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
-import RoundedButton from '../Components/RoundedButton';
+import { SocialIcon } from 'react-native-elements';
+import FBSDK, { LoginManager } from 'react-native-fbsdk';
 // Styles
 import styles from './Styles/LaunchScreenStyles';
 import { SocialIcon } from 'react-native-elements';
 
-export default class LaunchScreen extends Component {
 
-  LogInWithFacebook() {
-    console.log('logging in to facebook!')
+class LaunchScreen extends Component {
+
+  _fbAuth() {
+    LoginManager.logInWithReadPermissions(['public_profile']).then(function(result) {
+      if(result.isCancelled) {
+        console.log('Login cancelled')
+      } else {
+        console.log('Login Success:' + result.grantedPermissions)
+      }
+    }, function(error) {
+        console.log('An error occured:' + error)
+      })
   }
 
-  LogInWithTwitter() {
-    console.log('logging in to twitter!')
+  _twitterAuth() {
+    console.log('twitter auth')
   }
 
   render () {
+    const { navigate } = this.props.navigation
+    const { users } = this.props
+    this._fbAuth = this._fbAuth.bind(this)
 
     return (
       <View style={styles.mainContainer}>
@@ -32,20 +47,29 @@ export default class LaunchScreen extends Component {
               <Image
                 style={{ marginTop: 150 }} source={require('../Images/logo.png')}
               />
+              <Text style={styles.primSubText}>
+                CONNECTING THE WORLD
+              </Text>
+              <Text style={styles.secSubText}>
+                Life Happens when people connect
+              </Text>
             </View>
-
             <View style={styles.section} >
               <SocialIcon
                 button
                 title='Sign In With Facebook'
-                onPress={this.LogInWithFacebook}
+                onPress={this._fbAuth}
                 type='facebook'
               />
               <SocialIcon
                 button
                 title='Sign In With Twitter'
-                onPress={this.LogInWithTwitter}
+                onPress={this._twitterAuth}
                 type='twitter'
+              />
+              <Button
+                title='Go to Nearby Users'
+                onPress={() => navigate('NearbyUsersScreen', {numUsers: 2, users: users, navigation: this.props.navigation })}
               />
             </View>
           </ScrollView>
@@ -54,3 +78,9 @@ export default class LaunchScreen extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  users: state.facebook.users
+})
+
+export default connect(mapStateToProps)(LaunchScreen)
