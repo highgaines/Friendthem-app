@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { ScrollView, Text, Image, View, TouchableOpacity, Button } from 'react-native';
 import { Images } from '../Themes';
@@ -13,30 +12,13 @@ import { SocialIcon } from 'react-native-elements';
 
 class LaunchScreen extends Component {
 
-  _fbAuth() {
-    LoginManager.logInWithReadPermissions(['public_profile']).then(function(result) {
-      if(result.isCancelled) {
-        console.log('Login cancelled')
-      } else {
-        console.log('Login Success:' + result.grantedPermissions)
-      }
-    }, function(error) {
-        console.log('An error occured:' + error)
-      })
-  }
+class LaunchScreen extends Component {
+  constructor(props) {
+    super(props)
 
-  _fbProfileGetCallback(error, result) {
-    if (error) {
-      debugger
-    } else {
-      debugger
+    this.state = {
+      user: ''
     }
-  }
-
-  _getFbProfile() {
-    const getProfRequest = new GraphRequest('/me', null, this._fbProfileGetCallback,)
-
-    new GraphRequestManager().addRequest(getProfRequest).start()
   }
 
   render () {
@@ -68,9 +50,14 @@ class LaunchScreen extends Component {
               <SocialIcon
                 button
                 title='Sign In With Facebook'
-                onPress={this._fbAuth}
+                onPress={fbLogin}
                 type='facebook'
               />
+              <LoginButton
+                publishPermissions={["publish_actions"]}
+                permissions={["public_profile", "user_friends", "user_location", "user_photos"]}
+                onLoginFinished={fbLogin}
+                onLogoutFinished={() => console.log('logged out')} />
               <SocialIcon
                 button
                 title='Sign In With Twitter'
@@ -90,7 +77,14 @@ class LaunchScreen extends Component {
 }
 
 const mapStateToProps = state => ({
+  fbAuthToken: state.fbStore.fbAccessToken,
   users: state.facebook.users
 })
 
-export default connect(mapStateToProps)(LaunchScreen)
+const mapDispatchToProps = dispatch => {
+  return {
+    fbLogin: (error, result) => dispatch(FBStoreActions.login(error, result))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LaunchScreen)

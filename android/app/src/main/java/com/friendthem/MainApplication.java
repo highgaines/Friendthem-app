@@ -3,6 +3,7 @@ package com.friendthem;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import br.com.classapp.RNSensitiveInfo.RNSensitiveInfoPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
@@ -27,6 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNSensitiveInfoPackage(),
             new VectorIconsPackage(),
             new FBSDKPackage(),
             new LinearGradientPackage(),
