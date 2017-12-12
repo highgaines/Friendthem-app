@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
+import { ScrollView, Text, Image, View, TouchableOpacity, TextInput } from 'react-native'
 import { Images } from '../../Themes'
 import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from 'react-native-elements';
+import { NavigationActions } from 'react-navigation';
 
 // Styles
 import styles from '../Styles/SearchBarStyles';
@@ -12,12 +13,36 @@ export default class SearchBar extends Component {
     super()
 
     this.state = {
-      input: ''
+      input: '',
+      searchMode: false,
+      text: ''
     }
   }
 
-  render() {
+  onChangeHandler = input => {
+    this.setState({ text: input })
+  }
+
+  renderSearchForm = () => {
+    return (
+      <TextInput
+        style={{height: 40, borderColor: 'gray', borderWidth: 1 }}
+        onChange={ this.onChangeHandler }
+        value={this.state.text}
+      />
+    )
+  }
+
+  toggleSearch = () => {
+    this.setState({ searchMode: !this.state.searchMode })
+  }
+
+  render = () => {
     const { numUsers } = this.props
+    const { searchMode } = this.state
+
+    const backAction =  NavigationActions.back({ key: 'LaunchScreen'})
+
     return(
       <LinearGradient
         colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
@@ -26,17 +51,28 @@ export default class SearchBar extends Component {
         style={styles.linearGradient}
       >
         <View style={styles.searchBar}>
+          <View style={styles.searchIcon}>
+            <Icon
+              name='search'
+              type='evilicon'
+              color='#FFF'
+              onPress={this.toggleSearch}
+            />
+          </View>
+        { searchMode
+          ? this.renderSearchForm()
+          : <Text style={styles.numUsers}> {numUsers} users nearby </Text>
+        }
+        <View style={styles.backIcon}>
           <Icon
-            name='search'
-            type='evilicon'
+            name='arrow-back'
+            type='materialicons'
             color='#FFF'
+            onPress={() => this.props.navigation.dispatch(backAction)}
           />
-          <Text style={styles.numUsers}>
-            {numUsers}
-          </Text>
+        </View>
         </View>
       </LinearGradient>
     )
   }
-
 }

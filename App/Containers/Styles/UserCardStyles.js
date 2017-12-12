@@ -8,14 +8,12 @@ export default StyleSheet.create({
     backgroundColor: 'white',
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    height: 130,
-    margin: 3,
-    width: 125
+    height: 130
   },
   cardImage: {
     borderRadius: 100/2,
-    justifyContent: 'center',
-    height: 100,
+    height: 90,
+    marginTop: 10,
     width: 100,
 
   },

@@ -23,6 +23,10 @@ export const INITIAL_STATE = Immutable({
     {
       'image': require('../Images/conor.png'),
       'name': 'Conor Mcgregor'
+    },
+    {
+      'image': require('../Images/pacman.jpg'),
+      'name': 'Manny Pacquaio'
     }
   ],
   'fetching': false

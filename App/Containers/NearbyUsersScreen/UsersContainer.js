@@ -6,7 +6,6 @@ import styles from '../Styles/UsersContainerStyles';
 
 export default function UsersContainer(props) {
   const { users } = props
-  alert(users)
   const userCards = users.map( (userObj,i) => <UserCard key={i} style={styles.userCard} image={userObj.image} name={userObj.name}/> )
 
   return(

@@ -13,10 +13,10 @@ export default class NearbyUsers extends Component {
   }
 
   render() {
-    const { users, numUsers } = this.props
+    const { users } = this.props
     return(
       <View style={styles.nearbyUsersContainer}>
-        <SearchBar numUsers={numUsers}/>
+        <SearchBar numUsers={users.length}/>
         <UsersContainer users={users}/>
       </View>
     )

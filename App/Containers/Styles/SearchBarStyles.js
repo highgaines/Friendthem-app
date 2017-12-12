@@ -11,9 +11,16 @@ export default StyleSheet.create({
     marginTop: 20,
     flexDirection: 'row'
   },
+  searchIcon: {
+    alignItems: 'flex-start',
+    width: 130
+  },
   numUsers: {
     color: 'white',
     fontSize: 20,
-    flex: 2
+    flex: 3
+  },
+  backIcon: {
+    alignItems: 'flex-end'
   }
 })
