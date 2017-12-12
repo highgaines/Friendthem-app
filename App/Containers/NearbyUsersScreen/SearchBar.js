@@ -27,8 +27,8 @@ class SearchBar extends Component {
   renderSearchForm = () => {
     return (
       <TextInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1 }}
-        onChange={ this.onChangeHandler }
+        style={styles.searchForm}
+        onChange={this.onChangeHandler}
         value={this.state.text}
       />
     )

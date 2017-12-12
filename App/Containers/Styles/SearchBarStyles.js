@@ -12,13 +12,24 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   searchIcon: {
-    alignItems: 'flex-start',
-    width: 130
+    alignItems: 'flex-start'
+  },
+  searchForm: {
+    height: 25,
+    width: 200,
+    borderColor: 'white',
+    borderWidth: 2,
+    borderRadius: 50,
+    marginLeft: 65,
+    marginRight: 65,
+    paddingLeft: 10,
+    color: 'white'
   },
   numUsers: {
     color: 'white',
     fontSize: 20,
-    flex: 3
+    flex: 3,
+    marginLeft: 100
   },
   backIcon: {
     alignItems: 'flex-end'
