@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, TouchableOpacity, TextInput } from 'react-native'
+import { connect } from 'react-redux';
 import { Images } from '../../Themes'
 import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from 'react-native-elements';
@@ -8,7 +9,7 @@ import { NavigationActions } from 'react-navigation';
 // Styles
 import styles from '../Styles/SearchBarStyles';
 
-export default class SearchBar extends Component {
+class SearchBar extends Component {
   constructor() {
     super()
 
@@ -38,10 +39,10 @@ export default class SearchBar extends Component {
   }
 
   render = () => {
-    const { numUsers } = this.props
+    const { numUsers, navigation } = this.props
     const { searchMode } = this.state
 
-    const backAction =  NavigationActions.back({ key: 'LaunchScreen'})
+    const backAction =  NavigationActions.back()
 
     return(
       <LinearGradient
@@ -68,7 +69,7 @@ export default class SearchBar extends Component {
             name='arrow-back'
             type='materialicons'
             color='#FFF'
-            onPress={() => this.props.navigation.dispatch(backAction)}
+            onPress={() => navigation.dispatch(backAction) }
           />
         </View>
         </View>
@@ -76,3 +77,9 @@ export default class SearchBar extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+
+})
+
+export default connect(mapStateToProps)(SearchBar)

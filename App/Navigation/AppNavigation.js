@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StackNavigator } from 'react-navigation'
 import LaunchScreen from '../Containers/LaunchScreen'
 import NearbyUsers from '../Containers/NearbyUsersScreen/NearbyUsers'
-
+import SearchBar from '../Containers/NearbyUsersScreen/SearchBar'
 import styles from './Styles/NavigationStyles'
 
 const mapNavigationStateParamsToProps = (SomeComponent) => {
@@ -17,7 +17,8 @@ const mapNavigationStateParamsToProps = (SomeComponent) => {
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
   LaunchScreen: { screen: LaunchScreen },
-  NearbyUsersScreen: { screen: mapNavigationStateParamsToProps(NearbyUsers) }
+  NearbyUsersScreen: { screen: mapNavigationStateParamsToProps(NearbyUsers) },
+  SearchBar: { screen: SearchBar }
 }, {
   // Default config for all screens
   headerMode: 'none',

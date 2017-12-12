@@ -67,7 +67,7 @@ class LaunchScreen extends Component {
               />
               <Button
                 title='Go to Nearby Users'
-                onPress={() => navigate('NearbyUsersScreen', {numUsers: 2, users: users })}
+                onPress={() => navigate('NearbyUsersScreen', {numUsers: 2, users: users, navigation: this.props.navigation })}
               />
             </View>
           </ScrollView>
