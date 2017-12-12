@@ -7,7 +7,9 @@ export const reducers = combineReducers({
   nav: require('./NavigationRedux').reducer,
   github: require('./GithubRedux').reducer,
   search: require('./SearchRedux').reducer,
-  facebook: require('./FacebookUsersRedux').reducer
+  facebook: require('./FacebookUsersRedux').reducer,
+  fbStore: require('./FBStore').reducer,
+  userStore: require('./UserStore').reducer
 })
 
 export default () => {

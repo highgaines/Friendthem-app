@@ -1,38 +1,75 @@
-
 import React, { Component } from 'react';
 import { ScrollView, Text, Image, View, TouchableOpacity, Button } from 'react-native';
 import { Images } from '../Themes';
 import { connect } from 'react-redux';
-import LinearGradient from 'react-native-linear-gradient';
 import { SocialIcon } from 'react-native-elements';
-import FBSDK, { LoginManager } from 'react-native-fbsdk';
+import LinearGradient from 'react-native-linear-gradient';
+import FBSDK, { LoginManager, LoginButton, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk';
+
+//Redux Actions
+import UserStoreActions from '../Redux/UserStore';
+
 // Styles
 import styles from './Styles/LaunchScreenStyles';
-import { SocialIcon } from 'react-native-elements';
 
+//Child Components
+import FBLogin from './FBLogin'
 
 class LaunchScreen extends Component {
+  constructor(props) {
+    super(props)
 
-  _fbAuth() {
-    LoginManager.logInWithReadPermissions(['public_profile']).then(function(result) {
-      if(result.isCancelled) {
-        console.log('Login cancelled')
-      } else {
-        console.log('Login Success:' + result.grantedPermissions)
-      }
-    }, function(error) {
-        console.log('An error occured:' + error)
-      })
+    this.state = {
+      user: ''
+    }
+
+    this.getFbProfile = this.getFbProfile.bind(this)
   }
 
-  _twitterAuth() {
-    console.log('twitter auth')
+  componentWillUpdate(nextProps) {
+    const { fbAuthToken, navigation } = this.props;
+    const { navigate } = this.props.navigation
+
+    if (!fbAuthToken && nextProps.fbAuthToken) {
+      this.getFbProfile(nextProps.fbAuthToken)
+    }
+  }
+
+  getFbProfile(accessToken) {
+    const responseInfoCallback = (error, result) => {
+      if (error) {
+        console.log(error)
+        return error
+      } else {
+        this.props.userInfoRequestSuccess(result)
+        this.props.navigation.navigate('UserProfileScreen')
+        // SInfo is a storage library for React Native that securely stores
+        // any sensitive information using the iOS keychain, still contemplating
+        // whether it is necessary at this stage of development
+        //SInfo.setItem('userFBProfile', result, {})
+      }
+    }
+    const infoRequest = new GraphRequest(
+      '/me',
+      {
+        accessToken: accessToken,
+        parameters: {
+          fields: {
+            string: 'email,name,first_name,middle_name,last_name,id,picture'
+          }
+        }
+      },
+      responseInfoCallback
+    );
+
+  // Start the graph request.
+    new GraphRequestManager().addRequest(infoRequest).start();
+
   }
 
   render () {
     const { navigate } = this.props.navigation
     const { users } = this.props
-    this._fbAuth = this._fbAuth.bind(this)
 
     return (
       <View style={styles.mainContainer}>
@@ -55,12 +92,7 @@ class LaunchScreen extends Component {
               </Text>
             </View>
             <View style={styles.section} >
-              <SocialIcon
-                button
-                title='Sign In With Facebook'
-                onPress={this._fbAuth}
-                type='facebook'
-              />
+              <FBLogin />
               <SocialIcon
                 button
                 title='Sign In With Twitter'
@@ -80,7 +112,15 @@ class LaunchScreen extends Component {
 }
 
 const mapStateToProps = state => ({
+  fbAuthToken: state.fbStore.fbAccessToken,
   users: state.facebook.users
 })
 
-export default connect(mapStateToProps)(LaunchScreen)
+const mapDispatchToProps = dispatch => {
+  return {
+    userInfoRequestSuccess: (userInfo) =>
+      dispatch(UserStoreActions.fbUserInfo(userInfo))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LaunchScreen)
