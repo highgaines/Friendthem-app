@@ -37,6 +37,11 @@ class UserProfileScreen extends Component {
               </Text>
             </View>
             </LinearGradient>
+            <View style={styles.socialIconSlider}>
+
+            </View>
+            <View style={styles.socialAccountContainer}>
+            </View>
         </View>
         :
         <Text>No user info loaded</Text>

@@ -49,5 +49,12 @@ export default StyleSheet.create({
     borderWidth: 2,
     borderColor: '#ffffff',
     borderRadius: 20
+  },
+  socialIconSlider: {
+    height: 30,
+    backgroundColor: '#1111bb'
+  },
+  socialAccountContainer: {
+    height: 400
   }
 })
