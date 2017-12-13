@@ -1,6 +1,6 @@
 import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
-
+const fbDeepLinkURL = 'fb://profile/'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
@@ -18,15 +18,18 @@ export const INITIAL_STATE = Immutable({
   users: [
     {
       'image': require('../Images/floyd.jpg'),
-      'name': 'Floyd Mayweather'
+      'name': 'Floyd Mayweather',
+      fbUrl: ''
     },
     {
       'image': require('../Images/conor.png'),
-      'name': 'Conor Mcgregor'
+      'name': 'Conor Mcgregor',
+      'fbUrl': fbDeepLinkURL + '494191297315841'
     },
     {
       'image': require('../Images/pacman.jpg'),
-      'name': 'Manny Pacquaio'
+      'name': 'Manny Pacquaio',
+      fbUrl: ''
     }
   ],
   'fetching': false
