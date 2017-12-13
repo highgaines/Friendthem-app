@@ -33,21 +33,21 @@ export default StyleSheet.create({
     flex: 1
   },
   phoneIcon: {
-    height: 35,
-    width: 35,
+    height: 40,
+    width: 40,
     marginTop: 45,
     marginRight: 20,
     borderWidth: 2,
     borderColor: '#ffffff',
-    borderRadius: 17.5
+    borderRadius: 20
   },
   mailIcon: {
-    height: 35,
-    width: 35,
+    height: 40,
+    width: 40,
     marginTop: 45,
     marginLeft: 20,
     borderWidth: 2,
     borderColor: '#ffffff',
-    borderRadius: 17.5
+    borderRadius: 20
   }
 })
