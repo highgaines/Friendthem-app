@@ -6,8 +6,7 @@ export default StyleSheet.create({
   card: {
     alignItems: 'center',
     backgroundColor: 'white',
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+    borderRadius: 10,
     height: 130
   },
   cardImage: {
