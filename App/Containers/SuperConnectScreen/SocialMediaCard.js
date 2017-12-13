@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // Native
 import { ScrollView, Text, Image, View, Linking, TouchableOpacity } from 'react-native';
 import { Images } from '../../Themes';
-import { SocialIcon } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 
 // Redux
 import { connect } from 'react-redux';
@@ -29,7 +29,12 @@ export default class SocialMediaCard extends Component {
     const { platformName } = this.props;
 
     return (
-      <SocialIcon type={platformName} />
+      <Icon
+        name='facebook'
+        type='font-awesome'
+        color="#ffffff"
+        size={40}
+      />
     )
   }
 

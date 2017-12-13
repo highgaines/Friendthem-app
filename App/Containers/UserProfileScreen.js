@@ -4,6 +4,8 @@ import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from 'react-native-elements';
 
+import SocialMediaCard from './SuperConnectScreen/SocialMediaCard';
+
 import styles from './Styles/UserProfileStyles';
 
 class UserProfileScreen extends Component {
@@ -41,6 +43,9 @@ class UserProfileScreen extends Component {
 
             </View>
             <View style={styles.socialAccountContainer}>
+              <SocialMediaCard
+                platformName='Facebook'
+                userName={userInfo.name} />
             </View>
         </View>
         :
