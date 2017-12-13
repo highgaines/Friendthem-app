@@ -5,6 +5,7 @@ import { Images } from '../../Themes'
 import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from 'react-native-elements';
 import { NavigationActions } from 'react-navigation';
+import _ from 'lodash';
 
 // Styles
 import styles from '../Styles/SearchBarStyles';
@@ -15,21 +16,20 @@ class SearchBar extends Component {
 
     this.state = {
       input: '',
-      searchMode: false,
-      text: ''
+      searchMode: false
     }
   }
 
-  onChangeHandler = input => {
-    this.setState({ text: input })
+  handleChange = input => {
+    this.setState({input: input})
   }
 
   renderSearchForm = () => {
     return (
       <TextInput
         style={styles.searchForm}
-        onChange={this.onChangeHandler}
-        value={this.state.text}
+        onChange={input => this.handleChange(input)}
+        value={this.state.input}
       />
     )
   }
