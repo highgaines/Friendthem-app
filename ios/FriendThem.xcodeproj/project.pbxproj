@@ -348,7 +348,11 @@
 			remoteGlobalIDString = 9350E0F11CE3B0920041D815;
 			remoteInfo = RCTFBSDK;
 		};
+<<<<<<< Updated upstream
 		A5C5BB471FE0842000F3664B /* PBXContainerItemProxy */ = {
+=======
+		A5A15C8B1FE06E9600ABE5DB /* PBXContainerItemProxy */ = {
+>>>>>>> Stashed changes
 			isa = PBXContainerItemProxy;
 			containerPortal = 59F1F4CDE00E4C6E990349C0 /* RNSensitiveInfo.xcodeproj */;
 			proxyType = 2;
@@ -727,10 +731,17 @@
 			path = Frameworks;
 			sourceTree = "<group>";
 		};
+<<<<<<< Updated upstream
 		A5C5BB441FE0842000F3664B /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				A5C5BB481FE0842000F3664B /* libRNSensitiveInfo.a */,
+=======
+		A5A15C881FE06E9600ABE5DB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A5A15C8C1FE06E9600ABE5DB /* libRNSensitiveInfo.a */,
+>>>>>>> Stashed changes
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -940,7 +951,11 @@
 					ProjectRef = 881326D62F854149B4B966DE /* ReactNativeConfig.xcodeproj */;
 				},
 				{
+<<<<<<< Updated upstream
 					ProductGroup = A5C5BB441FE0842000F3664B /* Products */;
+=======
+					ProductGroup = A5A15C881FE06E9600ABE5DB /* Products */;
+>>>>>>> Stashed changes
 					ProjectRef = 59F1F4CDE00E4C6E990349C0 /* RNSensitiveInfo.xcodeproj */;
 				},
 				{
@@ -1232,11 +1247,19 @@
 			remoteRef = A54114A81FDB01B500AC2A83 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+<<<<<<< Updated upstream
 		A5C5BB481FE0842000F3664B /* libRNSensitiveInfo.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNSensitiveInfo.a;
 			remoteRef = A5C5BB471FE0842000F3664B /* PBXContainerItemProxy */;
+=======
+		A5A15C8C1FE06E9600ABE5DB /* libRNSensitiveInfo.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSensitiveInfo.a;
+			remoteRef = A5A15C8B1FE06E9600ABE5DB /* PBXContainerItemProxy */;
+>>>>>>> Stashed changes
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */ = {
