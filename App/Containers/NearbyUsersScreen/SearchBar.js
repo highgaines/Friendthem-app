@@ -15,21 +15,16 @@ class SearchBar extends Component {
     super()
 
     this.state = {
-      input: '',
       searchMode: false
     }
-  }
-
-  handleChange = input => {
-    this.setState({input: input})
   }
 
   renderSearchForm = () => {
     return (
       <TextInput
         style={styles.searchForm}
-        onChange={input => this.handleChange(input)}
-        value={this.state.input}
+        onChangeText={input => this.props.handleChange(input)}
+        value={this.props.input}
       />
     )
   }
