@@ -1,2 +1,2 @@
-*.pbxproj -text
+*.pbxproj merge=union
 *.bat text eol=crlf

@@ -11,7 +11,7 @@ export default function UserCard(props) {
   return(
     <View
       style={styles.card}
-      onPress={fbUrl ? () => Linking.openURL(fbUrl) : 'google.com'}>
+      onPress={fbUrl ? () => Linking.openURL(fbUrl) : null}>
       <Image style={styles.cardImage} source={image} />
       <View style={styles.cardText}>
         <Text numberOfLines={1}> {name} </Text>
