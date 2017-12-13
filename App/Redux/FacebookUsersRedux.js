@@ -30,6 +30,11 @@ export const INITIAL_STATE = Immutable({
       'image': require('../Images/pacman.jpg'),
       'name': 'Manny Pacquaio',
       fbUrl: ''
+    },
+    {
+      'image': require('../Images/pacman.jpg'),
+      'name': 'Manny Pacquaio',
+      fbUrl: ''
     }
   ],
   'fetching': false

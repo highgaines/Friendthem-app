@@ -3,14 +3,24 @@ import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native';
 import UserCard from './UserCard';
 // Styles
 import styles from '../Styles/UsersContainerStyles';
+import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard';
 
 export default function UsersContainer(props) {
   const { users } = props
-  const userCards = users.map( (userObj,i) => <UserCard key={i} style={styles.userCard} image={userObj.image} name={userObj.name} fbUrl={userObj.fbUrl}/> )
+  const userCards =
+    users.map( (userObj,i) =>
+  <UserCard
+    key={i}
+    image={userObj.image}
+    name={userObj.name}
+    fbUrl={userObj.fbUrl}
+  /> )
 
   return(
     <View style={styles.usersContainer}>
       {userCards}
+      <SocialMediaCard platformName="facebook" userName="mega0319" />
+      <SocialMediaCard platformName="twitter" userName="mega0319" />
     </View>
   )
 }

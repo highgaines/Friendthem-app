@@ -6,15 +6,16 @@ export default StyleSheet.create({
   card: {
     alignItems: 'center',
     backgroundColor: 'white',
+    height: 130,
+    marginTop: 10,
     borderRadius: 10,
-    height: 130
+    width: 120
   },
   cardImage: {
     borderRadius: 100/2,
     height: 90,
     marginTop: 10,
     width: 100,
-
   },
   cardText: {
     marginTop: 5,

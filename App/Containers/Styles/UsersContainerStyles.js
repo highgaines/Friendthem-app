@@ -5,8 +5,9 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   usersContainer: {
     backgroundColor: '#f2f2f2',
-    flex: 1,
+    flex: 3,
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    flexWrap: 'wrap',
+    justifyContent: 'space-between'
   }
 })

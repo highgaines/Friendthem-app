@@ -22,11 +22,9 @@ class LaunchScreen extends Component {
     this.state = {
       user: ''
     }
-
-    this.getFbProfile = this.getFbProfile.bind(this)
   }
 
-  componentWillUpdate(nextProps) {
+  componentWillUpdate = nextProps => {
     const { fbAuthToken, navigation } = this.props;
     const { navigate } = this.props.navigation
 
@@ -35,7 +33,7 @@ class LaunchScreen extends Component {
     }
   }
 
-  getFbProfile(accessToken) {
+  getFbProfile = accessToken => {
     const responseInfoCallback = (error, result) => {
       if (error) {
         console.log(error)
@@ -63,8 +61,9 @@ class LaunchScreen extends Component {
     );
 
   // Start the graph request.
-    new GraphRequestManager().addRequest(infoRequest).start();
-
+    new GraphRequestManager()
+    .addRequest(infoRequest)
+    .start();
   }
 
   render () {
