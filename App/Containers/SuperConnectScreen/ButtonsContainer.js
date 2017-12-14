@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Button } from 'react-native';
+import { View, Text, TouchableOpacity, Button, Linking } from 'react-native';
+import RoundedButton from '../../Components/RoundedButton';
+import { NavigationActions } from 'react-navigation';
+
+// Styles
+import styles from '../Styles/ButtonContainerStyles';
 
 export default ButtonsContainer = props => {
-  const { friendName } = props
+  const { friendName, deepLinkURL, navigation } = props
+  const backAction = NavigationActions.back()
 
-  const GoBack = () => {
-    console.log('going back')
+  const goBack = () => {
+    navigation.dispatch(backAction)
   }
 
-  const LetsDoIt = () => {
-    console.log('doing it')
+  const letsDoIt = () => {
+    Linking.openUrl(deepLinkURL)
   }
 
   return(
-    <View style={{ padding: 30,
-      width: 300, height: 150, backgroundColor: 'blue' }}>
+    <View style={styles.container}>
       <Text style={{ color: 'white', fontSize: 15}}>
         {`Are you sure you want to super connect with ${friendName}?`}
       </Text>
-      <Button onPress={GoBack} title="GO BACK"/>
-      <Button onPress={LetsDoIt} title="LETS DO IT"/>
+      <View style={{ flexDirection: 'row', alignContent: 'center'}}>
+        <RoundedButton style={styles.button} onPress={goBack}>
+          GO BACK
+        </RoundedButton>
+        <RoundedButton style={styles.button} onPress={letsDoIt}>
+          LET'S DO IT
+        </RoundedButton>
+      </View>
     </View>
   )
 }

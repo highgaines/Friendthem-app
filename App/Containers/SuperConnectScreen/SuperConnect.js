@@ -13,7 +13,7 @@ export default class SuperConnect extends Component {
   }
 
   render() {
-    const { userData, friendData } = this.props
+    const { userData, friendData, navigation } = this.props
 
     // dummy data
     const platforms = [
@@ -27,8 +27,10 @@ export default class SuperConnect extends Component {
     return(
       <View style={{ flex: 1 }}>
         <ConnectBar userData={userData} friendData={friendData}/>
-        <PlatformsContainer platforms={platforms} />
-        <ButtonsContainer friendName="Cyclops" />
+        <PlatformsContainer navigation={navigation} platforms={platforms} />
+        <View style={{ alignItems: 'center' }}>
+          <ButtonsContainer navigation={navigation} friendName="Cyclops" />
+        </View>
       </View>
     )
   }

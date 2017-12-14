@@ -63,7 +63,6 @@ export default class SocialMediaCard extends Component {
         <View style={styles.socialMediaImage}>
           { this.renderIcon() }
         </View>
-
         <View style={styles.socialMediaText}>
 
           <Text
@@ -75,7 +74,6 @@ export default class SocialMediaCard extends Component {
           <Text style={inverted ? styles.userNameInverted : styles.userName}>
             {userName}
           </Text>
-
         </View>
       </TouchableOpacity>
     )

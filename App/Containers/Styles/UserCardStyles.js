@@ -5,7 +5,7 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   card: {
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-around',
     backgroundColor: 'white',
     height: 130,
     marginTop: 10,

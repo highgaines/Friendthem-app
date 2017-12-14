@@ -115,7 +115,8 @@ class LaunchScreen extends Component {
                 onPress={() => navigate('SuperConnectScreen',
                 {
                   userData: { name: 'Logan', image: '../../Images/wolverine.jpg'},
-                  friendData: { name: 'Cyclops', image: '../../Images/cyclops.jpg'}
+                  friendData: { name: 'Cyclops', image: '../../Images/cyclops.jpg'},
+                  navigation: this.props.navigation
                 })}
               />
             </View>
