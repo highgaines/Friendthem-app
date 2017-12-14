@@ -110,6 +110,15 @@ class LaunchScreen extends Component {
                   })
                 }
               />
+              <Button
+                title='Go to Super Connect'
+                onPress={() => navigate('SuperConnectScreen',
+                {
+                  userData: { name: 'Logan', image: '../../Images/wolverine.jpg'},
+                  friendData: { name: 'Cyclops', image: '../../Images/cyclops.jpg'},
+                  navigation: this.props.navigation
+                })}
+              />
             </View>
           </ScrollView>
         </LinearGradient>
