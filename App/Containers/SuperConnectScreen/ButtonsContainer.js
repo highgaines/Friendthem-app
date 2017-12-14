@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Button, Linking } from 'react-native';
+import { View, Text, TouchableOpacity, TouchableHighlight, Button, Linking } from 'react-native';
 import RoundedButton from '../../Components/RoundedButton';
 import { NavigationActions } from 'react-navigation';
 
@@ -24,12 +24,7 @@ export default ButtonsContainer = props => {
         {`Are you sure you want to super connect with ${friendName}?`}
       </Text>
       <View style={{ flexDirection: 'row', alignContent: 'center'}}>
-        <RoundedButton style={styles.button} onPress={goBack}>
-          GO BACK
-        </RoundedButton>
-        <RoundedButton style={styles.button} onPress={letsDoIt}>
-          LET'S DO IT
-        </RoundedButton>
+
       </View>
     </View>
   )
