@@ -12,7 +12,6 @@ class FriendProfileScreen extends Component {
   render() {
     const { friendInfo } = this.props;
     return (
-      friendInfo ?
         <View>
           <LinearGradient
           colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
@@ -46,8 +45,6 @@ class FriendProfileScreen extends Component {
                 userName={friendInfo.name} />
             </View>
         </View>
-        :
-        <Text>No user info loaded</Text>
     )
   }
 }
