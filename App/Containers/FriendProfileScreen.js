@@ -5,6 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from 'react-native-elements';
 
 import SocialMediaCard from './SuperConnectScreen/SocialMediaCard';
+import SuperConnectBar from './SuperConnectScreen/SuperConnectBar'
 
 import styles from './Styles/UserProfileStyles';
 
@@ -43,6 +44,9 @@ class FriendProfileScreen extends Component {
                 platformName='Facebook'
                 inverted={true}
                 userName={friendInfo.name} />
+            </View>
+            <View style={styles.SuperConnectBarContainer}>
+              <SuperConnectBar />
             </View>
         </View>
     )
