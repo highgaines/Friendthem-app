@@ -52,7 +52,7 @@ export default StyleSheet.create({
   },
   socialIconSlider: {
     height: 30,
-    backgroundColor: '#23e458'
+    backgroundColor: '#143a7a'
   },
   socialAccountContainer: {
     padding: 2
