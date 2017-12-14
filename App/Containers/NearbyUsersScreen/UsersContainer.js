@@ -6,7 +6,11 @@ import styles from '../Styles/UsersContainerStyles';
 import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard';
 
 export default function UsersContainer(props) {
-  const { users } = props
+  const { users, navigation, setFriendInfo } = props
+  const viewFriendProfile = userObj => {
+    setFriendInfo(userObj)
+    navigation.navigate('FriendProfileScreen')
+  }
   const userCards =
     users.map( (userObj,i) =>
   <UserCard
@@ -14,6 +18,7 @@ export default function UsersContainer(props) {
     image={userObj.image}
     name={userObj.name}
     fbUrl={userObj.fbUrl}
+    setFriendInfo={() => viewFriendProfile(userObj)}
   /> )
 
   return(

@@ -8,11 +8,11 @@ import SocialMediaCard from './SuperConnectScreen/SocialMediaCard';
 
 import styles from './Styles/UserProfileStyles';
 
-class UserProfileScreen extends Component {
+class FriendProfileScreen extends Component {
   render() {
-    const { userInfo } = this.props;
+    const { friendInfo } = this.props;
     return (
-      userInfo ?
+      friendInfo ?
         <View>
           <LinearGradient
           colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
@@ -25,9 +25,6 @@ class UserProfileScreen extends Component {
                  type='font-awesome'
                  color='#ffffff'
                  containerStyle={styles.phoneIcon}/>
-                <Image
-                  style={styles.profileImage}
-                  source={{uri: `${userInfo.picture.data.url}`}} />
                 <Icon
                  name='md-mail'
                  type='ionicon'
@@ -35,7 +32,7 @@ class UserProfileScreen extends Component {
                  containerStyle={styles.mailIcon}/>
               </View>
               <Text style={styles.profileSubtext}>
-              {`${userInfo.name}`}
+              {`${friendInfo.name}`}
               </Text>
             </View>
             </LinearGradient>
@@ -45,8 +42,8 @@ class UserProfileScreen extends Component {
             <View style={styles.socialAccountContainer}>
               <SocialMediaCard
                 platformName='Facebook'
-                userName={userInfo.name}
-                inverted={false} />
+                inverted={true}
+                userName={friendInfo.name} />
             </View>
         </View>
         :
@@ -56,12 +53,11 @@ class UserProfileScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  userInfo: state.userStore.userFbData,
-  fbAuthToken: state.fbStore.fbAccessToken
+  friendInfo: state.friendStore.friendData
 })
 
 const mapDispatchToProps = dispatch => {
   return {}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfileScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(FriendProfileScreen)

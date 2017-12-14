@@ -9,7 +9,8 @@ export const reducers = combineReducers({
   search: require('./SearchRedux').reducer,
   facebook: require('./FacebookUsersRedux').reducer,
   fbStore: require('./FBStore').reducer,
-  userStore: require('./UserStore').reducer
+  userStore: require('./UserStore').reducer,
+  friendStore: require('./FriendStore').reducer
 })
 
 export default () => {

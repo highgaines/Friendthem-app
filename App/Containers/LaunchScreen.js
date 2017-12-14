@@ -8,6 +8,7 @@ import FBSDK, { LoginManager, LoginButton, AccessToken, GraphRequestManager, Gra
 
 //Redux Actions
 import UserStoreActions from '../Redux/UserStore';
+import FriendStoreActions from '../Redux/FriendStore'
 
 // Styles
 import styles from './Styles/LaunchScreenStyles';
@@ -25,8 +26,7 @@ class LaunchScreen extends Component {
   }
 
   componentWillUpdate = nextProps => {
-    const { fbAuthToken, navigation } = this.props;
-    const { navigate } = this.props.navigation
+    const { fbAuthToken } = this.props;
 
     if (!fbAuthToken && nextProps.fbAuthToken) {
       this.getFbProfile(nextProps.fbAuthToken)
@@ -34,13 +34,14 @@ class LaunchScreen extends Component {
   }
 
   getFbProfile = accessToken => {
+    const { userInfoRequestSuccess, navigation } = this.props;
     const responseInfoCallback = (error, result) => {
       if (error) {
         console.log(error)
         return error
       } else {
-        this.props.userInfoRequestSuccess(result)
-        this.props.navigation.navigate('UserProfileScreen')
+        userInfoRequestSuccess(result)
+        navigation.navigate('UserProfileScreen')
         // SInfo is a storage library for React Native that securely stores
         // any sensitive information using the iOS keychain, still contemplating
         // whether it is necessary at this stage of development
@@ -68,7 +69,7 @@ class LaunchScreen extends Component {
 
   render () {
     const { navigate } = this.props.navigation
-    const { users } = this.props
+    const { users, setFriendInfo } = this.props
 
     return (
       <View style={styles.mainContainer}>
@@ -100,7 +101,14 @@ class LaunchScreen extends Component {
               />
               <Button
                 title='Go to Nearby Users'
-                onPress={() => navigate('NearbyUsersScreen', {numUsers: 2, users: users, navigation: this.props.navigation })}
+                onPress={() =>
+                  navigate('NearbyUsersScreen', {
+                    numUsers: 2,
+                    users: users,
+                    navigation: this.props.navigation,
+                    setFriendInfo: setFriendInfo
+                  })
+                }
               />
             </View>
           </ScrollView>
@@ -118,7 +126,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     userInfoRequestSuccess: (userInfo) =>
-      dispatch(UserStoreActions.fbUserInfo(userInfo))
+      dispatch(UserStoreActions.fbUserInfo(userInfo)),
+    setFriendInfo: (friendInfo) =>
+      dispatch(FriendStoreActions.setFriendInfo(friendInfo)),
   }
 }
 

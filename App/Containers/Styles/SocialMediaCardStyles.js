@@ -19,6 +19,14 @@ export default StyleSheet.create({
     height: 130,
     width: 120
   },
+  invertedCard: {
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    marginTop: 10,
+    borderRadius: 10,
+    height: 130,
+    width: 120
+  },
   socialMediaImage: {
     borderRadius: 50,
     height: 60,
@@ -38,6 +46,15 @@ export default StyleSheet.create({
   userName: {
     fontSize: 12,
     color: '#FFFFFF'
+  },
+  platformNameInverted: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: '#000000'
+  },
+  userNameInverted: {
+    fontSize: 12,
+    color: '#000000'
   },
   iconContainer: {
     height: 30,

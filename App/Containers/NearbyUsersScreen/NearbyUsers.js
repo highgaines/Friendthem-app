@@ -27,7 +27,7 @@ export default class NearbyUsers extends Component {
   }
 
   render() {
-    const { users, navigation } = this.props
+    const { users, navigation, setFriendInfo } = this.props
     const { input } = this.state
 
     return(
@@ -39,7 +39,9 @@ export default class NearbyUsers extends Component {
           input={this.state.input}
         />
         <UsersContainer
-          users={input.length ? this.filterUsers(users) : users}/>
+          users={input.length ? this.filterUsers(users) : users}
+          navigation={navigation}
+          setFriendInfo={setFriendInfo}/>
       </View>
     )
   }

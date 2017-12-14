@@ -26,9 +26,16 @@ export default class SocialMediaCard extends Component {
   }
 
   renderIcon = () => {
-    const { platformName } = this.props;
+    const { platformName, inverted } = this.props;
 
-    return (
+    return inverted ? (
+      <Icon
+        name='facebook'
+        type='font-awesome'
+        color="#3C5996"
+        size={40}
+      />
+    ) : (
       <Icon
         name='facebook'
         type='font-awesome'
@@ -41,16 +48,16 @@ export default class SocialMediaCard extends Component {
   render() {
     const {
       platformName,
-      userName
+      userName,
+      inverted
     }  = this.props
 
     const { selected } = this.state;
+    const cardStyle = selected ? styles.cardSelected : styles.cardUnselected
 
     return(
       <TouchableOpacity
-        style={selected
-          ? styles.cardSelected
-          : styles.cardUnselected}
+        style={inverted ? styles.invertedCard : cardStyle}
         onPress={this.handlePush}
       >
         <View style={styles.socialMediaImage}>
@@ -59,11 +66,13 @@ export default class SocialMediaCard extends Component {
 
         <View style={styles.socialMediaText}>
 
-          <Text style={styles.platformName}>
+          <Text
+            style={inverted ? styles.platformNameInverted : styles.platformName}
+          >
             {platformName}
           </Text>
 
-          <Text style={styles.userName}>
+          <Text style={inverted ? styles.userNameInverted : styles.userName}>
             {userName}
           </Text>
 
