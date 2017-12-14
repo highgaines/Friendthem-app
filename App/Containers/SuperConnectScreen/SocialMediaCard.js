@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // Native
 import { ScrollView, Text, Image, View, Linking, TouchableOpacity } from 'react-native';
 import { Images } from '../../Themes';
-import { SocialIcon } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 
 // Redux
 import { connect } from 'react-redux';
@@ -26,26 +26,38 @@ export default class SocialMediaCard extends Component {
   }
 
   renderIcon = () => {
-    const { platformName } = this.props;
+    const { platformName, inverted } = this.props;
 
-    return (
-      <SocialIcon type={platformName} />
+    return inverted ? (
+      <Icon
+        name='facebook'
+        type='font-awesome'
+        color="#3C5996"
+        size={40}
+      />
+    ) : (
+      <Icon
+        name='facebook'
+        type='font-awesome'
+        color="#ffffff"
+        size={40}
+      />
     )
   }
 
   render() {
     const {
       platformName,
-      userName
+      userName,
+      inverted
     }  = this.props
 
     const { selected } = this.state;
+    const cardStyle = selected ? styles.cardSelected : styles.cardUnselected
 
     return(
       <TouchableOpacity
-        style={selected
-          ? styles.cardSelected
-          : styles.cardUnselected}
+        style={inverted ? styles.invertedCard : cardStyle}
         onPress={this.handlePush}
       >
         <View style={styles.socialMediaImage}>
@@ -54,11 +66,13 @@ export default class SocialMediaCard extends Component {
 
         <View style={styles.socialMediaText}>
 
-          <Text style={styles.platformName}>
+          <Text
+            style={inverted ? styles.platformNameInverted : styles.platformName}
+          >
             {platformName}
           </Text>
 
-          <Text style={styles.userName}>
+          <Text style={inverted ? styles.userNameInverted : styles.userName}>
             {userName}
           </Text>
 

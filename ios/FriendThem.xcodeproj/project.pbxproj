@@ -356,6 +356,7 @@
 			remoteInfo = RCTFBSDK;
 		};
 		A5C5BBC11FE0846400F3664B /* PBXContainerItemProxy */ = {
+		A5A15C8B1FE06E9600ABE5DB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 59F1F4CDE00E4C6E990349C0 /* RNSensitiveInfo.xcodeproj */;
 			proxyType = 2;
@@ -746,6 +747,10 @@
 			isa = PBXGroup;
 			children = (
 				A5C5BBC21FE0846400F3664B /* libRNSensitiveInfo.a */,
+		A5A15C881FE06E9600ABE5DB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A5A15C8C1FE06E9600ABE5DB /* libRNSensitiveInfo.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -958,6 +963,7 @@
 					ProductGroup = 39CB9C1B1FE0706A008CFC09 /* Products */;
 					ProductGroup = A5A15C881FE06E9600ABE5DB /* Products */;
 					ProductGroup = A5C5BBBE1FE0846400F3664B /* Products */;
+					ProductGroup = A5A15C881FE06E9600ABE5DB /* Products */;
 					ProjectRef = 59F1F4CDE00E4C6E990349C0 /* RNSensitiveInfo.xcodeproj */;
 				},
 				{

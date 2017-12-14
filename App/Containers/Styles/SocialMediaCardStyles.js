@@ -5,7 +5,7 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   cardUnselected: {
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#3C5996',
     marginTop: 10,
     borderRadius: 10,
     height: 130,
@@ -13,28 +13,51 @@ export default StyleSheet.create({
   },
   cardSelected: {
     alignItems: 'center',
-    backgroundColor: '#ADD8E6',
+    backgroundColor: '#3C5996',
+    marginTop: 10,
+    borderRadius: 10,
+    height: 130,
+    width: 120
+  },
+  invertedCard: {
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
     marginTop: 10,
     borderRadius: 10,
     height: 130,
     width: 120
   },
   socialMediaImage: {
-    marginLeft: 30,
-    marginBottom:10,
     borderRadius: 50,
     height: 60,
-    marginTop: 10,
+    marginTop: 25,
     width: 100
   },
   socialMediaText: {
     alignItems: 'center',
-    marginTop: 5,
     borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+    borderBottomRightRadius: 10
   },
   platformName: {
     fontSize: 17,
-    fontWeight: 'bold'
-  }
+    fontWeight: 'bold',
+    color: '#FFFFFF'
+  },
+  userName: {
+    fontSize: 12,
+    color: '#FFFFFF'
+  },
+  platformNameInverted: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: '#000000'
+  },
+  userNameInverted: {
+    fontSize: 12,
+    color: '#000000'
+  },
+  iconContainer: {
+    height: 30,
+    width: 30
+  },
 })
