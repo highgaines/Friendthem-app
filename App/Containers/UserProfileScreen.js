@@ -12,7 +12,6 @@ class UserProfileScreen extends Component {
   render() {
     const { userInfo } = this.props;
     return (
-      userInfo ?
         <View>
           <LinearGradient
           colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
@@ -49,8 +48,6 @@ class UserProfileScreen extends Component {
                 inverted={false} />
             </View>
         </View>
-        :
-        <Text>No user info loaded</Text>
     )
   }
 }
