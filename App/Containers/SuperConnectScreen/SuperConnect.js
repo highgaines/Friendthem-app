@@ -22,13 +22,19 @@ class SuperConnect extends Component {
         selected: true
       }
     ]
-
+    debugger
     return(
       <View style={{ flex: 1 }}>
         <ConnectBar userData={userData} friendData={friendData}/>
-        <PlatformsContainer navigation={navigation} platforms={platforms} />
+        <PlatformsContainer
+          navigation={navigation}
+          platforms={platforms}
+          inverted={true}/>
         <View style={{ alignItems: 'center' }}>
-          <ButtonsContainer navigation={navigation} friendName="Cyclops" />
+          <ButtonsContainer
+            navigation={navigation}
+            facebookUrl={friendData.fbUrl}
+            friendName="Cyclops" />
         </View>
       </View>
     )

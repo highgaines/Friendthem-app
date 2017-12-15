@@ -14,11 +14,12 @@ export default StyleSheet.create({
     shadowOpacity: 0.75,
     shadowRadius: 5,
     shadowColor: 'black',
-    shadowOffset: { height: 0, width: 0 }
+    shadowOffset: { height: 0, width: 0 },
+    marginHorizontal: 5
   },
   cardImage: {
-    borderRadius: 100/2,
-    height: 90,
+    borderRadius: 50,
+    height: 100,
     marginTop: 10,
     width: 100,
   },

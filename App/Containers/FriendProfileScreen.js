@@ -11,7 +11,7 @@ import styles from './Styles/UserProfileStyles';
 
 class FriendProfileScreen extends Component {
   render() {
-    const { friendInfo, superConnect } = this.props;
+    const { friendInfo, superConnect, navigation } = this.props;
 
     return (
         <View>
@@ -20,6 +20,9 @@ class FriendProfileScreen extends Component {
           start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
           locations={[0.1, 0.4, 0.6, 0.8, 1.0]}>
             <View style={styles.profileHeader}>
+              <TouchableOpacity onPress={() => navigation.navigate('LaunchScreen')}>
+                <Text>Return Home</Text>
+              </TouchableOpacity>
               <View style={styles.profHeaderTop}>
                 <Icon
                  name='phone'

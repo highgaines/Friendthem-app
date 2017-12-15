@@ -12,7 +12,7 @@ export default class PlatformsContainer extends Component {
   }
 
   renderSocialMediaCards = () => {
-    const { platforms } = this.props
+    const { platforms, inverted } = this.props
     const platformCards =
       platforms.map( (platObj,i) =>
     <SocialMediaCard
@@ -20,6 +20,7 @@ export default class PlatformsContainer extends Component {
       selected={platObj.selected}
       platformName={platObj.platformName}
       userName={platObj.userName}
+      inverted={inverted}
     /> )
 
     return platformCards
@@ -27,7 +28,7 @@ export default class PlatformsContainer extends Component {
 
   render() {
     return(
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={[styles.container, {justifyContent: 'flex-start'}]}>
         { this.renderSocialMediaCards() }
       </ScrollView>
     )

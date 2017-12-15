@@ -72,4 +72,9 @@ export default StyleSheet.create({
     height: 30,
     width: 30
   },
+  checkIcon: {
+    right: 5,
+    top: 3,
+    position: 'absolute'
+  }
 })

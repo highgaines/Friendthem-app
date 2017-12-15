@@ -35,6 +35,11 @@ export const INITIAL_STATE = Immutable({
       'image': require('../Images/pacman.jpg'),
       'name': 'Manny Pacquaio',
       fbUrl: ''
+    },
+    {
+      'image': require('../Images/pacman.jpg'),
+      'name': 'Jimmy Zhang',
+      fbUrl: fbDeepLinkURL + '502562708'
     }
   ],
   'fetching': false
