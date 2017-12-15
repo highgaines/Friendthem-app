@@ -31,7 +31,8 @@ export default ButtonsContainer = props => {
           color='#ffffff'
           title='GO BACK'
           onPressCallback={goBack}
-          containerStyle={styles.button}/>
+          containerStyle={styles.button}
+          textStyle={styles.textStyle}/>
 
         <ConnectButton
           name='check'
@@ -39,7 +40,8 @@ export default ButtonsContainer = props => {
           color='#ffffff'
           onPressCallback={letsDoIt}
           title="LET'S DO IT"
-          containerStyle={styles.button} />
+          containerStyle={styles.button}
+          textStyle={styles.textStyle}/>
       </View>
     </View>
   )

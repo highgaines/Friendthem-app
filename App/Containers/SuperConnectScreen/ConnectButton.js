@@ -12,7 +12,8 @@ export default function ConnectButton(props) {
     color,
     iconStyle,
     containerStyle,
-    onPressCallback
+    onPressCallback,
+    textStyle
   } = props;
 
   return (
@@ -25,7 +26,7 @@ export default function ConnectButton(props) {
           type={type}
           color={color}
           containerStyle={styles.buttonIconStyle} />
-        <Text style={styles.buttonTextStyle}>{title}</Text>
+        <Text style={textStyle}>{title}</Text>
       </View>
     </TouchableHighlight>
   )

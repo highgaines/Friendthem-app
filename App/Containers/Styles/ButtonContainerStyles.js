@@ -19,10 +19,10 @@ export default StyleSheet.create({
     backgroundColor: '#004d99'
   },
   button: {
-    width: 150,
+    width: 130,
     height: 40,
     flexDirection: 'row',
-    backgroundColor: '#030ab0',
+    backgroundColor: '#fff',
     borderRadius: 100,
     marginTop: 10,
     marginHorizontal: 5,
