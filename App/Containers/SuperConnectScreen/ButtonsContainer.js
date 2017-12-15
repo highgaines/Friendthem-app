@@ -26,16 +26,16 @@ export default ButtonsContainer = props => {
       </Text>
       <View style={{ flexDirection: 'row', alignContent: 'center'}}>
         <ConnectButton
-          name='people'
-          type='simple-line-icons'
+          name='arrow-back'
+          type='materialicons'
           color='#ffffff'
           title='GO BACK'
           onPressCallback={goBack}
           containerStyle={styles.button}/>
 
         <ConnectButton
-          name='bolt'
-          type='font-awesome'
+          name='check'
+          type='entypo'
           color='#ffffff'
           onPressCallback={letsDoIt}
           title="LET'S DO IT"
