@@ -13,7 +13,6 @@ export default class PlatformsContainer extends Component {
 
   renderSocialMediaCards = () => {
     const { platforms } = this.props
-    console.log(platforms)
     const platformCards =
       platforms.map( (platObj,i) =>
     <SocialMediaCard

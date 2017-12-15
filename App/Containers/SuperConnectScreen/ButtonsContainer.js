@@ -21,7 +21,7 @@ export default ButtonsContainer = props => {
 
   return(
     <View style={styles.container}>
-      <Text style={{ color: 'white', fontSize: 15}}>
+      <Text style={{ color: 'white', fontSize: 15, textAlign: 'center'}}>
         {`Are you sure you want to super connect with ${friendName}?`}
       </Text>
       <View style={{ flexDirection: 'row', alignContent: 'center'}}>

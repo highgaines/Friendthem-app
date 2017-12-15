@@ -11,7 +11,8 @@ import styles from './Styles/UserProfileStyles';
 
 class FriendProfileScreen extends Component {
   render() {
-    const { friendInfo } = this.props;
+    const { friendInfo, superConnect } = this.props;
+
     return (
         <View>
           <LinearGradient
@@ -46,7 +47,8 @@ class FriendProfileScreen extends Component {
                 userName={friendInfo.name} />
             </View>
             <View style={styles.SuperConnectBarContainer}>
-              <SuperConnectBar />
+              <SuperConnectBar
+                superConnect={superConnect}/>
             </View>
         </View>
     )

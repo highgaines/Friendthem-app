@@ -55,7 +55,7 @@ export default StyleSheet.create({
     backgroundColor: '#143a7a'
   },
   socialAccountContainer: {
-    padding: 2
+    paddingHorizontal: 10
   },
   SuperConnectBarContainer: {
     alignItems: 'center'
