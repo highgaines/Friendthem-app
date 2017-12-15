@@ -355,7 +355,6 @@
 			remoteGlobalIDString = 9350E0F11CE3B0920041D815;
 			remoteInfo = RCTFBSDK;
 		};
-		A5C5BBC11FE0846400F3664B /* PBXContainerItemProxy */ = {
 		A5A15C8B1FE06E9600ABE5DB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 59F1F4CDE00E4C6E990349C0 /* RNSensitiveInfo.xcodeproj */;
@@ -743,10 +742,6 @@
 			path = Frameworks;
 			sourceTree = "<group>";
 		};
-		A5C5BBBE1FE0846400F3664B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A5C5BBC21FE0846400F3664B /* libRNSensitiveInfo.a */,
 		A5A15C881FE06E9600ABE5DB /* Products */ = {
 			isa = PBXGroup;
 			children = (
