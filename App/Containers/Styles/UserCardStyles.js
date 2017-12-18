@@ -15,7 +15,7 @@ export default StyleSheet.create({
     shadowRadius: 5,
     shadowColor: 'black',
     shadowOffset: { height: 0, width: 0 },
-    marginHorizontal: 5
+    marginHorizontal: 2
   },
   cardImage: {
     borderRadius: 50,

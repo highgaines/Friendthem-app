@@ -13,12 +13,14 @@ export default StyleSheet.create({
     shadowOpacity: 0.75,
     shadowRadius: 5,
     shadowColor: 'black',
-    shadowOffset: { height: 0, width: 0 }
+    shadowOffset: { height: 0, width: 0 },
+    marginHorizontal: 2
   },
   cardSelected: {
     alignItems: 'center',
     backgroundColor: '#3C5996',
     marginTop: 10,
+    marginHorizontal: 2,
     borderRadius: 10,
     height: 130,
     width: 120,

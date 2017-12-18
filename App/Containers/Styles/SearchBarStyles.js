@@ -4,11 +4,12 @@ import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   linearGradient: {
-    height: 50
+    height: 80,
+    alignItems: 'flex-end'
   },
   searchBar: {
     backgroundColor: 'transparent',
-    marginTop: 20,
+    marginTop: 50,
     flexDirection: 'row'
   },
   searchIcon: {
