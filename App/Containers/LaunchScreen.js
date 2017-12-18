@@ -93,12 +93,6 @@ class LaunchScreen extends Component {
             </View>
             <View style={styles.section} >
               <FBLogin />
-              <SocialIcon
-                button
-                title='Sign In With Twitter'
-                onPress={this._twitterAuth}
-                type='twitter'
-              />
               <Button
                 title='Nearby Users Screen'
                 onPress={() =>
