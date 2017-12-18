@@ -29,7 +29,7 @@ class SuperConnect extends Component {
     if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
       console.log('hit')
       const friendListRequest = new GraphRequest(
-        `/${this.props.userData.id}/friends/502562708`,
+        `/${this.props.userData.id}/friends/${this.props.friendData.id}`,
         {
           accessToken: this.props.fbAuthToken,
         },
