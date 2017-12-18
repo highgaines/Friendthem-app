@@ -21,7 +21,11 @@ export default StyleSheet.create({
     marginTop: 10,
     borderRadius: 10,
     height: 130,
-    width: 120
+    width: 120,
+    shadowOpacity: 0.75,
+    shadowRadius: 5,
+    shadowColor: 'black',
+    shadowOffset: { height: 0, width: 0 }
   },
   invertedCard: {
     alignItems: 'center',

@@ -8,10 +8,10 @@ export default StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    width: 300,
+    width: 340,
     height: 120,
     marginBottom: 40,
-    marginLeft: 40,
+    marginLeft: 20,
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -19,11 +19,16 @@ export default StyleSheet.create({
     backgroundColor: '#004d99'
   },
   button: {
-    width: 170,
-    height: 50,
+    width: 150,
+    height: 40,
     flexDirection: 'row',
     backgroundColor: '#030ab0',
     borderRadius: 100,
-    marginHorizontal: 5
+    marginTop: 10,
+    marginHorizontal: 5,
+    shadowOpacity: 0.75,
+    shadowRadius: 5,
+    shadowColor: 'black',
+    shadowOffset: { height: 6, width: 10 }
   }
 })

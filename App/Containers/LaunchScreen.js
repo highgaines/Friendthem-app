@@ -100,7 +100,7 @@ class LaunchScreen extends Component {
                 type='twitter'
               />
               <Button
-                title='Go to Nearby Users'
+                title='Nearby Users Screen'
                 onPress={() =>
                   navigate('NearbyUsersScreen', {
                     numUsers: 2,
@@ -111,8 +111,17 @@ class LaunchScreen extends Component {
                 }
               />
               <Button
-                title='Go to Super Connect'
+                title='Super Connect Screen'
                 onPress={() => navigate('SuperConnectScreen',
+                {
+                  userData: { name: 'Logan', image: '../../Images/wolverine.jpg'},
+                  friendData: { name: 'Cyclops', image: '../../Images/cyclops.jpg'},
+                  navigation: this.props.navigation
+                })}
+              />
+              <Button
+                title='Congratulatory Screen'
+                onPress={() => navigate('CongratulatoryScreen',
                 {
                   userData: { name: 'Logan', image: '../../Images/wolverine.jpg'},
                   friendData: { name: 'Cyclops', image: '../../Images/cyclops.jpg'},

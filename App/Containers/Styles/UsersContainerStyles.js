@@ -9,6 +9,6 @@ export default StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
-    marginLeft: 5
+    marginLeft: 10
   }
 })

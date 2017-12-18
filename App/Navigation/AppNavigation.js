@@ -6,6 +6,8 @@ import SearchBar from '../Containers/NearbyUsersScreen/SearchBar'
 import UserProfileScreen from '../Containers/UserProfileScreen'
 import FriendProfileScreen from '../Containers/FriendProfileScreen'
 import SuperConnect from '../Containers/SuperConnectScreen/SuperConnect'
+import CongratulatoryScreen from '../Containers/SuperConnectScreen/CongratulatoryScreen'
+
 import styles from './Styles/NavigationStyles'
 
 const mapNavigationStateParamsToProps = (SomeComponent) => {
@@ -24,7 +26,8 @@ const PrimaryNav = StackNavigator({
   SearchBar: { screen: SearchBar },
   UserProfileScreen: { screen: UserProfileScreen },
   FriendProfileScreen: { screen: FriendProfileScreen},
-  SuperConnectScreen: { screen: mapNavigationStateParamsToProps(SuperConnect) }
+  SuperConnectScreen: { screen: mapNavigationStateParamsToProps(SuperConnect) },
+  CongratulatoryScreen: { screen: mapNavigationStateParamsToProps(CongratulatoryScreen) }
 }, {
   // Default config for all screens
   headerMode: 'none',
