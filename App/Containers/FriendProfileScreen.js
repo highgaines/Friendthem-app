@@ -49,7 +49,7 @@ class FriendProfileScreen extends Component {
                 inverted={true}
                 userName={friendInfo.name} />
             </View>
-            <View style={styles.SuperConnectBarContainer}>
+            <View style={styles.superConnectBarContainer}>
               <SuperConnectBar
                 superConnect={superConnect}/>
             </View>
