@@ -29,6 +29,13 @@ export default StyleSheet.create({
     shadowOpacity: 0.75,
     shadowRadius: 5,
     shadowColor: 'black',
-    shadowOffset: { height: 6, width: 10 }
+    shadowOffset: { height: 6, width: 10 },
+    marginTop: 5,
+    justifyContent: 'center'
+  },
+  textStyle: {
+    color: '#fff',
+    marginLeft: 5,
+    backgroundColor: 'transparent'
   }
 })

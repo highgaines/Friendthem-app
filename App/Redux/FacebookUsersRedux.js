@@ -19,7 +19,7 @@ export const INITIAL_STATE = Immutable({
     {
       'image': require('../Images/floyd.jpg'),
       'name': 'Floyd Mayweather',
-      fbUrl: ''
+      fbUrl: fbDeepLinkURL
     },
     {
       'image': require('../Images/conor.png'),
@@ -29,12 +29,12 @@ export const INITIAL_STATE = Immutable({
     {
       'image': require('../Images/pacman.jpg'),
       'name': 'Manny Pacquaio',
-      fbUrl: ''
+      fbUrl: fbDeepLinkURL
     },
     {
       'image': require('../Images/pacman.jpg'),
       'name': 'Manny Pacquaio',
-      fbUrl: ''
+      fbUrl: fbDeepLinkURL
     },
     {
       'image': require('../Images/pacman.jpg'),

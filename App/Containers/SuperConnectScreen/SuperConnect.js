@@ -22,7 +22,6 @@ class SuperConnect extends Component {
         selected: true
       }
     ]
-    debugger
     return(
       <View style={{ flex: 1 }}>
         <ConnectBar userData={userData} friendData={friendData}/>

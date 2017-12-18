@@ -41,5 +41,11 @@ export default StyleSheet.create({
   },
   buttonIconStyle: {
     marginLeft: 13
+  },
+  linearGradient: {
+    width: 130,
+    height: 40,
+    borderRadius: 100,
+    justifyContent: 'center'
   }
 })

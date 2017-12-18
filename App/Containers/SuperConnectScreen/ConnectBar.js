@@ -6,7 +6,7 @@ import styles from '../Styles/ConnectBarStyles';
 
 export default ConnectBar = props => {
   const { userData, friendData } = props
-  debugger
+  console.log(userData)
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -21,7 +21,7 @@ export default ConnectBar = props => {
               <View style={styles.column}>
                 <View style={styles.picAndName}>
                   <Image
-                    source={require('../../Images/wolverine.jpg')} style={styles.image}
+                    source={{uri: userData.picture.data.url}} style={styles.image}
                   />
                   <Text style={styles.name}> {userData.name} </Text>
                 </View>
