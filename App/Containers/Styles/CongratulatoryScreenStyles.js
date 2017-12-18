@@ -16,9 +16,15 @@ export default StyleSheet.create({
     justifyContent: 'flex-start'
   },
   row: {
+    flex: 6,
     flexDirection: 'row',
-    marginBottom: 20,
-    justifyContent: 'center'
+    marginBottom: 20
+  },
+  textContainer: {
+    flex: 5,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    marginRight: 60
   },
   superConnectText: {
     color: 'white',
@@ -27,18 +33,26 @@ export default StyleSheet.create({
   },
   body: {
     flex: 2,
-    padding: 30,
+    padding: 70,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     backgroundColor: '#fff'
   },
+  message: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  okButton: {
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginRight: 20
+  },
   button: {
-    alignSelf: 'stretch',
     color: 'white'
   },
   imgOverlapContainer: {
-    flex: 2,
-    marginTop: 30,
+    flex: 1,
+    marginTop: 50,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'flex-start'
@@ -50,9 +64,47 @@ export default StyleSheet.create({
   },
   image2: {
     position: 'absolute',
+    zIndex: 0,
     left: 100,
     borderRadius: 75,
     width: 150,
     height: 150
+  },
+  linearGradientBackground: {
+    position: 'absolute',
+    top: -12,
+    left: 88,
+    width: 175,
+    height: 175,
+    opacity: .5,
+    borderRadius: 175/2
+  },
+  linearGradientBackground2: {
+    position: 'absolute',
+    zIndex: 1,
+    top: -12,
+    left: -12,
+    width: 175,
+    height: 175,
+    opacity: .5,
+    borderRadius: 175/2
+  },
+  linearGradientBackground3: {
+    position: 'absolute',
+    top: -25,
+    left: 75,
+    width: 200,
+    height: 200,
+    opacity: .5,
+    borderRadius: 100
+  },
+  linearGradientBackground4: {
+    position: 'absolute',
+    top: -25,
+    left: -25,
+    width: 200,
+    height: 200,
+    opacity: .5,
+    borderRadius: 100
   }
 })
