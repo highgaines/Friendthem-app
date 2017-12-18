@@ -60,6 +60,14 @@ export default class SocialMediaCard extends Component {
         style={inverted ? styles.invertedCard : cardStyle}
         onPress={this.handlePush}
       >
+        {
+          selected ?
+          <Icon
+            name='check-circle'
+            type='font-awesome'
+            color={'#3C5996'}
+            containerStyle={styles.checkIcon} /> : null
+        }
         <View style={styles.socialMediaImage}>
           { this.renderIcon() }
         </View>

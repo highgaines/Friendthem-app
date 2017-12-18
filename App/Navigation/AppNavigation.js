@@ -25,7 +25,9 @@ const PrimaryNav = StackNavigator({
   NearbyUsersScreen: { screen: mapNavigationStateParamsToProps(NearbyUsers) },
   SearchBar: { screen: SearchBar },
   UserProfileScreen: { screen: UserProfileScreen },
-  FriendProfileScreen: { screen: FriendProfileScreen},
+  FriendProfileScreen: { screen:
+    mapNavigationStateParamsToProps(FriendProfileScreen)
+  },
   SuperConnectScreen: { screen: mapNavigationStateParamsToProps(SuperConnect) },
   CongratulatoryScreen: { screen: mapNavigationStateParamsToProps(CongratulatoryScreen) }
 }, {

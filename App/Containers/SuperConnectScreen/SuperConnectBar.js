@@ -14,14 +14,17 @@ export default class SuperConnectBar extends Component {
           type='simple-line-icons'
           color='#ffffff'
           title='FRIENDTHEM'
-          containerStyle={styles.friendThemButton}/>
+          containerStyle={styles.friendThemButton}
+          textStyle={styles.buttonTextStyle}/>
 
         <ConnectButton
           name='bolt'
           type='font-awesome'
           color='#ffffff'
           title='SUPER CONNECT'
-          containerStyle={styles.superConnectButton} />
+          onPressCallback={this.props.superConnect}
+          containerStyle={styles.superConnectButton}
+          textStyle={styles.buttonTextStyle}/>
       </View>
     )
   }

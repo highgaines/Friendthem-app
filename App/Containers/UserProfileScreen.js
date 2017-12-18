@@ -10,7 +10,8 @@ import styles from './Styles/UserProfileStyles';
 
 class UserProfileScreen extends Component {
   render() {
-    const { userInfo } = this.props;
+    const { userInfo, navigation } = this.props;
+
     return (
         <View>
           <LinearGradient
@@ -47,6 +48,9 @@ class UserProfileScreen extends Component {
                 userName={userInfo.name}
                 inverted={false} />
             </View>
+            <TouchableOpacity onPress={() => navigation.navigate('LaunchScreen')}>
+              <Text>Return Home</Text>
+            </TouchableOpacity>
         </View>
     )
   }

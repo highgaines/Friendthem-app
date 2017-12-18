@@ -7,14 +7,13 @@ import ConnectBar from './ConnectBar';
 import PlatformsContainer from './PlatformsContainer';
 import ButtonsContainer from './ButtonsContainer';
 
-export default class SuperConnect extends Component {
+class SuperConnect extends Component {
   constructor(props) {
     super(props)
   }
 
   render() {
     const { userData, friendData, navigation } = this.props
-
     // dummy data
     const platforms = [
       {
@@ -23,15 +22,27 @@ export default class SuperConnect extends Component {
         selected: true
       }
     ]
-
     return(
       <View style={{ flex: 1 }}>
         <ConnectBar userData={userData} friendData={friendData}/>
-        <PlatformsContainer navigation={navigation} platforms={platforms} />
+        <PlatformsContainer
+          navigation={navigation}
+          platforms={platforms}
+          inverted={true}/>
         <View style={{ alignItems: 'center' }}>
-          <ButtonsContainer navigation={navigation} friendName="Cyclops" />
+          <ButtonsContainer
+            navigation={navigation}
+            facebookUrl={friendData.fbUrl}
+            friendName="Cyclops" />
         </View>
       </View>
     )
   }
 }
+
+const mapStateToProps = state => ({
+  userData: state.userStore.userFbData,
+  friendData: state.friendStore.friendData
+})
+
+export default connect(mapStateToProps)(SuperConnect)

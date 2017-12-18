@@ -9,7 +9,10 @@ export default function UsersContainer(props) {
   const { users, navigation, setFriendInfo } = props
   const viewFriendProfile = userObj => {
     setFriendInfo(userObj)
-    navigation.navigate('FriendProfileScreen')
+    navigation.navigate('FriendProfileScreen', {
+      superConnect: () => navigation.navigate('SuperConnectScreen'),
+      homeScreen: () => navigation.navigate('LaunchScreen')
+    })
   }
   const userCards =
     users.map( (userObj,i) =>
