@@ -6,7 +6,6 @@ import styles from '../Styles/ConnectBarStyles';
 
 export default ConnectBar = props => {
   const { userData, friendData } = props
-  console.log(userData)
   return (
     <View style={styles.container}>
       <LinearGradient
