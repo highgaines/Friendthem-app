@@ -1,15 +1,49 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, Image, View, TouchableOpacity, Button } from 'react-native';
+import { ScrollView, Text, Image, View, TouchableOpacity, Button, AppState } from 'react-native';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import { SocialIcon } from 'react-native-elements';
 import ConnectBar from './ConnectBar';
 import PlatformsContainer from './PlatformsContainer';
 import ButtonsContainer from './ButtonsContainer';
+import FBSDK, { AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk';
 
 class SuperConnect extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      appState: AppState.currentState
+    }
+  }
+
+  componentDidMount() {
+    AppState.addEventListener('change', this._handleAppStateChange);
+  }
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this._handleAppStateChange);
+  }
+
+  _handleAppStateChange = (nextAppState) => {
+    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+      console.log('hit')
+      const friendListRequest = new GraphRequest(
+        `/${this.props.userData.id}/friends/502562708`,
+        {
+          accessToken: this.props.fbAuthToken,
+        },
+        (error, result) => {
+          if(result && !error) {
+            debugger
+          } else {
+            console.log(error, result)
+          }
+        }
+      )
+      new GraphRequestManager().addRequest(friendListRequest).start();
+    }
+    this.setState({appState: nextAppState});
   }
 
   render() {
@@ -41,6 +75,7 @@ class SuperConnect extends Component {
 }
 
 const mapStateToProps = state => ({
+  fbAuthToken: state.fbStore.fbAccessToken,
   userData: state.userStore.userFbData,
   friendData: state.friendStore.friendData
 })
