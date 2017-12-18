@@ -27,7 +27,6 @@ class SuperConnect extends Component {
 
   _handleAppStateChange = (nextAppState) => {
     if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
-      console.log('hit')
       const friendListRequest = new GraphRequest(
         `/${this.props.userData.id}/friends/${this.props.friendData.id}`,
         {
@@ -35,7 +34,11 @@ class SuperConnect extends Component {
         },
         (error, result) => {
           if(result && !error) {
-            debugger
+            this.props.navigation.navigate('CongratulatoryScreen', {
+              userData: this.props.userData,
+              friendData: this.props.friendData,
+              navigation: this.props.navigation
+            })
           } else {
             console.log(error, result)
           }
