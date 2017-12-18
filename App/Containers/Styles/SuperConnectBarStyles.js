@@ -19,7 +19,12 @@ export default StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#030ab0',
     borderRadius: 100,
-    marginHorizontal: 5
+    marginHorizontal: 5,
+    justifyContent: 'center'
+  },
+  superConnectBarContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   superConnectButton: {
     width: 170,
@@ -27,11 +32,12 @@ export default StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#030ab0',
     borderRadius: 100,
-    marginHorizontal: 5
+    marginHorizontal: 5,
+    justifyContent: 'center'
   },
   buttonTextStyle: {
     color: '#ffffff',
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: 'bold',
     marginLeft: 7,
   },
@@ -40,7 +46,7 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   buttonIconStyle: {
-    marginLeft: 13
+
   },
   linearGradient: {
     width: 130,
