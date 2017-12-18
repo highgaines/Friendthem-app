@@ -4,8 +4,7 @@ import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
-    flex: 3,
-    // alignItems: 'center'
+    flex: 3
   },
   linearGradient: {
     height: 70,
@@ -59,6 +58,7 @@ export default StyleSheet.create({
   },
   image1: {
     borderRadius: 75,
+    borderWidth: 1,
     width: 150,
     height: 150,
   },
@@ -66,6 +66,7 @@ export default StyleSheet.create({
     position: 'absolute',
     zIndex: 0,
     left: 100,
+    borderWidth: 1,
     borderRadius: 75,
     width: 150,
     height: 150
