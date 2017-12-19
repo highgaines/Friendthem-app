@@ -48,10 +48,6 @@ class LaunchScreen extends Component {
           navigation: this.props.navigation,
           setFriendInfo: setFriendInfo
         })
-        // SInfo is a storage library for React Native that securely stores
-        // any sensitive information using the iOS keychain, still contemplating
-        // whether it is necessary at this stage of development
-        //SInfo.setItem('userFBProfile', result, {})
       }
     }
     const infoRequest = new GraphRequest(
@@ -67,7 +63,6 @@ class LaunchScreen extends Component {
       responseInfoCallback
     );
 
-  // Start the graph request.
     new GraphRequestManager()
     .addRequest(infoRequest)
     .start();
@@ -75,7 +70,7 @@ class LaunchScreen extends Component {
 
   render () {
     const { navigate } = this.props.navigation
-    const { users, setFriendInfo } = this.props
+    const { users, setFriendInfo, fbAuthToken } = this.props
 
     return (
       <View style={styles.mainContainer}>
@@ -98,36 +93,8 @@ class LaunchScreen extends Component {
               </Text>
             </View>
             <View style={styles.section} >
-              <FBLogin />
-              <Button
-                title='Nearby Users Screen'
-                onPress={() =>
-                  navigate('NearbyUsersScreen', {
-                    numUsers: 2,
-                    users: users,
-                    navigation: this.props.navigation,
-                    setFriendInfo: setFriendInfo
-                  })
-                }
-              />
-              <Button
-                title='Super Connect Screen'
-                onPress={() => navigate('SuperConnectScreen',
-                {
-                  userData: { name: 'Logan', image: '../../Images/wolverine.jpg'},
-                  friendData: { name: 'Cyclops', image: '../../Images/cyclops.jpg'},
-                  navigation: this.props.navigation
-                })}
-              />
-              <Button
-                title='Congratulatory Screen'
-                onPress={() => navigate('CongratulatoryScreen',
-                {
-                  userData: { name: 'Logan', image: '../../Images/wolverine.jpg'},
-                  friendData: { name: 'Cyclops', image: '../../Images/cyclops.jpg'},
-                  navigation: this.props.navigation
-                })}
-              />
+              <FBLogin
+                loggedIn={!!fbAuthToken}/>
             </View>
           </ScrollView>
         </LinearGradient>
@@ -138,7 +105,8 @@ class LaunchScreen extends Component {
 
 const mapStateToProps = state => ({
   fbAuthToken: state.fbStore.fbAccessToken,
-  users: state.facebook.users
+  users: state.facebook.users,
+  userData: state.userStore
 })
 
 const mapDispatchToProps = dispatch => {

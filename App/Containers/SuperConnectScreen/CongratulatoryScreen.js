@@ -13,8 +13,7 @@ export default CongratulatoryScreen = props => {
     console.log('OK')
   }
 
-  // make sure to change source for images to proper URLs
-
+  debugger
   return(
     <View style={styles.container}>
       <View style={styles.headerBar}>
