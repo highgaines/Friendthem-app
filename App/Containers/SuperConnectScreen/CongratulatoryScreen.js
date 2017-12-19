@@ -81,8 +81,8 @@ export default CongratulatoryScreen = props => {
               style={styles.linearGradientBackground4}
             />
           </View>
-          <Image style={styles.image2} source={require('../../Images/cyclops.jpg')}/>
-          <Image style={styles.image1} source={require('../../Images/wolverine.jpg')}/>
+          <Image style={styles.image2} source={{uri: friendData.image}}/>
+          <Image style={styles.image1} source={{uri: userData.picture.data.url}}/>
         </View>
 
       </View>

@@ -12,7 +12,7 @@ export default function UserCard(props) {
     <TouchableOpacity
       style={styles.card}
       onPress={setFriendInfo}>
-      <Image style={styles.cardImage} source={image} />
+      <Image style={styles.cardImage} source={{uri: image}} />
       <View style={styles.cardText}>
         <Text numberOfLines={1}> {name} </Text>
       </View>
