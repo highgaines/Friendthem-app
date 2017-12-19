@@ -33,6 +33,18 @@ export default StyleSheet.create({
   linearGradient: {
     flex: 1
   },
+  modal: {
+    width: 350,
+    height: 115,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderWidth: 3,
+    borderColor: 'black',
+    borderRadius: 50,
+    marginTop: 280,
+    marginLeft: 15
+  },
   phoneIcon: {
     height: 40,
     width: 40,
