@@ -20,9 +20,11 @@ export default ConnectBar = props => {
               <View style={styles.column}>
                 <View style={styles.picAndName}>
                   <Image
-                    source={{uri: userData.picture.data.url}} style={styles.image}
+                    source={{ uri: userData.picture.data.url }} style={styles.image}
                   />
-                  <Text style={styles.name}> {userData.name} </Text>
+
+                  <Text
+                     style={styles.name}> {userData.name} </Text>
                 </View>
               </View>
               <View style={styles.column}>
