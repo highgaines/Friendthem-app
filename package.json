@@ -99,7 +99,7 @@
   },
   "nrpm": {
     "assets": [
-      "/assets/Fonts"
+      "./assets/Fonts"
     ]
   },
   "config": {},

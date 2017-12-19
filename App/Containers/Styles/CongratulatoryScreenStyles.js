@@ -23,12 +23,14 @@ export default StyleSheet.create({
     flex: 5,
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
-    marginRight: 60
+    marginRight: 60,
+    fontFamily: Fonts.type.base,
   },
   superConnectText: {
     color: 'white',
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontFamily: Fonts.type.base,
   },
   body: {
     flex: 2,
@@ -39,7 +41,8 @@ export default StyleSheet.create({
   },
   message: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    fontFamily: Fonts.type.base,
   },
   okButton: {
     justifyContent: 'flex-end',

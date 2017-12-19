@@ -18,14 +18,13 @@ export default StyleSheet.create({
     marginHorizontal: 2
   },
   cardImage: {
-    borderRadius: 50,
-    height: 100,
+    borderRadius: 40,
+    height: 80,
     marginTop: 10,
-    width: 100,
+    width: 80,
   },
   cardText: {
-    marginTop: 5,
     borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10
+    borderBottomLeftRadius: 10,
   }
 })

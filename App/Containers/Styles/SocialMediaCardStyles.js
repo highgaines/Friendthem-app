@@ -8,22 +8,22 @@ export default StyleSheet.create({
     backgroundColor: '#3C5996',
     marginTop: 10,
     borderRadius: 10,
-    height: 130,
-    width: 120,
+    height: 120,
+    width: 110,
     shadowOpacity: 0.75,
     shadowRadius: 5,
     shadowColor: 'black',
     shadowOffset: { height: 0, width: 0 },
-    marginHorizontal: 2
+    marginHorizontal: 5
   },
   cardSelected: {
     alignItems: 'center',
     backgroundColor: '#3C5996',
     marginTop: 10,
-    marginHorizontal: 2,
+    marginHorizontal: 5,
     borderRadius: 10,
-    height: 130,
-    width: 120,
+    height: 120,
+    width: 110,
     shadowOpacity: 0.75,
     shadowRadius: 5,
     shadowColor: 'black',
@@ -34,8 +34,8 @@ export default StyleSheet.create({
     backgroundColor: '#FFFFFF',
     marginTop: 10,
     borderRadius: 10,
-    height: 130,
-    width: 120,
+    height: 120,
+    width: 110,
     shadowOpacity: 0.75,
     shadowRadius: 5,
     shadowColor: 'black',
@@ -55,20 +55,24 @@ export default StyleSheet.create({
   platformName: {
     fontSize: 17,
     fontWeight: 'bold',
-    color: '#FFFFFF'
+    color: '#FFFFFF',
+    fontFamily: Fonts.type.base,
   },
   userName: {
     fontSize: 12,
-    color: '#FFFFFF'
+    color: '#FFFFFF',
+    fontFamily: Fonts.type.base,
   },
   platformNameInverted: {
     fontSize: 17,
     fontWeight: 'bold',
-    color: '#000000'
+    color: '#000000',
+    fontFamily: Fonts.type.base,
   },
   userNameInverted: {
     fontSize: 12,
-    color: '#000000'
+    color: '#000000',
+    fontFamily: Fonts.type.base,
   },
   iconContainer: {
     height: 30,

@@ -40,10 +40,12 @@ export default StyleSheet.create({
     fontSize: 12,
     fontWeight: 'bold',
     marginLeft: 7,
+    fontFamily: Fonts.type.base,
   },
   buttonViewStyle: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center'
   },
   buttonIconStyle: {
 

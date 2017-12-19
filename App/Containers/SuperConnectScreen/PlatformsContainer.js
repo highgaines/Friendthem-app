@@ -28,7 +28,7 @@ export default class PlatformsContainer extends Component {
 
   render() {
     return(
-      <ScrollView contentContainerStyle={[styles.container, {justifyContent: 'flex-start'}]}>
+      <ScrollView contentContainerStyle={styles.socialAccountContainer}>
         { this.renderSocialMediaCards() }
       </ScrollView>
     )

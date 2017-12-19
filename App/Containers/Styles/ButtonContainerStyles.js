@@ -36,6 +36,7 @@ export default StyleSheet.create({
   textStyle: {
     color: '#fff',
     marginLeft: 5,
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    fontFamily: Fonts.type.base,
   }
 })

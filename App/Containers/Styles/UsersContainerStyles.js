@@ -9,5 +9,10 @@ export default StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'flex-start'
+  },
+  socialAccountContainer: {
+    paddingHorizontal: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   }
 })

@@ -27,7 +27,8 @@ export default StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     backgroundColor: 'transparent',
-    color: '#ffffff'
+    color: '#ffffff',
+    fontFamily: Fonts.type.base,
   },
   linearGradient: {
     flex: 1
@@ -55,7 +56,9 @@ export default StyleSheet.create({
     backgroundColor: '#143a7a'
   },
   socialAccountContainer: {
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   SuperConnectBarContainer: {
     alignItems: 'center'
