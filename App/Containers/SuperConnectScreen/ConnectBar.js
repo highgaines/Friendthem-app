@@ -21,12 +21,12 @@ export default ConnectBar = props => {
                 <View style={styles.picAndName}>
                   <Image
                     // replace this with { uri: userData.picture.data.url }
-                    source={require('../../Images/wolverine.jpg')} style={styles.image}
+                    source={{ uri: userData.picture.data.url }} style={styles.image}
                   />
 
                   <Text
                     // replace with proper names of connecting users
-                     style={styles.name}> {'Wolverine'} </Text>
+                     style={styles.name}> {userData.name} </Text>
                 </View>
               </View>
               <View style={styles.column}>
@@ -39,7 +39,7 @@ export default ConnectBar = props => {
                   <Image
                     source={{uri: friendData.image}} style={styles.image}
                   />
-                  <Text style={styles.name}> {'Cyclops'} </Text>
+                  <Text style={styles.name}> {friendData.name} </Text>
                 </View>
               </View>
             </View>
