@@ -11,7 +11,6 @@ import styles from './Styles/UserProfileStyles';
 class UserProfileScreen extends Component {
   render() {
     const { userInfo, navigation } = this.props;
-
     return (
         <View>
           <LinearGradient
