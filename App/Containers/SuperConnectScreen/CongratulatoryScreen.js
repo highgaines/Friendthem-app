@@ -10,7 +10,7 @@ export default CongratulatoryScreen = props => {
   const { userData, friendData, navigation} = props;
 
   const handleNavigation = () => {
-    console.log('OK')
+    navigation.navigate('UserProfileScreen', { userInfo: userData })
   }
 
   // make sure to change source for images to proper URLs
