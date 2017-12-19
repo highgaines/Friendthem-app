@@ -32,7 +32,7 @@ export const INITIAL_STATE = Immutable({
       fbUrl: fbDeepLinkURL
     },
     {
-      'image': require('../Images/jimmy.jpg'),
+      'image': '',
       'name': 'Jimmy Zhang',
       fbUrl: fbDeepLinkURL + '502562708'
     },
@@ -43,7 +43,7 @@ export const INITIAL_STATE = Immutable({
       id: '16410544'
     },
     {
-      'image': require('../Images/eoghan.jpg'),
+      'image': '',
       'name': 'Eoghan Leddy',
       fbUrl: fbDeepLinkURL + '10154996425606714',
       id: '10154996425606714'
