@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
+import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from 'react-native-elements';
+import FBSDK, { LoginManager } from 'react-native-fbsdk';
+import FBStoreActions from '../Redux/FBStore';
 
 import Navbar from './Navbar/Navbar';
 import SocialMediaCard from './SuperConnectScreen/SocialMediaCard';
@@ -11,8 +13,34 @@ import SuperConnectBar from './SuperConnectScreen/SuperConnectBar'
 import styles from './Styles/UserProfileStyles';
 
 class FriendProfileScreen extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      showModal: false
+    }
+  }
+
+  openModal = () => {
+    this.setState({ showModal: true })
+  }
+
+  closeModal = () => {
+    this.setState({ showModal: false})
+  }
+
+  logOut = () => {
+    const { fbLogoutComplete, navigation } = this.props
+
+    this.closeModal()
+    LoginManager.logOut();
+    fbLogoutComplete()
+    navigation.navigate('LaunchScreen')
+  }
+
   render() {
     const { friendInfo, superConnect, navigation } = this.props;
+    const { showModal } = this.state
 
     return (
         <View>
@@ -53,12 +81,31 @@ class FriendProfileScreen extends Component {
                 inverted={true}
                 userName={friendInfo.name} />
             </View>
+            <View>
+              <Modal
+                transparent={true}
+                visible={showModal}
+                animationType='slide'
+                >
+                  <View style={styles.modal}>
+                    <Text style={{ fontSize: 15, color: 'black' }}> Are you sure you want to logout? </Text>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 30}}>
+                      <Button onPress={this.logOut} title='Logout'/>
+                      <Button onPress={this.closeModal} title='Cancel'/>
+                    </View>
+                  </View>
+                </Modal>
+            </View>
             <View style={styles.superConnectBarContainer}>
               <SuperConnectBar
                 superConnect={superConnect}/>
             </View>
             <View>
-              <Navbar navigation={navigation}/>
+              <Navbar
+                navigation={navigation}
+                openModal={this.openModal}
+                logOut={this.logOut}
+              />
             </View>
         </View>
     )
@@ -70,7 +117,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
-  return {}
+  return {
+    fbLogoutComplete: () => dispatch(FBStoreActions.logoutComplete())
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FriendProfileScreen)

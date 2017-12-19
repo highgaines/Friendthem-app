@@ -39,11 +39,7 @@ class Navbar extends Component {
   }
 
   handleLogout = () => {
-    const { fbLogoutComplete, navigation } = this.props
-    LoginManager.logOut();
-    alert('Logging out of FriendThem...')
-    fbLogoutComplete()
-    navigation.navigate('LaunchScreen')
+    this.props.openModal()
   }
 
   render() {
