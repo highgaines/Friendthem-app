@@ -4,6 +4,7 @@ import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from 'react-native-elements';
 
+import Navbar from './Navbar/Navbar';
 import SocialMediaCard from './SuperConnectScreen/SocialMediaCard';
 import SuperConnectBar from './SuperConnectScreen/SuperConnectBar'
 
@@ -20,9 +21,6 @@ class FriendProfileScreen extends Component {
           start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
           locations={[0.1, 0.4, 0.6, 0.8, 1.0]}>
             <View style={styles.profileHeader}>
-              <TouchableOpacity onPress={() => navigation.navigate('LaunchScreen')}>
-                <Text>Return Home</Text>
-              </TouchableOpacity>
               <View style={styles.profHeaderTop}>
                 <Icon
                  name='phone'
@@ -41,6 +39,9 @@ class FriendProfileScreen extends Component {
               <Text style={styles.profileSubtext}>
               {`${friendInfo.name}`}
               </Text>
+              <Text style={styles.interestsText}>
+                  {friendInfo.interests.join(' | ')}
+              </Text>
             </View>
             </LinearGradient>
             <View style={styles.socialIconSlider}>
@@ -55,6 +56,9 @@ class FriendProfileScreen extends Component {
             <View style={styles.superConnectBarContainer}>
               <SuperConnectBar
                 superConnect={superConnect}/>
+            </View>
+            <View>
+              <Navbar navigation={navigation}/>
             </View>
         </View>
     )

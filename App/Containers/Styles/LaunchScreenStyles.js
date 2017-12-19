@@ -4,7 +4,7 @@ import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
-    paddingBottom: Metrics.baseMargin
+    paddingBottom: Metrics.baseMargin,
   },
   logo: {
     marginTop: Metrics.doubleSection,
@@ -20,11 +20,14 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     fontStyle: 'italic',
     color: 'white',
-    fontSize: 15
+    fontSize: 15,
+    fontFamily: Fonts.type.base,
   },
   secSubText: {
     marginTop: 2,
-    color: 'white'
+    color: 'white',
+    fontFamily: Fonts.type.base,
+
   },
   linearGradient: {
     flex: 1

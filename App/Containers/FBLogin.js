@@ -27,15 +27,36 @@ class FBLogin extends Component {
     )
   }
 
+  handleFBLogout = () => {
+    LoginManager.logOut();
+    //More stlyistic way to do this?
+    alert('Logging out of Facebook...')
+    this.props.fbLogoutComplete();
+  }
+
   render() {
     return (
       <View style={styles.section} >
-        <SocialIcon
-          button
-          title='Sign In With Facebook'
-          onPress={this.handleFBLogin}
-          type='facebook'
-        />
+      {
+        this.props.loggedIn ?
+        (
+          <SocialIcon
+            button
+            title='Sign Out Of Facebook'
+            onPress={this.handleFBLogout}
+            type='facebook'
+          />
+        )
+        :
+        (
+          <SocialIcon
+            button
+            title='Sign In With Facebook'
+            onPress={this.handleFBLogin}
+            type='facebook'
+          />
+        )
+      }
       </View>
     )
   }
@@ -43,7 +64,8 @@ class FBLogin extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fbLoginComplete: (error, result) => dispatch(FBStoreActions.loginComplete(error, result))
+    fbLoginComplete: (error, result) => dispatch(FBStoreActions.loginComplete(error, result)),
+    fbLogoutComplete: () => dispatch(FBStoreActions.logoutComplete())
   }
 }
 

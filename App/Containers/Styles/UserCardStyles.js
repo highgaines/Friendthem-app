@@ -25,6 +25,6 @@ export default StyleSheet.create({
   },
   cardText: {
     borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10
+    borderBottomLeftRadius: 10,
   }
 })
