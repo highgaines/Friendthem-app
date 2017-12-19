@@ -13,8 +13,7 @@ export default CongratulatoryScreen = props => {
     navigation.navigate('UserProfileScreen', { userInfo: userData })
   }
 
-  // make sure to change source for images to proper URLs
-
+  debugger
   return(
     <View style={styles.container}>
       <View style={styles.headerBar}>

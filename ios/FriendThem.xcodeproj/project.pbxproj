@@ -1478,6 +1478,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.FriendThem-naz";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.FriendThem;
 				PRODUCT_NAME = FriendThem;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1509,6 +1510,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.FriendThem-naz";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.FriendThem;
 				PRODUCT_NAME = FriendThem;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
