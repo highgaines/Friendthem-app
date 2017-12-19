@@ -11,7 +11,7 @@ export default StyleSheet.create({
     bottom: 0,
     left: 0,
     top: 0,
-    marginTop: 200
+    marginTop: 150
   },
   friendThemButton: {
     width: 170,

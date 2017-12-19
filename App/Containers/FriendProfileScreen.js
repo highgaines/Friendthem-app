@@ -4,6 +4,7 @@ import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from 'react-native-elements';
 
+import Navbar from './Navbar/Navbar';
 import SocialMediaCard from './SuperConnectScreen/SocialMediaCard';
 import SuperConnectBar from './SuperConnectScreen/SuperConnectBar'
 
@@ -58,6 +59,9 @@ class FriendProfileScreen extends Component {
             <View style={styles.superConnectBarContainer}>
               <SuperConnectBar
                 superConnect={superConnect}/>
+            </View>
+            <View>
+              <Navbar />
             </View>
         </View>
     )
