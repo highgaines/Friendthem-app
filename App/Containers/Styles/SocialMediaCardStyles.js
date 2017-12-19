@@ -55,20 +55,24 @@ export default StyleSheet.create({
   platformName: {
     fontSize: 17,
     fontWeight: 'bold',
-    color: '#FFFFFF'
+    color: '#FFFFFF',
+    fontFamily: Fonts.type.base,
   },
   userName: {
     fontSize: 12,
-    color: '#FFFFFF'
+    color: '#FFFFFF',
+    fontFamily: Fonts.type.base,
   },
   platformNameInverted: {
     fontSize: 17,
     fontWeight: 'bold',
-    color: '#000000'
+    color: '#000000',
+    fontFamily: Fonts.type.base,
   },
   userNameInverted: {
     fontSize: 12,
-    color: '#000000'
+    color: '#000000',
+    fontFamily: Fonts.type.base,
   },
   iconContainer: {
     height: 30,

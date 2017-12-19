@@ -49,6 +49,7 @@ export default StyleSheet.create({
     color: 'white',
     backgroundColor: 'transparent',
     fontWeight: 'bold',
-    fontSize: 14
+    fontSize: 17,
+    fontFamily: Fonts.type.base,
   }
 })

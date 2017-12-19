@@ -27,7 +27,8 @@ export default StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     backgroundColor: 'transparent',
-    color: '#ffffff'
+    color: '#ffffff',
+    fontFamily: Fonts.type.base,
   },
   linearGradient: {
     flex: 1
