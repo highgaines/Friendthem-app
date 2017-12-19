@@ -13,7 +13,10 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  userFbData: {}
+  userFbData: {
+    name: '',
+    picture: { data: {url: 'empty string'} }
+  }
 })
 
 /* ------------- Reducers ------------- */

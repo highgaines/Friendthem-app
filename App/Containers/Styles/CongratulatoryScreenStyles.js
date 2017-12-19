@@ -23,8 +23,7 @@ export default StyleSheet.create({
     flex: 5,
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
-    marginRight: 60,
-    fontFamily: Fonts.type.base,
+    marginRight: 60
   },
   superConnectText: {
     color: 'white',
@@ -42,7 +41,6 @@ export default StyleSheet.create({
   message: {
     justifyContent: 'center',
     alignItems: 'center',
-    fontFamily: Fonts.type.base,
   },
   okButton: {
     justifyContent: 'flex-end',
@@ -50,7 +48,7 @@ export default StyleSheet.create({
     marginRight: 20
   },
   button: {
-    color: 'white'
+    backgroundColor: 'white'
   },
   imgOverlapContainer: {
     flex: 1,

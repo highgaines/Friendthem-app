@@ -17,36 +17,42 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   users: [
     {
-      'image': '',
+      'image': 'empty string',
       'name': 'Floyd Mayweather',
-      fbUrl: fbDeepLinkURL
+      fbUrl: fbDeepLinkURL,
+      interests: ['Boxer', 'Entrepreneur', 'Father']
     },
     {
-      'image': '',
+      'image': 'empty string',
       'name': 'Conor Mcgregor',
-      'fbUrl': fbDeepLinkURL + '494191297315841'
+      'fbUrl': fbDeepLinkURL + '494191297315841',
+      interests: ['MMA Fighter', 'Entrepreneur', 'Father']
     },
     {
-      'image': '',
+      'image': 'empty string',
       'name': 'Manny Pacquaio',
-      fbUrl: fbDeepLinkURL
+      fbUrl: fbDeepLinkURL,
+      interests: ['Boxer', 'Entrepreneur', 'Father']
     },
     {
-      'image': '',
+      'image': 'empty string',
       'name': 'Jimmy Zhang',
-      fbUrl: fbDeepLinkURL + '502562708'
+      fbUrl: fbDeepLinkURL + '502562708',
+      interests: ['Coder', 'Gamer', 'Crypto Enthusiast']
     },
     {
       'image': 'https://scontent-iad3-1.xx.fbcdn.net/v/t1.0-9/24301357_10101682515692025_688989114175452534_n.jpg?oh=ce183e657d63e2afbc440c5f19d59a41&oe=5AB8A292',
       'name': 'Naz Khan',
       fbUrl: fbDeepLinkURL + '16410544',
-      id: '16410544'
+      id: '16410544',
+      interests: ['Coder', 'Gamer', 'Crypto Enthusiast']
     },
     {
-      'image': '',
+      'image': 'empty string',
       'name': 'Eoghan Leddy',
       fbUrl: fbDeepLinkURL + '10154996425606714',
-      id: '10154996425606714'
+      id: '10154996425606714',
+      interests: ['Coder', 'Gamer', 'Biker']
     }
   ],
   'fetching': false

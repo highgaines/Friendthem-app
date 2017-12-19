@@ -41,6 +41,9 @@ class FriendProfileScreen extends Component {
               <Text style={styles.profileSubtext}>
               {`${friendInfo.name}`}
               </Text>
+              <Text style={styles.interestsText}>
+                  {friendInfo.interests.join(' | ')}
+              </Text>
             </View>
             </LinearGradient>
             <View style={styles.socialIconSlider}>
