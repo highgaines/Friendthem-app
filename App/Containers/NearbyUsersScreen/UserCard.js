@@ -15,7 +15,7 @@ export default function UserCard(props) {
       <Image style={styles.cardImage} source={{uri: image}} />
       <View style={styles.cardText}>
         <Text
-          style={{fontFamily: 'Montserrat', fontSize: 13, fontWeight: 'bold'}}
+          style={{ fontFamily: 'Montserrat', fontSize: 13 }}
           numberOfLines={1}>
             {name}
         </Text>
