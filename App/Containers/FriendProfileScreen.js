@@ -29,11 +29,14 @@ class FriendProfileScreen extends Component {
                  type='font-awesome'
                  color='#ffffff'
                  containerStyle={styles.phoneIcon}/>
-                <Icon
-                 name='md-mail'
-                 type='ionicon'
-                 color='#ffffff'
-                 containerStyle={styles.mailIcon}/>
+                <Image
+                  style={styles.profileImage}
+                  source={{uri: friendInfo.image}} />
+                 <Icon
+                  name='md-mail'
+                  type='ionicon'
+                  color='#ffffff'
+                  containerStyle={styles.mailIcon}/>
               </View>
               <Text style={styles.profileSubtext}>
               {`${friendInfo.name}`}

@@ -17,32 +17,32 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   users: [
     {
-      'image': require('../Images/floyd.jpg'),
+      'image': '',
       'name': 'Floyd Mayweather',
       fbUrl: fbDeepLinkURL
     },
     {
-      'image': require('../Images/conor.png'),
+      'image': '',
       'name': 'Conor Mcgregor',
       'fbUrl': fbDeepLinkURL + '494191297315841'
     },
     {
-      'image': require('../Images/pacman.jpg'),
+      'image': '',
       'name': 'Manny Pacquaio',
       fbUrl: fbDeepLinkURL
     },
     {
-      'image': require('../Images/pacman.jpg'),
+      'image': '',
       'name': 'Manny Pacquaio',
       fbUrl: fbDeepLinkURL
     },
     {
-      'image': require('../Images/pacman.jpg'),
+      'image': '',
       'name': 'Jimmy Zhang',
       fbUrl: fbDeepLinkURL + '502562708'
     },
     {
-      'image': require('../Images/megaman.png'),
+      'image': 'https://scontent-iad3-1.xx.fbcdn.net/v/t1.0-9/24301357_10101682515692025_688989114175452534_n.jpg?oh=ce183e657d63e2afbc440c5f19d59a41&oe=5AB8A292',
       'name': 'Naz Khan',
       fbUrl: fbDeepLinkURL + '16410544',
       id: '16410544'

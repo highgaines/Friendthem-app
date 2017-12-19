@@ -33,7 +33,7 @@ export default ConnectBar = props => {
               <View style={styles.column}>
                 <View style={styles.picAndName}>
                   <Image
-                    source={require('../../Images/cyclops.jpg')} style={styles.image}
+                    source={{uri: friendData.image}} style={styles.image}
                   />
                   <Text style={styles.name}> {friendData.name} </Text>
                 </View>

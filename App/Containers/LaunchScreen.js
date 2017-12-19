@@ -34,14 +34,20 @@ class LaunchScreen extends Component {
   }
 
   getFbProfile = accessToken => {
-    const { userInfoRequestSuccess, navigation } = this.props;
+    const { userInfoRequestSuccess, navigation, setFriendInfo, users } = this.props;
+
     const responseInfoCallback = (error, result) => {
       if (error) {
         console.log(error)
         return error
       } else {
         userInfoRequestSuccess(result)
-        navigation.navigate('UserProfileScreen')
+        navigation.navigate('NearbyUsersScreen', {
+          numUsers: users.length,
+          users: users,
+          navigation: this.props.navigation,
+          setFriendInfo: setFriendInfo
+        })
         // SInfo is a storage library for React Native that securely stores
         // any sensitive information using the iOS keychain, still contemplating
         // whether it is necessary at this stage of development
