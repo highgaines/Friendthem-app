@@ -10,7 +10,8 @@ export default StyleSheet.create({
   searchBar: {
     backgroundColor: 'transparent',
     marginTop: 50,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
   searchIcon: {
     alignItems: 'flex-start'
@@ -27,10 +28,13 @@ export default StyleSheet.create({
     color: 'white'
   },
   numUsers: {
+    width: '100%',
     color: 'white',
     fontSize: 20,
     flex: 3,
-    marginLeft: 100
+    textAlign: 'center',
+    fontWeight: '600',
+    fontFamily: 'Montserrat'
   },
   backIcon: {
     alignItems: 'flex-end'

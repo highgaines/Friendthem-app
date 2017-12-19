@@ -48,7 +48,7 @@ class Navbar extends Component {
 
   render() {
     return(
-        <View style={styles.navbarRow}>
+        <View style={this.props.navbarStyle || styles.navbarRow}>
           <Icon
             name='users'
             type='entypo'

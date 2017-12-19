@@ -8,14 +8,14 @@ export default StyleSheet.create({
     justifyContent: 'space-around',
     backgroundColor: 'white',
     height: 130,
-    marginTop: 10,
+    marginTop: 5,
     borderRadius: 10,
-    width: 120,
-    shadowOpacity: 0.75,
+    width: 115,
+    shadowOpacity: 0.2,
     shadowRadius: 5,
     shadowColor: 'black',
     shadowOffset: { height: 0, width: 0 },
-    marginHorizontal: 2
+    marginHorizontal: 3
   },
   cardImage: {
     borderRadius: 40,
