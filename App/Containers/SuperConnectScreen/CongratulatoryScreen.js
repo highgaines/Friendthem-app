@@ -13,7 +13,6 @@ export default CongratulatoryScreen = props => {
     navigation.navigate('UserProfileScreen', { userInfo: userData })
   }
 
-  debugger
   return(
     <View style={styles.container}>
       <View style={styles.headerBar}>

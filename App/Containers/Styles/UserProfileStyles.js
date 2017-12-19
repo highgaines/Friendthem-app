@@ -62,5 +62,12 @@ export default StyleSheet.create({
   },
   SuperConnectBarContainer: {
     alignItems: 'center'
+  },
+  interestsText: {
+    backgroundColor: 'transparent',
+    color: '#fff',
+    marginTop: 3,
+    fontFamily: Fonts.type.base,
+    fontWeight: '600'
   }
 })
