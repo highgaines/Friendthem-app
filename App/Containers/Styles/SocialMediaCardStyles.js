@@ -53,24 +53,24 @@ export default StyleSheet.create({
     borderBottomRightRadius: 10
   },
   platformName: {
-    fontSize: 17,
+    fontSize: 14,
     fontWeight: 'bold',
     color: '#FFFFFF',
     fontFamily: Fonts.type.base,
   },
   userName: {
-    fontSize: 12,
+    fontSize: 10,
     color: '#FFFFFF',
     fontFamily: Fonts.type.base,
   },
   platformNameInverted: {
-    fontSize: 17,
+    fontSize: 14,
     fontWeight: 'bold',
     color: '#000000',
     fontFamily: Fonts.type.base,
   },
   userNameInverted: {
-    fontSize: 12,
+    fontSize: 10,
     color: '#000000',
     fontFamily: Fonts.type.base,
   },

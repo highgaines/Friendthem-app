@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
+import FBSDK, { LoginManager } from 'react-native-fbsdk';
+
+import FriendStoreActions from '../../Redux/FriendStore'
+import UserStoreActions from '../../Redux/UserStore';
+import FBStoreActions from '../../Redux/FBStore';
 
 import styles from '../Styles/NavbarStyles';
 
@@ -10,13 +15,19 @@ class Navbar extends Component {
     super()
 
     this.state = {
-
+      highlighted: ''
     }
   }
 
   goToNearbyUsers = () => {
     const { navigation, users, setFriendInfo } = this.props
-    navigation.navigate('NearbyUsersScreen', { users: users, navigation: navigations, setFriendInfo: setFriendInfo, numUsers: users.length })
+    navigation.navigate('NearbyUsersScreen',
+    {
+      users: users,
+      navigation: navigation,
+      setFriendInfo: setFriendInfo,
+      numUsers: users.length
+    })
   }
 
   goToNotifications = () => {
@@ -28,7 +39,11 @@ class Navbar extends Component {
   }
 
   handleLogout = () => {
-
+    const { fbLogoutComplete, navigation } = this.props
+    LoginManager.logOut();
+    alert('Logging out of FriendThem...')
+    fbLogoutComplete()
+    navigation.navigate('LaunchScreen')
   }
 
   render() {
@@ -73,7 +88,8 @@ const mapDispatchToProps = dispatch => {
     userInfoRequestSuccess: (userInfo) =>
       dispatch(UserStoreActions.fbUserInfo(userInfo)),
     setFriendInfo: (friendInfo) =>
-      dispatch(FriendStoreActions.setFriendInfo(friendInfo))
+      dispatch(FriendStoreActions.setFriendInfo(friendInfo)),
+    fbLogoutComplete: () => dispatch(FBStoreActions.logoutComplete())
   }
 }
 

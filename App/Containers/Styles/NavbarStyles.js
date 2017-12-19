@@ -11,7 +11,7 @@ export default StyleSheet.create({
     bottom: 0,
     left: 0,
     top: 0,
-    marginTop: 210,
+    marginTop: 220,
     backgroundColor: 'black',
     height: 60,
     flexDirection: 'row'
