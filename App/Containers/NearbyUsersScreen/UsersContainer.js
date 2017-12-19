@@ -27,8 +27,6 @@ export default function UsersContainer(props) {
   return(
     <ScrollView contentContainerStyle={styles.container}>
       {userCards}
-      <SocialMediaCard platformName="facebook" userName="mega0319" />
-      <SocialMediaCard platformName="twitter" userName="mega0319" />
     </ScrollView>
   )
 }

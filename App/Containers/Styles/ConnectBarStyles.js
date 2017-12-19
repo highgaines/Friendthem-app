@@ -24,7 +24,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     flex: 3,
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'space-around'
   },
   column: {
     flex: 1

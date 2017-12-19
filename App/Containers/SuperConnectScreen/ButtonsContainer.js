@@ -24,7 +24,7 @@ export default ButtonsContainer = props => {
       <Text style={{ color: 'white', fontSize: 15, textAlign: 'center'}}>
         {`Are you sure you want to super connect with ${friendName}?`}
       </Text>
-      <View style={{ flexDirection: 'row', alignContent: 'center'}}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
         <ConnectButton
           name='arrow-back'
           type='materialicons'

@@ -32,12 +32,7 @@ export const INITIAL_STATE = Immutable({
       fbUrl: fbDeepLinkURL
     },
     {
-      'image': '',
-      'name': 'Manny Pacquaio',
-      fbUrl: fbDeepLinkURL
-    },
-    {
-      'image': '',
+      'image': require('../Images/jimmy.jpg'),
       'name': 'Jimmy Zhang',
       fbUrl: fbDeepLinkURL + '502562708'
     },
@@ -46,6 +41,12 @@ export const INITIAL_STATE = Immutable({
       'name': 'Naz Khan',
       fbUrl: fbDeepLinkURL + '16410544',
       id: '16410544'
+    },
+    {
+      'image': require('../Images/eoghan.jpg'),
+      'name': 'Eoghan Leddy',
+      fbUrl: fbDeepLinkURL + '10154996425606714',
+      id: '10154996425606714'
     }
   ],
   'fetching': false
