@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, Image, View, TouchableOpacity, Button } from 'react-native';
+import { ScrollView, Text, Image, View, TouchableOpacity, Button, ActivityIndicator } from 'react-native';
 import { Images } from '../Themes';
 import { connect } from 'react-redux';
 import { SocialIcon } from 'react-native-elements';
@@ -21,7 +21,8 @@ class LaunchScreen extends Component {
     super(props)
 
     this.state = {
-      user: ''
+      user: '',
+      loading: false
     }
   }
 
@@ -31,6 +32,14 @@ class LaunchScreen extends Component {
     if (!fbAuthToken && nextProps.fbAuthToken) {
       this.getFbProfile(nextProps.fbAuthToken)
     }
+  }
+
+  handleLoading = () => {
+    this.setState({ loading: true })
+  }
+
+  handleLoadingComplete = () => {
+    this.setState({ loading: false })
   }
 
   getFbProfile = accessToken => {
@@ -71,6 +80,9 @@ class LaunchScreen extends Component {
   render () {
     const { navigate } = this.props.navigation
     const { users, setFriendInfo, fbAuthToken } = this.props
+    const { loading } = this.state
+
+
 
     return (
       <View style={styles.mainContainer}>
@@ -93,8 +105,18 @@ class LaunchScreen extends Component {
               </Text>
             </View>
             <View style={styles.section} >
-              <FBLogin
-                loggedIn={!!fbAuthToken}/>
+              {loading
+                ? (
+                  <View style={styles.loading}>
+                    <ActivityIndicator size="large" color="#0000ff" />
+                  </View>
+                  )
+                : <FBLogin
+                loggedIn={!!fbAuthToken}
+                handleLoading={this.handleLoading}
+                handleLoadingComplete={this.handleLoadingComplete}
+                />
+              }
             </View>
           </ScrollView>
         </LinearGradient>

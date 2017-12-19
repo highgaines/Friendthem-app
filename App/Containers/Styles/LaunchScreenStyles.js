@@ -15,6 +15,10 @@ export default StyleSheet.create({
   centered: {
     alignItems: 'center'
   },
+  loading: {
+    flex: 1,
+    justifyContent: 'center'
+  },
   primSubText: {
     marginTop:20,
     fontWeight: 'bold',
