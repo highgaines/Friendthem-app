@@ -7,7 +7,8 @@ export default StyleSheet.create({
     // flex: 1,
   },
   linearGradient: {
-    height: 250
+    height: 230,
+    paddingHorizontal: 30
   },
   rows: {
     flex: 3,
@@ -17,8 +18,8 @@ export default StyleSheet.create({
   titleRow: {
     backgroundColor: 'transparent',
     color: 'white',
-    marginTop: 50,
-    fontSize: 30
+    marginTop: 40,
+    fontSize: 20
   },
   userRow: {
     alignItems: 'center',
@@ -33,7 +34,7 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   friendThemLogo: {
-    marginLeft: 40
+    marginLeft: 30
   },
   image: {
     borderRadius: 50,
@@ -48,6 +49,6 @@ export default StyleSheet.create({
     color: 'white',
     backgroundColor: 'transparent',
     fontWeight: 'bold',
-    fontSize: 17
+    fontSize: 14
   }
 })

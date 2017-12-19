@@ -14,7 +14,7 @@ export default function UserCard(props) {
       onPress={setFriendInfo}>
       <Image style={styles.cardImage} source={{uri: image}} />
       <View style={styles.cardText}>
-        <Text style={{ fontWeight: 'bold' }} numberOfLines={1}> {name} </Text>
+        <Text style={{ fontSize: 12, fontWeight: 'bold' }} numberOfLines={1}> {name} </Text>
       </View>
     </TouchableOpacity>
   )
