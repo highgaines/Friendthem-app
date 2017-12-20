@@ -16,7 +16,7 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontFamily: Fonts.type.base,
     fontSize: Fonts.size.regular,
-    fontWeight: 'bold',
+    fontWeight: '500',
     color: Colors.steel
   },
   icon: {

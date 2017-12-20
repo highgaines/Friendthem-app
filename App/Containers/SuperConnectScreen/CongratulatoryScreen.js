@@ -42,8 +42,14 @@ export default CongratulatoryScreen = props => {
       <View style={styles.body}>
 
         <View style={styles.message}>
-          <Text style={{ fontSize: 25, fontWeight: 'bold'}}> Congratulations! </Text>
-          <Text style={{ fontSize: 15 }}> {`You have Super Connected with ${friendData.name}`} </Text>
+          <Text
+            style={
+              {
+                fontSize: 25,
+                fontWeight: 'bold',
+                fontFamily: 'Montserrat'
+              }}> Congratulations! </Text>
+          <Text style={{ fontSize: 15, fontFamily: 'Montserrat'}}> {`You have Super Connected with ${friendData.name}`} </Text>
         </View>
 
         <View style={styles.imgOverlapContainer}>

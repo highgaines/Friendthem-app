@@ -28,7 +28,7 @@ export default StyleSheet.create({
   superConnectText: {
     color: 'white',
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: '500',
     fontFamily: Fonts.type.base,
   },
   body: {

@@ -39,7 +39,7 @@ class Navbar extends Component {
   }
 
   handleLogout = () => {
-    this.props.openModal()
+    this.props.logOut()
   }
 
   render() {

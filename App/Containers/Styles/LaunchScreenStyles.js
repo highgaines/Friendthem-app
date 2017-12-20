@@ -21,7 +21,7 @@ export default StyleSheet.create({
   },
   primSubText: {
     marginTop:20,
-    fontWeight: 'bold',
+    fontWeight: '500',
     fontStyle: 'italic',
     color: 'white',
     fontSize: 15,
@@ -39,7 +39,7 @@ export default StyleSheet.create({
   title: {
     marginTop: 100,
     fontSize: 50,
-    fontWeight: 'bold',
+    fontWeight: '500',
     textAlign: 'center',
     color: 'white',
     fontFamily: Fonts.type.base,

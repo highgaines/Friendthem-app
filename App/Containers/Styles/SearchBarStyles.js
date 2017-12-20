@@ -31,6 +31,7 @@ export default StyleSheet.create({
     width: '100%',
     color: 'white',
     fontSize: 20,
+    fontFamily: Fonts.type.base,
     flex: 3,
     textAlign: 'center',
     fontWeight: '600',
