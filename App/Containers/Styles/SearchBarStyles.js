@@ -5,7 +5,11 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   linearGradient: {
     height: 80,
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    shadowColor: 'black',
+    shadowOffset: { height: 0, width: 0 }
   },
   searchBar: {
     backgroundColor: 'transparent',
