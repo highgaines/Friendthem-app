@@ -82,8 +82,6 @@ class LaunchScreen extends Component {
     const { users, setFriendInfo, fbAuthToken } = this.props
     const { loading } = this.state
 
-
-
     return (
       <View style={styles.mainContainer}>
         <LinearGradient
