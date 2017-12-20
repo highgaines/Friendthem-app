@@ -57,7 +57,7 @@ class SearchBar extends Component {
           </View>
         { searchMode
           ? this.renderSearchForm()
-          : <Text style={styles.numUsers}> {numUsers} users nearby </Text>
+          : <Text style={styles.numUsers}> {numUsers} People Nearby </Text>
         }
         <View style={styles.backIcon}>
           <Icon

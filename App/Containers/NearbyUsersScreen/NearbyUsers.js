@@ -6,6 +6,7 @@ import UsersContainer from './UsersContainer';
 import LinearGradient from 'react-native-linear-gradient';
 import _ from 'lodash';
 
+import Navbar from '../Navbar/Navbar';
 import styles from '../Styles/NearbyUsersScreenStyles';
 
 export default class NearbyUsers extends Component {
@@ -42,6 +43,9 @@ export default class NearbyUsers extends Component {
           users={input.length ? this.filterUsers(users) : users}
           navigation={navigation}
           setFriendInfo={setFriendInfo}/>
+        <Navbar
+          navbarStyle={styles.nearbyUsersNavbar}
+          navigation={navigation}/>
       </View>
     )
   }
