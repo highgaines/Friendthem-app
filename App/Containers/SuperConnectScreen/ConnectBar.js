@@ -24,7 +24,9 @@ export default ConnectBar = props => {
                   />
 
                   <Text
-                     style={styles.name}> {userData.name} </Text>
+                     style={styles.name}
+                     numberOfLines={1}
+                     > {userData.name} </Text>
                 </View>
               </View>
               <View style={styles.column}>
@@ -37,7 +39,10 @@ export default ConnectBar = props => {
                   <Image
                     source={{uri: friendData.image}} style={styles.image}
                   />
-                  <Text style={styles.name}> {friendData.name} </Text>
+                  <Text
+                    style={styles.name}
+                    numberOfLines={1}
+                    > {friendData.name} </Text>
                 </View>
               </View>
             </View>

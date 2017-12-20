@@ -4,7 +4,10 @@ import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
-    // flex: 1,
+    shadowOpacity: 0.75,
+    shadowRadius: 5,
+    shadowColor: 'black',
+    shadowOffset: { height: 0, width: 0 }
   },
   linearGradient: {
     height: 230,
@@ -19,7 +22,9 @@ export default StyleSheet.create({
     backgroundColor: 'transparent',
     color: 'white',
     marginTop: 40,
-    fontSize: 20
+    fontSize: 20,
+    fontWeight: '500',
+    fontFamily: Fonts.type.base
   },
   userRow: {
     alignItems: 'center',
@@ -48,8 +53,8 @@ export default StyleSheet.create({
     alignItems: 'center',
     color: 'white',
     backgroundColor: 'transparent',
-    fontWeight: 'bold',
-    fontSize: 17,
+    fontWeight: '500',
+    fontSize: 14,
     fontFamily: Fonts.type.base,
   }
 })

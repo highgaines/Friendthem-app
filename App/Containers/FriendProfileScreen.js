@@ -70,6 +70,17 @@ class FriendProfileScreen extends Component {
               <Text style={styles.interestsText}>
                   {friendInfo.interests.join(' | ')}
               </Text>
+              <View style={{ flexDirection: 'row', marginTop: 7, justifyContent: 'space-around'}}>
+                <Icon
+                  name='location'
+                  type='entypo'
+                  size={14}
+                  color='#fff'
+                />
+                <Text style={{ color: '#fff', fontWeight: '500', backgroundColor: 'transparent', marginLeft: 7}}>
+                  {friendInfo.location}
+                </Text>
+              </View>
             </View>
             </LinearGradient>
             <View style={styles.socialIconSlider}>

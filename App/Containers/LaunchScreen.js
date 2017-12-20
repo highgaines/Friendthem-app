@@ -82,8 +82,6 @@ class LaunchScreen extends Component {
     const { users, setFriendInfo, fbAuthToken } = this.props
     const { loading } = this.state
 
-
-
     return (
       <View style={styles.mainContainer}>
         <LinearGradient
@@ -107,7 +105,7 @@ class LaunchScreen extends Component {
             <View style={styles.section} >
               {loading
                 ? (
-                  <View style={styles.loading}>
+                  <View style={styles.loading, { marginTop: 40 }}>
                     <ActivityIndicator size="large" color="#0000ff" />
                   </View>
                   )

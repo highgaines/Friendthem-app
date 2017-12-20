@@ -25,7 +25,7 @@ export default StyleSheet.create({
   },
   profileSubtext: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '500',
     backgroundColor: 'transparent',
     color: '#ffffff',
     fontFamily: Fonts.type.base,
@@ -78,7 +78,7 @@ export default StyleSheet.create({
   interestsText: {
     backgroundColor: 'transparent',
     color: '#fff',
-    marginTop: 3,
+    marginTop: 5,
     fontFamily: Fonts.type.base,
     fontWeight: '600'
   }

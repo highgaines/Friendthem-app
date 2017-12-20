@@ -70,7 +70,7 @@ class SuperConnect extends Component {
           <ButtonsContainer
             navigation={navigation}
             facebookUrl={friendData.fbUrl}
-            friendName="Cyclops" />
+            friendName={friendData.name} />
         </View>
       </View>
     )
