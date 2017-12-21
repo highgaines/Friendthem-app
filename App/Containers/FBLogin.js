@@ -32,7 +32,7 @@ class FBLogin extends Component {
 
   handleFBLogout = () => {
     LoginManager.logOut();
-    //More stlyistic way to do this?
+    //More stylistic way to do this?
     alert('Logging out of Facebook...')
     this.props.fbLogoutComplete();
   }

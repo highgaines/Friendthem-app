@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
 import FBSDK, { LoginManager } from 'react-native-fbsdk';
 
+import LogoutModal from './LogoutModal';
 import FriendStoreActions from '../../Redux/FriendStore'
 import UserStoreActions from '../../Redux/UserStore';
 import FBStoreActions from '../../Redux/FBStore';
@@ -15,8 +16,22 @@ class Navbar extends Component {
     super()
 
     this.state = {
-      highlighted: ''
+      highlighted: '',
+      logoutModalOpen: false
     }
+  }
+
+  toggleModal = () => {
+    this.setState({ logoutModalOpen: !this.state.logoutModalOpen })
+  }
+
+  logOut = () => {
+    const { fbLogoutComplete, navigation } = this.props
+
+    this.toggleModal()
+    LoginManager.logOut();
+    fbLogoutComplete()
+    navigation.navigate('LaunchScreen')
   }
 
   goToNearbyUsers = () => {
@@ -31,15 +46,11 @@ class Navbar extends Component {
   }
 
   goToNotifications = () => {
-    console.log('navigating to notifications screen')
+    this.props.navigation.navigate('UserProfileScreen')
   }
 
   goToSettings = () => {
     console.log('navigating to settings')
-  }
-
-  handleLogout = () => {
-    this.props.openModal()
   }
 
   render() {
@@ -49,25 +60,35 @@ class Navbar extends Component {
             name='users'
             type='entypo'
             color='#fff'
+            containerStyle={styles.iconContainer}
             onPress={this.goToNearbyUsers}
           />
           <Icon
             name='bell-o'
             type='font-awesome'
             color='#fff'
+            containerStyle={styles.iconContainer}
             onPress={this.goToNotifications}
           />
           <Icon
             name='settings'
             type='materialcommunityicons'
             color='#fff'
+            containerStyle={styles.iconContainer}
             onPress={this.goToSettings}
           />
           <Icon
             name='log-out'
             type='entypo'
             color='#fff'
-            onPress={this.handleLogout}
+            containerStyle={styles.iconContainer}
+            onPress={this.toggleModal}
+          />
+          <LogoutModal
+            showModal={this.state.logoutModalOpen}
+            logOut={this.logOut}
+            toggleModal={this.toggleModal}
+            modalStyle={styles.modal}
           />
         </View>
     )

@@ -47,9 +47,6 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginRight: 20
   },
-  button: {
-    backgroundColor: 'white'
-  },
   imgOverlapContainer: {
     flex: 1,
     marginTop: 50,
