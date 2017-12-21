@@ -7,6 +7,7 @@ import UserProfileScreen from '../Containers/UserProfileScreen'
 import FriendProfileScreen from '../Containers/FriendProfileScreen'
 import SuperConnect from '../Containers/SuperConnectScreen/SuperConnect'
 import CongratulatoryScreen from '../Containers/SuperConnectScreen/CongratulatoryScreen'
+import ForkScreen from '../Containers/SignUpFork/ForkScreen';
 
 import styles from './Styles/NavigationStyles'
 
@@ -22,14 +23,19 @@ const mapNavigationStateParamsToProps = (SomeComponent) => {
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
   LaunchScreen: { screen: LaunchScreen },
-  NearbyUsersScreen: { screen: mapNavigationStateParamsToProps(NearbyUsers) },
+  ForkScreen: { screen:
+    mapNavigationStateParamsToProps(ForkScreen) },
+  NearbyUsersScreen: { screen:
+    mapNavigationStateParamsToProps(NearbyUsers) },
   SearchBar: { screen: SearchBar },
   UserProfileScreen: { screen: UserProfileScreen },
   FriendProfileScreen: { screen:
     mapNavigationStateParamsToProps(FriendProfileScreen)
   },
-  SuperConnectScreen: { screen: mapNavigationStateParamsToProps(SuperConnect) },
-  CongratulatoryScreen: { screen: mapNavigationStateParamsToProps(CongratulatoryScreen) }
+  SuperConnectScreen: { screen:
+    mapNavigationStateParamsToProps(SuperConnect) },
+  CongratulatoryScreen: { screen:
+    mapNavigationStateParamsToProps(CongratulatoryScreen) }
 }, {
   // Default config for all screens
   headerMode: 'none',

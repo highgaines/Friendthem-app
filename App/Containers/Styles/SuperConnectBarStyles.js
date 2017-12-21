@@ -47,9 +47,6 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  buttonIconStyle: {
-
-  },
   linearGradient: {
     width: 130,
     height: 40,
