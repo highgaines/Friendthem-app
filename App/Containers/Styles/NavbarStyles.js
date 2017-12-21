@@ -6,7 +6,6 @@ export default StyleSheet.create({
   navbarRow: {
     justifyContent: 'space-around',
     width: '100%',
-    flexDirection: 'row',
     position: 'absolute',
     bottom: 0,
     left: 0,
@@ -15,5 +14,20 @@ export default StyleSheet.create({
     backgroundColor: 'black',
     height: 60,
     flexDirection: 'row'
+  },
+  modal: {
+    width: 350,
+    height: 115,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderWidth: 3,
+    borderColor: 'black',
+    borderRadius: 50,
+    marginTop: 280,
+    marginLeft: 15
+  },
+  iconContainer: {
+    marginHorizontal: 40
   }
 })

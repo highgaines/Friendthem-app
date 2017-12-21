@@ -21,23 +21,6 @@ class FriendProfileScreen extends Component {
     }
   }
 
-  openModal = () => {
-    this.setState({ showModal: true })
-  }
-
-  closeModal = () => {
-    this.setState({ showModal: false})
-  }
-
-  logOut = () => {
-    const { fbLogoutComplete, navigation } = this.props
-
-    this.closeModal()
-    LoginManager.logOut();
-    fbLogoutComplete()
-    navigation.navigate('LaunchScreen')
-  }
-
   render() {
     const { friendInfo, superConnect, navigation } = this.props;
     const { showModal } = this.state
@@ -91,21 +74,6 @@ class FriendProfileScreen extends Component {
                 platformName='Facebook'
                 inverted={true}
                 userName={friendInfo.name} />
-            </View>
-            <View>
-              <Modal
-                transparent={true}
-                visible={showModal}
-                animationType='slide'
-                >
-                  <View style={styles.modal}>
-                    <Text style={{ fontSize: 15, color: 'black' }}> Are you sure you want to logout? </Text>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 30}}>
-                      <Button onPress={this.logOut} title='Logout'/>
-                      <Button onPress={this.closeModal} title='Cancel'/>
-                    </View>
-                  </View>
-                </Modal>
             </View>
             <View style={styles.superConnectBarContainer}>
               <SuperConnectBar

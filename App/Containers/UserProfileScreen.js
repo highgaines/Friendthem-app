@@ -5,6 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from 'react-native-elements';
 
 import SocialMediaCard from './SuperConnectScreen/SocialMediaCard';
+import Navbar from './Navbar/Navbar';
 
 import styles from './Styles/UserProfileStyles';
 
@@ -47,9 +48,11 @@ class UserProfileScreen extends Component {
                 userName={userInfo.name}
                 inverted={false} />
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate('LaunchScreen')}>
-              <Text>Return Home</Text>
-            </TouchableOpacity>
+            <View>
+              <Navbar
+                navbarStyle={styles.userProfNavbar}
+                navigation={navigation}/>
+            </View>
         </View>
     )
   }

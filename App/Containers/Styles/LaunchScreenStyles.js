@@ -20,11 +20,10 @@ export default StyleSheet.create({
     justifyContent: 'center'
   },
   primSubText: {
-    marginTop:20,
-    fontWeight: '500',
-    fontStyle: 'italic',
+    marginTop: 20,
+    fontWeight: '600',
     color: 'white',
-    fontSize: 15,
+    fontSize: 16,
     fontFamily: Fonts.type.base,
   },
   secSubText: {
