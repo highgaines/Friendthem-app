@@ -7,7 +7,7 @@ export default StyleSheet.create({
 
   },
   profileHeader: {
-    height: 200,
+    height: 270,
     width: '100%',
     alignItems: 'center',
     marginTop: 30
@@ -78,9 +78,32 @@ export default StyleSheet.create({
     bottom: 0,
     left: 0,
     top: 0,
-    marginTop: 220,
+    marginTop: 140,
     backgroundColor: 'black',
     height: 60,
     flexDirection: 'row'
+  },
+  button: {
+    width: 220,
+    height: 50,
+    flexDirection: 'row',
+    backgroundColor: '#030ab0',
+    borderRadius: 100,
+    marginHorizontal: 5,
+    marginVertical: 10,
+    justifyContent: 'center',
+    shadowOpacity: 0.50,
+    shadowRadius: 5,
+    shadowColor: 'black',
+    shadowOffset: { height: 6, width: 10 },
+    marginTop: 15,
+    justifyContent: 'center'
+  },
+  buttonTextStyle: {
+    color: '#ffffff',
+    fontSize: 13,
+    fontWeight: 'bold',
+    marginLeft: 7,
+    fontFamily: Fonts.type.base,
   }
 })

@@ -7,10 +7,7 @@ export default StyleSheet.create({
     justifyContent: 'space-around',
     width: '100%',
     position: 'absolute',
-    bottom: 0,
-    left: 0,
-    top: 0,
-    marginTop: 220,
+    // marginTop: 150,
     backgroundColor: 'black',
     height: 60,
     flexDirection: 'row'
