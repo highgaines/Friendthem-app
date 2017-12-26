@@ -1,18 +1,30 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
+import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from 'react-native-elements';
+import FBSDK, { LoginManager } from 'react-native-fbsdk';
+import FBStoreActions from '../../Redux/FBStore';
 
-import ConnectButton from './SuperConnectScreen/ConnectButton'
-import SocialMediaCard from './SuperConnectScreen/SocialMediaCard';
-import Navbar from './Navbar/Navbar';
+import Navbar from '../Navbar/Navbar';
+import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard';
+import SuperConnectBar from '../SuperConnectScreen/SuperConnectBar'
 
-import styles from './Styles/UserProfileStyles';
+import styles from '../Styles/UserProfileStyles';
 
-class UserProfileScreen extends Component {
+class FriendProfileScreen extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      showModal: false
+    }
+  }
+
   render() {
-    const { userInfo, userInterests, userLocation, navigation } = this.props;
+    const { friendInfo, superConnect, navigation } = this.props;
+    const { showModal } = this.state
+
     return (
         <View>
           <LinearGradient
@@ -28,18 +40,18 @@ class UserProfileScreen extends Component {
                  containerStyle={styles.phoneIcon}/>
                 <Image
                   style={styles.profileImage}
-                  source={{uri: `${userInfo.picture.data.url}`}} />
-                <Icon
-                 name='md-mail'
-                 type='ionicon'
-                 color='#ffffff'
-                 containerStyle={styles.mailIcon}/>
+                  source={{uri: friendInfo.image}} />
+                 <Icon
+                  name='md-mail'
+                  type='ionicon'
+                  color='#ffffff'
+                  containerStyle={styles.mailIcon}/>
               </View>
               <Text style={styles.profileSubtext}>
-              {`${userInfo.name}`}
+              {`${friendInfo.name}`}
               </Text>
               <Text style={styles.interestsText}>
-                  {userInterests.join(' | ')}
+                  {friendInfo.interests.join(' | ')}
               </Text>
               <View style={{ flexDirection: 'row', marginTop: 7, justifyContent: 'space-around'}}>
                 <Icon
@@ -49,16 +61,9 @@ class UserProfileScreen extends Component {
                   color='#fff'
                 />
                 <Text style={{ color: '#fff', fontWeight: '500', backgroundColor: 'transparent', marginLeft: 7}}>
-                  {userLocation}
+                  {friendInfo.location}
                 </Text>
               </View>
-              <ConnectButton
-                color='#fff'
-                title='EDIT PROFILE'
-                containerStyle={styles.button}
-                textStyle={styles.buttonTextStyle}
-                onPressCallback={this.directToNearbyUsers}
-              />
             </View>
             </LinearGradient>
             <View style={styles.socialIconSlider}>
@@ -67,13 +72,18 @@ class UserProfileScreen extends Component {
             <View style={styles.socialAccountContainer}>
               <SocialMediaCard
                 platformName='Facebook'
-                userName={userInfo.name}
-                inverted={false} />
+                inverted={true}
+                userName={friendInfo.name} />
+            </View>
+            <View style={styles.superConnectBarContainer}>
+              <SuperConnectBar
+                superConnect={superConnect}/>
             </View>
             <View>
               <Navbar
-                navbarStyle={styles.userProfNavbar}
                 navigation={navigation}
+                openModal={this.openModal}
+                logOut={this.logOut}
                 margin={150}
               />
             </View>
@@ -83,14 +93,13 @@ class UserProfileScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  userInfo: state.userStore.userFbData,
-  userInterests: state.userStore.interests,
-  userLocation: state.userStore.location,
-  fbAuthToken: state.fbStore.fbAccessToken
+  friendInfo: state.friendStore.friendData
 })
 
 const mapDispatchToProps = dispatch => {
-  return {}
+  return {
+    fbLogoutComplete: () => dispatch(FBStoreActions.logoutComplete())
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfileScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(FriendProfileScreen)
