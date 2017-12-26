@@ -3,11 +3,12 @@ import { StackNavigator } from 'react-navigation'
 import LaunchScreen from '../Containers/LaunchScreen'
 import NearbyUsers from '../Containers/NearbyUsersScreen/NearbyUsers'
 import SearchBar from '../Containers/NearbyUsersScreen/SearchBar'
-import UserProfileScreen from '../Containers/UserProfileScreen'
-import FriendProfileScreen from '../Containers/FriendProfileScreen'
+import UserProfileScreen from '../Containers/ProfileScreen/UserProfileScreen'
+import FriendProfileScreen from '../Containers/ProfileScreen/FriendProfileScreen'
 import SuperConnect from '../Containers/SuperConnectScreen/SuperConnect'
 import CongratulatoryScreen from '../Containers/SuperConnectScreen/CongratulatoryScreen'
 import ForkScreen from '../Containers/SignUpFork/ForkScreen';
+import UserProfileInfoScreen from '../Containers/ProfileScreen/UserProfileInfoScreen'
 
 import styles from './Styles/NavigationStyles'
 
@@ -35,11 +36,14 @@ const PrimaryNav = StackNavigator({
   SuperConnectScreen: { screen:
     mapNavigationStateParamsToProps(SuperConnect) },
   CongratulatoryScreen: { screen:
-    mapNavigationStateParamsToProps(CongratulatoryScreen) }
+    mapNavigationStateParamsToProps(CongratulatoryScreen) },
+  UserProfileInfoScreen: {
+    screen: mapNavigationStateParamsToProps(UserProfileInfoScreen)
+  }
 }, {
   // Default config for all screens
   headerMode: 'none',
-  initialRouteName: 'LaunchScreen',
+  initialRouteName: 'UserProfileInfoScreen',
   navigationOptions: {
     headerStyle: styles.header
   }
