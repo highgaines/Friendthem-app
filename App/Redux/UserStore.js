@@ -16,7 +16,9 @@ export const INITIAL_STATE = Immutable({
   userFbData: {
     name: '',
     picture: { data: {url: 'empty string'} }
-  }
+  },
+  interests: ['Crypto', 'Gaming', 'Random'],
+  location: 'New York'
 })
 
 /* ------------- Reducers ------------- */

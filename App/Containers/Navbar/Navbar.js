@@ -55,7 +55,7 @@ class Navbar extends Component {
 
   render() {
     return(
-        <View style={this.props.navbarStyle || styles.navbarRow}>
+        <View style={[this.props.navbarStyle || styles.navbarRow, { marginTop: this.props.margin }]}>
           <Icon
             name='users'
             type='entypo'
@@ -64,8 +64,8 @@ class Navbar extends Component {
             onPress={this.goToNearbyUsers}
           />
           <Icon
-            name='bell-o'
-            type='font-awesome'
+            name='home'
+            type='entypo'
             color='#fff'
             containerStyle={styles.iconContainer}
             onPress={this.goToNotifications}

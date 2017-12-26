@@ -45,7 +45,9 @@ export default class NearbyUsers extends Component {
           setFriendInfo={setFriendInfo}/>
         <Navbar
           navbarStyle={styles.nearbyUsersNavbar}
-          navigation={navigation}/>
+          navigation={navigation}
+          margin={610}
+        />
       </View>
     )
   }

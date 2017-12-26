@@ -16,7 +16,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    backgroundColor: '#004d99'
+    backgroundColor: '#030ab0'
   },
   button: {
     width: 130,

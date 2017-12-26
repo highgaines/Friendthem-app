@@ -4,6 +4,7 @@ import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from 'react-native-elements';
 
+import ConnectButton from './SuperConnectScreen/ConnectButton'
 import SocialMediaCard from './SuperConnectScreen/SocialMediaCard';
 import Navbar from './Navbar/Navbar';
 
@@ -11,7 +12,7 @@ import styles from './Styles/UserProfileStyles';
 
 class UserProfileScreen extends Component {
   render() {
-    const { userInfo, navigation } = this.props;
+    const { userInfo, userInterests, userLocation, navigation } = this.props;
     return (
         <View>
           <LinearGradient
@@ -37,6 +38,27 @@ class UserProfileScreen extends Component {
               <Text style={styles.profileSubtext}>
               {`${userInfo.name}`}
               </Text>
+              <Text style={styles.interestsText}>
+                  {userInterests.join(' | ')}
+              </Text>
+              <View style={{ flexDirection: 'row', marginTop: 7, justifyContent: 'space-around'}}>
+                <Icon
+                  name='location'
+                  type='entypo'
+                  size={14}
+                  color='#fff'
+                />
+                <Text style={{ color: '#fff', fontWeight: '500', backgroundColor: 'transparent', marginLeft: 7}}>
+                  {userLocation}
+                </Text>
+              </View>
+              <ConnectButton
+                color='#fff'
+                title='EDIT PROFILE'
+                containerStyle={styles.button}
+                textStyle={styles.buttonTextStyle}
+                onPressCallback={this.directToNearbyUsers}
+              />
             </View>
             </LinearGradient>
             <View style={styles.socialIconSlider}>
@@ -51,7 +73,9 @@ class UserProfileScreen extends Component {
             <View>
               <Navbar
                 navbarStyle={styles.userProfNavbar}
-                navigation={navigation}/>
+                navigation={navigation}
+                margin={150}
+              />
             </View>
         </View>
     )
@@ -60,6 +84,8 @@ class UserProfileScreen extends Component {
 
 const mapStateToProps = state => ({
   userInfo: state.userStore.userFbData,
+  userInterests: state.userStore.interests,
+  userLocation: state.userStore.location,
   fbAuthToken: state.fbStore.fbAccessToken
 })
 
