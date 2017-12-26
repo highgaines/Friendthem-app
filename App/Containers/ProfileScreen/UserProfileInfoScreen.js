@@ -17,6 +17,11 @@ export default class UserProfileInfoScreen extends Component {
       checkBoxChecked: false
     }
   }
+
+  updateState = (textValue, textName) => {
+      this.setState({[textName]: textValue})
+  }
+
   render() {
     return (
       <View style={styles.userInfoView}>
@@ -36,18 +41,24 @@ export default class UserProfileInfoScreen extends Component {
           </Text>
           <TextInput
             style={styles.formInput}
+            onChangeText={(textValue) => this.updateState(textValue, 'userName')}
             placeholder='Name'>
           </TextInput>
           <TextInput
             style={styles.formInput}
+            onChangeText={(textValue) => this.updateState(textValue, 'userEmail')}
             placeholder='Email Address'>
           </TextInput>
           <TextInput
             style={styles.formInput}
+            onChangeText={(textValue) => this.updateState(textValue, 'userPassword')}
+            secureTextEntry={true}
             placeholder='Password'>
           </TextInput>
           <TextInput
             style={[styles.formInput, { marginBottom: 0 }]}
+            onChangeText={(textValue) => this.updateState(textValue, 'confirmPassword')}
+            secureTextEntry={true}
             placeholder='Confirm Password'>
           </TextInput>
           <CheckBox
