@@ -51,7 +51,7 @@ class LaunchScreen extends Component {
         return error
       } else {
         userInfoRequestSuccess(result)
-        navigation.navigate('NearbyUsersScreen', {
+        navigation.navigate('ForkScreen', {
           numUsers: users.length,
           users: users,
           navigation: this.props.navigation,
@@ -87,7 +87,7 @@ class LaunchScreen extends Component {
         <LinearGradient
           colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
           start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
-          locations={[0.1, 0.4, 0.6, 0.8, 1.0]}
+          locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
           style={styles.linearGradient}
           >
           <ScrollView style={styles.container}>
