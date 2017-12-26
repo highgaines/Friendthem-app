@@ -59,10 +59,8 @@ export default StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 16,
-    marginLeft: 55,
+    fontWeight: '700',
+    marginLeft: 50,
     marginRight: 25
   },
-  buttonIcon: {
-
-  }
 })

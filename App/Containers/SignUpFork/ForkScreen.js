@@ -22,6 +22,10 @@ class ForkScreen extends Component {
     })
   }
 
+  directToBuildProfile = () => {
+    this.props.navigation.navigate('UserProfileInfoScreen')
+  }
+
   render() {
     const { navigate, userInfo } = this.props
 
@@ -68,6 +72,7 @@ class ForkScreen extends Component {
                 title='BUILD YOUR PROFILE'
                 containerStyle={styles.button}
                 textStyle={styles.buttonTextStyle}
+                onPressCallback={this.directToBuildProfile}
               />
             </View>
           </LinearGradient>
