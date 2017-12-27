@@ -57,7 +57,7 @@ class UserProfileScreen extends Component {
                 title='EDIT PROFILE'
                 containerStyle={styles.button}
                 textStyle={styles.buttonTextStyle}
-                onPressCallback={this.directToNearbyUsers}
+                onPressCallback={() => navigation.navigate('EditProfileInfoScreen')}
               />
             </View>
             </LinearGradient>
