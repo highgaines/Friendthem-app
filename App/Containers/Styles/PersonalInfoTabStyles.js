@@ -4,7 +4,6 @@ import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   personalInfoContainer: {
-    height: 400,
     backgroundColor: '#f5f8f8'
   },
   rowContainer: {
@@ -15,7 +14,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     borderBottomColor: '#d6d6d6',
     borderBottomWidth: 2,
-    paddingVertical: 25,
+    paddingVertical: 20,
     backgroundColor: '#f5f8f8'
   },
   rowLabelText: {
@@ -34,7 +33,7 @@ export default StyleSheet.create({
   iconContainer: {
     position: 'absolute',
     right: 15,
-    top: 15
+    top: 20
   },
   privateRowDivider: {
     flexDirection: 'row',
@@ -42,7 +41,7 @@ export default StyleSheet.create({
     width: '100%',
     backgroundColor: '#fff',
     paddingLeft: 20,
-    paddingVertical: 25,
+    paddingVertical: 10,
     alignItems: 'center',
     borderBottomColor: '#d6d6d6',
     borderBottomWidth: 2,
@@ -59,7 +58,8 @@ export default StyleSheet.create({
     left: 100
   },
   privateIcon: {
-    marginRight: 110,
-    marginTop: 20
+    position: 'absolute',
+    right: 10,
+    marginTop: 4
   }
 })

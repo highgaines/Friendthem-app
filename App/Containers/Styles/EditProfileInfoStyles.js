@@ -54,5 +54,8 @@ export default StyleSheet.create({
   },
   selectedText: {
     color: '#fff'
+  },
+  tabDisplay: {
+    flex: 1
   }
 })
