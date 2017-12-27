@@ -45,7 +45,6 @@
 		914CBC0879A9402E9F5C42C2 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E466642F88F742F6B8DB89DF /* libRNVectorIcons.a */; };
 		9AA271830AE24F80B653047A /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C803CA948BDB49DC9347267A /* libRNSVG.a */; };
 		A0B63196D3554061AE81F5EB /* libRNSensitiveInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D30DBF209DA49FCB41241AE /* libRNSensitiveInfo.a */; };
-		A575D5D21FF30732008D198A /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A575D5921FF30585008D198A /* libRNSVG-tvOS.a */; };
 		A5A15C4A1FDB067700ABE5DB /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A15C461FDB067600ABE5DB /* FBSDKCoreKit.framework */; };
 		A5A15C4B1FDB067700ABE5DB /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A15C471FDB067600ABE5DB /* FBSDKLoginKit.framework */; };
 		A5A15C4C1FDB067700ABE5DB /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A15C481FDB067700ABE5DB /* FBSDKShareKit.framework */; };
@@ -483,7 +482,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A575D5D21FF30732008D198A /* libRNSVG-tvOS.a in Frameworks */,
 				A5A15C4F1FDB2F8A00ABE5DB /* libBVLinearGradient.a in Frameworks */,
 				A5A15C4E1FDB243200ABE5DB /* libRCTFBSDK.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
