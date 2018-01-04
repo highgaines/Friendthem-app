@@ -84,8 +84,8 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   button: {
-    width: 220,
-    height: 50,
+    width: 140,
+    height: 40,
     flexDirection: 'row',
     backgroundColor: '#030ab0',
     borderRadius: 100,
@@ -102,8 +102,8 @@ export default StyleSheet.create({
   buttonTextStyle: {
     color: '#ffffff',
     fontSize: 13,
-    fontWeight: 'bold',
-    marginLeft: 7,
+    fontWeight: '700',
+    marginLeft: 3,
     fontFamily: Fonts.type.base,
   }
 })
