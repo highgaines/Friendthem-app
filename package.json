@@ -75,7 +75,7 @@
     "react-dom": "16.0.0",
     "react-native-elements": "^0.18.5",
     "react-test-renderer": "16.0.0",
-    "reactotron-react-native": "^1.13.2",
+    "reactotron-react-native": "^1.14.0",
     "reactotron-redux": "^1.13.0",
     "reactotron-redux-saga": "^1.13.0",
     "snazzy": "^7.0.0",
