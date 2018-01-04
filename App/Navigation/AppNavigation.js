@@ -9,6 +9,7 @@ import SuperConnect from '../Containers/SuperConnectScreen/SuperConnect'
 import CongratulatoryScreen from '../Containers/SuperConnectScreen/CongratulatoryScreen'
 import ForkScreen from '../Containers/SignUpFork/ForkScreen';
 import UserProfileInfoScreen from '../Containers/ProfileScreen/UserProfileInfoScreen'
+import EditProfileInfoScreen from '../Containers/ProfileScreen/EditProfileInfoScreen'
 
 import styles from './Styles/NavigationStyles'
 
@@ -39,6 +40,9 @@ const PrimaryNav = StackNavigator({
     mapNavigationStateParamsToProps(CongratulatoryScreen) },
   UserProfileInfoScreen: {
     screen: mapNavigationStateParamsToProps(UserProfileInfoScreen)
+  },
+  EditProfileInfoScreen: {
+    screen: mapNavigationStateParamsToProps(EditProfileInfoScreen)
   }
 }, {
   // Default config for all screens
