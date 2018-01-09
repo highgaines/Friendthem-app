@@ -82,11 +82,11 @@ export default class NotificationsContainer extends Component {
                   {data.item.message} </Text>
               </View>
             )}
-            renderHiddenItem={ (data, secId, rowId, rowMap) => (
+            renderHiddenItem={ (data, rowMap) => (
               <View style={styles.rowBack}>
                 <TouchableOpacity
                   style={[styles.backRightBtn, styles.backRightBtnLeft]}
-                  onPress={this.deleteRow}
+                  onPress={() => this.deleteRow(rowMap, data.item.key)}
                   >
                     <Icon
                       name="delete"
@@ -97,7 +97,7 @@ export default class NotificationsContainer extends Component {
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={[styles.backRightBtn, styles.backRightBtnRight]}
-                    onPress={this.deleteRow}
+                    onPress={() => this.deleteRow(rowMap, data.item.key)}
                     >
                       <Icon
                         name="volume-mute"
