@@ -10,7 +10,8 @@ export const reducers = combineReducers({
   facebook: require('./FacebookUsersRedux').reducer,
   fbStore: require('./FBStore').reducer,
   userStore: require('./UserStore').reducer,
-  friendStore: require('./FriendStore').reducer
+  friendStore: require('./FriendStore').reducer,
+  authStore: require('./AuthStore').reducer,
 })
 
 export default () => {

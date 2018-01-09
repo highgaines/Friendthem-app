@@ -17,7 +17,7 @@ import { getUserAvatar } from './GithubSagas'
 
 // The API we use is only used from Sagas, so we create it here and pass along
 // to the sagas which need it.
-const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
+const api = DebugConfig.useFixtures ? FixtureAPI : API.createApi()
 
 /* ------------- Connect Types To Sagas ------------- */
 

@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, Button, Image, TextInput } from 'react-native'
+import { connect } from 'react-redux'
 import { CheckBox, Icon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 
+import AuthStoreActions from '../../Redux/AuthStore'
+
 import styles from '../Styles/UserProfileInfoStyles'
 
-export default class UserProfileInfoScreen extends Component {
+class UserProfileInfoScreen extends Component {
   constructor(props) {
     super(props)
 
@@ -23,6 +26,7 @@ export default class UserProfileInfoScreen extends Component {
   }
 
   render() {
+    const { userAccessToken, registerUserRequest } = this.props
     return (
       <View style={styles.userInfoView}>
         <LinearGradient
@@ -71,7 +75,9 @@ export default class UserProfileInfoScreen extends Component {
             checkedColor='#fff'
             onIconPress={() => this.setState({checkBoxChecked: !this.state.checkBoxChecked})}
             checked={this.state.checkBoxChecked}/>
-          <TouchableOpacity style={styles.buttonStyle}>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            onPress={registerUserRequest}>
             <Text style={styles.buttonText}>START</Text>
             <Icon
               name='arrow-right'
@@ -84,3 +90,15 @@ export default class UserProfileInfoScreen extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  userAccessToken: state.authStore.accessToken
+})
+
+const mapDispatchToProps = dispatch => {
+  return {
+    registerUserRequest: () => dispatch(AuthStoreActions.register())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfileInfoScreen)
