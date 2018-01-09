@@ -6,6 +6,7 @@ import ReduxPersist from '../Config/ReduxPersist'
 import Config from '../Config/DebugConfig'
 import createSagaMiddleware from 'redux-saga'
 import ScreenTracking from './ScreenTrackingMiddleware'
+import apiMiddleware from './ApiMiddleware'
 
 // creates the store
 export default (rootReducer, rootSaga) => {
@@ -26,6 +27,7 @@ export default (rootReducer, rootSaga) => {
 	/* ------------- Thunk Middleware ------------- */
 
 	middleware.push(thunk)
+	middleware.push(apiMiddleware)
 
 	/* ------------- Assemble Middleware ------------- */
 
