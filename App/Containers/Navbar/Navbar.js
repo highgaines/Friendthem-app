@@ -65,8 +65,8 @@ class Navbar extends Component {
             onPress={this.goToNearbyUsers}
           />
           <Icon
-            name='home'
-            type='entypo'
+            name='notifications'
+            type='materialicons'
             color='#fff'
             containerStyle={styles.iconContainer}
             onPress={this.goToNotifications}
