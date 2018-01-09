@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
+import { Metrix, ApplicationStyles, Fonts } from '../../Themes/'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
@@ -11,36 +11,23 @@ export default StyleSheet.create({
     shadowColor: 'black',
     shadowOffset: { height: 0, width: 0 }
   },
-  searchBar: {
+  header: {
     backgroundColor: 'transparent',
     marginTop: 50,
     flexDirection: 'row',
     justifyContent: 'center'
   },
-  searchIcon: {
-    alignItems: 'flex-start'
-  },
-  searchForm: {
-    height: 25,
-    width: 200,
-    borderColor: 'white',
-    borderWidth: 2,
-    borderRadius: 50,
-    marginLeft: 65,
-    marginRight: 65,
-    paddingLeft: 10,
-    color: 'white'
-  },
-  numUsers: {
+  headerTitle: {
     width: '100%',
+    height: '50%',
+    backgroundColor: 'transparent',
     color: 'white',
+    justifyContent: 'center',
     fontSize: 20,
+    paddingTop: 30,
+    fontFamily: 'Montserrat',
     flex: 3,
     textAlign: 'center',
-    fontWeight: '600',
-    fontFamily: 'Montserrat'
-  },
-  backIcon: {
-    alignItems: 'flex-end'
+    fontWeight: '600'
   }
 })

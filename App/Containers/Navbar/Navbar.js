@@ -45,8 +45,9 @@ class Navbar extends Component {
     })
   }
 
+  // notifications or user profile screen?
   goToNotifications = () => {
-    this.props.navigation.navigate('UserProfileScreen')
+    this.props.navigation.navigate('NotificationsScreen')
   }
 
   goToSettings = () => {
