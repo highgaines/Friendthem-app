@@ -8,21 +8,21 @@ import ReduxPersist from '../Config/ReduxPersist'
 import styles from './Styles/RootContainerStyles'
 
 class RootContainer extends Component {
-	componentDidMount () {
-		// if redux persist is not active fire startup action
-		if (!ReduxPersist.active) {
-			this.props.startup()
-		}
-	}
+  componentDidMount () {
+    // if redux persist is not active fire startup action
+    if (!ReduxPersist.active) {
+      this.props.startup()
+    }
+  }
 
-	render () {
-		return (
-			<View style={styles.applicationView}>
-				<StatusBar barStyle='light-content' />
-				<ReduxNavigation />
-			</View>
-		)
-	}
+  render () {
+    return (
+      <View style={styles.applicationView}>
+        <StatusBar barStyle='light-content' />
+        <ReduxNavigation />
+      </View>
+    )
+  }
 }
 
 // wraps dispatch to create nicer functions to call within our component
