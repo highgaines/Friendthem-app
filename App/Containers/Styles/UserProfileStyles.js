@@ -17,9 +17,9 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   profileImage: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 120,
+    height: 120,
+    borderRadius: 60,
     borderWidth: 3,
     borderColor: '#ffffff'
   },

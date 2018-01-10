@@ -6,6 +6,19 @@ export default StyleSheet.create({
   listContainer:{
     marginTop: 50
   },
+  navbar: {
+    justifyContent: 'space-around',
+    width: '100%',
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    top: 0,
+    marginTop: 610,
+    backgroundColor: 'black',
+    height: 60,
+    flexDirection: 'row'
+  },
   rowFront: {
   		alignItems: 'center',
   		backgroundColor: '#f2f2f2',
@@ -52,5 +65,9 @@ export default StyleSheet.create({
     },
     message: {
       fontSize: 11
+    },
+    userName: {
+      fontWeight: '800',
+      marginRight: 15
     }
 })

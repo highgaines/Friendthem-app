@@ -9,6 +9,7 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 
 // Components
 import Header from './Header';
+import Navbar from '../Navbar/Navbar';
 
 // Styles
 import styles from '../Styles/NotificationStyles';
@@ -77,7 +78,7 @@ export default class NotificationsContainer extends Component {
                   source={{uri: data.item.img}}
                   resizeMode='contain'
                 />
-                <Text style={{fontWeight: '800', marginRight: 15}}> {data.item.name} </Text>
+                <Text style={styles.userName}> {data.item.name} </Text>
                 <Text style={styles.message}>
                   {data.item.message} </Text>
               </View>
@@ -111,7 +112,16 @@ export default class NotificationsContainer extends Component {
                 leftOpenValue={-150}
               />
         </View>
+        <Navbar
+          navbarStyle={styles.navbar}
+          navigation={this.props.navigation}
+          margin={610}
+        />
       </View>
     )
   }
 }
+
+const mapStateToProps = state => ({
+  notifications: state.notificationsStore.notifications
+})
