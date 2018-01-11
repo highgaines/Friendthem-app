@@ -30,7 +30,6 @@ export default StyleSheet.create({
     marginTop: 2,
     color: 'white',
     fontFamily: Fonts.type.base,
-
   },
   linearGradient: {
     flex: 1
@@ -42,5 +41,32 @@ export default StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     fontFamily: Fonts.type.base,
+  },
+  orText: {
+    fontSize: 17,
+    fontWeight: '600',
+    color: 'white',
+    textAlign: 'center'
+  },
+  button: {
+    width: 220,
+    height: 47,
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginTop: 40,
+    marginLeft: 40,
+    backgroundColor: '#030ab0',
+    borderRadius: 100,
+    justifyContent: 'center',
+    shadowOpacity: 0.30,
+    shadowRadius: 5,
+    shadowColor: 'black',
+    shadowOffset: { height: 6, width: 10 }
+  },
+  buttonTextStyle: {
+    color: '#ffffff',
+    fontSize: 14,
+    fontWeight: '700',
+    marginLeft: 3
   }
 })
