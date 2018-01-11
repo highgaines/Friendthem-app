@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { SocialIcon } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import FBSDK, { LoginManager, LoginButton, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk';
+import ConnectButton from './SuperConnectScreen/ConnectButton';
+import Footer from './UtilityComponents/Footer';
 
 //Redux Actions
 import UserStoreActions from '../Redux/UserStore';
@@ -93,7 +95,7 @@ class LaunchScreen extends Component {
           <ScrollView style={styles.container}>
             <View style={styles.centered}>
               <Image
-                style={{ marginTop: 150 }} source={require('../Images/logo.png')}
+                style={{ marginTop: 100 }} source={require('../Images/logo.png')}
               />
               <Text style={styles.primSubText}>
                 CONNECTING THE WORLD
@@ -109,14 +111,27 @@ class LaunchScreen extends Component {
                     <ActivityIndicator size="large" color="#0000ff" />
                   </View>
                   )
-                : <FBLogin
-                loggedIn={!!fbAuthToken}
-                handleLoading={this.handleLoading}
-                handleLoadingComplete={this.handleLoadingComplete}
-                />
+                :
+                <View>
+                  <FBLogin
+                    loggedIn={!!fbAuthToken}
+                    handleLoading={this.handleLoading}
+                    handleLoadingComplete={this.handleLoadingComplete}
+                  />
+                  <Text style={styles.orText}> ( or ) </Text>
+                  <ConnectButton
+                    title='Start With Email'
+                    color='#fff'
+                    containerStyle={styles.button}
+                    textStyle={styles.buttonTextStyle}
+                    onPressCallback={() => navigate('EditProfileInfo')}
+                  />
+
+                </View>
               }
             </View>
           </ScrollView>
+          <Footer />
         </LinearGradient>
       </View>
     )
