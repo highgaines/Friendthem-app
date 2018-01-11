@@ -95,7 +95,7 @@ class LaunchScreen extends Component {
           <ScrollView style={styles.container}>
             <View style={styles.centered}>
               <Image
-                style={{ marginTop: 150 }} source={require('../Images/logo.png')}
+                style={{ marginTop: 100, width: 270, height: 60 }} source={require('../Images/logo.png')}
               />
               <Text style={styles.primSubText}>
                 CONNECTING THE WORLD
