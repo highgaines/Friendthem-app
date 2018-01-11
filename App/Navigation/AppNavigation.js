@@ -8,9 +8,15 @@ import FriendProfileScreen from '../Containers/ProfileScreen/FriendProfileScreen
 import SuperConnect from '../Containers/SuperConnectScreen/SuperConnect';
 import CongratulatoryScreen from '../Containers/SuperConnectScreen/CongratulatoryScreen';
 import ForkScreen from '../Containers/SignUpFork/ForkScreen';
+<<<<<<< HEAD
 import UserProfileInfoScreen from '../Containers/ProfileScreen/UserProfileInfoScreen';
 import EditProfileInfoScreen from '../Containers/ProfileScreen/EditProfileInfoScreen';
 import NotificationsContainer from '../Containers/Notifications/NotificationsContainer';
+=======
+import UserProfileInfoScreen from '../Containers/ProfileScreen/UserProfileInfoScreen'
+import EditProfileInfoScreen from '../Containers/ProfileScreen/EditProfileInfoScreen'
+import LoginScreen from '../Containers/LoginScreen'
+>>>>>>> init commit for updated login screen
 
 import styles from './Styles/NavigationStyles'
 
@@ -47,11 +53,14 @@ const PrimaryNav = StackNavigator({
   },
   NotificationsScreen: {
     screen: mapNavigationStateParamsToProps(NotificationsContainer)
+  },
+  LoginScreen: {
+    screen: mapNavigationStateParamsToProps(LoginScreen)
   }
 }, {
   // Default config for all screens
   headerMode: 'none',
-  initialRouteName: 'LaunchScreen',
+  initialRouteName: 'LoginScreen',
   navigationOptions: {
     headerStyle: styles.header
   }
