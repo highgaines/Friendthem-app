@@ -1,0 +1,16 @@
+{
+ "Development": {
+   "codePushKey": "",
+   "appServerRootURL": "http://127.0.0.1:8000/",
+   "devClientId": "VFbzhZAxSsmKBIjFiWoYMBvCLUKcoT7NqSqDhK0r",
+   "devClientSecret": "hwB0PcITb5dSEMgI4Z6fmuHf6ng4xAG2LCdQan0oxbq1t67tACGiHXWLUlf6PI6NNkdZEcspMtWISrAGGQSWk38i5UhADqrhHe3a9z2jjO4hK6fHsq9mkrCqMlQjcLD0"
+ },
+ "Staging": {
+   "codePushKey": "",
+   "appServerRootURL": ""
+  },
+ "Production": {
+   "codePushKey": "",
+   "appServerRootURL": ""
+ }
+}

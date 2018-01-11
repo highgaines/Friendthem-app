@@ -3,13 +3,14 @@ import { StackNavigator } from 'react-navigation'
 import LaunchScreen from '../Containers/LaunchScreen'
 import NearbyUsers from '../Containers/NearbyUsersScreen/NearbyUsers'
 import SearchBar from '../Containers/NearbyUsersScreen/SearchBar'
-import UserProfileScreen from '../Containers/ProfileScreen/UserProfileScreen'
-import FriendProfileScreen from '../Containers/ProfileScreen/FriendProfileScreen'
-import SuperConnect from '../Containers/SuperConnectScreen/SuperConnect'
-import CongratulatoryScreen from '../Containers/SuperConnectScreen/CongratulatoryScreen'
+import UserProfileScreen from '../Containers/ProfileScreen/UserProfileScreen';
+import FriendProfileScreen from '../Containers/ProfileScreen/FriendProfileScreen';
+import SuperConnect from '../Containers/SuperConnectScreen/SuperConnect';
+import CongratulatoryScreen from '../Containers/SuperConnectScreen/CongratulatoryScreen';
 import ForkScreen from '../Containers/SignUpFork/ForkScreen';
-import UserProfileInfoScreen from '../Containers/ProfileScreen/UserProfileInfoScreen'
-import EditProfileInfoScreen from '../Containers/ProfileScreen/EditProfileInfoScreen'
+import UserProfileInfoScreen from '../Containers/ProfileScreen/UserProfileInfoScreen';
+import EditProfileInfoScreen from '../Containers/ProfileScreen/EditProfileInfoScreen';
+import NotificationsContainer from '../Containers/Notifications/NotificationsContainer';
 
 import styles from './Styles/NavigationStyles'
 
@@ -43,6 +44,9 @@ const PrimaryNav = StackNavigator({
   },
   EditProfileInfoScreen: {
     screen: mapNavigationStateParamsToProps(EditProfileInfoScreen)
+  },
+  NotificationsScreen: {
+    screen: mapNavigationStateParamsToProps(NotificationsContainer)
   }
 }, {
   // Default config for all screens

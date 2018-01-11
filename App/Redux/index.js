@@ -10,6 +10,7 @@ export const reducers = combineReducers({
   userStore: require('./UserStore').reducer,
   friendStore: require('./FriendStore').reducer,
   authStore: require('./AuthStore').reducer,
+  notificationStore: require('./NotificationStore').reducer
 })
 
 export default () => {

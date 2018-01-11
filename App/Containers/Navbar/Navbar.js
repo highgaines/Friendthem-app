@@ -45,8 +45,12 @@ class Navbar extends Component {
     })
   }
 
+  // notifications or user profile screen?
   goToNotifications = () => {
-    this.props.navigation.navigate('UserProfileScreen')
+    this.props.navigation.navigate('NotificationsScreen',
+    {
+      navigation: this.props.navigation
+    })
   }
 
   goToSettings = () => {
@@ -64,8 +68,8 @@ class Navbar extends Component {
             onPress={this.goToNearbyUsers}
           />
           <Icon
-            name='home'
-            type='entypo'
+            name='notifications'
+            type='materialicons'
             color='#fff'
             containerStyle={styles.iconContainer}
             onPress={this.goToNotifications}
