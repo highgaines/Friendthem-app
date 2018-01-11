@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, Text, Image, View, TouchableOpacity, ListView } from 'react-native';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
+import Reactotron from 'reactotron-react-native';
 
 // Libraries
 import LinearGradient from 'react-native-linear-gradient';
@@ -11,58 +12,51 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 import Header from './Header';
 import Navbar from '../Navbar/Navbar';
 
+// Redux Actions
+import NotificationsStoreActions from '../../Redux/Notifications';
+
 // Styles
 import styles from '../Styles/NotificationStyles';
 
-export default class NotificationsContainer extends Component {
+class NotificationsContainer extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       //dummy data
-      listViewData: [
-        {
-          key: 1,
-          name: "Mickey Mouse",
-          img: 'https://www.disneyclips.com/imagesnewb/images/mickey_smiling2.gif',
-          message: "wants to connect on facebook"
-        },
-        {
-          key: 2,
-          name: "Donald Duck",
-          img: 'https://upload.wikimedia.org/wikipedia/en/thumb/b/b4/Donald_Duck.svg/618px-Donald_Duck.svg.png',
-          message: "just joined Friendthem"
-         },
-        {
-          key: 3, name: "Goofy", img: 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/Goofy.svg/1200px-Goofy.svg.png',
-          message: "wants to connect on facebook"
-        },
-        {
-          key: 4,
-          name: "Sora",
-          img: 'https://vignette.wikia.nocookie.net/kingdomhearts/images/5/59/Sora_%28Art%29_KH.png/revision/latest/scale-to-width-down/180?cb=20121114141242',
-          message: "wants to follow you"
-        }
-      ]
+      notifications: []
     }
   }
 
-  closeRow = (rowMap, rowKey) => {
+  componentDidMount() {
+    this.setState({ notifications: this.props.notifications })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    Reactotron.log('in did update')
+  }
+
+  componentWillReceiveProps(nextProps) {
+    Reactotron.log(nextProps)
+    if (this.state.notifications.length !== nextProps.notifications.length) {
+      this.setState({ notifications: nextProps.notifications})
+    }
+  }
+
+  closeRowItem = (rowMap, rowKey) => {
     if (rowMap[rowKey]) {
       rowMap[rowKey].closeRow()
     }
   }
 
   deleteRow = (rowMap, rowKey) => {
-    this.closeRow(rowMap, rowKey)
-    const newData = [...this.state.listViewData];
-    const prevIdx = this.state.listViewData.findIndex(item => item.key === rowKey)
-
-    newData.splice(prevIdx, 1);
-    this.setState({ listViewData: newData })
+    this.closeRowItem(rowMap, rowKey)
+    this.props.deleteNotification(rowMap, rowKey)
+    console.log('made it')
   }
 
   render() {
+    Reactotron.log(this.props.notifications)
     return(
       <View>
         <Header title='Notifications' />
@@ -70,7 +64,7 @@ export default class NotificationsContainer extends Component {
           <SwipeListView
             useFlatList
             disableLeftSwipe={true}
-            data={this.state.listViewData}
+            data={this.state.notifications}
             renderItem={ (data, rowMap) => (
               <View style={styles.rowFront}>
                 <Image
@@ -125,3 +119,11 @@ export default class NotificationsContainer extends Component {
 const mapStateToProps = state => ({
   notifications: state.notificationsStore.notifications
 })
+
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteNotification: (rowMap, rowKey) => dispatch(NotificationsStoreActions.deleteRow(rowMap, rowKey))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NotificationsContainer);

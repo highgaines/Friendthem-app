@@ -1,12 +1,10 @@
 import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
-
+import Reactotron from 'reactotron-react-native';
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  notificationsRequest: null,
-  notificationsSuccess: null,
-  notificationsFailure: null
+  deleteRow: ['rowMap', 'rowKey']
 })
 
 export const NotificationsTypes = Types
@@ -48,19 +46,20 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Reducers ------------- */
 
-export const request = (state, action) => state.merge({ fetching: true })
 
-export const success = (state, action) => {
-  const { notifications } = action
-  return state.merge({ fetching: false, notifications: notifications })
+
+const handleDeleteRowSuccess = (state = INITIAL_STATE, action)  => {
+  // const newData = [...state.notifications];
+  // const prevIdx = state.notifications.findIndex(item => item.key === action.rowKey)
+  //
+  // console.log('here')
+  // newData.splice(prevIdx, 1);
+  Reactotron.log('here')
+  return {...state, notifications: [] }
 }
-
-export const failure = (state) => state.merge({ fetching: false })
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.NOTIFICATIONS_REQUEST]: request,
-  [Types.NOTIFICATIONS_SUCCESS]: success,
-  [Types.NOTIFICATIONS_FAILURE]: failure
+  [Types.DELETE_ROW]: handleDeleteRowSuccess
 })
