@@ -4,7 +4,7 @@ import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   footerContainer: {
-    borderTopWidth: 1,
+    borderTopWidth: 0.5,
     borderTopColor: '#fff',
     height: 80,
     marginLeft: 10,
