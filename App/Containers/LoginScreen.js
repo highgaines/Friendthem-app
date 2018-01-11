@@ -28,26 +28,28 @@ class LoginScreen extends Component {
           locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
           style={styles.linearGradient}>
           <Image
-            style={styles.friendThemIcon}
+            style={styles.friendThemLoginIcon}
             source={require('../Images/logo-friendthem-text.png')}/>
-          <Text style={styles.formText}>
-            LOGIN
+          <Text style={styles.loginFormText}>
+            LOG IN
           </Text>
           <TextInput
             style={styles.formInput}
             onChangeText={(textValue) => this.updateState(textValue, 'userEmail')}
-            placeholder='Email Address'>
+            placeholder='Email Address'
+            placeholderFontColor='#85919a'>
           </TextInput>
           <TextInput
             style={styles.formInput}
             onChangeText={(textValue) => this.updateState(textValue, 'userPassword')}
             secureTextEntry={true}
-            placeholder='Password'>
+            placeholder='Password'
+            placeholderFontColor='#85919a'>
           </TextInput>
           <CheckBox
             containerStyle={styles.checkboxContainer}
-            textStyle={styles.checkBoxText}
-            title="By clicking on the 'Start' button you accept our Terms and Conditions"
+            textStyle={styles.loginCheckBoxText}
+            title="Remember Me"
             uncheckedIcon='square'
             uncheckedColor='#fff'
             checkedIcon='check-square'
@@ -55,7 +57,7 @@ class LoginScreen extends Component {
             onIconPress={() => this.setState({checkBoxChecked: !this.state.checkBoxChecked})}
             checked={this.state.checkBoxChecked}/>
           <TouchableOpacity
-            style={styles.buttonStyle}
+            style={[styles.buttonStyle, { marginTop: 20 }]}
             onPress={() => this.registerUser()}>
             <Text style={styles.buttonText}>START</Text>
             <Icon

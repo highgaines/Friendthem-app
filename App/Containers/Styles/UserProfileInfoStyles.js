@@ -17,6 +17,10 @@ export default StyleSheet.create({
   friendThemIcon: {
     marginTop: 50
   },
+  friendThemLoginIcon: {
+    marginTop: 150,
+    marginBottom: 25
+  },
   headerText: {
     backgroundColor: 'transparent',
     color: '#fff'
@@ -27,6 +31,13 @@ export default StyleSheet.create({
     marginTop: 40,
     marginBottom: 20,
     fontSize: 18
+  },
+  loginFormText: {
+    backgroundColor: 'transparent',
+    color: '#fff',
+    marginBottom: 10,
+    fontSize: 15,
+    fontWeight: '800'
   },
   formInput: {
     width: '90%',
@@ -46,6 +57,11 @@ export default StyleSheet.create({
     color: '#fff',
     fontWeight: '400',
     marginTop: 10
+  },
+  loginCheckBoxText: {
+    color: '#ffffff',
+    fontWeight: '400',
+    marginTop: 0
   },
   buttonStyle: {
     flexDirection: 'row',
