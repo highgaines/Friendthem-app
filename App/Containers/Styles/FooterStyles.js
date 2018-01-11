@@ -14,6 +14,7 @@ export default StyleSheet.create({
   text: {
     color: '#fff',
     fontSize: 15,
+    fontFamily: 'montserrat',
     textAlign: 'center'
   },
   button: {
