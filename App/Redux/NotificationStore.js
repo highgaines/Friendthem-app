@@ -7,7 +7,7 @@ const { Types, Creators } = createActions({
   deleteRow: ['rowMap', 'rowKey']
 })
 
-export const NotificationsTypes = Types
+export const NotificationTypes = Types
 export default Creators
 
 /* ------------- Initial State ------------- */
@@ -46,16 +46,18 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Reducers ------------- */
 
+const DELETE_ROW = 'DELETE_ROW'
 
+export const deleteRowAction = (rowKey) => {
+  return { type: Types.DELETE_ROW, payload: { rowKey } }
+}
 
 const handleDeleteRowSuccess = (state = INITIAL_STATE, action)  => {
-  // const newData = [...state.notifications];
-  // const prevIdx = state.notifications.findIndex(item => item.key === action.rowKey)
-  //
-  // console.log('here')
-  // newData.splice(prevIdx, 1);
-  Reactotron.log('here')
-  return {...state, notifications: [] }
+
+  const { rowKey } = action.payload
+  const newData = state.notifications.filter(item => item.key !== rowKey)
+
+  return state.merge({ notifications: newData })
 }
 
 /* ------------- Hookup Reducers To Types ------------- */

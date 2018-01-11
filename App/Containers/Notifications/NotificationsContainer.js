@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, Image, View, TouchableOpacity, ListView } from 'react-native';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Icon } from 'react-native-elements';
 import Reactotron from 'reactotron-react-native';
 
@@ -13,7 +14,8 @@ import Header from './Header';
 import Navbar from '../Navbar/Navbar';
 
 // Redux Actions
-import NotificationsStoreActions from '../../Redux/Notifications';
+import NotificationStoreActions from '../../Redux/NotificationStore';
+import { deleteRowAction } from '../../Redux/NotificationStore';
 
 // Styles
 import styles from '../Styles/NotificationStyles';
@@ -22,26 +24,7 @@ class NotificationsContainer extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      //dummy data
-      notifications: []
-    }
-  }
-
-  componentDidMount() {
-    this.setState({ notifications: this.props.notifications })
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    Reactotron.log('in did update')
-  }
-
-  componentWillReceiveProps(nextProps) {
-    Reactotron.log(nextProps)
-    if (this.state.notifications.length !== nextProps.notifications.length) {
-      this.setState({ notifications: nextProps.notifications})
-    }
-  }
+}
 
   closeRowItem = (rowMap, rowKey) => {
     if (rowMap[rowKey]) {
@@ -51,8 +34,7 @@ class NotificationsContainer extends Component {
 
   deleteRow = (rowMap, rowKey) => {
     this.closeRowItem(rowMap, rowKey)
-    this.props.deleteNotification(rowMap, rowKey)
-    console.log('made it')
+    this.props.deleteRowAction(rowKey)
   }
 
   render() {
@@ -64,7 +46,7 @@ class NotificationsContainer extends Component {
           <SwipeListView
             useFlatList
             disableLeftSwipe={true}
-            data={this.state.notifications}
+            data={this.props.notifications}
             renderItem={ (data, rowMap) => (
               <View style={styles.rowFront}>
                 <Image
@@ -117,12 +99,14 @@ class NotificationsContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  notifications: state.notificationsStore.notifications
+  notifications: state.notificationStore.notifications
 })
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteNotification: (rowMap, rowKey) => dispatch(NotificationsStoreActions.deleteRow(rowMap, rowKey))
+    ...bindActionCreators({
+      deleteRowAction }, dispatch
+    )
   }
 }
 
