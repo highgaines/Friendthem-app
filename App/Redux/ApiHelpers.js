@@ -5,6 +5,8 @@
  * @param {function} dispatch
  * @returns {Promise}
  */
+import envConfig from '../../envConfig'
+
 export function fetchFromApi(url, init, dispatch) {
   return new Promise((resolve, reject) => {
     fetch(buildRequest(url, init))
@@ -66,5 +68,5 @@ export function buildQueryString(query) {
  */
 function buildApiUrl(url) {
   //change the following url to be our environment variables base url
-  return ['https://google.com', url].join('/');
+  return [envConfig.Development.appServerRootURL, url].join('/');
 }
