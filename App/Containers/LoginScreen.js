@@ -4,6 +4,8 @@ import { ScrollView, Text, TextInput, Image, View, TouchableOpacity } from 'reac
 import { CheckBox, Icon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 
+import Footer from './UtilityComponents/Footer'
+
 import AuthStoreActions from '../Redux/AuthStore'
 
 import styles from './Styles/UserProfileInfoStyles'
@@ -57,7 +59,7 @@ class LoginScreen extends Component {
             onIconPress={() => this.setState({checkBoxChecked: !this.state.checkBoxChecked})}
             checked={this.state.checkBoxChecked}/>
           <TouchableOpacity
-            style={[styles.buttonStyle, { marginTop: 20 }]}
+            style={[styles.loginButtonStyle, { marginTop: 20 }]}
             onPress={() => this.registerUser()}>
             <Text style={styles.buttonText}>START</Text>
             <Icon
@@ -66,6 +68,14 @@ class LoginScreen extends Component {
               color='#fff'
               iconStyle={styles.buttonIcon}/>
           </TouchableOpacity>
+          <View style={{ marginTop: 75 }}>
+            <Footer
+              navigationCallback={() =>
+                this.props.navigation.navigate('UserProfileInfoScreen')
+              }
+              onLoginScreen={true}
+              styles={styles}/>
+          </View>
         </LinearGradient>
       </View>
     )

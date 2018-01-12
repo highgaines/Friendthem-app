@@ -14,6 +14,7 @@ import FriendStoreActions from '../Redux/FriendStore'
 
 // Styles
 import styles from './Styles/LaunchScreenStyles';
+import footerStyles from './Styles/FooterStyles';
 
 //Child Components
 import FBLogin from './FBLogin'
@@ -131,7 +132,9 @@ class LaunchScreen extends Component {
               }
             </View>
           </ScrollView>
-          <Footer />
+          <Footer
+            navigationCallback={() => navigate('LoginScreen')}
+            styles={footerStyles}/>
         </LinearGradient>
       </View>
     )

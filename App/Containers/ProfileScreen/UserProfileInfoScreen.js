@@ -6,6 +6,7 @@ import LinearGradient from 'react-native-linear-gradient'
 
 import API from '../../Services/Api'
 import AuthStoreActions from '../../Redux/AuthStore'
+import Footer from '../UtilityComponents/Footer'
 
 import styles from '../Styles/UserProfileInfoStyles'
 
@@ -36,23 +37,11 @@ class UserProfileInfoScreen extends Component {
   }
 
   registerUser = () => {
-    // const { userName, userEmail, userPassword } = this.state
-    // const api = API.createApi()
-    //
-    // api.postRegister({
-    // 	"client_id": envConfig.Development.devClientId,
-    // 	"client_secret": envConfig.Development.devClientSecret,
-    // 	"grant_type": "password",
-    // 	"username": userEmail,
-    // 	"password": userPassword,
-    // }).then(resp =>
-    // 	this.props.registerUserRequest(resp)
-    // )
 
   }
 
   render() {
-    const { userAccessToken, registerUserRequest } = this.props
+    const { userAccessToken, registerUserRequest, navigation } = this.props
     return (
       <View style={styles.userInfoView}>
         <LinearGradient
@@ -63,9 +52,6 @@ class UserProfileInfoScreen extends Component {
           <Image
             style={styles.friendThemIcon}
             source={require('../../Images/friend_them_icon.png')}/>
-          <Text style={styles.headerText}>
-            Select a Facebook photo or open the photo gallery
-          </Text>
           <Text style={styles.formText}>
             ADD INFORMATION
           </Text>
@@ -93,8 +79,18 @@ class UserProfileInfoScreen extends Component {
           </TextInput>
           <CheckBox
             containerStyle={styles.checkboxContainer}
-            textStyle={styles.checkBoxText}
-            title="By clicking on the 'Start' button you accept our Terms and Conditions"
+            title={
+              <Text style={styles.checkBoxText}>
+                By clicking on the&nbsp;
+                <Text style={{ fontWeight: '800' }}>
+                  "Start"
+                </Text>
+                  &nbsp;button you accept our
+                <Text style={{ fontWeight: '800' }}>
+                  &nbsp;Terms and Conditions
+                </Text>.
+              </Text>
+            }
             uncheckedIcon='square'
             uncheckedColor='#fff'
             checkedIcon='check-square'
@@ -111,6 +107,10 @@ class UserProfileInfoScreen extends Component {
               color='#fff'
               iconStyle={styles.buttonIcon}/>
           </TouchableOpacity>
+          <Footer
+            onLoginScreen={false}
+            navigationCallback={() => navigation.navigate('LoginScreen')}
+            styles={styles} />
         </LinearGradient>
       </View>
     )
