@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { StackNavigator } from 'react-navigation'
+
+// Components
 import LaunchScreen from '../Containers/LaunchScreen'
 import NearbyUsers from '../Containers/NearbyUsersScreen/NearbyUsers'
 import SearchBar from '../Containers/NearbyUsersScreen/SearchBar'
@@ -13,7 +15,9 @@ import EditProfileInfoScreen from '../Containers/ProfileScreen/EditProfileInfoSc
 import NotificationsContainer from '../Containers/Notifications/NotificationsContainer'
 import SettingsScreen from '../Containers/Settings/SettingsScreen'
 import LoginScreen from '../Containers/LoginScreen'
+import InviteUsersScreen from '../Containers/InviteUsers/InviteUsersScreen';
 
+// Styles
 import styles from './Styles/NavigationStyles'
 
 const mapNavigationStateParamsToProps = (SomeComponent) => {
@@ -50,11 +54,16 @@ const PrimaryNav = StackNavigator({
   NotificationsScreen: {
     screen: mapNavigationStateParamsToProps(NotificationsContainer)
   },
+<<<<<<< HEAD
   SettingsScreen: {
     screen: mapNavigationStateParamsToProps(SettingsScreen)
   },
   LoginScreen: {
     screen: mapNavigationStateParamsToProps(LoginScreen)
+=======
+  InviteUsers: {
+    screen: mapNavigationStateParamsToProps(InviteUsersScreen)
+>>>>>>> styling out interface
   }
 }, {
   // Default config for all screens

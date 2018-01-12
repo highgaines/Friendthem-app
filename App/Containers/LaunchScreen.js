@@ -139,7 +139,13 @@ class LaunchScreen extends Component {
                     textStyle={styles.buttonTextStyle}
                     onPressCallback={() => navigate('RegisterUserScreen')}
                   />
-
+                  <ConnectButton
+                    title="Invite Users"
+                    color="#fff"
+                    containerStyle={styles.button}
+                    textStyle={styles.buttonTextStyle}
+                    onPressCallback={() => navigate('InviteUsers')}
+                  />
                 </View>
               }
             </View>

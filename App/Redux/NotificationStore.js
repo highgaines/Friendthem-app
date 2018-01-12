@@ -44,13 +44,15 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Selectors ------------- */
 
 
-/* ------------- Reducers ------------- */
-
-const DELETE_ROW = 'DELETE_ROW'
+/* ------------- Actions ------------- */
 
 export const deleteRowAction = (rowKey) => {
   return { type: Types.DELETE_ROW, payload: { rowKey } }
 }
+
+/* ------------- Reducers ------------- */
+
+const DELETE_ROW = 'DELETE_ROW'
 
 const handleDeleteRowSuccess = (state = INITIAL_STATE, action)  => {
 

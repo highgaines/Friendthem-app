@@ -38,7 +38,6 @@ class NotificationsContainer extends Component {
   }
 
   render() {
-    Reactotron.log(this.props.notifications)
     return(
       <View>
         <Header title='Notifications' />
@@ -104,9 +103,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    ...bindActionCreators({
-      deleteRowAction }, dispatch
-    )
+    ...bindActionCreators({ deleteRowAction }, dispatch)
   }
 }
 
