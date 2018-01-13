@@ -6,6 +6,9 @@ import Reactotron from 'reactotron-react-native';
 // Libraries
 import LinearGradient from 'react-native-linear-gradient';
 
+// Components
+import MessageContainer from './MessageContainer';
+
 // Styles
 import styles from '../Styles/InviteUsersScreenStyles';
 
@@ -53,6 +56,7 @@ export default class InviteUsersScreen extends Component {
             </TouchableOpacity>
           </View>
         </LinearGradient>
+        {networkTabSelected ? <MessageContainer /> : null}
       </View>
     )
   }
