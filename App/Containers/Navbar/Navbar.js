@@ -54,7 +54,12 @@ class Navbar extends Component {
   }
 
   goToSettings = () => {
-    console.log('navigating to settings')
+    const { navigation } = this.props
+    navigation.navigate('SettingsScreen',
+      {
+        
+      }
+    )
   }
 
   render() {

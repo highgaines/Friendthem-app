@@ -1,22 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { StackNavigator } from 'react-navigation'
 import LaunchScreen from '../Containers/LaunchScreen'
 import NearbyUsers from '../Containers/NearbyUsersScreen/NearbyUsers'
 import SearchBar from '../Containers/NearbyUsersScreen/SearchBar'
-import UserProfileScreen from '../Containers/ProfileScreen/UserProfileScreen';
-import FriendProfileScreen from '../Containers/ProfileScreen/FriendProfileScreen';
-import SuperConnect from '../Containers/SuperConnectScreen/SuperConnect';
-import CongratulatoryScreen from '../Containers/SuperConnectScreen/CongratulatoryScreen';
-import ForkScreen from '../Containers/SignUpFork/ForkScreen';
-import UserProfileInfoScreen from '../Containers/ProfileScreen/UserProfileInfoScreen';
-import EditProfileInfoScreen from '../Containers/ProfileScreen/EditProfileInfoScreen';
-import NotificationsContainer from '../Containers/Notifications/NotificationsContainer';
+import UserProfileScreen from '../Containers/ProfileScreen/UserProfileScreen'
+import FriendProfileScreen from '../Containers/ProfileScreen/FriendProfileScreen'
+import SuperConnect from '../Containers/SuperConnectScreen/SuperConnect'
+import CongratulatoryScreen from '../Containers/SuperConnectScreen/CongratulatoryScreen'
+import ForkScreen from '../Containers/SignUpFork/ForkScreen'
+import UserProfileInfoScreen from '../Containers/ProfileScreen/UserProfileInfoScreen'
+import EditProfileInfoScreen from '../Containers/ProfileScreen/EditProfileInfoScreen'
+import NotificationsContainer from '../Containers/Notifications/NotificationsContainer'
+import SettingsScreen from '../Containers/Settings/SettingsScreen'
 
 import styles from './Styles/NavigationStyles'
 
 const mapNavigationStateParamsToProps = (SomeComponent) => {
     return class extends Component {
-        static navigationOptions = SomeComponent.navigationOptions; // better use hoist-non-react-statics
+        static navigationOptions = SomeComponent.navigationOptions  // better use hoist-non-react-statics
         render() {
             const {navigation: {state: {params}}} = this.props
             return <SomeComponent {...params} {...this.props} />
@@ -47,6 +48,9 @@ const PrimaryNav = StackNavigator({
   },
   NotificationsScreen: {
     screen: mapNavigationStateParamsToProps(NotificationsContainer)
+  },
+  SettingsScreen: {
+    screen: mapNavigationStateParamsToProps(SettingsScreen)
   }
 }, {
   // Default config for all screens

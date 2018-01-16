@@ -19,7 +19,16 @@ const images = {
   chevronRight: require('../Images/Icons/chevron-right.png'),
   hamburger: require('../Images/Icons/hamburger.png'),
   backButton: require('../Images/Icons/back-button.png'),
-  closeButton: require('../Images/Icons/close-button.png')
+  closeButton: require('../Images/Icons/close-button.png'),
+  backArrow: require('../Images/Icons/back-arrow.png'),
+  danger: require('../Images/Icons/danger.png'),
+  file: require('../Images/Icons/file.png'),
+  ghost: require('../Images/Icons/ghost.png'),
+  inclinedBell: require('../Images/Icons/inclined-bell.png'),
+  person: require('../Images/Icons/person.png'),
+  powerIcon: require('../Images/Icons/power-icon.png'),
+  privacy: require('../Images/Icons/privacy.png'),
+  rightArrow: require('../Images/Icons/rightArrow.png')
 }
 
 export default images
