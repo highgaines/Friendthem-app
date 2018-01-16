@@ -23,7 +23,7 @@ class ForkScreen extends Component {
   }
 
   directToBuildProfile = () => {
-    this.props.navigation.navigate('UserProfileInfoScreen')
+    this.props.navigation.navigate('RegisterUserScreen')
   }
 
   render() {

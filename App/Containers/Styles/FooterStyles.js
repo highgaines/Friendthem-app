@@ -9,18 +9,21 @@ export default StyleSheet.create({
     height: 80,
     marginLeft: 10,
     marginRight: 10,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: 'transparent'
   },
   text: {
     color: '#fff',
     fontSize: 15,
     fontFamily: 'montserrat',
     textAlign: 'center',
-    letterSpacing: 1
+    letterSpacing: 1,
+    backgroundColor: 'transparent'
   },
   button: {
     marginTop: 10,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: 'transparent'
   }
 })
