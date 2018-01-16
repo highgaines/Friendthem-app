@@ -21,18 +21,23 @@ class SettingsScreen extends Component {
             start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
             locations={[0.1, 0.3, 0.5, 0.7, 1.0]}>
             <View style={styles.topHeader}>
+              <TouchableOpacity style={styles.backArrow}>
+                <Image
+                  source={Images.backArrow}
+                  />
+              </TouchableOpacity>
               <Text style={styles.titleText}>
                 Settings
               </Text>
             </View>
           </LinearGradient>
-          <ScrollView>
+          <ScrollView style={styles.scrollView}>
           <View style={styles.sectionTitle}>
             <Text style={styles.sectionTitleText}>
               General Setting
             </Text>
           </View>
-          <View style={styles.sectionItem}>
+          <TouchableOpacity style={styles.sectionItem}>
             <Image
               source={Images.person}
               />
@@ -43,8 +48,8 @@ class SettingsScreen extends Component {
               source={Images.rightArrow}
               style={styles.rightArrow}
               />
-          </View>
-          <View style={styles.sectionItem}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.sectionItem}>
             <Image
               source={Images.danger}
               />
@@ -55,8 +60,8 @@ class SettingsScreen extends Component {
               source={Images.rightArrow}
               style={styles.rightArrow}
               />
-          </View>
-          <View style={styles.sectionItem}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.sectionItem}>
             <Image
               source={Images.file}
               />
@@ -67,29 +72,29 @@ class SettingsScreen extends Component {
               source={Images.rightArrow}
               style={styles.rightArrow}
               />
-          </View>
+          </TouchableOpacity>
           <View style={styles.sectionTitle}>
             <Text style={styles.sectionTitleText}>
               Application Settings
             </Text>
           </View>
-          <View style={styles.sectionItem}>
+          <TouchableOpacity style={styles.sectionItem}>
             <Image
               source={Images.inclinedBell}
               />
             <Text style={styles.sectionItemText}>
               Silence Notifications
             </Text>
-          </View>
-          <View style={styles.sectionItem}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.sectionItem}>
             <Image
               source={Images.ghost}
               />
             <Text style={styles.sectionItemText}>
               Ghost Mode
             </Text>
-          </View>
-          <View style={styles.sectionItem}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.sectionItem}>
             <Image
               source={Images.privacy}
               />
@@ -100,7 +105,15 @@ class SettingsScreen extends Component {
               source={Images.rightArrow}
               style={styles.rightArrow}
               />
-          </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.logOutButton}>
+            <Image
+              source={Images.powerIcon}
+              />
+            <Text style={styles.logOutText}>
+              LOG OUT
+            </Text>
+          </TouchableOpacity>
         </ScrollView>
           <Navbar
             navbarStyle={styles.userProfNavbar}

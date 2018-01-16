@@ -13,12 +13,18 @@ export default StyleSheet.create({
     shadowOffset: { height: 5, width: 0 },
     zIndex: 99
   },
+  backArrow: {
+    position: 'absolute',
+    left: 20,
+    alignSelf: 'center'
+  },
   topHeader: {
     height: 60,
     width: '100%',
-    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 30,
-    paddingTop: 15
+    paddingTop: 16,
+    flexDirection: 'row'
   },
   userProfNavbar: {
     justifyContent: 'space-around',
@@ -67,5 +73,30 @@ export default StyleSheet.create({
   rightArrow: {
     position: 'absolute',
     right: 15
+  },
+  scrollView: {
+    backgroundColor: 'white',
+    height: Metrics.screenHeight * 1.2
+  },
+  logOutButton: {
+    backgroundColor: 'blue',
+    width: 150,
+    alignSelf: 'center',
+    top: 30,
+    marginBottom: 30,
+    alignItems: 'center',
+    flexDirection: 'row',
+    borderRadius: 50,
+    height: 50,
+    justifyContent: 'center',
+    marginBottom: 125,
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+    shadowColor: 'blue',
+    shadowOffset: { height: 3, width: 3 },
+  },
+  logOutText: {
+    color: 'white',
+    marginLeft: 10
   }
 })
