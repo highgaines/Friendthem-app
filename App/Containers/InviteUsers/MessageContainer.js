@@ -9,6 +9,11 @@ import ConnectButton from '../SuperConnectScreen/ConnectButton';
 import ImageCircle from '../UtilityComponents/ImageCircle';
 
 export default MessageContainer = props => {
+
+  const handleSend = () => {
+    console.log('handling send')
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.firstRow}>
@@ -26,7 +31,13 @@ export default MessageContainer = props => {
         </Text>
       </View>
       <View style={styles.thirdRow}>
-
+        <ConnectButton
+          title="Send"
+          color="#fff"
+          linearGradient={true}
+          textStyle={styles.buttonTextStyle}
+          onPressCallback={() => handleSend()}
+        />
       </View>
     </View>
   )
