@@ -1,6 +1,7 @@
 import { createActions, createReducer } from 'reduxsauce'
 import { fetchFromApi } from './ApiHelpers'
 import Immutable from 'seamless-immutable'
+import envConfig from '../../envConfig'
 
 /* ------ Types and Action Creators ------ */
 
@@ -22,8 +23,27 @@ const { Types, Creators } = createActions({
 export const AuthTypes = Types
 export default Creators
 
+/* ---------- Initial State ---------- */
+
+export const INITIAL_STATE = Immutable({
+  userInfoAdded: false,
+  loggedIn: false,
+  accessToken: null,
+  expiresIn: null,
+  tokenType: null,
+  scope: null,
+  refreshToken: null,
+  authError: false
+})
+
+
 export const registerUser = (userObj) => {
-  const body = { ...userObj }
+  const body = {
+    client_id: envConfig.Development.devClientId,
+    client_secret: envConfig.Development.devClientSecret,
+    grant_type: "password",
+    ...userObj
+  }
 
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
@@ -46,7 +66,12 @@ export const registerUser = (userObj) => {
 }
 
 export const login = (userObj) => {
-  const body = { ...userObj }
+  const body = {
+    client_id: envConfig.Development.devClientId,
+    client_secret: envConfig.Development.devClientSecret,
+    grant_type: 'password',
+    ...userObj
+  }
 
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
@@ -112,18 +137,6 @@ export const testRedirect = () => {
 }
 
 
-/* ---------- Initial State ---------- */
-
-export const INITIAL_STATE = Immutable({
-  userInfoAdded: false,
-  loggedIn: false,
-  accessToken: null,
-  expiresIn: null,
-  tokenType: null,
-  scope: null,
-  refreshToken: null
-})
-
 
 /* -------- Reducers -------- */
 
@@ -136,17 +149,20 @@ const registerAccountSuccess = (state = INITIAL_STATE, action) => {
   return {
     ...state,
     userInfoAdded: true,
+    loggedIn: true,
     accessToken: data.access_token,
     expiresIn: data.expires_in,
-    tokenType: data.tokenType,
+    tokenType: data.token_type,
     scope: data.scope,
-    refreshToken: data.refreshToken
+    refreshToken: data.refresh_token,
+    authError: false
   }
 }
 
 const registerAccountFailure = (state = INITIAL_STATE, action) => {
   return {
-    userInfoAdded: false
+    userInfoAdded: false,
+    authError: true
   }
 }
 
@@ -161,24 +177,25 @@ const loginSuccess = (state = INITIAL_STATE, action) => {
     loggedIn: true,
     accessToken: data.access_token,
     expiresIn: data.expires_in,
-    tokenType: data.tokenType,
+    tokenType: data.token_Type,
     scope: data.scope,
-    refreshToken: data.refreshToken
+    refreshToken: data.refresh_token,
+    authError: false
   }
 }
 
 const loginFailure = (state = INITIAL_STATE, action) => {
-  console.log(action)
-  return state
+  return {
+    ...state,
+    authError: true
+  }
 }
 
 const handleRedirectSuccess = (state, action) => {
-  debugger
   return state
 }
 
 const handleRedirectFailure = (state, action) => {
-  debugger
   return state
 }
 

@@ -5,7 +5,6 @@ import { CheckBox, Icon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 
 import Footer from './UtilityComponents/Footer'
-import envConfig from '../../envConfig'
 import AuthStoreActions, { login } from '../Redux/AuthStore'
 import styles from './Styles/UserProfileInfoStyles'
 
@@ -21,10 +20,14 @@ class LoginScreen extends Component {
   }
 
   componentDidUpdate = (prevProps) => {
-    const { loggedIn, navigation } = this.props
+    const { loggedIn, navigation, authError } = this.props
 
     if (loggedIn && !prevProps.loggedIn) {
       navigation.navigate('UserProfileScreen');
+    }
+
+    if (authError && !prevProps.authError) {
+      alert('The information you entered was incorrect')
     }
   }
 
@@ -36,9 +39,6 @@ class LoginScreen extends Component {
     const { userEmail, userPassword } = this.state
 
     this.props.loginUser({
-      client_id: envConfig.Development.devClientId,
-      client_secret: envConfig.Development.devClientSecret,
-      grant_type: 'password',
       username: userEmail,
       password: userPassword
     })
@@ -62,12 +62,16 @@ class LoginScreen extends Component {
             style={styles.formInput}
             onChangeText={(textValue) => this.updateState(textValue, 'userEmail')}
             placeholder='Email Address'
+            autoCapitalize={'none'}
+            autoCorrect={false}
+            autoFocus={true}
             placeholderFontColor='#85919a'>
           </TextInput>
           <TextInput
             style={styles.formInput}
             onChangeText={(textValue) => this.updateState(textValue, 'userPassword')}
             secureTextEntry={true}
+            autoCorrect={false}
             placeholder='Password'
             placeholderFontColor='#85919a'>
           </TextInput>
@@ -106,7 +110,8 @@ class LoginScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  loggedIn: state.authStore.loggedIn
+  loggedIn: state.authStore.loggedIn,
+  authError: state.authStore.authError
 })
 
 const mapDispatchToProps = dispatch => {

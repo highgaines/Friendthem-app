@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { CheckBox, Icon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 
-import envConfig from '../../../envConfig'
 import AuthStoreActions, { registerUser } from '../../Redux/AuthStore'
 import Footer from '../UtilityComponents/Footer'
 import styles from '../Styles/UserProfileInfoStyles'
@@ -26,7 +25,6 @@ class RegisterUserScreen extends Component {
   componentDidUpdate = prevProps => {
     const { userInfoAdded } = this.props
     if (userInfoAdded && !prevProps.userInfoAdded) {
-      console.log(hit)
       this.props.navigation.navigate('UserProfileScreen')
     }
   }
@@ -36,13 +34,15 @@ class RegisterUserScreen extends Component {
   }
 
   registerUser = () => {
-    this.props.registerUserRequest({
-      client_id: envConfig.Development.devClientId,
-      client_secret: envConfig.Development.devClientSecret,
-      grant_type: "password",
-      username: this.state.userEmail,
-      password: this.state.userPassword
-    })
+    const { userEmail, userPassword, confirmPassword } = this.state
+
+    confirmPassword === userPassword ?
+      this.props.registerUserRequest({
+        username: this.state.userEmail,
+        password: this.state.userPassword
+      })
+      :
+      alert('Passwords do not match.')
   }
 
   render() {
@@ -64,23 +64,30 @@ class RegisterUserScreen extends Component {
           <TextInput
             style={styles.formInput}
             onChangeText={(textValue) => this.updateState(textValue, 'userName')}
+            autoCapitalize={'words'}
+            autoCorrect={false}
+            autoFocus={true}
             placeholder='Name'>
           </TextInput>
           <TextInput
             style={styles.formInput}
             onChangeText={(textValue) => this.updateState(textValue, 'userEmail')}
+            autoCapitalize={'none'}
+            autoCorrect={false}
             placeholder='Email Address'>
           </TextInput>
           <TextInput
             style={styles.formInput}
             onChangeText={(textValue) => this.updateState(textValue, 'userPassword')}
             secureTextEntry={true}
+            autoCorrect={false}
             placeholder='Password'>
           </TextInput>
           <TextInput
             style={[styles.formInput, { marginBottom: 0 }]}
             onChangeText={(textValue) => this.updateState(textValue, 'confirmPassword')}
             secureTextEntry={true}
+            autoCorrect={false}
             placeholder='Confirm Password'>
           </TextInput>
           <CheckBox
@@ -105,7 +112,11 @@ class RegisterUserScreen extends Component {
             checked={checkBoxChecked}/>
           <TouchableOpacity
             style={styles.buttonStyle}
-            onPress={checkBoxChecked ? () => this.registerUser() : null}>
+            onPress={checkBoxChecked ?
+              () => this.registerUser()
+              :
+              () => alert('Please make sure to check the checkbox.')
+            }>
             <Text style={styles.buttonText}>START</Text>
             <Icon
               name='arrow-right'
