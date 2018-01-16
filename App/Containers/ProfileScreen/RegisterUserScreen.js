@@ -4,13 +4,12 @@ import { connect } from 'react-redux'
 import { CheckBox, Icon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 
-import API from '../../Services/Api'
-import AuthStoreActions from '../../Redux/AuthStore'
+import envConfig from '../../../envConfig'
+import AuthStoreActions, { registerUser } from '../../Redux/AuthStore'
 import Footer from '../UtilityComponents/Footer'
-
 import styles from '../Styles/UserProfileInfoStyles'
 
-class UserProfileInfoScreen extends Component {
+class RegisterUserScreen extends Component {
   constructor(props) {
     super(props)
 
@@ -37,11 +36,18 @@ class UserProfileInfoScreen extends Component {
   }
 
   registerUser = () => {
-
+    this.props.registerUserRequest({
+      client_id: envConfig.Development.devClientId,
+      client_secret: envConfig.Development.devClientSecret,
+      grant_type: "password",
+      username: this.state.userEmail,
+      password: this.state.userPassword
+    })
   }
 
   render() {
     const { userAccessToken, registerUserRequest, navigation } = this.props
+    const { checkBoxChecked } = this.state
     return (
       <View style={styles.userInfoView}>
         <LinearGradient
@@ -96,10 +102,10 @@ class UserProfileInfoScreen extends Component {
             checkedIcon='check-square'
             checkedColor='#fff'
             onIconPress={() => this.setState({checkBoxChecked: !this.state.checkBoxChecked})}
-            checked={this.state.checkBoxChecked}/>
+            checked={checkBoxChecked}/>
           <TouchableOpacity
             style={styles.buttonStyle}
-            onPress={() => this.registerUser()}>
+            onPress={checkBoxChecked ? () => this.registerUser() : null}>
             <Text style={styles.buttonText}>START</Text>
             <Icon
               name='arrow-right'
@@ -109,7 +115,9 @@ class UserProfileInfoScreen extends Component {
           </TouchableOpacity>
           <Footer
             onLoginScreen={false}
-            navigationCallback={() => navigation.navigate('LoginScreen')}
+            navigationCallback={
+              () => navigation.navigate('LoginScreen')
+            }
             styles={styles} />
         </LinearGradient>
       </View>
@@ -123,8 +131,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    registerUserRequest: (userObj) => dispatch(AuthStoreActions.register(userObj))
+    registerUserRequest: (userObj) => dispatch(registerUser(userObj))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfileInfoScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterUserScreen)

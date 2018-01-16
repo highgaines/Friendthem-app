@@ -8,7 +8,7 @@ import FriendProfileScreen from '../Containers/ProfileScreen/FriendProfileScreen
 import SuperConnect from '../Containers/SuperConnectScreen/SuperConnect';
 import CongratulatoryScreen from '../Containers/SuperConnectScreen/CongratulatoryScreen';
 import ForkScreen from '../Containers/SignUpFork/ForkScreen';
-import UserProfileInfoScreen from '../Containers/ProfileScreen/UserProfileInfoScreen';
+import RegisterUserScreen from '../Containers/ProfileScreen/RegisterUserScreen';
 import EditProfileInfoScreen from '../Containers/ProfileScreen/EditProfileInfoScreen';
 import NotificationsContainer from '../Containers/Notifications/NotificationsContainer';
 import LoginScreen from '../Containers/LoginScreen'
@@ -40,8 +40,8 @@ const PrimaryNav = StackNavigator({
     mapNavigationStateParamsToProps(SuperConnect) },
   CongratulatoryScreen: { screen:
     mapNavigationStateParamsToProps(CongratulatoryScreen) },
-  UserProfileInfoScreen: {
-    screen: mapNavigationStateParamsToProps(UserProfileInfoScreen)
+  RegisterUserScreen: {
+    screen: mapNavigationStateParamsToProps(RegisterUserScreen)
   },
   EditProfileInfoScreen: {
     screen: mapNavigationStateParamsToProps(EditProfileInfoScreen)

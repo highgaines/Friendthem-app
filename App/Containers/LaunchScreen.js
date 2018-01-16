@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 import { ScrollView, Text, Image, View, TouchableOpacity, Button, ActivityIndicator } from 'react-native';
 import { Images } from '../Themes';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { SocialIcon } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import FBSDK, { LoginManager, LoginButton, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk';
 import ConnectButton from './SuperConnectScreen/ConnectButton';
 import Footer from './UtilityComponents/Footer';
+import envConfig from '../../envConfig'
 
 //Redux Actions
 import UserStoreActions from '../Redux/UserStore';
 import FriendStoreActions from '../Redux/FriendStore'
+import AuthStoreActions, { loginByFacebook } from '../Redux/AuthStore'
 
 // Styles
 import styles from './Styles/LaunchScreenStyles';
@@ -46,7 +49,7 @@ class LaunchScreen extends Component {
   }
 
   getFbProfile = accessToken => {
-    const { userInfoRequestSuccess, navigation, setFriendInfo, users } = this.props;
+    const { userInfoRequestSuccess, navigation, setFriendInfo, users, userFbLogin } = this.props;
 
     const responseInfoCallback = (error, result) => {
       if (error) {
@@ -62,6 +65,15 @@ class LaunchScreen extends Component {
         })
       }
     }
+
+    userFbLogin({
+      client_id: envConfig.Development.devClientId,
+      client_secret: envConfig.Development.devClientSecret,
+      grant_type: 'convert_token',
+      backend: 'facebook',
+      token: accessToken
+    })
+
     const infoRequest = new GraphRequest(
       '/me',
       {
@@ -125,7 +137,7 @@ class LaunchScreen extends Component {
                     color='#fff'
                     containerStyle={styles.button}
                     textStyle={styles.buttonTextStyle}
-                    onPressCallback={() => navigate('EditProfileInfo')}
+                    onPressCallback={() => navigate('RegisterUserScreen')}
                   />
 
                 </View>
@@ -149,10 +161,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    userInfoRequestSuccess: (userInfo) =>
+    ...bindActionCreators({
+      userInfoRequestSuccess: (userInfo) =>
       dispatch(UserStoreActions.fbUserInfo(userInfo)),
-    setFriendInfo: (friendInfo) =>
+      setFriendInfo: (friendInfo) =>
       dispatch(FriendStoreActions.setFriendInfo(friendInfo)),
+      userFbLogin: (userInfo) => loginByFacebook(userInfo)
+    }, dispatch)
   }
 }
 

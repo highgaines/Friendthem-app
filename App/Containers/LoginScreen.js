@@ -5,9 +5,8 @@ import { CheckBox, Icon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 
 import Footer from './UtilityComponents/Footer'
-
-import AuthStoreActions from '../Redux/AuthStore'
-
+import envConfig from '../../envConfig'
+import AuthStoreActions, { login } from '../Redux/AuthStore'
 import styles from './Styles/UserProfileInfoStyles'
 
 class LoginScreen extends Component {
@@ -19,6 +18,30 @@ class LoginScreen extends Component {
       userPassword: '',
       rememberMe: false
     }
+  }
+
+  componentDidUpdate = (prevProps) => {
+    const { loggedIn, navigation } = this.props
+
+    if (loggedIn && !prevProps.loggedIn) {
+      navigation.navigate('UserProfileScreen');
+    }
+  }
+
+  updateState = (textValue, textName) => {
+    this.setState({[textName]: textValue})
+  }
+
+  loginRequest = () => {
+    const { userEmail, userPassword } = this.state
+
+    this.props.loginUser({
+      client_id: envConfig.Development.devClientId,
+      client_secret: envConfig.Development.devClientSecret,
+      grant_type: 'password',
+      username: userEmail,
+      password: userPassword
+    })
   }
 
   render() {
@@ -60,7 +83,7 @@ class LoginScreen extends Component {
             checked={this.state.checkBoxChecked}/>
           <TouchableOpacity
             style={[styles.loginButtonStyle, { marginTop: 20 }]}
-            onPress={() => this.registerUser()}>
+            onPress={() => this.loginRequest()}>
             <Text style={styles.buttonText}>START</Text>
             <Icon
               name='arrow-right'
@@ -71,7 +94,7 @@ class LoginScreen extends Component {
           <View style={{ marginTop: 75 }}>
             <Footer
               navigationCallback={() =>
-                this.props.navigation.navigate('UserProfileInfoScreen')
+                this.props.navigation.navigate('RegisterUserScreen')
               }
               onLoginScreen={true}
               styles={styles}/>
@@ -83,12 +106,12 @@ class LoginScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-
+  loggedIn: state.authStore.loggedIn
 })
 
 const mapDispatchToProps = dispatch => {
   return {
-
+    loginUser: (userObj) => dispatch(login(userObj))
   }
 }
 
