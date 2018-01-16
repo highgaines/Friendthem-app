@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import { ScrollView, Text, Image, View, TouchableOpacity, Button, ActivityIndicator } from 'react-native';
-import { Images } from '../Themes';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { SocialIcon } from 'react-native-elements';
-import LinearGradient from 'react-native-linear-gradient';
-import FBSDK, { LoginManager, LoginButton, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk';
-import ConnectButton from './SuperConnectScreen/ConnectButton';
-import Footer from './UtilityComponents/Footer';
+import React, { Component } from 'react'
+import { ScrollView, Text, Image, View, TouchableOpacity, Button, ActivityIndicator } from 'react-native'
+import { Images } from '../Themes'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { SocialIcon } from 'react-native-elements'
+import LinearGradient from 'react-native-linear-gradient'
+import FBSDK, { LoginManager, LoginButton, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk'
+import ConnectButton from './SuperConnectScreen/ConnectButton'
+import Footer from './UtilityComponents/Footer'
 import envConfig from '../../envConfig'
 
 //Redux Actions
-import UserStoreActions from '../Redux/UserStore';
-import FriendStoreActions from '../Redux/FriendStore'
+import UserStoreActions, { fbUserInfo } from '../Redux/UserStore'
+import FriendStoreActions, { setFriendInfo } from '../Redux/FriendStore'
 import AuthStoreActions, { loginByFacebook } from '../Redux/AuthStore'
 
 // Styles
-import styles from './Styles/LaunchScreenStyles';
-import footerStyles from './Styles/FooterStyles';
+import styles from './Styles/LaunchScreenStyles'
+import footerStyles from './Styles/FooterStyles'
 
 //Child Components
 import FBLogin from './FBLogin'
@@ -33,7 +33,7 @@ class LaunchScreen extends Component {
   }
 
   componentWillUpdate = nextProps => {
-    const { fbAuthToken } = this.props;
+    const { fbAuthToken } = this.props
 
     if (!fbAuthToken && nextProps.fbAuthToken) {
       this.getFbProfile(nextProps.fbAuthToken)
@@ -49,14 +49,14 @@ class LaunchScreen extends Component {
   }
 
   getFbProfile = accessToken => {
-    const { userInfoRequestSuccess, navigation, setFriendInfo, users, userFbLogin } = this.props;
+    const { fbUserInfo, navigation, setFriendInfo, users, loginByFacebook } = this.props
 
     const responseInfoCallback = (error, result) => {
       if (error) {
         console.log(error)
         return error
       } else {
-        userInfoRequestSuccess(result)
+        fbUserInfo(result)
         navigation.navigate('ForkScreen', {
           numUsers: users.length,
           users: users,
@@ -66,7 +66,7 @@ class LaunchScreen extends Component {
       }
     }
 
-    userFbLogin({
+    loginByFacebook({
       client_id: envConfig.Development.devClientId,
       client_secret: envConfig.Development.devClientSecret,
       grant_type: 'convert_token',
@@ -85,11 +85,11 @@ class LaunchScreen extends Component {
         }
       },
       responseInfoCallback
-    );
+    )
 
     new GraphRequestManager()
     .addRequest(infoRequest)
-    .start();
+    .start()
   }
 
   render () {
@@ -162,11 +162,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({
-      userInfoRequestSuccess: (userInfo) =>
-      dispatch(UserStoreActions.fbUserInfo(userInfo)),
-      setFriendInfo: (friendInfo) =>
-      dispatch(FriendStoreActions.setFriendInfo(friendInfo)),
-      userFbLogin: (userInfo) => loginByFacebook(userInfo)
+      fbUserInfo,
+      setFriendInfo,
+      loginByFacebook
     }, dispatch)
   }
 }
