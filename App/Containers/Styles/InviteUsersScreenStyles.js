@@ -10,7 +10,8 @@ export default StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 5,
     shadowColor: 'black',
-    shadowOffset: { height: 0, width: 0 }
+    shadowOffset: { height: 0, width: 0 },
+    zIndex: 99
   },
   tabSelectionContainer: {
     flexDirection: 'row',

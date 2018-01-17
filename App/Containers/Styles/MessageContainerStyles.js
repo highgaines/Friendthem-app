@@ -5,8 +5,10 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
     backgroundColor: '#fff',
-    height: 240,
-    padding: 30,
+    height: 80,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
     shadowOpacity: 0.5,
     shadowRadius: 5,
     shadowColor: 'black',
@@ -15,15 +17,32 @@ export default StyleSheet.create({
   firstRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'space-between',
+    flexWrap: 'wrap'
+  },
+  firstRowText: {
+    textAlign: 'center',
+    marginTop: 40,
+    fontSize: 12,
+    fontWeight: '700',
+    fontFamily: 'montserrat',
+    flexWrap: 'wrap'
+  },
+  thirdRow: {
+    borderTopWidth: 1,
+    width: 320,
+    padding: 10,
+    borderColor: '#edeeef',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
+  cancelContainer: {
+
   },
   button: {
-    width: 100,
-    height: 47,
-    alignItems: 'flex-end',
     flexDirection: 'row',
-    backgroundColor: '#030ab0',
-    borderRadius: 100,
+    borderRadius: 30,
     justifyContent: 'center',
     shadowOpacity: 0.30,
     shadowRadius: 5,
