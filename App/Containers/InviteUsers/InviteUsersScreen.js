@@ -57,8 +57,11 @@ export default class InviteUsersScreen extends Component {
             </TouchableOpacity>
           </View>
         </LinearGradient>
-        {networkTabSelected ? <InviteUsersHeader /> : null}
-        <SearchContainer />
+        {networkTabSelected ?
+          <View>
+            <InviteUsersHeader />
+            <SearchContainer />
+          </View> : null}
       </View>
     )
   }
