@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
-import LinearGradient from 'react-native-linear-gradient';
-import { Icon } from 'react-native-elements';
+import LinearGradient from 'react-native-linear-gradient'
+import { Icon } from 'react-native-elements'
 
 import ConnectButton from '../SuperConnectScreen/ConnectButton'
-import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard';
-import Navbar from '../Navbar/Navbar';
+import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard'
+import Navbar from '../Navbar/Navbar'
 
-import styles from '../Styles/UserProfileStyles';
+import styles from '../Styles/UserProfileStyles'
 
 class UserProfileScreen extends Component {
   render() {
-    const { userInfo, userInterests, userLocation, navigation } = this.props;
+    const { userInfo, userInterests, userLocation, navigation } = this.props
     return (
         <View>
           <LinearGradient

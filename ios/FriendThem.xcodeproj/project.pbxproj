@@ -43,7 +43,6 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8EB0A68526954D48A24FF203 /* libA0Auth0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BDE80F84EF24FA89D093A2D /* libA0Auth0.a */; };
 		914CBC0879A9402E9F5C42C2 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E466642F88F742F6B8DB89DF /* libRNVectorIcons.a */; };
-		9AA271830AE24F80B653047A /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C803CA948BDB49DC9347267A /* libRNSVG.a */; };
 		A0B63196D3554061AE81F5EB /* libRNSensitiveInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D30DBF209DA49FCB41241AE /* libRNSensitiveInfo.a */; };
 		A5A15C4A1FDB067700ABE5DB /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A15C461FDB067600ABE5DB /* FBSDKCoreKit.framework */; };
 		A5A15C4B1FDB067700ABE5DB /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A15C471FDB067600ABE5DB /* FBSDKLoginKit.framework */; };
@@ -1638,7 +1637,7 @@
 					"$(SRCROOT)/../node_modules/react-native-auth0/ios",
 				);
 				INFOPLIST_FILE = FriendThem/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1676,7 +1675,7 @@
 					"$(SRCROOT)/../node_modules/react-native-auth0/ios",
 				);
 				INFOPLIST_FILE = FriendThem/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
