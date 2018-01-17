@@ -45,5 +45,17 @@ export default StyleSheet.create({
     fontWeight: '600',
     marginTop: 30,
     textAlign: 'center'
+  },
+  modal: {
+    width: 310,
+    height: 400,
+    overflow: 'hidden',
+    alignItems: 'center',
+    marginTop: 70,
+    marginLeft: 30,
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 30
   }
 })

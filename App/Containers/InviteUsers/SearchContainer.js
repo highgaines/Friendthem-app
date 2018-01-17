@@ -34,12 +34,14 @@ class SearchContainer extends Component {
   }
 
   renderUserList = () => {
-    const { userList } = this.props
-    return userList.map( user =>
+    const { userList, triggerModal } = this.props
+    return userList.map( (user, idx) =>
       <UserCard
+        key={idx}
         userImage={user.image}
         userName={user.name}
         userPlatforms={user.platforms}
+        triggerModal={triggerModal}
       /> )
   }
 

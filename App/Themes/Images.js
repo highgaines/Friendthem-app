@@ -32,7 +32,12 @@ const images = {
   fbIcon: require('../Images/fbicon.png'),
   twitterIcon: require('../Images/twittericon.png'),
   snapchatIcon: require('../Images/snapchaticon.png'),
-  igIcon: require('../Images/igicon.png')
+  igIcon: require('../Images/igicon.png'),
+  messengerIcon: require('../Images/messengericon.png'),
+  textMessageIcon: require('../Images/texticon.png'),
+  whatsappIcon: require('../Images/whatsappicon.png'),
+  smallLogoSVG: require('../Images/logo-small-svg.svg'),
+  logoPNG: require('../Images/logo-png.png')
 }
 
 export default images

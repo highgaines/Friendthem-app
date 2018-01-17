@@ -9,6 +9,7 @@ import LinearGradient from 'react-native-linear-gradient';
 // Components
 import InviteUsersHeader from './InviteUsersHeader';
 import SearchContainer from './SearchContainer';
+import InviteUsersModal from './InviteUsersModal';
 
 // Styles
 import styles from '../Styles/InviteUsersScreenStyles';
@@ -18,19 +19,28 @@ export default class InviteUsersScreen extends Component {
     super(props)
 
     this.state = {
-      networkTabSelected: true
+      networkTabSelected: true,
+      showModal: false
     }
   }
 
+  triggerModal = () => {
+    this.setState({ showModal: !this.state.showModal })
+  }
+
   render() {
-    const { networkTabSelected } = this.state;
+    const { networkTabSelected, showModal } = this.state;
+
     return (
-      <View style={{ flex: 1}}>
+      <View style={[{ flex: 1 }, this.state.showModal ? { opacity: 0.1 } : '']}>
         <LinearGradient
           colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
           start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
           locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
           style={styles.headerGradient}>
+          <View style={{ alignItems: 'center', justifyContent: 'center'}}>
+            <InviteUsersModal showModal={showModal} modalStyle={styles.modal} triggerModal={this.triggerModal}/>
+          </View>
           <View>
             <Text style={styles.friendCount}>
               450 friends
@@ -60,7 +70,7 @@ export default class InviteUsersScreen extends Component {
         {networkTabSelected ?
           <View style={{ flex: 1}}>
             <InviteUsersHeader />
-            <SearchContainer />
+            <SearchContainer triggerModal={this.triggerModal}/>
           </View> : null}
       </View>
     )
