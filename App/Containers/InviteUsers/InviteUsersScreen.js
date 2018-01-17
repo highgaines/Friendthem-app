@@ -3,6 +3,10 @@ import { View, TouchableOpacity, Text } from 'react-native';
 import { connect } from 'react-redux';
 import Reactotron from 'reactotron-react-native';
 
+// Redux
+import { bindActionCreators } from 'redux';
+import { selectUser } from '../../Redux/InviteUsersStore';
+
 // Libraries
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -14,7 +18,7 @@ import InviteUsersModal from './InviteUsersModal';
 // Styles
 import styles from '../Styles/InviteUsersScreenStyles';
 
-export default class InviteUsersScreen extends Component {
+class InviteUsersScreen extends Component {
   constructor(props) {
     super(props)
 
@@ -30,6 +34,7 @@ export default class InviteUsersScreen extends Component {
 
   render() {
     const { networkTabSelected, showModal } = this.state;
+    const { selectUser, selectedUser } = this.props
 
     return (
       <View style={[{ flex: 1 }, this.state.showModal ? { opacity: 0.1 } : '']}>
@@ -39,7 +44,12 @@ export default class InviteUsersScreen extends Component {
           locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
           style={styles.headerGradient}>
           <View style={{ alignItems: 'center', justifyContent: 'center'}}>
-            <InviteUsersModal showModal={showModal} modalStyle={styles.modal} triggerModal={this.triggerModal}/>
+            <InviteUsersModal
+              showModal={showModal}
+              modalStyle={styles.modal}
+              triggerModal={this.triggerModal}
+              selectedUser={selectedUser}
+            />
           </View>
           <View>
             <Text style={styles.friendCount}>
@@ -70,9 +80,24 @@ export default class InviteUsersScreen extends Component {
         {networkTabSelected ?
           <View style={{ flex: 1}}>
             <InviteUsersHeader />
-            <SearchContainer triggerModal={this.triggerModal}/>
+            <SearchContainer
+              triggerModal={this.triggerModal}
+              selectUser={selectUser}
+            />
           </View> : null}
       </View>
     )
   }
 }
+
+const mapStateToProps = state => ({
+  selectedUser: state.inviteUsersStore.selectedUser
+})
+
+const mapDispatchToProps = dispatch => {
+  return {
+    ...bindActionCreators({ selectUser }, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(InviteUsersScreen)

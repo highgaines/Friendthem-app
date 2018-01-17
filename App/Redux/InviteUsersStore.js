@@ -69,7 +69,8 @@ export const sendInvitationToUser = (name) => {
 }
 
 export const selectUser = (user) => {
-  return { type: Types.selectUser, payload: user}
+  debugger
+  return { type: Types.SELECT_USER, payload: { user } }
 }
 
 
@@ -84,8 +85,8 @@ const handleSendInvite = (state, action) => {
 }
 
 const handleSelectUser = (state, action) => {
-
   const { user } = action.payload
+  debugger
   return state.merge({ selectedUser: user})
 }
 

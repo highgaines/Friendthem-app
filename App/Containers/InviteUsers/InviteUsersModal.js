@@ -17,7 +17,13 @@ import styles from '../Styles/InviteUsersModalStyles';
 
 export default class InviteUsersModal extends Component {
   render() {
-    const { userData, showModal, modalStyle, triggerModal } = this.props
+    const {
+      userData,
+      showModal,
+      modalStyle,
+      triggerModal,
+      selectedUser
+    } = this.props
 
     return(
       <View>
@@ -40,11 +46,11 @@ export default class InviteUsersModal extends Component {
               <ImageCircle
                 size={90}
                 extraStyles={ { borderWidth: 3, borderColor: 'white', marginTop: 5, marginBottom: 5 }}
-                source={'https://www.girlfriend.com.au/media/3722/1000-voldemort.jpg'}
+                source={selectedUser.userImage}
               />
               <View style={styles.imageTextContainer}>
                 <Text style={styles.imageText}>
-                  Invite Voldemort to use Friendthem
+                  Invite {selectedUser.userName} to use Friendthem
                 </Text>
               </View>
             </LinearGradient>

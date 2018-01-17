@@ -34,7 +34,7 @@ class SearchContainer extends Component {
   }
 
   renderUserList = () => {
-    const { userList, triggerModal } = this.props
+    const { userList, triggerModal, selectUser } = this.props
     return userList.map( (user, idx) =>
       <UserCard
         key={idx}
@@ -42,6 +42,7 @@ class SearchContainer extends Component {
         userName={user.name}
         userPlatforms={user.platforms}
         triggerModal={triggerModal}
+        selectUser={selectUser}
       /> )
   }
 

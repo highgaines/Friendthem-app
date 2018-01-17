@@ -7,10 +7,15 @@ import ImageCircle from '../UtilityComponents/ImageCircle';
 import styles from '../Styles/InviteUserCardStyles';
 
 export default UserCard = props => {
-  const { userImage, userName, userPlatforms, triggerModal } = props
+  const { userImage, userName, userPlatforms, triggerModal, selectUser } = props
 
   const handleSend = () => {
-      console.log('sending')
+    const userData = {
+      userName: userName,
+      userImage: userImage
+    }
+      selectUser(userData)
+      triggerModal()
   }
 
   const renderSocialIcons = () => {
@@ -40,7 +45,7 @@ export default UserCard = props => {
       </View>
 
       <View style={styles.sendButtonColumn}>
-        <Button title="SEND" onPress={() => triggerModal()}/>
+        <Button title="SEND" onPress={() => handleSend()}/>
       </View>
 
     </View>
