@@ -47,8 +47,6 @@ class SearchContainer extends Component {
     return (
       <ScrollView>
         <View style={styles.searchContainer}>
-          <View style={styles.searchBar}>
-          </View>
           {this.renderUserList()}
         </View>
       </ScrollView>

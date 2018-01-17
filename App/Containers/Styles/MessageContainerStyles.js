@@ -5,10 +5,10 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
     backgroundColor: '#fff',
-    height: 80,
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 20,
+    padding: 5,
     shadowOpacity: 0.5,
     shadowRadius: 5,
     shadowColor: 'black',
@@ -22,7 +22,6 @@ export default StyleSheet.create({
   },
   firstRowText: {
     textAlign: 'center',
-    marginTop: 40,
     fontSize: 12,
     fontWeight: '700',
     fontFamily: 'montserrat',

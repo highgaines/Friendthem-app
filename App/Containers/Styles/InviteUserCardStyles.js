@@ -4,30 +4,35 @@ import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   userCardContainer: {
+    flex: 5,
     flexDirection: 'row',
     justifyContent: 'space-around',
     borderColor: '#a6acb1',
-    borderTopWidth: 1,
     padding: 10,
     borderBottomWidth: 1
   },
   imageColumn: {
+    flex: 1,
     justifyContent: 'center'
   },
   userNameText: {
     fontFamily: 'montserrat',
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '600'
   },
   infoColumn: {
-    flexDirection: 'column'
+    flex: 3,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'flex-start'
   },
   sendButtonColumn: {
-    justifyContent: 'flex-end',
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'flex-end'
   },
   socialIcons: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'flex-start'
   }
 })

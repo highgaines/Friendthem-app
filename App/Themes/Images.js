@@ -28,7 +28,11 @@ const images = {
   person: require('../Images/Icons/person.png'),
   powerIcon: require('../Images/Icons/power-icon.png'),
   privacy: require('../Images/Icons/privacy.png'),
-  rightArrow: require('../Images/Icons/rightArrow.png')
+  rightArrow: require('../Images/Icons/rightArrow.png'),
+  fbIcon: require('../Images/fbicon.png'),
+  twitterIcon: require('../Images/twittericon.png'),
+  snapchatIcon: require('../Images/snapchaticon.png'),
+  igIcon: require('../Images/igicon.png')
 }
 
 export default images
