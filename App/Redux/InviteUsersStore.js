@@ -65,7 +65,7 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Actions ------------- */
 
 export const sendInvitationToUser = (name) => {
-  return { type: Types.sendInviteToUser, payload: { name } }
+  return { type: Types.SEND_INVITE_TO_USER, payload: { name } }
 }
 
 export const selectUser = (user) => {
@@ -77,7 +77,6 @@ export const selectUser = (user) => {
 /* ------------- Reducers ------------- */
 
 const handleSendInvite = (state, action) => {
-
   const { name } = action.payload
   const filteredData = state.userList.filter( user => user.name === name)
 
@@ -86,7 +85,6 @@ const handleSendInvite = (state, action) => {
 
 const handleSelectUser = (state, action) => {
   const { user } = action.payload
-  debugger
   return state.merge({ selectedUser: user})
 }
 

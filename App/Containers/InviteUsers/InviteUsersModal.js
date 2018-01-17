@@ -50,7 +50,7 @@ export default class InviteUsersModal extends Component {
               />
               <View style={styles.imageTextContainer}>
                 <Text style={styles.imageText}>
-                  Invite {selectedUser.userName} to use Friendthem
+                  Invite {selectedUser.userName ? selectedUser.userName.split(' ')[0] : ''} to use Friendthem
                 </Text>
               </View>
             </LinearGradient>

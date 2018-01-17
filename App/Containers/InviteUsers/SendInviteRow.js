@@ -21,6 +21,7 @@ export default SendInviteRow = props => {
       }
   }
 
+  // will have to tweak - currently not working
   const handleInvite = () => {
     SendSMS.send({
       body: 'You have been invited to use FriendThem!',
