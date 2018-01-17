@@ -5,7 +5,8 @@ import Reactotron from 'reactotron-react-native';
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-    sendInviteToUser: null
+    sendInviteToUser: null,
+    selectUser: ['user']
 })
 
 export const InvitationTypes = Types
@@ -57,7 +58,8 @@ export const INITIAL_STATE = Immutable({
       image: "https://images.pottermore.com/bxd3o8b291gf/Mam68Vfou2OO6kqEcyW8W/a9abc28e1e15bdd7d57f6257f3fed897/LunaLovegood_WB_F6_LunaLovegoodInQuibblerSpecsOnHogwartsExpress_Still_080615_Port.jpg?w=1200",
       platforms: ['snapchat', 'instagram']
     }
-  ]
+  ],
+  selectedUser: ''
 })
 
 /* ------------- Actions ------------- */
@@ -65,6 +67,11 @@ export const INITIAL_STATE = Immutable({
 export const sendInvitationToUser = (name) => {
   return { type: Types.sendInviteToUser, payload: { name } }
 }
+
+export const selectUser = (user) => {
+  return { type: Types.selectUser, payload: user}
+}
+
 
 /* ------------- Reducers ------------- */
 
@@ -76,8 +83,15 @@ const handleSendInvite = (state, action) => {
   return state.merge({ userList: filteredData})
 }
 
+const handleSelectUser = (state, action) => {
+
+  const { user } = action.payload
+  return state.merge({ selectedUser: user})
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.SEND_INVITE_TO_USER]: handleSendInvite
+  [Types.SEND_INVITE_TO_USER]: handleSendInvite,
+  [Types.SELECT_USER]: handleSelectUser
 })

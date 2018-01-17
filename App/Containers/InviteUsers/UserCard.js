@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image, TouchableOpacity, ScrollView, Text, Button } from 'react-native';
 import SMPlatformCircle from '../UtilityComponents/SMPlatformCircle';
-import ImageCricle from '../UtilityComponents/ImageCircle';
+import ImageCircle from '../UtilityComponents/ImageCircle';
 
 // Styles
 import styles from '../Styles/InviteUserCardStyles';

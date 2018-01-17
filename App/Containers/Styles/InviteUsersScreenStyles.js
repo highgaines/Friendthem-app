@@ -54,8 +54,6 @@ export default StyleSheet.create({
     marginTop: 70,
     marginLeft: 30,
     backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: 'black',
     borderRadius: 30
   }
 })

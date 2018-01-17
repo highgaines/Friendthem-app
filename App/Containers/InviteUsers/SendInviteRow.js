@@ -3,11 +3,15 @@ import { StyleSheet } from 'react-native'
 import { View, TouchableOpacity, Text, Image, Button } from 'react-native';
 import { Metrics, ApplicationStyles, Fonts } from '../../Themes/';
 
+// Libraries
+import SendSMS from 'react-native-sms';
+
 // Images
 import { Images } from '../../Themes';
 
 export default SendInviteRow = props => {
-  const { platform, handleInvite } = props
+  const { platform } = props
+
   const renderIcon = () => {
       switch(platform) {
         case 'Text Message':
@@ -15,6 +19,16 @@ export default SendInviteRow = props => {
         case 'FB Messenger':
           return Images.messengerIcon
       }
+  }
+
+  const handleInvite = () => {
+    SendSMS.send({
+      body: 'You have been invited to use FriendThem!',
+      recipients: ['3472917739'],
+      successTypes: ['sent', 'queued']
+    }, (completed, cancelled, error) => {
+      console.log('completed:', completed, 'cancelled:', cancelled, 'error:', error)
+    })
   }
 
   return(
