@@ -58,7 +58,7 @@ export default class InviteUsersScreen extends Component {
           </View>
         </LinearGradient>
         {networkTabSelected ?
-          <View>
+          <View style={{ flex: 1}}>
             <InviteUsersHeader />
             <SearchContainer />
           </View> : null}

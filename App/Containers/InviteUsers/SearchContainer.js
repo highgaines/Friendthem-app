@@ -45,11 +45,9 @@ class SearchContainer extends Component {
 
   render() {
     return (
-      <ScrollView>
-        <View style={styles.searchContainer}>
+        <ScrollView contentContainerStyle={styles.searchContainer}>
           {this.renderUserList()}
-        </View>
-      </ScrollView>
+        </ScrollView>
     )
   }
 }

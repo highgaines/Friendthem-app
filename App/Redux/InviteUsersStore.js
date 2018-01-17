@@ -44,6 +44,18 @@ export const INITIAL_STATE = Immutable({
       name: "Neville Longbottom",
       image: "https://vignette.wikia.nocookie.net/harrypotter/images/2/20/NevilleHBP.jpg/revision/latest?cb=20141122220929",
       platforms: ['facebook', 'instagram']
+    },
+    {
+      key: 6,
+      name: "Cedric Diggory",
+      image: 'https://vignette.wikia.nocookie.net/harrypotter/images/2/23/CedricDiggoryProfile.png/revision/latest?cb=20161123045136',
+      platforms: ['twitter', 'snapchat']
+    },
+    {
+      key: 7,
+      name: "Luna Lovegood",
+      image: "https://images.pottermore.com/bxd3o8b291gf/Mam68Vfou2OO6kqEcyW8W/a9abc28e1e15bdd7d57f6257f3fed897/LunaLovegood_WB_F6_LunaLovegoodInQuibblerSpecsOnHogwartsExpress_Still_080615_Port.jpg?w=1200",
+      platforms: ['snapchat', 'instagram']
     }
   ]
 })
