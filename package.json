@@ -37,6 +37,7 @@
     "react": "16.0.0",
     "react-icons": "^2.2.7",
     "react-native": "0.50.4",
+    "react-native-auth0": "^1.2.1",
     "react-native-checkbox": "^2.0.0",
     "react-native-config": "^0.10.0",
     "react-native-fbsdk": "^0.6.3",

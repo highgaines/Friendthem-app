@@ -15,18 +15,26 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   friendThemIcon: {
-    marginTop: 50
+    marginTop: 30
   },
-  headerText: {
-    backgroundColor: 'transparent',
-    color: '#fff'
+  friendThemLoginIcon: {
+    marginTop: 150,
+    marginBottom: 25
   },
   formText: {
     backgroundColor: 'transparent',
     color: '#fff',
-    marginTop: 40,
+    marginTop: 10,
     marginBottom: 20,
-    fontSize: 18
+    fontSize: 16,
+    fontWeight: '800'
+  },
+  loginFormText: {
+    backgroundColor: 'transparent',
+    color: '#fff',
+    marginBottom: 10,
+    fontSize: 15,
+    fontWeight: '800'
   },
   formInput: {
     width: '90%',
@@ -45,9 +53,25 @@ export default StyleSheet.create({
   checkBoxText: {
     color: '#fff',
     fontWeight: '400',
-    marginTop: 10
+    marginTop: 5,
+    marginLeft: 5
+  },
+  loginCheckBoxText: {
+    color: '#ffffff',
+    fontWeight: '400',
+    marginTop: 0
   },
   buttonStyle: {
+    flexDirection: 'row',
+    backgroundColor: '#060aad',
+    width: 175,
+    height: 50,
+    borderRadius: 50,
+    marginBottom: 40,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  loginButtonStyle: {
     flexDirection: 'row',
     backgroundColor: '#060aad',
     width: 175,
@@ -63,4 +87,27 @@ export default StyleSheet.create({
     marginLeft: 50,
     marginRight: 25
   },
+  footerContainer: {
+    borderTopWidth: 0.5,
+    borderTopColor: '#fff',
+    height: 80,
+    marginLeft: 10,
+    marginRight: 10,
+    justifyContent: 'center',
+    backgroundColor: 'transparent'
+  },
+  text: {
+    color: '#fff',
+    fontSize: 15,
+    fontFamily: 'montserrat',
+    textAlign: 'center',
+    letterSpacing: 1,
+    backgroundColor: 'transparent'
+  },
+  button: {
+    marginTop: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent'
+  }
 })

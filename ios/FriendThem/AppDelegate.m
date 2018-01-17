@@ -11,6 +11,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import <React/RCTLinkingManager.h>
 
 @implementation AppDelegate
 
@@ -56,9 +57,16 @@
                                                       sourceApplication:sourceApplication
                                                              annotation:annotation
                   ];
+  
+  BOOL auth0 = [RCTLinkingManager application:application openURL:url
+                            sourceApplication:sourceApplication annotation:annotation];
   // Add any custom logic here.
-  return handled;
+  if (handled) {
+    return handled;
+  } else {
+    return auth0;
+  };
+  
 }
-
 
 @end

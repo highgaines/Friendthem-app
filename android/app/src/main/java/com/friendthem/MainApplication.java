@@ -9,6 +9,7 @@ import br.com.classapp.RNSensitiveInfo.RNSensitiveInfoPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
+import com.auth0.react.A0Auth0Package;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -34,7 +35,8 @@ public class MainApplication extends Application implements ReactApplication {
             new RNSensitiveInfoPackage(),
             new LinearGradientPackage(),
             new FBSDKPackage(),
-            new ReactNativeConfigPackage()
+            new ReactNativeConfigPackage(),
+            new A0Auth0Package()
       );
     }
 

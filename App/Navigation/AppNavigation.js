@@ -12,6 +12,7 @@ import UserProfileInfoScreen from '../Containers/ProfileScreen/UserProfileInfoSc
 import EditProfileInfoScreen from '../Containers/ProfileScreen/EditProfileInfoScreen'
 import NotificationsContainer from '../Containers/Notifications/NotificationsContainer'
 import SettingsScreen from '../Containers/Settings/SettingsScreen'
+import LoginScreen from '../Containers/LoginScreen'
 
 import styles from './Styles/NavigationStyles'
 
@@ -40,8 +41,8 @@ const PrimaryNav = StackNavigator({
     mapNavigationStateParamsToProps(SuperConnect) },
   CongratulatoryScreen: { screen:
     mapNavigationStateParamsToProps(CongratulatoryScreen) },
-  UserProfileInfoScreen: {
-    screen: mapNavigationStateParamsToProps(UserProfileInfoScreen)
+  RegisterUserScreen: {
+    screen: mapNavigationStateParamsToProps(RegisterUserScreen)
   },
   EditProfileInfoScreen: {
     screen: mapNavigationStateParamsToProps(EditProfileInfoScreen)
@@ -51,6 +52,9 @@ const PrimaryNav = StackNavigator({
   },
   SettingsScreen: {
     screen: mapNavigationStateParamsToProps(SettingsScreen)
+  },
+  LoginScreen: {
+    screen: mapNavigationStateParamsToProps(LoginScreen)
   }
 }, {
   // Default config for all screens
