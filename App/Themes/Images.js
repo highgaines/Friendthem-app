@@ -37,7 +37,12 @@ const images = {
   textMessageIcon: require('../Images/texticon.png'),
   whatsappIcon: require('../Images/whatsappicon.png'),
   smallLogoSVG: require('../Images/logo-small-svg.svg'),
-  logoPNG: require('../Images/logo-png.png')
+  logoPNG: require('../Images/logo-png.png'),
+  profileIcon: require('../Images/Icons/nav-profile-icon.svg'),
+  friendsIcon: require('../Images/Icons/nav-friends-icon.svg'),
+  notificationIcon: require('../Images/Icons/nav-notification-icon.svg'),
+  settingsIcon: require('../Images/Icons/nav-settings-icon.svg'),
+  peopleNearbyIcon: require('../Images/Icons/nav-people-nearby-icon.svg')
 }
 
 export default images

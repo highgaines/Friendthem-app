@@ -9,6 +9,9 @@ import FriendStoreActions from '../../Redux/FriendStore'
 import UserStoreActions from '../../Redux/UserStore';
 import FBStoreActions from '../../Redux/FBStore';
 
+// Icons
+import { Images } from '../../Themes';
+
 import styles from '../Styles/NavbarStyles';
 
 class Navbar extends Component {
