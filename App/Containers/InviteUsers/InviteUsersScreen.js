@@ -14,6 +14,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import InviteUsersHeader from './InviteUsersHeader';
 import SearchContainer from './SearchContainer';
 import InviteUsersModal from './InviteUsersModal';
+import UsersContainer from '../NearbyUsersScreen/UsersContainer';
 
 // Styles
 import styles from '../Styles/InviteUsersScreenStyles';
@@ -84,7 +85,19 @@ class InviteUsersScreen extends Component {
               triggerModal={this.triggerModal}
               selectUser={selectUser}
             />
-          </View> : null}
+          </View> :
+          <View>
+            <Text
+              style={{
+                  padding: 10,
+                  fontFamily: 'montserrat',
+                  fontWeight: "600",
+                  opacity: .5
+                }}>
+              Connectivity
+            </Text>
+          </View>
+        }
       </View>
     )
   }

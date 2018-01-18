@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
+import { ScrollView, Text, Image, View, TouchableOpacity, Switch } from 'react-native'
 
 // Librarires
 import LinearGradient from 'react-native-linear-gradient'
@@ -22,7 +22,14 @@ import { Images } from '../../Themes'
 import styles from '../Styles/SettingsStyles'
 
 class SettingsScreen extends Component {
+  constructor(props) {
+    super(props)
 
+    this.state = {
+      silenceSwitch: false,
+      ghostSwitch: false
+    }
+  }
   logOut = () => {
     const { toggleModal, fbLogoutComplete, navigation } = this.props
 
@@ -34,6 +41,8 @@ class SettingsScreen extends Component {
 
   render() {
     const { navigation, toggleModal } = this.props
+    const { silenceSwitch, ghostSwitch } = this.state
+
     return (
         <View style={styles.container}>
           <LinearGradient
@@ -106,6 +115,12 @@ class SettingsScreen extends Component {
             <Text style={styles.sectionItemText}>
               Silence Notifications
             </Text>
+            <Switch
+              onTintColor='#f6385e'
+              onValueChange={() => this.setState({ silenceSwitch: !silenceSwitch}) }
+              value={silenceSwitch}
+              style={styles.switchStyle}
+            />
           </TouchableOpacity>
           <TouchableOpacity style={styles.sectionItem}>
             <Image
@@ -114,6 +129,12 @@ class SettingsScreen extends Component {
             <Text style={styles.sectionItemText}>
               Ghost Mode
             </Text>
+            <Switch
+              onTintColor='#f6385e'
+              onValueChange={() => this.setState({ ghostSwitch: !ghostSwitch}) }
+              value={ghostSwitch}
+              style={styles.ghostSwitchStyle}
+            />
           </TouchableOpacity>
           <TouchableOpacity style={styles.sectionItem}>
             <Image
