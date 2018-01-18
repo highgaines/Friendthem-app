@@ -22,7 +22,10 @@ export default class SocialMediaCard extends Component {
   }
 
   handlePush = () => {
-    this.setState({selected: !this.state.selected})
+    alert('hit')
+    this.setState({ selected: !this.state.selected },
+      this.props.socialAuth()
+    )
   }
 
   renderIcon = () => {
@@ -49,16 +52,16 @@ export default class SocialMediaCard extends Component {
     const {
       platformName,
       userName,
-      inverted
+      inverted,
+      socialAuth
     }  = this.props
-
     const { selected } = this.state;
     const cardStyle = selected ? styles.cardSelected : styles.cardUnselected
 
-    return(
+    return (
       <TouchableOpacity
         style={inverted ? styles.invertedCard : cardStyle}
-        onPress={this.handlePush}
+        onPress={() => alert('hi')}
       >
         {
           selected ?
@@ -66,6 +69,7 @@ export default class SocialMediaCard extends Component {
             name='check-circle'
             type='font-awesome'
             color={'#3C5996'}
+            onPress={() => alert('hi from icon')}
             containerStyle={styles.checkIcon} /> : null
         }
         <View style={styles.socialMediaImage}>
@@ -74,12 +78,15 @@ export default class SocialMediaCard extends Component {
         <View style={styles.socialMediaText}>
 
           <Text
+            onPress={() => alert('hi from text')}
             style={inverted ? styles.platformNameInverted : styles.platformName}
           >
             {platformName}
           </Text>
 
-          <Text style={inverted ? styles.userNameInverted : styles.userName}>
+          <Text
+            onPress={() => alert('hi from text2')}
+            style={inverted ? styles.userNameInverted : styles.userName}>
             {userName}
           </Text>
         </View>

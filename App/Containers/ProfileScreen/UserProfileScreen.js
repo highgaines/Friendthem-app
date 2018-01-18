@@ -56,6 +56,11 @@ class UserProfileScreen extends Component {
     }
   }
 
+  authenticateSocialMedia = platform => {
+    debugger
+    this.props.socialMediaAuth(platfrom, this.props.userId)
+  }
+
   render() {
     const {
       userId,
@@ -124,7 +129,7 @@ class UserProfileScreen extends Component {
               <SocialMediaCard
                 platformName='Instagram'
                 userName={userInfo.name}
-                socialAuth={socialMediaAuth}
+                socialAuth={this.authenticateSocialMedia}
                 authenticated={''}
                 inverted={true} />
               <SocialMediaCard
@@ -152,12 +157,12 @@ class UserProfileScreen extends Component {
 }
 
 const mapStateToProps = state => ({
+  userId: state.userStore.userId,
   userInfo: state.userStore.userData,
   userInterests: state.userStore.interests,
   userLocation: state.userStore.location,
   fbAuthToken: state.fbStore.fbAccessToken,
   apiAccessToken: state.authStore.accessToken,
-  userId: state.userStore.userId,
   needsRedirect: state.authStore.needsRedirect,
   redirectURL: state.authStore.redirectURL,
   platforms: state.tokenStore.platforms,

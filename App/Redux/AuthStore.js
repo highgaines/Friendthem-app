@@ -18,7 +18,10 @@ const { Types, Creators } = createActions({
   registerFailure: null,
   loginFacebookRequest: null,
   loginFacebookSuccess: null,
-  loginFacebookFailure: null
+  loginFacebookFailure: null,
+  socialMediaAuthRequest: null,
+  socialMediaAuthSuccess: null,
+  socialMediaAuthFailure: null,
 })
 
 export const AuthTypes = Types
@@ -34,7 +37,8 @@ export const INITIAL_STATE = Immutable({
   tokenType: null,
   scope: null,
   refreshToken: null,
-  authError: false
+  authError: false,
+  redirectUrl: null
 })
 
 
@@ -137,6 +141,26 @@ export const testRedirect = () => {
   }
 }
 
+export const socialMediaAuth = (platform, userId) => {
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+
+  const init = {
+    method: 'GET'.
+    headers
+  }
+
+  return {
+    types: [
+      Types.SOCIAL_MEDIA_AUTH_REQUEST,
+      Types.SOCIAL_MEDIA_AUTH_SUCCESS,
+      Types.SOCIAL_MEDIA_AUTH_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch =>
+      fetchFromApi(`auth/login/${platform}/?user_id=${userId}`)
+  }
+}
 
 
 /* -------- Reducers -------- */
@@ -196,6 +220,19 @@ const loginFailure = (state = INITIAL_STATE, action) => {
   }
 }
 
+const handleSocialMediaAuthRequest = (state, action) => {
+    return state
+}
+
+const handleSocialMediaAuthSuccess = (state, action) => {
+  debugger
+  return state
+}
+
+const handleSocialMediaAuthFailure = (state, action) => {
+  return state
+}
+
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGOUT_USER]: handleUserLogout,
   [Types.LOGIN_REQUEST]: loginRequest,
@@ -207,4 +244,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.REGISTER_REQUEST]: registerAccountRequest,
   [Types.REGISTER_SUCCESS]: registerAccountSuccess,
   [Types.REGISTER_FAILURE]: registerAccountFailure,
+  [Types.SOCIAL_MEDIA_AUTH_REQUEST]: handleSocialMediaAuthRequest,
+  [Types.SOCIAL_MEDIA_AUTH_SUCCESS]: handleSocialMediaAuthSuccess,
+  [Types.SOCIAL_MEDIA_AUTH_FAILURE]: handleSocialMediaAuthFailure,
 })
