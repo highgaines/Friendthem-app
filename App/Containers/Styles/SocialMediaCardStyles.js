@@ -9,7 +9,7 @@ export default StyleSheet.create({
     marginTop: 10,
     borderRadius: 10,
     height: 120,
-    width: 110,
+    width: '30%',
     shadowOpacity: 0.75,
     shadowRadius: 5,
     shadowColor: 'black',
@@ -23,11 +23,12 @@ export default StyleSheet.create({
     marginHorizontal: 5,
     borderRadius: 10,
     height: 120,
-    width: 110,
+    width: '30%',
     shadowOpacity: 0.75,
     shadowRadius: 5,
     shadowColor: 'black',
-    shadowOffset: { height: 0, width: 0 }
+    shadowOffset: { height: 0, width: 0 },
+    marginHorizontal: 5
   },
   invertedCard: {
     alignItems: 'center',
@@ -35,11 +36,12 @@ export default StyleSheet.create({
     marginTop: 10,
     borderRadius: 10,
     height: 120,
-    width: 110,
+    width: '30%',
     shadowOpacity: 0.75,
     shadowRadius: 5,
     shadowColor: 'black',
-    shadowOffset: { height: 0, width: 0 }
+    shadowOffset: { height: 0, width: 0 },
+    marginHorizontal: 5
   },
   socialMediaImage: {
     borderRadius: 50,

@@ -98,7 +98,7 @@ class LaunchScreen extends Component {
 
   render () {
     const { navigate } = this.props.navigation
-    const { users, setFriendInfo, fbAuthToken } = this.props
+    const { users, setFriendInfo, fbAuthToken, logoutUser } = this.props
     const { loading } = this.state
 
     return (
@@ -120,6 +120,7 @@ class LaunchScreen extends Component {
               <Text style={styles.secSubText}>
                 Life Happens when people connect
               </Text>
+              <Button title='logout' onPress={logoutUser} />
             </View>
             <View style={styles.section} >
               {loading
@@ -163,12 +164,14 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
+  const { logoutUser } = AuthStoreActions
   const { fbUserInfo } = UserStoreActions
   return {
     ...bindActionCreators({
       fbUserInfo,
       setFriendInfo,
-      loginByFacebook
+      loginByFacebook,
+      logoutUser,
     }, dispatch)
   }
 }

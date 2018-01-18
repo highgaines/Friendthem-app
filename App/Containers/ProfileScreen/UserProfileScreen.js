@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
+import { bindActionCreators } from 'redux'
+import { ScrollView, Text, Image, View, TouchableOpacity, Button, Linking } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { Icon } from 'react-native-elements'
 
@@ -9,6 +10,9 @@ import ConnectButton from '../SuperConnectScreen/ConnectButton'
 import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard'
 import Navbar from '../Navbar/Navbar'
 import PickSocialMediaModal from '../TutorialScreens/PickSocialMediaModal'
+import AuthStoreActions, { socialMediaAuth } from '../../Redux/AuthStore'
+import UserStoreActions, { getUserId } from '../../Redux/UserStore'
+import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
 
 // Styles
 import styles from '../Styles/UserProfileStyles'
@@ -27,8 +31,35 @@ class UserProfileScreen extends Component {
     this.setState({ showFriendster: !showFriendster })
   }
 
+  componentWillMount = () => {
+    const { userId, apiAccessToken, navigation } = this.props
+
+    if (apiAccessToken) {
+      getUserId(apiAccessToken)
+    } else {
+      navigation.navigate('LaunchScreen')
+    }
+  }
+
+  componentDidUpdate = prevProps => {
+    const { needsRedirect, redirectURL } = this.props
+    if (needsRedirect && redirectURL && !prevProps.needsRedirect) {
+      Linking.openURL(redirectURL)
+    }
+  }
+
   render() {
-    const { userInfo, userInterests, userLocation, navigation } = this.props
+    const {
+      userId,
+      userInfo,
+      userInterests,
+      userLocation,
+      navigation,
+      apiAccessToken,
+      getUserId,
+      socialMediaAuth,
+      getUserTokens
+    } = this.props
     const { showFriendster } = this.state
 
     return (
@@ -53,6 +84,7 @@ class UserProfileScreen extends Component {
               <Text style={styles.interestsText}>
                   {userInterests.join(' | ')}
               </Text>
+              <Button title='Get my Tokens' onPress={() => getUserTokens(apiAccessToken)} />
               <View style={{ flexDirection: 'row', marginTop: 7, justifyContent: 'space-around'}}>
                 <Icon
                   name='location'
@@ -81,6 +113,19 @@ class UserProfileScreen extends Component {
                 platformName='Facebook'
                 userName={userInfo.name}
                 inverted={false} />
+              <SocialMediaCard
+                platformName='Instagram'
+                userName={userInfo.name}
+                authenticated={''}
+                inverted={true} />
+              <SocialMediaCard
+                platformName='Twitter'
+                userName={userInfo.name}
+                inverted={true} />
+              <SocialMediaCard
+                platformName='LinkedIn'
+                userName={userInfo.name}
+                inverted={true} />
             </View>
             <View>
               <Navbar
@@ -96,14 +141,25 @@ class UserProfileScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  userInfo: state.userStore.userFbData,
+  userInfo: state.userStore.userData,
   userInterests: state.userStore.interests,
   userLocation: state.userStore.location,
-  fbAuthToken: state.fbStore.fbAccessToken
+  fbAuthToken: state.fbStore.fbAccessToken,
+  apiAccessToken: state.authStore.accessToken,
+  userId: state.userStore.userId,
+  needsRedirect: state.authStore.needsRedirect,
+  redirectURL: state.authStore.redirectURL,
+  platforms: state.tokenStore.platforms
 })
 
 const mapDispatchToProps = dispatch => {
-  return {}
+  return {
+    ...bindActionCreators({
+      getUserId,
+      socialMediaAuth,
+      getUserTokens
+    }, dispatch)
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfileScreen)

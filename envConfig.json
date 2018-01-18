@@ -2,8 +2,11 @@
  "Development": {
    "codePushKey": "",
    "appServerRootURL": "http://127.0.0.1:8000",
-   "devClientId": "W2DbhObyHTY3Te6ThSRA2vGrvhBQVPIDhy11o1jx",
-   "devClientSecret": "eRN5eUnvVizsrVeE827pSz6yHi60JS6bzBE0mSAHK6L5JcAiH8Krp54O78vHxW9MgdsxXA78TnDd9PciGmwVwIuwrWA505SCx3VInV5kt2ndKPllwerS1s5LVrETXn2y"
+   "devClientId": "VFbzhZAxSsmKBIjFiWoYMBvCLUKcoT7NqSqDhK0r",
+   "devClientSecret": "hwB0PcITb5dSEMgI4Z6fmuHf6ng4xAG2LCdQan0oxbq1t67tACGiHXWLUlf6PI6NNkdZEcspMtWISrAGGQSWk38i5UhADqrhHe3a9z2jjO4hK6fHsq9mkrCqMlQjcLD0",
+   "devGoogleClientId": "595911831950-0ktavocb1eoufc0g99p69s8rp7l4pcea.apps.googleusercontent.com",
+   "devGoogleClientSecret": "7acK_8Ej0SKWnnS1GjHTesXm",
+   "devGoogleBaseURL": "https://accounts.google.com/o/oauth2/v2/auth?"
  },
  "Staging": {
    "codePushKey": "",

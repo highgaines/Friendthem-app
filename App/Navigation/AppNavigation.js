@@ -70,9 +70,10 @@ const PrimaryNav = StackNavigator({
 }, {
   // Default config for all screens
   headerMode: 'none',
-  initialRouteName: 'LaunchScreen',
+  initialRouteName: 'UserProfileScreen',
   navigationOptions: {
-    headerStyle: styles.header
+    headerStyle: styles.header,
+    gesturesEnabled: false
   }
 })
 

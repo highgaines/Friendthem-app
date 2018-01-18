@@ -6,6 +6,7 @@ import envConfig from '../../envConfig'
 /* ------ Types and Action Creators ------ */
 
 const { Types, Creators } = createActions({
+<<<<<<< HEAD
   registerRequest: null,
   registerSuccess: null,
   registerFailure: null,
@@ -18,6 +19,21 @@ const { Types, Creators } = createActions({
   redirectRequest: null,
   redirectSuccess: null,
   redirectFailure: null,
+=======
+  logoutUser: null,
+  loginRequest: null,
+  loginSuccess: null,
+  loginFailure: null,
+  registerRequest: null,
+  registerSuccess: null,
+  registerFailure: null,
+  loginFacebookRequest: null,
+  loginFacebookSuccess: null,
+  loginFacebookFailure: null,
+  socialMediaAuthRequest: null,
+  socialMediaAuthSuccess: null,
+  socialMediaAuthFailure: null,
+>>>>>>> begins refactor of redux stores
 })
 
 export const AuthTypes = Types
@@ -26,7 +42,10 @@ export default Creators
 /* ---------- Initial State ---------- */
 
 export const INITIAL_STATE = Immutable({
+<<<<<<< HEAD
   userInfoAdded: false,
+=======
+>>>>>>> begins refactor of redux stores
   loggedIn: false,
   accessToken: null,
   expiresIn: null,
@@ -187,7 +206,8 @@ const loginSuccess = (state = INITIAL_STATE, action) => {
 const loginFailure = (state = INITIAL_STATE, action) => {
   return {
     ...state,
-    authError: true
+    authError: true,
+    loggedIn: false
   }
 }
 
@@ -199,16 +219,38 @@ const handleRedirectFailure = (state, action) => {
   return state
 }
 
+const handleUserLogout = (state, action) => {
+  return INITIAL_STATE
+}
+
+const handleSocialMediaRequest = (state, action) => {
+  return state
+}
+
+const handleSocialMediaSuccess = (state, action) => {
+  return {
+    ...state,
+    needsRedirect: true,
+    redirectURL: action.data.redirect_url,
+  }
+}
+
+const handleSocialMediaFailure = (state, action) => {
+  return state
+}
+
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.REGISTER_REQUEST]: registerAccountRequest,
-  [Types.REGISTER_SUCCESS]: registerAccountSuccess,
-  [Types.REGISTER_FAILURE]: registerAccountFailure,
+  [Types.LOGOUT_USER]: handleUserLogout,
   [Types.LOGIN_REQUEST]: loginRequest,
   [Types.LOGIN_SUCCESS]: loginSuccess,
   [Types.LOGIN_FAILURE]: loginFailure,
   [Types.LOGIN_FACEBOOK_REQUEST]: loginRequest,
   [Types.LOGIN_FACEBOOK_SUCCESS]: loginSuccess,
   [Types.LOGIN_FACEBOOK_FAILURE]: loginFailure,
-  [Types.REDIRECT_SUCCESS]: handleRedirectSuccess,
-  [Types.REDIRECT_FAILURE]: handleRedirectFailure,
+  [Types.REGISTER_REQUEST]: registerAccountRequest,
+  [Types.REGISTER_SUCCESS]: registerAccountSuccess,
+  [Types.REGISTER_FAILURE]: registerAccountFailure,
+  [Types.SOCIAL_MEDIA_AUTH_REQUEST]: handleSocialMediaRequest,
+  [Types.SOCIAL_MEDIA_AUTH_SUCCESS]: handleSocialMediaSuccess,
+  [Types.SOCIAL_MEDIA_AUTH_FAILURE]: handleSocialMediaFailure
 })

@@ -53,8 +53,6 @@ export default (rootReducer, rootSaga) => {
   let sagasManager = sagaMiddleware.run(rootSaga)
 
   return {
-    store,
-    sagasManager,
-    sagaMiddleware
+    store
   }
 }

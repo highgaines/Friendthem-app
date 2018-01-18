@@ -30,14 +30,14 @@ export default class SocialMediaCard extends Component {
 
     return inverted ? (
       <Icon
-        name='facebook'
+        name={platformName.toLowerCase()}
         type='font-awesome'
         color="#3C5996"
         size={40}
       />
     ) : (
       <Icon
-        name='facebook'
+        name={platformName.toLowerCase()}
         type='font-awesome'
         color="#ffffff"
         size={40}
