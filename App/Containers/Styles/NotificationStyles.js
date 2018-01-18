@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native'
-import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
+import { Metrics, ApplicationStyles, Fonts, Colors } from '../../Themes/'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   listContainer:{
-    marginTop: 50
+
   },
   navbar: {
     justifyContent: 'space-around',
@@ -69,5 +69,18 @@ export default StyleSheet.create({
     userName: {
       fontWeight: '800',
       marginRight: 15
+    },
+    sectionTitle: {
+      height: 60,
+      backgroundColor: 'white',
+      justifyContent: 'center',
+      paddingLeft: 15,
+      borderBottomWidth: 0.5,
+      borderBottomColor: Colors.borderGray
+    },
+    sectionTitleText: {
+      color: Colors.medGray,
+      opacity: 0.8,
+      fontSize: 16
     }
 })

@@ -39,7 +39,9 @@ class Navbar extends Component {
 
   goToNearbyUsers = () => {
     const { navigation, users, setFriendInfo } = this.props
-    navigation.navigate('NearbyUsersScreen',
+    const { navigate } = this.props.navigation
+
+    navigate('NearbyUsersScreen',
     {
       users: users,
       navigation: navigation,
@@ -50,19 +52,35 @@ class Navbar extends Component {
 
   // notifications or user profile screen?
   goToNotifications = () => {
-    this.props.navigation.navigate('NotificationsScreen',
+    const { navigate } = this.props.navigation
+    navigate('NotificationsScreen',
     {
       navigation: this.props.navigation
     })
   }
 
+  goToInviteUsers = () => {
+    const { navigate } = this.props.navigation
+    navigate('InviteUsers',
+    {
+        // pass in props object here
+    })
+  }
+
   goToSettings = () => {
-    const { navigation } = this.props
-    navigation.navigate('SettingsScreen',
+    const { navigate } = this.props.navigation
+    navigate('SettingsScreen',
       {
         toggleModal: () => this.toggleModal()
-      }
-    )
+      })
+  }
+
+  goToProfile = () => {
+    const { navigate } = this.props.navigation
+    navigate('UserProfileScreen',
+    {
+        // pass in props object here
+    })
   }
 
   render() {
@@ -74,14 +92,14 @@ class Navbar extends Component {
             type='entypo'
             color='#fff'
             containerStyle={styles.iconContainer}
-            onPress={this.toggleModal}
+            onPress={this.goToProfile}
           />
           <Icon
             name='users'
             type='entypo'
             color='#fff'
             containerStyle={styles.iconContainer}
-            onPress={this.goToNearbyUsers}
+            onPress={this.goToInviteUsers}
           />
           <Icon
             name="500px-with-circle"

@@ -42,6 +42,11 @@ class NotificationsContainer extends Component {
       <View>
         <Header title='Notifications' />
         <View style={styles.listContainer}>
+          <View style={styles.sectionTitle}>
+            <Text style={styles.sectionTitleText}>
+              Most Recent
+            </Text>
+          </View>
           <SwipeListView
             useFlatList
             disableLeftSwipe={true}
