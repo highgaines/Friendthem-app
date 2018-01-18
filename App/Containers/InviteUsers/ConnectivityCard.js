@@ -21,16 +21,30 @@ export default ConnectivityCard = props => {
     //action here
   }
 
-  const determineRadialColor = () => {
-      switch(conPct) {
-        case conPct === 100:
-          return 'green'
+  // will need to finish coding out conditional
+  const determineRadialColor = (conPct) => {
+      // switch(conPct) {
+      //   case conPct === 100:
+      //     return 'green'
+      //   case conPct < 100 && conPct > 66:
+      //     return 'yellow'
+      //   case conPct === 66 && conPct > 33:
+      //     return 'orange'
+      //   case conPct <= 33:
+      //     return 'red'
+      // }
+      if (conPct === 100) {
+        return 'green'
+      } else {
+        return 'orange'
       }
   }
 
   const determineEmblem = () => {
     return conPct === 100
   }
+
+  const progressColor = determineRadialColor(conPct)
 
   return (
     <TouchableOpacity
@@ -48,7 +62,7 @@ export default ConnectivityCard = props => {
           radius={45}
           innerRadius={30}
           series={[conPct]}
-          colors={['green', 'gray']}
+          colors={[progressColor, 'gray']}
           backgroundColor='#ddd'
         />
         <ImageCircle
