@@ -68,10 +68,25 @@ class Navbar extends Component {
   render() {
     return(
         <View style={[this.props.navbarStyle || styles.navbarRow, { marginTop: this.props.margin }]}>
+
+          <Icon
+            name='user'
+            type='entypo'
+            color='#fff'
+            containerStyle={styles.iconContainer}
+            onPress={this.toggleModal}
+          />
           <Icon
             name='users'
             type='entypo'
             color='#fff'
+            containerStyle={styles.iconContainer}
+            onPress={this.goToNearbyUsers}
+          />
+          <Icon
+            name="500px-with-circle"
+            type="entypo"
+            color="#fff"
             containerStyle={styles.iconContainer}
             onPress={this.goToNearbyUsers}
           />
@@ -88,13 +103,6 @@ class Navbar extends Component {
             color='#fff'
             containerStyle={styles.iconContainer}
             onPress={this.goToSettings}
-          />
-          <Icon
-            name='log-out'
-            type='entypo'
-            color='#fff'
-            containerStyle={styles.iconContainer}
-            onPress={this.toggleModal}
           />
           <LogoutModal
             showModal={this.state.logoutModalOpen}

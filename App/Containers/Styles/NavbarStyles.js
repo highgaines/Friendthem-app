@@ -24,6 +24,6 @@ export default StyleSheet.create({
     marginLeft: 15
   },
   iconContainer: {
-    marginHorizontal: 40
+    marginHorizontal: 30
   }
 })
