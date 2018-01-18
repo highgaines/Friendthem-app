@@ -6,6 +6,7 @@ import envConfig from '../../envConfig'
 /* ------ Types and Action Creators ------ */
 
 const { Types, Creators } = createActions({
+  logoutUser: null,
   getUserTokenRequest: null,
   getUserTokenSuccess: null,
   getUserTokenFailure: null,
@@ -43,6 +44,10 @@ export const getUserTokens = (accessToken) => {
   }
 }
 
+const handleUserLogout = (state, action) => {
+  return INITIAL_STATE
+}
+
 const handleSocialMediaSuccess = (state, action) => {
   return {
     ...state,
@@ -55,6 +60,7 @@ const handleGetUserTokenRequest = (state, action) => {
 }
 
 const handleGetUserTokenSuccess = (state, action) => {
+  debugger
   return {
     ...state,
     needsFetchTokens: false
@@ -66,6 +72,7 @@ const handleGetUserTokenFailure = (state, action) => {
 }
 
 export const reducer = createReducer(INITIAL_STATE, {
+  [Types.LOGOUT_USER]: handleUserLogout,
   [Types.GET_USER_TOKEN_REQUEST]: handleGetUserTokenRequest,
   [Types.GET_USER_TOKEN_SUCCESS]: handleGetUserTokenSuccess,
   [Types.GET_USER_TOKEN_FAILURE]: handleGetUserTokenFailure,

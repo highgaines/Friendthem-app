@@ -41,6 +41,14 @@ class UserProfileScreen extends Component {
     }
   }
 
+  componentWillUpdate = nextProps => {
+    const { needsFetchTokens, getUserTokens, apiAccessToken } = this.props
+
+    if (!needsFetchTokens && nextProps.needsFetchTokens) {
+      getUserTokens(apiAccessToken)
+    }
+  }
+
   componentDidUpdate = prevProps => {
     const { needsRedirect, redirectURL } = this.props
     if (needsRedirect && redirectURL && !prevProps.needsRedirect) {
@@ -84,7 +92,6 @@ class UserProfileScreen extends Component {
               <Text style={styles.interestsText}>
                   {userInterests.join(' | ')}
               </Text>
-              <Button title='Get my Tokens' onPress={() => getUserTokens(apiAccessToken)} />
               <View style={{ flexDirection: 'row', marginTop: 7, justifyContent: 'space-around'}}>
                 <Icon
                   name='location'
@@ -111,19 +118,23 @@ class UserProfileScreen extends Component {
             <View style={styles.socialAccountContainer}>
               <SocialMediaCard
                 platformName='Facebook'
+                socialAuth={socialMediaAuth}
                 userName={userInfo.name}
                 inverted={false} />
               <SocialMediaCard
                 platformName='Instagram'
                 userName={userInfo.name}
+                socialAuth={socialMediaAuth}
                 authenticated={''}
                 inverted={true} />
               <SocialMediaCard
                 platformName='Twitter'
+                socialAuth={socialMediaAuth}
                 userName={userInfo.name}
                 inverted={true} />
               <SocialMediaCard
                 platformName='LinkedIn'
+                socialAuth={socialMediaAuth}
                 userName={userInfo.name}
                 inverted={true} />
             </View>
@@ -149,7 +160,8 @@ const mapStateToProps = state => ({
   userId: state.userStore.userId,
   needsRedirect: state.authStore.needsRedirect,
   redirectURL: state.authStore.redirectURL,
-  platforms: state.tokenStore.platforms
+  platforms: state.tokenStore.platforms,
+  needsFetchTokens: state.tokenStore.needsFetchTokens
 })
 
 const mapDispatchToProps = dispatch => {

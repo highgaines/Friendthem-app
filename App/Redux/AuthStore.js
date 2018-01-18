@@ -10,18 +10,15 @@ const { Types, Creators } = createActions({
   loginRequest: null,
   loginSuccess: null,
   loginFailure: null,
-  registerRequest: null,
-  registerSuccess: null,
-  registerFailure: null,
   loginRequest: null,
   loginSuccess: null,
   loginFailure: null,
+  registerRequest: null,
+  registerSuccess: null,
+  registerFailure: null,
   loginFacebookRequest: null,
   loginFacebookSuccess: null,
-  loginFacebookFailure: null,
-  redirectRequest: null,
-  redirectSuccess: null,
-  redirectFailure: null,
+  loginFacebookFailure: null
 })
 
 export const AuthTypes = Types
@@ -144,6 +141,10 @@ export const testRedirect = () => {
 
 /* -------- Reducers -------- */
 
+const handleUserLogout = (state, action) => {
+  return INITIAL_STATE
+}
+
 const registerAccountRequest = (state = INITIAL_STATE, action) => {
   return state
 }
@@ -188,31 +189,6 @@ const loginSuccess = (state = INITIAL_STATE, action) => {
   }
 }
 
-const registerAccountFailure = (state = INITIAL_STATE, action) => {
-  return {
-    userInfoAdded: false,
-    authError: true
-  }
-}
-
-const loginRequest = (state = INITIAL_STATE, action) => {
-  return state
-}
-
-const loginSuccess = (state = INITIAL_STATE, action) => {
-  const { data } = action
-  return {
-    ...state,
-    loggedIn: true,
-    accessToken: data.access_token,
-    expiresIn: data.expires_in,
-    tokenType: data.token_Type,
-    scope: data.scope,
-    refreshToken: data.refresh_token,
-    authError: false
-  }
-}
-
 const loginFailure = (state = INITIAL_STATE, action) => {
   return {
     ...state,
@@ -220,24 +196,15 @@ const loginFailure = (state = INITIAL_STATE, action) => {
   }
 }
 
-const handleRedirectSuccess = (state, action) => {
-  return state
-}
-
-const handleRedirectFailure = (state, action) => {
-  return state
-}
-
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.REGISTER_REQUEST]: registerAccountRequest,
-  [Types.REGISTER_SUCCESS]: registerAccountSuccess,
-  [Types.REGISTER_FAILURE]: registerAccountFailure,
+  [Types.LOGOUT_USER]: handleUserLogout,
   [Types.LOGIN_REQUEST]: loginRequest,
   [Types.LOGIN_SUCCESS]: loginSuccess,
   [Types.LOGIN_FAILURE]: loginFailure,
   [Types.LOGIN_FACEBOOK_REQUEST]: loginRequest,
   [Types.LOGIN_FACEBOOK_SUCCESS]: loginSuccess,
   [Types.LOGIN_FACEBOOK_FAILURE]: loginFailure,
-  [Types.REDIRECT_SUCCESS]: handleRedirectSuccess,
-  [Types.REDIRECT_FAILURE]: handleRedirectFailure,
+  [Types.REGISTER_REQUEST]: registerAccountRequest,
+  [Types.REGISTER_SUCCESS]: registerAccountSuccess,
+  [Types.REGISTER_FAILURE]: registerAccountFailure,
 })
