@@ -131,7 +131,7 @@ class LaunchScreen extends Component {
                     handleLoading={this.handleLoading}
                     handleLoadingComplete={this.handleLoadingComplete}
                   />
-                  <Text style={styles.orText}> ( or ) </Text>
+                  <Text style={styles.orText}>  or  </Text>
                   <ConnectButton
                     title='Start With Email'
                     color='#fff'
@@ -139,7 +139,6 @@ class LaunchScreen extends Component {
                     textStyle={styles.buttonTextStyle}
                     onPressCallback={() => navigate('RegisterUserScreen')}
                   />
-
                 </View>
               }
             </View>
@@ -156,10 +155,12 @@ class LaunchScreen extends Component {
 const mapStateToProps = state => ({
   fbAuthToken: state.fbStore.fbAccessToken,
   users: state.facebook.users,
-  userData: state.userStore
+  userData: state.userStore,
+  nav: state.nav
 })
 
 const mapDispatchToProps = dispatch => {
+  const { fbUserInfo } = UserStoreActions
   return {
     ...bindActionCreators({
       fbUserInfo,

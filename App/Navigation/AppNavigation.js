@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { StackNavigator } from 'react-navigation'
+
+// Components
 import LaunchScreen from '../Containers/LaunchScreen'
 import NearbyUsers from '../Containers/NearbyUsersScreen/NearbyUsers'
 import SearchBar from '../Containers/NearbyUsersScreen/SearchBar'
@@ -8,12 +10,14 @@ import FriendProfileScreen from '../Containers/ProfileScreen/FriendProfileScreen
 import SuperConnect from '../Containers/SuperConnectScreen/SuperConnect'
 import CongratulatoryScreen from '../Containers/SuperConnectScreen/CongratulatoryScreen'
 import ForkScreen from '../Containers/SignUpFork/ForkScreen'
-import UserProfileInfoScreen from '../Containers/ProfileScreen/UserProfileInfoScreen'
+import RegisterUserScreen from '../Containers/ProfileScreen/RegisterUserScreen'
 import EditProfileInfoScreen from '../Containers/ProfileScreen/EditProfileInfoScreen'
 import NotificationsContainer from '../Containers/Notifications/NotificationsContainer'
 import SettingsScreen from '../Containers/Settings/SettingsScreen'
 import LoginScreen from '../Containers/LoginScreen'
+import InviteUsersScreen from '../Containers/InviteUsers/InviteUsersScreen'
 
+// Styles
 import styles from './Styles/NavigationStyles'
 
 const mapNavigationStateParamsToProps = (SomeComponent) => {
@@ -55,6 +59,9 @@ const PrimaryNav = StackNavigator({
   },
   LoginScreen: {
     screen: mapNavigationStateParamsToProps(LoginScreen)
+  },
+  InviteUsers: {
+    screen: mapNavigationStateParamsToProps(InviteUsersScreen)
   }
 }, {
   // Default config for all screens

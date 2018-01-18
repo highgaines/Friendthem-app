@@ -98,5 +98,11 @@ export default StyleSheet.create({
   logOutText: {
     color: 'white',
     marginLeft: 10
+  },
+  switchStyle: {
+    left: 110
+  },
+  ghostSwitchStyle: {
+    left: 170
   }
 })

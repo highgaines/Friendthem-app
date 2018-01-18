@@ -14,6 +14,7 @@ export default function UsersContainer(props) {
       homeScreen: () => navigation.navigate('LaunchScreen')
     })
   }
+
   const userCards =
     users.map( (userObj,i) =>
   <UserCard

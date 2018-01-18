@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="44px" viewBox="0 0 50 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>Notification</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="11.-Settings" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-242.000000, -704.000000)">
+        <g id="Bottom-Nav" transform="translate(-19.000000, 684.000000)">
+            <g id="Notification" transform="translate(260.000000, 21.000000)">
+                <g id="Icon]" transform="translate(13.000000, 0.000000)" fill-rule="nonzero" opacity="0.56640625" stroke="#FFFFFF">
+                    <path d="M12.5,30 C14.1176471,30 15.4411765,28.65 15.4411765,27 L9.55882353,27 C9.55882353,28.65 10.8823529,30 12.5,30 Z M22.0588235,21 L22.0588235,12.75 C22.0588235,8.1 18.9705882,4.35 14.7058824,3.3 L14.7058824,2.25 C14.7058824,1.05 13.6764706,0 12.5,0 C11.3235294,0 10.2941176,1.05 10.2941176,2.25 L10.2941176,3.3 C6.02941176,4.35 2.94117647,8.1 2.94117647,12.75 L2.94117647,21 L0,24 L0,25.5 L25,25.5 L25,24 L22.0588235,21 Z" id="Shape"></path>
+                </g>
+                <text font-family=".AppleSystemUIFont" font-size="9" font-weight="normal" line-spacing="10" fill="#9090A1">
+                    <tspan x="0" y="43">Notification</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

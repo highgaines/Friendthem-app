@@ -7,7 +7,6 @@ export default StyleSheet.create({
     justifyContent: 'space-around',
     width: '100%',
     position: 'absolute',
-    // marginTop: 150,
     backgroundColor: 'black',
     height: 60,
     flexDirection: 'row'
@@ -25,6 +24,6 @@ export default StyleSheet.create({
     marginLeft: 15
   },
   iconContainer: {
-    marginHorizontal: 40
+    marginHorizontal: 30
   }
 })

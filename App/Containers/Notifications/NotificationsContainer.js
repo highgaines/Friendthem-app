@@ -38,11 +38,15 @@ class NotificationsContainer extends Component {
   }
 
   render() {
-    Reactotron.log(this.props.notifications)
     return(
       <View>
         <Header title='Notifications' />
         <View style={styles.listContainer}>
+          <View style={styles.sectionTitle}>
+            <Text style={styles.sectionTitleText}>
+              Most Recent
+            </Text>
+          </View>
           <SwipeListView
             useFlatList
             disableLeftSwipe={true}
@@ -104,9 +108,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    ...bindActionCreators({
-      deleteRowAction }, dispatch
-    )
+    ...bindActionCreators({ deleteRowAction }, dispatch)
   }
 }
 
