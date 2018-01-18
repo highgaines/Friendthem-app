@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>Oval</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="88.249748%" y1="89.2999464%" x2="21.4835874%" y2="13.9833512%" id="linearGradient-1">
+            <stop stop-color="#01E2C5" offset="0%"></stop>
+            <stop stop-color="#950DBB" offset="54.9325004%"></stop>
+            <stop stop-color="#FC3D17" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="9.-On-Friendthem" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-160.000000, -272.000000)">
+        <g id="Super-connect" transform="translate(10.000000, 158.000000)" fill="url(#linearGradient-1)">
+            <g id="Group-4-Copy">
+                <g id="2" transform="translate(120.000000, 0.000000)">
+                    <g id="Sync" transform="translate(30.000000, 114.000000)">
+                        <circle id="Oval" cx="11.8095238" cy="11.8095238" r="11.8095238"></circle>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -7,7 +7,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     backgroundColor: 'white',
-    height: 130,
+    height: 140,
     marginTop: 5,
     borderRadius: 10,
     width: 115,
@@ -26,5 +26,17 @@ export default StyleSheet.create({
   cardText: {
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
+  },
+  percentIndicator: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row'
+  },
+  pctText: {
+    textAlign: 'center'
+  },
+  pieContainer: {
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })

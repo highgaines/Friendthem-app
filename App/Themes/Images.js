@@ -47,7 +47,11 @@ const images = {
 
   // Logos
   smallLogoSVG: require('../Images/logo-small-svg.svg'),
-  logoPNG: require('../Images/logo-png.png')
+  logoPNG: require('../Images/logo-png.png'),
+
+  // Emblems
+  emblemColor: require('../Images/Icons/emblem-color-png.png'),
+  emblemGreen: require('../Images/Icons/emblem-green-png.png')
 }
 
 export default images
