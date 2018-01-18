@@ -29,7 +29,7 @@ export default class NearbyUsers extends Component {
 
   toggleWelcomeTutorial = () => {
     this.setState({
-      welcomeTutorialVisible: !this.state.welcomeTutorialVisible
+      welcomeTutorialVisible: false
     })
   }
 
@@ -59,11 +59,11 @@ export default class NearbyUsers extends Component {
           navigation={navigation}
           margin={610}
         />
-        <WelcomeScreen
+        {welcomeTutorialVisible ? <WelcomeScreen
           visible={welcomeTutorialVisible}
           closeModal={this.toggleWelcomeTutorial}
           name='Peter Parker'
-        />
+        /> : null }
       </View>
     )
   }
