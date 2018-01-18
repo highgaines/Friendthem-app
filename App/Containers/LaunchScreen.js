@@ -96,7 +96,7 @@ class LaunchScreen extends Component {
     const { navigate } = this.props.navigation
     const { users, setFriendInfo, fbAuthToken } = this.props
     const { loading } = this.state
-    console.log(this.props.nav)
+
     return (
       <View style={styles.mainContainer}>
         <LinearGradient
