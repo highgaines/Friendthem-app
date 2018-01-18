@@ -48,6 +48,7 @@ const images = {
   // Logos
   smallLogoSVG: require('../Images/logo-small-svg.svg'),
   logoPNG: require('../Images/logo-png.png'),
+  friendster: require('../Images/Icons/friendster-png.png'),
 
   // Emblems
   emblemColor: require('../Images/Icons/emblem-color-png.png'),

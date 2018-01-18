@@ -6,7 +6,11 @@ import UsersContainer from './UsersContainer';
 import LinearGradient from 'react-native-linear-gradient';
 import _ from 'lodash';
 
+// Components
 import Navbar from '../Navbar/Navbar';
+import WelcomeScreen from '../TutorialScreens/WelcomeScreen';
+
+// Styles
 import styles from '../Styles/NearbyUsersScreenStyles';
 
 export default class NearbyUsers extends Component {
@@ -14,12 +18,19 @@ export default class NearbyUsers extends Component {
     super(props)
 
     this.state = {
-      input: ''
+      input: '',
+      welcomeTutorialVisible: true
     }
   }
 
   handleChange = input => {
     this.setState({input: input})
+  }
+
+  toggleWelcomeTutorial = () => {
+    this.setState({
+      welcomeTutorialVisible: !this.state.welcomeTutorialVisible
+    })
   }
 
   filterUsers = users => {
@@ -29,10 +40,10 @@ export default class NearbyUsers extends Component {
 
   render() {
     const { users, navigation, setFriendInfo } = this.props
-    const { input } = this.state
+    const { input, welcomeTutorialVisible } = this.state
 
     return(
-      <View style={styles.nearbyUsersContainer}>
+      <View style={[styles.nearbyUsersContainer, welcomeTutorialVisible ? { opacity: .9 } : '']}>
         <SearchBar
           numUsers={users.length}
           navigation={navigation}
@@ -47,6 +58,11 @@ export default class NearbyUsers extends Component {
           navbarStyle={styles.nearbyUsersNavbar}
           navigation={navigation}
           margin={610}
+        />
+        <WelcomeScreen
+          visible={welcomeTutorialVisible}
+          closeModal={this.toggleWelcomeTutorial}
+          name='Peter Parker'
         />
       </View>
     )
