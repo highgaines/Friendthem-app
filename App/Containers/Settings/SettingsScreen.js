@@ -1,18 +1,39 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
+
+// Librarires
 import LinearGradient from 'react-native-linear-gradient'
 import { Icon } from 'react-native-elements'
+import FBSDK, { LoginManager } from 'react-native-fbsdk';
 
+// Redux
+import FBStoreActions from '../../Redux/FBStore';
+
+// Components
 import ConnectButton from '../SuperConnectScreen/ConnectButton'
 import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard'
 import Navbar from '../Navbar/Navbar'
+
+// Images
 import { Images } from '../../Themes'
+
+// Styles
 import styles from '../Styles/SettingsStyles'
 
 class SettingsScreen extends Component {
+
+  logOut = () => {
+    const { toggleModal, fbLogoutComplete, navigation } = this.props
+
+    toggleModal()
+    LoginManager.logOut();
+    fbLogoutComplete()
+    navigation.navigate('LaunchScreen')
+  }
+
   render() {
-    const { navigation } = this.props
+    const { navigation, toggleModal } = this.props
     return (
         <View style={styles.container}>
           <LinearGradient
@@ -106,7 +127,10 @@ class SettingsScreen extends Component {
               style={styles.rightArrow}
               />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.logOutButton}>
+          <TouchableOpacity
+            style={styles.logOutButton}
+            onPress={() => toggleModal()}
+            >
             <Image
               source={Images.powerIcon}
               />
@@ -130,7 +154,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
-  return {}
+  return {
+    fbLogoutComplete: () => dispatch(FBStoreActions.logoutComplete())
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen)

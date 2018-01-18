@@ -60,7 +60,7 @@ class Navbar extends Component {
     const { navigation } = this.props
     navigation.navigate('SettingsScreen',
       {
-        
+        toggleModal: () => this.toggleModal()
       }
     )
   }

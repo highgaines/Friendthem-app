@@ -96,7 +96,7 @@ class LaunchScreen extends Component {
     const { navigate } = this.props.navigation
     const { users, setFriendInfo, fbAuthToken } = this.props
     const { loading } = this.state
-
+    console.log(this.props.nav)
     return (
       <View style={styles.mainContainer}>
         <LinearGradient
@@ -162,10 +162,12 @@ class LaunchScreen extends Component {
 const mapStateToProps = state => ({
   fbAuthToken: state.fbStore.fbAccessToken,
   users: state.facebook.users,
-  userData: state.userStore
+  userData: state.userStore,
+  nav: state.nav
 })
 
 const mapDispatchToProps = dispatch => {
+  const { fbUserInfo } = UserStoreActions
   return {
     ...bindActionCreators({
       fbUserInfo,

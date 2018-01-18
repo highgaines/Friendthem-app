@@ -20,7 +20,6 @@ const images = {
   hamburger: require('../Images/Icons/hamburger.png'),
   backButton: require('../Images/Icons/back-button.png'),
   closeButton: require('../Images/Icons/close-button.png'),
-<<<<<<< HEAD
   backArrow: require('../Images/Icons/back-arrow.png'),
   danger: require('../Images/Icons/danger.png'),
   file: require('../Images/Icons/file.png'),
@@ -30,10 +29,6 @@ const images = {
   powerIcon: require('../Images/Icons/power-icon.png'),
   privacy: require('../Images/Icons/privacy.png'),
   rightArrow: require('../Images/Icons/rightArrow.png'),
-=======
-
-  // Social Icons
->>>>>>> fixing added icon and route to navbar
   fbIcon: require('../Images/fbicon.png'),
   twitterIcon: require('../Images/twittericon.png'),
   snapchatIcon: require('../Images/snapchaticon.png'),

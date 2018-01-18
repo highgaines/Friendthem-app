@@ -35,7 +35,7 @@ class InviteUsersScreen extends Component {
   render() {
     const { networkTabSelected, showModal } = this.state;
     const { selectUser, selectedUser } = this.props
-
+    console.log(this.props.nav)
     return (
       <View style={[{ flex: 1 }, this.state.showModal ? { opacity: 0.1 } : '']}>
         <LinearGradient
@@ -91,7 +91,8 @@ class InviteUsersScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  selectedUser: state.inviteUsersStore.selectedUser
+  selectedUser: state.inviteUsersStore.selectedUser,
+  nav: state.nav
 })
 
 const mapDispatchToProps = dispatch => {
