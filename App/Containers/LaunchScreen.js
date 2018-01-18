@@ -131,20 +131,13 @@ class LaunchScreen extends Component {
                     handleLoading={this.handleLoading}
                     handleLoadingComplete={this.handleLoadingComplete}
                   />
-                  <Text style={styles.orText}> ( or ) </Text>
+                  <Text style={styles.orText}>  or  </Text>
                   <ConnectButton
                     title='Start With Email'
                     color='#fff'
                     containerStyle={styles.button}
                     textStyle={styles.buttonTextStyle}
                     onPressCallback={() => navigate('RegisterUserScreen')}
-                  />
-                  <ConnectButton
-                    title="Invite Users"
-                    color="#fff"
-                    containerStyle={styles.button}
-                    textStyle={styles.buttonTextStyle}
-                    onPressCallback={() => navigate('InviteUsers')}
                   />
                 </View>
               }

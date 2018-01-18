@@ -69,7 +69,6 @@ export const sendInvitationToUser = (name) => {
 }
 
 export const selectUser = (user) => {
-  debugger
   return { type: Types.SELECT_USER, payload: { user } }
 }
 
