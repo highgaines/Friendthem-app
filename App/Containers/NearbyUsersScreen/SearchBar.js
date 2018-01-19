@@ -51,6 +51,7 @@ class SearchBar extends Component {
             <Icon
               name='search'
               type='evilicon'
+              size={36}
               color='#FFF'
               onPress={this.toggleSearch}
             />
@@ -63,6 +64,7 @@ class SearchBar extends Component {
           <Icon
             name='arrow-back'
             type='materialicons'
+            size={36}
             color='#FFF'
             onPress={() => navigation.dispatch(backAction) }
           />

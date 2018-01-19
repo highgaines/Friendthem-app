@@ -4,8 +4,10 @@ import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   linearGradient: {
-    height: 80,
-    alignItems: 'flex-end',
+    height: 90,
+    alignItems: 'stretch',
+    justifyContent: 'space-between',
+    paddingBottom: 25,
     shadowOpacity: 0.5,
     shadowRadius: 5,
     shadowColor: 'black',
@@ -15,19 +17,18 @@ export default StyleSheet.create({
     backgroundColor: 'transparent',
     marginTop: 50,
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   searchIcon: {
     alignItems: 'flex-start'
   },
   searchForm: {
-    height: 25,
+    height: 35,
     width: 200,
     borderColor: 'white',
     borderWidth: 2,
     borderRadius: 50,
-    marginLeft: 65,
-    marginRight: 65,
     paddingLeft: 10,
     color: 'white'
   },

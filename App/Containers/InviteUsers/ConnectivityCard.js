@@ -4,6 +4,7 @@ import { Text, Image, View, TouchableOpacity } from 'react-native';
 // Libraries
 import Pie from 'react-native-pie';
 import SvgUri from 'react-native-svg-uri';
+import * as Animatable from 'react-native-animatable';
 
 // Components
 import ImageCircle from '../UtilityComponents/ImageCircle';
@@ -47,31 +48,32 @@ export default ConnectivityCard = props => {
   const progressColor = determineRadialColor(conPct)
 
   return (
-    <TouchableOpacity
-      style={styles.card}
-      onPress={handlePress}>
-      <View style={styles.cardText}>
-        <Text
-          style={{ fontFamily: 'Montserrat', fontSize: 13}}
-          numberOfLines={1}>
+    <Animatable.View animation="slideInUp">
+      <TouchableOpacity
+        style={styles.card}
+        onPress={handlePress}>
+        <View style={styles.cardText} animation="slideInUp">
+          <Text
+            style={{ fontFamily: 'Montserrat', fontSize: 13}}
+            numberOfLines={1}>
             {name}
-        </Text>
-      </View>
-      <View style={styles.pieContainer}>
-        <Pie
-          radius={45}
-          innerRadius={30}
-          series={[conPct]}
-          colors={[progressColor, 'gray']}
-          backgroundColor='#ddd'
-        />
-        <ImageCircle
-          size={75}
-          source={image}
-          extraStyles={{ position: 'absolute'}}
-        />
-      </View>
-        <View style={styles.percentIndicator}>
+          </Text>
+        </View>
+        <View style={styles.pieContainer} animation="slideInUp">
+          <Pie
+            radius={45}
+            innerRadius={30}
+            series={[conPct]}
+            colors={[progressColor, 'gray']}
+            backgroundColor='#ddd'
+          />
+          <ImageCircle
+            size={75}
+            source={image}
+            extraStyles={{ position: 'absolute'}}
+          />
+        </View>
+        <View style={styles.percentIndicator} >
           <Image
             source={determineEmblem() ? Images.emblemGreen : Images.emblemColor}
           />
@@ -79,6 +81,7 @@ export default ConnectivityCard = props => {
             {conPct}%
           </Text>
         </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </Animatable.View>
   )
 }

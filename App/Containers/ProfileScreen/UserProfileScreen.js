@@ -21,19 +21,9 @@ class UserProfileScreen extends Component {
           locations={[0.1, 0.3, 0.5, 0.7, 1.0]}>
             <View style={styles.profileHeader}>
               <View style={styles.profHeaderTop}>
-                <Icon
-                 name='phone'
-                 type='font-awesome'
-                 color='#ffffff'
-                 containerStyle={styles.phoneIcon}/>
                 <Image
                   style={styles.profileImage}
                   source={{uri: `${userInfo.picture.data.url}`}} />
-                <Icon
-                 name='md-mail'
-                 type='ionicon'
-                 color='#ffffff'
-                 containerStyle={styles.mailIcon}/>
               </View>
               <Text style={styles.profileSubtext}>
               {`${userInfo.name}`}
