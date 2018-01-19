@@ -16,7 +16,6 @@ export default WelcomeScreen = props => {
         visible={visible}
         animationType={'slide'}
         transparent={true}
-        // presentationStyle={'overFullScreen'}
         onRequestClose={() => closeModal()}
         >
           <View style={styles.modalContainer}>

@@ -135,7 +135,6 @@ class LaunchScreen extends Component {
                     handleLoading={this.handleLoading}
                     handleLoadingComplete={this.handleLoadingComplete}
                   />
-                  <Text style={styles.orText}>  or  </Text>
                   <ConnectButton
                     title='Start With Email'
                     color='#fff'

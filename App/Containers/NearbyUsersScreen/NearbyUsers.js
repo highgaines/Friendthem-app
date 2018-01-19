@@ -43,7 +43,7 @@ export default class NearbyUsers extends Component {
     const { input, welcomeTutorialVisible } = this.state
 
     return(
-      <View style={[styles.nearbyUsersContainer, welcomeTutorialVisible ? { opacity: .9 } : '']}>
+      <View style={[styles.nearbyUsersContainer]}>
         <SearchBar
           numUsers={users.length}
           navigation={navigation}
