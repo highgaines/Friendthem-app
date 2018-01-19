@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, Image, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
+import Image from 'react-native-remote-svg';
 
 // Libraries
 import Pie from 'react-native-pie';
@@ -24,16 +25,6 @@ export default ConnectivityCard = props => {
 
   // will need to finish coding out conditional
   const determineRadialColor = (conPct) => {
-      // switch(conPct) {
-      //   case conPct === 100:
-      //     return 'green'
-      //   case conPct < 100 && conPct > 66:
-      //     return 'yellow'
-      //   case conPct === 66 && conPct > 33:
-      //     return 'orange'
-      //   case conPct <= 33:
-      //     return 'red'
-      // }
       if (conPct === 100) {
         return 'green'
       } else if(conPct > 66) {
@@ -79,6 +70,8 @@ export default ConnectivityCard = props => {
         </View>
         <View style={styles.percentIndicator} >
           <Image
+            height={20}
+            width={20}
             source={determineEmblem() ? Images.emblemGreen : Images.emblemColor}
           />
           <Text style={styles.pctText}>

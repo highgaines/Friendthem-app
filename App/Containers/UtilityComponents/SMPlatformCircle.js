@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
+import Image from 'react-native-remote-svg';
 import { SocialIcon } from 'react-native-elements';
 import { Images } from '../../Themes';
 
 export default SMPlatformCircle = props => {
   // if you want button form, add button={true} prop
-  const { iconSize, size, extraStyles, platform, raised, title, light, button } = props
+  const { size, extraStyles, platform, light, button } = props
 
   const renderIcon = arg => {
       switch(arg) {
@@ -17,18 +18,19 @@ export default SMPlatformCircle = props => {
           return Images.snapchatIcon
         case 'instagram':
           return Images.igIcon
+        case 'youtube':
+          return Images.youtubeIcon
       }
   }
 
   return (
     <View
       style={{
-        backgroundColor: '#fff',
-        borderRadius: size/2,
-        width: 10,
-        height: 10,
+        backgroundColor: '#fff'
       }, extraStyles}>
       <Image
+        width={size}
+        height={size}
         source={renderIcon(platform)}
       />
     </View>

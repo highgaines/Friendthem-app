@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="38px" height="38px" viewBox="0 0 38 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>messages-ios copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="1.44328993e-13%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#03C6FF" offset="0%"></stop>
+            <stop stop-color="#0572FF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="9.2-My-Network-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-291.000000, -214.000000)">
+        <g id="Most-Recent" transform="translate(14.000000, 214.000000)" fill-rule="nonzero">
+            <g id="User-1">
+                <g id="Options" transform="translate(239.000000, 0.000000)">
+                    <g id="messages-ios-copy" transform="translate(38.000000, 0.000000)">
+                        <path d="M37.9602992,9.34407365 L37.9602992,29.2002301 C37.9602992,34.0381243 34.0381243,37.9602992 29.2002301,37.9602992 L9.34407365,37.9602992 C4.50617952,37.9602992 0.584004603,34.0381243 0.584004603,29.2002301 L0.584004603,9.34407365 C0.584004603,4.50617952 4.50617952,0.584004603 9.34407365,0.584004603 L29.2002301,0.584004603 C34.0381243,0.584004603 37.9602992,4.50617952 37.9602992,9.34407365 Z" id="Shape" fill="url(#linearGradient-1)"></path>
+                        <path d="M18.7992558,9.91139241 C13.3034814,9.91139241 8.81012658,14.0519122 8.81012658,19.1102921 C8.81012658,21.9922717 10.2693691,24.5633819 12.4808212,26.242391 L12.4808212,29.7341772 L15.9076242,27.885917 C16.8117922,28.1349266 17.7886222,28.2690086 18.7806165,28.2690086 C24.2763909,28.2690086 28.7416287,24.1683579 28.7416287,19.1102921 C28.7416287,14.0522262 24.2950303,9.91139241 18.7992558,9.91139241 Z M19.7887227,22.2852426 L17.2540826,19.5985769 L12.3092757,22.2852426 L17.7488161,16.545776 L20.344745,19.2324418 L25.2279472,16.545776 L19.7887227,22.2852426 Z" id="Shape" fill="#FFFFFF"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

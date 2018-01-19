@@ -6,10 +6,13 @@ import { Icon } from 'react-native-elements';
 import FBSDK, { LoginManager } from 'react-native-fbsdk';
 import FBStoreActions from '../../Redux/FBStore';
 
+// Components
 import Navbar from '../Navbar/Navbar';
 import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard';
 import SuperConnectBar from '../SuperConnectScreen/SuperConnectBar'
+import ScrollWheel from './ScrollWheel';
 
+// Styles
 import styles from '../Styles/UserProfileStyles';
 
 class FriendProfileScreen extends Component {
@@ -64,6 +67,7 @@ class FriendProfileScreen extends Component {
                   {friendInfo.location}
                 </Text>
               </View>
+              <ScrollWheel />
             </View>
             </LinearGradient>
             <View style={styles.socialIconSlider}>
