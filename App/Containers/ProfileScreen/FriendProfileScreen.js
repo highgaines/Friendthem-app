@@ -67,11 +67,10 @@ class FriendProfileScreen extends Component {
                   {friendInfo.location}
                 </Text>
               </View>
-              <ScrollWheel />
             </View>
             </LinearGradient>
-            <View style={styles.socialIconSlider}>
-
+            <View style={styles.scrollWheelContainer}>
+              <ScrollWheel />
             </View>
             <View style={styles.socialAccountContainer}>
               <SocialMediaCard

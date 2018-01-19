@@ -7,14 +7,26 @@ export default StyleSheet.create({
 
   },
   profileHeader: {
-    height: 270,
+    height: 220,
     width: '100%',
     alignItems: 'center',
-    marginTop: 30
+    marginTop: 30,
+    shadowOpacity: 0.75,
+    shadowRadius: 5,
+    shadowColor: 'black',
+    shadowOffset: { height: 6, width: 10 },
+    zIndex: 99
   },
   profHeaderTop: {
     height: 125,
     flexDirection: 'row'
+  },
+  scrollWheelContainer: {
+    shadowOpacity: 0.15,
+    shadowRadius: 5,
+    shadowColor: 'black',
+    shadowOffset: { height: 6, width: 10 },
+    zIndex: 100
   },
   profileImage: {
     width: 120,

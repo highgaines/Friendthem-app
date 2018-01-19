@@ -29,8 +29,10 @@ export default SMPlatformCircle = props => {
         backgroundColor: '#fff'
       }, extraStyles}>
       <Image
-        width={size}
-        height={size}
+        style={{
+          width: size,
+          height: size
+        }}
         source={renderIcon(platform)}
       />
     </View>
