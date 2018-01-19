@@ -26,47 +26,47 @@ export default class ScrollWheel extends Component {
       >
         <View style={styles.platforms}>
           <TouchableOpacity>
-            <SMPlatformCircle platform="twitter" size={60}/>
+            <SMPlatformCircle platform="twitter" size={70}/>
             <Text style={styles.text}> Twitter </Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <SMPlatformCircle platform="facebook" size={60}/>
+            <SMPlatformCircle platform="facebook" size={70}/>
+            <Text style={styles.text}> Facebook </Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <SMPlatformCircle platform="snapchat" size={70}/>
+            <Text style={styles.text}> Snapchat </Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <SMPlatformCircle platform="youtube" size={70}/>
+            <Text style={styles.text}> Youtube </Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <SMPlatformCircle platform="twitter" size={70}/>
+            <Text style={styles.text}> Twitter </Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <SMPlatformCircle platform="twitter" size={70}/>
+            <Text style={styles.text}> Twitter </Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <SMPlatformCircle platform="twitter" size={70}/>
+            <Text style={styles.text}> Twitter </Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <SMPlatformCircle platform="twitter" size={70}/>
+            <Text style={styles.text}> Twitter </Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <SMPlatformCircle platform="twitter" size={70}/>
             <Text> Twitter </Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <SMPlatformCircle platform="snapchat" size={60}/>
+            <SMPlatformCircle platform="twitter" size={70}/>
             <Text> Twitter </Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <SMPlatformCircle platform="youtube" size={60}/>
-            <Text> Twitter </Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <SMPlatformCircle platform="twitter" size={60}/>
-            <Text> Twitter </Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <SMPlatformCircle platform="twitter" size={60}/>
-            <Text> Twitter </Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <SMPlatformCircle platform="twitter" size={60}/>
-            <Text> Twitter </Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <SMPlatformCircle platform="twitter" size={60}/>
-            <Text> Twitter </Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <SMPlatformCircle platform="twitter" size={60}/>
-            <Text> Twitter </Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <SMPlatformCircle platform="twitter" size={60}/>
-            <Text> Twitter </Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <SMPlatformCircle platform="twitter" size={60}/>
+            <SMPlatformCircle platform="twitter" size={70}/>
             <Text> Twitter </Text>
           </TouchableOpacity>
 
