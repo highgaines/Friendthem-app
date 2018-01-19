@@ -225,7 +225,6 @@ const handleSocialMediaAuthRequest = (state, action) => {
 }
 
 const handleSocialMediaAuthSuccess = (state, action) => {
-  debugger
   return state
 }
 

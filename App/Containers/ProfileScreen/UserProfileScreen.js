@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { ScrollView, Text, Image, View, TouchableOpacity, Button, Linking } from 'react-native'
+import { ScrollView, Text, Image, View, Button, Linking } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { Icon } from 'react-native-elements'
 
@@ -32,7 +32,7 @@ class UserProfileScreen extends Component {
   }
 
   componentWillMount = () => {
-    const { userId, apiAccessToken, navigation } = this.props
+    const { apiAccessToken, navigation, getUserId } = this.props
 
     if (apiAccessToken) {
       getUserId(apiAccessToken)
@@ -50,15 +50,14 @@ class UserProfileScreen extends Component {
   }
 
   componentDidUpdate = prevProps => {
-    const { needsRedirect, redirectURL } = this.props
-    if (needsRedirect && redirectURL && !prevProps.needsRedirect) {
-      Linking.openURL(redirectURL)
+    const { authRedirectUrl } = this.props
+    if (authRedirectUrl && !prevProps.authRedirectUrl) {
+      Linking.openURL(authRedirectUrl)
     }
   }
 
   authenticateSocialMedia = platform => {
-    debugger
-    this.props.socialMediaAuth(platfrom, this.props.userId)
+    this.props.socialMediaAuth(platform, this.props.userId)
   }
 
   render() {
@@ -125,22 +124,25 @@ class UserProfileScreen extends Component {
                 platformName='Facebook'
                 socialAuth={socialMediaAuth}
                 userName={userInfo.name}
+                platformAuth={'facebook'}
                 inverted={false} />
               <SocialMediaCard
                 platformName='Instagram'
                 userName={userInfo.name}
                 socialAuth={this.authenticateSocialMedia}
-                authenticated={''}
+                platformAuth={'instagram'}
                 inverted={true} />
               <SocialMediaCard
                 platformName='Twitter'
-                socialAuth={socialMediaAuth}
+                socialAuth={this.authenticateSocialMedia}
                 userName={userInfo.name}
+                platformAuth={'twitter'}
                 inverted={true} />
               <SocialMediaCard
                 platformName='LinkedIn'
-                socialAuth={socialMediaAuth}
+                socialAuth={this.authenticateSocialMedia}
                 userName={userInfo.name}
+                platformAuth={'linkedin-oauth2'}
                 inverted={true} />
             </View>
             <View>
@@ -163,10 +165,9 @@ const mapStateToProps = state => ({
   userLocation: state.userStore.location,
   fbAuthToken: state.fbStore.fbAccessToken,
   apiAccessToken: state.authStore.accessToken,
-  needsRedirect: state.authStore.needsRedirect,
-  redirectURL: state.authStore.redirectURL,
   platforms: state.tokenStore.platforms,
-  needsFetchTokens: state.tokenStore.needsFetchTokens
+  needsFetchTokens: state.tokenStore.needsFetchTokens,
+  authRedirectUrl: state.tokenStore.authRedirectUrl
 })
 
 const mapDispatchToProps = dispatch => {

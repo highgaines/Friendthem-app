@@ -68,7 +68,6 @@ export default StyleSheet.create({
     backgroundColor: '#143a7a'
   },
   socialAccountContainer: {
-    flex: 3,
     flexWrap: 'wrap',
     paddingHorizontal: 10,
     flexDirection: 'row',

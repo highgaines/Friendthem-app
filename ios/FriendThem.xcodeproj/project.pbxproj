@@ -44,6 +44,8 @@
 		6046DB130ACC4DD3B1A39D0B /* libSendSMS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBAE745E3AB341C5ACE5E6DA /* libSendSMS.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		914CBC0879A9402E9F5C42C2 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E466642F88F742F6B8DB89DF /* libRNVectorIcons.a */; };
+		9A670FE5EAC94C568087AF98 /* libSendSMS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B1C18B10A3403B97F0400A /* libSendSMS.a */; };
+		A0B63196D3554061AE81F5EB /* libRNSensitiveInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D30DBF209DA49FCB41241AE /* libRNSensitiveInfo.a */; };
 		A5A15C4A1FDB067700ABE5DB /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A15C461FDB067600ABE5DB /* FBSDKCoreKit.framework */; };
 		A5A15C4B1FDB067700ABE5DB /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A15C471FDB067600ABE5DB /* FBSDKLoginKit.framework */; };
 		A5A15C4C1FDB067700ABE5DB /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A15C481FDB067700ABE5DB /* FBSDKShareKit.framework */; };
@@ -414,6 +416,13 @@
 			remoteGlobalIDString = BF8FCF941BFFB184000FCD37;
 			remoteInfo = RNSensitiveInfo;
 		};
+		A5EFED32201169F3002C7F7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 256149C219B447D8BCC5C229 /* SendSMS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 95688E1A1D38251600F72D63;
+			remoteInfo = SendSMS;
+		};
 		ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */;
@@ -447,6 +456,7 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		1F397E8CD39F4D15B2BF2D83 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		1F84AB765D524CC08F41A173 /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDK.xcodeproj; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; };
+		256149C219B447D8BCC5C229 /* SendSMS.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SendSMS.xcodeproj; path = "../node_modules/react-native-sms/SendSMS.xcodeproj"; sourceTree = "<group>"; };
 		2A3E12924A4F44FBB96EE029 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* FriendThem-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FriendThem-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* FriendThem-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FriendThem-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -495,6 +505,7 @@
 		BBAE745E3AB341C5ACE5E6DA /* libSendSMS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSendSMS.a; sourceTree = "<group>"; };
 		C5634B3F305F47A5896309A9 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		C803CA948BDB49DC9347267A /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSVG.a; sourceTree = "<group>"; };
+		C9B1C18B10A3403B97F0400A /* libSendSMS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSendSMS.a; sourceTree = "<group>"; };
 		DEA751660EBF4B309AC87720 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		E466642F88F742F6B8DB89DF /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		E6ADA2E7E997469A85731C82 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
@@ -536,6 +547,9 @@
 				914CBC0879A9402E9F5C42C2 /* libRNVectorIcons.a in Frameworks */,
 				236C973EEA944DDDB43A8D4A /* libReactNativeConfig.a in Frameworks */,
 				6046DB130ACC4DD3B1A39D0B /* libSendSMS.a in Frameworks */,
+				A0B63196D3554061AE81F5EB /* libRNSensitiveInfo.a in Frameworks */,
+				8EB0A68526954D48A24FF203 /* libA0Auth0.a in Frameworks */,
+				9A670FE5EAC94C568087AF98 /* libSendSMS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -688,6 +702,7 @@
 				0A627E19F1344630AF47F333 /* libRNSVG-tvOS.a */,
 				7BDE80F84EF24FA89D093A2D /* libA0Auth0.a */,
 				BBAE745E3AB341C5ACE5E6DA /* libSendSMS.a */,
+				C9B1C18B10A3403B97F0400A /* libSendSMS.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -759,6 +774,7 @@
 				B10CE50B2FF24ED8B05B9B54 /* RNSVG.xcodeproj */,
 				A75C70FC01114FE7A83C9868 /* A0Auth0.xcodeproj */,
 				057DE0DDC2024163B0A8064D /* SendSMS.xcodeproj */,
+				256149C219B447D8BCC5C229 /* SendSMS.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -856,6 +872,14 @@
 			isa = PBXGroup;
 			children = (
 				A5A15C8C1FE06E9600ABE5DB /* libRNSensitiveInfo.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A5EFED2F201169F2002C7F7C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A5EFED33201169F3002C7F7C /* libSendSMS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -995,7 +1019,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = X8WHEJ9ZK2;
+						DevelopmentTeam = 9R6E2E49V4;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -1106,6 +1130,8 @@
 				{
 					ProductGroup = 39E4EB9A20112BF4001A65A5 /* Products */;
 					ProjectRef = 057DE0DDC2024163B0A8064D /* SendSMS.xcodeproj */;
+					ProductGroup = A5EFED2F201169F2002C7F7C /* Products */;
+					ProjectRef = 256149C219B447D8BCC5C229 /* SendSMS.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1441,6 +1467,13 @@
 			remoteRef = A5A15C8B1FE06E9600ABE5DB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		A5EFED33201169F3002C7F7C /* libSendSMS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSendSMS.a;
+			remoteRef = A5EFED32201169F3002C7F7C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1684,7 +1717,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = X8WHEJ9ZK2;
+				DEVELOPMENT_TEAM = 9R6E2E49V4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1724,7 +1757,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X8WHEJ9ZK2;
+				DEVELOPMENT_TEAM = 9R6E2E49V4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

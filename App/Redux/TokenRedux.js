@@ -20,7 +20,8 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   platforms: [],
-  needsFetchTokens: false
+  needsFetchTokens: false,
+  authRedirectUrl: null
 })
 
 export const getUserTokens = (accessToken) => {
@@ -51,7 +52,7 @@ const handleUserLogout = (state, action) => {
 const handleSocialMediaSuccess = (state, action) => {
   return {
     ...state,
-    needsFetchTokens: true
+    authRedirectUrl: action.data.redirect_url
   }
 }
 
@@ -60,7 +61,6 @@ const handleGetUserTokenRequest = (state, action) => {
 }
 
 const handleGetUserTokenSuccess = (state, action) => {
-  debugger
   return {
     ...state,
     needsFetchTokens: false
