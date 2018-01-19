@@ -10,6 +10,7 @@ const { Types, Creators } = createActions({
   getUserTokenRequest: null,
   getUserTokenSuccess: null,
   getUserTokenFailure: null,
+  socialMediaAuthRequest: null,
   socialMediaAuthSuccess: null,
 })
 
@@ -20,7 +21,6 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   platforms: [],
-  needsFetchTokens: false,
   authRedirectUrl: null
 })
 
@@ -63,7 +63,7 @@ const handleGetUserTokenRequest = (state, action) => {
 const handleGetUserTokenSuccess = (state, action) => {
   return {
     ...state,
-    needsFetchTokens: false
+    platforms: action.data
   }
 }
 
@@ -71,10 +71,18 @@ const handleGetUserTokenFailure = (state, action) => {
   return state
 }
 
+const handleSocialMediaRequest = (state, action) => {
+  return {
+    ...state,
+    authRedirectUrl: null
+  }
+}
+
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGOUT_USER]: handleUserLogout,
   [Types.GET_USER_TOKEN_REQUEST]: handleGetUserTokenRequest,
   [Types.GET_USER_TOKEN_SUCCESS]: handleGetUserTokenSuccess,
   [Types.GET_USER_TOKEN_FAILURE]: handleGetUserTokenFailure,
+  [Types.SOCIAL_MEDIA_AUTH_REQUEST]: handleSocialMediaRequest,
   [Types.SOCIAL_MEDIA_AUTH_SUCCESS]: handleSocialMediaSuccess,
 })

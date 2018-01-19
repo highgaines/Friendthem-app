@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { ScrollView, Text, Image, View, Button, Linking } from 'react-native'
+import { ScrollView, Text, Image, View, Button, Linking , AppState } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { Icon } from 'react-native-elements'
 
@@ -22,7 +22,9 @@ class UserProfileScreen extends Component {
     super(props)
 
     this.state = {
-      showFriendster: true
+      showFriendster: true,
+      externalAuth: false,
+      appState: AppState.currentState
     }
   }
 
@@ -34,6 +36,7 @@ class UserProfileScreen extends Component {
   componentWillMount = () => {
     const { apiAccessToken, navigation, getUserId } = this.props
 
+    AppState.addEventListener('change', this._handleAppStateChange);
     if (apiAccessToken) {
       getUserId(apiAccessToken)
     } else {
@@ -41,19 +44,31 @@ class UserProfileScreen extends Component {
     }
   }
 
-  componentWillUpdate = nextProps => {
-    const { needsFetchTokens, getUserTokens, apiAccessToken } = this.props
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this._handleAppStateChange);
+  }
 
-    if (!needsFetchTokens && nextProps.needsFetchTokens) {
+  componentWillUpdate = (nextProps, nextState) => {
+    const { getUserTokens, apiAccessToken } = this.props
+    const { externalAuth, appState } = this.state
+    const returningToApp = appState.match(/inactive|background/) && nextState.appState === 'active'
+
+    if (externalAuth && returningToApp) {
       getUserTokens(apiAccessToken)
     }
   }
 
   componentDidUpdate = prevProps => {
     const { authRedirectUrl } = this.props
+
     if (authRedirectUrl && !prevProps.authRedirectUrl) {
+      this.setState({ externalAuth: true})
       Linking.openURL(authRedirectUrl)
     }
+  }
+
+  _handleAppStateChange = nextAppState => {
+    this.setState({appState: nextAppState})
   }
 
   authenticateSocialMedia = platform => {
