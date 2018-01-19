@@ -61,10 +61,10 @@ class LaunchScreen extends Component {
         return error
       } else {
         fbUserInfo(result)
-        navigation.navigate('ForkScreen', {
-          numUsers: users.length,
+        navigation.navigate('PermissionScreen', {
+          permissionType: 'geolocation',
+          navigation: navigation,
           users: users,
-          navigation: this.props.navigation,
           setFriendInfo: setFriendInfo
         })
       }

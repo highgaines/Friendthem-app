@@ -38,6 +38,10 @@ const images = {
   textMessageIcon: require('../Images/texticon.png'),
   whatsappIcon: require('../Images/whatsappicon.png'),
 
+  // Images
+  geolocationSVG: require('../Images/geolocation-svg.svg'),
+  notificationsSVG: require('../Images/notifications-svg.svg'),
+
   // Navbar Icons
   profileIcon: require('../Images/Icons/nav-profile-icon.svg'),
   friendsIcon: require('../Images/Icons/nav-friends-icon.svg'),
