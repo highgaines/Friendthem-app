@@ -13,18 +13,9 @@ import { connect } from 'react-redux';
 import styles from '../Styles/SocialMediaCardStyles';
 
 export default class SocialMediaCard extends Component {
-  constructor(props) {
-    super(props)
 
-    this.state = {
-      selected: props.selected
-    }
-  }
-
-  handlePush = platform => {
-    const { socialAuth, platformAuth } = this.props
-
-    this.setState({ selected: !this.state.selected }, socialAuth(platformAuth))
+  handlePush = () => {
+    this.props.socialAuth(this.props.platformAuth)
   }
 
   renderIcon = () => {
@@ -54,7 +45,7 @@ export default class SocialMediaCard extends Component {
       inverted,
       socialAuth
     }  = this.props
-    const { selected } = this.state;
+    const { selected } = this.props;
     const cardStyle = selected ? styles.cardSelected : styles.cardUnselected
 
     return (

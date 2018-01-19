@@ -1741,7 +1741,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.FriendThem2;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.FriendThem;
 				PRODUCT_NAME = FriendThem;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1781,7 +1781,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.FriendThem2;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.FriendThem;
 				PRODUCT_NAME = FriendThem;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";

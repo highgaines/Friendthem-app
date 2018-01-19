@@ -1,4 +1,4 @@
-const SOCIAL_MEDIA_DATA = {
+export const SOCIAL_MEDIA_DATA = {
   facebook: {
     deepLinkUrl: 'fb://'
   },

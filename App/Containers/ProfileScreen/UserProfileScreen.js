@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { ScrollView, Text, Image, View, Button, Linking , AppState } from 'react-native'
+import { Text, Image, View, Button, Linking , AppState, ScrollView } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { Icon } from 'react-native-elements'
 
@@ -16,6 +16,7 @@ import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
 
 // Styles
 import styles from '../Styles/UserProfileStyles'
+import {SOCIAL_MEDIA_DATA} from '../../Utils/constants'
 
 class UserProfileScreen extends Component {
   constructor(props) {
@@ -24,7 +25,10 @@ class UserProfileScreen extends Component {
     this.state = {
       showFriendster: true,
       externalAuth: false,
-      appState: AppState.currentState
+      currentPlatform: null,
+      appState: AppState.currentState,
+      socialMediaData: SOCIAL_MEDIA_DATA,
+      onMobile: false
     }
   }
 
@@ -35,8 +39,8 @@ class UserProfileScreen extends Component {
 
   componentWillMount = () => {
     const { apiAccessToken, navigation, getUserId } = this.props
-
     AppState.addEventListener('change', this._handleAppStateChange);
+
     if (apiAccessToken) {
       getUserId(apiAccessToken)
     } else {
@@ -44,7 +48,7 @@ class UserProfileScreen extends Component {
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
@@ -54,16 +58,25 @@ class UserProfileScreen extends Component {
     const returningToApp = appState.match(/inactive|background/) && nextState.appState === 'active'
 
     if (externalAuth && returningToApp) {
-      getUserTokens(apiAccessToken)
+      this.setState({externalAuth: false}, () => getUserTokens(apiAccessToken))
     }
   }
 
   componentDidUpdate = prevProps => {
     const { authRedirectUrl } = this.props
+    const { socialMediaData, currentPlatform, onMobile } = this.state
 
-    if (authRedirectUrl && !prevProps.authRedirectUrl) {
-      this.setState({ externalAuth: true})
-      Linking.openURL(authRedirectUrl)
+    if (authRedirectUrl && !prevProps.authRedirectUrl && currentPlatform) {
+      const deepLinkBase = socialMediaData[currentPlatform.split('-')[0]].deepLinkUrl
+      const deepLinkAuth = `${deepLinkBase}${authRedirectUrl.split('.com/')[1]}`
+
+      this.setState({externalAuth: true})
+
+      if (Linking.canOpenURL(deepLinkAuth) && onMobile) {
+        Linking.openURL(deepLinkAuth)
+      } else {
+        Linking.openURL(authRedirectUrl)
+      }
     }
   }
 
@@ -72,7 +85,14 @@ class UserProfileScreen extends Component {
   }
 
   authenticateSocialMedia = platform => {
+    this.setState({currentPlatform: platform})
     this.props.socialMediaAuth(platform, this.props.userId)
+  }
+
+  socialPlatformAuthenticated = (provider) => {
+    return this.props.platforms.filter(platformObj =>
+      platformObj.provider === provider
+    ).length > 0
   }
 
   render() {
@@ -85,12 +105,13 @@ class UserProfileScreen extends Component {
       apiAccessToken,
       getUserId,
       socialMediaAuth,
-      getUserTokens
+      getUserTokens,
+      platforms
     } = this.props
     const { showFriendster } = this.state
 
     return (
-        <View style={showFriendster ? { opacity: 0.3 } : ''}>
+        <ScrollView style={showFriendster ? { opacity: 0.3 } : ''}>
           <LinearGradient
           colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
           start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
@@ -111,6 +132,7 @@ class UserProfileScreen extends Component {
               <Text style={styles.interestsText}>
                   {userInterests.join(' | ')}
               </Text>
+              <Button title='Toggle onMobile' onPress={() => this.setState({onMobile: true})} />
               <View style={{ flexDirection: 'row', marginTop: 7, justifyContent: 'space-around'}}>
                 <Icon
                   name='location'
@@ -132,7 +154,6 @@ class UserProfileScreen extends Component {
             </View>
             </LinearGradient>
             <View style={styles.socialIconSlider}>
-
             </View>
             <View style={styles.socialAccountContainer}>
               <SocialMediaCard
@@ -144,14 +165,16 @@ class UserProfileScreen extends Component {
               <SocialMediaCard
                 platformName='Instagram'
                 userName={userInfo.name}
-                socialAuth={this.authenticateSocialMedia}
+                socialAuth={(platform) => this.authenticateSocialMedia(platform)}
+                selected={this.socialPlatformAuthenticated('instagram')}
                 platformAuth={'instagram'}
                 inverted={true} />
               <SocialMediaCard
                 platformName='Twitter'
-                socialAuth={this.authenticateSocialMedia}
+                socialAuth={(platform) => this.authenticateSocialMedia(platform)}
                 userName={userInfo.name}
                 platformAuth={'twitter'}
+                selected={this.socialPlatformAuthenticated('twitter')}
                 inverted={true} />
               <SocialMediaCard
                 platformName='LinkedIn'
@@ -168,7 +191,7 @@ class UserProfileScreen extends Component {
                 margin={207}
               />
             </View>
-        </View>
+        </ScrollView>
     )
   }
 }
