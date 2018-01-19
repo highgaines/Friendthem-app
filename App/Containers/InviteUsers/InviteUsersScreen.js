@@ -108,6 +108,11 @@ class InviteUsersScreen extends Component {
                 image={'https://i.ytimg.com/vi/6UuTd4pKHPo/maxresdefault.jpg'}
                 conPct={80}
               />
+              <ConnectivityCard
+                name="Peter Parker"
+                image={'https://qph.ec.quoracdn.net/main-qimg-b494e2e5ec0277770bed6c793c3570b9-c'}
+                conPct={30}
+              />
             </View>
           </View>
         }

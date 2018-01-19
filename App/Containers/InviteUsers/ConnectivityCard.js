@@ -36,8 +36,12 @@ export default ConnectivityCard = props => {
       // }
       if (conPct === 100) {
         return 'green'
-      } else {
+      } else if(conPct > 66) {
+        return 'yellow'
+      } else if(conPct > 33) {
         return 'orange'
+      } else {
+        return 'red'
       }
   }
 
