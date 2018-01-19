@@ -11,11 +11,11 @@ export default StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     marginTop: 30,
+    backgroundColor: 'transparent',
     shadowOpacity: 0.25,
     shadowRadius: 5,
     shadowColor: 'black',
-    shadowOffset: { height: 6, width: 10 },
-    zIndex: 99
+    shadowOffset: { height: 6, width: 10 }
   },
   profHeaderTop: {
     height: 125,
