@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity } from 'react-native'
+
+// Libraries
 import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from 'react-native-elements';
 import FBSDK, { LoginManager } from 'react-native-fbsdk';
+import Communications from 'react-native-communications';
+
+// Redux
 import FBStoreActions from '../../Redux/FBStore';
 
 // Components
@@ -25,11 +30,13 @@ class FriendProfileScreen extends Component {
   }
 
   handleEmail = () => {
-    // email action here
+    // email action here - needs to be hooked up to friend/user's actual e-mail
+    Communications.email(['naz@simplefractal.com'], null, null, 'ITS ALIVE!!!', 'my body text')
   }
 
   handleCall = () => {
-    // call action here
+    // call action here - needs to be hooked up to friend/user's actual phone number if they have one, otherwise this action will trigger alert?
+    Communications.phonecall('3472917739', true)
   }
 
   render() {
