@@ -22,7 +22,6 @@ export default class PermissionScreen extends Component {
 
   handleNotNow = () => {
     // redux action to continue WITHOUT gelocation
-    console.log('not now buddy')
   }
 
   handleOkay = () => {
@@ -51,7 +50,6 @@ export default class PermissionScreen extends Component {
         setFriendInfo: setFriendInfo
       })
     }
-    console.log('okay!')
   }
 
   determineText = () => {

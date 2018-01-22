@@ -25,11 +25,11 @@ class FriendProfileScreen extends Component {
   }
 
   handleEmail = () => {
-    console.log('sending e-mail')
+    // email action here
   }
 
   handleCall = () => {
-    console.log('calling contact')
+    // call action here
   }
 
   render() {
