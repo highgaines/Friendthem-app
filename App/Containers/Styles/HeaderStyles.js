@@ -4,16 +4,18 @@ import { Metrix, ApplicationStyles, Fonts } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   linearGradient: {
-    height: 80,
-    alignItems: 'flex-end',
+    height: 90,
+    alignItems: 'center',
     shadowOpacity: 0.5,
     shadowRadius: 5,
     shadowColor: 'black',
-    shadowOffset: { height: 0, width: 0 }
+    shadowOffset: { height: 0, width: 0 },
+    zIndex: 99
   },
   header: {
     backgroundColor: 'transparent',
-    marginTop: 50,
+    marginTop: 30,
+    paddingTop: 16,
     flexDirection: 'row',
     justifyContent: 'center'
   },
@@ -27,7 +29,6 @@ export default StyleSheet.create({
     paddingTop: 30,
     fontFamily: 'Montserrat',
     flex: 3,
-    textAlign: 'center',
-    fontWeight: '600'
+    textAlign: 'center'
   }
 })

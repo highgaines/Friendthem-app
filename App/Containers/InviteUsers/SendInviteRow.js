@@ -6,6 +6,7 @@ import { Metrics, ApplicationStyles, Fonts } from '../../Themes/';
 // Libraries
 import SendSMS from 'react-native-sms';
 import Image from 'react-native-remote-svg';
+import Communications from 'react-native-communications';
 
 // Images
 import { Images } from '../../Themes';
@@ -24,13 +25,7 @@ export default SendInviteRow = props => {
 
   // will have to tweak - currently not working
   const handleInvite = () => {
-    SendSMS.send({
-      body: 'You have been invited to use FriendThem!',
-      recipients: ['3472917739'],
-      successTypes: ['sent', 'queued']
-    }, (completed, cancelled, error) => {
-      console.log('completed:', completed, 'cancelled:', cancelled, 'error:', error)
-    })
+    Communications.text('3472917739', 'You have been invited to download FriendThem')
   }
 
   return(

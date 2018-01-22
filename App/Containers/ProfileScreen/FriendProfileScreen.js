@@ -106,6 +106,7 @@ class FriendProfileScreen extends Component {
                 navigation={navigation}
                 openModal={this.openModal}
                 logOut={this.logOut}
+                current='Friends'
                 margin={150}
               />
             </View>

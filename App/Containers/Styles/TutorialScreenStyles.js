@@ -17,6 +17,22 @@ export default StyleSheet.create({
     width: '100%',
     height: '100%'
   },
+  modal: {
+    width: 250,
+    height: 200,
+    overflow: 'hidden',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 250,
+    marginLeft: 70,
+    backgroundColor: 'white',
+    borderRadius: 30
+  },
+  modalText: {
+    fontSize: 12,
+    fontFamily: 'montserrat',
+    textAlign: 'center'
+  },
   startButton: {
     justifyContent: 'center',
     textAlign: 'center',

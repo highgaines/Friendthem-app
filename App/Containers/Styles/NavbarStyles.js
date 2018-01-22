@@ -8,7 +8,7 @@ export default StyleSheet.create({
     width: '100%',
     position: 'absolute',
     backgroundColor: 'black',
-    height: 60,
+    height: 70,
     flexDirection: 'row'
   },
   modal: {
@@ -24,6 +24,12 @@ export default StyleSheet.create({
     marginLeft: 15
   },
   iconContainer: {
-    marginHorizontal: 30
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  iconText: {
+    color: 'white',
+    fontSize: 10,
+    textAlign: 'center'
   }
 })

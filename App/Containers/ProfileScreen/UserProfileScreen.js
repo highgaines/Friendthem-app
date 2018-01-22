@@ -4,21 +4,43 @@ import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { Icon } from 'react-native-elements'
 
+// Libraries
 import ConnectButton from '../SuperConnectScreen/ConnectButton'
 import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard'
 import Navbar from '../Navbar/Navbar'
+import PickSocialMediaModal from '../TutorialScreens/PickSocialMediaModal'
 
+// Styles
 import styles from '../Styles/UserProfileStyles'
 
 class UserProfileScreen extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      showFriendster: true
+    }
+  }
+
+  triggerFriendster = () => {
+    const { showFriendster } = this.state
+    this.setState({ showFriendster: !showFriendster })
+  }
+
   render() {
     const { userInfo, userInterests, userLocation, navigation } = this.props
+    const { showFriendster } = this.state
+
     return (
-        <View>
+        <View style={showFriendster ? { opacity: 0.3 } : ''}>
           <LinearGradient
           colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
           start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
           locations={[0.1, 0.3, 0.5, 0.7, 1.0]}>
+          <PickSocialMediaModal
+            triggerModal={this.triggerFriendster}
+            showModal={showFriendster}
+          />
             <View style={styles.profileHeader}>
               <View style={styles.profHeaderTop}>
                 <Image
@@ -64,7 +86,8 @@ class UserProfileScreen extends Component {
               <Navbar
                 navbarStyle={styles.userProfNavbar}
                 navigation={navigation}
-                margin={150}
+                current='Profile'
+                margin={207}
               />
             </View>
         </View>
