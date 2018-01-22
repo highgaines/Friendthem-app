@@ -19,20 +19,20 @@ export default class SocialMediaCard extends Component {
   }
 
   renderIcon = () => {
-    const { platformName, inverted } = this.props;
+    const { platformName, selected } = this.props;
 
-    return inverted ? (
+    return selected ? (
       <Icon
         name={platformName.toLowerCase()}
         type='font-awesome'
-        color="#3C5996"
+        color="#fff"
         size={40}
       />
     ) : (
       <Icon
         name={platformName.toLowerCase()}
         type='font-awesome'
-        color="#ffffff"
+        color="#ABABAB"
         size={40}
       />
     )
@@ -50,7 +50,7 @@ export default class SocialMediaCard extends Component {
 
     return (
       <TouchableOpacity
-        style={inverted ? styles.invertedCard : cardStyle}
+        style={cardStyle}
         onPress={this.handlePush}
       >
         {
@@ -67,14 +67,14 @@ export default class SocialMediaCard extends Component {
         <View style={styles.socialMediaText}>
 
           <Text
-            style={inverted ? styles.platformNameInverted : styles.platformName}
+            style={selected ? styles.platformName : styles.unsyncedPlatformName }
           >
             {platformName}
           </Text>
 
           <Text
-            style={inverted ? styles.userNameInverted : styles.userName}>
-            {userName}
+            style={selected ? styles.userName : styles.unsyncedUserName }>
+            {userName || 'Sync Account'}
           </Text>
         </View>
       </TouchableOpacity>

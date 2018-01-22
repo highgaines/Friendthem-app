@@ -4,9 +4,10 @@
    "appServerRootURL": "http://eoghan.pagekite.me",
    "devClientId": "vVHC5uHETLyixeMkB9oMp3696it3yp3bT86fODTx",
    "devClientSecret": "OKNqJSy8ptZ0GUR2afW20ijs3hbS1HNc069RGH8NgPxc2bCU1urm1GyofbIAWxihaoeJZ5Ume9ECeLt0h7qjLeRSRx7sA3k5nGF1ibxwhJyPW1xbhNbHsQmqJH6KwC18",
-   "devGoogleClientId": "595911831950-0ktavocb1eoufc0g99p69s8rp7l4pcea.apps.googleusercontent.com",
+   "devGoogleClientId": "595911831950-6lnct4nnui472l34e6asij2rnrjbdcmj.apps.googleusercontent.com",
    "devGoogleClientSecret": "7acK_8Ej0SKWnnS1GjHTesXm",
-   "devGoogleBaseURL": "https://accounts.google.com/o/oauth2/v2/auth?"
+   "devGoogleBaseURL": "https://accounts.google.com/o/oauth2/v2/auth?",
+   "devGoogleApiParams": "scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&response_type=code&redirect_uri=org.reactjs.native.FriendThem&client_id="
  },
  "Staging": {
    "codePushKey": "",

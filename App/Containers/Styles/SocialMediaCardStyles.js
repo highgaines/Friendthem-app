@@ -5,7 +5,7 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   cardUnselected: {
     alignItems: 'center',
-    backgroundColor: '#3C5996',
+    backgroundColor: '#fff',
     marginTop: 10,
     borderRadius: 10,
     height: 120,
@@ -47,7 +47,8 @@ export default StyleSheet.create({
     borderRadius: 50,
     height: 60,
     marginTop: 25,
-    width: 100
+    width: 100,
+    marginBottom: -10
   },
   socialMediaText: {
     alignItems: 'center',
@@ -55,14 +56,27 @@ export default StyleSheet.create({
     borderBottomRightRadius: 10
   },
   platformName: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: 'bold',
     color: '#FFFFFF',
+    fontFamily: Fonts.type.base,
+  },
+  unsyncedPlatformName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#adadad',
     fontFamily: Fonts.type.base,
   },
   userName: {
     fontSize: 10,
     color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontFamily: Fonts.type.base,
+  },
+  unsyncedUserName: {
+    fontSize: 10,
+    color: '#adadad',
+    fontWeight: 'bold',
     fontFamily: Fonts.type.base,
   },
   platformNameInverted: {

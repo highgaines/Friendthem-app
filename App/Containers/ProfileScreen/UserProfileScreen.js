@@ -16,7 +16,8 @@ import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
 
 // Styles
 import styles from '../Styles/UserProfileStyles'
-import {SOCIAL_MEDIA_DATA} from '../../Utils/constants'
+import { SOCIAL_MEDIA_DATA } from '../../Utils/constants'
+import envConfig from '../../../envConfig'
 
 class UserProfileScreen extends Component {
   constructor(props) {
@@ -90,9 +91,9 @@ class UserProfileScreen extends Component {
   }
 
   socialPlatformAuthenticated = (provider) => {
-    return this.props.platforms.filter(platformObj =>
+    return this.props.platforms.find(platformObj =>
       platformObj.provider === provider
-    ).length > 0
+    )
   }
 
   render() {
@@ -109,6 +110,7 @@ class UserProfileScreen extends Component {
       platforms
     } = this.props
     const { showFriendster } = this.state
+    const { devGoogleBaseURL, devGoogleApiParams, devGoogleClientId } = envConfig.Development
 
     return (
         <ScrollView style={showFriendster ? { opacity: 0.3 } : ''}>
@@ -158,30 +160,27 @@ class UserProfileScreen extends Component {
             <View style={styles.socialAccountContainer}>
               <SocialMediaCard
                 platformName='Facebook'
-                socialAuth={socialMediaAuth}
+                selected={!!this.socialPlatformAuthenticated('facebook')}
+                socialAuth={(platform) => this.authenticateSocialMedia(platform)}
                 userName={userInfo.name}
-                platformAuth={'facebook'}
-                inverted={false} />
+                platformAuth={'facebook'} />
               <SocialMediaCard
                 platformName='Instagram'
                 userName={userInfo.name}
                 socialAuth={(platform) => this.authenticateSocialMedia(platform)}
-                selected={this.socialPlatformAuthenticated('instagram')}
-                platformAuth={'instagram'}
-                inverted={true} />
+                selected={!!this.socialPlatformAuthenticated('instagram')}
+                platformAuth={'instagram'} />
               <SocialMediaCard
                 platformName='Twitter'
                 socialAuth={(platform) => this.authenticateSocialMedia(platform)}
-                userName={userInfo.name}
+                userName={this.socialPlatformAuthenticated('twitter').access_token.screen_name}
                 platformAuth={'twitter'}
-                selected={this.socialPlatformAuthenticated('twitter')}
-                inverted={true} />
+                selected={!!this.socialPlatformAuthenticated('twitter')} />
               <SocialMediaCard
-                platformName='LinkedIn'
-                socialAuth={this.authenticateSocialMedia}
+                platformName='SnapChat'
+                socialAuth={() => Linking.openURL('snapchat://add/starbucks')}
                 userName={userInfo.name}
-                platformAuth={'linkedin-oauth2'}
-                inverted={true} />
+                platformAuth={'snapchat'} />
             </View>
             <View>
               <Navbar
