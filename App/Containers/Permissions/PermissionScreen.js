@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 // Libraries
 import SVGImage from 'react-native-svg-image';
@@ -9,13 +11,16 @@ import Image from 'react-native-remote-svg';
 // Components
 import ConnectButton from '../SuperConnectScreen/ConnectButton';
 
+// Redux
+import PermissionsStoreActions from '../../Redux/PermissionsStore';
+
 // Images
 import { Images } from '../../Themes';
 
 // Styles
 import styles from '../Styles/PermissionsScreenStyles';
 
-export default class PermissionScreen extends Component {
+class PermissionScreen extends Component {
   constructor(props) {
     super(props)
   }
@@ -116,3 +121,19 @@ export default class PermissionScreen extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+
+})
+
+const mapDispatchToProps = dispatch => {
+  const { setGeoPermission, setNotifPermission } = PermissionsStoreActions
+  return {
+    ...bindActionCreators({
+      setGeoPermissions,
+      setNotifPermission
+    }, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PermissionScreen)
