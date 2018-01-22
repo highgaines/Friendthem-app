@@ -28,8 +28,7 @@ class UserProfileScreen extends Component {
       externalAuth: false,
       currentPlatform: null,
       appState: AppState.currentState,
-      socialMediaData: SOCIAL_MEDIA_DATA,
-      onMobile: false
+      socialMediaData: SOCIAL_MEDIA_DATA
     }
   }
 
@@ -65,7 +64,7 @@ class UserProfileScreen extends Component {
 
   componentDidUpdate = prevProps => {
     const { authRedirectUrl } = this.props
-    const { socialMediaData, currentPlatform, onMobile } = this.state
+    const { socialMediaData, currentPlatform } = this.state
 
     if (authRedirectUrl && !prevProps.authRedirectUrl && currentPlatform) {
       const deepLinkBase = socialMediaData[currentPlatform.split('-')[0]].deepLinkUrl
@@ -73,7 +72,7 @@ class UserProfileScreen extends Component {
 
       this.setState({externalAuth: true})
 
-      if (Linking.canOpenURL(deepLinkAuth) && onMobile) {
+      if (Linking.canOpenURL(deepLinkAuth) && false) {
         Linking.openURL(deepLinkAuth)
       } else {
         Linking.openURL(authRedirectUrl)
@@ -90,7 +89,7 @@ class UserProfileScreen extends Component {
     this.props.socialMediaAuth(platform, this.props.userId)
   }
 
-  socialPlatformAuthenticated = (provider) => {
+  socialPlatformPresent = (provider) => {
     return this.props.platforms.find(platformObj =>
       platformObj.provider === provider
     )
@@ -109,7 +108,7 @@ class UserProfileScreen extends Component {
       getUserTokens,
       platforms
     } = this.props
-    const { showFriendster } = this.state
+    const { showFriendster, socialMediaData } = this.state
     const { devGoogleBaseURL, devGoogleApiParams, devGoogleClientId } = envConfig.Development
 
     return (
@@ -134,7 +133,6 @@ class UserProfileScreen extends Component {
               <Text style={styles.interestsText}>
                   {userInterests.join(' | ')}
               </Text>
-              <Button title='Toggle onMobile' onPress={() => this.setState({onMobile: true})} />
               <View style={{ flexDirection: 'row', marginTop: 7, justifyContent: 'space-around'}}>
                 <Icon
                   name='location'
@@ -158,29 +156,24 @@ class UserProfileScreen extends Component {
             <View style={styles.socialIconSlider}>
             </View>
             <View style={styles.socialAccountContainer}>
-              <SocialMediaCard
-                platformName='Facebook'
-                selected={!!this.socialPlatformAuthenticated('facebook')}
-                socialAuth={(platform) => this.authenticateSocialMedia(platform)}
-                userName={userInfo.name}
-                platformAuth={'facebook'} />
-              <SocialMediaCard
-                platformName='Instagram'
-                userName={userInfo.name}
-                socialAuth={(platform) => this.authenticateSocialMedia(platform)}
-                selected={!!this.socialPlatformAuthenticated('instagram')}
-                platformAuth={'instagram'} />
-              <SocialMediaCard
-                platformName='Twitter'
-                socialAuth={(platform) => this.authenticateSocialMedia(platform)}
-                userName={this.socialPlatformAuthenticated('twitter').access_token.screen_name}
-                platformAuth={'twitter'}
-                selected={!!this.socialPlatformAuthenticated('twitter')} />
-              <SocialMediaCard
-                platformName='SnapChat'
-                socialAuth={() => Linking.openURL('snapchat://add/starbucks')}
-                userName={userInfo.name}
-                platformAuth={'snapchat'} />
+            {
+              Object.keys(socialMediaData).map((socialPlatform, idx) => {
+                const currentPlatform = this.socialPlatformPresent(socialPlatform)
+                const userName = currentPlatform ? currentPlatform['access_token'][socialMediaData[socialPlatform]['userNamePath']] : null
+                const isSynced = !!currentPlatform
+
+                return (
+                  <SocialMediaCard
+                    key={idx}
+                    platformName={socialPlatform[0].toUpperCase() + socialPlatform.slice(1)}
+                    selected={isSynced}
+                    socialAuth={(platform) => this.authenticateSocialMedia(platform)}
+                    platformAuth={socialPlatform}
+                    userName={userName}
+                  />
+                )
+              })
+            }
             </View>
             <View>
               <Navbar

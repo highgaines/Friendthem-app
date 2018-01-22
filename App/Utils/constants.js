@@ -6,14 +6,15 @@ export const SOCIAL_MEDIA_DATA = {
     deepLinkUrl: 'instagram://'
   },
   twitter: {
-    deepLinkUrl: 'twitter://'
+    deepLinkUrl: 'twitter://',
+    userNamePath: 'screen_name'
   },
-  linkedin: {
-    deepLinkUrl: 'voyager://in'
-  },
-  youtube: {
-    deepLinkUrl: 'youtube://'
-  },
+  // linkedin: {
+  //   deepLinkUrl: 'voyager://in'
+  // },
+  // youtube: {
+  //   deepLinkUrl: 'youtube://'
+  // },
   snapchat: {
     deepLinkUrl: 'snapchat://'
   }
