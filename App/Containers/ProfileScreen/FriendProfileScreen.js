@@ -24,6 +24,14 @@ class FriendProfileScreen extends Component {
     }
   }
 
+  handleEmail = () => {
+    console.log('sending e-mail')
+  }
+
+  handleCall = () => {
+    console.log('calling contact')
+  }
+
   render() {
     const { friendInfo, superConnect, navigation } = this.props;
     const { showModal } = this.state
@@ -36,19 +44,23 @@ class FriendProfileScreen extends Component {
           locations={[0.1, 0.3, 0.5, 0.7, 1.0]}>
             <View style={styles.profileHeader}>
               <View style={styles.profHeaderTop}>
-                <Icon
-                 name='phone'
-                 type='font-awesome'
-                 color='#ffffff'
-                 containerStyle={styles.phoneIcon}/>
+                <TouchableOpacity onPress={this.handleCall}>
+                  <Icon
+                    name='phone'
+                    type='font-awesome'
+                    color='#ffffff'
+                    containerStyle={styles.phoneIcon}/>
+                </TouchableOpacity>
                 <Image
                   style={styles.profileImage}
                   source={{uri: friendInfo.image}} />
-                 <Icon
-                  name='md-mail'
-                  type='ionicon'
-                  color='#ffffff'
-                  containerStyle={styles.mailIcon}/>
+                  <TouchableOpacity onPress={this.handleEmail}>
+                    <Icon
+                      name='md-mail'
+                      type='ionicon'
+                      color='#ffffff'
+                      containerStyle={styles.mailIcon}/>
+                  </TouchableOpacity>
               </View>
               <Text style={styles.profileSubtext}>
               {`${friendInfo.name}`}
