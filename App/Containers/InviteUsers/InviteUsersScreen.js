@@ -16,6 +16,7 @@ import SearchContainer from './SearchContainer';
 import InviteUsersModal from './InviteUsersModal';
 import UsersContainer from '../NearbyUsersScreen/UsersContainer';
 import ConnectivityCard from './ConnectivityCard';
+import Navbar from '../Navbar/Navbar';
 
 // Styles
 import styles from '../Styles/InviteUsersScreenStyles';
@@ -36,7 +37,7 @@ class InviteUsersScreen extends Component {
 
   render() {
     const { networkTabSelected, showModal } = this.state;
-    const { selectUser, selectedUser } = this.props
+    const { selectUser, selectedUser, navigation } = this.props
 
     return (
       <View style={[{ flex: 1 }, this.state.showModal ? { opacity: 0.1 } : '']}>
@@ -116,6 +117,12 @@ class InviteUsersScreen extends Component {
             </View>
           </View>
         }
+        <Navbar
+          navbarStyle={styles.navbar}
+          navigation={navigation}
+          current="Friends"
+          margin={607}
+        />
       </View>
     )
   }

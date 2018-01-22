@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 //Styles
@@ -13,7 +13,9 @@ export default Header = props => {
       locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
       style={styles.linearGradient}
     >
-      <Text style={styles.headerTitle}> {props.title} </Text>
+      <View style={{ marginTop: 10, alignItems: 'center', justifyContent: 'center' }}>
+        <Text style={styles.headerTitle}> {props.title} </Text>
+      </View>
     </LinearGradient>
   )
 }

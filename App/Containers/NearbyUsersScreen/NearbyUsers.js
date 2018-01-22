@@ -56,8 +56,9 @@ export default class NearbyUsers extends Component {
           setFriendInfo={setFriendInfo}/>
         <Navbar
           navbarStyle={styles.nearbyUsersNavbar}
+          current='Nearby'
           navigation={navigation}
-          margin={610}
+          margin={607}
         />
         {welcomeTutorialVisible ? <WelcomeScreen
           visible={welcomeTutorialVisible}

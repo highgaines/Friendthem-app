@@ -15,8 +15,8 @@ import { Images } from '../../Themes';
 import styles from '../Styles/NavbarStyles';
 
 class Navbar extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
 
     this.state = {
       highlighted: '',
@@ -63,7 +63,7 @@ class Navbar extends Component {
     const { navigate } = this.props.navigation
     navigate('InviteUsers',
     {
-        // pass in props object here
+        navigation: this.props.navigation
     })
   }
 
@@ -84,44 +84,100 @@ class Navbar extends Component {
   }
 
   render() {
+    const { current } = this.props
+
     return(
         <View style={[this.props.navbarStyle || styles.navbarRow, { marginTop: this.props.margin }]}>
+          <View style={[styles.container, current === 'Profile' ?
+            {
+              borderColor: '#ff00e1',
+              borderBottomWidth: 2
+            }: '']}>
+            <Icon
+              name='user'
+              type='entypo'
+              color={current === 'Profile' ? "#ff00e1" : "#fff"}
+              containerStyle={styles.iconContainer}
+              onPress={this.goToProfile}
+            />
+            <Text style={[styles.iconText, current === 'Profile' ?
+              {color: '#ff00e1'} :
+              '' ]}> Profile </Text>
+          </View>
 
-          <Icon
-            name='user'
-            type='entypo'
-            color='#fff'
-            containerStyle={styles.iconContainer}
-            onPress={this.goToProfile}
-          />
-          <Icon
-            name='users'
-            type='entypo'
-            color='#fff'
-            containerStyle={styles.iconContainer}
-            onPress={this.goToInviteUsers}
-          />
-          <Icon
-            name="500px-with-circle"
-            type="entypo"
-            color="#fff"
-            containerStyle={styles.iconContainer}
-            onPress={this.goToNearbyUsers}
-          />
-          <Icon
-            name='notifications'
-            type='materialicons'
-            color='#fff'
-            containerStyle={styles.iconContainer}
-            onPress={this.goToNotifications}
-          />
-          <Icon
-            name='settings'
-            type='materialcommunityicons'
-            color='#fff'
-            containerStyle={styles.iconContainer}
-            onPress={this.goToSettings}
-          />
+          <View style={[styles.container, current === 'Friends' ?
+            {
+              borderColor: '#ff00e1',
+              borderBottomWidth: 2
+            }: '']}>
+            <Icon
+              name='users'
+              type='entypo'
+              color={current === 'Friends' ? "#ff00e1" : "#fff"}
+              containerStyle={styles.iconContainer}
+              onPress={this.goToInviteUsers}
+            />
+            <Text style={[styles.iconText, current === 'Friends' ?
+              {color: '#ff00e1'} :
+              '' ]}> Friends </Text>
+          </View>
+
+          <View
+            style={[styles.container, current === 'Nearby' ?
+              {
+                borderColor: '#ff00e1',
+                borderBottomWidth: 2
+              }: '']}>
+            <Icon
+              name="500px-with-circle"
+              type="entypo"
+              color={current === 'Nearby' ? "#ff00e1" : "#fff"}
+              containerStyle={styles.iconContainer}
+              onPress={this.goToNearbyUsers}
+            />
+            <Text
+              style={[styles.iconText, current === 'Nearby' ?
+                {color: '#ff00e1'} :
+                '' ]}>
+              Nearby
+            </Text>
+          </View>
+
+          <View style={[styles.container, current === 'Notifications' ?
+            {
+              borderColor: '#ff00e1',
+              borderBottomWidth: 5
+            }: '']}>
+            <Icon
+              name='notifications'
+              type='materialicons'
+              size={26}
+              color={current === 'Notifications' ? "#ff00e1" : "#fff"}
+              containerStyle={styles.iconContainer}
+              onPress={this.goToNotifications}
+            />
+            <Text style={[styles.iconText, current === 'Notifications' ?
+              {color: '#ff00e1'} :
+              '' ]}> Notifications </Text>
+          </View>
+
+          <View style={[styles.container, current === 'Settings' ?
+            {
+              borderColor: '#ff00e1',
+              borderBottomWidth: 2
+            }: '']}>
+            <Icon
+              name='settings'
+              type='materialcommunityicons'
+              size={27}
+              color={current === 'Settings' ? "#ff00e1" : "#fff"}
+              containerStyle={styles.iconContainer}
+              onPress={this.goToSettings}
+            />
+            <Text style={[styles.iconText, current === 'Settings' ?
+              {color: '#ff00e1'} :
+              '' ]}> Settings </Text>
+          </View>
           <LogoutModal
             showModal={this.state.logoutModalOpen}
             logOut={this.logOut}

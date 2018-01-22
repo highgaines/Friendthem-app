@@ -40,6 +40,7 @@
     "react-native-animatable": "^1.2.4",
     "react-native-auth0": "^1.2.1",
     "react-native-checkbox": "^2.0.0",
+    "react-native-communications": "^2.2.1",
     "react-native-config": "^0.10.0",
     "react-native-fbsdk": "^0.6.3",
     "react-native-linear-gradient": "react-native-community/react-native-linear-gradient",

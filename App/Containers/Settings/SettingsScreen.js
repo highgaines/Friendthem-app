@@ -6,6 +6,7 @@ import { ScrollView, Text, Image, View, TouchableOpacity, Switch } from 'react-n
 import LinearGradient from 'react-native-linear-gradient'
 import { Icon } from 'react-native-elements'
 import FBSDK, { LoginManager } from 'react-native-fbsdk';
+import Communications from 'react-native-communications';
 
 // Redux
 import FBStoreActions from '../../Redux/FBStore';
@@ -37,6 +38,20 @@ class SettingsScreen extends Component {
     LoginManager.logOut();
     fbLogoutComplete()
     navigation.navigate('LaunchScreen')
+  }
+
+  reportProblem = () => {
+    Communications.email(['customerservice@friendthem.com'], null, null, 'Report A Problem', 'Please explain your problem here...')
+  }
+
+  toggleSilenceNotification = () => {
+    const { silenceSwitch } = this.state
+    this.setState({ silenceSwitch: !silenceSwitch}, () => silenceNotifications( !silenceSwitch ))
+  }
+
+  toggleGhostMode = () => {
+    const { ghostSwitch } = this.state
+    this.setState({ ghostSwitch: !ghostSwitch }, () => ghostMode(!ghostSwitch))
   }
 
   render() {
@@ -79,7 +94,10 @@ class SettingsScreen extends Component {
               style={styles.rightArrow}
               />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.sectionItem}>
+          <TouchableOpacity
+            style={styles.sectionItem}
+            onPress={this.handleReportProblem}
+            >
             <Image
               source={Images.danger}
               />
@@ -117,7 +135,7 @@ class SettingsScreen extends Component {
             </Text>
             <Switch
               onTintColor='#f6385e'
-              onValueChange={() => this.setState({ silenceSwitch: !silenceSwitch}) }
+              onValueChange={this.toggleSilenceNotification}
               value={silenceSwitch}
               style={styles.switchStyle}
             />
@@ -131,7 +149,7 @@ class SettingsScreen extends Component {
             </Text>
             <Switch
               onTintColor='#f6385e'
-              onValueChange={() => this.setState({ ghostSwitch: !ghostSwitch}) }
+              onValueChange={this.toggleGhostMode}
               value={ghostSwitch}
               style={styles.ghostSwitchStyle}
             />
@@ -163,6 +181,7 @@ class SettingsScreen extends Component {
           <Navbar
             navbarStyle={styles.userProfNavbar}
             navigation={navigation}
+            current="Settings"
             margin={150}
           />
       </View>

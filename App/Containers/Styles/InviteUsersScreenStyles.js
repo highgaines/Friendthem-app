@@ -62,5 +62,18 @@ export default StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
     padding: 5
+  },
+  navbar: {
+    justifyContent: 'space-around',
+    width: '100%',
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    top: 0,
+    marginTop: 610,
+    backgroundColor: 'black',
+    height: 60,
+    flexDirection: 'row'
   }
 })

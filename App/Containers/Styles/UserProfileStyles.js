@@ -7,7 +7,7 @@ export default StyleSheet.create({
 
   },
   profileHeader: {
-    height: 220,
+    height: 210,
     width: '100%',
     alignItems: 'center',
     marginTop: 30,

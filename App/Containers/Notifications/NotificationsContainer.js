@@ -95,6 +95,7 @@ class NotificationsContainer extends Component {
         <Navbar
           navbarStyle={styles.navbar}
           navigation={this.props.navigation}
+          current="Notifications"
           margin={610}
         />
       </View>

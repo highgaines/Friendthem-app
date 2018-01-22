@@ -38,7 +38,6 @@ export default StyleSheet.create({
     fontSize: 20,
     flex: 3,
     textAlign: 'center',
-    fontWeight: '600',
     fontFamily: 'Montserrat'
   },
   backIcon: {
