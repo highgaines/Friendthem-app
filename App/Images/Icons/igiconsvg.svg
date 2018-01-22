@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="31px" height="31px" viewBox="0 0 31 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>Instagram</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <ellipse id="path-1" cx="9.42653183" cy="9.80934959" rx="9.42653183" ry="9.66219512"></ellipse>
+        <filter x="-47.7%" y="-46.6%" width="195.5%" height="193.1%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.141247736 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="99.7089109%" x2="50%" y2="0.776721582%" id="linearGradient-3">
+            <stop stop-color="#E09B3D" offset="0%"></stop>
+            <stop stop-color="#C74C4D" offset="30%"></stop>
+            <stop stop-color="#C21975" offset="60%"></stop>
+            <stop stop-color="#7024C4" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="146.098873%" x2="50%" y2="-45.1596833%" id="linearGradient-4">
+            <stop stop-color="#E09B3D" offset="0%"></stop>
+            <stop stop-color="#C74C4D" offset="30%"></stop>
+            <stop stop-color="#C21975" offset="60%"></stop>
+            <stop stop-color="#7024C4" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="658.140556%" x2="50%" y2="-140.029283%" id="linearGradient-5">
+            <stop stop-color="#E09B3D" offset="0%"></stop>
+            <stop stop-color="#C74C4D" offset="30%"></stop>
+            <stop stop-color="#C21975" offset="60%"></stop>
+            <stop stop-color="#7024C4" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="9.2-My-Network-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-91.000000, -256.000000)">
+        <g id="Most-Recent" transform="translate(14.000000, 218.000000)">
+            <g id="User-1">
+                <g id="Social-medial" transform="translate(58.000000, 34.000000)">
+                    <g id="Instagram" transform="translate(25.000000, 10.000000)">
+                        <g id="Oval-6">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                            <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        </g>
+                        <g id="003-instagram" transform="translate(4.713266, 4.978252)" fill-rule="nonzero">
+                            <path d="M6.61831716,0 L2.80821466,0 C1.25975857,0 0,1.31872599 0,2.93966301 L0,6.92811073 C0,8.54904775 1.25975857,9.86777374 2.80821466,9.86777374 L6.61831716,9.86777374 C8.16677326,9.86777374 9.42653183,8.54904775 9.42653183,6.92811073 L9.42653183,2.93966301 C9.42651472,1.31872599 8.16675615,0 6.61831716,0 Z M8.47822307,6.92811073 C8.47822307,8.003381 7.64550624,8.87507607 6.61831716,8.87507607 L2.80821466,8.87507607 C1.78102559,8.87507607 0.948308753,8.003381 0.948308753,6.92811073 L0.948308753,2.93966301 C0.948308753,1.86437484 1.78102559,0.992697673 2.80821466,0.992697673 L6.61831716,0.992697673 C7.64550624,0.992697673 8.47822307,1.86437484 8.47822307,2.93966301 L8.47822307,6.92811073 Z" id="Shape" fill="url(#linearGradient-3)"></path>
+                            <path d="M4.71326591,2.26136482 C3.33087283,2.26136482 2.20620958,3.41414869 2.20620958,4.83108855 C2.20620958,6.2480284 3.33087283,7.40083031 4.71326591,7.40083031 C6.095659,7.40083031 7.22032225,6.24804643 7.22032225,4.83108855 C7.22032225,3.41413066 6.095659,2.26136482 4.71326591,2.26136482 Z M4.71326591,6.40131099 C3.86721334,6.40131099 3.18136455,5.69831351 3.18136455,4.83110658 C3.18136455,3.96389965 3.86723093,3.26090217 4.71326591,3.26090217 C5.55931849,3.26090217 6.24516728,3.96389965 6.24516728,4.83110658 C6.24516728,5.69829547 5.55930089,6.40131099 4.71326591,6.40131099 Z" id="Shape" fill="url(#linearGradient-4)"></path>
+                            <ellipse id="Oval" fill="url(#linearGradient-5)" cx="7.22032225" cy="2.67252206" rx="1" ry="1"></ellipse>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

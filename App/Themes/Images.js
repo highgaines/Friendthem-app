@@ -29,14 +29,19 @@ const images = {
   powerIcon: require('../Images/Icons/power-icon.png'),
   privacy: require('../Images/Icons/privacy.png'),
   rightArrow: require('../Images/Icons/rightArrow.png'),
-  fbIcon: require('../Images/fbicon.png'),
-  twitterIcon: require('../Images/twittericon.png'),
-  snapchatIcon: require('../Images/snapchaticon.png'),
-  igIcon: require('../Images/igicon.png'),
+  fbIcon: require('../Images/Icons/fbiconsvg.svg'),
+  twitterIcon: require('../Images/Icons/twittericonsvg.svg'),
+  snapchatIcon: require('../Images/Icons/snapiconsvg.svg'),
+  igIcon: require('../Images/Icons/igiconsvg.svg'),
+  youtubeIcon: require('../Images/Icons/youtubeiconsvg.svg'),
 
-  messengerIcon: require('../Images/messengericon.png'),
-  textMessageIcon: require('../Images/texticon.png'),
+  messengerIcon: require('../Images/Icons/messengericon.svg'),
+  textMessageIcon: require('../Images/Icons/texticon.svg'),
   whatsappIcon: require('../Images/whatsappicon.png'),
+
+  // Images
+  geolocationSVG: require('../Images/geolocation-svg.svg'),
+  notificationsSVG: require('../Images/notifications-svg.svg'),
 
   // Navbar Icons
   profileIcon: require('../Images/Icons/nav-profile-icon.svg'),
@@ -47,7 +52,12 @@ const images = {
 
   // Logos
   smallLogoSVG: require('../Images/logo-small-svg.svg'),
-  logoPNG: require('../Images/logo-png.png')
+  logoPNG: require('../Images/logo-png.png'),
+  friendster: require('../Images/Icons/friendster-png.png'),
+
+  // Emblems
+  emblemColor: require('../Images/Icons/emblem-color.svg'),
+  emblemGreen: require('../Images/Icons/emblem-green.svg')
 }
 
 export default images

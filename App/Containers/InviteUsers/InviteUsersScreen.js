@@ -15,6 +15,7 @@ import InviteUsersHeader from './InviteUsersHeader';
 import SearchContainer from './SearchContainer';
 import InviteUsersModal from './InviteUsersModal';
 import UsersContainer from '../NearbyUsersScreen/UsersContainer';
+import ConnectivityCard from './ConnectivityCard';
 
 // Styles
 import styles from '../Styles/InviteUsersScreenStyles';
@@ -96,6 +97,23 @@ class InviteUsersScreen extends Component {
                 }}>
               Connectivity
             </Text>
+            <View style={styles.userContainer}>
+              <ConnectivityCard
+                name="Bruce Wayne"
+                image={'https://images.forbes.com/media/lists/fictional/2011/bruce-wayne_197x282.jpg'}
+                conPct={100}
+              />
+              <ConnectivityCard
+                name="Clark Kent"
+                image={'https://i.ytimg.com/vi/6UuTd4pKHPo/maxresdefault.jpg'}
+                conPct={80}
+              />
+              <ConnectivityCard
+                name="Peter Parker"
+                image={'https://qph.ec.quoracdn.net/main-qimg-b494e2e5ec0277770bed6c793c3570b9-c'}
+                conPct={30}
+              />
+            </View>
           </View>
         }
       </View>

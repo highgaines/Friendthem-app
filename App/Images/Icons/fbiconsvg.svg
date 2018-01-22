@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="31px" height="31px" viewBox="0 0 31 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>Fb</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <ellipse id="path-1" cx="9.42653183" cy="9.80934959" rx="9.42653183" ry="9.66219512"></ellipse>
+        <filter x="-47.7%" y="-46.6%" width="195.5%" height="193.1%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.141247736 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="9.2-My-Network-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-66.000000, -246.000000)">
+        <g id="Most-Recent" transform="translate(14.000000, 218.000000)">
+            <g id="User-1">
+                <g id="Social-medial" transform="translate(58.000000, 34.000000)">
+                    <g id="Fb">
+                        <g id="Oval-6">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                            <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        </g>
+                        <path d="M6.46171975,10.445225 L7.64887228,10.445225 L7.64887228,15.5322103 C7.64887228,15.6326506 7.72705263,15.7140244 7.82355121,15.7140244 L9.83642022,15.7140244 C9.9329188,15.7140244 10.0110991,15.6326506 10.0110991,15.5322103 L10.0110991,10.4692012 L11.3758497,10.4692012 C11.4645852,10.4692012 11.5392542,10.3998926 11.5493864,10.3081489 L11.7566616,8.43538461 C11.7623517,8.38386548 11.7466775,8.33225829 11.7135524,8.29359693 C11.6804061,8.25491355 11.6329606,8.23276473 11.5831672,8.23276473 L10.0111838,8.23276473 L10.0111838,7.05881117 C10.0111838,6.70493642 10.1942392,6.52547812 10.5553579,6.52547812 C10.6068224,6.52547812 11.5831672,6.52547812 11.5831672,6.52547812 C11.6796658,6.52547812 11.7578461,6.44406029 11.7578461,6.34366405 L11.7578461,4.62462051 C11.7578461,4.52418023 11.6796658,4.44280643 11.5831672,4.44280643 L10.1666772,4.44280643 C10.1566931,4.44230005 10.134504,4.44146341 10.1018019,4.44146341 C9.85602876,4.44146341 9.00173499,4.49168355 8.32690067,5.13785229 C7.57919531,5.85392411 7.68313964,6.71127723 7.7079729,6.85993413 L7.7079729,8.23272069 L6.4616986,8.23272069 C6.36520002,8.23272069 6.28701967,8.31409449 6.28701967,8.41453477 L6.28701967,10.2633889 C6.28704082,10.3638072 6.36522117,10.445225 6.46171975,10.445225 Z" id="Shape" fill="#385C8E" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

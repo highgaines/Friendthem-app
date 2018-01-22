@@ -3,11 +3,18 @@ import { ScrollView, Text, Image, View, TouchableOpacity, Button, ActivityIndica
 import { Images } from '../Themes'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+
+// Libraries
 import { SocialIcon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 import FBSDK, { LoginManager, LoginButton, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk'
+
+// Components
 import ConnectButton from './SuperConnectScreen/ConnectButton'
+import FBLogin from './FBLogin'
 import Footer from './UtilityComponents/Footer'
+
+// Config
 import envConfig from '../../envConfig'
 
 //Redux Actions
@@ -18,9 +25,6 @@ import AuthStoreActions, { loginByFacebook } from '../Redux/AuthStore'
 // Styles
 import styles from './Styles/LaunchScreenStyles'
 import footerStyles from './Styles/FooterStyles'
-
-//Child Components
-import FBLogin from './FBLogin'
 
 class LaunchScreen extends Component {
   constructor(props) {
@@ -57,10 +61,10 @@ class LaunchScreen extends Component {
         return error
       } else {
         fbUserInfo(result)
-        navigation.navigate('ForkScreen', {
-          numUsers: users.length,
+        navigation.navigate('PermissionScreen', {
+          permissionType: 'geolocation',
+          navigation: navigation,
           users: users,
-          navigation: this.props.navigation,
           setFriendInfo: setFriendInfo
         })
       }
@@ -131,7 +135,6 @@ class LaunchScreen extends Component {
                     handleLoading={this.handleLoading}
                     handleLoadingComplete={this.handleLoadingComplete}
                   />
-                  <Text style={styles.orText}>  or  </Text>
                   <ConnectButton
                     title='Start With Email'
                     color='#fff'

@@ -55,5 +55,12 @@ export default StyleSheet.create({
     marginLeft: 30,
     backgroundColor: 'white',
     borderRadius: 30
+  },
+  userContainer: {
+    flex: 3,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start',
+    padding: 5
   }
 })

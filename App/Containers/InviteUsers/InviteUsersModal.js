@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Modal, Text, Button, TouchableOpacity, Image } from 'react-native';
+import { View, Modal, Text, Button, TouchableOpacity } from 'react-native';
 
 // Libraries
 import LinearGradient from 'react-native-linear-gradient';
+import Image from 'react-native-remote-svg';
 
 // Components
 import ImageCircle from '../UtilityComponents/ImageCircle';
@@ -34,9 +35,7 @@ export default class InviteUsersModal extends Component {
         >
           <View style={modalStyle}>
             <View style={styles.blueRadial}>
-              <Image
-                source={Images.smallLogoSVG}
-              />
+
             </View>
             <LinearGradient
               colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}

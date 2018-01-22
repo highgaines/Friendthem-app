@@ -3,6 +3,7 @@ package com.friendthem;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.tkporter.sendsms.SendSMSPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.horcrux.svg.SvgPackage;
 import br.com.classapp.RNSensitiveInfo.RNSensitiveInfoPackage;
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            SendSMSPackage.getInstance(),
             new VectorIconsPackage(),
             new SvgPackage(),
             new RNSensitiveInfoPackage(),

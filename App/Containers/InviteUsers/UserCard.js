@@ -3,6 +3,9 @@ import { View, Image, TouchableOpacity, ScrollView, Text, Button } from 'react-n
 import SMPlatformCircle from '../UtilityComponents/SMPlatformCircle';
 import ImageCircle from '../UtilityComponents/ImageCircle';
 
+// Libraries
+import * as Animatable from 'react-native-animatable';
+
 // Styles
 import styles from '../Styles/InviteUserCardStyles';
 
@@ -23,13 +26,13 @@ export default UserCard = props => {
       <SMPlatformCircle
         key={idx}
         platform={platform}
+        size={30}
       />
     )
   }
 
   return (
-    <View style={styles.userCardContainer}>
-
+    <Animatable.View style={styles.userCardContainer} animation="slideInLeft">
       <View style={styles.imageColumn}>
         <ImageCircle
           size={70}
@@ -47,7 +50,6 @@ export default UserCard = props => {
       <View style={styles.sendButtonColumn}>
         <Button title="SEND" onPress={() => handleSend()}/>
       </View>
-
-    </View>
+    </Animatable.View>
   )
 }

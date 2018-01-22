@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet } from 'react-native'
-import { View, TouchableOpacity, Text, Image, Button } from 'react-native';
+import { View, TouchableOpacity, Text, Button } from 'react-native';
 import { Metrics, ApplicationStyles, Fonts } from '../../Themes/';
 
 // Libraries
 import SendSMS from 'react-native-sms';
+import Image from 'react-native-remote-svg';
 
 // Images
 import { Images } from '../../Themes';
@@ -40,10 +41,6 @@ export default SendInviteRow = props => {
         <Text style={styles.text}>
           Send request through {platform}
         </Text>
-        <Button
-          title="Invite"
-          onPress={() => handleInvite()}
-        />
     </View>
   )
 }
@@ -53,9 +50,9 @@ const styles = StyleSheet.create({
   inviteRowContent: {
     borderColor: 'grey',
     borderBottomWidth: 1,
-    height: 40,
+    height: 45,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-around',
     alignItems: 'center'
   },
   text: {

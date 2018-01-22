@@ -6,10 +6,13 @@ import { Icon } from 'react-native-elements';
 import FBSDK, { LoginManager } from 'react-native-fbsdk';
 import FBStoreActions from '../../Redux/FBStore';
 
+// Components
 import Navbar from '../Navbar/Navbar';
 import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard';
 import SuperConnectBar from '../SuperConnectScreen/SuperConnectBar'
+import ScrollWheel from './ScrollWheel';
 
+// Styles
 import styles from '../Styles/UserProfileStyles';
 
 class FriendProfileScreen extends Component {
@@ -19,6 +22,14 @@ class FriendProfileScreen extends Component {
     this.state = {
       showModal: false
     }
+  }
+
+  handleEmail = () => {
+    // email action here
+  }
+
+  handleCall = () => {
+    // call action here
   }
 
   render() {
@@ -33,19 +44,23 @@ class FriendProfileScreen extends Component {
           locations={[0.1, 0.3, 0.5, 0.7, 1.0]}>
             <View style={styles.profileHeader}>
               <View style={styles.profHeaderTop}>
-                <Icon
-                 name='phone'
-                 type='font-awesome'
-                 color='#ffffff'
-                 containerStyle={styles.phoneIcon}/>
+                <TouchableOpacity onPress={this.handleCall}>
+                  <Icon
+                    name='phone'
+                    type='font-awesome'
+                    color='#ffffff'
+                    containerStyle={styles.phoneIcon}/>
+                </TouchableOpacity>
                 <Image
                   style={styles.profileImage}
                   source={{uri: friendInfo.image}} />
-                 <Icon
-                  name='md-mail'
-                  type='ionicon'
-                  color='#ffffff'
-                  containerStyle={styles.mailIcon}/>
+                  <TouchableOpacity onPress={this.handleEmail}>
+                    <Icon
+                      name='md-mail'
+                      type='ionicon'
+                      color='#ffffff'
+                      containerStyle={styles.mailIcon}/>
+                  </TouchableOpacity>
               </View>
               <Text style={styles.profileSubtext}>
               {`${friendInfo.name}`}
@@ -66,8 +81,8 @@ class FriendProfileScreen extends Component {
               </View>
             </View>
             </LinearGradient>
-            <View style={styles.socialIconSlider}>
-
+            <View style={styles.scrollWheelContainer}>
+              <ScrollWheel />
             </View>
             <View style={styles.socialAccountContainer}>
               <SocialMediaCard

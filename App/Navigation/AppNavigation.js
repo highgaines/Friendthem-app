@@ -16,6 +16,7 @@ import NotificationsContainer from '../Containers/Notifications/NotificationsCon
 import SettingsScreen from '../Containers/Settings/SettingsScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import InviteUsersScreen from '../Containers/InviteUsers/InviteUsersScreen'
+import PermissionScreen from '../Containers/Permissions/PermissionScreen'
 
 // Styles
 import styles from './Styles/NavigationStyles'
@@ -62,6 +63,9 @@ const PrimaryNav = StackNavigator({
   },
   InviteUsers: {
     screen: mapNavigationStateParamsToProps(InviteUsersScreen)
+  },
+  PermissionScreen: {
+    screen: mapNavigationStateParamsToProps(PermissionScreen)
   }
 }, {
   // Default config for all screens

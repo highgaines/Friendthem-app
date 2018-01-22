@@ -42,18 +42,11 @@ export default StyleSheet.create({
     color: 'white',
     fontFamily: Fonts.type.base,
   },
-  orText: {
-    fontSize: 17,
-    fontWeight: '600',
-    color: 'white',
-    textAlign: 'center'
-  },
   button: {
     width: 220,
     height: 47,
     alignItems: 'center',
     flexDirection: 'row',
-    marginTop: 40,
     marginLeft: 40,
     backgroundColor: '#030ab0',
     borderRadius: 100,
