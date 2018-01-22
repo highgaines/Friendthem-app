@@ -12,7 +12,7 @@ import Image from 'react-native-remote-svg';
 import ConnectButton from '../SuperConnectScreen/ConnectButton';
 
 // Redux
-import PermissionsStoreActions from '../../Redux/PermissionsStore';
+import PermissionsStoreActions, { setGeoPermission } from '../../Redux/PermissionsStore';
 
 // Images
 import { Images } from '../../Themes';
@@ -130,7 +130,7 @@ const mapDispatchToProps = dispatch => {
   const { setGeoPermission, setNotifPermission } = PermissionsStoreActions
   return {
     ...bindActionCreators({
-      setGeoPermissions,
+      setGeoPermission,
       setNotifPermission
     }, dispatch)
   }
