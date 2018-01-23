@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, Button, TextInput } from 'react-native'
+import { View, TouchableOpacity, Text, Button, TextInput, ScrollView } from 'react-native'
 import { Icon } from 'react-native-elements'
 
 import InfoRow from './InfoRow'

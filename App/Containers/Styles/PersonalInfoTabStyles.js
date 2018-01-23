@@ -4,7 +4,9 @@ import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   personalInfoContainer: {
-    backgroundColor: '#f5f8f8'
+    backgroundColor: '#f5f8f8',
+    flex: 1,
+    // height: 700
   },
   rowContainer: {
     flexDirection: 'row',

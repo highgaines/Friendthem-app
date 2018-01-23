@@ -48,7 +48,7 @@ export default UserCard = props => {
       </View>
 
       <View style={styles.sendButtonColumn}>
-        <Button title="SEND" onPress={() => handleSend()}/>
+        <Button title="INVITE" onPress={() => handleSend()}/>
       </View>
     </Animatable.View>
   )
