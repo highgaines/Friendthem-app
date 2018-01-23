@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, TextInput, View, Switch } from 'react-native'
+import { Text, Button, TextInput, View, Switch, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
 
 import styles from '../Styles/PersonalInfoTabStyles'
@@ -10,17 +10,39 @@ export default class InfoRow extends Component {
 
     this.state = {
       isEditing: false,
-      flipSwitch: false
+      flipSwitch: false,
+      input: props.userInfo
     }
   }
 
+  toggleEditMode = () => {
+    const { isEditing } = this.state
+    this.setState({ isEditing: !isEditing })
+  }
+
+  handleChange = input => {
+    this.setState({ input: input })
+  }
+
+  handleSubmit = () => {
+    const { updateInfo, field } = this.props
+    const { input } = this.state
+    this.setState({ isEditing: false}, () => updateInfo(field, input) )
+  }
+
   render() {
-    const { rowLabel, userInfo, showSwitch, isPrivate } = this.props
+    const { rowLabel, userInfo, showSwitch, isPrivate, updateInfo } = this.props
     const { isEditing, flipSwitch } = this.state
     return (
       <View style={styles.rowContainer}>
         <Text style={styles.rowLabelText}>{`${rowLabel}: `}</Text>
-        <Text style={styles.rowTextContent}>{userInfo}</Text>
+        {isEditing ?
+          <TextInput
+            value={this.state.input}
+            style={styles.form}
+            onChangeText={input => this.handleChange(input)}
+          /> :
+          <Text style={styles.rowTextContent}>{userInfo}</Text>}
         {
           showSwitch ?
           <Switch
@@ -29,14 +51,22 @@ export default class InfoRow extends Component {
             value={flipSwitch}
             style={styles.switchStyle} />
             :
-            null
+            <TouchableOpacity
+              style={styles.iconContainer}
+              onPress={this.toggleEditMode}
+              >
+              { isEditing ?
+                <View style={{ position: 'absolute', right: -10, top: -10}}>
+                  <Button title="SAVE" onPress={this.handleSubmit}/>
+                </View> :
+                <Icon
+                  name='pencil'
+                  type='simple-line-icon'
+                  size={15}
+                  color='#6f6f71'
+                /> }
+              </TouchableOpacity>
         }
-        <Icon
-          name='pencil'
-          type='simple-line-icon'
-          size={15}
-          color='#6f6f71'
-          containerStyle={styles.iconContainer}/>
       </View>
     )
   }

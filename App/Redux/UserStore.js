@@ -7,6 +7,7 @@ import envConfig from '../../envConfig'
 
 const { Types, Creators } = createActions({
   fbUserInfo: ['userInfo'],
+  updateInfo: ['userInfo'],
   getUserRequest: null,
   getUserSuccess: null,
   getUserFailure: null,
@@ -21,10 +22,13 @@ export const INITIAL_STATE = Immutable({
   userId: null,
   userData: {
     name: '',
-    picture: { data: {url: null} }
-  },
-  interests: [],
-  location: ''
+    picture: { data: {url: null} },
+    email: '',
+    age: 26,
+    phoneNumber: '3472917739',
+    interests: ['Crypto', 'Flying Kites', 'Gaming'],
+    location: 'New York'
+  }
 })
 
 export const getUserId = (accessToken) => {
@@ -48,9 +52,31 @@ export const getUserId = (accessToken) => {
   }
 }
 
+export const updateInfo = (field, content) => {
+  return { type: Types.UPDATE_INFO, payload: { field, content } }
+}
+
 /* ------------- Reducers ------------- */
 const handleFbUserInfoSuccess = (state = INITIAL_STATE, action) => {
-  return { ...state, userData: action.userInfo }
+  return {
+    ...state,
+    userData: {
+      ...state.userData,
+      ...action.userInfo
+    }
+  }
+}
+
+const handleUpdateInfo = (state, action) => {
+  const { field, content } = action.payload
+
+  return {
+    ...state,
+    userData: {
+      ...state.userData,
+      [field]: content
+    }
+  }
 }
 
 const handleGetUserRequest = (state, action) => {
@@ -72,6 +98,7 @@ const handleGetUserFailure = (state, action) => {
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.FB_USER_INFO]: handleFbUserInfoSuccess,
+  [Types.UPDATE_INFO]: handleUpdateInfo,
   [Types.GET_USER_REQUEST]: handleGetUserRequest,
   [Types.GET_USER_SUCCESS]: handleGetUserSuccess,
   [Types.GET_USER_FAILURE]: handleGetUserFailure,

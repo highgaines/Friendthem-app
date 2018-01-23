@@ -158,9 +158,6 @@ class UserProfileScreen extends Component {
               <Text style={styles.profileSubtext}>
               {`${userInfo.name}`}
               </Text>
-              <Text style={styles.interestsText}>
-                  {userInterests.join(' | ')}
-              </Text>
             </View>
             <View style={styles.tabSelectionContainer}>
               <TouchableOpacity
