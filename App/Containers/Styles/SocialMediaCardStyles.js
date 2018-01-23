@@ -5,11 +5,11 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   cardUnselected: {
     alignItems: 'center',
-    backgroundColor: '#3C5996',
+    backgroundColor: '#fff',
     marginTop: 10,
     borderRadius: 10,
     height: 120,
-    width: 110,
+    width: '30%',
     shadowOpacity: 0.75,
     shadowRadius: 5,
     shadowColor: 'black',
@@ -23,11 +23,12 @@ export default StyleSheet.create({
     marginHorizontal: 5,
     borderRadius: 10,
     height: 120,
-    width: 110,
+    width: '30%',
     shadowOpacity: 0.75,
     shadowRadius: 5,
     shadowColor: 'black',
-    shadowOffset: { height: 0, width: 0 }
+    shadowOffset: { height: 0, width: 0 },
+    marginHorizontal: 5
   },
   invertedCard: {
     alignItems: 'center',
@@ -35,17 +36,19 @@ export default StyleSheet.create({
     marginTop: 10,
     borderRadius: 10,
     height: 120,
-    width: 110,
+    width: '30%',
     shadowOpacity: 0.75,
     shadowRadius: 5,
     shadowColor: 'black',
-    shadowOffset: { height: 0, width: 0 }
+    shadowOffset: { height: 0, width: 0 },
+    marginHorizontal: 5
   },
   socialMediaImage: {
     borderRadius: 50,
     height: 60,
     marginTop: 25,
-    width: 100
+    width: 100,
+    marginBottom: -10
   },
   socialMediaText: {
     alignItems: 'center',
@@ -53,14 +56,27 @@ export default StyleSheet.create({
     borderBottomRightRadius: 10
   },
   platformName: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: 'bold',
     color: '#FFFFFF',
+    fontFamily: Fonts.type.base,
+  },
+  unsyncedPlatformName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#adadad',
     fontFamily: Fonts.type.base,
   },
   userName: {
     fontSize: 10,
     color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontFamily: Fonts.type.base,
+  },
+  unsyncedUserName: {
+    fontSize: 10,
+    color: '#adadad',
+    fontWeight: 'bold',
     fontFamily: Fonts.type.base,
   },
   platformNameInverted: {

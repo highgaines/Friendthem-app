@@ -79,7 +79,7 @@ class SuperConnect extends Component {
 
 const mapStateToProps = state => ({
   fbAuthToken: state.fbStore.fbAccessToken,
-  userData: state.userStore.userFbData,
+  userData: state.userStore.userData,
   friendData: state.friendStore.friendData
 })
 

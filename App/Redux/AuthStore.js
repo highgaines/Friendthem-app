@@ -6,18 +6,22 @@ import envConfig from '../../envConfig'
 /* ------ Types and Action Creators ------ */
 
 const { Types, Creators } = createActions({
-  registerRequest: null,
-  registerSuccess: null,
-  registerFailure: null,
+  logoutUser: null,
   loginRequest: null,
   loginSuccess: null,
   loginFailure: null,
+  loginRequest: null,
+  loginSuccess: null,
+  loginFailure: null,
+  registerRequest: null,
+  registerSuccess: null,
+  registerFailure: null,
   loginFacebookRequest: null,
   loginFacebookSuccess: null,
   loginFacebookFailure: null,
-  redirectRequest: null,
-  redirectSuccess: null,
-  redirectFailure: null,
+  socialMediaAuthRequest: null,
+  socialMediaAuthSuccess: null,
+  socialMediaAuthFailure: null,
 })
 
 export const AuthTypes = Types
@@ -33,7 +37,8 @@ export const INITIAL_STATE = Immutable({
   tokenType: null,
   scope: null,
   refreshToken: null,
-  authError: false
+  authError: false,
+  redirectUrl: null
 })
 
 
@@ -136,9 +141,33 @@ export const testRedirect = () => {
   }
 }
 
+export const socialMediaAuth = (platform, userId) => {
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+
+  const init = {
+    method: 'GET'.
+    headers
+  }
+
+  return {
+    types: [
+      Types.SOCIAL_MEDIA_AUTH_REQUEST,
+      Types.SOCIAL_MEDIA_AUTH_SUCCESS,
+      Types.SOCIAL_MEDIA_AUTH_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch =>
+      fetchFromApi(`auth/login/${platform}/?user_id=${userId}`)
+  }
+}
 
 
 /* -------- Reducers -------- */
+
+const handleUserLogout = (state, action) => {
+  return INITIAL_STATE
+}
 
 const registerAccountRequest = (state = INITIAL_STATE, action) => {
   return state
@@ -191,24 +220,30 @@ const loginFailure = (state = INITIAL_STATE, action) => {
   }
 }
 
-const handleRedirectSuccess = (state, action) => {
+const handleSocialMediaAuthRequest = (state, action) => {
+    return state
+}
+
+const handleSocialMediaAuthSuccess = (state, action) => {
   return state
 }
 
-const handleRedirectFailure = (state, action) => {
+const handleSocialMediaAuthFailure = (state, action) => {
   return state
 }
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.REGISTER_REQUEST]: registerAccountRequest,
-  [Types.REGISTER_SUCCESS]: registerAccountSuccess,
-  [Types.REGISTER_FAILURE]: registerAccountFailure,
+  [Types.LOGOUT_USER]: handleUserLogout,
   [Types.LOGIN_REQUEST]: loginRequest,
   [Types.LOGIN_SUCCESS]: loginSuccess,
   [Types.LOGIN_FAILURE]: loginFailure,
   [Types.LOGIN_FACEBOOK_REQUEST]: loginRequest,
   [Types.LOGIN_FACEBOOK_SUCCESS]: loginSuccess,
   [Types.LOGIN_FACEBOOK_FAILURE]: loginFailure,
-  [Types.REDIRECT_SUCCESS]: handleRedirectSuccess,
-  [Types.REDIRECT_FAILURE]: handleRedirectFailure,
+  [Types.REGISTER_REQUEST]: registerAccountRequest,
+  [Types.REGISTER_SUCCESS]: registerAccountSuccess,
+  [Types.REGISTER_FAILURE]: registerAccountFailure,
+  [Types.SOCIAL_MEDIA_AUTH_REQUEST]: handleSocialMediaAuthRequest,
+  [Types.SOCIAL_MEDIA_AUTH_SUCCESS]: handleSocialMediaAuthSuccess,
+  [Types.SOCIAL_MEDIA_AUTH_FAILURE]: handleSocialMediaAuthFailure,
 })

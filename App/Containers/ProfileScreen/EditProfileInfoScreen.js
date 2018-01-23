@@ -77,7 +77,7 @@ class EditProfileInfoScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  userInfo: state.userStore.userFbData
+  userInfo: state.userStore.userData
 })
 
 const mapDispatchToProps = dispatch => {

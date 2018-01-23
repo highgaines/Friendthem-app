@@ -12,7 +12,8 @@ export const reducers = combineReducers({
   authStore: require('./AuthStore').reducer,
   notificationStore: require('./NotificationStore').reducer,
   inviteUsersStore: require('./InviteUsersStore').reducer,
-  permissionsStore: require('./PermissionsStore').reducer
+  permissionsStore: require('./PermissionsStore').reducer,
+  tokenStore: require('./TokenRedux').reducer
 })
 
 export default () => {

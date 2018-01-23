@@ -13,33 +13,26 @@ import { connect } from 'react-redux';
 import styles from '../Styles/SocialMediaCardStyles';
 
 export default class SocialMediaCard extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      selected: props.selected
-    }
-  }
 
   handlePush = () => {
-    this.setState({selected: !this.state.selected})
+    this.props.socialAuth(this.props.platformAuth)
   }
 
   renderIcon = () => {
-    const { platformName, inverted } = this.props;
+    const { platformName, selected } = this.props;
 
-    return inverted ? (
+    return selected ? (
       <Icon
-        name='facebook'
+        name={platformName.toLowerCase()}
         type='font-awesome'
-        color="#3C5996"
+        color="#fff"
         size={40}
       />
     ) : (
       <Icon
-        name='facebook'
+        name={platformName.toLowerCase()}
         type='font-awesome'
-        color="#ffffff"
+        color="#ABABAB"
         size={40}
       />
     )
@@ -49,15 +42,15 @@ export default class SocialMediaCard extends Component {
     const {
       platformName,
       userName,
-      inverted
+      inverted,
+      socialAuth
     }  = this.props
-
-    const { selected } = this.state;
+    const { selected } = this.props;
     const cardStyle = selected ? styles.cardSelected : styles.cardUnselected
 
-    return(
+    return (
       <TouchableOpacity
-        style={inverted ? styles.invertedCard : cardStyle}
+        style={cardStyle}
         onPress={this.handlePush}
       >
         {
@@ -74,13 +67,14 @@ export default class SocialMediaCard extends Component {
         <View style={styles.socialMediaText}>
 
           <Text
-            style={inverted ? styles.platformNameInverted : styles.platformName}
+            style={selected ? styles.platformName : styles.unsyncedPlatformName }
           >
             {platformName}
           </Text>
 
-          <Text style={inverted ? styles.userNameInverted : styles.userName}>
-            {userName}
+          <Text
+            style={selected ? styles.userName : styles.unsyncedUserName }>
+            {userName || 'Sync Account'}
           </Text>
         </View>
       </TouchableOpacity>

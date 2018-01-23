@@ -68,9 +68,11 @@ export default StyleSheet.create({
     backgroundColor: '#143a7a'
   },
   socialAccountContainer: {
+    flexWrap: 'wrap',
     paddingHorizontal: 10,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    width: '100%'
   },
   SuperConnectBarContainer: {
     alignItems: 'center'
@@ -86,14 +88,9 @@ export default StyleSheet.create({
     justifyContent: 'space-around',
     width: '100%',
     flexDirection: 'row',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    top: 0,
     marginTop: 140,
     backgroundColor: 'black',
     height: 60,
-    flexDirection: 'row'
   },
   button: {
     width: 140,

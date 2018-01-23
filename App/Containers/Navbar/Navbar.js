@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { Icon } from 'react-native-elements';
-import FBSDK, { LoginManager } from 'react-native-fbsdk';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { View, Text, TouchableOpacity } from 'react-native'
+import { Icon } from 'react-native-elements'
+import FBSDK, { LoginManager } from 'react-native-fbsdk'
 
-import LogoutModal from './LogoutModal';
+import LogoutModal from './LogoutModal'
 import FriendStoreActions from '../../Redux/FriendStore'
-import UserStoreActions from '../../Redux/UserStore';
-import FBStoreActions from '../../Redux/FBStore';
+import UserStoreActions from '../../Redux/UserStore'
+import FBStoreActions from '../../Redux/FBStore'
+import AuthStoreActions from '../../Redux/AuthStore'
 
 // Icons
 import { Images } from '../../Themes';
@@ -30,7 +32,7 @@ class Navbar extends Component {
 
   logOut = () => {
     const { fbLogoutComplete, navigation } = this.props
-
+    this.props.logoutUser()
     this.toggleModal()
     LoginManager.logOut();
     fbLogoutComplete()
@@ -190,17 +192,20 @@ class Navbar extends Component {
 }
 
 const mapStateToProps = state => ({
-  userInfo: state.userStore.userFbData,
+  userInfo: state.userStore.userData,
   users: state.facebook.users
 })
 
 const mapDispatchToProps = dispatch => {
   return {
-    userInfoRequestSuccess: (userInfo) =>
-      dispatch(UserStoreActions.fbUserInfo(userInfo)),
-    setFriendInfo: (friendInfo) =>
-      dispatch(FriendStoreActions.setFriendInfo(friendInfo)),
-    fbLogoutComplete: () => dispatch(FBStoreActions.logoutComplete())
+    ...bindActionCreators({
+      userInfoRequestSuccess: (userInfo) =>
+        dispatch(UserStoreActions.fbUserInfo(userInfo)),
+      setFriendInfo: (friendInfo) =>
+        dispatch(FriendStoreActions.setFriendInfo(friendInfo)),
+      fbLogoutComplete: () => dispatch(FBStoreActions.logoutComplete()),
+      logoutUser: () => dispatch(AuthStoreActions.logoutUser())
+    }, dispatch)
   }
 }
 

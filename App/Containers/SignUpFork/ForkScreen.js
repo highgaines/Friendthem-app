@@ -67,13 +67,6 @@ class ForkScreen extends Component {
                 textStyle={styles.buttonTextStyle}
                 onPressCallback={this.directToNearbyUsers}
               />
-              <ConnectButton
-                color='#fff'
-                title='BUILD YOUR PROFILE'
-                containerStyle={styles.button}
-                textStyle={styles.buttonTextStyle}
-                onPressCallback={this.directToBuildProfile}
-              />
             </View>
           </LinearGradient>
         </View>
@@ -83,7 +76,7 @@ class ForkScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  userInfo: state.userStore.userFbData,
+  userInfo: state.userStore.userData,
   fbAuthToken: state.fbStore.fbAccessToken
 })
 
