@@ -120,7 +120,6 @@ class LaunchScreen extends Component {
               <Text style={styles.secSubText}>
                 Life Happens when people connect
               </Text>
-              <Button title='logout' onPress={logoutUser} />
             </View>
             <View style={styles.section} >
               {loading

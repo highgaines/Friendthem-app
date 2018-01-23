@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -24,11 +25,9 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		15E53965630C42C3B8ABBD77 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A3E12924A4F44FBB96EE029 /* Feather.ttf */; };
 		236C973EEA944DDDB43A8D4A /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 691A6335617B44A6A76ABE8B /* libReactNativeConfig.a */; };
-		27FA60F17F241F51661724C8 /* libPods-FriendThem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 552C5FC7548713C00EA3FDD7 /* libPods-FriendThem.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2D02E4C21E0B4AEC006451C7 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		2D02E4C31E0B4AEC006451C7 /* libRCTImage-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */; };
 		2D02E4C41E0B4AEC006451C7 /* libRCTLinking-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E881DF850E9000B6D8A /* libRCTLinking-tvOS.a */; };
 		2D02E4C51E0B4AEC006451C7 /* libRCTNetwork-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E8C1DF850E9000B6D8A /* libRCTNetwork-tvOS.a */; };
@@ -45,7 +44,6 @@
 		6046DB130ACC4DD3B1A39D0B /* libSendSMS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBAE745E3AB341C5ACE5E6DA /* libSendSMS.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		914CBC0879A9402E9F5C42C2 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E466642F88F742F6B8DB89DF /* libRNVectorIcons.a */; };
-		9A670FE5EAC94C568087AF98 /* libSendSMS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B1C18B10A3403B97F0400A /* libSendSMS.a */; };
 		A0B63196D3554061AE81F5EB /* libRNSensitiveInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D30DBF209DA49FCB41241AE /* libRNSensitiveInfo.a */; };
 		A5A15C4A1FDB067700ABE5DB /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A15C461FDB067600ABE5DB /* FBSDKCoreKit.framework */; };
 		A5A15C4B1FDB067700ABE5DB /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A15C471FDB067600ABE5DB /* FBSDKLoginKit.framework */; };
@@ -53,10 +51,6 @@
 		A5A15C4D1FDB067700ABE5DB /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A15C491FDB067700ABE5DB /* Bolts.framework */; };
 		A5A15C4E1FDB243200ABE5DB /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A54114A91FDB01B500AC2A83 /* libRCTFBSDK.a */; };
 		A5A15C4F1FDB2F8A00ABE5DB /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A541145F1FDAF8FD00AC2A83 /* libBVLinearGradient.a */; };
-		A5EFED9020168BC0002C7F7C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5EFED8F20168BC0002C7F7C /* GoogleService-Info.plist */; };
-		A5EFED9120168BC0002C7F7C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5EFED8F20168BC0002C7F7C /* GoogleService-Info.plist */; };
-		A5EFED9220168BC0002C7F7C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5EFED8F20168BC0002C7F7C /* GoogleService-Info.plist */; };
-		A5EFED9320168BC0002C7F7C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5EFED8F20168BC0002C7F7C /* GoogleService-Info.plist */; };
 		A5FFC8E61FE97AA4007F713A /* Montserrat-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A5FFC89D1FE97A9F007F713A /* Montserrat-Italic.ttf */; };
 		A5FFC8E71FE97AA4007F713A /* Montserrat-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A5FFC8D51FE97AA0007F713A /* Montserrat-LightItalic.ttf */; };
 		A5FFC8E81FE97AA4007F713A /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A5FFC8D61FE97AA0007F713A /* Montserrat-Thin.ttf */; };
@@ -211,13 +205,6 @@
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
 		};
-		39E4EB9D20112BF4001A65A5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 057DE0DDC2024163B0A8064D /* SendSMS.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 95688E1A1D38251600F72D63;
-			remoteInfo = SendSMS;
-		};
 		39E4EBBA201137E6001A65A5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 39E4EBB5201137E6001A65A5 /* ART.xcodeproj */;
@@ -323,6 +310,20 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		A50496432016AF02009C8918 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A75C70FC01114FE7A83C9868 /* A0Auth0.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = A0Auth0;
+		};
+		A50496732016AF02009C8918 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 057DE0DDC2024163B0A8064D /* SendSMS.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 95688E1A1D38251600F72D63;
+			remoteInfo = SendSMS;
+		};
 		A54114421FDAF8FC00AC2A83 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */;
@@ -392,13 +393,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 9350E0F11CE3B0920041D815;
 			remoteInfo = RCTFBSDK;
-		};
-		A553FA9D200679B600EF97BA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A75C70FC01114FE7A83C9868 /* A0Auth0.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = A0Auth0;
 		};
 		A575D58F1FF30585008D198A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -488,7 +482,6 @@
 		A5A15C471FDB067600ABE5DB /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		A5A15C481FDB067700ABE5DB /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		A5A15C491FDB067700ABE5DB /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		A5EFED8F20168BC0002C7F7C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A5FFC89D1FE97A9F007F713A /* Montserrat-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Italic.ttf"; path = "../assets/Fonts/Montserrat-Italic.ttf"; sourceTree = "<group>"; };
 		A5FFC8D51FE97AA0007F713A /* Montserrat-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-LightItalic.ttf"; path = "../assets/Fonts/Montserrat-LightItalic.ttf"; sourceTree = "<group>"; };
 		A5FFC8D61FE97AA0007F713A /* Montserrat-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Thin.ttf"; path = "../assets/Fonts/Montserrat-Thin.ttf"; sourceTree = "<group>"; };
@@ -533,33 +526,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5A15C4B1FDB067700ABE5DB /* FBSDKLoginKit.framework in Frameworks */,
+				A5A15C4C1FDB067700ABE5DB /* FBSDKShareKit.framework in Frameworks */,
+				A5A15C4A1FDB067700ABE5DB /* FBSDKCoreKit.framework in Frameworks */,
+				A5A15C4D1FDB067700ABE5DB /* Bolts.framework in Frameworks */,
 				39E4EBEB20113DDA001A65A5 /* libRNSVG.a in Frameworks */,
 				A5A15C4F1FDB2F8A00ABE5DB /* libBVLinearGradient.a in Frameworks */,
 				A5A15C4E1FDB243200ABE5DB /* libRCTFBSDK.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
-				A5A15C4B1FDB067700ABE5DB /* FBSDKLoginKit.framework in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
-				A5A15C4C1FDB067700ABE5DB /* FBSDKShareKit.framework in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
-				A5A15C4D1FDB067700ABE5DB /* Bolts.framework in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
-				A5A15C4A1FDB067700ABE5DB /* FBSDKCoreKit.framework in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
-				39E4EBEA201138A4001A65A5 /* libART.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				39E4EBEA201138A4001A65A5 /* libART.a in Frameworks */,
 				914CBC0879A9402E9F5C42C2 /* libRNVectorIcons.a in Frameworks */,
 				236C973EEA944DDDB43A8D4A /* libReactNativeConfig.a in Frameworks */,
 				6046DB130ACC4DD3B1A39D0B /* libSendSMS.a in Frameworks */,
 				A0B63196D3554061AE81F5EB /* libRNSensitiveInfo.a in Frameworks */,
-				8EB0A68526954D48A24FF203 /* libA0Auth0.a in Frameworks */,
-				9A670FE5EAC94C568087AF98 /* libSendSMS.a in Frameworks */,
-				27FA60F17F241F51661724C8 /* libPods-FriendThem.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,7 +558,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */,
-				2D02E4C21E0B4AEC006451C7 /* (null) in Frameworks */,
 				2D02E4C31E0B4AEC006451C7 /* libRCTImage-tvOS.a in Frameworks */,
 				2D02E4C41E0B4AEC006451C7 /* libRCTLinking-tvOS.a in Frameworks */,
 				2D02E4C51E0B4AEC006451C7 /* libRCTNetwork-tvOS.a in Frameworks */,
@@ -725,14 +714,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		39E4EB9A20112BF4001A65A5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				39E4EB9E20112BF4001A65A5 /* libSendSMS.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		39E4EBB6201137E6001A65A5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -801,7 +782,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				A5EFED8F20168BC0002C7F7C /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* FriendThem */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* FriendThemTests */,
@@ -823,6 +803,14 @@
 				00E356EE1AD99517003FC87E /* FriendThemTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* FriendThem-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* FriendThem-tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A50496402016AF02009C8918 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A50496742016AF02009C8918 /* libSendSMS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -855,7 +843,7 @@
 		A553FA9A200679B500EF97BA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A553FA9E200679B600EF97BA /* libA0Auth0.a */,
+				A50496442016AF02009C8918 /* libA0Auth0.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -976,13 +964,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "FriendThem" */;
 			buildPhases = (
-				0C95AB5DE498A9F6377C9A35 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				18A983701244CA71E352AAE8 /* [CP] Embed Pods Frameworks */,
-				964A46EDCC8402CDACA2D6A2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1153,8 +1138,10 @@
 					ProjectRef = 8FC18AE6E8A14C7AA278F142 /* RNVectorIcons.xcodeproj */;
 				},
 				{
-					ProductGroup = 39E4EB9A20112BF4001A65A5 /* Products */;
+					ProductGroup = A50496402016AF02009C8918 /* Products */;
 					ProjectRef = 057DE0DDC2024163B0A8064D /* SendSMS.xcodeproj */;
+				},
+				{
 					ProductGroup = A5EFED2F201169F2002C7F7C /* Products */;
 					ProjectRef = 256149C219B447D8BCC5C229 /* SendSMS.xcodeproj */;
 				},
@@ -1282,13 +1269,6 @@
 			remoteRef = 39CB9BA71FE052DF008CFC09 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		39E4EB9E20112BF4001A65A5 /* libSendSMS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSendSMS.a;
-			remoteRef = 39E4EB9D20112BF4001A65A5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		39E4EBBB201137E6001A65A5 /* libART.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1394,6 +1374,20 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		A50496442016AF02009C8918 /* libA0Auth0.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libA0Auth0.a;
+			remoteRef = A50496432016AF02009C8918 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A50496742016AF02009C8918 /* libSendSMS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSendSMS.a;
+			remoteRef = A50496732016AF02009C8918 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		A54114431FDAF8FC00AC2A83 /* libRCTBlob-tvOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1464,13 +1458,6 @@
 			remoteRef = A54114A81FDB01B500AC2A83 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A553FA9E200679B600EF97BA /* libA0Auth0.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libA0Auth0.a;
-			remoteRef = A553FA9D200679B600EF97BA /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		A575D5901FF30585008D198A /* libRNSVG.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1513,7 +1500,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5EFED9120168BC0002C7F7C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1536,7 +1522,6 @@
 				A5FFC8F11FE97AA4007F713A /* Montserrat-SemiBoldItalic.ttf in Resources */,
 				F13C7B5F2B73486E93416B75 /* Foundation.ttf in Resources */,
 				A5FFC8F61FE97AA4007F713A /* Montserrat-ThinItalic.ttf in Resources */,
-				A5EFED9020168BC0002C7F7C /* GoogleService-Info.plist in Resources */,
 				423C29E79CDF45BDB69C8B01 /* Ionicons.ttf in Resources */,
 				A5FFC8E71FE97AA4007F713A /* Montserrat-LightItalic.ttf in Resources */,
 				E44880F9C79C4A51AE06E8C4 /* MaterialCommunityIcons.ttf in Resources */,
@@ -1560,7 +1545,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
-				A5EFED9220168BC0002C7F7C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1568,7 +1552,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5EFED9320168BC0002C7F7C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1589,39 +1572,6 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		0C95AB5DE498A9F6377C9A35 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FriendThem-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		18A983701244CA71E352AAE8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FriendThem/Pods-FriendThem-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1635,26 +1585,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
-		};
-		964A46EDCC8402CDACA2D6A2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-FriendThem/Pods-FriendThem-resources.sh",
-				"${PODS_ROOT}/GTMOAuth2/Source/Touch/GTMOAuth2ViewTouch.xib",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GTMOAuth2ViewTouch.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FriendThem/Pods-FriendThem-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 

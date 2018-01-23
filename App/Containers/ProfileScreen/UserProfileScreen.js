@@ -159,13 +159,14 @@ class UserProfileScreen extends Component {
             {
               Object.keys(socialMediaData).map((socialPlatform, idx) => {
                 const currentPlatform = this.socialPlatformPresent(socialPlatform)
+                const capitalizeName = (name) => name[0].toUpperCase() + name.slice(1)
                 const userName = currentPlatform ? currentPlatform['access_token'][socialMediaData[socialPlatform]['userNamePath']] : null
                 const isSynced = !!currentPlatform
 
                 return (
                   <SocialMediaCard
                     key={idx}
-                    platformName={socialPlatform[0].toUpperCase() + socialPlatform.slice(1)}
+                    platformName={capitalizeName(socialPlatform)}
                     selected={isSynced}
                     socialAuth={(platform) => this.authenticateSocialMedia(platform)}
                     platformAuth={socialPlatform}
@@ -180,7 +181,7 @@ class UserProfileScreen extends Component {
                 navbarStyle={styles.userProfNavbar}
                 navigation={navigation}
                 current='Profile'
-                margin={207}
+                margin={77}
               />
             </View>
         </ScrollView>
