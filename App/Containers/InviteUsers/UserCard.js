@@ -26,7 +26,7 @@ export default UserCard = props => {
       <SMPlatformCircle
         key={idx}
         platform={platform}
-        size={30}
+        size={50}
       />
     )
   }
