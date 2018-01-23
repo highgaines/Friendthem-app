@@ -26,13 +26,13 @@ export default ConnectivityCard = props => {
   // will need to finish coding out conditional
   const determineRadialColor = (conPct) => {
       if (conPct === 100) {
-        return 'green'
+        return 'rgba(190,255, 20, 0.6)'
       } else if(conPct > 66) {
-        return 'yellow'
+        return 'rgba(255, 255, 0, 0.5)'
       } else if(conPct > 33) {
         return 'orange'
       } else {
-        return 'red'
+        return 'rgba(255, 0, 50, 0.5)'
       }
   }
 
