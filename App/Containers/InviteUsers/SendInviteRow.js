@@ -29,14 +29,14 @@ export default SendInviteRow = props => {
   }
 
   return(
-    <View style={styles.inviteRowContent}>
+      <TouchableOpacity style={styles.inviteRowContent}>
         <Image
           source={renderIcon()}
         />
         <Text style={styles.text}>
           Send request through {platform}
         </Text>
-    </View>
+      </TouchableOpacity>
   )
 }
 

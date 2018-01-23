@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Text, Image, View, Button, Linking , AppState, ScrollView, TouchableOpacity } from 'react-native'
+import { Text, View, Button, Linking , AppState, ScrollView, TouchableOpacity } from 'react-native'
 
 // Libraries
 import LinearGradient from 'react-native-linear-gradient'
 import { Icon } from 'react-native-elements'
+import Image from 'react-native-remote-svg'
 
 // Components
 import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard'
@@ -18,6 +19,9 @@ import PersonalInfoTab from './PersonalInfoTab'
 import AuthStoreActions, { socialMediaAuth } from '../../Redux/AuthStore'
 import UserStoreActions, { getUserId } from '../../Redux/UserStore'
 import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
+
+// Images
+import { Images } from '../../Themes';
 
 // Styles
 import styles from '../Styles/UserProfileStyles'
@@ -105,6 +109,20 @@ class UserProfileScreen extends Component {
     )
   }
 
+  determineImage = () => {
+    const { userInfo } = this.props
+    if (userInfo.picture.data.url) {
+      return {uri: `${userInfo.picture.data.url}`}
+    } else {
+      return Images.noPicSVG
+    }
+  }
+
+  determineStyling = () => {
+    const { userInfo } = this.props
+    return userInfo.picture.data.url.length > 1 ? true : false
+  }
+
   render() {
     const {
       userId,
@@ -134,8 +152,8 @@ class UserProfileScreen extends Component {
             <View style={[styles.profileHeader, { height: 150}]}>
               <View style={styles.profHeaderTop}>
                 <Image
-                  style={styles.profileImage}
-                  source={{uri: `${userInfo.picture.data.url}`}} />
+                  style={[styles.profileImage]}
+                  source={this.determineImage()} />
               </View>
               <Text style={styles.profileSubtext}>
               {`${userInfo.name}`}
