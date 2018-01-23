@@ -22,7 +22,7 @@ export default WelcomeScreen = props => {
             <Image
               source={Images.friendster}
             />
-            <Text style={[styles.text, { fontSize: 15}]}> Welcome {name}! </Text>
+            <Text style={[styles.text, { fontSize: 15}]}> Welcome to Friendthem! </Text>
             <Text style={[styles.text, { fontSize: 12, textAlign: 'center'}]}> Let's get you started by syncing up all your social media accounts</Text>
             <TouchableOpacity
               style={styles.startButton}
