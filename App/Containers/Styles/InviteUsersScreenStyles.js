@@ -13,13 +13,6 @@ export default StyleSheet.create({
     shadowOffset: { height: 0, width: 0 },
     zIndex: 99
   },
-  linearGradient: {
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    shadowColor: 'black',
-    shadowOffset: { height: 0, width: 0 },
-    zIndex: 99
-  },
   tabSelectionContainer: {
     flexDirection: 'row',
     marginTop: 30

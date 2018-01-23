@@ -36,7 +36,7 @@ export default StyleSheet.create({
   },
   tabText: {
     color: '#a6acb1',
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: '600',
     backgroundColor: 'transparent',
     textAlign: 'center'
@@ -93,7 +93,8 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%'
+    width: '100%',
+    height: 366
   },
   SuperConnectBarContainer: {
     alignItems: 'center'

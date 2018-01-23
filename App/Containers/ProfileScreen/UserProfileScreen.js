@@ -166,7 +166,7 @@ class UserProfileScreen extends Component {
             </View>
             </LinearGradient>
 
-        {  socialNetworkTab ?  <View style={styles.socialAccountContainer}>
+        {  socialNetworkTab ?  <ScrollView contentContainerStyle={styles.socialAccountContainer}>
             {
               Object.keys(socialMediaData).map((socialPlatform, idx) => {
                 const currentPlatform = this.socialPlatformPresent(socialPlatform)
@@ -186,8 +186,8 @@ class UserProfileScreen extends Component {
                 )
               })
             }
-          </View> :
-          <ScrollView style={{ height: 400}}>
+          </ScrollView> :
+          <ScrollView style={{ height: 366}}>
             <PersonalInfoTab />
           </ScrollView>
          }
@@ -196,7 +196,7 @@ class UserProfileScreen extends Component {
                 navbarStyle={styles.userProfNavbar}
                 navigation={navigation}
                 current='Profile'
-                margin={103}
+                margin={0}
               />
             </View>
         </View>
