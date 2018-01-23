@@ -3,12 +3,34 @@ import { Text, Image, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { SocialIcon } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
+import Permissions from 'react-native-permissions'
 import ConnectButton from '../SuperConnectScreen/ConnectButton';
 
 // Styles
 import styles from '../Styles/ForkScreenStyles';
 
 class ForkScreen extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      locationPermission: false,
+      notificationPermission: false
+    }
+  }
+
+  componentWillMount = () => {
+    const { locationPermission, notificationPermission } = this.props
+
+    if (locationPermission && notificationPermission) {
+      Permissions.request('location', { type: 'active' }).then(response => {
+        this.setState({ locationPermission: response })
+      })
+      Permissions.request('notification').then(response => {
+        this.setState({ notificationPermission: response })
+      })
+    }
+  }
 
   directToNearbyUsers = () => {
     const { navigate } = this.props.navigation
@@ -77,7 +99,9 @@ class ForkScreen extends Component {
 
 const mapStateToProps = state => ({
   userInfo: state.userStore.userData,
-  fbAuthToken: state.fbStore.fbAccessToken
+  fbAuthToken: state.fbStore.fbAccessToken,
+  locationPermission: state.permissionsStore.locationPermissionsGranted,
+  notificationPermission: state.permissionsStore.notificationPermissionsGranted
 })
 
 const mapDispatchToProps = dispatch => {
