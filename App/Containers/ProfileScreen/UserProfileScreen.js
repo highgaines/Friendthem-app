@@ -7,6 +7,7 @@ import { Text, View, Button, Linking , AppState, ScrollView, TouchableOpacity } 
 import LinearGradient from 'react-native-linear-gradient'
 import { Icon } from 'react-native-elements'
 import Image from 'react-native-remote-svg'
+import RNYoutubeOAuth from 'react-native-youtube-oauth';
 
 // Components
 import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard'
@@ -52,11 +53,12 @@ class UserProfileScreen extends Component {
   }
 
   componentWillMount = () => {
-    const { apiAccessToken, navigation, getUserId, loggedIn } = this.props
+    const { apiAccessToken, navigation, getUserId, loggedIn, getUserTokens } = this.props
     AppState.addEventListener('change', this._handleAppStateChange);
 
     if (apiAccessToken && loggedIn) {
       getUserId(apiAccessToken)
+      getUserTokens(apiAccessToken)
     } else {
       navigation.navigate('LaunchScreen')
     }
@@ -86,7 +88,7 @@ class UserProfileScreen extends Component {
 
       this.setState({externalAuth: true})
 
-      if (Linking.canOpenURL(deepLinkAuth)) {
+      if (Linking.canOpenURL(deepLinkAuth && false)) {
         Linking.openURL(deepLinkAuth)
       } else {
         Linking.openURL(authRedirectUrl)
@@ -121,6 +123,17 @@ class UserProfileScreen extends Component {
   determineStyling = () => {
     const { userInfo } = this.props
     return userInfo.picture.data.url.length > 1 ? true : false
+  }
+
+  youtubeOAuth = () => {
+    const { devYoutubeClientId, devYoutubeClientSecret } = envConfig.Development
+
+    RNYoutubeOAuth({
+      scheme: 'FriendThem://',
+      client_id: devYoutubeClientId,
+      redirect_uri: 'http://eoghan.pagekite.me/auth/redirect_to_app/',
+      state: 'FriendThemYoutubeAPIOAuth'
+    })
   }
 
   render() {

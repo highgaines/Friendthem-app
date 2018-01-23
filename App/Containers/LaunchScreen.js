@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, TouchableOpacity, Button, ActivityIndicator } from 'react-native'
-import { Images } from '../Themes'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Images } from '../Themes'
 
 // Libraries
 import { SocialIcon } from 'react-native-elements'

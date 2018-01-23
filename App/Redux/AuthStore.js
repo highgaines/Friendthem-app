@@ -22,6 +22,8 @@ const { Types, Creators } = createActions({
   socialMediaAuthRequest: null,
   socialMediaAuthSuccess: null,
   socialMediaAuthFailure: null,
+  grantLocationPermission: ['response'],
+  grantNotificationPermission: ['response'],
 })
 
 export const AuthTypes = Types
@@ -30,15 +32,17 @@ export default Creators
 /* ---------- Initial State ---------- */
 
 export const INITIAL_STATE = Immutable({
-  userInfoAdded: false,
   loggedIn: false,
   accessToken: null,
-  expiresIn: null,
   tokenType: null,
   scope: null,
   refreshToken: null,
+  expiresIn: null,
+  userInfoAdded: false,
   authError: false,
-  redirectUrl: null
+  redirectUrl: null,
+  locationPermissionsGranted: false,
+  notificationPermissionsGranted: false
 })
 
 
@@ -232,6 +236,20 @@ const handleSocialMediaAuthFailure = (state, action) => {
   return state
 }
 
+const handleLocationPermissions = (state, action) => {
+  return {
+    ...state,
+    locationPermissionsGranted: true
+  }
+}
+
+const handleNotificationPermissions = (state, action) => {
+  return {
+    ...state,
+    notificationPermissionsGranted: true
+  }
+}
+
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGOUT_USER]: handleUserLogout,
   [Types.LOGIN_REQUEST]: loginRequest,
@@ -246,4 +264,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.SOCIAL_MEDIA_AUTH_REQUEST]: handleSocialMediaAuthRequest,
   [Types.SOCIAL_MEDIA_AUTH_SUCCESS]: handleSocialMediaAuthSuccess,
   [Types.SOCIAL_MEDIA_AUTH_FAILURE]: handleSocialMediaAuthFailure,
+  [Types.GRANT_LOCATION_PERMISSION]: handleLocationPermissions,
+  [Types.GRANT_NOTIFICATION_PERMISSION]: handleNotificationPermissions
 })

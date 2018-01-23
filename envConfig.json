@@ -6,6 +6,8 @@
    "devClientSecret": "zUHQP76jg8aVl9LNSygiRpgD5lgkTkjxuC3Fd0Lb7dIMAZ58Fma4XMM3fWSbTsEfG7rar0Rn8sUNlZutuNNRS8IOv1zRNngWaZgmB0tKC2C0emWcWB1yVXar3bcgG5E6",
    "devGoogleClientId": "595911831950-6lnct4nnui472l34e6asij2rnrjbdcmj.apps.googleusercontent.com",
    "devGoogleClientSecret": "7acK_8Ej0SKWnnS1GjHTesXm",
+   "devYoutubeClientId": "595911831950-bdgl2qkqlbk8suf2fsqkbqj9dnvchdmn.apps.googleusercontent.com",
+   "devYoutubeClientSecret": "2Cvq6YPPWCfS9kETmCOALE1v",
    "devGoogleBaseURL": "https://accounts.google.com/o/oauth2/v2/auth?",
    "devGoogleApiParams": "scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube&response_type=code&redirect_uri=org.reactjs.native.FriendThem&client_id="
  },
