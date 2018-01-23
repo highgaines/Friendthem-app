@@ -43,8 +43,6 @@ export default SendInviteRow = props => {
 const styles = StyleSheet.create({
   ...ApplicationStyles.screen,
   inviteRowContent: {
-    borderColor: 'grey',
-    borderBottomWidth: 1,
     height: 45,
     flexDirection: 'row',
     justifyContent: 'space-around',

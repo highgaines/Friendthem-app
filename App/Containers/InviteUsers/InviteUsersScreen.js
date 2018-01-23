@@ -56,7 +56,7 @@ class InviteUsersScreen extends Component {
           </View>
           <View>
             <Text style={styles.friendCount}>
-              450 friends
+              {networkTabSelected ? '3 friends' : '7 friends' }
             </Text>
           </View>
           <View style={styles.tabSelectionContainer}>
