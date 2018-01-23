@@ -97,17 +97,18 @@ class FriendProfileScreen extends Component {
                 inverted={true}
                 userName={friendInfo.name} />
             </View>
+            <SuperConnectBar
+              superConnect={superConnect}/>
             <View style={styles.superConnectBarContainer}>
-              <SuperConnectBar
-                superConnect={superConnect}/>
             </View>
             <View>
               <Navbar
                 navigation={navigation}
+                navbarStyle={styles.userProfNavbar}
                 openModal={this.openModal}
                 logOut={this.logOut}
                 current='Friends'
-                margin={150}
+                margin={-88}
               />
             </View>
         </View>

@@ -26,7 +26,7 @@ export default UserCard = props => {
       <SMPlatformCircle
         key={idx}
         platform={platform}
-        size={30}
+        size={50}
       />
     )
   }
@@ -48,7 +48,7 @@ export default UserCard = props => {
       </View>
 
       <View style={styles.sendButtonColumn}>
-        <Button title="SEND" onPress={() => handleSend()}/>
+        <Button title="INVITE" onPress={() => handleSend()}/>
       </View>
     </Animatable.View>
   )

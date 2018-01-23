@@ -21,7 +21,7 @@ export const INITIAL_STATE = Immutable({
   userId: null,
   userData: {
     name: '',
-    picture: { data: {url: ''} }
+    picture: { data: {url: null} }
   },
   interests: [],
   location: ''

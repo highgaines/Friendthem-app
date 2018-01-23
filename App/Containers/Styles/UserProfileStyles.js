@@ -15,7 +15,8 @@ export default StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 5,
     shadowColor: 'black',
-    shadowOffset: { height: 6, width: 10 }
+    shadowOffset: { height: 6, width: 10 },
+    zIndex: 99
   },
   profHeaderTop: {
     height: 125,
@@ -27,6 +28,26 @@ export default StyleSheet.create({
     shadowColor: 'black',
     shadowOffset: { height: 6, width: 10 },
     zIndex: 100
+  },
+  tabSelectionContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 30
+  },
+  tabText: {
+    color: '#a6acb1',
+    fontSize: 15,
+    fontWeight: '600',
+    backgroundColor: 'transparent',
+    textAlign: 'center'
+  },
+  selectedText: {
+    color: '#fff'
+  },
+  selected: {
+    borderBottomColor: '#fff',
+    borderBottomWidth: 3,
+    paddingBottom: 10
   },
   profileImage: {
     width: 120,
@@ -72,7 +93,8 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%'
+    width: '100%',
+    height: 366
   },
   SuperConnectBarContainer: {
     alignItems: 'center'

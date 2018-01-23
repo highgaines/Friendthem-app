@@ -1,22 +1,35 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Text, Image, View, Button, Linking , AppState, ScrollView } from 'react-native'
-import LinearGradient from 'react-native-linear-gradient'
-import { Icon } from 'react-native-elements'
+import { Text, View, Button, Linking , AppState, ScrollView, TouchableOpacity } from 'react-native'
 
 // Libraries
-import ConnectButton from '../SuperConnectScreen/ConnectButton'
+import LinearGradient from 'react-native-linear-gradient'
+import { Icon } from 'react-native-elements'
+import Image from 'react-native-remote-svg'
+
+// Components
 import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard'
 import Navbar from '../Navbar/Navbar'
 import PickSocialMediaModal from '../TutorialScreens/PickSocialMediaModal'
+import ConnectButton from '../SuperConnectScreen/ConnectButton'
+import PersonalInfoTab from './PersonalInfoTab'
+
+// Redux
 import AuthStoreActions, { socialMediaAuth } from '../../Redux/AuthStore'
 import UserStoreActions, { getUserId } from '../../Redux/UserStore'
 import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
 
+// Images
+import { Images } from '../../Themes';
+
 // Styles
 import styles from '../Styles/UserProfileStyles'
+
+// Constants
 import { SOCIAL_MEDIA_DATA } from '../../Utils/constants'
+
+// Env
 import envConfig from '../../../envConfig'
 
 class UserProfileScreen extends Component {
@@ -24,6 +37,7 @@ class UserProfileScreen extends Component {
     super(props)
 
     this.state = {
+      socialNetworkTab: true,
       showFriendster: true,
       externalAuth: false,
       currentPlatform: null,
@@ -44,7 +58,7 @@ class UserProfileScreen extends Component {
     if (apiAccessToken) {
       getUserId(apiAccessToken)
     } else {
-      navigation.navigate('LaunchScreen')
+      // navigation.navigate('LaunchScreen')
     }
   }
 
@@ -95,6 +109,20 @@ class UserProfileScreen extends Component {
     )
   }
 
+  determineImage = () => {
+    const { userInfo } = this.props
+    if (userInfo.picture.data.url) {
+      return {uri: `${userInfo.picture.data.url}`}
+    } else {
+      return Images.noPicSVG
+    }
+  }
+
+  determineStyling = () => {
+    const { userInfo } = this.props
+    return userInfo.picture.data.url.length > 1 ? true : false
+  }
+
   render() {
     const {
       userId,
@@ -108,11 +136,11 @@ class UserProfileScreen extends Component {
       getUserTokens,
       platforms
     } = this.props
-    const { showFriendster, socialMediaData } = this.state
+    const { showFriendster, socialMediaData, socialNetworkTab } = this.state
     const { devGoogleBaseURL, devGoogleApiParams, devGoogleClientId } = envConfig.Development
 
     return (
-        <ScrollView style={showFriendster ? { opacity: 0.3 } : ''}>
+        <View style={showFriendster ? { opacity: 0.3 } : ''}>
           <LinearGradient
           colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
           start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
@@ -121,11 +149,11 @@ class UserProfileScreen extends Component {
             triggerModal={this.triggerFriendster}
             showModal={showFriendster}
           />
-            <View style={styles.profileHeader}>
+            <View style={[styles.profileHeader, { height: 150}]}>
               <View style={styles.profHeaderTop}>
                 <Image
-                  style={styles.profileImage}
-                  source={{uri: `${userInfo.picture.data.url}`}} />
+                  style={[styles.profileImage]}
+                  source={this.determineImage()} />
               </View>
               <Text style={styles.profileSubtext}>
               {`${userInfo.name}`}
@@ -133,29 +161,30 @@ class UserProfileScreen extends Component {
               <Text style={styles.interestsText}>
                   {userInterests.join(' | ')}
               </Text>
-              <View style={{ flexDirection: 'row', marginTop: 7, justifyContent: 'space-around'}}>
-                <Icon
-                  name='location'
-                  type='entypo'
-                  size={14}
-                  color='#fff'
-                />
-                <Text style={{ color: '#fff', fontWeight: '500', backgroundColor: 'transparent', marginLeft: 7}}>
-                  {userLocation}
+            </View>
+            <View style={styles.tabSelectionContainer}>
+              <TouchableOpacity
+                onPress={() => this.setState({ socialNetworkTab: true })}
+                style={[styles.tabItem, socialNetworkTab ? styles.selected : null]}>
+                <Text
+                  style={[styles.tabText, socialNetworkTab ? styles.selectedText : null]}
+                  >
+                  SOCIAL NETWORKS
                 </Text>
-              </View>
-              <ConnectButton
-                color='#fff'
-                title='EDIT PROFILE'
-                containerStyle={styles.button}
-                textStyle={styles.buttonTextStyle}
-                onPressCallback={() => navigation.navigate('EditProfileInfoScreen')}
-              />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.setState({ socialNetworkTab: false })}
+                style={[styles.tabItem, socialNetworkTab ? null : styles.selected]}>
+                <Text
+                  style={[styles.tabText, socialNetworkTab ? null : styles.selectedText]}
+                  >
+                  PERSONAL INFO
+                </Text>
+              </TouchableOpacity>
             </View>
             </LinearGradient>
-            <View style={styles.socialIconSlider}>
-            </View>
-            <View style={styles.socialAccountContainer}>
+
+        {  socialNetworkTab ?  <ScrollView contentContainerStyle={styles.socialAccountContainer}>
             {
               Object.keys(socialMediaData).map((socialPlatform, idx) => {
                 const currentPlatform = this.socialPlatformPresent(socialPlatform)
@@ -175,16 +204,20 @@ class UserProfileScreen extends Component {
                 )
               })
             }
-            </View>
+          </ScrollView> :
+          <ScrollView style={{ height: 366}}>
+            <PersonalInfoTab />
+          </ScrollView>
+         }
             <View>
               <Navbar
                 navbarStyle={styles.userProfNavbar}
                 navigation={navigation}
                 current='Profile'
-                margin={77}
+                margin={0}
               />
             </View>
-        </ScrollView>
+        </View>
     )
   }
 }
