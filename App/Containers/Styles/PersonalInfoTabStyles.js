@@ -27,7 +27,8 @@ export default StyleSheet.create({
   rowTextContent: {
     fontWeight: '700',
     fontSize: 13,
-    color: '#9ca4ab'
+    color: '#9ca4ab',
+    marginRight: 10
   },
   form: {
     height: 25,
