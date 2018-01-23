@@ -25,11 +25,13 @@ export default SendInviteRow = props => {
 
   // will have to tweak - currently not working
   const handleInvite = () => {
-    Communications.text('3472917739', 'You have been invited to download FriendThem')
+    if (platform === 'Text Message') {
+      Communications.text('3472917739', 'Friendthem is Great! Download it here! ----')
+    }
   }
 
   return(
-      <TouchableOpacity style={styles.inviteRowContent}>
+      <TouchableOpacity style={styles.inviteRowContent} onPress={() => handleInvite()}>
         <Image
           source={renderIcon()}
         />
