@@ -50,23 +50,23 @@ export default class InfoRow extends Component {
             onValueChange={() => this.setState({flipSwitch: !flipSwitch})}
             value={flipSwitch}
             style={styles.switchStyle} />
-            :
-            <TouchableOpacity
-              style={styles.iconContainer}
-              onPress={this.toggleEditMode}
-              >
-              { isEditing ?
-                <View style={{ position: 'absolute', right: -10, top: -10}}>
-                  <Button title="SAVE" onPress={this.handleSubmit}/>
-                </View> :
-                <Icon
-                  name='pencil'
-                  type='simple-line-icon'
-                  size={15}
-                  color='#6f6f71'
-                /> }
-              </TouchableOpacity>
+            : null
         }
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={this.toggleEditMode}
+          >
+          { isEditing ?
+            <View style={{ position: 'absolute', right: -10, top: -10}}>
+              <Button title="SAVE" onPress={this.handleSubmit}/>
+            </View> :
+            <Icon
+              name='pencil'
+              type='simple-line-icon'
+              size={15}
+              color='#6f6f71'
+            /> }
+          </TouchableOpacity>
       </View>
     )
   }
