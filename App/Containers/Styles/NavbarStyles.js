@@ -31,5 +31,8 @@ export default StyleSheet.create({
     color: 'white',
     fontSize: 10,
     textAlign: 'center'
+  },
+  button: {
+    width: 70
   }
 })
