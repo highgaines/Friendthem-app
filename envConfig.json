@@ -2,8 +2,8 @@
  "Development": {
    "codePushKey": "",
    "appServerRootURL": "http://eoghan.pagekite.me",
-   "devClientId": "vVHC5uHETLyixeMkB9oMp3696it3yp3bT86fODTx",
-   "devClientSecret": "OKNqJSy8ptZ0GUR2afW20ijs3hbS1HNc069RGH8NgPxc2bCU1urm1GyofbIAWxihaoeJZ5Ume9ECeLt0h7qjLeRSRx7sA3k5nGF1ibxwhJyPW1xbhNbHsQmqJH6KwC18",
+   "devClientId": "HN4wjQmw1WvkOI2AUGrSOIrKx7kOzEVP1H1zxYfB",
+   "devClientSecret": "zUHQP76jg8aVl9LNSygiRpgD5lgkTkjxuC3Fd0Lb7dIMAZ58Fma4XMM3fWSbTsEfG7rar0Rn8sUNlZutuNNRS8IOv1zRNngWaZgmB0tKC2C0emWcWB1yVXar3bcgG5E6",
    "devGoogleClientId": "595911831950-6lnct4nnui472l34e6asij2rnrjbdcmj.apps.googleusercontent.com",
    "devGoogleClientSecret": "7acK_8Ej0SKWnnS1GjHTesXm",
    "devGoogleBaseURL": "https://accounts.google.com/o/oauth2/v2/auth?",
