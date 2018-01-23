@@ -31,7 +31,6 @@ export default PickSocialMediaModal = props => {
             </Text>
             <Button title="CLOSE" onPress={triggerModal}/>
           </View>
-
       </Modal>
     </View>
   )
