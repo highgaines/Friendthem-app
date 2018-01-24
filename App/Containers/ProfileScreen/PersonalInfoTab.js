@@ -34,7 +34,7 @@ class PersonalInfoTab extends Component {
           rowLabel='OCCUPATION'
           field="interests"
           updateInfo={updateInfo}
-          userInfo={userData.interests.isArray ? userData.interests.join(', ') : userData.interests}/>
+          userInfo={Array.isArray(userData.interests) ? userData.interests.join(', ') : userData.interests}/>
         <InfoRow
           rowLabel='LOCATION'
           field="location"
