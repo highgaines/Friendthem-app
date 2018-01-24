@@ -11,11 +11,12 @@ export default StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     width: '100%',
-    paddingHorizontal: 20,
+    height: 70,
+    justifyContent: 'flex-start',
+    padding: 20,
     alignItems: 'center',
     borderBottomColor: '#d6d6d6',
     borderBottomWidth: 2,
-    paddingVertical: 20,
     backgroundColor: '#f5f8f8'
   },
   rowLabelText: {
@@ -26,15 +27,27 @@ export default StyleSheet.create({
   rowTextContent: {
     fontWeight: '700',
     fontSize: 13,
-    color: '#9ca4ab'
+    color: '#9ca4ab',
+    marginRight: 10
+  },
+  form: {
+    height: 25,
+    paddingVertical: 2,
+    paddingHorizontal: 5,
+    width: 150,
+    fontSize: 13,
+    color: 'black',
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 30
   },
   switchStyle: {
-    left: 90
+
   },
   iconContainer: {
     position: 'absolute',
     right: 15,
-    top: 20
+    top: 25
   },
   privateRowDivider: {
     flexDirection: 'row',

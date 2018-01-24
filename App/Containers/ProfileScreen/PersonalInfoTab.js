@@ -1,27 +1,50 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, Button, TextInput, ScrollView } from 'react-native'
-import { Icon } from 'react-native-elements'
 
+// Components
+import { View, TouchableOpacity, Text, Button, TextInput, ScrollView } from 'react-native'
 import InfoRow from './InfoRow'
 
+// Libraries
+import { Icon } from 'react-native-elements'
+
+// Redux
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import UserStoreActions, { updateInfo } from '../../Redux/UserStore'
+
+// Styles
 import styles from '../Styles/PersonalInfoTabStyles'
 
-export default class PersonalInfoTab extends Component {
+class PersonalInfoTab extends Component {
+  constructor(props) {
+    super(props)
+
+  }
+
   render() {
+    const { userData, updateInfo } = this.props
     return (
       <View style={styles.personalInfoContainer}>
         <InfoRow
           rowLabel='USER NAME'
-          userInfo='Eoghan Leddy'/>
+          field="name"
+          updateInfo={updateInfo}
+          userInfo={userData.name}/>
         <InfoRow
           rowLabel='OCCUPATION'
-          userInfo={['Coder', 'Biker', 'Swimmer'].join(', ')}/>
+          field="interests"
+          updateInfo={updateInfo}
+          userInfo={userData.interests.isArray ? userData.interests.join(', ') : userData.interests}/>
         <InfoRow
           rowLabel='LOCATION'
-          userInfo='New York City'/>
+          field="location"
+          updateInfo={updateInfo}
+          userInfo={userData.location}/>
         <InfoRow
           rowLabel='AGE'
-          userInfo={26}/>
+          field="age"
+          updateInfo={updateInfo}
+          userInfo={userData.age}/>
         <View style={styles.privateRowDivider}>
           <Text
             style={styles.mainPrivateText}>
@@ -38,16 +61,38 @@ export default class PersonalInfoTab extends Component {
         </View>
         <InfoRow
           rowLabel='PHONE'
-          userInfo='(800)800-8000'
+          field="phoneNumber"
+          updateInfo={updateInfo}
+          userInfo={userData.phoneNumber}
           showSwitch={true}/>
         <InfoRow
           rowLabel='EMAIL'
-          userInfo='eoghan@me.com'
+          field="email"
+          updateInfo={updateInfo}
+          userInfo={userData.email}
           showSwitch={true}/>
         <InfoRow
           rowLabel='PASSWORD'
+          field="password"
+          updateInfo={updateInfo}
           userInfo='********'/>
       </View>
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    userData: state.userStore.userData
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    ...bindActionCreators({
+      updateInfo
+    }, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PersonalInfoTab)

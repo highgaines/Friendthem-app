@@ -40,7 +40,7 @@ class SettingsScreen extends Component {
     navigation.navigate('LaunchScreen')
   }
 
-  reportProblem = () => {
+  handleReportProblem = () => {
     Communications.email(['customerservice@friendthem.com'], null, null, 'Report A Problem', 'Please explain your problem here...')
   }
 

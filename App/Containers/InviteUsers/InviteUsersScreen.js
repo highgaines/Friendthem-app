@@ -26,7 +26,7 @@ class InviteUsersScreen extends Component {
     super(props)
 
     this.state = {
-      networkTabSelected: true,
+      networkTabSelected: false,
       showModal: false
     }
   }
@@ -61,15 +61,6 @@ class InviteUsersScreen extends Component {
           </View>
           <View style={styles.tabSelectionContainer}>
             <TouchableOpacity
-              onPress={() => this.setState({ networkTabSelected: true })}
-              style={[styles.tabItem, networkTabSelected ? styles.selected : null]}>
-              <Text
-                style={[styles.tabText, networkTabSelected ? styles.selectedText : null]}
-                >
-                ON FRIENDTHEM
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
               onPress={() => this.setState({ networkTabSelected: false })}
               style={[styles.tabItem, networkTabSelected ? null : styles.selected]}>
               <Text
@@ -78,6 +69,15 @@ class InviteUsersScreen extends Component {
                 MY NETWORK
               </Text>
             </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.setState({ networkTabSelected: true })}
+              style={[styles.tabItem, networkTabSelected ? styles.selected : null]}>
+              <Text
+                style={[styles.tabText, networkTabSelected ? styles.selectedText : null]}
+                >
+                  ON FRIENDTHEM
+                </Text>
+              </TouchableOpacity>
           </View>
         </LinearGradient>
         {!networkTabSelected ?
