@@ -12,9 +12,9 @@ export const SOCIAL_MEDIA_DATA = {
   // linkedin: {
   //   deepLinkUrl: 'voyager://in'
   // },
-  // youtube: {
-  //   deepLinkUrl: 'youtube://'
-  // },
+  youtube: {
+    deepLinkUrl: 'youtube://'
+  },
   snapchat: {
     deepLinkUrl: 'snapchat://'
   }

@@ -2,8 +2,8 @@
  "Development": {
    "codePushKey": "",
    "appServerRootURL": "http://eoghan.pagekite.me",
-   "devClientId": "HN4wjQmw1WvkOI2AUGrSOIrKx7kOzEVP1H1zxYfB",
-   "devClientSecret": "zUHQP76jg8aVl9LNSygiRpgD5lgkTkjxuC3Fd0Lb7dIMAZ58Fma4XMM3fWSbTsEfG7rar0Rn8sUNlZutuNNRS8IOv1zRNngWaZgmB0tKC2C0emWcWB1yVXar3bcgG5E6",
+   "devClientId": "rwGQbMOAIsJeiObZLVB9YDksfmfRFNHvxhe1GEQb",
+   "devClientSecret": "mD3lxrxmIIfpR7qKHLCm1JsICL4xzJSjSPN1PGuKvl6IB1q6vlhmqu89nCctS0StmwHt1yKJuaIdzZOLVx4BzwReGx4iy1YhkbxeEPdreiVrW72hWKLJSmJvSCVcCG9p",
    "devGoogleClientId": "595911831950-6lnct4nnui472l34e6asij2rnrjbdcmj.apps.googleusercontent.com",
    "devGoogleClientSecret": "7acK_8Ej0SKWnnS1GjHTesXm",
    "devYoutubeClientId": "595911831950-bdgl2qkqlbk8suf2fsqkbqj9dnvchdmn.apps.googleusercontent.com",

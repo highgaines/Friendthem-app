@@ -48,7 +48,7 @@ export const getUserId = (accessToken) => {
       Types.GET_USER_FAILURE
     ],
     shouldCallApi: state => true,
-    callApi: dispatch => fetchFromApi('auth/me/', init, dispatch)
+    callApi: dispatch => fetchFromApi('profile/me/', init, dispatch)
   }
 }
 

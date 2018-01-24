@@ -83,16 +83,16 @@ class UserProfileScreen extends Component {
     const { socialMediaData, currentPlatform } = this.state
 
     if (authRedirectUrl && !prevProps.authRedirectUrl && currentPlatform) {
-      const deepLinkBase = socialMediaData[currentPlatform.split('-')[0]].deepLinkUrl
-      const deepLinkAuth = `${deepLinkBase}${authRedirectUrl.split('.com/')[1]}`
+      // const deepLinkBase = socialMediaData[currentPlatform.split('-')[0]].deepLinkUrl
+      // const deepLinkAuth = `${deepLinkBase}${authRedirectUrl.split('.com/')[1]}`
 
       this.setState({externalAuth: true})
 
-      if (Linking.canOpenURL(deepLinkAuth && false)) {
-        Linking.openURL(deepLinkAuth)
-      } else {
+      // if (Linking.canOpenURL(deepLinkAuth && false)) {
+      //   Linking.openURL(deepLinkAuth)
+      // } else {
         Linking.openURL(authRedirectUrl)
-      }
+      //}
     }
   }
 
@@ -123,17 +123,6 @@ class UserProfileScreen extends Component {
   determineStyling = () => {
     const { userInfo } = this.props
     return userInfo.picture.data.url.length > 1 ? true : false
-  }
-
-  youtubeOAuth = () => {
-    const { devYoutubeClientId, devYoutubeClientSecret } = envConfig.Development
-
-    RNYoutubeOAuth({
-      scheme: 'FriendThem://',
-      client_id: devYoutubeClientId,
-      redirect_uri: 'http://eoghan.pagekite.me/auth/redirect_to_app/',
-      state: 'FriendThemYoutubeAPIOAuth'
-    })
   }
 
   render() {
@@ -197,7 +186,8 @@ class UserProfileScreen extends Component {
         {  socialNetworkTab ?  <ScrollView contentContainerStyle={styles.socialAccountContainer}>
             {
               Object.keys(socialMediaData).map((socialPlatform, idx) => {
-                const currentPlatform = this.socialPlatformPresent(socialPlatform)
+                const isYoutube = socialPlatform === 'youtube'
+                const currentPlatform = this.socialPlatformPresent(isYoutube ? 'google-oauth2' : socialPlatform)
                 const capitalizeName = (name) => name[0].toUpperCase() + name.slice(1)
                 const userName = currentPlatform ? currentPlatform['access_token'][socialMediaData[socialPlatform]['userNamePath']] : null
                 const isSynced = !!currentPlatform
@@ -208,7 +198,7 @@ class UserProfileScreen extends Component {
                     platformName={capitalizeName(socialPlatform)}
                     selected={isSynced}
                     socialAuth={(platform) => this.authenticateSocialMedia(platform)}
-                    platformAuth={socialPlatform}
+                    platformAuth={isYoutube ? 'google-oauth2' : socialPlatform}
                     userName={userName}
                   />
                 )
