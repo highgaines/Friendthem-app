@@ -23,7 +23,6 @@ export default SendInviteRow = props => {
       }
   }
 
-  // will have to tweak - currently not working
   const handleInvite = () => {
     if (platform === 'Text Message') {
       Communications.text('3472917739', 'Friendthem is Great! Download it here! ----')
