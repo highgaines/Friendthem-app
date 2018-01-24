@@ -1,13 +1,20 @@
 import React from 'react';
-import { View, Image, TouchableOpacity, ScrollView, Text, Button } from 'react-native';
+import { View, TouchableOpacity, ScrollView, Text, Button } from 'react-native';
+
+import Image from 'react-native-remote-svg';
+
 import SMPlatformCircle from '../UtilityComponents/SMPlatformCircle';
 import ImageCircle from '../UtilityComponents/ImageCircle';
 
 // Libraries
 import * as Animatable from 'react-native-animatable';
+import Communications from 'react-native-communications';
 
 // Styles
 import styles from '../Styles/InviteUserCardStyles';
+
+// Images
+import { Images } from '../../Themes';
 
 export default UserCard = props => {
   const { userImage, userName, userPlatforms, triggerModal, selectUser } = props
@@ -26,9 +33,13 @@ export default UserCard = props => {
       <SMPlatformCircle
         key={idx}
         platform={platform}
-        size={50}
+        size={30}
       />
     )
+  }
+
+  const handleInvite = () => {
+    Communications.text('3472917739', 'Friendthem is Great! Download it here!')
   }
 
   return (
@@ -48,7 +59,16 @@ export default UserCard = props => {
       </View>
 
       <View style={styles.sendButtonColumn}>
-        <Button title="INVITE" onPress={() => handleSend()}/>
+        <TouchableOpacity style={styles.inviteRowContent} onPress={() => handleInvite()}>
+          <Image
+            source={Images.textMessageIcon}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.inviteRowContent} onPress={() => handleInvite()}>
+          <Image
+            source={Images.messengerIcon}
+          />
+        </TouchableOpacity>
       </View>
     </Animatable.View>
   )

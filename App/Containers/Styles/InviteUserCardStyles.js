@@ -8,7 +8,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     borderColor: '#a6acb1',
-    padding: 10,
+    padding: 5,
     borderBottomWidth: 1
   },
   imageColumn: {
@@ -21,15 +21,23 @@ export default StyleSheet.create({
     fontWeight: '600'
   },
   infoColumn: {
-    flex: 3,
+    flex: 2.5,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'flex-start'
   },
   sendButtonColumn: {
-    flex: 1,
+    flex: 1.5,
+    flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'flex-end'
+    alignItems: 'center',
+    marginRight: 5
+  },
+  inviteRowContent: {
+    height: 45,
+    width: 50,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   socialIcons: {
     flexDirection: 'row',
