@@ -11,6 +11,7 @@ const { Types, Creators } = createActions({
   getUserRequest: null,
   getUserSuccess: null,
   getUserFailure: null,
+  submitSnapchatHandle: ['handle']
 })
 
 export const UserTypes = Types
@@ -27,7 +28,8 @@ export const INITIAL_STATE = Immutable({
     age: 26,
     phoneNumber: '3472917739',
     interests: ['Crypto', 'Flying Kites', 'Gaming'],
-    location: 'New York'
+    location: 'New York',
+    snapHandle: null
   }
 })
 
@@ -94,6 +96,13 @@ const handleGetUserFailure = (state, action) => {
   return state
 }
 
+const handleSnapHandleSubmit = (state, action) => {
+  return {
+    ...state,
+
+  }
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -102,4 +111,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_USER_REQUEST]: handleGetUserRequest,
   [Types.GET_USER_SUCCESS]: handleGetUserSuccess,
   [Types.GET_USER_FAILURE]: handleGetUserFailure,
+  [Types.SUBMIT_SNAPCHAT_HANDLE]: handleSnapHandleSubmit
 })

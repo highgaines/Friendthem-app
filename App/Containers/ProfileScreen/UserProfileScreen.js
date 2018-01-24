@@ -15,6 +15,7 @@ import Navbar from '../Navbar/Navbar'
 import PickSocialMediaModal from '../TutorialScreens/PickSocialMediaModal'
 import ConnectButton from '../SuperConnectScreen/ConnectButton'
 import PersonalInfoTab from './PersonalInfoTab'
+import FriendThemModal from '../UtilityComponents/FriendThemModal'
 
 // Redux
 import AuthStoreActions, { socialMediaAuth } from '../../Redux/AuthStore'
@@ -43,7 +44,8 @@ class UserProfileScreen extends Component {
       externalAuth: false,
       currentPlatform: null,
       appState: AppState.currentState,
-      socialMediaData: SOCIAL_MEDIA_DATA
+      socialMediaData: SOCIAL_MEDIA_DATA,
+      snapHandleModalOpen: false
     }
   }
 
@@ -125,6 +127,12 @@ class UserProfileScreen extends Component {
     return userInfo.picture.data.url.length > 1 ? true : false
   }
 
+  toggleSnapchatModal = () => {
+    const { snapHandleModalOpen } = this.state
+
+    this.setState({snapHandleModalOpen: !snapHandleModalOpen})
+  }
+
   render() {
     const {
       userId,
@@ -161,6 +169,9 @@ class UserProfileScreen extends Component {
               {`${userInfo.name}`}
               </Text>
             </View>
+            <FriendThemModal
+              modalVisible={this.state.snapHandleModalOpen}
+              toggleSnapchatModal={this.toggleSnapchatModal} />
             <View style={styles.tabSelectionContainer}>
               <TouchableOpacity
                 onPress={() => this.setState({ socialNetworkTab: true })}
@@ -187,6 +198,7 @@ class UserProfileScreen extends Component {
             {
               Object.keys(socialMediaData).map((socialPlatform, idx) => {
                 const isYoutube = socialPlatform === 'youtube'
+                const isSnapchat = socialPlatform === 'snapchat'
                 const currentPlatform = this.socialPlatformPresent(isYoutube ? 'google-oauth2' : socialPlatform)
                 const capitalizeName = (name) => name[0].toUpperCase() + name.slice(1)
                 const userName = currentPlatform ? currentPlatform['access_token'][socialMediaData[socialPlatform]['userNamePath']] : null
@@ -197,7 +209,7 @@ class UserProfileScreen extends Component {
                     key={idx}
                     platformName={capitalizeName(socialPlatform)}
                     selected={isSynced}
-                    socialAuth={(platform) => this.authenticateSocialMedia(platform)}
+                    socialAuth={isSnapchat ? this.toggleSnapchatModal : (platform) => this.authenticateSocialMedia(platform)}
                     platformAuth={isYoutube ? 'google-oauth2' : socialPlatform}
                     userName={userName}
                   />
