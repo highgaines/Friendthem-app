@@ -10,8 +10,7 @@ const { Types, Creators } = createActions({
   updateInfo: ['userInfo'],
   getUserRequest: null,
   getUserSuccess: null,
-  getUserFailure: null,
-  submitSnapchatHandle: ['handle']
+  getUserFailure: null
 })
 
 export const UserTypes = Types
@@ -96,13 +95,6 @@ const handleGetUserFailure = (state, action) => {
   return state
 }
 
-const handleSnapHandleSubmit = (state, action) => {
-  return {
-    ...state,
-
-  }
-}
-
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -110,6 +102,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.UPDATE_INFO]: handleUpdateInfo,
   [Types.GET_USER_REQUEST]: handleGetUserRequest,
   [Types.GET_USER_SUCCESS]: handleGetUserSuccess,
-  [Types.GET_USER_FAILURE]: handleGetUserFailure,
-  [Types.SUBMIT_SNAPCHAT_HANDLE]: handleSnapHandleSubmit
+  [Types.GET_USER_FAILURE]: handleGetUserFailure
 })

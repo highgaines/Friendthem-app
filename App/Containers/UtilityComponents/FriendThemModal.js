@@ -20,10 +20,17 @@ class FriendThemModal extends Component {
     }
   }
 
+  submitSnapHandle = () => {
+    const { submitText, toggleSnapchatModal } = this.props
+
+    submitText(this.state.snapHandle)
+    toggleSnapchatModal()
+  }
+
   render() {
     const { modalVisible, toggleSnapchatModal } = this.props
-    const { snapHandle } = this.props
-
+    const { snapHandle } = this.state
+    console.log(snapHandle)
     return (
       <Modal
       animationIn='slideInUp'
@@ -54,10 +61,10 @@ class FriendThemModal extends Component {
             value={snapHandle}
             autoCapitalize={'none'}
             autoCorrect={false}
-            onChange={(value) => this.setState({snapHandle: value})}/>
+            onChangeText={(value) => this.setState({snapHandle: value})}/>
           <TouchableOpacity
             style={styles.modalButton}
-            onPress={() => alert('callback triggered')}>
+            onPress={() => this.submitSnapHandle()}>
             <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>
         </View>
