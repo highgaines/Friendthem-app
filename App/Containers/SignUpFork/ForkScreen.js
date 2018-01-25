@@ -6,6 +6,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import Permissions from 'react-native-permissions'
 import ConnectButton from '../SuperConnectScreen/ConnectButton';
 
+import PermissionsStoreActions from '../../Redux/PermissionsStore'
+
 // Styles
 import styles from '../Styles/ForkScreenStyles';
 
@@ -24,7 +26,9 @@ class ForkScreen extends Component {
 
     if (locationPermission && notificationPermission) {
       Permissions.request('location', { type: 'active' }).then(response => {
-        this.setState({ locationPermission: response })
+        if(response === 'authorized') {
+          this.props.setLocationInterval()
+        }
       })
       Permissions.request('notification').then(response => {
         this.setState({ notificationPermission: response })
@@ -105,7 +109,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
-  return {}
+  const { setLocationInterval } = PermissionsStoreActions
+  return {
+    setLocationInterval
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ForkScreen)

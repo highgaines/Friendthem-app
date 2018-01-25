@@ -32,7 +32,8 @@ class LaunchScreen extends Component {
 
     this.state = {
       user: '',
-      loading: false
+      loading: false,
+      error: null
     }
   }
 
@@ -43,11 +44,27 @@ class LaunchScreen extends Component {
   }
 
   componentWillUpdate = nextProps => {
-    const { fbAuthToken } = this.props
+    const { fbAuthToken, locationIntervalRunning } = this.props
 
+    if (!locationIntervalRunning && nextProps.locationIntervalRunning) {
+      console.log(this.locationInterval)
+      setInterval(this.locationInterval, 120000)
+    }
+    if (locationIntervalRunning && !nextProps.locationIntervalRunning) {
+      clearInterval(this.locationInterval)
+    }
     if (!fbAuthToken && nextProps.fbAuthToken) {
       this.getFbProfile(nextProps.fbAuthToken)
     }
+  }
+
+  locationInterval = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log(position)
+    },
+      (error) => this.setState({ error: error.message }),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    )
   }
 
   handleLoading = () => {
@@ -166,7 +183,8 @@ const mapStateToProps = state => ({
   users: state.facebook.users,
   userData: state.userStore,
   nav: state.nav,
-  loggedIn: state.authStore.loggedIn
+  loggedIn: state.authStore.loggedIn,
+  locationIntervalRunning: state.permissionsStore.locationIntervalRunning
 })
 
 const mapDispatchToProps = dispatch => {
