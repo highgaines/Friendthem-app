@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
+    "test:update": "jest --updateSnapshot",
     "clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force",
     "clean:android": "cd android/ && ./gradlew clean && cd .. && react-native run-android",
     "newclear": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build && rm -rf node_modules/ && npm cache clean --force && npm i",
@@ -80,23 +81,25 @@
     "@storybook/react-native": "^3.3.13",
     "babel-core": "6.26.0",
     "babel-eslint": "7.1.1",
-    "babel-jest": "21.2.0",
+    "babel-jest": "^21.2.0",
     "babel-plugin-ignite-ignore-reactotron": "^0.3.0",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react-native": "^3.0.2",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
+    "detox": "^7.0.0-alpha.1",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.0",
     "husky": "^0.14.3",
     "ignite-ir-boilerplate": "^2.3.0",
     "ignite-redux-persist": "^0.0.7",
     "ignite-standard": "^1.0.0",
-    "jest": "21.2.1",
+    "jest": "^21.2.1",
+    "jest-react-native": "^18.0.0",
     "mockery": "^2.1.0",
     "react-dom": "16.0.0",
     "react-native-code-push": "^5.2.1",
     "react-native-elements": "^0.18.5",
-    "react-test-renderer": "16.0.0",
+    "react-test-renderer": "^16.0.0",
     "reactotron-react-native": "^1.14.0",
     "reactotron-redux": "^1.13.0",
     "reactotron-redux-saga": "^1.13.0",
@@ -119,6 +122,16 @@
       "<rootDir>/Tests/Setup"
     ],
     "preset": "react-native"
+  },
+  "detox": {
+    "configurations": {
+      "ios.sim.debug": {
+        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/FriendThem.app",
+        "build": "xcodebuild -project ios/FriendThem.xcodeproj -scheme FriendThem -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "name": "iPhone 7"
+      }
+    }
   },
   "nrpm": {
     "assets": [
