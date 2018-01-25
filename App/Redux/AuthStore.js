@@ -21,7 +21,7 @@ const { Types, Creators } = createActions({
   loginFacebookFailure: null,
   socialMediaAuthRequest: null,
   socialMediaAuthSuccess: null,
-  socialMediaAuthFailure: null,
+  socialMediaAuthFailure: null
 })
 
 export const AuthTypes = Types
@@ -30,15 +30,15 @@ export default Creators
 /* ---------- Initial State ---------- */
 
 export const INITIAL_STATE = Immutable({
-  userInfoAdded: false,
   loggedIn: false,
   accessToken: null,
-  expiresIn: null,
   tokenType: null,
   scope: null,
   refreshToken: null,
+  expiresIn: null,
+  userInfoAdded: false,
   authError: false,
-  redirectUrl: null
+  redirectUrl: null,
 })
 
 
@@ -245,5 +245,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.REGISTER_FAILURE]: registerAccountFailure,
   [Types.SOCIAL_MEDIA_AUTH_REQUEST]: handleSocialMediaAuthRequest,
   [Types.SOCIAL_MEDIA_AUTH_SUCCESS]: handleSocialMediaAuthSuccess,
-  [Types.SOCIAL_MEDIA_AUTH_FAILURE]: handleSocialMediaAuthFailure,
+  [Types.SOCIAL_MEDIA_AUTH_FAILURE]: handleSocialMediaAuthFailure
 })
