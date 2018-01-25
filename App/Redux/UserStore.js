@@ -7,10 +7,12 @@ import envConfig from '../../envConfig'
 
 const { Types, Creators } = createActions({
   fbUserInfo: ['userInfo'],
-  updateInfo: ['userInfo'],
   getUserRequest: null,
   getUserSuccess: null,
   getUserFailure: null,
+  updateInfoRequest: null,
+  updateInfoSuccess: null,
+  updateInfoFailure: null
 })
 
 export const UserTypes = Types
@@ -24,10 +26,12 @@ export const INITIAL_STATE = Immutable({
     name: '',
     picture: { data: {url: null} },
     email: '',
+    personal_email: '',
     age: 26,
-    phoneNumber: '3472917739',
-    interests: ['Crypto', 'Flying Kites', 'Gaming'],
-    location: 'New York'
+    occupation: '',
+    // phone_number: '3472917739',
+    hobbies: ['Crypto', 'Flying Kites', 'Gaming'],
+    hometown: 'New York'
   }
 })
 
@@ -52,10 +56,33 @@ export const getUserId = (accessToken) => {
   }
 }
 
-export const updateInfo = (field, content) => {
-  return { type: Types.UPDATE_INFO, payload: { field, content } }
-}
+export const updateInfoRequest = (field, content, accessToken) => {
 
+  const body = {
+    ...INITIAL_STATE.userData,
+    [field]: content
+  }
+
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('Authorization', `Bearer ${accessToken}`)
+
+  const init = {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify(body)
+  }
+
+  return {
+    types: [
+      Types.UPDATE_INFO_REQUEST,
+      Types.UPDATE_INFO_SUCCESS,
+      Types.UPDATE_INFO_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi('profile/', init, dispatch)
+  }
+}
 /* ------------- Reducers ------------- */
 const handleFbUserInfoSuccess = (state = INITIAL_STATE, action) => {
   return {
@@ -94,12 +121,36 @@ const handleGetUserFailure = (state, action) => {
   return state
 }
 
+const handleUpdateUserRequest = (state, action) => {
+  return state
+}
+
+const handleUpdateUserSuccess = (state, action) => {
+  debugger
+
+  return {
+    ...state,
+    userData: {
+      ...state.userData,
+      ...action.response.data
+    }
+  }
+}
+
+const handleUpdateUserFailure = (state, action) => {
+  debugger
+  return state
+}
+
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.FB_USER_INFO]: handleFbUserInfoSuccess,
-  [Types.UPDATE_INFO]: handleUpdateInfo,
   [Types.GET_USER_REQUEST]: handleGetUserRequest,
   [Types.GET_USER_SUCCESS]: handleGetUserSuccess,
   [Types.GET_USER_FAILURE]: handleGetUserFailure,
+  [Types.UPDATE_INFO_REQUEST]: handleUpdateUserRequest,
+  [Types.UPDATE_INFO_SUCCESS]: handleUpdateUserSuccess,
+  [Types.UPDATE_INFO_FAILURE]: handleUpdateUserFailure
 })

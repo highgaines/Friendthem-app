@@ -25,9 +25,9 @@ export default class InfoRow extends Component {
   }
 
   handleSubmit = () => {
-    const { updateInfo, field } = this.props
+    const { updateInfo, field, accessToken } = this.props
     const { input } = this.state
-    this.setState({ isEditing: false}, () => updateInfo(field, input) )
+    this.setState({ isEditing: false}, () => updateInfo(field, input, accessToken) )
   }
 
   render() {
