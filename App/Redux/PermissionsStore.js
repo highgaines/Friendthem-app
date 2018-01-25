@@ -6,7 +6,9 @@ import Reactotron from 'reactotron-react-native';
 
 const { Types, Creators } = createActions({
   setGeoPermission: ['permission'],
-  setNotifPermission: ['permission']
+  setNotifPermission: ['permission'],
+  grantLocationPermission: ['response'],
+  grantNotificationPermission: ['response'],
 })
 
 export const PermissionTypes = Types
@@ -16,7 +18,9 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   geolocation: null,
-  notifications: null
+  notifications: null,
+  locationPermissionsGranted: false,
+  notificationPermissionsGranted: false
 })
 
 /* ----------------- Actions ------------------ */
@@ -43,9 +47,25 @@ const handleSetNotification = (state = INITIAL_STATE, action) => {
   return state.merge({ notifications: permission })
 }
 
+const handleLocationPermissions = (state, action) => {
+  return {
+    ...state,
+    locationPermissionsGranted: true
+  }
+}
+
+const handleNotificationPermissions = (state, action) => {
+  return {
+    ...state,
+    notificationPermissionsGranted: true
+  }
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.SET_GEO_PERMISSION]: handleSetGeolocation,
-  [Types.SET_NOTIF_PERMISSION]: handleSetNotification
+  [Types.SET_NOTIF_PERMISSION]: handleSetNotification,
+  [Types.GRANT_LOCATION_PERMISSION]: handleLocationPermissions,
+  [Types.GRANT_NOTIFICATION_PERMISSION]: handleNotificationPermissions
 })

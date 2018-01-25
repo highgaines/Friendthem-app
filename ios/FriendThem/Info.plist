@@ -78,7 +78,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>FriendThem would like to know your location so that we can better connect you with the people around you.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
