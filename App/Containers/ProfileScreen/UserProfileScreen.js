@@ -86,16 +86,16 @@ class UserProfileScreen extends Component {
     const { socialMediaData, currentPlatform } = this.state
 
     if (authRedirectUrl && !prevProps.authRedirectUrl && currentPlatform) {
-      // const deepLinkBase = socialMediaData[currentPlatform.split('-')[0]].deepLinkUrl
-      // const deepLinkAuth = `${deepLinkBase}${authRedirectUrl.split('.com/')[1]}`
+      const deepLinkBase = socialMediaData[currentPlatform.split('-')[0]].deepLinkUrl
+      const deepLinkAuth = `${deepLinkBase}${authRedirectUrl.split('.com/')[1]}`
 
       this.setState({externalAuth: true})
 
-      // if (Linking.canOpenURL(deepLinkAuth && false)) {
-      //   Linking.openURL(deepLinkAuth)
-      // } else {
+      if (Linking.canOpenURL(deepLinkAuth && false)) {
+        Linking.openURL(deepLinkAuth)
+      } else {
         Linking.openURL(authRedirectUrl)
-      //}
+      }
     }
   }
 

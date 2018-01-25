@@ -77,12 +77,4 @@ const mapStateToProps = (state) => ({
   userId: state.userStore.userId
 })
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     bindActionCreators({
-//
-//     }, dispatch)
-//   }
-// }
-
 export default connect(mapStateToProps)(FriendThemModal)
