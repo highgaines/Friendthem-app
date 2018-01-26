@@ -47,7 +47,6 @@ class LaunchScreen extends Component {
 
   componentDidMount = () => {
     Permissions.check('location', { type: 'always' }).then(response => {
-      console.log(response)
       if (response === 'authorized') {
         this.props.setLocationInterval()
       }
