@@ -15,10 +15,11 @@ import Navbar from '../Navbar/Navbar'
 import PickSocialMediaModal from '../TutorialScreens/PickSocialMediaModal'
 import ConnectButton from '../SuperConnectScreen/ConnectButton'
 import PersonalInfoTab from './PersonalInfoTab'
+import FriendThemModal from '../UtilityComponents/FriendThemModal'
 
 // Redux
 import AuthStoreActions, { socialMediaAuth } from '../../Redux/AuthStore'
-import UserStoreActions, { getUserId } from '../../Redux/UserStore'
+import UserStoreActions, { getUserId, updateInfo } from '../../Redux/UserStore'
 import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
 
 // Images
@@ -28,7 +29,7 @@ import { Images } from '../../Themes';
 import styles from '../Styles/UserProfileStyles'
 
 // Constants
-import { SOCIAL_MEDIA_DATA } from '../../Utils/constants'
+import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
 
 // Env
 import envConfig from '../../../envConfig'
@@ -43,7 +44,9 @@ class UserProfileScreen extends Component {
       externalAuth: false,
       currentPlatform: null,
       appState: AppState.currentState,
-      socialMediaData: SOCIAL_MEDIA_DATA
+      socialMediaData: SOCIAL_MEDIA_DATA,
+      syncedCardColors: SYNCED_CARD_COLORS,
+      snapHandleModalOpen: false
     }
   }
 
@@ -101,18 +104,28 @@ class UserProfileScreen extends Component {
   }
 
   authenticateSocialMedia = platform => {
+    const { userId, apiAccessToken } = this.props
     this.setState({currentPlatform: platform})
-    this.props.socialMediaAuth(platform, this.props.userId)
+    this.props.socialMediaAuth(platform, userId, apiAccessToken)
   }
 
   socialPlatformPresent = (provider) => {
-    return this.props.platforms.find(platformObj =>
-      platformObj.provider === provider
-    )
+    const { platforms, userInfo } = this.props
+
+    switch (provider) {
+      case 'snapchat':
+        return userInfo && userInfo.snapHandle
+      case 'youtube':
+        return platforms.find(platformObj => platformObj.provider === 'google-oauth2')
+      default:
+        return platforms.find(platformObj => platformObj.provider === provider)
+    }
+
   }
 
   determineImage = () => {
     const { userInfo } = this.props
+
     if (userInfo.picture.data.url) {
       return {uri: `${userInfo.picture.data.url}`}
     } else {
@@ -125,15 +138,10 @@ class UserProfileScreen extends Component {
     return userInfo.picture.data.url.length > 1 ? true : false
   }
 
-  youtubeOAuth = () => {
-    const { devYoutubeClientId, devYoutubeClientSecret } = envConfig.Development
+  toggleSnapchatModal = () => {
+    const { snapHandleModalOpen } = this.state
 
-    RNYoutubeOAuth({
-      scheme: 'FriendThem://',
-      client_id: devYoutubeClientId,
-      redirect_uri: 'http://eoghan.pagekite.me/auth/redirect_to_app/',
-      state: 'FriendThemYoutubeAPIOAuth'
-    })
+    this.setState({snapHandleModalOpen: !snapHandleModalOpen})
   }
 
   render() {
@@ -147,9 +155,10 @@ class UserProfileScreen extends Component {
       getUserId,
       socialMediaAuth,
       getUserTokens,
-      platforms
+      platforms,
+      updateInfo
     } = this.props
-    const { showFriendster, socialMediaData, socialNetworkTab } = this.state
+    const { showFriendster, socialMediaData, socialNetworkTab, syncedCardColors } = this.state
     const { devGoogleBaseURL, devGoogleApiParams, devGoogleClientId } = envConfig.Development
 
     return (
@@ -172,6 +181,10 @@ class UserProfileScreen extends Component {
               {`${userInfo.name}`}
               </Text>
             </View>
+            <FriendThemModal
+              modalVisible={this.state.snapHandleModalOpen}
+              toggleSnapchatModal={this.toggleSnapchatModal}
+              submitText={(inputValue) => updateInfo('snapHandle', inputValue)} />
             <View style={styles.tabSelectionContainer}>
               <TouchableOpacity
                 onPress={() => this.setState({ socialNetworkTab: true })}
@@ -197,9 +210,11 @@ class UserProfileScreen extends Component {
         {  socialNetworkTab ?  <ScrollView contentContainerStyle={styles.socialAccountContainer}>
             {
               Object.keys(socialMediaData).map((socialPlatform, idx) => {
+                const isYoutube = socialPlatform === 'youtube'
+                const isSnapchat = socialPlatform === 'snapchat'
                 const currentPlatform = this.socialPlatformPresent(socialPlatform)
                 const capitalizeName = (name) => name[0].toUpperCase() + name.slice(1)
-                const userName = currentPlatform ? currentPlatform['access_token'][socialMediaData[socialPlatform]['userNamePath']] : null
+                const userName = currentPlatform && !isSnapchat ? currentPlatform['access_token'][socialMediaData[socialPlatform]['userNamePath']] : null
                 const isSynced = !!currentPlatform
 
                 return (
@@ -207,9 +222,10 @@ class UserProfileScreen extends Component {
                     key={idx}
                     platformName={capitalizeName(socialPlatform)}
                     selected={isSynced}
-                    socialAuth={(platform) => this.authenticateSocialMedia(platform)}
-                    platformAuth={socialPlatform}
+                    socialAuth={isSnapchat ? this.toggleSnapchatModal : (platform) => this.authenticateSocialMedia(platform)}
+                    platformAuth={isYoutube ? 'google-oauth2' : socialPlatform}
                     userName={userName}
+                    syncedBGColor={syncedCardColors[socialPlatform]}
                   />
                 )
               })
@@ -250,7 +266,8 @@ const mapDispatchToProps = dispatch => {
     ...bindActionCreators({
       getUserId,
       socialMediaAuth,
-      getUserTokens
+      getUserTokens,
+      updateInfo
     }, dispatch)
   }
 }

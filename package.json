@@ -44,6 +44,7 @@
     "react-native-config": "^0.10.0",
     "react-native-fbsdk": "^0.6.3",
     "react-native-linear-gradient": "react-native-community/react-native-linear-gradient",
+    "react-native-modal": "^4.1.1",
     "react-native-modalbox": "^1.4.2",
     "react-native-permissions": "^1.0.6",
     "react-native-pie": "^0.4.0",

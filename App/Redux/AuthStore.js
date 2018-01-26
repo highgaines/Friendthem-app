@@ -141,8 +141,9 @@ export const testRedirect = () => {
   }
 }
 
-export const socialMediaAuth = (platform, userId) => {
+export const socialMediaAuth = (platform, userId, apiAccessToken) => {
   const headers = new Headers()
+  headers.append('Authorization', `Bearer ${apiAccessToken}`)
   headers.append('Content-Type', 'application/json')
 
   const init = {

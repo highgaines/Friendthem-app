@@ -92,7 +92,7 @@ export default StyleSheet.create({
     flexWrap: 'wrap',
     paddingHorizontal: 10,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     width: '100%',
     height: 366
   },
