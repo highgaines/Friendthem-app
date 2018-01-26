@@ -10,7 +10,7 @@ const { Types, Creators } = createActions({
   updateInfo: ['userInfo'],
   getUserRequest: null,
   getUserSuccess: null,
-  getUserFailure: null,
+  getUserFailure: null
 })
 
 export const UserTypes = Types
@@ -27,7 +27,8 @@ export const INITIAL_STATE = Immutable({
     age: 26,
     phoneNumber: '3472917739',
     interests: ['Crypto', 'Flying Kites', 'Gaming'],
-    location: 'New York'
+    location: 'New York',
+    snapHandle: null
   }
 })
 
@@ -48,7 +49,7 @@ export const getUserId = (accessToken) => {
       Types.GET_USER_FAILURE
     ],
     shouldCallApi: state => true,
-    callApi: dispatch => fetchFromApi('auth/me/', init, dispatch)
+    callApi: dispatch => fetchFromApi('profile/me/', init, dispatch)
   }
 }
 
@@ -101,5 +102,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.UPDATE_INFO]: handleUpdateInfo,
   [Types.GET_USER_REQUEST]: handleGetUserRequest,
   [Types.GET_USER_SUCCESS]: handleGetUserSuccess,
-  [Types.GET_USER_FAILURE]: handleGetUserFailure,
+  [Types.GET_USER_FAILURE]: handleGetUserFailure
 })
