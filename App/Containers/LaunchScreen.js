@@ -8,6 +8,7 @@ import { Images } from '../Themes'
 import { SocialIcon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 import FBSDK, { LoginManager, LoginButton, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk'
+import Permissions from 'react-native-permissions'
 
 // Components
 import ConnectButton from './SuperConnectScreen/ConnectButton'
@@ -21,6 +22,7 @@ import envConfig from '../../envConfig'
 import UserStoreActions, { fbUserInfo } from '../Redux/UserStore'
 import FriendStoreActions from '../Redux/FriendStore'
 import AuthStoreActions, { loginByFacebook } from '../Redux/AuthStore'
+import PermissionsStoreActions from '../Redux/PermissionsStore'
 
 // Styles
 import styles from './Styles/LaunchScreenStyles'
@@ -43,28 +45,21 @@ class LaunchScreen extends Component {
     }
   }
 
-  componentWillUpdate = nextProps => {
-    const { fbAuthToken, locationIntervalRunning } = this.props
+  componentDidMount = () => {
+    Permissions.check('location', { type: 'always' }).then(response => {
+      console.log(response)
+      if (response === 'authorized') {
+        this.props.setLocationInterval()
+      }
+    })
+  }
 
-    if (!locationIntervalRunning && nextProps.locationIntervalRunning) {
-      console.log(this.locationInterval)
-      setInterval(this.locationInterval, 120000)
-    }
-    if (locationIntervalRunning && !nextProps.locationIntervalRunning) {
-      clearInterval(this.locationInterval)
-    }
+  componentWillUpdate = nextProps => {
+    const { fbAuthToken } = this.props
+
     if (!fbAuthToken && nextProps.fbAuthToken) {
       this.getFbProfile(nextProps.fbAuthToken)
     }
-  }
-
-  locationInterval = () => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position)
-    },
-      (error) => this.setState({ error: error.message }),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    )
   }
 
   handleLoading = () => {
@@ -191,12 +186,14 @@ const mapDispatchToProps = dispatch => {
   const { logoutUser } = AuthStoreActions
   const { fbUserInfo } = UserStoreActions
   const { setFriendInfo } = FriendStoreActions
+  const { setLocationInterval } = PermissionsStoreActions
   return {
     ...bindActionCreators({
       fbUserInfo,
       setFriendInfo,
       loginByFacebook,
       logoutUser,
+      setLocationInterval
     }, dispatch)
   }
 }

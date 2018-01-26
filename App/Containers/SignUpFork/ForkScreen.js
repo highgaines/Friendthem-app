@@ -1,44 +1,71 @@
 import React, { Component } from 'react';
 import { Text, Image, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
 import { SocialIcon } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import Permissions from 'react-native-permissions'
 import ConnectButton from '../SuperConnectScreen/ConnectButton';
 
 import PermissionsStoreActions from '../../Redux/PermissionsStore'
+import UserStoreActions, { updateUserPosition } from '../../Redux/UserStore'
 
 // Styles
 import styles from '../Styles/ForkScreenStyles';
 
-class ForkScreen extends Component {
-  constructor(props) {
-    super(props)
+//Images
+import { Images } from '../../Themes';
 
-    this.state = {
-      locationPermission: false,
-      notificationPermission: false
+class ForkScreen extends Component {
+  componentWillMount = () => {
+    const {
+      locationPermission,
+      notificationPermission,
+      locationIntervalRunning,
+      setLocationInterval
+    } = this.props
+
+    if (locationPermission && !locationIntervalRunning) {
+      Permissions.request('location', { type: 'active' }).then(response => {
+        if(response === 'authorized') {
+          setLocationInterval()
+        }
+        if (notificationPermission) {
+          Permissions.request('notification').then(response => {
+            this.setState({ permissionsGranted: true })
+          })
+        }
+      })
     }
   }
 
-  componentWillMount = () => {
-    const { locationPermission, notificationPermission } = this.props
+  componentWillUpdate = (nextProps, nextState) => {
+    const { locationIntervalRunning } = this.props
 
-    if (locationPermission && notificationPermission) {
-      Permissions.request('location', { type: 'active' }).then(response => {
-        if(response === 'authorized') {
-          this.props.setLocationInterval()
-        }
-      })
-      Permissions.request('notification').then(response => {
-        this.setState({ notificationPermission: response })
-      })
+    if (!locationIntervalRunning && nextProps.locationIntervalRunning) {
+      this.locationInterval()
+      setInterval(this.locationInterval, 18000000)
     }
+    if (locationIntervalRunning && !nextProps.locationIntervalRunning) {
+      clearInterval(this.locationInterval)
+    }
+  }
+
+  locationInterval = () => {
+    const { apiAccessToken, updateUserPosition } = this.props
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      updateUserPosition(apiAccessToken, position.coords)
+    },
+      (error) => this.setState({ error: error.message }),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    )
   }
 
   directToNearbyUsers = () => {
     const { navigate } = this.props.navigation
     const { users, navigation, setFriendInfo } = this.props
+
     navigate('NearbyUsersScreen',
     {
         users: users,
@@ -48,12 +75,10 @@ class ForkScreen extends Component {
     })
   }
 
-  directToBuildProfile = () => {
-    this.props.navigation.navigate('RegisterUserScreen')
-  }
-
   render() {
     const { navigate, userInfo } = this.props
+    const { url } = userInfo.picture.data
+    const imageSource = url ? url : Images.noPicSVG
 
     return (
         <View style={styles.mainContainer}>
@@ -65,10 +90,10 @@ class ForkScreen extends Component {
           >
             <View style={styles.centered}>
               <Image
-                style={{ marginTop: 100 }} source={require('../../Images/logo.png')}
+                style={{ marginTop: 100 }} source={{uri: `${Images.mainLogo}`}}
               />
               <Image
-                style={styles.userImage} source={{uri: userInfo.picture.data.url}}
+                style={styles.userImage} source={{uri: `${imageSource}`}}
               />
               <View style={{ position: 'absolute', top: 260}}>
                 <SocialIcon
@@ -103,15 +128,21 @@ class ForkScreen extends Component {
 
 const mapStateToProps = state => ({
   userInfo: state.userStore.userData,
+  apiAccessToken: state.authStore.accessToken,
   fbAuthToken: state.fbStore.fbAccessToken,
   locationPermission: state.permissionsStore.locationPermissionsGranted,
-  notificationPermission: state.permissionsStore.notificationPermissionsGranted
+  notificationPermission: state.permissionsStore.notificationPermissionsGranted,
+  locationIntervalRunning: state.permissionsStore.locationIntervalRunning
 })
 
 const mapDispatchToProps = dispatch => {
   const { setLocationInterval } = PermissionsStoreActions
+
   return {
-    setLocationInterval
+    ...bindActionCreators({
+      setLocationInterval,
+      updateUserPosition
+    }, dispatch)
   }
 }
 

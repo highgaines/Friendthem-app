@@ -12,7 +12,10 @@ const { Types, Creators } = createActions({
   getUserFailure: null,
   updateInfoRequest: null,
   updateInfoSuccess: null,
-  updateInfoFailure: null
+  updateInfoFailure: null,
+  updateUserPositionRequest: null,
+  updateUserPositionSuccess: null,
+  updateUserPositionFailure: null
 })
 
 export const UserTypes = Types
@@ -35,7 +38,8 @@ export const INITIAL_STATE = Immutable({
     phoneNumber: '3472917739',
     interests: ['Crypto', 'Flying Kites', 'Gaming'],
     location: 'New York',
-    snapHandle: null
+    snapHandle: null,
+    geoLocation: {}
   }
 })
 
@@ -60,21 +64,43 @@ export const getUserId = (accessToken) => {
   }
 }
 
-export const updateInfoRequest = (field, content, accessToken) => {
-
-  const body = {
-    ...INITIAL_STATE.userData,
-    [field]: content
-  }
-
+export const updateUserPosition = (accessToken, coords) => {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${accessToken}`)
+
+  const body = {
+    last_location: {
+      lat: coords.latitude,
+      lng: coords.longitude,
+    }
+  }
 
   const init = {
     method: 'PUT',
     headers,
     body: JSON.stringify(body)
+  }
+
+  return {
+    types: [
+      Types.UPDATE_USER_POSITION_REQUEST,
+      Types.UPDATE_USER_POSITION_SUCCESS,
+      Types.UPDATE_USER_POSITION_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi('profile/location/', init, dispatch)
+  }
+}
+
+export const updateInfoRequest = (field, content, accessToken) => {
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('Authorization', `Bearer ${accessToken}`
+
+  const body = {
+    ...INITIAL_STATE.userData,
+    [field]: content
   }
 
   return {
@@ -144,6 +170,20 @@ const handleUpdateUserFailure = (state, action) => {
   return state
 }
 
+const handleUpdateUserPositionRequest = (state, action) => {
+  return state
+}
+
+const handleUpdateUserPositionSuccess = (state, action) => {
+  return {
+    ...state,
+    geoLocation: action.data.last_location
+  }
+}
+
+const handleUpdateUserPositionFailure = (state, action) => {
+  return state
+}
 
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -154,5 +194,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_USER_FAILURE]: handleGetUserFailure,
   [Types.UPDATE_INFO_REQUEST]: handleUpdateUserRequest,
   [Types.UPDATE_INFO_SUCCESS]: handleUpdateUserSuccess,
-  [Types.UPDATE_INFO_FAILURE]: handleUpdateUserFailure
+  [Types.UPDATE_INFO_FAILURE]: handleUpdateUserFailure,
+  [Types.UPDATE_USER_POSITION_REQUEST]: handleUpdateUserPositionRequest,
+  [Types.UPDATE_USER_POSITION_SUCCESS]: handleUpdateUserPositionSuccess,
+  [Types.UPDATE_USER_POSITION_FAILURE]: handleUpdateUserPositionFailure
 })

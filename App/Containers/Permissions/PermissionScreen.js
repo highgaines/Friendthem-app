@@ -13,6 +13,7 @@ import ConnectButton from '../SuperConnectScreen/ConnectButton';
 
 // Redux
 import PermissionsStoreActions, { setGeoPermission } from '../../Redux/PermissionsStore';
+import FriendStoreActions from '../../Redux/FriendStore'
 
 // Images
 import { Images } from '../../Themes';
@@ -127,7 +128,7 @@ class PermissionScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-
+  users: state.facebook.users,
 })
 
 const mapDispatchToProps = dispatch => {
@@ -137,9 +138,11 @@ const mapDispatchToProps = dispatch => {
     grantLocationPermission,
     grantNotificationPermission
    } = PermissionsStoreActions
+  const { setFriendInfo } = FriendStoreActions
 
   return {
     ...bindActionCreators({
+      setFriendInfo,
       setGeoPermission,
       setNotifPermission,
       grantLocationPermission,

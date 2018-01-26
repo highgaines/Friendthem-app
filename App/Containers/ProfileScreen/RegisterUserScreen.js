@@ -23,9 +23,13 @@ class RegisterUserScreen extends Component {
   }
 
   componentDidUpdate = prevProps => {
-    const { userInfoAdded } = this.props
+    const { userInfoAdded, navigation, users } = this.props
+
     if (userInfoAdded && !prevProps.userInfoAdded) {
-      this.props.navigation.navigate('UserProfileScreen')
+      navigation.navigate('PermissionScreen', {
+        permissionType: 'geolocation',
+        navigation: navigation,
+      })
     }
   }
 
@@ -137,6 +141,7 @@ class RegisterUserScreen extends Component {
 }
 
 const mapStateToProps = state => ({
+  users: state.facebook.users,
   userInfoAdded: state.authStore.userInfoAdded
 })
 
