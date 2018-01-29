@@ -31,15 +31,18 @@ class PermissionScreen extends Component {
 
   handleOkay = () => {
     // redux action to continue WITH gelocation
-    const { navigate } = this.props.navigation
     const {
       users,
       setFriendInfo,
       navigation,
-      permissionType
+      permissionType,
+      grantLocationPermission,
+      grantNotificationPermission
     } = this.props
+    const { navigate } = navigation
 
     if (permissionType === 'geolocation') {
+      grantLocationPermission()
       navigate('PermissionScreen', {
         permissionType: 'notifications',
         numUsers: users.length,
@@ -48,6 +51,7 @@ class PermissionScreen extends Component {
         setFriendInfo: setFriendInfo
       })
     } else {
+      grantNotificationPermission()
       navigate('ForkScreen', {
         numUsers: users.length,
         users: users,
@@ -127,11 +131,19 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
-  const { setGeoPermission, setNotifPermission } = PermissionsStoreActions
+  const {
+    setGeoPermission,
+    setNotifPermission,
+    grantLocationPermission,
+    grantNotificationPermission
+   } = PermissionsStoreActions
+
   return {
     ...bindActionCreators({
       setGeoPermission,
-      setNotifPermission
+      setNotifPermission,
+      grantLocationPermission,
+      grantNotificationPermission
     }, dispatch)
   }
 }

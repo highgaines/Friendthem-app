@@ -60,15 +60,15 @@ class SearchBar extends Component {
           ? this.renderSearchForm()
           : <Text style={styles.numUsers}> {numUsers} People Nearby </Text>
         }
-        <View style={styles.backIcon}>
-          <Icon
-            name='arrow-back'
-            type='materialicons'
-            size={36}
-            color='#FFF'
-            onPress={() => navigation.dispatch(backAction) }
-          />
-        </View>
+          <View style={styles.backIcon}>
+            <Icon
+              name='arrow-back'
+              type='materialicons'
+              size={36}
+              color='#FFF'
+              onPress={() => navigation.dispatch(backAction) }
+            />
+          </View>
         </View>
       </LinearGradient>
     )

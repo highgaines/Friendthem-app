@@ -1,3 +1,11 @@
+export const SYNCED_CARD_COLORS = {
+  facebook: '#3b5997',
+  twitter: '#28a9e0',
+  instagram: '#28a9e0',
+  snapchat: '#fefc04',
+  youtube:  '#ff0000'
+}
+
 export const SOCIAL_MEDIA_DATA = {
   facebook: {
     deepLinkUrl: 'fb://'
@@ -12,9 +20,9 @@ export const SOCIAL_MEDIA_DATA = {
   // linkedin: {
   //   deepLinkUrl: 'voyager://in'
   // },
-  // youtube: {
-  //   deepLinkUrl: 'youtube://'
-  // },
+  youtube: {
+    deepLinkUrl: 'youtube://'
+  },
   snapchat: {
     deepLinkUrl: 'snapchat://'
   }

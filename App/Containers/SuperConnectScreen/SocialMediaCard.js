@@ -43,10 +43,14 @@ export default class SocialMediaCard extends Component {
       platformName,
       userName,
       inverted,
-      socialAuth
+      socialAuth,
+      syncedBGColor
     }  = this.props
     const { selected } = this.props;
-    const cardStyle = selected ? styles.cardSelected : styles.cardUnselected
+    const cardStyle = selected ?
+      [styles.cardSelected, { backgroundColor: syncedBGColor }]
+      :
+      styles.cardUnselected
 
     return (
       <TouchableOpacity

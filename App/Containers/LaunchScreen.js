@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, TouchableOpacity, Button, ActivityIndicator } from 'react-native'
-import { Images } from '../Themes'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Images } from '../Themes'
 
 // Libraries
 import { SocialIcon } from 'react-native-elements'
@@ -19,7 +19,7 @@ import envConfig from '../../envConfig'
 
 //Redux Actions
 import UserStoreActions, { fbUserInfo } from '../Redux/UserStore'
-import FriendStoreActions, { setFriendInfo } from '../Redux/FriendStore'
+import FriendStoreActions from '../Redux/FriendStore'
 import AuthStoreActions, { loginByFacebook } from '../Redux/AuthStore'
 
 // Styles
@@ -33,6 +33,12 @@ class LaunchScreen extends Component {
     this.state = {
       user: '',
       loading: false
+    }
+  }
+
+  componentWillMount = () => {
+    if (this.props.loggedIn) {
+      this.props.navigation.navigate('UserProfileScreen')
     }
   }
 
@@ -159,12 +165,14 @@ const mapStateToProps = state => ({
   fbAuthToken: state.fbStore.fbAccessToken,
   users: state.facebook.users,
   userData: state.userStore,
-  nav: state.nav
+  nav: state.nav,
+  loggedIn: state.authStore.loggedIn
 })
 
 const mapDispatchToProps = dispatch => {
   const { logoutUser } = AuthStoreActions
   const { fbUserInfo } = UserStoreActions
+  const { setFriendInfo } = FriendStoreActions
   return {
     ...bindActionCreators({
       fbUserInfo,

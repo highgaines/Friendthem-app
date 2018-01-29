@@ -31,7 +31,11 @@ export const INITIAL_STATE = Immutable({
     occupation: '',
     // phone_number: '3472917739',
     hobbies: ['Crypto', 'Flying Kites', 'Gaming'],
-    hometown: 'New York'
+    hometown: 'New York',
+    phoneNumber: '3472917739',
+    interests: ['Crypto', 'Flying Kites', 'Gaming'],
+    location: 'New York',
+    snapHandle: null
   }
 })
 
@@ -52,7 +56,7 @@ export const getUserId = (accessToken) => {
       Types.GET_USER_FAILURE
     ],
     shouldCallApi: state => true,
-    callApi: dispatch => fetchFromApi('auth/me/', init, dispatch)
+    callApi: dispatch => fetchFromApi('profile/me/', init, dispatch)
   }
 }
 
