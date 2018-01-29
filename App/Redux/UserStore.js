@@ -96,7 +96,7 @@ export const updateUserPosition = (accessToken, coords) => {
 export const updateInfoRequest = (field, content, accessToken) => {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
-  headers.append('Authorization', `Bearer ${accessToken}`
+  headers.append('Authorization', `Bearer ${accessToken}`)
 
   const body = {
     ...INITIAL_STATE.userData,
