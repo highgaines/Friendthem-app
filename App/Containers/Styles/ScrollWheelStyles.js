@@ -5,7 +5,7 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   scrollContainer: {
     height: 90,
-    backgroundColor: 'white'
+    backgroundColor: 'transparent'
   },
   container: {
     justifyContent: 'center',
@@ -17,6 +17,12 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   text: {
-    textAlign: 'center'
+    textAlign: 'center',
+    backgroundColor: 'transparent',
+    color: 'white',
+    fontSize: 11
+  },
+  linearGradient: {
+    height: 90
   }
 })

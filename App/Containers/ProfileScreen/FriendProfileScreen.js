@@ -16,6 +16,7 @@ import Navbar from '../Navbar/Navbar';
 import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard';
 import SuperConnectBar from '../SuperConnectScreen/SuperConnectBar'
 import ScrollWheel from './ScrollWheel';
+import FeedContainer from '../FeedContainer/FeedContainer';
 
 // Styles
 import styles from '../Styles/UserProfileStyles';
@@ -25,8 +26,22 @@ class FriendProfileScreen extends Component {
     super()
 
     this.state = {
-      showModal: false
+      showModal: false,
+      platform: '',
+      feedContainer: false
     }
+  }
+
+  renderPlatformContainer = platform => {
+      return <FeedContainer platform={platform} />
+  }
+
+  handlePlatformChange = () => {
+    this.setState({ feedContainer: true })
+  }
+
+  handleBackToProfile = () => {
+    this.setState({ feedContainer: false })
   }
 
   handleEmail = () => {
@@ -89,16 +104,24 @@ class FriendProfileScreen extends Component {
             </View>
             </LinearGradient>
             <View style={styles.scrollWheelContainer}>
-              <ScrollWheel />
+              <ScrollWheel
+                handlePlatformChange={this.handlePlatformChange}
+                handleBackToProfile={this.handleBackToProfile}
+              />
             </View>
-            <View style={styles.socialAccountContainer}>
-              <SocialMediaCard
-                platformName='Facebook'
-                inverted={true}
-                userName={friendInfo.name} />
-            </View>
-            <SuperConnectBar
-              superConnect={superConnect}/>
+            {
+              this.state.feedContainer ? <FeedContainer platform="twitter" /> :
+              <View>
+                <View style={styles.socialAccountContainer}>
+                  <SocialMediaCard
+                    platformName='Facebook'
+                    inverted={true}
+                    userName={friendInfo.name} />
+                  </View>
+                  <SuperConnectBar
+                    superConnect={superConnect}/>
+                  </View>
+            }
             <View style={styles.superConnectBarContainer}>
             </View>
             <View>
