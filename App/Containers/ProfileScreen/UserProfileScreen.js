@@ -63,7 +63,7 @@ class UserProfileScreen extends Component {
       getUserId(apiAccessToken)
       getUserTokens(apiAccessToken)
     } else {
-      navigation.navigate('LaunchScreen')
+      // navigation.navigate('LaunchScreen')
     }
   }
 

@@ -21,40 +21,44 @@ class PersonalInfoTab extends Component {
 
   }
 
+  packageEditProfile = (field, content) => {
+    if (field === 'phone_number') {
+      content = `+1${content}`
+    }
+
+    const { updateInfoRequest, editableData, accessToken } = this.props
+    updateInfoRequest(editableData, field, content, accessToken)
+  }
+
   render() {
-    const { userData, updateInfo, updateInfoRequest, accessToken } = this.props
+    const { userData, editableData } = this.props
     return (
       <View style={styles.personalInfoContainer}>
         <InfoRow
           rowLabel='NAME'
           field="name"
-          updateInfo={updateInfoRequest}
-          accessToken={accessToken}
-          userInfo={userData.name}/>
+          updateInfo={this.packageEditProfile}
+          userInfo={editableData.name}/>
         <InfoRow
           rowLabel='HOBBIES'
           field="hobbies"
-          updateInfo={updateInfoRequest}
-          accessToken={accessToken}
-          userInfo={Array.isArray(userData.hobbies) ? userData.hobbies.join(', ') : userData.hobbies}/>
+          updateInfo={this.packageEditProfile}
+          userInfo={Array.isArray(editableData.hobbies) ? editableData.hobbies.join(', ') : editableData.hobbies}/>
         <InfoRow
           rowLabel='OCCUPATION'
           field="occupation"
-          updateInfo={updateInfoRequest}
-          accessToken={accessToken}
-          userInfo={userData.occupation}/>
+          updateInfo={this.packageEditProfile}
+          userInfo={editableData.occupation}/>
         <InfoRow
           rowLabel='HOMETOWN'
-          field="location"
-          updateInfo={updateInfoRequest}
-          accessToken={accessToken}
-          userInfo={userData.hometown}/>
+          field="hometown"
+          updateInfo={this.packageEditProfile}
+          userInfo={editableData.hometown}/>
         <InfoRow
           rowLabel='AGE'
           field="age"
-          updateInfo={updateInfoRequest}
-          accessToken={accessToken}
-          userInfo={userData.age}/>
+          updateInfo={this.packageEditProfile}
+          userInfo={editableData.age}/>
         <View style={styles.privateRowDivider}>
           <Text
             style={styles.mainPrivateText}>
@@ -71,22 +75,20 @@ class PersonalInfoTab extends Component {
         </View>
         <InfoRow
           rowLabel='PHONE'
-          field="phoneNumber"
-          updateInfo={updateInfoRequest}
-          accessToken={accessToken}
-          userInfo={userData.phone_number}
+          field="phone_number"
+          updateInfo={this.packageEditProfile}
+          userInfo={editableData.phone_number}
           showSwitch={true}/>
         <InfoRow
           rowLabel='EMAIL'
-          field="email"
-          updateInfo={updateInfoRequest}
-          accessToken={accessToken}
-          userInfo={userData.email}
+          field="personal_email"
+          updateInfo={this.packageEditProfile}
+          userInfo={editableData.personal_email}
           showSwitch={true}/>
         <InfoRow
           rowLabel='PASSWORD'
           field="password"
-          updateInfo={updateInfo}
+          updateInfo={this.packageEditProfile}
           userInfo='********'/>
       </View>
     )
@@ -96,6 +98,7 @@ class PersonalInfoTab extends Component {
 const mapStateToProps = state => {
   return {
     userData: state.userStore.userData,
+    editableData: state.userStore.editableData,
     accessToken: state.authStore.accessToken
   }
 }
