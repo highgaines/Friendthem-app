@@ -10,7 +10,7 @@ import { Icon } from 'react-native-elements'
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import UserStoreActions, { updateInfo } from '../../Redux/UserStore'
+import UserStoreActions, { updateInfoRequest } from '../../Redux/UserStore'
 
 // Styles
 import styles from '../Styles/PersonalInfoTabStyles'
@@ -22,28 +22,38 @@ class PersonalInfoTab extends Component {
   }
 
   render() {
-    const { userData, updateInfo } = this.props
+    const { userData, updateInfo, updateInfoRequest, accessToken } = this.props
     return (
       <View style={styles.personalInfoContainer}>
         <InfoRow
-          rowLabel='USER NAME'
+          rowLabel='NAME'
           field="name"
-          updateInfo={updateInfo}
+          updateInfo={updateInfoRequest}
+          accessToken={accessToken}
           userInfo={userData.name}/>
         <InfoRow
-          rowLabel='OCCUPATION'
-          field="interests"
-          updateInfo={updateInfo}
-          userInfo={Array.isArray(userData.interests) ? userData.interests.join(', ') : userData.interests}/>
+          rowLabel='HOBBIES'
+          field="hobbies"
+          updateInfo={updateInfoRequest}
+          accessToken={accessToken}
+          userInfo={Array.isArray(userData.hobbies) ? userData.hobbies.join(', ') : userData.hobbies}/>
         <InfoRow
-          rowLabel='LOCATION'
+          rowLabel='OCCUPATION'
+          field="occupation"
+          updateInfo={updateInfoRequest}
+          accessToken={accessToken}
+          userInfo={userData.occupation}/>
+        <InfoRow
+          rowLabel='HOMETOWN'
           field="location"
-          updateInfo={updateInfo}
-          userInfo={userData.location}/>
+          updateInfo={updateInfoRequest}
+          accessToken={accessToken}
+          userInfo={userData.hometown}/>
         <InfoRow
           rowLabel='AGE'
           field="age"
-          updateInfo={updateInfo}
+          updateInfo={updateInfoRequest}
+          accessToken={accessToken}
           userInfo={userData.age}/>
         <View style={styles.privateRowDivider}>
           <Text
@@ -62,13 +72,15 @@ class PersonalInfoTab extends Component {
         <InfoRow
           rowLabel='PHONE'
           field="phoneNumber"
-          updateInfo={updateInfo}
-          userInfo={userData.phoneNumber}
+          updateInfo={updateInfoRequest}
+          accessToken={accessToken}
+          userInfo={userData.phone_number}
           showSwitch={true}/>
         <InfoRow
           rowLabel='EMAIL'
           field="email"
-          updateInfo={updateInfo}
+          updateInfo={updateInfoRequest}
+          accessToken={accessToken}
           userInfo={userData.email}
           showSwitch={true}/>
         <InfoRow
@@ -83,14 +95,15 @@ class PersonalInfoTab extends Component {
 
 const mapStateToProps = state => {
   return {
-    userData: state.userStore.userData
+    userData: state.userStore.userData,
+    accessToken: state.authStore.accessToken
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({
-      updateInfo
+      updateInfoRequest,
     }, dispatch)
   }
 }
