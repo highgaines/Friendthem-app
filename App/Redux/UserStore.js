@@ -26,20 +26,22 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   userId: null,
   userData: {
+    username: '',
     name: '',
     picture: { data: {url: null} },
     email: '',
-    personal_email: '',
-    age: 26,
-    occupation: '',
-    // phone_number: '3472917739',
-    hobbies: ['Crypto', 'Flying Kites', 'Gaming'],
-    hometown: 'New York',
-    phoneNumber: '3472917739',
     interests: ['Crypto', 'Flying Kites', 'Gaming'],
     location: 'New York',
     snapHandle: null,
     geoLocation: {}
+  },
+  editableData : {
+    personal_email: '',
+    age: null,
+    occupation: '',
+    hobbies: [],
+    hometown: '',
+    phone_number: '',
   }
 })
 
@@ -93,14 +95,20 @@ export const updateUserPosition = (accessToken, coords) => {
   }
 }
 
-export const updateInfoRequest = (field, content, accessToken) => {
+export const updateInfoRequest = (data, field, content, accessToken) => {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${accessToken}`)
 
   const body = {
-    ...INITIAL_STATE.userData,
+    ...data,
     [field]: content
+  }
+
+  const init = {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify(body)
   }
 
   return {
@@ -125,6 +133,7 @@ const handleFbUserInfoSuccess = (state = INITIAL_STATE, action) => {
 }
 
 const handleUpdateInfo = (state, action) => {
+
   const { field, content } = action.payload
 
   return {
@@ -152,6 +161,7 @@ const handleGetUserFailure = (state, action) => {
 }
 
 const handleUpdateUserRequest = (state, action) => {
+
   return state
 }
 
@@ -159,10 +169,7 @@ const handleUpdateUserSuccess = (state, action) => {
 
   return {
     ...state,
-    userData: {
-      ...state.userData,
-      ...action.response.data
-    }
+    editableData: action.response.data
   }
 }
 
