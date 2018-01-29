@@ -126,7 +126,6 @@ const handleUpdateUserRequest = (state, action) => {
 }
 
 const handleUpdateUserSuccess = (state, action) => {
-  debugger
 
   return {
     ...state,
@@ -138,7 +137,6 @@ const handleUpdateUserSuccess = (state, action) => {
 }
 
 const handleUpdateUserFailure = (state, action) => {
-  debugger
   return state
 }
 
