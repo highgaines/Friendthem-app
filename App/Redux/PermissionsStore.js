@@ -9,6 +9,8 @@ const { Types, Creators } = createActions({
   setNotifPermission: ['permission'],
   grantLocationPermission: ['response'],
   grantNotificationPermission: ['response'],
+  setLocationInterval: null,
+  logoutUser: null
 })
 
 export const PermissionTypes = Types
@@ -20,7 +22,8 @@ export const INITIAL_STATE = Immutable({
   geolocation: null,
   notifications: null,
   locationPermissionsGranted: false,
-  notificationPermissionsGranted: false
+  notificationPermissionsGranted: false,
+  locationIntervalRunning: false
 })
 
 /* ----------------- Actions ------------------ */
@@ -61,9 +64,26 @@ const handleNotificationPermissions = (state, action) => {
   }
 }
 
+const setLocationInterval = (state, action) => {
+  return {
+    ...state,
+    locationIntervalRunning: true
+  }
+}
+
+const removeLocationInterval = (state, action) => {
+  return {
+    ...state,
+    locationIntervalRunning: false
+  }
+}
+
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
+  [Types.LOGOUT_USER]: removeLocationInterval,
+  [Types.SET_LOCATION_INTERVAL]: setLocationInterval,
   [Types.SET_GEO_PERMISSION]: handleSetGeolocation,
   [Types.SET_NOTIF_PERMISSION]: handleSetNotification,
   [Types.GRANT_LOCATION_PERMISSION]: handleLocationPermissions,

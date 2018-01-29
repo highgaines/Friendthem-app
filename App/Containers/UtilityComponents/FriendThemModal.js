@@ -30,7 +30,7 @@ class FriendThemModal extends Component {
   render() {
     const { modalVisible, toggleSnapchatModal } = this.props
     const { snapHandle } = this.state
-    console.log(snapHandle)
+
     return (
       <Modal
       animationIn='slideInUp'

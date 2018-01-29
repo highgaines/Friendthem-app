@@ -8,6 +8,7 @@ import { Images } from '../Themes'
 import { SocialIcon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 import FBSDK, { LoginManager, LoginButton, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk'
+import Permissions from 'react-native-permissions'
 
 // Components
 import ConnectButton from './SuperConnectScreen/ConnectButton'
@@ -21,6 +22,7 @@ import envConfig from '../../envConfig'
 import UserStoreActions, { fbUserInfo } from '../Redux/UserStore'
 import FriendStoreActions from '../Redux/FriendStore'
 import AuthStoreActions, { loginByFacebook } from '../Redux/AuthStore'
+import PermissionsStoreActions from '../Redux/PermissionsStore'
 
 // Styles
 import styles from './Styles/LaunchScreenStyles'
@@ -32,7 +34,8 @@ class LaunchScreen extends Component {
 
     this.state = {
       user: '',
-      loading: false
+      loading: false,
+      error: null
     }
   }
 
@@ -40,6 +43,14 @@ class LaunchScreen extends Component {
     if (this.props.loggedIn) {
       this.props.navigation.navigate('UserProfileScreen')
     }
+  }
+
+  componentDidMount = () => {
+    Permissions.check('location', { type: 'always' }).then(response => {
+      if (response === 'authorized') {
+        this.props.setLocationInterval()
+      }
+    })
   }
 
   componentWillUpdate = nextProps => {
@@ -166,19 +177,22 @@ const mapStateToProps = state => ({
   users: state.facebook.users,
   userData: state.userStore,
   nav: state.nav,
-  loggedIn: state.authStore.loggedIn
+  loggedIn: state.authStore.loggedIn,
+  locationIntervalRunning: state.permissionsStore.locationIntervalRunning
 })
 
 const mapDispatchToProps = dispatch => {
   const { logoutUser } = AuthStoreActions
   const { fbUserInfo } = UserStoreActions
   const { setFriendInfo } = FriendStoreActions
+  const { setLocationInterval } = PermissionsStoreActions
   return {
     ...bindActionCreators({
       fbUserInfo,
       setFriendInfo,
       loginByFacebook,
       logoutUser,
+      setLocationInterval
     }, dispatch)
   }
 }
