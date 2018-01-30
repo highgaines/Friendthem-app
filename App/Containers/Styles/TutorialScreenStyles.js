@@ -19,17 +19,17 @@ export default StyleSheet.create({
   },
   modal: {
     width: 250,
-    height: 200,
+    height: 250,
     overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 250,
-    marginLeft: 70,
     backgroundColor: 'white',
-    borderRadius: 30
+    marginLeft: 45,
+    borderRadius: 30,
+    padding: 20
   },
   modalText: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'montserrat',
     textAlign: 'center'
   },

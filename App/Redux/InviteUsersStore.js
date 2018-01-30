@@ -1,4 +1,5 @@
 import { createReducer, createActions } from 'reduxsauce';
+import { fetchFromApi } from './ApiHelpers';
 import Immutable from 'seamless-immutable';
 import Reactotron from 'reactotron-react-native';
 
@@ -6,7 +7,10 @@ import Reactotron from 'reactotron-react-native';
 
 const { Types, Creators } = createActions({
     sendInviteToUser: null,
-    selectUser: ['user']
+    selectUser: ['user'],
+    connectivityInfoRequest: null,
+    connectivityInfoFailure: null,
+    connectivityInfoSuccess: null
 })
 
 export const InvitationTypes = Types
@@ -59,7 +63,8 @@ export const INITIAL_STATE = Immutable({
       platforms: ['snapchat', 'instagram']
     }
   ],
-  selectedUser: ''
+  selectedUser: '',
+  connectivityData: []
 })
 
 /* ------------- Actions ------------- */
@@ -72,6 +77,27 @@ export const selectUser = (user) => {
   return { type: Types.SELECT_USER, payload: { user } }
 }
 
+export const fetchConnectivityData = (accessToken) => {
+  console.log('here')
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('Authorization', `Bearer ${accessToken}`)
+
+  const init = {
+    method: 'GET',
+    headers
+  }
+
+  return {
+    types: [
+      Types.CONNECTIVITY_INFO_REQUEST,
+      Types.CONNECTIVITY_INFO_SUCCESS,
+      Types.CONNECTIVITY_INFO_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi('nearby_users/', init, dispatch)
+  }
+}
 
 /* ------------- Reducers ------------- */
 
@@ -87,9 +113,28 @@ const handleSelectUser = (state, action) => {
   return state.merge({ selectedUser: user})
 }
 
+// Connectivity Reducers
+
+const handleConnectivityRequest = (state, action) => {
+  return state.merge({ fetchingData: true })
+}
+
+const handleConnectivityFailure = (state, action) => {
+  return state.merge({ fetchingData: false})
+}
+
+const handleConnectivitySuccess = (state, action) => {
+  const { data } = action.payload
+
+  return state.merge({ connectivityData: data, fetchingData: false })
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.SEND_INVITE_TO_USER]: handleSendInvite,
-  [Types.SELECT_USER]: handleSelectUser
+  [Types.SELECT_USER]: handleSelectUser,
+  [Types.CONNECTIVITY_INFO_REQUEST]: handleConnectivityRequest,
+  [Types.CONNECTIVITY_INFO_FAILURE]: handleConnectivityFailure,
+  [Types.CONNECTIVITY_INFO_SUCCESS]: handleConnectivitySuccess
 })

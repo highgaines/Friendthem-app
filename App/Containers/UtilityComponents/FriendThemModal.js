@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { Text, TextInput, View, Button, TouchableOpacity } from 'react-native'
 
-//Libraries
+// Libraries
 import LinearGradient from 'react-native-linear-gradient'
 import { Icon } from 'react-native-elements'
 import Modal from 'react-native-modal'
 
-//styles
+// Redux
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
+// Styles
 import styles from '../Styles/FriendThemModalStyles'
 
 class FriendThemModal extends Component {

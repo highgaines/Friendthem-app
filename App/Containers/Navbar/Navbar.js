@@ -187,14 +187,14 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   const { fbUserInfo } = UserStoreActions
   const { setFriendInfo } = FriendStoreActions
-  const { logoutComplete } = FBStoreActions
+  const { fbLogoutComplete } = FBStoreActions
   const { logoutUser } = AuthStoreActions
 
   return {
     ...bindActionCreators({
       fbUserInfo,
       setFriendInfo,
-      logoutComplete,
+      fbLogoutComplete,
       logoutUser
     }, dispatch)
   }
