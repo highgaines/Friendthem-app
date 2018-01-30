@@ -11,7 +11,7 @@ import RNYoutubeOAuth from 'react-native-youtube-oauth';
 import TimerMixin from 'react-timer-mixin'
 
 // Components
-import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard'
+import SocialMediaCard from '../SocialMediaCards/SocialMediaCard'
 import Navbar from '../Navbar/Navbar'
 import PickSocialMediaModal from '../TutorialScreens/PickSocialMediaModal'
 import ConnectButton from '../SuperConnectScreen/ConnectButton'
@@ -166,7 +166,7 @@ class UserProfileScreen extends Component {
     } = this.props
     const { showFriendster, socialMediaData, socialNetworkTab, syncedCardColors } = this.state
     const { devGoogleBaseURL, devGoogleApiParams, devGoogleClientId } = envConfig.Development
-
+    console.log(updateInfo)
     return (
         <View>
           <LinearGradient
@@ -271,7 +271,6 @@ const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({
       getUserId,
-      socialMediaAuth,
       getUserTokens,
       updateInfo
     }, dispatch)

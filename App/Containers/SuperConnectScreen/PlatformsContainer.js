@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, TouchableOpacity, Button, View } from 'react-native';
 import { connect } from 'react-redux';
-import SocialMediaCard from './SocialMediaCard';
+import SocialMediaCard from '../SocialMediaCards/SocialMediaCard';
 
 // Styles
 import styles from '../Styles/UsersContainerStyles';
