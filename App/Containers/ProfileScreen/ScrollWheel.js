@@ -3,6 +3,7 @@ import { ScrollView, Text, Image, TouchableOpacity, View } from 'react-native';
 
 // Components
 import SMPlatformCircle from '../UtilityComponents/SMPlatformCircle';
+import ImageCircle from '../UtilityComponents/ImageCircle';
 
 // Libraries
 import LinearGradient from 'react-native-linear-gradient';
@@ -17,7 +18,7 @@ export default class ScrollWheel extends Component {
   }
 
   render() {
-    const { handlePlatformChange, handleBackToProfile, selected } = this.props
+    const { handlePlatformChange, handleBackToProfile, selected, profilePic } = this.props
 
     console.log(selected)
     return (
@@ -43,7 +44,7 @@ export default class ScrollWheel extends Component {
                 <Text style={selected === 'facebook' ? [styles.text, { color: 'white'}] : styles.text}> Facebook </Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => handleBackToProfile()}>
-                <SMPlatformCircle platform={null} size={70}/>
+                <ImageCircle source={profilePic} size={70}/>
                 <Text style={selected === 'profile' ? [styles.text, { color: 'white'}] : styles.text}> Profile </Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => handlePlatformChange('snapchat')}>

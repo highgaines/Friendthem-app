@@ -108,6 +108,7 @@ class FriendProfileScreen extends Component {
                 handlePlatformChange={this.handlePlatformChange}
                 handleBackToProfile={this.handleBackToProfile}
                 selected={this.state.platform}
+                profilePic={friendInfo.image}
               />
             </View>
             {
