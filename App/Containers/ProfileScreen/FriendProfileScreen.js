@@ -117,11 +117,19 @@ class FriendProfileScreen extends Component {
                 profilePic={friendInfo.image}
               />
             </View>
+            <SocialMediaCardContainer
+              fromFriendProfile={true}
+              onPressCallback={(platform) =>
+                this.setState({
+                  selectedSocialMedia: [...selectedSocialMedia, platform]
+                })
+              }
+              platformSelected={(socialMedia => selectedSocialMedia.includes(socialMedia))}
+            />
             <SuperConnectBar
               superConnect={superConnect}/>
             <View style={styles.superConnectBarContainer}>
             </View>
-            <SocialMediaCardContainer />
             <View>
               <Navbar
                 navigation={navigation}

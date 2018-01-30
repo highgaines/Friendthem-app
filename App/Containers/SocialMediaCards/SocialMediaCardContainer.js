@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity } from 'react-native'
 
 import SocialMediaCard from '../SocialMediaCards/SocialMediaCard';
@@ -18,28 +19,14 @@ class SocialMediaCardContainer extends Component {
     }
   }
 
-  authenticateSocialMedia = platform => {
-    const { userId, apiAccessToken } = this.props
-
-    this.setState({currentPlatform: platform})
-    this.props.socialMediaAuth(platform, userId, apiAccessToken)
-  }
-
-  socialPlatformPresent = (provider) => {
-    const { platforms, userInfo } = this.props
-
-    switch (provider) {
-      case 'snapchat':
-        return userInfo && userInfo.snapHandle
-      case 'youtube':
-        return platforms.find(platformObj => platformObj.provider === 'google-oauth2')
-      default:
-        return platforms.find(platformObj => platformObj.provider === provider)
-    }
-  }
-
   render() {
-    const { platforms } = this.props
+    const {
+      platforms,
+      onPressCallback,
+      snapchatCallback,
+      platformSelected,
+      fromFriendProfile
+    } = this.props
     const { socialMediaData, syncedCardColors, selectedSocialMedia } = this.state
 
     return (
@@ -47,7 +34,8 @@ class SocialMediaCardContainer extends Component {
       {
         Object.keys(socialMediaData).map((socialPlatform, idx) => {
           const isYoutube = socialPlatform === 'youtube'
-          const currentPlatform = selectedSocialMedia.find(platform => platform === socialPlatform || 'google-oauth2')
+          const isSnapchat = socialPlatform === 'snapchat'
+          const currentPlatform = platformSelected(isYoutube ? 'google-oauth2' : socialPlatform)
           const capitalizeName = (name) => name[0].toUpperCase() + name.slice(1)
           const userName = currentPlatform && false ? currentPlatform['access_token'][socialMediaData[socialPlatform]['userNamePath']] : null
           const isSynced = !!currentPlatform
@@ -57,11 +45,7 @@ class SocialMediaCardContainer extends Component {
               key={idx}
               platformName={capitalizeName(socialPlatform)}
               selected={isSynced}
-              socialAuth={(platform) =>
-                this.setState({
-                  selectedSocialMedia: [...selectedSocialMedia, platform]
-                })
-              }
+              socialAuth={isSnapchat && !fromFriendProfile ? snapchatCallback :  onPressCallback}
               platformAuth={isYoutube ? 'google-oauth2' : socialPlatform}
               userName={userName}
               syncedBGColor={syncedCardColors[socialPlatform]}
@@ -76,6 +60,7 @@ class SocialMediaCardContainer extends Component {
 
 const mapStateToProps = state => ({
   userId: state.userStore.userId,
+  userInfo: state.userStore.userData,
   platforms: state.tokenStore.platforms,
   fbAuthToken: state.fbStore.fbAccessToken,
   apiAccessToken: state.authStore.accessToken,
@@ -84,7 +69,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({
-      socialMediaAuth,
     }, dispatch)
   }
 }
