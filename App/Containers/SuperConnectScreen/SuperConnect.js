@@ -35,7 +35,6 @@ class SuperConnect extends Component {
         (error, result) => {
           if(result && !error) {
             this.props.navigation.navigate('CongratulatoryScreen', {
-              userData: this.props.userData,
               friendData: this.props.friendData,
               navigation: this.props.navigation
             })

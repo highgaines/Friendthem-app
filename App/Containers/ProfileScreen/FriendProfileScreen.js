@@ -16,6 +16,7 @@ import Navbar from '../Navbar/Navbar';
 import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard';
 import SuperConnectBar from '../SuperConnectScreen/SuperConnectBar'
 import ScrollWheel from './ScrollWheel';
+import FeedContainer from '../FeedContainer/FeedContainer';
 
 // Styles
 import styles from '../Styles/UserProfileStyles';
@@ -25,8 +26,22 @@ class FriendProfileScreen extends Component {
     super()
 
     this.state = {
-      showModal: false
+      showModal: false,
+      platform: 'profile',
+      feedContainer: false
     }
+  }
+
+  renderPlatformContainer = platform => {
+      return <FeedContainer platform={platform} />
+  }
+
+  handlePlatformChange = platform => {
+    this.setState({ feedContainer: true, platform: platform })
+  }
+
+  handleBackToProfile = () => {
+    this.setState({ feedContainer: false, platform: 'profile' })
   }
 
   handleEmail = () => {
@@ -89,18 +104,25 @@ class FriendProfileScreen extends Component {
             </View>
             </LinearGradient>
             <View style={styles.scrollWheelContainer}>
-              <ScrollWheel />
+              <ScrollWheel
+                handlePlatformChange={this.handlePlatformChange}
+                handleBackToProfile={this.handleBackToProfile}
+                selected={this.state.platform}
+                profilePic={friendInfo.image}
+              />
             </View>
-            <View style={styles.socialAccountContainer}>
-              <SocialMediaCard
-                platformName='Facebook'
-                inverted={true}
-                userName={friendInfo.name} />
-            </View>
-            <SuperConnectBar
-              superConnect={superConnect}/>
-            <View style={styles.superConnectBarContainer}>
-            </View>
+            {
+              this.state.feedContainer ? <FeedContainer platform={this.state.platform} /> :
+              <View style={{}}>
+                <ScrollView contentContainerStyle={styles.socialAccountContainer}>
+                  <SocialMediaCard
+                    platformName='Facebook'
+                    inverted={true}
+                    userName={friendInfo.name} />
+                </ScrollView>
+              </View>
+            }
+            { this.state.feedContainer ? null : <SuperConnectBar superConnect={superConnect}/> }
             <View>
               <Navbar
                 navigation={navigation}

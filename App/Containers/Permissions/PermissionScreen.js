@@ -44,21 +44,10 @@ class PermissionScreen extends Component {
 
     if (permissionType === 'geolocation') {
       grantLocationPermission()
-      navigate('PermissionScreen', {
-        permissionType: 'notifications',
-        numUsers: users.length,
-        users: users,
-        navigation: navigation,
-        setFriendInfo: setFriendInfo
-      })
+      navigate('PermissionScreen', { permissionType: 'notifications', navigation: navigation })
     } else {
       grantNotificationPermission()
-      navigate('ForkScreen', {
-        numUsers: users.length,
-        users: users,
-        navigation: navigation,
-        setFriendInfo: setFriendInfo
-      })
+      navigate('ForkScreen', { navigation: navigation })
     }
   }
 

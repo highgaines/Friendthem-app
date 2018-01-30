@@ -82,18 +82,6 @@ class SettingsScreen extends Component {
               General Setting
             </Text>
           </View>
-          <TouchableOpacity style={styles.sectionItem}>
-            <Image
-              source={Images.person}
-              />
-            <Text style={styles.sectionItemText}>
-              Account
-            </Text>
-            <Image
-              source={Images.rightArrow}
-              style={styles.rightArrow}
-              />
-          </TouchableOpacity>
           <TouchableOpacity
             style={styles.sectionItem}
             onPress={this.handleReportProblem}

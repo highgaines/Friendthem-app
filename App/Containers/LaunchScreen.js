@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, TouchableOpacity, Button, ActivityIndicator } from 'react-native'
+
+// Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Images } from '../Themes'
 
 // Libraries
 import { SocialIcon } from 'react-native-elements'
@@ -23,6 +24,9 @@ import UserStoreActions, { fbUserInfo } from '../Redux/UserStore'
 import FriendStoreActions from '../Redux/FriendStore'
 import AuthStoreActions, { loginByFacebook } from '../Redux/AuthStore'
 import PermissionsStoreActions from '../Redux/PermissionsStore'
+
+// Images
+import { Images } from '../Themes'
 
 // Styles
 import styles from './Styles/LaunchScreenStyles'
@@ -80,9 +84,7 @@ class LaunchScreen extends Component {
         fbUserInfo(result)
         navigation.navigate('PermissionScreen', {
           permissionType: 'geolocation',
-          navigation: navigation,
-          users: users,
-          setFriendInfo: setFriendInfo
+          navigation: navigation
         })
       }
     }
