@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity } from 'react-native'
 
 // Libraries
@@ -62,7 +63,7 @@ class FriendProfileScreen extends Component {
   }
 
   render() {
-    const { friendInfo, superConnect, navigation } = this.props;
+    const { friendInfo, superConnect, navigation, setSuperConnectPlatforms } = this.props;
     const { showModal, socialMediaData, syncedCardColors, selectedSocialMedia } = this.state
 
     return (
@@ -125,9 +126,10 @@ class FriendProfileScreen extends Component {
                   selectedSocialMedia: [...selectedSocialMedia, platform]
                 })
               }
-              platformSelected={(socialMedia => selectedSocialMedia.includes(socialMedia))}
+              platformSelected={socialMedia => selectedSocialMedia.includes(socialMedia)}
             />
             <SuperConnectBar
+              setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
               superConnect={superConnect}/>
             <View style={styles.superConnectBarContainer}>
             </View>
@@ -158,7 +160,7 @@ const mapDispatchToProps = dispatch => {
     ...bindActionCreators({
       fbLogoutComplete: logoutComplete,
       setSuperConnectPlatforms,
-    })
+    }, dispatch)
   }
 }
 

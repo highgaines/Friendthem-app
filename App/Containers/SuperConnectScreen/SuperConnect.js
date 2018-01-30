@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
-import { ScrollView, Text, Image, View, TouchableOpacity, Button, AppState } from 'react-native';
-import { connect } from 'react-redux';
-import LinearGradient from 'react-native-linear-gradient';
-import { SocialIcon } from 'react-native-elements';
-import ConnectBar from './ConnectBar';
-import PlatformsContainer from './PlatformsContainer';
-import ButtonsContainer from './ButtonsContainer';
-import FBSDK, { AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk';
+import React, { Component } from 'react'
+import { ScrollView, Text, Image, View, TouchableOpacity, Button, AppState } from 'react-native'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import LinearGradient from 'react-native-linear-gradient'
+import { SocialIcon } from 'react-native-elements'
+import ConnectBar from './ConnectBar'
+import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer';
+import ButtonsContainer from './ButtonsContainer'
+import FBSDK, { AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk'
 
 class SuperConnect extends Component {
   constructor(props) {
@@ -45,11 +46,11 @@ class SuperConnect extends Component {
       )
       new GraphRequestManager().addRequest(friendListRequest).start();
     }
-    this.setState({appState: nextAppState});
+    this.setState({ appState: nextAppState });
   }
 
   render() {
-    const { userData, friendData, navigation } = this.props
+    const { userData, friendData, navigation, selectedSocialMedia } = this.props
     // dummy data
     const platforms = [
       {
@@ -61,10 +62,9 @@ class SuperConnect extends Component {
     return(
       <View style={{ flex: 1 }}>
         <ConnectBar userData={userData} friendData={friendData}/>
-        <PlatformsContainer
-          navigation={navigation}
-          platforms={platforms}
-          inverted={true}/>
+        <SocialMediaCardContainer
+          platformSelected={socialMedia => selectedSocialMedia.includes(socialMedia)}
+        />
         <View style={{ alignItems: 'center' }}>
           <ButtonsContainer
             navigation={navigation}
@@ -77,9 +77,11 @@ class SuperConnect extends Component {
 }
 
 const mapStateToProps = state => ({
-  fbAuthToken: state.fbStore.fbAccessToken,
   userData: state.userStore.userData,
-  friendData: state.friendStore.friendData
+  friendData: state.friendStore.friendData,
+  fbAuthToken: state.fbStore.fbAccessToken,
+  selectedSocialMedia: state.superConnect.selectedSocialMedia
 })
+
 
 export default connect(mapStateToProps)(SuperConnect)
