@@ -1,19 +1,25 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { View, Text, TouchableOpacity } from 'react-native'
+
+// Libraries
 import { Icon } from 'react-native-elements'
 import FBSDK, { LoginManager } from 'react-native-fbsdk'
 
+// Components
 import LogoutModal from './LogoutModal'
+
+// Redux
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import FriendStoreActions from '../../Redux/FriendStore'
 import UserStoreActions from '../../Redux/UserStore'
 import FBStoreActions from '../../Redux/FBStore'
 import AuthStoreActions from '../../Redux/AuthStore'
 
-// Icons
+// Images
 import { Images } from '../../Themes';
 
+// Styles
 import styles from '../Styles/NavbarStyles';
 
 class Navbar extends Component {
@@ -43,46 +49,28 @@ class Navbar extends Component {
     const { navigation, users, setFriendInfo } = this.props
     const { navigate } = this.props.navigation
 
-    navigate('NearbyUsersScreen',
-    {
-      users: users,
-      navigation: navigation,
-      setFriendInfo: setFriendInfo,
-      numUsers: users.length
-    })
+    navigate('NearbyUsersScreen', { navigation: navigation })
   }
 
   // notifications or user profile screen?
   goToNotifications = () => {
     const { navigate } = this.props.navigation
-    navigate('NotificationsScreen',
-    {
-      navigation: this.props.navigation
-    })
+    navigate('NotificationsScreen', { navigation: this.props.navigation })
   }
 
   goToInviteUsers = () => {
     const { navigate } = this.props.navigation
-    navigate('InviteUsers',
-    {
-        navigation: this.props.navigation
-    })
+    navigate('InviteUsers', { navigation: this.props.navigation })
   }
 
   goToSettings = () => {
     const { navigate } = this.props.navigation
-    navigate('SettingsScreen',
-      {
-        toggleModal: () => this.toggleModal()
-      })
+    navigate('SettingsScreen', { toggleModal: () => this.toggleModal() })
   }
 
   goToProfile = () => {
     const { navigate } = this.props.navigation
-    navigate('UserProfileScreen',
-    {
-        // pass in props object here
-    })
+    navigate('UserProfileScreen')
   }
 
   render() {
@@ -193,19 +181,21 @@ class Navbar extends Component {
 }
 
 const mapStateToProps = state => ({
-  userInfo: state.userStore.userData,
-  users: state.facebook.users
+  // access redux state for navbar
 })
 
 const mapDispatchToProps = dispatch => {
+  const { fbUserInfo } = UserStoreActions
+  const { setFriendInfo } = FriendStoreActions
+  const { logoutComplete } = FBStoreActions
+  const { logoutUser } = AuthStoreActions
+
   return {
     ...bindActionCreators({
-      userInfoRequestSuccess: (userInfo) =>
-        dispatch(UserStoreActions.fbUserInfo(userInfo)),
-      setFriendInfo: (friendInfo) =>
-        dispatch(FriendStoreActions.setFriendInfo(friendInfo)),
-      fbLogoutComplete: () => dispatch(FBStoreActions.logoutComplete()),
-      logoutUser: () => dispatch(AuthStoreActions.logoutUser())
+      fbUserInfo,
+      setFriendInfo,
+      logoutComplete,
+      logoutUser
     }, dispatch)
   }
 }

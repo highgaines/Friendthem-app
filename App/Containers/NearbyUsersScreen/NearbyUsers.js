@@ -77,11 +77,12 @@ class NearbyUsers extends Component {
 }
 
 const mapStateToProps = state => ({
-  users: state.facebook.users
+  users: state.friendStore.users
 })
 
 const mapDispatchToProps = dispatch => {
   const { setFriendInfo } = FriendStoreActions
+
   return {
     ...bindActionCreators({ setFriendInfo }, dispatch)
   }
