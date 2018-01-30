@@ -8,6 +8,7 @@ import ConnectBar from './ConnectBar'
 import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer';
 import ButtonsContainer from './ButtonsContainer'
 import FBSDK, { AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk'
+import SuperConnectActions, { superConnectPlatform } from '../../Redux/SuperConnectStore'
 
 class SuperConnect extends Component {
   constructor(props) {
@@ -49,9 +50,24 @@ class SuperConnect extends Component {
     this.setState({ appState: nextAppState });
   }
 
+  superConnectPromiseLoop = () => {
+    const { selectedSocialMedia, friendData, superConnectPlatform, apiAccessToken } = this.props
+
+    for (let i = 0; i < selectedSocialMedia.length; i++) {
+      superConnectPlatform(selectedSocialMedia[i], apiAccessToken, friendData.id).then(resp => {
+        if (resp) {
+          return true
+        } else {
+          return false
+        }
+      }
+      )
+    }
+  }
+
   render() {
-    const { userData, friendData, navigation, selectedSocialMedia } = this.props
-    // dummy data
+    const { userData, friendData, navigation, selectedSocialMedia, togglePlatform } = this.props
+
     const platforms = [
       {
         platformName: 'facebook',
@@ -63,10 +79,13 @@ class SuperConnect extends Component {
       <View style={{ flex: 1 }}>
         <ConnectBar userData={userData} friendData={friendData}/>
         <SocialMediaCardContainer
+          fromFriendProfile={true}
+          onPressCallback={(platform) => togglePlatform(platform)}
           platformSelected={socialMedia => selectedSocialMedia.includes(socialMedia)}
         />
         <View style={{ alignItems: 'center' }}>
           <ButtonsContainer
+            superConnectPromiseLoop={this.superConnectPromiseLoop}
             navigation={navigation}
             facebookUrl={friendData.fbUrl}
             friendName={friendData.name} />
@@ -80,8 +99,18 @@ const mapStateToProps = state => ({
   userData: state.userStore.userData,
   friendData: state.friendStore.friendData,
   fbAuthToken: state.fbStore.fbAccessToken,
+  apiAccessToken: state.authStore.accessToken,
   selectedSocialMedia: state.superConnect.selectedSocialMedia
 })
 
+const mapDispatchToProps = dispatch => {
+  const { togglePlatform } = SuperConnectActions
+  return {
+    ...bindActionCreators({
+      togglePlatform,
+      superConnectPlatform
+    }, dispatch)
+  }
+}
 
-export default connect(mapStateToProps)(SuperConnect)
+export default connect(mapStateToProps, mapDispatchToProps)(SuperConnect)

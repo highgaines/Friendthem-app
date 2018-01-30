@@ -159,7 +159,7 @@ export const socialMediaAuth = (platform, userId, apiAccessToken) => {
     ],
     shouldCallApi: state => true,
     callApi: dispatch =>
-      fetchFromApi(`auth/login/${platform}/?user_id=${userId}`)
+      fetchFromApi(`auth/login/${platform}/?user_id=${userId}`, init, dispatch)
   }
 }
 

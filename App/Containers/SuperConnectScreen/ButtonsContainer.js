@@ -8,7 +8,7 @@ import ConnectButton from './ConnectButton';
 import styles from '../Styles/ButtonContainerStyles';
 
 export default ButtonsContainer = props => {
-  const { friendName, deepLinkURL, navigation, friendUrl } = props
+  const { friendName, deepLinkURL, navigation, friendUrlm, superConnectPromiseLoop } = props
   const backAction = NavigationActions.back()
 
   const goBack = () => {
@@ -16,7 +16,7 @@ export default ButtonsContainer = props => {
   }
 
   const letsDoIt = () => {
-    Linking.openURL(props.facebookUrl)
+    superConnectPromiseLoop()
   }
 
   return(

@@ -4,7 +4,11 @@ import Immutable from 'seamless-immutable'
 import envConfig from '../../envConfig'
 
 const { Types, Creators} = createActions({
-  setSuperConnectPlatforms: ['platformList']
+  socialMediaConnectRequest: null,
+  socialMediaConnectSuccess: null,
+  socialMediaConnectFailure: null,
+  setSuperConnectPlatforms: ['platformList'],
+  togglePlatform: ['platformName']
 })
 
 export const SuperConnectTypes = Types
@@ -15,6 +19,32 @@ export const INITIAL_STATE = Immutable({
   selectedSocialMedia: []
 })
 
+export const superConnectPlatform = (platformName, apiAccessToken, friendId) => {
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('Authorization', `Bearer ${apiAccessToken}`)
+
+  const body = {
+    provider: platformName,
+    user_2: 19
+  }
+
+  const init = {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(body)
+  }
+
+  return {
+    types: [
+      Types.SOCIAL_MEDIA_CONNECT_REQUEST,
+      Types.SOCIAL_MEDIA_CONNECT_SUCCESS,
+      Types.SOCIAL_MEDIA_CONNECT_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi('connect/', init, dispatch)
+  }
+}
 /* ---------- Reducers --------- */
 
 const handleSetSelectedSocialMedia = (state, action) => {
@@ -26,7 +56,40 @@ const handleSetSelectedSocialMedia = (state, action) => {
   }
 }
 
+const handleTogglePlatform = (state, action) => {
+  const { platformName } = action
+  const { selectedSocialMedia } = state
+  const itemIndex = selectedSocialMedia.findIndex(socialMedia => socialMedia === platformName)
+
+  if (itemIndex < 0) {
+    return {
+      ...state,
+      selectedSocialMedia: [...selectedSocialMedia, platformName]
+    }
+  } else {
+      return {
+        ...state,
+        selectedSocialMedia: [...selectedSocialMedia.slice(0, itemIndex), ...selectedSocialMedia.slice(itemIndex + 1)]
+      }
+  }
+}
+
+const handleSocialMediaConnectRequest = (state, action) => {
+  return state
+}
+
+const handleSocialMediaConnectSuccess = (state, action) => {
+  return state
+}
+
+const handleSocialMediaConnectFailure = (state, action) => {
+  return state
+}
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.SET_SUPER_CONNECT_PLATFORMS]: handleSetSelectedSocialMedia
+  [Types.TOGGLE_PLATFORM]: handleTogglePlatform,
+  [Types.SET_SUPER_CONNECT_PLATFORMS]: handleSetSelectedSocialMedia,
+  [Types.SOCIAL_MEDIA_CONNECT_REQUEST]: handleSocialMediaConnectRequest,
+  [Types.SOCIAL_MEDIA_CONNECT_SUCCESS]: handleSocialMediaConnectSuccess,
+  [Types.SOCIAL_MEDIA_CONNECT_FAILURE]: handleSocialMediaConnectFailure
 })
