@@ -27,7 +27,7 @@ class FriendProfileScreen extends Component {
 
     this.state = {
       showModal: false,
-      platform: '',
+      platform: 'profile',
       feedContainer: false
     }
   }
@@ -36,12 +36,12 @@ class FriendProfileScreen extends Component {
       return <FeedContainer platform={platform} />
   }
 
-  handlePlatformChange = () => {
-    this.setState({ feedContainer: true })
+  handlePlatformChange = platform => {
+    this.setState({ feedContainer: true, platform: platform })
   }
 
   handleBackToProfile = () => {
-    this.setState({ feedContainer: false })
+    this.setState({ feedContainer: false, platform: 'profile' })
   }
 
   handleEmail = () => {
@@ -107,23 +107,21 @@ class FriendProfileScreen extends Component {
               <ScrollWheel
                 handlePlatformChange={this.handlePlatformChange}
                 handleBackToProfile={this.handleBackToProfile}
+                selected={this.state.platform}
               />
             </View>
             {
-              this.state.feedContainer ? <FeedContainer platform="twitter" /> :
-              <View>
-                <View style={styles.socialAccountContainer}>
+              this.state.feedContainer ? <FeedContainer platform={this.state.platform} /> :
+              <View style={{}}>
+                <ScrollView contentContainerStyle={styles.socialAccountContainer}>
                   <SocialMediaCard
                     platformName='Facebook'
                     inverted={true}
                     userName={friendInfo.name} />
-                  </View>
-                  <SuperConnectBar
-                    superConnect={superConnect}/>
-                  </View>
+                </ScrollView>
+              </View>
             }
-            <View style={styles.superConnectBarContainer}>
-            </View>
+            { this.state.feedContainer ? null : <SuperConnectBar superConnect={superConnect}/> }
             <View>
               <Navbar
                 navigation={navigation}

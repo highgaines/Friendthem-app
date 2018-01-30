@@ -19,7 +19,7 @@ export default StyleSheet.create({
   text: {
     textAlign: 'center',
     backgroundColor: 'transparent',
-    color: 'white',
+    color: 'rgba(255, 255, 255, 0.4)',
     fontSize: 11
   },
   linearGradient: {

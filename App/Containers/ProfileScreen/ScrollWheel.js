@@ -17,7 +17,9 @@ export default class ScrollWheel extends Component {
   }
 
   render() {
-    const { handlePlatformChange } = this.props
+    const { handlePlatformChange, handleBackToProfile, selected } = this.props
+
+    console.log(selected)
     return (
         <LinearGradient
           colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
@@ -34,23 +36,23 @@ export default class ScrollWheel extends Component {
             <View style={styles.platforms}>
               <TouchableOpacity onPress={() => handlePlatformChange('twitter')}>
                 <SMPlatformCircle platform="twitter" size={70}/>
-                <Text style={styles.text}> Twitter </Text>
+                <Text style={selected === 'twitter' ? [styles.text, { color: 'white'}] : styles.text}> Twitter </Text>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => handlePlatformChange('facebook')}>
                 <SMPlatformCircle platform="facebook" size={70}/>
-                <Text style={styles.text}> Facebook </Text>
+                <Text style={selected === 'facebook' ? [styles.text, { color: 'white'}] : styles.text}> Facebook </Text>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => handleBackToProfile()}>
+                <SMPlatformCircle platform={null} size={70}/>
+                <Text style={selected === 'profile' ? [styles.text, { color: 'white'}] : styles.text}> Profile </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handlePlatformChange('snapchat')}>
                 <SMPlatformCircle platform="snapchat" size={70}/>
-                <Text style={styles.text}> Snapchat </Text>
+                <Text style={selected === 'snapchat' ? [styles.text, { color: 'white'}] : styles.text}> Snapchat </Text>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => handlePlatformChange('youtube')}>
                 <SMPlatformCircle platform="youtube" size={70}/>
-                <Text style={styles.text}> Youtube </Text>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <SMPlatformCircle platform="twitter" size={70}/>
-                <Text style={styles.text}> Twitter </Text>
+                <Text style={selected === 'youtube' ? [styles.text, { color: 'white'}] : styles.text}> Youtube </Text>
               </TouchableOpacity>
               <TouchableOpacity>
                 <SMPlatformCircle platform="twitter" size={70}/>

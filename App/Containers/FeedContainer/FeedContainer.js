@@ -27,9 +27,11 @@ export default class FeedContainer extends Component {
   }
 
   render = () => {
+    const { platform } = this.props
+
     return(
       <ScrollView style={styles.feedContainer}>
-        <Text style={{ fontSize: 30, textAlign: 'center' }}> TWITTER FEED HERE </Text>
+        <Text style={{ fontSize: 30, textAlign: 'center' }}> {platform} feed here </Text>
       </ScrollView>
     )
   }

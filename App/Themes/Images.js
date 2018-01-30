@@ -41,7 +41,7 @@ const images = {
   whatsappIcon: require('../Images/whatsappicon.png'),
 
   // Images
-  geolocationSVG: require('../Images/geolocation-svg.svg'),
+  geolocationSVG: require('../Images/permission-geo.svg'),
   notificationsSVG: require('../Images/notifications-svg.svg'),
   noPicSVG: require('../Images/nopic-svg.svg'),
 
@@ -57,6 +57,7 @@ const images = {
   logoPNG: require('../Images/logo-png.png'),
   friendster: require('../Images/Icons/friendster-png.png'),
   friendsterSVG: require('../Images/friendster-svg.svg'),
+  Friendster: require('../Images/Friendster.svg'),
 
   // Emblems
   emblemColor: require('../Images/Icons/emblem-color.svg'),
