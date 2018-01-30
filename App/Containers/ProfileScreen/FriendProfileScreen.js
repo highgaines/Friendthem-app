@@ -21,6 +21,9 @@ import FeedContainer from '../FeedContainer/FeedContainer';
 // Styles
 import styles from '../Styles/UserProfileStyles';
 
+//constants
+import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
+
 class FriendProfileScreen extends Component {
   constructor() {
     super()
@@ -28,7 +31,10 @@ class FriendProfileScreen extends Component {
     this.state = {
       showModal: false,
       platform: 'profile',
-      feedContainer: false
+      feedContainer: false,
+      socialMediaData: SOCIAL_MEDIA_DATA,
+      syncedCardColors: SYNCED_CARD_COLORS,
+      selectedSocialMedia: []
     }
   }
 
@@ -54,9 +60,29 @@ class FriendProfileScreen extends Component {
     Communications.phonecall('3472917739', true)
   }
 
+  authenticateSocialMedia = platform => {
+    const { userId, apiAccessToken } = this.props
+    this.setState({currentPlatform: platform})
+    this.props.socialMediaAuth(platform, userId, apiAccessToken)
+  }
+
+  socialPlatformPresent = (provider) => {
+    const { platforms, userInfo } = this.props
+
+    switch (provider) {
+      case 'snapchat':
+        return userInfo && userInfo.snapHandle
+      case 'youtube':
+        return platforms.find(platformObj => platformObj.provider === 'google-oauth2')
+      default:
+        return platforms.find(platformObj => platformObj.provider === provider)
+    }
+
+  }
+
   render() {
     const { friendInfo, superConnect, navigation } = this.props;
-    const { showModal } = this.state
+    const { showModal, socialMediaData, syncedCardColors, selectedSocialMedia } = this.state
 
     return (
         <View>
@@ -111,6 +137,37 @@ class FriendProfileScreen extends Component {
                 profilePic={friendInfo.image}
               />
             </View>
+            <ScrollView contentContainerStyle={styles.socialAccountContainer}>
+                {
+                  Object.keys(socialMediaData).map((socialPlatform, idx) => {
+                    const isYoutube = socialPlatform === 'youtube'
+                    const currentPlatform = selectedSocialMedia.find(platform => platform === socialPlatform || 'google-oauth2')
+                    const capitalizeName = (name) => name[0].toUpperCase() + name.slice(1)
+                    const userName = currentPlatform && false ? currentPlatform['access_token'][socialMediaData[socialPlatform]['userNamePath']] : null
+                    const isSynced = !!currentPlatform
+
+                    return (
+                      <SocialMediaCard
+                        key={idx}
+                        platformName={capitalizeName(socialPlatform)}
+                        selected={isSynced}
+                        socialAuth={(platform) =>
+                          this.setState({
+                            selectedSocialMedia: [...selectedSocialMedia, platform]
+                          })
+                        }
+                        platformAuth={isYoutube ? 'google-oauth2' : socialPlatform}
+                        userName={userName}
+                        syncedBGColor={syncedCardColors[socialPlatform]}
+                      />
+                    )
+                  })
+                }
+            </ScrollView>
+            <SuperConnectBar
+              superConnect={superConnect}/>
+            <View style={styles.superConnectBarContainer}>
+            </View>
             {
               this.state.feedContainer ? <FeedContainer platform={this.state.platform} /> :
               <View style={{}}>
@@ -139,7 +196,8 @@ class FriendProfileScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  friendInfo: state.friendStore.friendData
+  friendInfo: state.friendStore.friendData,
+    platforms: state.tokenStore.platforms,
 })
 
 const mapDispatchToProps = dispatch => {
