@@ -10,6 +10,7 @@ import Communications from 'react-native-communications';
 
 // Redux
 import FBStoreActions from '../../Redux/FBStore';
+import SuperConnectActions from '../../Redux/SuperConnectStore'
 
 // Components
 import Navbar from '../Navbar/Navbar';
@@ -151,8 +152,13 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
+  const { logoutComplete } = FBStoreActions
+  const { setSuperConnectPlatforms } = SuperConnectActions
   return {
-    fbLogoutComplete: () => dispatch(FBStoreActions.logoutComplete())
+    ...bindActionCreators({
+      fbLogoutComplete: logoutComplete,
+      setSuperConnectPlatforms,
+    })
   }
 }
 

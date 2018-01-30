@@ -14,8 +14,7 @@ class SocialMediaCardContainer extends Component {
     this.state = {
       currentPlatform: '',
       socialMediaData: SOCIAL_MEDIA_DATA,
-      syncedCardColors: SYNCED_CARD_COLORS,
-      selectedSocialMedia: []
+      syncedCardColors: SYNCED_CARD_COLORS
     }
   }
 
