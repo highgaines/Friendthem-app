@@ -31,7 +31,7 @@ export default class FeedContainer extends Component {
 
     return(
       <ScrollView style={styles.feedContainer}>
-        <Text style={{ fontSize: 30, textAlign: 'center' }}> {platform} feed here </Text>
+        <Text style={{ fontSize: 30, textAlign: 'center', padding: 100 }}> {platform} feed here </Text>
       </ScrollView>
     )
   }
