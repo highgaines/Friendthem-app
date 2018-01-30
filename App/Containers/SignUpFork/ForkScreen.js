@@ -66,13 +66,7 @@ class ForkScreen extends Component {
     const { navigate } = this.props.navigation
     const { users, navigation, setFriendInfo } = this.props
 
-    navigate('NearbyUsersScreen',
-    {
-        users: users,
-        navigation: navigation,
-        setFriendInfo: setFriendInfo,
-        numUsers: users.length
-    })
+    navigate('NearbyUsersScreen', { navigation: navigation })
   }
 
   render() {

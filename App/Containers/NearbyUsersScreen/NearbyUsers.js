@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
 import { Images } from '../../Themes';
+
 import SearchBar from './SearchBar';
 import UsersContainer from './UsersContainer';
 import LinearGradient from 'react-native-linear-gradient';
@@ -10,10 +11,15 @@ import _ from 'lodash';
 import Navbar from '../Navbar/Navbar';
 import WelcomeScreen from '../TutorialScreens/WelcomeScreen';
 
+// Redux
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import FriendStoreActions from '../../Redux/FriendStore';
+
 // Styles
 import styles from '../Styles/NearbyUsersScreenStyles';
 
-export default class NearbyUsers extends Component {
+class NearbyUsers extends Component {
   constructor(props) {
     super(props)
 
@@ -69,3 +75,16 @@ export default class NearbyUsers extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  users: state.facebook.users
+})
+
+const mapDispatchToProps = dispatch => {
+  const { setFriendInfo } = FriendStoreActions
+  return {
+    ...bindActionCreators({ setFriendInfo }, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NearbyUsers)

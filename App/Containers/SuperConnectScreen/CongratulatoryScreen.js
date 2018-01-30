@@ -7,10 +7,10 @@ import LinearGradient from 'react-native-linear-gradient';
 import styles from '../Styles/CongratulatoryScreenStyles';
 
 export default CongratulatoryScreen = props => {
-  const { userData, friendData, navigation} = props;
+  const {friendData, navigation} = props;
 
   const handleNavigation = () => {
-    navigation.navigate('UserProfileScreen', { userInfo: userData })
+    navigation.navigate('UserProfileScreen')
   }
 
   return(
@@ -88,7 +88,6 @@ export default CongratulatoryScreen = props => {
           <Image style={styles.image2} source={{uri: friendData.image}}/>
           <Image style={styles.image1} source={{uri: userData.picture.data.url}}/>
         </View>
-
       </View>
     </View>
   )
