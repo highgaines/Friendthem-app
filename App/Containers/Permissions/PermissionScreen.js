@@ -33,8 +33,6 @@ class PermissionScreen extends Component {
   handleOkay = () => {
     // redux action to continue WITH gelocation
     const {
-      users,
-      setFriendInfo,
       navigation,
       permissionType,
       grantLocationPermission,
@@ -117,7 +115,7 @@ class PermissionScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  users: state.facebook.users,
+  // hook up state to props
 })
 
 const mapDispatchToProps = dispatch => {

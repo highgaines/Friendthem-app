@@ -89,7 +89,7 @@ class ForkScreen extends Component {
               <Image
                 style={styles.userImage} source={{uri: `${imageSource}`}}
               />
-              <View style={{ position: 'absolute', top: 260}}>
+              <View>
                 <SocialIcon
                   raised={false}
                   iconSize={15}

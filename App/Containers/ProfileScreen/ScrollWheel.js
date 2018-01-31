@@ -20,7 +20,6 @@ export default class ScrollWheel extends Component {
   render() {
     const { handlePlatformChange, handleBackToProfile, selected, profilePic } = this.props
 
-    console.log(selected)
     return (
         <LinearGradient
           colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}

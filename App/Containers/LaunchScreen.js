@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, TouchableOpacity, Button, ActivityIndicator } from 'react-native'
 
-// Redux
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-
 // Libraries
 import { SocialIcon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
@@ -19,7 +15,9 @@ import Footer from './UtilityComponents/Footer'
 // Config
 import envConfig from '../../envConfig'
 
-//Redux Actions
+//Redux
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import UserStoreActions, { fbUserInfo } from '../Redux/UserStore'
 import FriendStoreActions from '../Redux/FriendStore'
 import AuthStoreActions, { loginByFacebook } from '../Redux/AuthStore'
@@ -74,7 +72,7 @@ class LaunchScreen extends Component {
   }
 
   getFbProfile = accessToken => {
-    const { fbUserInfo, navigation, setFriendInfo, users, loginByFacebook } = this.props
+    const { fbUserInfo, navigation, loginByFacebook } = this.props
 
     const responseInfoCallback = (error, result) => {
       if (error) {
@@ -117,7 +115,7 @@ class LaunchScreen extends Component {
 
   render () {
     const { navigate } = this.props.navigation
-    const { users, setFriendInfo, fbAuthToken, logoutUser } = this.props
+    const { users, fbAuthToken, logoutUser } = this.props
     const { loading } = this.state
 
     return (
@@ -176,8 +174,6 @@ class LaunchScreen extends Component {
 
 const mapStateToProps = state => ({
   fbAuthToken: state.fbStore.fbAccessToken,
-  users: state.facebook.users,
-  userData: state.userStore,
   nav: state.nav,
   loggedIn: state.authStore.loggedIn,
   locationIntervalRunning: state.permissionsStore.locationIntervalRunning
@@ -186,12 +182,11 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   const { logoutUser } = AuthStoreActions
   const { fbUserInfo } = UserStoreActions
-  const { setFriendInfo } = FriendStoreActions
   const { setLocationInterval } = PermissionsStoreActions
+
   return {
     ...bindActionCreators({
       fbUserInfo,
-      setFriendInfo,
       loginByFacebook,
       logoutUser,
       setLocationInterval

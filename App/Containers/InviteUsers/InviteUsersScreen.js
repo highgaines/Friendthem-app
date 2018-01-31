@@ -5,7 +5,7 @@ import Reactotron from 'reactotron-react-native';
 
 // Redux
 import { bindActionCreators } from 'redux';
-import { selectUser } from '../../Redux/InviteUsersStore';
+import { selectUser, fetchConnectivityData } from '../../Redux/InviteUsersStore';
 
 // Libraries
 import LinearGradient from 'react-native-linear-gradient';
@@ -33,6 +33,11 @@ class InviteUsersScreen extends Component {
 
   triggerModal = () => {
     this.setState({ showModal: !this.state.showModal })
+  }
+
+  componentDidMount = () => {
+    const { fetchConnectivityData, accessToken } = this.props
+    fetchConnectivityData(accessToken)
   }
 
   render() {
@@ -130,12 +135,14 @@ class InviteUsersScreen extends Component {
 
 const mapStateToProps = state => ({
   selectedUser: state.inviteUsersStore.selectedUser,
-  nav: state.nav
+  nav: state.nav,
+  accessToken: state.authStore.accessToken
 })
 
 const mapDispatchToProps = dispatch => {
+
   return {
-    ...bindActionCreators({ selectUser }, dispatch)
+    ...bindActionCreators({ selectUser, fetchConnectivityData }, dispatch)
   }
 }
 

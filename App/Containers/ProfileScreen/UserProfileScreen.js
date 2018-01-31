@@ -8,6 +8,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import { Icon } from 'react-native-elements'
 import Image from 'react-native-remote-svg'
 import RNYoutubeOAuth from 'react-native-youtube-oauth';
+import TimerMixin from 'react-timer-mixin'
 
 // Components
 import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard'
@@ -40,7 +41,7 @@ class UserProfileScreen extends Component {
 
     this.state = {
       socialNetworkTab: true,
-      showFriendster: true,
+      showFriendster: false,
       externalAuth: false,
       currentPlatform: null,
       appState: AppState.currentState,
@@ -68,7 +69,12 @@ class UserProfileScreen extends Component {
   }
 
   componentWillUnmount = () => {
+    this.setState({ showFriendster: false })
     AppState.removeEventListener('change', this._handleAppStateChange);
+  }
+
+  componentDidMount = () => {
+    setTimeout(() => this.triggerFriendster(), 2200)
   }
 
   componentWillUpdate = (nextProps, nextState) => {
@@ -162,7 +168,7 @@ class UserProfileScreen extends Component {
     const { devGoogleBaseURL, devGoogleApiParams, devGoogleClientId } = envConfig.Development
 
     return (
-        <View style={showFriendster ? { opacity: 0.3 } : ''}>
+        <View>
           <LinearGradient
           colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
           start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import Image from 'react-native-remote-svg';
 
@@ -10,21 +10,29 @@ import * as Animatable from 'react-native-animatable';
 // Components
 import ImageCircle from '../UtilityComponents/ImageCircle';
 
+// Redux
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 // Images
 import { Images } from '../../Themes';
 
 // Styles
 import styles from '../Styles/UserCardStyles';
 
-export default ConnectivityCard = props => {
-  const { image, name, conPct } = props
+class ConnectivityCard extends Component {
+  constructor() {
+    super()
+  }
 
-  const handlePress = () => {
+  handlePress = () => {
     //action here
   }
 
   // will need to finish coding out conditional
-  const determineRadialColor = (conPct) => {
+  determineRadialColor = (conPct) => {
+    const { image, name } = this.props
+
       if (conPct === 100) {
         return 'rgba(120,255, 20, 0.3)'
       } else if(conPct > 66) {
@@ -36,49 +44,71 @@ export default ConnectivityCard = props => {
       }
   }
 
-  const determineEmblem = () => {
+  determineEmblem = () => {
+    const { conPct } = this.props
+
     return conPct === 100
   }
 
-  const progressColor = determineRadialColor(conPct)
+  render() {
+    const { image, name, conPct } = this.props
 
-  return (
-    <Animatable.View animation="slideInUp">
-      <TouchableOpacity
-        style={styles.card}
-        onPress={handlePress}>
-        <View style={styles.cardText} animation="slideInUp">
-          <Text
-            style={{ fontFamily: 'Montserrat', fontSize: 13}}
-            numberOfLines={1}>
-            {name}
-          </Text>
-        </View>
-        <View style={styles.pieContainer} animation="slideInUp">
-          <Pie
-            radius={45}
-            innerRadius={30}
-            series={[conPct]}
-            colors={[progressColor, 'gray']}
-            backgroundColor='#ddd'
-          />
-          <ImageCircle
-            size={75}
-            source={image}
-            extraStyles={{ position: 'absolute'}}
-          />
-        </View>
-        <View style={styles.percentIndicator} >
-          <Image
-            height={20}
-            width={20}
-            source={determineEmblem() ? Images.emblemGreen : Images.emblemColor}
-          />
-          <Text style={styles.pctText}>
-            {conPct}%
-          </Text>
-        </View>
-      </TouchableOpacity>
-    </Animatable.View>
-  )
+    const progressColor = this.determineRadialColor(conPct)
+
+      return (
+        <Animatable.View animation="slideInUp">
+          <TouchableOpacity
+            style={styles.card}
+            onPress={this.handlePress}>
+            <View style={styles.cardText} animation="slideInUp">
+              <Text
+                style={{ fontFamily: 'Montserrat', fontSize: 13}}
+                numberOfLines={1}>
+                {name}
+              </Text>
+            </View>
+            <View style={styles.pieContainer} animation="slideInUp">
+              <Pie
+                radius={45}
+                innerRadius={30}
+                series={[conPct]}
+                colors={[progressColor, 'gray']}
+                backgroundColor='#ddd'
+              />
+              <ImageCircle
+                size={75}
+                source={image}
+                extraStyles={{ position: 'absolute'}}
+              />
+            </View>
+            <View style={styles.percentIndicator} >
+              <Image
+                height={20}
+                width={20}
+                source={this.determineEmblem() ? Images.emblemGreen : Images.emblemColor}
+              />
+              <Text style={styles.pctText}>
+                {conPct}%
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </Animatable.View>
+      )
+  }
 }
+
+const mapStateToProps = state => {
+  return {
+
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+      ...bindActionCreators({
+
+      }, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConnectivityCard)
