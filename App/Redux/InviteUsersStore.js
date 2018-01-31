@@ -13,7 +13,7 @@ const { Types, Creators } = createActions({
     connectivityInfoSuccess: null
 })
 
-export const InvitationTypes = Types
+export const InviteUserS = Types
 export default Creators
 
 /* ------------- Initial State ------------- */
@@ -124,7 +124,7 @@ const handleConnectivityFailure = (state, action) => {
 }
 
 const handleConnectivitySuccess = (state, action) => {
-  const { data } = action.payload
+  const { data } = action
 
   return state.merge({ connectivityData: data, fetchingData: false })
 }
