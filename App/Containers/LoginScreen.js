@@ -23,7 +23,7 @@ class LoginScreen extends Component {
     const { loggedIn, navigation, authError } = this.props
 
     if (loggedIn && !prevProps.loggedIn) {
-      navigation.navigate('UserProfileScreen');
+      navigation.navigate('PermissionScreen', { permissionType: 'geolocation', navigation: navigation });
     }
 
     if (authError && !prevProps.authError) {

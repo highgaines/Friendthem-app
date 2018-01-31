@@ -135,6 +135,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.SEND_INVITE_TO_USER]: handleSendInvite,
   [Types.SELECT_USER]: handleSelectUser,
   [Types.CONNECTIVITY_INFO_REQUEST]: handleConnectivityRequest,
+  [Types.CONNECTIVITY_INFO_SUCCESS]: handleConnectivitySuccess,
   [Types.CONNECTIVITY_INFO_FAILURE]: handleConnectivityFailure,
-  [Types.CONNECTIVITY_INFO_SUCCESS]: handleConnectivitySuccess
 })
