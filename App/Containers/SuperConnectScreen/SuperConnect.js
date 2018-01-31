@@ -60,8 +60,7 @@ class SuperConnect extends Component {
         } else {
           return false
         }
-      }
-      )
+      })
     }
   }
 

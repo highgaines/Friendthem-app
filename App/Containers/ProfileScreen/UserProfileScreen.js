@@ -98,9 +98,9 @@ class UserProfileScreen extends Component {
       this.setState({externalAuth: true})
 
       if (Linking.canOpenURL(deepLinkAuth && false)) {
-        Linking.openURL(deepLinkAuth)
+        Linking.openURL(`${deepLinkAuth}`)
       } else {
-        Linking.openURL(authRedirectUrl)
+        Linking.openURL(`${authRedirectUrl}`)
       }
     }
   }
