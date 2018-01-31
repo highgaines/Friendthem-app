@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
 import { SocialIcon } from 'react-native-elements';
 import FBSDK, { LoginManager, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk';
-import SInfo from 'react-native-sensitive-info';
 
 import FBStoreActions from '../Redux/FBStore';
 import styles from './Styles/LaunchScreenStyles';

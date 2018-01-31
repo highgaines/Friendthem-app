@@ -98,11 +98,14 @@ export const login = (userObj) => {
   }
 }
 
-export const loginByFacebook = (userObj) => {
+
+
+export const loginByFacebook = (userObj, accessToken = null) => {
   const body = { ...userObj }
 
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
+  accessToken ? headers.append('Authorization', `Bearer ${accessToken}`) : null
 
   const init= {
     method: 'POST',

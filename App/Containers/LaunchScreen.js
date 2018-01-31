@@ -58,8 +58,9 @@ class LaunchScreen extends Component {
   componentWillUpdate = nextProps => {
     const { fbAuthToken } = this.props
 
-    if (!fbAuthToken && nextProps.fbAuthToken) {
+    if (!fbAuthToken && nextProps.fbAuthToken && this.state.loading) {
       this.getFbProfile(nextProps.fbAuthToken)
+      this.handleLoadingComplete()
     }
   }
 
@@ -86,7 +87,7 @@ class LaunchScreen extends Component {
         })
       }
     }
-
+    console.log('hit from launchScreen')
     loginByFacebook({
       client_id: envConfig.Development.devClientId,
       client_secret: envConfig.Development.devClientSecret,
