@@ -78,7 +78,7 @@ export const selectUser = (user) => {
 }
 
 export const fetchConnectivityData = (accessToken) => {
-  console.log('here')
+
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${accessToken}`)

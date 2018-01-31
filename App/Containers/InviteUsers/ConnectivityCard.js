@@ -23,10 +23,6 @@ import styles from '../Styles/UserCardStyles';
 class ConnectivityCard extends Component {
   constructor() {
     super()
-
-    this.state = {
-
-    }
   }
 
   handlePress = () => {
