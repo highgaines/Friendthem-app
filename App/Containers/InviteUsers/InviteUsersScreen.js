@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, ScrollView } from 'react-native';
-import { connect } from 'react-redux';
-import Reactotron from 'reactotron-react-native';
 
 // Redux
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import InviteUsersStoreActions, { selectUser, fetchConnectivityData } from '../../Redux/InviteUsersStore';
 
 // Libraries
+import Reactotron from 'reactotron-react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 // Components
