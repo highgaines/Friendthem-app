@@ -44,6 +44,8 @@ const images = {
   geolocationSVG: require('../Images/permission-geo.svg'),
   notificationsSVG: require('../Images/notifications-svg.svg'),
   noPicSVG: require('../Images/nopic-svg.svg'),
+  lightbulbSVG: require('../Images/Icons/lightbulb.svg'),
+  lightbulbPNG: require('../Images/Icons/lightbulb.png'),
 
   // Navbar Icons
   profileIcon: require('../Images/Icons/nav-profile-icon.svg'),

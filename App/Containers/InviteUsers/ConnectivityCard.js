@@ -67,7 +67,7 @@ class ConnectivityCard extends Component {
               <Text
                 style={{ fontFamily: 'Montserrat', fontSize: 13}}
                 numberOfLines={1}>
-                {friendData.name}
+                {friendData.first_name}
               </Text>
             </View>
             <View style={styles.pieContainer} animation="slideInUp">

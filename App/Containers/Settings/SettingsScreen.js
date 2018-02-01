@@ -44,6 +44,10 @@ class SettingsScreen extends Component {
     Communications.email(['customerservice@friendthem.com'], null, null, 'Report A Problem', 'Please explain your problem here...')
   }
 
+  handleSuggestion = () => {
+    Communications.email(['suggestions@friendthem.com'], null, null, 'Offer A Suggestion', 'Please give us some detailed feedback on how we can make our app better here...')
+  }
+
   toggleSilenceNotification = () => {
     const { silenceSwitch } = this.state
     this.setState({ silenceSwitch: !silenceSwitch})//, () => silenceNotifications( !silenceSwitch ))
@@ -97,6 +101,21 @@ class SettingsScreen extends Component {
               style={styles.rightArrow}
               />
           </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.sectionItem}
+            onPress={this.handleSuggestion}
+            >
+            <Image
+              source={Images.lightbulbPNG}
+            />
+            <Text style={styles.sectionItemText}>
+              Offer a Suggestion
+            </Text>
+            <Image
+              source={Images.rightArrow}
+              style={styles.rightArrow}
+            />
+          </TouchableOpacity>
           <TouchableOpacity style={styles.sectionItem}>
             <Image
               source={Images.file}
@@ -109,11 +128,6 @@ class SettingsScreen extends Component {
               style={styles.rightArrow}
               />
           </TouchableOpacity>
-          <View style={styles.sectionTitle}>
-            <Text style={styles.sectionTitleText}>
-              Application Settings
-            </Text>
-          </View>
           <TouchableOpacity style={styles.sectionItem}>
             <Image
               source={Images.inclinedBell}
@@ -141,18 +155,6 @@ class SettingsScreen extends Component {
               value={ghostSwitch}
               style={styles.ghostSwitchStyle}
             />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.sectionItem}>
-            <Image
-              source={Images.privacy}
-              />
-            <Text style={styles.sectionItemText}>
-              Account Privacy
-            </Text>
-            <Image
-              source={Images.rightArrow}
-              style={styles.rightArrow}
-              />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.logOutButton}

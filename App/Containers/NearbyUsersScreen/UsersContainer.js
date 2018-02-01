@@ -18,7 +18,7 @@ export default function UsersContainer(props) {
   <UserCard
     key={i}
     picture={userObj.picture}
-    name={userObj.name}
+    name={userObj.first_name}
     fbUrl={userObj.fbUrl}
     setFriendInfo={() => viewFriendProfile(userObj)}
   /> )

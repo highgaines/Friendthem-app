@@ -47,7 +47,7 @@ class FriendProfileScreen extends Component {
     if (apiAccessToken && loggedIn) {
       getUserTokens(apiAccessToken)
     } else {
-      navigation.navigate('LaunchScreen')
+      // navigation.navigate('LaunchScreen')
     }
   }
 
