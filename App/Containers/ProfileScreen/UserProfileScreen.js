@@ -40,14 +40,14 @@ class UserProfileScreen extends Component {
     super(props)
 
     this.state = {
-      socialNetworkTab: true,
-      showFriendster: false,
       externalAuth: false,
+      showFriendster: false,
       currentPlatform: null,
+      socialNetworkTab: true,
+      snapHandleModalOpen: false,
       appState: AppState.currentState,
       socialMediaData: SOCIAL_MEDIA_DATA,
       syncedCardColors: SYNCED_CARD_COLORS,
-      snapHandleModalOpen: false
     }
   }
 
@@ -210,6 +210,7 @@ class UserProfileScreen extends Component {
         {  socialNetworkTab ?
             <SocialMediaCardContainer
               fromFriendProfile={false}
+              platformSelected={false}
               snapchatCallback={this.toggleSnapchatModal}
               onPressCallback={(platform) => this.authenticateSocialMedia(platform)}
               platformSynced={((socialMedia) => this.socialPlatformPresent(socialMedia))}

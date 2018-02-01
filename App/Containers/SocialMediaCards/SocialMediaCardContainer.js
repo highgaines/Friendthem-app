@@ -77,20 +77,22 @@ class SocialMediaCardContainer extends Component {
       friendPlatforms,
       platformSelected
     } = this.props
-    const { socialMediaData, syncedCardColors, selectedSocialMedia } = this.state
+    const {
+      socialMediaData,
+      syncedCardColors,
+      selectedSocialMedia
+    } = this.state
 
     return (
       <ScrollView contentContainerStyle={styles.socialAccountContainer}>
       {
         Object.keys(socialMediaData).map((socialPlatform, idx) => {
           const isYoutube = socialPlatform === 'youtube'
-          const isSnapchat = socialPlatform === 'snapchat'
-          const isFacebook = socialPlatform === 'facebook'
           const currentPlatform = platformSynced(isYoutube ? 'google-oauth2' : socialPlatform)
+          const isSelected = platformSelected(socialPlatform)
+          const isSynced = !!currentPlatform
           const capitalizeName = (name) => name[0].toUpperCase() + name.slice(1)
           const userName = currentPlatform && false ? currentPlatform['access_token'][socialMediaData[socialPlatform]['userNamePath']] : null
-          const isSynced = !!currentPlatform
-          const isSelected = platformSelected(socialPlatform)
           const friendPlatfromPresent = fromFriendProfile ?
             friendPlatforms.some(socialElem =>
               socialElem.provider === socialPlatform

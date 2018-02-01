@@ -7,8 +7,9 @@ const { Types, Creators} = createActions({
   socialMediaConnectRequest: null,
   socialMediaConnectSuccess: null,
   socialMediaConnectFailure: null,
+  togglePlatform: ['platformName'],
+  setManualPlatforms: ['platformArr'],
   setSuperConnectPlatforms: ['platformList'],
-  togglePlatform: ['platformName']
 })
 
 export const SuperConnectTypes = Types
@@ -16,7 +17,8 @@ export default Creators
 
 /* --------- Initial State --------- */
 export const INITIAL_STATE = Immutable({
-  selectedSocialMedia: []
+  selectedSocialMedia: [],
+  manualPlatforms: []
 })
 
 export const superConnectPlatform = (platformName, apiAccessToken, friendId) => {
@@ -26,7 +28,7 @@ export const superConnectPlatform = (platformName, apiAccessToken, friendId) => 
 
   const body = {
     provider: platformName,
-    user_2: 2
+    user_2: friendId
   }
 
   const init = {
@@ -86,8 +88,16 @@ const handleSocialMediaConnectFailure = (state, action) => {
   return state
 }
 
+const handleSetManualPlatforms = (state, action) => {
+  return {
+    ...state,
+    manualPlatforms: action.platformArr
+  }
+}
+
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.TOGGLE_PLATFORM]: handleTogglePlatform,
+  [Types.SET_MANUAL_PLATFORMS]: handleSetManualPlatforms,
   [Types.SET_SUPER_CONNECT_PLATFORMS]: handleSetSelectedSocialMedia,
   [Types.SOCIAL_MEDIA_CONNECT_REQUEST]: handleSocialMediaConnectRequest,
   [Types.SOCIAL_MEDIA_CONNECT_SUCCESS]: handleSocialMediaConnectSuccess,

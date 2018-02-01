@@ -111,7 +111,7 @@ class FriendProfileScreen extends Component {
   render() {
     const { friendInfo, superConnect, navigation, setSuperConnectPlatforms } = this.props;
     const { showModal, socialMediaData, syncedCardColors, selectedSocialMedia } = this.state
-    console.log(selectedSocialMedia)
+
     return (
         <View>
           <LinearGradient

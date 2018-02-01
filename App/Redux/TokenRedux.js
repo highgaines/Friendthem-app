@@ -50,7 +50,6 @@ const handleUserLogout = (state, action) => {
 }
 
 const handleSocialMediaSuccess = (state, action) => {
-  console.log(action.data.redirect_url)
   return {
     ...state,
     authRedirectUrl: action.data.redirect_url

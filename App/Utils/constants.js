@@ -27,3 +27,8 @@ export const SOCIAL_MEDIA_DATA = {
     deepLinkUrl: 'snapchat://'
   }
 }
+
+export const MANUAL_CONNECT_PLATFORMS = [
+  'facebook',
+  'snapchat'
+]

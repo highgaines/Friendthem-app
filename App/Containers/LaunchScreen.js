@@ -87,7 +87,7 @@ class LaunchScreen extends Component {
         })
       }
     }
-    console.log('hit from launchScreen')
+
     loginByFacebook({
       client_id: envConfig.Development.devClientId,
       client_secret: envConfig.Development.devClientSecret,

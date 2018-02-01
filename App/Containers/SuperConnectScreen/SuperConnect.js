@@ -1,29 +1,43 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Image, View, TouchableOpacity, Button, AppState } from 'react-native'
+import { ScrollView, Text, Image, View, TouchableOpacity, Button, AppState, Linking } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import FBSDK, { AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk'
 import LinearGradient from 'react-native-linear-gradient'
 import { SocialIcon } from 'react-native-elements'
+
 import ConnectBar from './ConnectBar'
-import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer';
 import ButtonsContainer from './ButtonsContainer'
-import FBSDK, { AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk'
+import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer';
 import SuperConnectActions, { superConnectPlatform } from '../../Redux/SuperConnectStore'
+import { MANUAL_CONNECT_PLATFORMS } from '../../Utils/constants'
 
 class SuperConnect extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      appState: AppState.currentState
+      appState: AppState.currentState,
+      manualPlatforms: MANUAL_CONNECT_PLATFORMS,
+      userInputRequiredPlatforms: []
     }
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     AppState.addEventListener('change', this._handleAppStateChange);
   }
 
-  componentWillUnmount() {
+  componentWillUpdate = nextProps => {
+    const { manualPlatforms, friendInfo } = this.props
+
+    if (!manualPlatforms.length && nextProps.manualPlatforms.length) {
+      if (manualPlatforms.includes('facebook')) {
+        debugger
+      }
+    }
+  }
+
+  componentWillUnmount = () => {
     AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
@@ -51,17 +65,23 @@ class SuperConnect extends Component {
   }
 
   superConnectPromiseLoop = () => {
-    const { selectedSocialMedia, friendInfo, superConnectPlatform, apiAccessToken } = this.props
+    const { selectedSocialMedia, friendInfo, superConnectPlatform, apiAccessToken, setManualPlatforms } = this.props
+    const { userInputRequiredPlatforms, manualPlatforms } = this.state
 
     for (let i = 0; i < selectedSocialMedia.length; i++) {
-      superConnectPlatform(selectedSocialMedia[i], apiAccessToken, friendInfo.id).then(resp => {
-        if (resp) {
-          return true
-        } else {
-          return false
-        }
-      })
+      if (manualPlatforms.includes(selectedSocialMedia[i])) {
+        userInputRequiredPlatforms.push(selectedSocialMedia[i])
+      } else {
+          superConnectPlatform(selectedSocialMedia[i], apiAccessToken, friendInfo.id).then(resp => {
+            if (resp) {
+              return true
+            } else {
+              return false
+            }
+        })
+      }
     }
+    setManualPlatforms(userInputRequiredPlatforms)
   }
 
   socialPlatformPresent = (provider) => {
@@ -109,14 +129,17 @@ const mapStateToProps = state => ({
   friendInfo: state.friendStore.friendData,
   fbAuthToken: state.fbStore.fbAccessToken,
   apiAccessToken: state.authStore.accessToken,
+  manualPlatforms: state.superConnect.manualPlatforms,
   selectedSocialMedia: state.superConnect.selectedSocialMedia
 })
 
 const mapDispatchToProps = dispatch => {
-  const { togglePlatform } = SuperConnectActions
+  const { togglePlatform, setManualPlatforms } = SuperConnectActions
+
   return {
     ...bindActionCreators({
       togglePlatform,
+      setManualPlatforms,
       superConnectPlatform
     }, dispatch)
   }
