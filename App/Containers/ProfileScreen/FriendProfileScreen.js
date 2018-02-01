@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity } from 'react-native'
+import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity, AppState } from 'react-native'
 
 // Libraries
 import LinearGradient from 'react-native-linear-gradient';
@@ -12,6 +12,7 @@ import Communications from 'react-native-communications';
 // Redux
 import FBStoreActions from '../../Redux/FBStore';
 import SuperConnectActions from '../../Redux/SuperConnectStore'
+import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
 
 // Components
 import Navbar from '../Navbar/Navbar';
@@ -40,6 +41,22 @@ class FriendProfileScreen extends Component {
     }
   }
 
+  componentWillMount = () => {
+    const { apiAccessToken, navigation, getUserId, loggedIn, getUserTokens } = this.props
+    AppState.addEventListener('change', this._handleAppStateChange);
+
+    if (apiAccessToken && loggedIn) {
+      getUserTokens(apiAccessToken)
+    } else {
+      navigation.navigate('LaunchScreen')
+    }
+  }
+
+  componentWillUnmount = () => {
+    this.setState({ showFriendster: false })
+    AppState.removeEventListener('change', this._handleAppStateChange);
+  }
+
   renderPlatformContainer = platform => {
       return <FeedContainer platform={platform} />
   }
@@ -60,6 +77,19 @@ class FriendProfileScreen extends Component {
   handleCall = () => {
     // call action here - needs to be hooked up to friend/user's actual phone number if they have one, otherwise this action will trigger alert?
     Communications.phonecall('3472917739', true)
+  }
+
+  socialPlatformPresent = (provider) => {
+    const { platforms, userInfo } = this.props
+
+    switch (provider) {
+      case 'snapchat':
+        return userInfo && userInfo.snapHandle
+      case 'youtube':
+        return platforms.find(platformObj => platformObj.provider === 'google-oauth2')
+      default:
+        return platforms.find(platformObj => platformObj.provider === provider)
+    }
   }
 
   render() {
@@ -96,7 +126,7 @@ class FriendProfileScreen extends Component {
               {`${friendInfo.name}`}
               </Text>
               <Text style={styles.interestsText}>
-                  {friendInfo.interests.join(' | ')}
+                  {friendInfo.hobbies ? friendInfo.hobbies.join(' | ') : ''}
               </Text>
               <View style={{ flexDirection: 'row', marginTop: 7, justifyContent: 'space-around'}}>
                 <Icon
@@ -126,7 +156,7 @@ class FriendProfileScreen extends Component {
                   selectedSocialMedia: [...selectedSocialMedia, platform]
                 })
               }
-              platformSelected={socialMedia => selectedSocialMedia.includes(socialMedia)}
+              platformSelected={socialMedia => this.socialPlatformPresent(socialMedia)}
             />
             <SuperConnectBar
               setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
@@ -149,7 +179,12 @@ class FriendProfileScreen extends Component {
 }
 
 const mapStateToProps = state => ({
+  userInfo: state.userStore.userData,
   friendInfo: state.friendStore.friendData,
+  platforms: state.tokenStore.platforms,
+  fbAuthToken: state.fbStore.fbAccessToken,
+  apiAccessToken: state.authStore.accessToken,
+  loggedIn: state.authStore.loggedIn,
   platforms: state.tokenStore.platforms,
 })
 
@@ -160,6 +195,7 @@ const mapDispatchToProps = dispatch => {
     ...bindActionCreators({
       fbLogoutComplete: logoutComplete,
       setSuperConnectPlatforms,
+      getUserTokens,
     }, dispatch)
   }
 }
