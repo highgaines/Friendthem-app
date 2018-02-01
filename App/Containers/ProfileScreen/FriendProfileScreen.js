@@ -107,7 +107,7 @@ class FriendProfileScreen extends Component {
   }
 
   render() {
-    const { friendInfo, superConnect, navigation, setSuperConnectPlatforms } = this.props;
+    const { friendInfo, navigation, setSuperConnectPlatforms } = this.props;
     const { showModal, socialMediaData, syncedCardColors, selectedSocialMedia } = this.state
 
     return (
@@ -127,7 +127,7 @@ class FriendProfileScreen extends Component {
                 </TouchableOpacity>
                 <Image
                   style={styles.profileImage}
-                  source={{uri: friendInfo.image}} />
+                  source={{uri: friendInfo.picture}} />
                   <TouchableOpacity onPress={this.handleEmail}>
                     <Icon
                       name='md-mail'
@@ -137,10 +137,10 @@ class FriendProfileScreen extends Component {
                   </TouchableOpacity>
               </View>
               <Text style={styles.profileSubtext}>
-              {`${friendInfo.name}`}
+                {`${friendInfo.first_name} ${friendInfo.last_name}`}
               </Text>
               <Text style={styles.interestsText}>
-                  {friendInfo.hobbies ? friendInfo.hobbies.join(' | ') : ''}
+                  {['Crypto', 'Kiting' ,'Gaming'].join(' | ')}
               </Text>
               <View style={{ flexDirection: 'row', marginTop: 7, justifyContent: 'space-around'}}>
                 <Icon
@@ -160,7 +160,7 @@ class FriendProfileScreen extends Component {
                 handlePlatformChange={this.handlePlatformChange}
                 handleBackToProfile={this.handleBackToProfile}
                 selected={this.state.platform}
-                profilePic={friendInfo.image}
+                profilePic={friendInfo.picture}
               />
             </View>
             <SocialMediaCardContainer
@@ -172,7 +172,7 @@ class FriendProfileScreen extends Component {
             />
             <SuperConnectBar
               setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
-              superConnect={superConnect}/>
+              superConnect={() => navigation.navigate('SuperConnectScreen')}/>
             <View style={styles.superConnectBarContainer}>
             </View>
             <View>
@@ -203,6 +203,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   const { logoutComplete } = FBStoreActions
   const { setSuperConnectPlatforms } = SuperConnectActions
+
   return {
     ...bindActionCreators({
       fbLogoutComplete: logoutComplete,
