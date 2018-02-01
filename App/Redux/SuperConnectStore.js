@@ -26,7 +26,7 @@ export const superConnectPlatform = (platformName, apiAccessToken, friendId) => 
 
   const body = {
     provider: platformName,
-    user_2: 19
+    user_2: 2
   }
 
   const init = {

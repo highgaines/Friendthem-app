@@ -19,9 +19,9 @@ export default class SocialMediaCard extends Component {
   }
 
   renderIcon = () => {
-    const { platformName, selected } = this.props;
+    const { platformName, synced } = this.props;
 
-    return selected ? (
+    return synced ? (
       <Icon
         name={platformName.toLowerCase()}
         type='font-awesome'
@@ -43,11 +43,12 @@ export default class SocialMediaCard extends Component {
       platformName,
       userName,
       inverted,
+      synced,
+      selected,
       socialAuth,
       syncedBGColor
     }  = this.props
-    const { selected } = this.props;
-    const cardStyle = selected ?
+    const cardStyle = synced ?
       [styles.cardSelected, { backgroundColor: syncedBGColor }]
       :
       styles.cardUnselected
@@ -62,7 +63,7 @@ export default class SocialMediaCard extends Component {
           <Icon
             name='check-circle'
             type='font-awesome'
-            color={'#3C5996'}
+            color={'green'}
             containerStyle={styles.checkIcon} /> : null
         }
         <View style={styles.socialMediaImage}>
@@ -71,13 +72,13 @@ export default class SocialMediaCard extends Component {
         <View style={styles.socialMediaText}>
 
           <Text
-            style={selected ? styles.platformName : styles.unsyncedPlatformName }
+            style={synced ? styles.platformName : styles.unsyncedPlatformName }
           >
             {platformName}
           </Text>
 
           <Text
-            style={selected ? styles.userName : styles.unsyncedUserName }>
+            style={synced ? styles.userName : styles.unsyncedUserName }>
             {userName || 'Sync Account'}
           </Text>
         </View>

@@ -212,7 +212,7 @@ class UserProfileScreen extends Component {
               fromFriendProfile={false}
               snapchatCallback={this.toggleSnapchatModal}
               onPressCallback={(platform) => this.authenticateSocialMedia(platform)}
-              platformSelected={((socialMedia) => this.socialPlatformPresent(socialMedia))}
+              platformSynced={((socialMedia) => this.socialPlatformPresent(socialMedia))}
             />
           :
             <ScrollView style={{ height: 366}}>

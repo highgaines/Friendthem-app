@@ -92,10 +92,26 @@ class FriendProfileScreen extends Component {
     }
   }
 
+  toggleSocialMediaSelection = (platformName) => {
+    const { selectedSocialMedia } = this.state
+    const platformIndex = selectedSocialMedia.findIndex(socialMedia => socialMedia === platformName)
+
+    if (platformIndex < 0) {
+      this.setState({ selectedSocialMedia: [...selectedSocialMedia, platformName] })
+    } else {
+      const updatedSocialMediaList = [
+        ...selectedSocialMedia.slice(0, platformIndex),
+        ...selectedSocialMedia.slice(platformIndex + 1)
+      ]
+
+      this.setState({ selectedSocialMedia: updatedSocialMediaList })
+    }
+  }
+
   render() {
     const { friendInfo, superConnect, navigation, setSuperConnectPlatforms } = this.props;
     const { showModal, socialMediaData, syncedCardColors, selectedSocialMedia } = this.state
-
+    console.log(selectedSocialMedia)
     return (
         <View>
           <LinearGradient
@@ -151,12 +167,10 @@ class FriendProfileScreen extends Component {
             </View>
             <SocialMediaCardContainer
               fromFriendProfile={true}
-              onPressCallback={(platform) =>
-                this.setState({
-                  selectedSocialMedia: [...selectedSocialMedia, platform]
-                })
-              }
-              platformSelected={socialMedia => this.socialPlatformPresent(socialMedia)}
+              friendPlatforms={friendInfo.social_profiles}
+              onPressCallback={(platform) => this.toggleSocialMediaSelection(platform)}
+              platformSynced={socialMedia => this.socialPlatformPresent(socialMedia)}
+              platformSelected={socialMedia => selectedSocialMedia.includes(socialMedia)}
             />
             <SuperConnectBar
               setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}

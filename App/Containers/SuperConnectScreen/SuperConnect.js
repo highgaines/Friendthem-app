@@ -30,14 +30,14 @@ class SuperConnect extends Component {
   _handleAppStateChange = (nextAppState) => {
     if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
       const friendListRequest = new GraphRequest(
-        `/${this.props.userData.id}/friends/${this.props.friendData.id}`,
+        `/${this.props.userData.id}/friends/${this.props.friendInfo.id}`,
         {
           accessToken: this.props.fbAuthToken,
         },
         (error, result) => {
           if(result && !error) {
             this.props.navigation.navigate('CongratulatoryScreen', {
-              friendData: this.props.friendData,
+              friendInfo: this.props.friendInfo,
               navigation: this.props.navigation
             })
           } else {
@@ -51,10 +51,10 @@ class SuperConnect extends Component {
   }
 
   superConnectPromiseLoop = () => {
-    const { selectedSocialMedia, friendData, superConnectPlatform, apiAccessToken } = this.props
+    const { selectedSocialMedia, friendInfo, superConnectPlatform, apiAccessToken } = this.props
 
     for (let i = 0; i < selectedSocialMedia.length; i++) {
-      superConnectPlatform(selectedSocialMedia[i], apiAccessToken, friendData.id).then(resp => {
+      superConnectPlatform(selectedSocialMedia[i], apiAccessToken, friendInfo.id).then(resp => {
         if (resp) {
           return true
         } else {
@@ -64,30 +64,39 @@ class SuperConnect extends Component {
     }
   }
 
-  render() {
-    const { userData, friendData, navigation, selectedSocialMedia, togglePlatform } = this.props
+  socialPlatformPresent = (provider) => {
+    const { platforms, userInfo } = this.props
 
-    const platforms = [
-      {
-        platformName: 'facebook',
-        userName: 'theOGwolverine',
-        selected: true
-      }
-    ]
+    switch (provider) {
+      case 'snapchat':
+        return userInfo && userInfo.snapHandle
+      case 'youtube':
+        return platforms.find(platformObj => platformObj.provider === 'google-oauth2')
+      default:
+        return platforms.find(platformObj => platformObj.provider === provider)
+    }
+  }
+
+  render() {
+    const { userData, friendInfo, navigation, selectedSocialMedia, togglePlatform, platforms } = this.props
+
     return(
       <View style={{ flex: 1 }}>
-        <ConnectBar userData={userData} friendData={friendData}/>
+        <ConnectBar userData={userData} friendInfo={friendInfo}/>
         <SocialMediaCardContainer
           fromFriendProfile={true}
+          friendPlatforms={friendInfo.social_profiles}
           onPressCallback={(platform) => togglePlatform(platform)}
-          platformSelected={socialMedia => selectedSocialMedia.includes(socialMedia)}
-        />
+          platformSynced={platform => this.socialPlatformPresent(platform)}
+          platformSelected={socialMedia =>
+            selectedSocialMedia.includes(socialMedia)
+          } />
         <View style={{ alignItems: 'center' }}>
           <ButtonsContainer
             superConnectPromiseLoop={this.superConnectPromiseLoop}
             navigation={navigation}
-            facebookUrl={friendData.fbUrl}
-            friendName={friendData.name} />
+            facebookUrl={friendInfo.fbUrl}
+            friendName={friendInfo.name} />
         </View>
       </View>
     )
@@ -96,7 +105,8 @@ class SuperConnect extends Component {
 
 const mapStateToProps = state => ({
   userData: state.userStore.userData,
-  friendData: state.friendStore.friendData,
+  platforms: state.tokenStore.platforms,
+  friendInfo: state.friendStore.friendData,
   fbAuthToken: state.fbStore.fbAccessToken,
   apiAccessToken: state.authStore.accessToken,
   selectedSocialMedia: state.superConnect.selectedSocialMedia

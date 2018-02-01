@@ -72,8 +72,10 @@ class SocialMediaCardContainer extends Component {
       platforms,
       onPressCallback,
       snapchatCallback,
-      platformSelected,
-      fromFriendProfile
+      platformSynced,
+      fromFriendProfile,
+      friendPlatforms,
+      platformSelected
     } = this.props
     const { socialMediaData, syncedCardColors, selectedSocialMedia } = this.state
 
@@ -84,22 +86,32 @@ class SocialMediaCardContainer extends Component {
           const isYoutube = socialPlatform === 'youtube'
           const isSnapchat = socialPlatform === 'snapchat'
           const isFacebook = socialPlatform === 'facebook'
-          const currentPlatform = platformSelected(isYoutube ? 'google-oauth2' : socialPlatform)
+          const currentPlatform = platformSynced(isYoutube ? 'google-oauth2' : socialPlatform)
           const capitalizeName = (name) => name[0].toUpperCase() + name.slice(1)
           const userName = currentPlatform && false ? currentPlatform['access_token'][socialMediaData[socialPlatform]['userNamePath']] : null
           const isSynced = !!currentPlatform
+          const isSelected = platformSelected(socialPlatform)
+          const friendPlatfromPresent = fromFriendProfile ?
+            friendPlatforms.some(socialElem =>
+              socialElem.provider === socialPlatform
+            ) : true
 
-          return (
-            <SocialMediaCard
+          if (friendPlatfromPresent) {
+            return (
+              <SocialMediaCard
               key={idx}
               platformName={capitalizeName(socialPlatform)}
-              selected={isSynced}
+              synced={isSynced}
               socialAuth={this.determineSocialAuth(socialPlatform)}
               platformAuth={isYoutube ? 'google-oauth2' : socialPlatform}
               userName={userName}
               syncedBGColor={syncedCardColors[socialPlatform]}
-            />
-          )
+              selected={isSelected}
+              />
+            )
+          } else {
+            return null
+          }
         })
       }
       </ScrollView>
