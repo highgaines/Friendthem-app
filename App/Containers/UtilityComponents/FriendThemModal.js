@@ -9,6 +9,7 @@ import Modal from 'react-native-modal'
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import UserStoreActions, { updateSnapInfo } from '../../Redux/UserStore'
 
 // Styles
 import styles from '../Styles/FriendThemModalStyles'
@@ -23,9 +24,9 @@ class FriendThemModal extends Component {
   }
 
   submitSnapHandle = () => {
-    const { submitText, toggleSnapchatModal } = this.props
+    const { submitText, toggleSnapchatModal, accessToken, updateSnapInfo } = this.props
 
-    submitText(this.state.snapHandle)
+    updateSnapInfo('snapchat', this.state.snapHandle, accessToken)
     toggleSnapchatModal()
   }
 
@@ -76,7 +77,16 @@ class FriendThemModal extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  userId: state.userStore.userId
+  userId: state.userStore.userId,
+  accessToken: state.authStore.accessToken
 })
 
-export default connect(mapStateToProps)(FriendThemModal)
+const mapDispatchToProps = dispatch => {
+  return {
+    ...bindActionCreators({
+      updateSnapInfo
+    }, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FriendThemModal)

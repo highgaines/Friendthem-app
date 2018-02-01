@@ -19,7 +19,7 @@ import PersonalInfoTab from './PersonalInfoTab'
 import FriendThemModal from '../UtilityComponents/FriendThemModal'
 
 // Redux
-import UserStoreActions, { getUserId, updateInfo } from '../../Redux/UserStore'
+import UserStoreActions, { getUserId, updateInfo, updateSnapInfo } from '../../Redux/UserStore'
 import AuthStoreActions, { socialMediaAuth } from '../../Redux/AuthStore'
 import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
 
@@ -184,7 +184,7 @@ class UserProfileScreen extends Component {
             <FriendThemModal
               modalVisible={this.state.snapHandleModalOpen}
               toggleSnapchatModal={this.toggleSnapchatModal}
-              submitText={(inputValue) => updateInfo('snapHandle', inputValue)} />
+              submitText={(inputValue, apiAccessToken) => updateSnapInfo('snapchat', inputValue, apiAccessToken)} />
             <View style={styles.tabSelectionContainer}>
               <TouchableOpacity
                 onPress={() => this.setState({ socialNetworkTab: true })}
@@ -252,6 +252,7 @@ const mapDispatchToProps = dispatch => {
       getUserId,
       getUserTokens,
       updateInfo,
+      updateSnapInfo,
       socialMediaAuth,
     }, dispatch)
   }

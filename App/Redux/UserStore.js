@@ -16,7 +16,10 @@ const { Types, Creators } = createActions({
   updateInfoFailure: null,
   updateUserPositionRequest: null,
   updateUserPositionSuccess: null,
-  updateUserPositionFailure: null
+  updateUserPositionFailure: null,
+  updateSnapRequest: null,
+  updateSnapSuccess: null,
+  updateSnapFailure: null
 })
 
 export const UserTypes = Types
@@ -127,6 +130,33 @@ export const updateInfo = (field, content) => {
   return { type: Types.UPDATE_INFO, payload: { field, content } }
 }
 
+export const updateSnapInfo = (provider, username, accessToken) => {
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('Authorization', `Bearer ${accessToken}`)
+
+  const body = {
+    provider: provider,
+    username: username
+  }
+
+  const init = {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(body)
+  }
+
+  return {
+    types: [
+      Types.UPDATE_SNAP_REQUEST,
+      Types.UPDATE_SNAP_SUCCESS,
+      Types.UPDATE_SNAP_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi('social_profile/', init, dispatch)
+  }
+
+}
 /* ------------- Reducers ------------- */
 const handleFbUserInfoSuccess = (state = INITIAL_STATE, action) => {
   return {
@@ -198,6 +228,24 @@ const handleUpdateUserPositionFailure = (state, action) => {
   return state
 }
 
+const handleUpdateSnapRequest = (state, action) => {
+  return state
+}
+
+const handleUpdateSnapSuccess = (state, action) => {
+  return {
+    ...state,
+    userData: {
+      ...userData,
+      snapHandle: action.data.username
+    }
+  }
+}
+
+const handleUpdateSnapFailure = (state, action) => {
+  return state
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -211,5 +259,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.UPDATE_INFO_FAILURE]: handleUpdateUserFailure,
   [Types.UPDATE_USER_POSITION_REQUEST]: handleUpdateUserPositionRequest,
   [Types.UPDATE_USER_POSITION_SUCCESS]: handleUpdateUserPositionSuccess,
-  [Types.UPDATE_USER_POSITION_FAILURE]: handleUpdateUserPositionFailure
+  [Types.UPDATE_USER_POSITION_FAILURE]: handleUpdateUserPositionFailure,
+  [Types.UPDATE_SNAP_REQUEST]: handleUpdateSnapRequest,
+  [Types.UPDATE_SNAP_SUCCESS]: handleUpdateSnapSuccess,
+  [Types.UPDATE_SNAP_FAILURE]: handleUpdateSnapFailure
 })
