@@ -351,7 +351,7 @@ const handleUpdateSnapSuccess = (state, action) => {
   return {
     ...state,
     userData: {
-      ...userData,
+      ...state.userData,
       snapHandle: action.data.username
     }
   }
