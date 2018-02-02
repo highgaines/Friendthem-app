@@ -13,7 +13,7 @@ const { Types, Creators } = createActions({
     connectivityInfoSuccess: null
 })
 
-export const InviteUserS = Types
+export const InviteUsers = Types
 export default Creators
 
 /* ------------- Initial State ------------- */
