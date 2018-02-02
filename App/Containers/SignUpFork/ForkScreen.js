@@ -71,8 +71,8 @@ class ForkScreen extends Component {
 
   render() {
     const { navigate, userInfo } = this.props
-    const { url } = userInfo.picture.data
-    const imageSource = url ? url : Images.noPicSVG
+    const { picture } = userInfo
+    const imageSource = picture ? picture : Images.noPicSVG
 
     return (
         <View style={styles.mainContainer}>

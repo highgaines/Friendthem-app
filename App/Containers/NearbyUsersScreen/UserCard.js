@@ -6,13 +6,13 @@ import { Images } from '../../Themes';
 import styles from '../Styles/UserCardStyles';
 
 export default function UserCard(props) {
-  const { image, name, fbUrl, setFriendInfo } = props
+  const { picture, name, fbUrl, setFriendInfo } = props
 
   return(
     <TouchableOpacity
       style={styles.card}
       onPress={setFriendInfo}>
-      <Image style={styles.cardImage} source={{uri: image}} />
+      <Image style={styles.cardImage} source={{uri: picture}} />
       <View style={styles.cardText}>
         <Text
           style={{ fontFamily: 'Montserrat', fontSize: 13 }}

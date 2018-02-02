@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, ScrollView } from 'react-native';
-import { connect } from 'react-redux';
-import Reactotron from 'reactotron-react-native';
 
 // Redux
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import InviteUsersStoreActions, { selectUser, fetchConnectivityData } from '../../Redux/InviteUsersStore';
 
 // Libraries
+import Reactotron from 'reactotron-react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 // Components
@@ -41,19 +41,24 @@ class InviteUsersScreen extends Component {
   }
 
   renderConnectivityCards = () => {
-    const { friends } = this.props
+    const { friends, navigation } = this.props
+
     return friends.map( friend => {
-      return <ConnectivityCard
-              name={friend.first_name ? friend.first_name : "BOB"}
-              image={`${friend.picture}`}
-              conPct={friend.connection_percentage}
-            />
+      return(
+        <ConnectivityCard
+          name={friend.first_name ? friend.first_name : "BOB"}
+          image={`${friend.picture}`}
+          friendData={friend}
+          conPct={friend.connection_percentage}
+          navigation={navigation}
+        />
+      )
     })
   }
 
   render() {
     const { networkTabSelected, showModal } = this.state;
-    const { selectUser, selectedUser, navigation, fetchConnectivityData, accessToken } = this.props
+    const { friends, selectUser, selectedUser, navigation, fetchConnectivityData, accessToken } = this.props
 
     return (
       <View style={[{ flex: 1 }, this.state.showModal ? { opacity: 0.1 } : '']}>
@@ -72,7 +77,7 @@ class InviteUsersScreen extends Component {
           </View>
           <View>
             <Text style={styles.friendCount}>
-              {networkTabSelected ? '3 friends' : '7 friends' }
+              {networkTabSelected ? `${friends.length} friends` : `${friends.length} friends` }
             </Text>
           </View>
           <View style={styles.tabSelectionContainer}>

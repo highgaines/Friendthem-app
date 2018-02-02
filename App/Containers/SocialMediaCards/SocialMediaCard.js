@@ -7,7 +7,6 @@ import { Icon } from 'react-native-elements';
 
 // Redux
 import { connect } from 'react-redux';
-// import SocialMediaCardRedux from '../Redux/SSMCStore';
 
 // Styles
 import styles from '../Styles/SocialMediaCardStyles';

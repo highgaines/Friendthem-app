@@ -101,14 +101,14 @@ class SocialMediaCardContainer extends Component {
           if (friendPlatfromPresent) {
             return (
               <SocialMediaCard
-              key={idx}
-              platformName={capitalizeName(socialPlatform)}
-              synced={isSynced}
-              socialAuth={this.determineSocialAuth(socialPlatform)}
-              platformAuth={isYoutube ? 'google-oauth2' : socialPlatform}
-              userName={userName}
-              syncedBGColor={syncedCardColors[socialPlatform]}
-              selected={isSelected}
+                key={idx}
+                platformName={capitalizeName(socialPlatform)}
+                synced={isSynced}
+                socialAuth={this.determineSocialAuth(socialPlatform)}
+                platformAuth={isYoutube ? 'google-oauth2' : socialPlatform}
+                userName={userName}
+                syncedBGColor={syncedCardColors[socialPlatform]}
+                selected={isSelected}
               />
             )
           } else {

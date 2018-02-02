@@ -19,7 +19,7 @@ import PersonalInfoTab from './PersonalInfoTab'
 import FriendThemModal from '../UtilityComponents/FriendThemModal'
 
 // Redux
-import UserStoreActions, { getUserId, updateInfo } from '../../Redux/UserStore'
+import UserStoreActions, { getUserId, updateInfo, updateSnapInfo } from '../../Redux/UserStore'
 import AuthStoreActions, { socialMediaAuth } from '../../Redux/AuthStore'
 import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
 
@@ -121,7 +121,7 @@ class UserProfileScreen extends Component {
 
     switch (provider) {
       case 'snapchat':
-        return userInfo && userInfo.snapHandle
+        return userInfo.social_profiles.filter( profile => profile.provider === 'snapchat').length
       case 'youtube':
         return platforms.find(platformObj => platformObj.provider === 'google-oauth2')
       default:
@@ -132,8 +132,8 @@ class UserProfileScreen extends Component {
   determineImage = () => {
     const { userInfo } = this.props
 
-    if (userInfo.picture.data.url) {
-      return {uri: `${userInfo.picture.data.url}`}
+    if (userInfo.picture) {
+      return {uri: `${userInfo.picture}`}
     } else {
       return Images.noPicSVG
     }
@@ -178,13 +178,13 @@ class UserProfileScreen extends Component {
                   source={this.determineImage()} />
               </View>
               <Text style={styles.profileSubtext}>
-              {`${userInfo.name}`}
+              {`${userInfo.first_name} ${userInfo.last_name}`}
               </Text>
             </View>
             <FriendThemModal
               modalVisible={this.state.snapHandleModalOpen}
               toggleSnapchatModal={this.toggleSnapchatModal}
-              submitText={(inputValue) => updateInfo('snapHandle', inputValue)} />
+              submitText={(inputValue, apiAccessToken) => updateSnapInfo('snapchat', inputValue, apiAccessToken)} />
             <View style={styles.tabSelectionContainer}>
               <TouchableOpacity
                 onPress={() => this.setState({ socialNetworkTab: true })}
@@ -252,6 +252,7 @@ const mapDispatchToProps = dispatch => {
       getUserId,
       getUserTokens,
       updateInfo,
+      updateSnapInfo,
       socialMediaAuth,
     }, dispatch)
   }

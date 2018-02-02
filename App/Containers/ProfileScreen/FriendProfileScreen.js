@@ -19,13 +19,14 @@ import Navbar from '../Navbar/Navbar';
 import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer';
 import SuperConnectBar from '../SuperConnectScreen/SuperConnectBar'
 import ScrollWheel from './ScrollWheel';
-import FeedContainer from '../FeedContainer/FeedContainer';
+import FeedContainer from '../SocialFeed/FeedContainer';
+
+// Constants
+import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
 
 // Styles
 import styles from '../Styles/UserProfileStyles';
 
-//constants
-import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
 
 class FriendProfileScreen extends Component {
   constructor(props) {
@@ -127,7 +128,7 @@ class FriendProfileScreen extends Component {
                 </TouchableOpacity>
                 <Image
                   style={styles.profileImage}
-                  source={{uri: friendInfo.image}} />
+                  source={{uri: friendInfo.picture}} />
                   <TouchableOpacity onPress={this.handleEmail}>
                     <Icon
                       name='md-mail'
@@ -137,7 +138,7 @@ class FriendProfileScreen extends Component {
                   </TouchableOpacity>
               </View>
               <Text style={styles.profileSubtext}>
-              {`${friendInfo.name}`}
+              {`${friendInfo.first_name} ${friendInfo.last_name}`}
               </Text>
               <Text style={styles.interestsText}>
                   {friendInfo.hobbies ? friendInfo.hobbies.join(' | ') : ''}
@@ -160,7 +161,7 @@ class FriendProfileScreen extends Component {
                 handlePlatformChange={this.handlePlatformChange}
                 handleBackToProfile={this.handleBackToProfile}
                 selected={this.state.platform}
-                profilePic={friendInfo.image}
+                profilePic={friendInfo.picture}
               />
             </View>
             <SocialMediaCardContainer

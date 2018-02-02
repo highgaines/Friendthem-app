@@ -40,7 +40,7 @@ class EditProfileInfoScreen extends Component {
             </TouchableOpacity>
             <Image
               style={styles.headerImage}
-              source={{uri: `${userInfo.picture.data.url}`}} />
+              source={{uri: `${userInfo.picture}`}} />
             <TouchableOpacity style={[styles.headerButton, {marginLeft: 20}]}>
               <Text style={styles.headerButtonText}>Save</Text>
             </TouchableOpacity>

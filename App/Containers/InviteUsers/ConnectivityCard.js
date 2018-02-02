@@ -13,6 +13,7 @@ import ImageCircle from '../UtilityComponents/ImageCircle';
 // Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import FriendStoreActions from '../../Redux/FriendStore';
 
 // Images
 import { Images } from '../../Themes';
@@ -26,7 +27,10 @@ class ConnectivityCard extends Component {
   }
 
   handlePress = () => {
-    //action here
+    const { setFriendInfo, navigation, friendData } = this.props
+
+    setFriendInfo(friendData)
+    navigation.navigate('FriendProfileScreen')
   }
 
   // will need to finish coding out conditional
@@ -51,8 +55,7 @@ class ConnectivityCard extends Component {
   }
 
   render() {
-    const { image, name, conPct } = this.props
-
+    const { conPct, friendData } = this.props
     const progressColor = this.determineRadialColor(conPct)
 
       return (
@@ -64,7 +67,7 @@ class ConnectivityCard extends Component {
               <Text
                 style={{ fontFamily: 'Montserrat', fontSize: 13}}
                 numberOfLines={1}>
-                {name}
+                {friendData.first_name}
               </Text>
             </View>
             <View style={styles.pieContainer} animation="slideInUp">
@@ -77,7 +80,7 @@ class ConnectivityCard extends Component {
               />
               <ImageCircle
                 size={75}
-                source={image}
+                source={friendData.picture}
                 extraStyles={{ position: 'absolute'}}
               />
             </View>
@@ -104,9 +107,11 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
+  const { setFriendInfo } = FriendStoreActions
+
     return {
       ...bindActionCreators({
-
+        setFriendInfo
       }, dispatch)
     }
 }
