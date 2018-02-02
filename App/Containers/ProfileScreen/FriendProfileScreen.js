@@ -19,7 +19,7 @@ import Navbar from '../Navbar/Navbar';
 import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer';
 import SuperConnectBar from '../SuperConnectScreen/SuperConnectBar'
 import ScrollWheel from './ScrollWheel';
-import FeedContainer from '../FeedContainer/FeedContainer';
+import FeedContainer from '../SocialFeed/FeedContainer';
 
 // Styles
 import styles from '../Styles/UserProfileStyles';

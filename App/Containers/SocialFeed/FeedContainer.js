@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 
 import { View, TouchableOpacity, Text, Button, ScrollView } from 'react-native';
 
+// Components
+import FeedCard from './FeedCard';
+
 // Libraries
 import { Icon } from 'react-native-elements';
 import Image from 'react-native-remote-svg';
@@ -22,7 +25,7 @@ export default class FeedContainer extends Component {
 
   }
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     // api call to obtain data
   }
 
@@ -32,6 +35,7 @@ export default class FeedContainer extends Component {
     return(
       <ScrollView style={styles.feedContainer}>
         <Text style={{ fontSize: 30, textAlign: 'center', padding: 100 }}> {platform} feed here </Text>
+        <FeedCard />
       </ScrollView>
     )
   }
