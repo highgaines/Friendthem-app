@@ -138,10 +138,12 @@ class SuperConnect extends Component {
           } />
         <View style={{ alignItems: 'center' }}>
           <ButtonsContainer
-            superConnectPromiseLoop={this.superConnectPromiseLoop}
+            superConnectPromiseLoop={selectedSocialMedia.length ?
+              this.superConnectPromiseLoop : () => false
+            }
             navigation={navigation}
             facebookUrl={friendInfo.fbUrl}
-            friendName={friendInfo.name} />
+            friendName={`${friendInfo.first_name}`} />
         </View>
       </View>
     )

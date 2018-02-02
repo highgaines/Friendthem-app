@@ -7,12 +7,12 @@ import LinearGradient from 'react-native-linear-gradient';
 import styles from '../Styles/CongratulatoryScreenStyles';
 
 export default CongratulatoryScreen = props => {
-  const {friendData, navigation} = props;
+  const { userInfo,friendInfo, navigation } = props;
 
   const handleNavigation = () => {
     navigation.navigate('UserProfileScreen')
   }
-
+  console.log(userInfo, friendInfo)
   return(
     <View style={styles.container}>
       <View style={styles.headerBar}>
@@ -49,7 +49,7 @@ export default CongratulatoryScreen = props => {
                 fontWeight: 'bold',
                 fontFamily: 'Montserrat'
               }}> Congratulations! </Text>
-          <Text style={{ fontSize: 15, fontFamily: 'Montserrat'}}> {`You have Super Connected with ${friendData.name}`} </Text>
+          <Text style={{ fontSize: 15, fontFamily: 'Montserrat'}}> {`You have Super Connected with ${friendInfo.first_name}`} </Text>
         </View>
 
         <View style={styles.imgOverlapContainer}>
@@ -85,8 +85,8 @@ export default CongratulatoryScreen = props => {
               style={styles.linearGradientBackground4}
             />
           </View>
-          <Image style={styles.image2} source={{uri: friendData.image}}/>
-          <Image style={styles.image1} source={{uri: userData.picture}}/>
+          <Image style={styles.image2} source={{uri: friendInfo.picture}}/>
+          <Image style={styles.image1} source={{uri: userInfo.picture}}/>
         </View>
       </View>
     </View>
