@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Linking, Button, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Linking, Button } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import LinearGradient from 'react-native-linear-gradient';
-
+import Image from 'react-native-remote-svg';
+import { Images } from '../../Themes';
 // Styles
 import styles from '../Styles/CongratulatoryScreenStyles';
 
 export default CongratulatoryScreen = props => {
   const { userInfo,friendInfo, navigation } = props;
-
+  const fullFriendName = `${friendInfo.first_name} ${friendInfo.last_name}`
   const handleNavigation = () => {
     navigation.navigate('UserProfileScreen')
   }
-  console.log(userInfo, friendInfo)
+
   return(
     <View style={styles.container}>
       <View style={styles.headerBar}>
@@ -23,17 +24,17 @@ export default CongratulatoryScreen = props => {
           style={styles.linearGradient}
           >
             <View style={styles.row}>
+              <View style={styles.okButton}>
+              <TouchableOpacity style={styles.button} onPress={handleNavigation} title="OK">
+              <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>
+                {`< Home`}
+              </Text>
+              </TouchableOpacity>
+              </View>
               <View style={styles.textContainer}>
                 <Text style={styles.superConnectText}> Super Connect </Text>
               </View>
 
-              <View style={styles.okButton}>
-                <TouchableOpacity style={styles.button} onPress={handleNavigation} title="OK">
-                  <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>
-                    OK
-                  </Text>
-                </TouchableOpacity>
-              </View>
             </View>
 
           </LinearGradient>
@@ -49,7 +50,9 @@ export default CongratulatoryScreen = props => {
                 fontWeight: 'bold',
                 fontFamily: 'Montserrat'
               }}> Congratulations! </Text>
-          <Text style={{ fontSize: 15, fontFamily: 'Montserrat'}}> {`You have Super Connected with ${friendInfo.first_name}`} </Text>
+          <Text style={styles.subMessage}>
+            {`You have Super Connected with ${fullFriendName}`}
+          </Text>
         </View>
 
         <View style={styles.imgOverlapContainer}>
@@ -87,6 +90,18 @@ export default CongratulatoryScreen = props => {
           </View>
           <Image style={styles.image2} source={{uri: friendInfo.picture}}/>
           <Image style={styles.image1} source={{uri: userInfo.picture}}/>
+        </View>
+        <View>
+          <Text>
+            {`Do you want to connect with ${fullFriendName} on Snapchat`}
+          </Text>
+          <TouchableOpacity>
+            <Text>Open Snapchat</Text>
+            <Image
+              style={{width: 35, height: 35}}
+              source={Images.snapChatLogo}
+            />
+          </TouchableOpacity>
         </View>
       </View>
     </View>

@@ -2,7 +2,7 @@ export const SYNCED_CARD_COLORS = {
   facebook: '#3b5997',
   twitter: '#28a9e0',
   instagram: '#9E2BB0',
-  snapchat: '#fefc04',
+  snapchat: '#feec01',
   youtube:  '#ff0000'
 }
 

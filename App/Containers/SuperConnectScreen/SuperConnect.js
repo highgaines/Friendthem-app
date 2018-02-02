@@ -61,7 +61,7 @@ class SuperConnect extends Component {
         (error, result) => {
           if(result && !error) {
             this.props.navigation.navigate('CongratulatoryScreen', {
-              userInfo: this.props.userData,
+              userInfo: this.props.userInfo,
               friendInfo: this.props.friendInfo,
               navigation: this.props.navigation
             })
@@ -105,7 +105,7 @@ class SuperConnect extends Component {
 
     switch (provider) {
       case 'snapchat':
-        return userInfo && userInfo.snapHandle
+        return userInfo.social_profiles.find(elem => elem.provider === 'snapchat')
       case 'youtube':
         return platforms.find(platformObj => platformObj.provider === 'google-oauth2')
       default:
@@ -114,7 +114,7 @@ class SuperConnect extends Component {
   }
 
   render() {
-    const { userData, friendInfo, navigation, selectedSocialMedia, togglePlatform, platforms } = this.props
+    const { userInfo, friendInfo, navigation, selectedSocialMedia, togglePlatform, platforms } = this.props
     const { connectionModalOpen, connectionStepCount } = this.state
 
     return(
@@ -127,7 +127,7 @@ class SuperConnect extends Component {
             </Modal>
           : null
         }
-        <ConnectBar userData={userData} friendInfo={friendInfo}/>
+        <ConnectBar userData={userInfo} friendInfo={friendInfo}/>
         <SocialMediaCardContainer
           fromFriendProfile={true}
           friendPlatforms={friendInfo.social_profiles}
@@ -151,7 +151,7 @@ class SuperConnect extends Component {
 }
 
 const mapStateToProps = state => ({
-  userData: state.userStore.userData,
+  userInfo: state.userStore.userData,
   platforms: state.tokenStore.platforms,
   friendInfo: state.friendStore.friendData,
   fbAuthToken: state.fbStore.fbAccessToken,
