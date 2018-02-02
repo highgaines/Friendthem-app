@@ -31,6 +31,7 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
+  fetching: false,
   userId: null,
   userData: {
     username: '',
@@ -40,6 +41,8 @@ export const INITIAL_STATE = Immutable({
     interests: ['Crypto', 'Flying Kites', 'Gaming'],
     location: 'New York',
     snapHandle: null,
+    ghostMode: false,
+    silenceNotifications: false,
     social_profiles: [],
     geoLocation: {}
   },
@@ -80,6 +83,8 @@ export const getUserInfo = (accessToken) => {
   }
 }
 
+// GEOLOCATION POSITIONING
+
 export const updateUserPosition = (accessToken, coords) => {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
@@ -109,8 +114,9 @@ export const updateUserPosition = (accessToken, coords) => {
   }
 }
 
-// EDIT PROFILE UPDATE
-export const updateInfoRequest = (data, field, content, accessToken) => {
+// EDIT PROFILE/UPDATE PROFILE INFORMATION
+
+export const updateProfileInfo = (data, field, content, accessToken) => {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${accessToken}`)
@@ -141,7 +147,8 @@ export const updateInfo = (field, content) => {
   return { type: Types.UPDATE_INFO, payload: { field, content } }
 }
 
-// SNAPCHAT HANDLE UPDATE
+// SNAPCHAT INFO
+
 export const updateSnapInfo = (provider, username, accessToken) => {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
@@ -169,9 +176,9 @@ export const updateSnapInfo = (provider, username, accessToken) => {
   }
 }
 
-// SETTINGS GHOST MODE AND NOTIFICATIONS UPDATE
-export const updateSettings = (accessToken, setting, mode) => {
+// USER SETTINGS - GHOST MODE AND SILENCE NOTIFICATIONS
 
+export const updateSettings = (setting, mode, accessToken) => {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${accessToken}`)
@@ -209,6 +216,7 @@ const handleFbUserInfoSuccess = (state = INITIAL_STATE, action) => {
   }
 }
 
+// ------------------------------------------------------------------------ //
 const handleUpdateInfo = (state, action) => {
 
   const { field, content } = action.payload
@@ -221,6 +229,7 @@ const handleUpdateInfo = (state, action) => {
     }
   }
 }
+// ------------------------------------------------------------------------ //
 
 const handleGetUserRequest = (state, action) => {
   return {...state, fetching: true}
@@ -234,30 +243,41 @@ const handleGetUserSuccess = (state, action) => {
     fetching: false
   }
 }
-
 const handleGetUserFailure = (state, action) => {
   return {...state, fetching: false}
 }
 
-const handleUpdateUserRequest = (state, action) => {
+// ------------------------------------------------------------------------ //
 
-  return state
-}
-
-const handleUpdateUserSuccess = (state, action) => {
-
+const handleUpdateInfoRequest = (state, action) => {
   return {
     ...state,
-    editableData: action.response.data
+    fetching: true
   }
 }
 
-const handleUpdateUserFailure = (state, action) => {
-  return state
+const handleUpdateInfoSuccess = (state, action) => {
+
+  return {
+    ...state,
+    editableData: action.response.data,
+    fetching: false
+  }
+}
+const handleUpdateInfoFailure = (state, action) => {
+  return {
+    ...state,
+    fetching: false
+  }
 }
 
+// ------------------------------------------------------------------------ //
+
 const handleUpdateUserPositionRequest = (state, action) => {
-  return state
+  return {
+    ...state,
+    fetching: true
+  }
 }
 
 const handleUpdateUserPositionSuccess = (state, action) => {
@@ -268,16 +288,25 @@ const handleUpdateUserPositionSuccess = (state, action) => {
 }
 
 const handleUpdateUserPositionFailure = (state, action) => {
-  return state
+  return {
+    ...state,
+    fetching: false
+  }
 }
 
+// ------------------------------------------------------------------------ //
+
 const handleUpdateSnapRequest = (state, action) => {
-  return state
+  return {
+    ...state,
+    fetching: true
+  }
 }
 
 const handleUpdateSnapSuccess = (state, action) => {
   return {
     ...state,
+    fetching: false,
     userData: {
       ...state.userData,
       snapHandle: action.data.username
@@ -286,7 +315,10 @@ const handleUpdateSnapSuccess = (state, action) => {
 }
 
 const handleUpdateSnapFailure = (state, action) => {
-  return state
+  return {
+    ...state,
+    fetching: false
+  }
 }
 
 const handleUpdateSettingsRequest = (state, action) => {
@@ -319,9 +351,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_USER_REQUEST]: handleGetUserRequest,
   [Types.GET_USER_SUCCESS]: handleGetUserSuccess,
   [Types.GET_USER_FAILURE]: handleGetUserFailure,
-  [Types.UPDATE_INFO_REQUEST]: handleUpdateUserRequest,
-  [Types.UPDATE_INFO_SUCCESS]: handleUpdateUserSuccess,
-  [Types.UPDATE_INFO_FAILURE]: handleUpdateUserFailure,
+  [Types.UPDATE_INFO_REQUEST]: handleUpdateInfoRequest,
+  [Types.UPDATE_INFO_SUCCESS]: handleUpdateInfoSuccess,
+  [Types.UPDATE_INFO_FAILURE]: handleUpdateInfoFailure,
   [Types.UPDATE_USER_POSITION_REQUEST]: handleUpdateUserPositionRequest,
   [Types.UPDATE_USER_POSITION_SUCCESS]: handleUpdateUserPositionSuccess,
   [Types.UPDATE_USER_POSITION_FAILURE]: handleUpdateUserPositionFailure,
