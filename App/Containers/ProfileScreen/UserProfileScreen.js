@@ -118,7 +118,7 @@ class UserProfileScreen extends Component {
 
   socialPlatformPresent = (provider) => {
     const { platforms, userInfo } = this.props
-    console.log(userInfo)
+
     switch (provider) {
       case 'snapchat':
         return userInfo.social_profiles.filter( profile => profile.provider === 'snapchat').length

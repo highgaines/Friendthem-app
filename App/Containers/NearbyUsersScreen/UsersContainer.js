@@ -12,7 +12,6 @@ export default function UsersContainer(props) {
     navigation.navigate('FriendProfileScreen', { })
   }
 
-  console.log('users', users)
   const userCards =
     users.map( (userObj,i) =>
   <UserCard
