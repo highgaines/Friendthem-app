@@ -21,11 +21,12 @@ import SuperConnectBar from '../SuperConnectScreen/SuperConnectBar'
 import ScrollWheel from './ScrollWheel';
 import FeedContainer from '../SocialFeed/FeedContainer';
 
+// Constants
+import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
+
 // Styles
 import styles from '../Styles/UserProfileStyles';
 
-//constants
-import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
 
 class FriendProfileScreen extends Component {
   constructor(props) {
@@ -47,7 +48,7 @@ class FriendProfileScreen extends Component {
     if (apiAccessToken && loggedIn) {
       getUserTokens(apiAccessToken)
     } else {
-      // navigation.navigate('LaunchScreen')
+      navigation.navigate('LaunchScreen')
     }
   }
 
@@ -107,7 +108,7 @@ class FriendProfileScreen extends Component {
   }
 
   render() {
-    const { friendInfo, navigation, setSuperConnectPlatforms } = this.props;
+    const { friendInfo, superConnect, navigation, setSuperConnectPlatforms } = this.props;
     const { showModal, socialMediaData, syncedCardColors, selectedSocialMedia } = this.state
 
     return (
@@ -137,10 +138,10 @@ class FriendProfileScreen extends Component {
                   </TouchableOpacity>
               </View>
               <Text style={styles.profileSubtext}>
-                {`${friendInfo.first_name} ${friendInfo.last_name}`}
+              {`${friendInfo.first_name} ${friendInfo.last_name}`}
               </Text>
               <Text style={styles.interestsText}>
-                  {['Crypto', 'Kiting' ,'Gaming'].join(' | ')}
+                  {friendInfo.hobbies ? friendInfo.hobbies.join(' | ') : ''}
               </Text>
               <View style={{ flexDirection: 'row', marginTop: 7, justifyContent: 'space-around'}}>
                 <Icon
@@ -172,7 +173,7 @@ class FriendProfileScreen extends Component {
             />
             <SuperConnectBar
               setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
-              superConnect={() => navigation.navigate('SuperConnectScreen')}/>
+              superConnect={superConnect}/>
             <View style={styles.superConnectBarContainer}>
             </View>
             <View>
@@ -203,7 +204,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   const { logoutComplete } = FBStoreActions
   const { setSuperConnectPlatforms } = SuperConnectActions
-
   return {
     ...bindActionCreators({
       fbLogoutComplete: logoutComplete,
