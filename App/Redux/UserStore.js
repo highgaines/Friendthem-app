@@ -32,11 +32,12 @@ export const INITIAL_STATE = Immutable({
   userData: {
     username: '',
     name: '',
-    picture: { data: {url: null} },
+    picture: '',
     email: '',
     interests: ['Crypto', 'Flying Kites', 'Gaming'],
     location: 'New York',
     snapHandle: null,
+    social_profiles: [],
     geoLocation: {}
   },
   editableData : {
@@ -188,6 +189,7 @@ const handleGetUserRequest = (state, action) => {
 const handleGetUserSuccess = (state, action) => {
   return {
     ...state,
+    userData: action.data,
     userId: action.response.data.id
   }
 }
@@ -236,7 +238,7 @@ const handleUpdateSnapSuccess = (state, action) => {
   return {
     ...state,
     userData: {
-      ...userData,
+      ...state.userData,
       snapHandle: action.data.username
     }
   }

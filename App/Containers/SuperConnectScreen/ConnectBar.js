@@ -20,7 +20,7 @@ export default ConnectBar = props => {
               <View style={styles.column}>
                 <View style={styles.picAndName}>
                   <Image
-                    source={{ uri: `${userData.picture.data.url}` }} style={styles.image}
+                    source={{ uri: `${userData.picture}` }} style={styles.image}
                   />
 
                   <Text

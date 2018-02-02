@@ -86,7 +86,7 @@ export default CongratulatoryScreen = props => {
             />
           </View>
           <Image style={styles.image2} source={{uri: friendData.image}}/>
-          <Image style={styles.image1} source={{uri: userData.picture.data.url}}/>
+          <Image style={styles.image1} source={{uri: userData.picture}}/>
         </View>
       </View>
     </View>

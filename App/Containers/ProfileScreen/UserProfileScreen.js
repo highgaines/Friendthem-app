@@ -118,10 +118,10 @@ class UserProfileScreen extends Component {
 
   socialPlatformPresent = (provider) => {
     const { platforms, userInfo } = this.props
-
+    console.log(userInfo)
     switch (provider) {
       case 'snapchat':
-        return userInfo && userInfo.snapHandle
+        return userInfo.social_profiles.filter( profile => profile.provider === 'snapchat').length
       case 'youtube':
         return platforms.find(platformObj => platformObj.provider === 'google-oauth2')
       default:
@@ -132,8 +132,8 @@ class UserProfileScreen extends Component {
   determineImage = () => {
     const { userInfo } = this.props
 
-    if (userInfo.picture.data.url) {
-      return {uri: `${userInfo.picture.data.url}`}
+    if (userInfo.picture) {
+      return {uri: `${userInfo.picture}`}
     } else {
       return Images.noPicSVG
     }
