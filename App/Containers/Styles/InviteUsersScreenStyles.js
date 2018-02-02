@@ -57,7 +57,6 @@ export default StyleSheet.create({
     borderRadius: 30
   },
   userContainer: {
-    flex: 3,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'flex-start',

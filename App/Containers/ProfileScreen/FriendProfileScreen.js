@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity } from 'react-native'
+import { bindActionCreators } from 'redux'
+import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity, AppState } from 'react-native'
 
 // Libraries
 import LinearGradient from 'react-native-linear-gradient';
@@ -10,10 +11,12 @@ import Communications from 'react-native-communications';
 
 // Redux
 import FBStoreActions from '../../Redux/FBStore';
+import SuperConnectActions from '../../Redux/SuperConnectStore'
+import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
 
 // Components
 import Navbar from '../Navbar/Navbar';
-import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard';
+import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer';
 import SuperConnectBar from '../SuperConnectScreen/SuperConnectBar'
 import ScrollWheel from './ScrollWheel';
 import FeedContainer from '../FeedContainer/FeedContainer';
@@ -21,15 +24,35 @@ import FeedContainer from '../FeedContainer/FeedContainer';
 // Styles
 import styles from '../Styles/UserProfileStyles';
 
+//constants
+import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
+
 class FriendProfileScreen extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       showModal: false,
       platform: 'profile',
-      feedContainer: false
+      feedContainer: false,
+      socialMediaData: SOCIAL_MEDIA_DATA,
+      syncedCardColors: SYNCED_CARD_COLORS,
+      selectedSocialMedia: []
     }
+  }
+
+  componentWillMount = () => {
+    const { apiAccessToken, navigation, getUserId, loggedIn, getUserTokens } = this.props
+
+    if (apiAccessToken && loggedIn) {
+      getUserTokens(apiAccessToken)
+    } else {
+      navigation.navigate('LaunchScreen')
+    }
+  }
+
+  componentWillUnmount = () => {
+    this.setState({ showFriendster: false })
   }
 
   renderPlatformContainer = platform => {
@@ -54,9 +77,38 @@ class FriendProfileScreen extends Component {
     Communications.phonecall('3472917739', true)
   }
 
+  socialPlatformPresent = (provider) => {
+    const { platforms, userInfo } = this.props
+
+    switch (provider) {
+      case 'snapchat':
+        return userInfo && userInfo.snapHandle
+      case 'youtube':
+        return platforms.find(platformObj => platformObj.provider === 'google-oauth2')
+      default:
+        return platforms.find(platformObj => platformObj.provider === provider)
+    }
+  }
+
+  toggleSocialMediaSelection = (platformName) => {
+    const { selectedSocialMedia } = this.state
+    const platformIndex = selectedSocialMedia.findIndex(socialMedia => socialMedia === platformName)
+
+    if (platformIndex < 0) {
+      this.setState({ selectedSocialMedia: [...selectedSocialMedia, platformName] })
+    } else {
+      const updatedSocialMediaList = [
+        ...selectedSocialMedia.slice(0, platformIndex),
+        ...selectedSocialMedia.slice(platformIndex + 1)
+      ]
+
+      this.setState({ selectedSocialMedia: updatedSocialMediaList })
+    }
+  }
+
   render() {
-    const { friendInfo, superConnect, navigation } = this.props;
-    const { showModal } = this.state
+    const { friendInfo, superConnect, navigation, setSuperConnectPlatforms } = this.props;
+    const { showModal, socialMediaData, syncedCardColors, selectedSocialMedia } = this.state
 
     return (
         <View>
@@ -88,7 +140,7 @@ class FriendProfileScreen extends Component {
               {`${friendInfo.name}`}
               </Text>
               <Text style={styles.interestsText}>
-                  {friendInfo.interests.join(' | ')}
+                  {friendInfo.hobbies ? friendInfo.hobbies.join(' | ') : ''}
               </Text>
               <View style={{ flexDirection: 'row', marginTop: 7, justifyContent: 'space-around'}}>
                 <Icon
@@ -111,18 +163,18 @@ class FriendProfileScreen extends Component {
                 profilePic={friendInfo.image}
               />
             </View>
-            {
-              this.state.feedContainer ? <FeedContainer platform={this.state.platform} /> :
-              <View style={{}}>
-                <ScrollView contentContainerStyle={styles.socialAccountContainer}>
-                  <SocialMediaCard
-                    platformName='Facebook'
-                    inverted={true}
-                    userName={friendInfo.name} />
-                </ScrollView>
-              </View>
-            }
-            { this.state.feedContainer ? null : <SuperConnectBar superConnect={superConnect}/> }
+            <SocialMediaCardContainer
+              fromFriendProfile={true}
+              friendPlatforms={friendInfo.social_profiles}
+              onPressCallback={(platform) => this.toggleSocialMediaSelection(platform)}
+              platformSynced={socialMedia => this.socialPlatformPresent(socialMedia)}
+              platformSelected={socialMedia => selectedSocialMedia.includes(socialMedia)}
+            />
+            <SuperConnectBar
+              setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
+              superConnect={superConnect}/>
+            <View style={styles.superConnectBarContainer}>
+            </View>
             <View>
               <Navbar
                 navigation={navigation}
@@ -139,12 +191,24 @@ class FriendProfileScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  friendInfo: state.friendStore.friendData
+  userInfo: state.userStore.userData,
+  friendInfo: state.friendStore.friendData,
+  platforms: state.tokenStore.platforms,
+  fbAuthToken: state.fbStore.fbAccessToken,
+  apiAccessToken: state.authStore.accessToken,
+  loggedIn: state.authStore.loggedIn,
+  platforms: state.tokenStore.platforms,
 })
 
 const mapDispatchToProps = dispatch => {
+  const { logoutComplete } = FBStoreActions
+  const { setSuperConnectPlatforms } = SuperConnectActions
   return {
-    fbLogoutComplete: () => dispatch(FBStoreActions.logoutComplete())
+    ...bindActionCreators({
+      fbLogoutComplete: logoutComplete,
+      setSuperConnectPlatforms,
+      getUserTokens,
+    }, dispatch)
   }
 }
 

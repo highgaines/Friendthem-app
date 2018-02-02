@@ -13,7 +13,7 @@ import FBStoreActions from '../../Redux/FBStore';
 
 // Components
 import ConnectButton from '../SuperConnectScreen/ConnectButton'
-import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard'
+import SocialMediaCard from '../SocialMediaCards/SocialMediaCard'
 import Navbar from '../Navbar/Navbar'
 
 // Images

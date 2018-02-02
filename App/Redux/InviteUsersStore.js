@@ -13,7 +13,7 @@ const { Types, Creators } = createActions({
     connectivityInfoSuccess: null
 })
 
-export const InvitationTypes = Types
+export const InviteUsers = Types
 export default Creators
 
 /* ------------- Initial State ------------- */
@@ -124,7 +124,7 @@ const handleConnectivityFailure = (state, action) => {
 }
 
 const handleConnectivitySuccess = (state, action) => {
-  const { data } = action.payload
+  const { data } = action
 
   return state.merge({ connectivityData: data, fetchingData: false })
 }
@@ -135,6 +135,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.SEND_INVITE_TO_USER]: handleSendInvite,
   [Types.SELECT_USER]: handleSelectUser,
   [Types.CONNECTIVITY_INFO_REQUEST]: handleConnectivityRequest,
+  [Types.CONNECTIVITY_INFO_SUCCESS]: handleConnectivitySuccess,
   [Types.CONNECTIVITY_INFO_FAILURE]: handleConnectivityFailure,
-  [Types.CONNECTIVITY_INFO_SUCCESS]: handleConnectivitySuccess
 })

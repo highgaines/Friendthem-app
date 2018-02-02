@@ -3,7 +3,7 @@ import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native';
 import UserCard from './UserCard';
 // Styles
 import styles from '../Styles/UsersContainerStyles';
-import SocialMediaCard from '../SuperConnectScreen/SocialMediaCard';
+import SocialMediaCard from '../SocialMediaCards/SocialMediaCard';
 
 export default function UsersContainer(props) {
   const { users, navigation, setFriendInfo } = props

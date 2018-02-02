@@ -86,10 +86,6 @@ class PermissionScreen extends Component {
             <Text style={[styles.text, { fontSize: 18 }]}>
                {this.determineTitle()}
              </Text>
-            <Image
-              style={{ width: 220, height: 220 }}
-              source={this.determineImage()}
-            />
             <Text style={[styles.text, { fontSize: 14 }]}>
               {this.determineText()}
              </Text>

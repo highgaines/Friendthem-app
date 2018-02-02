@@ -6,6 +6,7 @@ import envConfig from '../../envConfig'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
+  updateInfo: ['field', 'content'],
   fbUserInfo: ['userInfo'],
   getUserRequest: null,
   getUserSuccess: null,
@@ -121,6 +122,11 @@ export const updateInfoRequest = (data, field, content, accessToken) => {
     callApi: dispatch => fetchFromApi('profile/', init, dispatch)
   }
 }
+
+export const updateInfo = (field, content) => {
+  return { type: Types.UPDATE_INFO, payload: { field, content } }
+}
+
 /* ------------- Reducers ------------- */
 const handleFbUserInfoSuccess = (state = INITIAL_STATE, action) => {
   return {
@@ -195,6 +201,7 @@ const handleUpdateUserPositionFailure = (state, action) => {
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
+  [Types.UPDATE_INFO]: handleUpdateInfo,
   [Types.FB_USER_INFO]: handleFbUserInfoSuccess,
   [Types.GET_USER_REQUEST]: handleGetUserRequest,
   [Types.GET_USER_SUCCESS]: handleGetUserSuccess,

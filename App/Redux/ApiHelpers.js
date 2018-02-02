@@ -11,6 +11,7 @@ export function fetchFromApi(url, init, dispatch) {
   return new Promise((resolve, reject) => {
     fetch(buildRequest(url, init))
       .then(response => {
+
         switch (response.status) {
           case 401:
             if (response.url === buildApiUrl('token/')) {

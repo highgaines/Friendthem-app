@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import styles from '../Styles/ConnectBarStyles';
 
 export default ConnectBar = props => {
-  const { userData, friendData } = props
+  const { userData, friendInfo } = props
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -20,7 +20,7 @@ export default ConnectBar = props => {
               <View style={styles.column}>
                 <View style={styles.picAndName}>
                   <Image
-                    source={{ uri: userData.picture.data.url }} style={styles.image}
+                    source={{ uri: `${userData.picture.data.url}` }} style={styles.image}
                   />
 
                   <Text
@@ -37,12 +37,12 @@ export default ConnectBar = props => {
               <View style={styles.column}>
                 <View style={styles.picAndName}>
                   <Image
-                    source={{uri: friendData.image}} style={styles.image}
+                    source={{uri: `${friendInfo.picture}`}} style={styles.image}
                   />
                   <Text
                     style={styles.name}
                     numberOfLines={1}
-                    > {friendData.name} </Text>
+                    > {friendInfo.name} </Text>
                 </View>
               </View>
             </View>

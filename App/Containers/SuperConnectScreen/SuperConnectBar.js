@@ -6,6 +6,11 @@ import ConnectButton from './ConnectButton'
 import styles from '../Styles/SuperConnectBarStyles'
 
 export default class SuperConnectBar extends Component {
+  navigateToSuperConnect = () => {
+    this.props.setSuperConnectPlatforms()
+    this.props.superConnect()
+  }
+
   render() {
     return (
       <View style={styles.buttonContainer}>
@@ -22,7 +27,7 @@ export default class SuperConnectBar extends Component {
           type='font-awesome'
           color='#ffffff'
           title='SUPER CONNECT'
-          onPressCallback={this.props.superConnect}
+          onPressCallback={this.navigateToSuperConnect}
           containerStyle={styles.superConnectButton}
           textStyle={styles.buttonTextStyle}/>
       </View>

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import Reactotron from 'reactotron-react-native';
 
 // Redux
 import { bindActionCreators } from 'redux';
-import { selectUser, fetchConnectivityData } from '../../Redux/InviteUsersStore';
+import InviteUsersStoreActions, { selectUser, fetchConnectivityData } from '../../Redux/InviteUsersStore';
 
 // Libraries
 import LinearGradient from 'react-native-linear-gradient';
@@ -40,9 +40,20 @@ class InviteUsersScreen extends Component {
     fetchConnectivityData(accessToken)
   }
 
+  renderConnectivityCards = () => {
+    const { friends } = this.props
+    return friends.map( friend => {
+      return <ConnectivityCard
+              name={friend.first_name ? friend.first_name : "BOB"}
+              image={`${friend.picture}`}
+              conPct={friend.connection_percentage}
+            />
+    })
+  }
+
   render() {
     const { networkTabSelected, showModal } = this.state;
-    const { selectUser, selectedUser, navigation } = this.props
+    const { selectUser, selectedUser, navigation, fetchConnectivityData, accessToken } = this.props
 
     return (
       <View style={[{ flex: 1 }, this.state.showModal ? { opacity: 0.1 } : '']}>
@@ -103,23 +114,9 @@ class InviteUsersScreen extends Component {
                 }}>
               Connectivity
             </Text>
-            <View style={styles.userContainer}>
-              <ConnectivityCard
-                name="Bruce Wayne"
-                image={'https://images.forbes.com/media/lists/fictional/2011/bruce-wayne_197x282.jpg'}
-                conPct={100}
-              />
-              <ConnectivityCard
-                name="Clark Kent"
-                image={'https://i.ytimg.com/vi/6UuTd4pKHPo/maxresdefault.jpg'}
-                conPct={80}
-              />
-              <ConnectivityCard
-                name="Peter Parker"
-                image={'https://qph.ec.quoracdn.net/main-qimg-b494e2e5ec0277770bed6c793c3570b9-c'}
-                conPct={30}
-              />
-            </View>
+            <ScrollView contentContainerStyle={styles.userContainer}>
+              {this.renderConnectivityCards()}
+            </ScrollView>
           </View>
         }
         <Navbar
@@ -136,7 +133,8 @@ class InviteUsersScreen extends Component {
 const mapStateToProps = state => ({
   selectedUser: state.inviteUsersStore.selectedUser,
   nav: state.nav,
-  accessToken: state.authStore.accessToken
+  accessToken: state.authStore.accessToken,
+  friends: state.inviteUsersStore.connectivityData
 })
 
 const mapDispatchToProps = dispatch => {
