@@ -43,7 +43,6 @@ class FriendProfileScreen extends Component {
 
   componentWillMount = () => {
     const { apiAccessToken, navigation, getUserId, loggedIn, getUserTokens } = this.props
-    AppState.addEventListener('change', this._handleAppStateChange);
 
     if (apiAccessToken && loggedIn) {
       getUserTokens(apiAccessToken)
@@ -54,7 +53,6 @@ class FriendProfileScreen extends Component {
 
   componentWillUnmount = () => {
     this.setState({ showFriendster: false })
-    AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
   renderPlatformContainer = platform => {

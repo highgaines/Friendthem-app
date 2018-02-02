@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Image, View, TouchableOpacity, Button, AppState, Linking } from 'react-native'
+import { ScrollView, Text, Image, View, TouchableOpacity, Button, AppState, Linking, Modal } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import FBSDK, { AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk'
@@ -16,10 +16,15 @@ class SuperConnect extends Component {
   constructor(props) {
     super(props)
 
+    this._handleAppStateChange = this._handleAppStateChange.bind(this)
+
     this.state = {
+      fbToken: null,
+      connectionStepCount: null,
+      connectionModalOpen: false,
+      userInputRequiredPlatforms: [],
       appState: AppState.currentState,
       manualPlatforms: MANUAL_CONNECT_PLATFORMS,
-      userInputRequiredPlatforms: []
     }
   }
 
@@ -27,12 +32,14 @@ class SuperConnect extends Component {
     AppState.addEventListener('change', this._handleAppStateChange);
   }
 
-  componentWillUpdate = nextProps => {
-    const { manualPlatforms, friendInfo } = this.props
+  componentWillUpdate = (nextProps, nextState) => {
+    const { manualPlatforms, friendInfo, platforms } = this.props
+    const fbToken = platforms.find(platform => platform.provider === 'facebook').accessToken
 
     if (!manualPlatforms.length && nextProps.manualPlatforms.length) {
-      if (manualPlatforms.includes('facebook')) {
-        debugger
+      if (nextProps.manualPlatforms.includes('facebook')) {
+        fbProfile = friendInfo.social_profiles.find(profile => profile.provider === 'facebook')
+        Linking.openURL(`https://facebook.com/${fbProfile.uid}`)
       }
     }
   }
@@ -42,15 +49,19 @@ class SuperConnect extends Component {
   }
 
   _handleAppStateChange = (nextAppState) => {
-    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+    const returningToApp = this.state.appState.match(/inactive|background/) && nextAppState === 'active'
+    const accessToken = this.props.platforms.find(elem => elem.provider === 'facebook').access_token
+
+    if (returningToApp) {
       const friendListRequest = new GraphRequest(
-        `/${this.props.userData.id}/friends/${this.props.friendInfo.id}`,
+        `/10154996425606714/friends/${this.props.friendInfo.id}`, //`/${this.props.userData.id}/friends/${this.props.friendInfo.id}` Hardcoded until all updated branches are merged
         {
-          accessToken: this.props.fbAuthToken,
+          accessToken: accessToken
         },
         (error, result) => {
           if(result && !error) {
             this.props.navigation.navigate('CongratulatoryScreen', {
+              userInfo: this.props.userData,
               friendInfo: this.props.friendInfo,
               navigation: this.props.navigation
             })
@@ -68,7 +79,10 @@ class SuperConnect extends Component {
     const { selectedSocialMedia, friendInfo, superConnectPlatform, apiAccessToken, setManualPlatforms } = this.props
     const { userInputRequiredPlatforms, manualPlatforms } = this.state
 
+    this.setState({ connectionModalOpen: true })
     for (let i = 0; i < selectedSocialMedia.length; i++) {
+      this.setState({ connectionStepCount: i + 1 })
+
       if (manualPlatforms.includes(selectedSocialMedia[i])) {
         userInputRequiredPlatforms.push(selectedSocialMedia[i])
       } else {
@@ -81,7 +95,9 @@ class SuperConnect extends Component {
         })
       }
     }
-    setManualPlatforms(userInputRequiredPlatforms)
+    this.setState({connectionModalOpen: false },
+      () => setManualPlatforms(userInputRequiredPlatforms)
+    )
   }
 
   socialPlatformPresent = (provider) => {
@@ -99,9 +115,18 @@ class SuperConnect extends Component {
 
   render() {
     const { userData, friendInfo, navigation, selectedSocialMedia, togglePlatform, platforms } = this.props
+    const { connectionModalOpen, connectionStepCount } = this.state
 
     return(
       <View style={{ flex: 1 }}>
+        { connectionModalOpen ?
+            <Modal>
+              <Text>
+                {`Connecting: Step ${connectionStepCount} of ${selectedSocialMedia.length}`}
+              </Text>
+            </Modal>
+          : null
+        }
         <ConnectBar userData={userData} friendInfo={friendInfo}/>
         <SocialMediaCardContainer
           fromFriendProfile={true}

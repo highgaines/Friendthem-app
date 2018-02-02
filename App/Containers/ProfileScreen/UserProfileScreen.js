@@ -210,7 +210,7 @@ class UserProfileScreen extends Component {
         {  socialNetworkTab ?
             <SocialMediaCardContainer
               fromFriendProfile={false}
-              platformSelected={false}
+              platformSelected={(platform) => false}
               snapchatCallback={this.toggleSnapchatModal}
               onPressCallback={(platform) => this.authenticateSocialMedia(platform)}
               platformSynced={((socialMedia) => this.socialPlatformPresent(socialMedia))}
