@@ -178,7 +178,7 @@ class UserProfileScreen extends Component {
                   source={this.determineImage()} />
               </View>
               <Text style={styles.profileSubtext}>
-              {`${userInfo.name}`}
+              {`${userInfo.first_name} ${userInfo.last_name}`}
               </Text>
             </View>
             <FriendThemModal
