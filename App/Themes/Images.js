@@ -60,10 +60,11 @@ const images = {
   friendster: require('../Images/Icons/friendster-png.png'),
   friendsterSVG: require('../Images/friendster-svg.svg'),
   Friendster: require('../Images/Friendster.svg'),
+  snapChatLogo: require('../Images/Icons/snapIcon.svg'),
 
   // Emblems
   emblemColor: require('../Images/Icons/emblem-color.svg'),
-  emblemGreen: require('../Images/Icons/emblem-green.svg')
+  emblemGreen: require('../Images/Icons/emblem-green.svg'),
 }
 
 export default images

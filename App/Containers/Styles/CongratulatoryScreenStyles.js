@@ -23,7 +23,7 @@ export default StyleSheet.create({
     flex: 5,
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
-    marginRight: 60
+    marginRight: 100
   },
   superConnectText: {
     color: 'white',
@@ -42,10 +42,15 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  subMessage: {
+    fontSize: 15,
+    fontFamily: 'Montserrat',
+    textAlign: 'center'
+  },
   okButton: {
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    marginRight: 20
+    marginTop: 25
   },
   imgOverlapContainer: {
     flex: 1,
@@ -105,5 +110,34 @@ export default StyleSheet.create({
     height: 200,
     opacity: .5,
     borderRadius: 100
+  },
+  subTextContainer: {
+    height: 150,
+    alignItems: 'center',
+    paddingLeft: 20
+  },
+  superConnectSubtext: {
+    fontSize: 16,
+    color: '#8F8F8F',
+    lineHeight: 22,
+    textAlign: 'center',
+    marginBottom: 25
+  },
+  snapChatConnectButton: {
+    width: 200,
+    height: 50,
+    borderRadius: 75,
+    backgroundColor: '#feec01',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  snapchatButtonText: {
+    marginRight: 10
+  },
+  snapchatLogo: {
+    width: 35,
+    height: 35,
+    marginLeft: 55
   }
 })

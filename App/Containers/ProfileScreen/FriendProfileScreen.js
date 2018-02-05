@@ -83,7 +83,7 @@ class FriendProfileScreen extends Component {
 
     switch (provider) {
       case 'snapchat':
-        return userInfo && userInfo.snapHandle
+        return userInfo.social_profiles.find(elem => elem.provider === 'snapchat')
       case 'youtube':
         return platforms.find(platformObj => platformObj.provider === 'google-oauth2')
       default:
@@ -173,7 +173,7 @@ class FriendProfileScreen extends Component {
             />
             <SuperConnectBar
               setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
-              superConnect={superConnect}/>
+              superConnect={() => navigation.navigate('SuperConnectScreen')}/>
             <View style={styles.superConnectBarContainer}>
             </View>
             <View>
