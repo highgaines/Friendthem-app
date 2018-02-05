@@ -63,7 +63,8 @@ class SuperConnect extends Component {
             this.props.navigation.navigate('CongratulatoryScreen', {
               userInfo: this.props.userInfo,
               friendInfo: this.props.friendInfo,
-              navigation: this.props.navigation
+              navigation: this.props.navigation,
+              snapchatDeeplink: this.snapchatDeepLinkCallback
             })
           } else {
             console.log(error, result)
@@ -111,6 +112,13 @@ class SuperConnect extends Component {
       default:
         return platforms.find(platformObj => platformObj.provider === provider)
     }
+  }
+
+  snapchatDeepLinkCallback = () => {
+    const { friendInfo } = this.props
+    const snapInfo = friendInfo.social_profiles.find(profile => profile.provider === 'snapchat')
+
+    Linking.openURL(`snapchat://add/${snapInfo.username}`)
   }
 
   render() {

@@ -8,11 +8,19 @@ import { Images } from '../../Themes';
 import styles from '../Styles/CongratulatoryScreenStyles';
 
 export default CongratulatoryScreen = props => {
-  const { userInfo,friendInfo, navigation } = props;
+  const { userInfo,friendInfo, navigation, snapchatDeeplink } = props;
   const fullFriendName = `${friendInfo.first_name} ${friendInfo.last_name}`
+
   const handleNavigation = () => {
     navigation.navigate('UserProfileScreen')
   }
+
+  const snapHandlePresent = social_profiles => {
+    return !!social_profiles.find(profile => profile.provider === 'snapchat')
+  }
+
+  const displaySnapButton = snapHandlePresent(userInfo.social_profiles) &&
+  snapHandlePresent(friendInfo.social_profiles)
 
   return(
     <View style={styles.container}>
@@ -91,21 +99,25 @@ export default CongratulatoryScreen = props => {
           <Image style={styles.image2} source={{uri: friendInfo.picture}}/>
           <Image style={styles.image1} source={{uri: userInfo.picture}}/>
         </View>
-        <View style={styles.subTextContainer}>
-          <Text style={styles.superConnectSubtext}>
-            {`Do you want to connect with ${fullFriendName} on Snapchat?`}
-          </Text>
-          <TouchableOpacity
-            style={styles.snapChatConnectButton}>
-            <Text style={styles.snapchatButtonText}>
-              Open Snapchat
+        {
+          displaySnapButton ?
+          <View style={styles.subTextContainer}>
+            <Text style={styles.superConnectSubtext}>
+              {`Do you want to connect with ${fullFriendName} on Snapchat?`}
             </Text>
-            <Image
-              style={styles.snapChatLogo}
-              source={Images.snapChatLogo}
-            />
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity
+              style={styles.snapChatConnectButton}
+              onPress={snapchatDeeplink}>
+              <Text style={styles.snapchatButtonText}>
+                Open Snapchat
+              </Text>
+              <Image
+                style={styles.snapChatLogo}
+                source={Images.snapChatLogo}
+              />
+            </TouchableOpacity>
+          </View> : null
+        }
       </View>
     </View>
   )
