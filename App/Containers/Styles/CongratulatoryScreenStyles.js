@@ -110,5 +110,34 @@ export default StyleSheet.create({
     height: 200,
     opacity: .5,
     borderRadius: 100
+  },
+  subTextContainer: {
+    height: 150,
+    alignItems: 'center',
+    paddingLeft: 20
+  },
+  superConnectSubtext: {
+    fontSize: 16,
+    color: '#8F8F8F',
+    lineHeight: 22,
+    textAlign: 'center',
+    marginBottom: 25
+  },
+  snapChatConnectButton: {
+    width: 200,
+    height: 50,
+    borderRadius: 75,
+    backgroundColor: '#feec01',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  snapchatButtonText: {
+    marginRight: 10
+  },
+  snapchatLogo: {
+    width: 35,
+    height: 35,
+    marginLeft: 55
   }
 })

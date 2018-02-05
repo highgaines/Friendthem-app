@@ -91,14 +91,17 @@ export default CongratulatoryScreen = props => {
           <Image style={styles.image2} source={{uri: friendInfo.picture}}/>
           <Image style={styles.image1} source={{uri: userInfo.picture}}/>
         </View>
-        <View>
-          <Text>
-            {`Do you want to connect with ${fullFriendName} on Snapchat`}
+        <View style={styles.subTextContainer}>
+          <Text style={styles.superConnectSubtext}>
+            {`Do you want to connect with ${fullFriendName} on Snapchat?`}
           </Text>
-          <TouchableOpacity>
-            <Text>Open Snapchat</Text>
+          <TouchableOpacity
+            style={styles.snapChatConnectButton}>
+            <Text style={styles.snapchatButtonText}>
+              Open Snapchat
+            </Text>
             <Image
-              style={{width: 35, height: 35}}
+              style={styles.snapChatLogo}
               source={Images.snapChatLogo}
             />
           </TouchableOpacity>
