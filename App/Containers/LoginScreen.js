@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { ScrollView, Text, TextInput, Image, View, TouchableOpacity } from 'react-native'
 import { CheckBox, Icon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
+import Permissions from 'react-native-permissions'
 
 import Footer from './UtilityComponents/Footer'
 import AuthStoreActions, { login } from '../Redux/AuthStore'
@@ -15,20 +16,56 @@ class LoginScreen extends Component {
     this.state = {
       userEmail: '',
       userPassword: '',
-      rememberMe: false
+      rememberMe: false,
+      locationPermission: false,
+      notificationPermission: false
     }
+  }
+
+  componentDidMount = () => {
+    this.checkPermissions()
   }
 
   componentDidUpdate = (prevProps) => {
     const { loggedIn, navigation, authError } = this.props
+    const { locationPermission, notificationPermission } = this.state
+    const permissionsGranted = locationPermission && notificationPermission
 
-    if (loggedIn && !prevProps.loggedIn) {
-      navigation.navigate('PermissionScreen', { permissionType: 'geolocation', navigation: navigation });
+    if (loggedIn && !prevProps.loggedIn && permissionsGranted) {
+      navigation.navigate('ForkScreen')
+    }
+
+    if (loggedIn && !prevProps.loggedIn && !permissionsGranted) {
+      if (!locationPermission) {
+        navigation.navigate('PermissionScreen', {
+          permissionType: 'geolocation',
+          navigation: navigation
+        });
+      }
+      if (!notificationPermission) {
+        navigation.navigate('PermissionScreen', {
+          permissionType: 'notifications',
+          navigation: navigation
+        })
+      }
     }
 
     if (authError && !prevProps.authError) {
       alert('The information you entered was incorrect')
     }
+  }
+
+  checkPermissions = () => {
+    Permissions.check('location', { type: 'always' }).then(response => {
+      if (response === 'authorized') {
+        this.setState({ locationPermission: true })
+      }
+    })
+    Permissions.check('notification').then(response => {
+      if (response === 'authorized') {
+        this.setState({ notificationPermission: true })
+      }
+    })
   }
 
   updateState = (textValue, textName) => {

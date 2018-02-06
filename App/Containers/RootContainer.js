@@ -3,6 +3,7 @@ import { View, StatusBar } from 'react-native'
 import ReduxNavigation from '../Navigation/ReduxNavigation'
 import { connect } from 'react-redux'
 import ReduxPersist from '../Config/ReduxPersist'
+import Navbar from './Navbar/Navbar'
 
 // Styles
 import styles from './Styles/RootContainerStyles'

@@ -104,7 +104,9 @@ class SocialMediaCardContainer extends Component {
                 key={idx}
                 platformName={capitalizeName(socialPlatform)}
                 synced={isSynced}
-                socialAuth={this.determineSocialAuth(socialPlatform)}
+                socialAuth={!isSynced && fromFriendProfile ?
+                  () => null : this.determineSocialAuth(socialPlatform)
+                }
                 platformAuth={isYoutube ? 'google-oauth2' : socialPlatform}
                 userName={userName}
                 syncedBGColor={syncedCardColors[socialPlatform]}

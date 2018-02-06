@@ -26,10 +26,10 @@ const handleFriendInfo = (state = INITIAL_STATE, action) => {
 
 const handleConnectivitySuccess = (state, action) => {
   const { data } = action
-  const { users } = state
+
   return {
     ...state,
-    users: [...users, ...data]
+    users: [...data]
   }
 }
 
