@@ -38,7 +38,6 @@ class Navbar extends Component {
 
   logOut = () => {
     const { logoutComplete, navigation } = this.props
-    debugger
     this.props.logoutUser()
     this.toggleModal()
     LoginManager.logOut();

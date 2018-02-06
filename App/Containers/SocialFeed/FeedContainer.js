@@ -38,14 +38,16 @@ class FeedContainer extends Component {
   }
 
   renderFeedCards = platform => {
-    this.props[`${platform}Feed`].map( item => {
-      <FeedCard
-        platform={item.provider}
-        image={item.img_url}
-        description={item.description}
-        date={item.date_posted}
-        numLikes={item.num_likes}
-      />
+    return this.props[`${platform}Feed`].map( item => {
+      return(
+        <FeedCard
+          platform={item.provider}
+          image={item.img_url}
+          description={item.description}
+          date={item.date_posted}
+          numLikes={item.num_likes}
+        />
+      )
     })
   }
 
@@ -53,7 +55,7 @@ class FeedContainer extends Component {
     const { platform, loading } = this.props
 
     return(
-      <ScrollView style={styles.feedContainer}>
+      <ScrollView contentContainerStyle={styles.feedContainer}>
         <Text> {platform} Feed </Text>
         { loading ?
           <View

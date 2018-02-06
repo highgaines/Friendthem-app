@@ -57,7 +57,11 @@ class FriendProfileScreen extends Component {
   }
 
   renderPlatformContainer = platform => {
-      return <FeedContainer platform={platform} />
+      return(
+        <View style={{ height: 366 }}>
+          <FeedContainer platform={platform} />
+        </View>
+      )
   }
 
   handlePlatformChange = platform => {
@@ -168,7 +172,7 @@ class FriendProfileScreen extends Component {
             { platform === 'profile' ? <View>
               <SocialMediaCardContainer
                 fromFriendProfile={true}
-                friendPlatforms={friendInfo.social_profiles ? friendInfo.social_profiles : []}
+                friendPlatforms={friendInfo.social_profiles}
                 onPressCallback={(platform) => this.toggleSocialMediaSelection(platform)}
                 platformSynced={socialMedia => this.socialPlatformPresent(socialMedia)}
                 platformSelected={socialMedia => selectedSocialMedia.includes(socialMedia)}
@@ -178,7 +182,8 @@ class FriendProfileScreen extends Component {
                 superConnect={() => navigation.navigate('SuperConnectScreen')}/>
                 <View style={styles.superConnectBarContainer}>
                 </View>
-            </View> : this.renderPlatformContainer(platform)}
+            </View> :
+             this.renderPlatformContainer(platform)  }
             <View>
               <Navbar
                 navigation={navigation}

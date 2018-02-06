@@ -16,25 +16,7 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   friendData: {},
-  users: [
-    {
-      'picture': 'https://scontent-lga3-1.xx.fbcdn.net/v/t31.0-8/21316507_10155006784517709_7125993525464181821_o.jpg?oh=1240661516ae37ca2606af692fe8f87a&oe=5ABE7DFA',
-      'first_name': 'Jimmy',
-      'last_name': 'Zhang',
-      fbUrl: fbDeepLinkURL + '502562708',
-      hobbies: ['Coder', 'Gamer', 'Crypto Enthusiast'],
-      'location': 'New York'
-    },
-    {
-      'picture': 'https://scontent-iad3-1.xx.fbcdn.net/v/t1.0-9/24301357_10101682515692025_688989114175452534_n.jpg?oh=ce183e657d63e2afbc440c5f19d59a41&oe=5AB8A292',
-      'first_name': 'Naz',
-      'last_name': 'Khan',
-      fbUrl: fbDeepLinkURL + '16410544',
-      id: '16410544',
-      hobbies: ['Coder', 'Gamer', 'Crypto Enthusiast'],
-      'location': 'New York'
-    }
-  ]
+  users: []
 })
 
 /* ------------- Reducers ------------- */

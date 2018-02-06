@@ -43,9 +43,10 @@ class InviteUsersScreen extends Component {
   renderConnectivityCards = () => {
     const { friends, navigation } = this.props
 
-    return friends.map( friend => {
+    return friends.map( (friend, idx) => {
       return(
         <ConnectivityCard
+          key={idx}
           name={friend.first_name ? friend.first_name : "BOB"}
           image={`${friend.picture}`}
           friendData={friend}
