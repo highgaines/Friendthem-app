@@ -12,7 +12,7 @@ import Image from 'react-native-remote-svg';
 // Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import SocialFeedStoreActions, { fetchFeed } from '../../Redux/SocialFeedStoreActions'
+import SocialFeedStoreActions, { fetchFeed } from '../../Redux/SocialFeedStore'
 
 // Images
 import { Images } from '../../Themes';
@@ -30,13 +30,26 @@ class FeedContainer extends Component {
     // api call to obtain data
   }
 
+  renderFeedCards = platform => {
+    const {
+      instagramFeed,
+      facebookFeed
+    } = this.props
+
+    this.props[`${platform}Feed`].map( item => {
+      <FeedCard
+
+      />
+    })
+  }
+
   render = () => {
     const { platform } = this.props
 
     return(
       <ScrollView style={styles.feedContainer}>
         <Text style={{ fontSize: 30, textAlign: 'center', padding: 100 }}> {platform} feed here </Text>
-        <FeedCard />
+        {this.renderFeedCards(platform)}
       </ScrollView>
     )
   }
@@ -44,7 +57,6 @@ class FeedContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    twitterFeed: state.socialFeed.twitterFeed,
     instagramFeed: state.socialFeed.instagramFeed,
     facebookFeed: state.socialFeed.facebookFeed
   }

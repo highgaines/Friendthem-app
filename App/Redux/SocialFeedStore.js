@@ -17,25 +17,24 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  twitterFeed: [],
-  instagramFeed:  [
-  {
-  	img_url: "https://cdn-images-1.medium.com/max/1200/*jB76MLZjiNhGSQQvxm7LSQ.gif",
-  	num_likes: 38,
-  	description: 'Hello world!!',
-  	date_posted: 'Monday, February 5th 8:33PM',
-  	type: 'photo',
-  	provider: 'instagram'
-  },
-  {
-  	img_url: 'http://www.petsworld.in/blog/wp-content/uploads/2014/09/cute-kittens.jpg',
-  	num_likes: 44,
-  	description: 'I love cats!!!',
-  	date_posted: 'Tuesday, February 6th 12:01 PM',
-  	type: 'photo',
-  	provider: 'instagram'
-  }
-],
+  instagramFeed: [
+    {
+    	img_url: "https://cdn-images-1.medium.com/max/1200/*jB76MLZjiNhGSQQvxm7LSQ.gif",
+    	num_likes: 38,
+    	description: 'Hello world!!',
+    	date_posted: 'Monday, February 5th 8:33PM',
+    	type: 'photo',
+    	provider: 'instagram'
+    },
+    {
+    	img_url: 'http://www.petsworld.in/blog/wp-content/uploads/2014/09/cute-kittens.jpg',
+    	num_likes: 44,
+    	description: 'I love cats!!!',
+    	date_posted: 'Tuesday, February 6th 12:01 PM',
+    	type: 'photo',
+    	provider: 'instagram'
+    }
+  ],
   facebookFeed: [],
   fetching: false
 })
