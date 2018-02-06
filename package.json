@@ -28,6 +28,7 @@
   "dependencies": {
     "apisauce": "^0.14.2",
     "auth0": "^2.9.1",
+    "code-push-cli": "^2.1.6",
     "format-json": "^1.0.3",
     "identity-obj-proxy": "^3.0.0",
     "lodash": "^4.17.4",
@@ -40,6 +41,7 @@
     "react-native-animatable": "^1.2.4",
     "react-native-auth0": "^1.2.1",
     "react-native-checkbox": "^2.0.0",
+    "react-native-code-push": "^5.2.1",
     "react-native-communications": "^2.2.1",
     "react-native-config": "^0.10.0",
     "react-native-contacts": "^2.1.1",
