@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { ScrollView, Text, Image, View, TouchableOpacity, Switch } from 'react-native'
 
 // Librarires
@@ -9,7 +8,9 @@ import FBSDK, { LoginManager } from 'react-native-fbsdk';
 import Communications from 'react-native-communications';
 
 // Redux
-import FBStoreActions from '../../Redux/FBStore';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'
+import FBStoreActions, { fbLogoutComplete } from '../../Redux/FBStore';
 
 // Components
 import ConnectButton from '../SuperConnectScreen/ConnectButton'
@@ -31,6 +32,7 @@ class SettingsScreen extends Component {
       ghostSwitch: false
     }
   }
+
   logOut = () => {
     const { toggleModal, fbLogoutComplete, navigation } = this.props
 
@@ -184,8 +186,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
+  const { fbLogoutComplete } = FBStoreActions
   return {
-    fbLogoutComplete: () => dispatch(FBStoreActions.logoutComplete())
+    ...bindActionCreators({ fbLogoutComplete }, dispatch)
   }
 }
 

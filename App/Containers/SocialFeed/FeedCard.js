@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 // Styles
 import styles from '../Styles/FeedCardStyles';
 
-class FeedCard extends Component {
+export default class FeedCard extends Component {
   constructor(props) {
     super(props)
 

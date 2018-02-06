@@ -35,7 +35,6 @@ export default StyleSheet.create({
   },
   startButton: {
     justifyContent: 'center',
-    textAlign: 'center',
     borderColor: 'white',
     borderWidth: 2,
     width: 100,

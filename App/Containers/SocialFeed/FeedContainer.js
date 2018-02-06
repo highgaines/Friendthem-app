@@ -30,6 +30,13 @@ class FeedContainer extends Component {
     fetchFeed(accessToken, userId, platform)
   }
 
+  componentDidUpdate = prevProps => {
+    const { platform, fetchFeed, userId, accessToken } = this.props
+    if (prevProps.platform !== platform) {
+      fetchFeed(accessToken, userId, platform)
+    }
+  }
+
   renderFeedCards = platform => {
     this.props[`${platform}Feed`].map( item => {
       <FeedCard
@@ -47,6 +54,7 @@ class FeedContainer extends Component {
 
     return(
       <ScrollView style={styles.feedContainer}>
+        <Text> {platform} Feed </Text>
         { loading ?
           <View
             style={styles.loading, { marginTop: 40 }}>
