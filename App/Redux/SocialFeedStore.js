@@ -35,12 +35,30 @@ export const INITIAL_STATE = Immutable({
     	provider: 'instagram'
     }
   ],
-  facebookFeed: [],
+  facebookFeed: [
+    {
+    	img_url: '',
+    	num_likes: 3,
+    	description: 'Star Wars!',
+    	date_posted: 'Monday, February 5th 9:43PM',
+    	type: 'photo',
+    	provider: 'facebook'
+    },
+    {
+    	img_url: ''
+    	num_likes: 9,
+    	description: 'Crypto is trading sideways! Oh no!',
+    	date_posted: 'Sunday, February 4th 11:18 PM',
+    	type: 'status',
+    	provider: 'facebook'
+    }
+  ],
   fetching: false
 })
 
 /* ------------- Actions ------------- */
 
+// route will be adjusted after PR for endpoints is up
 export const fetchFeed = (accessToken, userId, platform) => {
   const headers = new Headers()
   headers.append('Authorization', `Bearer ${accessToken}`)
@@ -58,7 +76,7 @@ export const fetchFeed = (accessToken, userId, platform) => {
       Types.FETCH_FEED_DATA_FAILURE
     ],
     shouldCallApi: state => true,
-    callApi: dispatch => fetchFromApi('profile/me', init, dispatch)
+    callApi: dispatch => fetchFromApi('user_feed/', init, dispatch)
   }
 }
 

@@ -5,5 +5,9 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   feedContainer: {
     height: 366
+  },
+  loading: {
+    flex: 1,
+    justifyContent: 'center'
   }
 })

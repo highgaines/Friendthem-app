@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { View, TouchableOpacity, Text, Button, ScrollView } from 'react-native';
+import { View, TouchableOpacity, Text, Button, ScrollView, ActivityIndicator } from 'react-native';
 
 // Components
 import FeedCard from './FeedCard';
@@ -23,33 +23,34 @@ import styles from '../Styles/FeedContainerStyles';
 class FeedContainer extends Component {
   constructor(props) {
     super(props)
-
   }
 
   componentDidMount = () => {
-    // api call to obtain data
+    const { platform, fetchFeed, userId, accessToken } = this.props
+    fetchFeed(accessToken, userId, platform)
   }
 
   renderFeedCards = platform => {
-    const {
-      instagramFeed,
-      facebookFeed
-    } = this.props
-
     this.props[`${platform}Feed`].map( item => {
       <FeedCard
-
+        platform={item.provider}
+        image={item.img_url}
+        description={item.description}
+        date={item.date_posted}
+        numLikes={item.num_likes}
       />
     })
   }
 
   render = () => {
-    const { platform } = this.props
+    const { platform, loading } = this.props
 
     return(
       <ScrollView style={styles.feedContainer}>
-        <Text style={{ fontSize: 30, textAlign: 'center', padding: 100 }}> {platform} feed here </Text>
-        {this.renderFeedCards(platform)}
+        { loading ?
+          <View style={styles.loading, { marginTop: 40 }}>
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View> : this.renderFeedCards(platform)}
       </ScrollView>
     )
   }
@@ -58,7 +59,9 @@ class FeedContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     instagramFeed: state.socialFeed.instagramFeed,
-    facebookFeed: state.socialFeed.facebookFeed
+    facebookFeed: state.socialFeed.facebookFeed,
+    accessToken: state.authStore.accessToken,
+    loading: state.socialFeed.fetching
   }
 }
 
