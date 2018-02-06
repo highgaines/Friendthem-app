@@ -12,6 +12,7 @@ import Image from 'react-native-remote-svg';
 // Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import SocialFeedStoreActions, { fetchFeed } from '../../Redux/SocialFeedStoreActions'
 
 // Images
 import { Images } from '../../Themes';
@@ -19,7 +20,7 @@ import { Images } from '../../Themes';
 // Styles
 import styles from '../Styles/FeedContainerStyles';
 
-export default class FeedContainer extends Component {
+class FeedContainer extends Component {
   constructor(props) {
     super(props)
 
@@ -40,3 +41,19 @@ export default class FeedContainer extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    twitterFeed: state.socialFeed.twitterFeed,
+    instagramFeed: state.socialFeed.instagramFeed,
+    facebookFeed: state.socialFeed.facebookFeed
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    ...bindActionCreators({ fetchFeed }, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FeedContainer)

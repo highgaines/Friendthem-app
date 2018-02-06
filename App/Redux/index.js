@@ -13,7 +13,8 @@ export const reducers = combineReducers({
   inviteUsersStore: require('./InviteUsersStore').reducer,
   permissionsStore: require('./PermissionsStore').reducer,
   tokenStore: require('./TokenRedux').reducer,
-  superConnect: require('./SuperConnectStore').reducer
+  superConnect: require('./SuperConnectStore').reducer,
+  socialFeed: require('./SocialFeedStore').reducer
 })
 
 export default () => {
