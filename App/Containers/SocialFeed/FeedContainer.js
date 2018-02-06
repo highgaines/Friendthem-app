@@ -48,8 +48,12 @@ class FeedContainer extends Component {
     return(
       <ScrollView style={styles.feedContainer}>
         { loading ?
-          <View style={styles.loading, { marginTop: 40 }}>
-            <ActivityIndicator size="large" color="#0000ff" />
+          <View
+            style={styles.loading, { marginTop: 40 }}>
+            <ActivityIndicator
+              size="large"
+              color="#0000ff"
+            />
           </View> : this.renderFeedCards(platform)}
       </ScrollView>
     )
