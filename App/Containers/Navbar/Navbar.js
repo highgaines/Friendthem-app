@@ -37,11 +37,11 @@ class Navbar extends Component {
   }
 
   logOut = () => {
-    const { fbLogoutComplete, navigation } = this.props
+    const { logoutComplete, navigation } = this.props
     this.props.logoutUser()
     this.toggleModal()
     LoginManager.logOut();
-    fbLogoutComplete()
+    logoutComplete()
     navigation.navigate('LaunchScreen')
   }
 
@@ -187,14 +187,14 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   const { fbUserInfo } = UserStoreActions
   const { setFriendInfo } = FriendStoreActions
-  const { fbLogoutComplete } = FBStoreActions
+  const { logoutComplete } = FBStoreActions
   const { logoutUser } = AuthStoreActions
 
   return {
     ...bindActionCreators({
       fbUserInfo,
       setFriendInfo,
-      fbLogoutComplete,
+      logoutComplete,
       logoutUser
     }, dispatch)
   }

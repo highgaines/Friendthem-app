@@ -57,7 +57,11 @@ class FriendProfileScreen extends Component {
   }
 
   renderPlatformContainer = platform => {
-      return <FeedContainer platform={platform} />
+      return(
+        <View style={{ height: 366 }}>
+          <FeedContainer platform={platform} />
+        </View>
+      )
   }
 
   handlePlatformChange = platform => {
@@ -109,7 +113,7 @@ class FriendProfileScreen extends Component {
 
   render() {
     const { friendInfo, superConnect, navigation, setSuperConnectPlatforms } = this.props;
-    const { showModal, socialMediaData, syncedCardColors, selectedSocialMedia } = this.state
+    const { showModal, socialMediaData, syncedCardColors, selectedSocialMedia, platform } = this.state
 
     return (
         <View>
@@ -164,18 +168,22 @@ class FriendProfileScreen extends Component {
                 profilePic={friendInfo.picture}
               />
             </View>
-            <SocialMediaCardContainer
-              fromFriendProfile={true}
-              friendPlatforms={friendInfo.social_profiles}
-              onPressCallback={(platform) => this.toggleSocialMediaSelection(platform)}
-              platformSynced={socialMedia => this.socialPlatformPresent(socialMedia)}
-              platformSelected={socialMedia => selectedSocialMedia.includes(socialMedia)}
-            />
-            <SuperConnectBar
-              setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
-              superConnect={() => navigation.navigate('SuperConnectScreen')}/>
-            <View style={styles.superConnectBarContainer}>
-            </View>
+
+            { platform === 'profile' ? <View>
+              <SocialMediaCardContainer
+                fromFriendProfile={true}
+                friendPlatforms={friendInfo.social_profiles}
+                onPressCallback={(platform) => this.toggleSocialMediaSelection(platform)}
+                platformSynced={socialMedia => this.socialPlatformPresent(socialMedia)}
+                platformSelected={socialMedia => selectedSocialMedia.includes(socialMedia)}
+              />
+              <SuperConnectBar
+                setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
+                superConnect={() => navigation.navigate('SuperConnectScreen')}/>
+                <View style={styles.superConnectBarContainer}>
+                </View>
+            </View> :
+             this.renderPlatformContainer(platform)  }
             <View>
               <Navbar
                 navigation={navigation}

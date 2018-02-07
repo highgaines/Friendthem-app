@@ -34,38 +34,19 @@ export default class ScrollWheel extends Component {
               showsHorizontalScrollIndicator={false}
               >
             <View style={styles.platforms}>
-              <TouchableOpacity onPress={() => handlePlatformChange('twitter')}>
-                <SMPlatformCircle platform="twitter" size={70}/>
-                <Text style={selected === 'twitter' ? [styles.text, { color: 'white'}] : styles.text}> Twitter </Text>
-              </TouchableOpacity>
               <TouchableOpacity onPress={() => handlePlatformChange('facebook')}>
                 <SMPlatformCircle platform="facebook" size={70}/>
                 <Text style={selected === 'facebook' ? [styles.text, { color: 'white'}] : styles.text}> Facebook </Text>
               </TouchableOpacity>
+              <TouchableOpacity onPress={() => handlePlatformChange('instagram')}>
+                <SMPlatformCircle platform="instagram" size={70}/>
+                <Text style={selected === 'instagram' ? [styles.text, { color: 'white'}] : styles.text}> Instagram </Text>
+              </TouchableOpacity>
               <TouchableOpacity onPress={() => handleBackToProfile()}>
-                <ImageCircle source={profilePic} size={70}/>
+                <SMPlatformCircle size={70}/>
                 <Text style={selected === 'profile' ? [styles.text, { color: 'white'}] : styles.text}> Profile </Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => handlePlatformChange('snapchat')}>
-                <SMPlatformCircle platform="snapchat" size={70}/>
-                <Text style={selected === 'snapchat' ? [styles.text, { color: 'white'}] : styles.text}> Snapchat </Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => handlePlatformChange('youtube')}>
-                <SMPlatformCircle platform="youtube" size={70}/>
-                <Text style={selected === 'youtube' ? [styles.text, { color: 'white'}] : styles.text}> Youtube </Text>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <SMPlatformCircle platform="twitter" size={70}/>
-                <Text style={styles.text}> Twitter </Text>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <SMPlatformCircle platform="twitter" size={70}/>
-                <Text style={styles.text}> Twitter </Text>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <SMPlatformCircle platform="twitter" size={70}/>
-                <Text style={styles.text}> Twitter </Text>
-              </TouchableOpacity>
+
             </View>
           </ScrollView>
         </LinearGradient>

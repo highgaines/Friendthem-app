@@ -1,31 +1,26 @@
 import React, { Component } from 'react';
 
-
 // Native
 import { Text, View, Linking, TouchableOpacity } from 'react-native';
-import { Images } from '../../Themes';
-import { Icon } from 'react-native-elements';
 
-// Redux
-import { connect } from 'react-redux';
+// Libraries
+import { Icon } from 'react-native-elements';
+import Image from 'react-native-remote-svg';
+
+// Images
+import { Images } from '../../Themes';
 
 // Styles
 import styles from '../Styles/FeedCardStyles';
 
-class FeedCard extends Component {
-  constructor(props) {
-    super(props)
+export default FeedCard = props => {
 
-    this.state = {
-
-    }
-  }
-
-  render = () => {
-    return(
-      <View style={styles.cardContainer}>
-        <Text> Feed Card </Text>
-      </View>
-    )
-  }
+  return(
+    <View style={styles.cardContainer}>
+      <Text> {props.description} </Text>
+      <Text> {props.date} </Text>
+      <Text> {`${props.numLikes} likes`} </Text>
+      <Text> {props.platform} </Text>
+    </View>
+  )
 }

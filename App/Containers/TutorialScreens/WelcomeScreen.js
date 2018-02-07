@@ -27,7 +27,7 @@ export default WelcomeScreen = props => {
             <TouchableOpacity
               style={styles.startButton}
               onPress={closeModal}>
-              <Text style={[styles.text, { textAlign: 'center', numberOfLines: 3}]}> START </Text>
+              <Text style={[styles.text, { textAlign: 'center'}]}> START </Text>
             </TouchableOpacity>
           </View>
         </Modal>
