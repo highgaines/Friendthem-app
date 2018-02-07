@@ -60,6 +60,7 @@ export const INITIAL_STATE = Immutable({
 
 // route will be adjusted after PR for endpoints is up
 export const fetchFeed = (accessToken, userId, platform) => {
+  console.log(accessToken, userId, platform)
   const headers = new Headers()
   headers.append('Authorization', `Bearer ${accessToken}`)
   headers.append('Content-Type', 'application/json')
@@ -76,7 +77,7 @@ export const fetchFeed = (accessToken, userId, platform) => {
       Types.FETCH_FEED_DATA_FAILURE
     ],
     shouldCallApi: state => true,
-    callApi: dispatch => fetchFromApi('user_feed/', init, dispatch)
+    callApi: dispatch => fetchFromApi(`feed/${userId}`, init, dispatch)
   }
 }
 

@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity, AppState } from 'react-native'
+import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity, AppState, ActionSheetIOS } from 'react-native'
 
 // Libraries
 import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from 'react-native-elements';
 import FBSDK, { LoginManager } from 'react-native-fbsdk';
 import Communications from 'react-native-communications';
+import Contacts from 'react-native-contacts';
 
 // Redux
 import FBStoreActions from '../../Redux/FBStore';
@@ -57,9 +58,10 @@ class FriendProfileScreen extends Component {
   }
 
   renderPlatformContainer = platform => {
+    const { friendInfo } = this.props
       return(
         <View style={{ height: 366 }}>
-          <FeedContainer platform={platform} />
+          <FeedContainer platform={platform} userId={friendInfo.id} />
         </View>
       )
   }
@@ -79,7 +81,20 @@ class FriendProfileScreen extends Component {
 
   handleCall = () => {
     // call action here - needs to be hooked up to friend/user's actual phone number if they have one, otherwise this action will trigger alert?
-    Communications.phonecall('3472917739', true)
+    // Communications.phonecall('3472917739', true)
+    const newPerson = {
+      emailAddresses: [{
+        label: "work",
+        email: "mrniet@example.com",
+      }],
+      familyName: "Nietzsche",
+      givenName: "Friedrich",
+    }
+    ActionSheetIOS.showActionSheetWithOptions({
+      options: ['Add To Contacts', 'Remove', 'Cancel']
+    }, (buttonIndex) => {
+      if (buttonIndex === 0) { console.log }
+    })
   }
 
   socialPlatformPresent = (provider) => {
