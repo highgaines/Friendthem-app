@@ -24,7 +24,7 @@ import AuthStoreActions, { socialMediaAuth } from '../../Redux/AuthStore'
 import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
 
 // Images
-import { Images } from '../../Themes';
+import { Images } from '../../Themes'
 
 // Styles
 import styles from '../Styles/UserProfileStyles'

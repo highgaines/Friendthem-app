@@ -41,12 +41,8 @@ class FeedContainer extends Component {
     return this.props[`${platform}Feed`].map( item => {
       return(
         <FeedCard
-          platform={item.provider}
-          image={item.img_url}
-          description={item.description}
-          date={item.date_posted}
-          numLikes={item.num_likes}
-        />
+          item={item}
+          />
       )
     })
   }
