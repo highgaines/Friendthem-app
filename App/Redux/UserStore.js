@@ -19,7 +19,10 @@ const { Types, Creators } = createActions({
   updateUserPositionFailure: null,
   updateSnapRequest: null,
   updateSnapSuccess: null,
-  updateSnapFailure: null
+  updateSnapFailure: null,
+  updateSettingsRequest: null,
+  updateSettingsSuccess: null,
+  updateSettingsFailure: null
 })
 
 export const UserTypes = Types
@@ -47,7 +50,10 @@ export const INITIAL_STATE = Immutable({
     hobbies: [],
     hometown: '',
     phone_number: '',
-  }
+  },
+  ghostModeOn: true,
+  notificationsOn: true,
+  fetching: false
 })
 
 export const getUserId = (accessToken) => {
@@ -156,7 +162,33 @@ export const updateSnapInfo = (provider, username, accessToken) => {
     shouldCallApi: state => true,
     callApi: dispatch => fetchFromApi('social_profile/', init, dispatch)
   }
+}
 
+export const updateSettings = (accessToken, setting, mode) => {
+
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('Authorization', `Bearer ${accessToken}`)
+
+  const body = {
+    [setting]: mode
+  }
+
+  const init = {
+    method: 'PATCH',
+    headers,
+    body: JSON.stringify(body)
+  }
+
+  return {
+    types: [
+      Types.UPDATE_SETTINGS_REQUEST,
+      Types.UPDATE_SETTINGS_SUCCESS,
+      Types.UPDATE_SETTINGS_FAILURE
+    ],
+    shoudlCallApi: state => true,
+    callApi: dispatch => fetchFromApi('me/profile/', init, dispatch)
+  }
 }
 /* ------------- Reducers ------------- */
 const handleFbUserInfoSuccess = (state = INITIAL_STATE, action) => {
@@ -248,6 +280,28 @@ const handleUpdateSnapFailure = (state, action) => {
   return state
 }
 
+const handleUpdateSettingsRequest = (state, action) => {
+  return {
+    ...state,
+    fetching: true
+  }
+}
+
+const handleUpdateSettingsSuccess = (state, action) => {
+  debugger
+  return {
+    ...state,
+    fetching: false
+  }
+}
+
+const handleUpdateSettingsFailure = (state, action) => {
+  return {
+    ...state,
+    fetching: false
+  }
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -264,5 +318,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.UPDATE_USER_POSITION_FAILURE]: handleUpdateUserPositionFailure,
   [Types.UPDATE_SNAP_REQUEST]: handleUpdateSnapRequest,
   [Types.UPDATE_SNAP_SUCCESS]: handleUpdateSnapSuccess,
-  [Types.UPDATE_SNAP_FAILURE]: handleUpdateSnapFailure
+  [Types.UPDATE_SNAP_FAILURE]: handleUpdateSnapFailure,
+  [Types.UPDATE_SETTINGS_REQUEST]: handleUpdateSettingsRequest,
+  [Types.UPDATE_SETTINGS_SUCCESS]: handleUpdateSettingsSuccess,
+  [Types.UPDATE_SETTINGS_FAILURE]: handleUpdateSettingsFailure
 })

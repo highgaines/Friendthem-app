@@ -11,6 +11,7 @@ import Communications from 'react-native-communications';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import FBStoreActions, { fbLogoutComplete } from '../../Redux/FBStore';
+import UserStoreActions, { updateSettings } from '../../Redux/UserStore';
 
 // Components
 import ConnectButton from '../SuperConnectScreen/ConnectButton'
@@ -52,11 +53,15 @@ class SettingsScreen extends Component {
 
   toggleSilenceNotification = () => {
     const { silenceSwitch } = this.state
+    const { updateSettings, accessToken } = this.props
+    updateSettings(accessToken, 'notifications', !silenceSwitch)
     this.setState({ silenceSwitch: !silenceSwitch})//, () => silenceNotifications( !silenceSwitch ))
   }
 
   toggleGhostMode = () => {
     const { ghostSwitch } = this.state
+    const { updateSettings, accessToken } = this.props
+    updateSettings(accessToken, 'ghost_mode', !ghostSwitch)
     this.setState({ ghostSwitch: !ghostSwitch })//, () => ghostMode(!ghostSwitch))
   }
 
@@ -182,13 +187,14 @@ class SettingsScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-
+  accessToken: state.authStore.accessToken
 })
 
 const mapDispatchToProps = dispatch => {
   const { fbLogoutComplete } = FBStoreActions
+
   return {
-    ...bindActionCreators({ fbLogoutComplete }, dispatch)
+    ...bindActionCreators({ fbLogoutComplete, updateSettings }, dispatch)
   }
 }
 
