@@ -54,15 +54,19 @@ class SettingsScreen extends Component {
   toggleSilenceNotification = () => {
     const { silenceSwitch } = this.state
     const { updateSettings, accessToken } = this.props
-    updateSettings(accessToken, 'notifications', !silenceSwitch)
-    this.setState({ silenceSwitch: !silenceSwitch})//, () => silenceNotifications( !silenceSwitch ))
+
+    this.setState(
+      { silenceSwitch: !silenceSwitch},
+      () => updateSettings(accessToken, 'notifications', !silenceSwitch))
   }
 
   toggleGhostMode = () => {
     const { ghostSwitch } = this.state
     const { updateSettings, accessToken } = this.props
-    updateSettings(accessToken, 'ghost_mode', !ghostSwitch)
-    this.setState({ ghostSwitch: !ghostSwitch })//, () => ghostMode(!ghostSwitch))
+
+    this.setState(
+      { ghostSwitch: !ghostSwitch },
+      () => updateSettings(accessToken, 'ghost_mode', !ghostSwitch))/
   }
 
   render() {
