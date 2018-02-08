@@ -77,7 +77,7 @@ export const fetchFeed = (accessToken, userId, platform) => {
       Types.FETCH_FEED_DATA_FAILURE
     ],
     shouldCallApi: state => true,
-    callApi: dispatch => fetchFromApi(`feed/${userId}`, init, dispatch)
+    callApi: dispatch => fetchFromApi(`feed/${userId}/`, init, dispatch)
   }
 }
 
