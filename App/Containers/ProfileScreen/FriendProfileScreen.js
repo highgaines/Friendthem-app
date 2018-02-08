@@ -80,22 +80,20 @@ class FriendProfileScreen extends Component {
   }
 
   handleCall = () => {
-    // call action here - needs to be hooked up to friend/user's actual phone number if they have one, otherwise this action will trigger alert?
+    // call action here - needs to be hooked up to user phone number
+    const { friendInfo } = this.props
 
     const userData = {
-      emailAddresses: [{
-        label: "work",
-        email: "mrniet@example.com",
-      }],
       phoneNumbers: [{
         label: 'mobile',
-        number: '(347) 291-7739'
+        number: '3472917739'
       }],
-      familyName: "Khan",
-      givenName: "Naz",
+      familyName: `${friendInfo.last_name}`,
+      givenName: `${friendInfo.first_name}`,
     }
+
     ActionSheetIOS.showActionSheetWithOptions({
-      options: [`Call ${phone}`, 'Add To Contacts', 'Cancel']
+      options: [`Call 3472917739`, 'Add To Contacts', 'Cancel']
     }, (buttonIndex) => {
       if (buttonIndex === 0) {
         Communications.phonecall('3472917739', true)
