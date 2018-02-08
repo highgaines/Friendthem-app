@@ -80,7 +80,7 @@ class ConnectivityCard extends Component {
               />
               <ImageCircle
                 size={75}
-                source={friendData.picture}
+                source={`${friendData.picture}`}
                 extraStyles={{ position: 'absolute'}}
               />
             </View>

@@ -38,7 +38,7 @@ class FeedContainer extends Component {
   }
 
   renderFeedCards = platform => {
-    return this.props[`${platform}Feed`].map( item => {
+    return this.props.feed.map( item => {
       return(
         <FeedCard
           platform={item.provider}
@@ -72,8 +72,7 @@ class FeedContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    instagramFeed: state.socialFeed.instagramFeed,
-    facebookFeed: state.socialFeed.facebookFeed,
+    feed: state.socialFeed.feed,
     accessToken: state.authStore.accessToken,
     loading: state.socialFeed.fetching
   }

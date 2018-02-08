@@ -53,6 +53,7 @@ export const INITIAL_STATE = Immutable({
     	provider: 'facebook'
     }
   ],
+  feed: [],
   fetching: false
 })
 
@@ -77,7 +78,7 @@ export const fetchFeed = (accessToken, userId, platform) => {
       Types.FETCH_FEED_DATA_FAILURE
     ],
     shouldCallApi: state => true,
-    callApi: dispatch => fetchFromApi(`feed/${userId}/`, init, dispatch)
+    callApi: dispatch => fetchFromApi(`feed/${userId}/${platform}/`, init, dispatch)
   }
 }
 
@@ -91,7 +92,7 @@ const handleFeedDataSuccess = (state, action) => {
   return {
     ...state,
     fetching: false,
-    [action.platform]: action.data
+    feed: action.response.data.data
   }
 }
 
