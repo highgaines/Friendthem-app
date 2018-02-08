@@ -93,7 +93,9 @@ class FriendProfileScreen extends Component {
     ActionSheetIOS.showActionSheetWithOptions({
       options: ['Add To Contacts', 'Remove', 'Cancel']
     }, (buttonIndex) => {
-      if (buttonIndex === 0) { console.log }
+      if (buttonIndex === 0) {
+        Contacts.openContactForm(newPerson, (err) => { console.log(err)})
+       }
     })
   }
 
