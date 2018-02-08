@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity, AppState } from 'react-native'
+import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity, AppState, ActionSheetIOS } from 'react-native'
 
 // Libraries
-import LinearGradient from 'react-native-linear-gradient'
-import { Icon } from 'react-native-elements'
-import FBSDK, { LoginManager } from 'react-native-fbsdk'
-import Communications from 'react-native-communications'
+import LinearGradient from 'react-native-linear-gradient';
+import { Icon } from 'react-native-elements';
+import FBSDK, { LoginManager } from 'react-native-fbsdk';
+import Communications from 'react-native-communications';
+import Contacts from 'react-native-contacts';
 
 // Redux
 import FBStoreActions from '../../Redux/FBStore'
@@ -57,9 +58,10 @@ class FriendProfileScreen extends Component {
   }
 
   renderPlatformContainer = platform => {
+    const { friendInfo } = this.props
       return(
         <View style={{ height: 366 }}>
-          <FeedContainer platform={platform} />
+          <FeedContainer platform={platform} userId={friendInfo.id} />
         </View>
       )
   }
@@ -78,8 +80,27 @@ class FriendProfileScreen extends Component {
   }
 
   handleCall = () => {
-    // call action here - needs to be hooked up to friend/user's actual phone number if they have one, otherwise this action will trigger alert?
-    Communications.phonecall('3472917739', true)
+    // call action here - needs to be hooked up to user phone number
+    const { friendInfo } = this.props
+
+    const userData = {
+      phoneNumbers: [{
+        label: 'mobile',
+        number: '3472917739'
+      }],
+      familyName: `${friendInfo.last_name}`,
+      givenName: `${friendInfo.first_name}`,
+    }
+
+    ActionSheetIOS.showActionSheetWithOptions({
+      options: [`Call 3472917739`, 'Add To Contacts', 'Cancel']
+    }, (buttonIndex) => {
+      if (buttonIndex === 0) {
+        Communications.phonecall('3472917739', true)
+      } else if (buttonIndex === 1) {
+        Contacts.openContactForm(userData, (err) => { console.log(err)})
+      }
+    })
   }
 
   socialPlatformPresent = (provider) => {

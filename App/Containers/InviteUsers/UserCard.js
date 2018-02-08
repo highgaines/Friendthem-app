@@ -47,7 +47,7 @@ export default UserCard = props => {
       <View style={styles.imageColumn}>
         <ImageCircle
           size={70}
-          source={userImage}
+          source={`${userImage}`}
         />
       </View>
 

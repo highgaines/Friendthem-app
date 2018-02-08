@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+  import React, { Component } from 'react'
 
 import { View, TouchableOpacity, Text, Button, ScrollView, ActivityIndicator } from 'react-native';
 
@@ -38,7 +38,7 @@ class FeedContainer extends Component {
   }
 
   renderFeedCards = platform => {
-    return this.props[`${platform}Feed`].map( item => {
+    return this.props.feed.map( item => {
       return(
         <FeedCard
           item={item}
@@ -68,8 +68,7 @@ class FeedContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    instagramFeed: state.socialFeed.instagramFeed,
-    facebookFeed: state.socialFeed.facebookFeed,
+    feed: state.socialFeed.feed,
     accessToken: state.authStore.accessToken,
     loading: state.socialFeed.fetching
   }

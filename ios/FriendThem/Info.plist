@@ -79,6 +79,8 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>FriendThem would like to know your location so that we can better connect you with the people around you.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>FriendThem would like to access your contacts to enable you to add your new friends&apos; information directly into your phonebook.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
@@ -121,6 +123,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSContactsUsageDescription</key>
+	<string></string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>
