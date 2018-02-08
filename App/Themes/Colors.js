@@ -25,7 +25,8 @@ const colors = {
   medGray: '#808080',
   lightGray: '#EDEDED',
   charcoalGray: '#4A4A4A',
-  borderGray: '#D2D2D2'
+  borderGray: '#D2D2D2',
+  socialMediaBlue: '#3b5998'
 }
 
 export default colors

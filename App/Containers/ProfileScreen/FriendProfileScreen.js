@@ -4,28 +4,28 @@ import { bindActionCreators } from 'redux'
 import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity, AppState } from 'react-native'
 
 // Libraries
-import LinearGradient from 'react-native-linear-gradient';
-import { Icon } from 'react-native-elements';
-import FBSDK, { LoginManager } from 'react-native-fbsdk';
-import Communications from 'react-native-communications';
+import LinearGradient from 'react-native-linear-gradient'
+import { Icon } from 'react-native-elements'
+import FBSDK, { LoginManager } from 'react-native-fbsdk'
+import Communications from 'react-native-communications'
 
 // Redux
-import FBStoreActions from '../../Redux/FBStore';
+import FBStoreActions from '../../Redux/FBStore'
 import SuperConnectActions from '../../Redux/SuperConnectStore'
 import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
 
 // Components
-import Navbar from '../Navbar/Navbar';
-import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer';
+import Navbar from '../Navbar/Navbar'
+import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer'
 import SuperConnectBar from '../SuperConnectScreen/SuperConnectBar'
-import ScrollWheel from './ScrollWheel';
-import FeedContainer from '../SocialFeed/FeedContainer';
+import ScrollWheel from './ScrollWheel'
+import FeedContainer from '../SocialFeed/FeedContainer'
 
 // Constants
 import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
 
 // Styles
-import styles from '../Styles/UserProfileStyles';
+import styles from '../Styles/UserProfileStyles'
 
 
 class FriendProfileScreen extends Component {
@@ -112,7 +112,7 @@ class FriendProfileScreen extends Component {
   }
 
   render() {
-    const { friendInfo, superConnect, navigation, setSuperConnectPlatforms } = this.props;
+    const { friendInfo, superConnect, navigation, setSuperConnectPlatforms } = this.props
     const { showModal, socialMediaData, syncedCardColors, selectedSocialMedia, platform } = this.state
 
     return (

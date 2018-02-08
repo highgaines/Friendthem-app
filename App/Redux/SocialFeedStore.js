@@ -19,36 +19,39 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   instagramFeed: [
     {
-    	img_url: "https://cdn-images-1.medium.com/max/1200/*jB76MLZjiNhGSQQvxm7LSQ.gif",
     	num_likes: 38,
     	description: 'Hello world!!',
-    	date_posted: 'Monday, February 5th 8:33PM',
+    	date_posted: 'February 5th at 8:33PM',
     	type: 'photo',
-    	provider: 'instagram'
+    	provider: 'instagram',
+      handle: 'jimzhang93'
     },
     {
     	img_url: 'http://www.petsworld.in/blog/wp-content/uploads/2014/09/cute-kittens.jpg',
     	num_likes: 44,
     	description: 'I love cats!!!',
-    	date_posted: 'Tuesday, February 6th 12:01 PM',
+    	date_posted: 'February 6th at 12:01PM',
     	type: 'photo',
-    	provider: 'instagram'
+    	provider: 'instagram',
+      handle: 'jimzhang93'
     }
   ],
   facebookFeed: [
     {
+      name: 'Jimmy Zhang',
     	img_url: '',
     	num_likes: 3,
     	description: 'Star Wars!',
-    	date_posted: 'Monday, February 5th 9:43PM',
+    	date_posted: 'February 5th 9:43PM',
     	type: 'photo',
     	provider: 'facebook'
     },
     {
+      name: 'Jimmy Zhang',
     	img_url: '',
     	num_likes: 9,
     	description: 'Crypto is trading sideways! Oh no!',
-    	date_posted: 'Sunday, February 4th 11:18 PM',
+    	date_posted: 'February 4th at 11:18PM',
     	type: 'status',
     	provider: 'facebook'
     }
