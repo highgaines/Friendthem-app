@@ -66,7 +66,7 @@ class SettingsScreen extends Component {
 
     this.setState(
       { ghostSwitch: !ghostSwitch },
-      () => updateSettings(accessToken, 'ghost_mode', !ghostSwitch))/
+      () => updateSettings(accessToken, 'ghost_mode', !ghostSwitch))
   }
 
   render() {
