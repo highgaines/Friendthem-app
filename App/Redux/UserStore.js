@@ -288,7 +288,7 @@ const handleUpdateSettingsRequest = (state, action) => {
 }
 
 const handleUpdateSettingsSuccess = (state, action) => {
-  debugger
+
   return {
     ...state,
     fetching: false
