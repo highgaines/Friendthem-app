@@ -187,7 +187,7 @@ export const updateSettings = (accessToken, setting, mode) => {
       Types.UPDATE_SETTINGS_FAILURE
     ],
     shoudlCallApi: state => true,
-    callApi: dispatch => fetchFromApi('profile/me', init, dispatch)
+    callApi: dispatch => fetchFromApi('profile/me/', init, dispatch)
   }
 }
 /* ------------- Reducers ------------- */
