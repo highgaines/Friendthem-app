@@ -38,7 +38,8 @@ export default StyleSheet.create({
   },
   descriptionText: {
     color: Colors.charcoalGray,
-    fontSize: 18
+    fontSize: 18,
+    marginTop: 15
   },
   image: {
     marginTop: 10,
