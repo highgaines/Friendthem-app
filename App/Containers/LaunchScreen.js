@@ -42,7 +42,6 @@ class LaunchScreen extends Component {
   }
 
   componentWillMount = () => {
-    console.log('hit willmount')
     this.checkPermissions()
     if (this.props.loggedIn) {
       this.props.navigation.navigate('UserProfileScreen')
@@ -58,18 +57,10 @@ class LaunchScreen extends Component {
     }
   }
 
-  // componentDidUpdate = prevProps = {
-  //   const { locationPermission, notificationPermission } = this.props
-  //   const permissionsGranted = locationPermission && notificationPermission
-  //
-  //
-  // }
-
   checkPermissions = () => {
     const { setGeoPermission, setNotifPermission } = this.props
 
     Permissions.check('location', { type: 'always' }).then(response => {
-      console.log(response)
       if (response === 'authorized') {
         setGeoPermission(true)
       }
