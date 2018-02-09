@@ -76,24 +76,23 @@ class SuperConnect extends Component {
     this.setState({ appState: nextAppState });
   }
 
+  asyncSuperConnectPlatform = async (platform, apiAccessToken, friendId) => {
+    await this.props.superConnectPlatform(platform, apiAccessToken, friendId)
+  }
+
   superConnectPromiseLoop = () => {
     const { selectedSocialMedia, friendInfo, superConnectPlatform, apiAccessToken, setManualPlatforms } = this.props
     const { userInputRequiredPlatforms, manualPlatforms } = this.state
+    let platform;
 
     this.setState({ connectionModalOpen: true })
     for (let i = 0; i < selectedSocialMedia.length; i++) {
       this.setState({ connectionStepCount: i + 1 })
-
-      if (manualPlatforms.includes(selectedSocialMedia[i])) {
-        userInputRequiredPlatforms.push(selectedSocialMedia[i])
+      platform = selectedSocialMedia[i]
+      if (manualPlatforms.includes(platform)) {
+        userInputRequiredPlatforms.push(platform)
       } else {
-          superConnectPlatform(selectedSocialMedia[i], apiAccessToken, friendInfo.id).then(resp => {
-            if (resp) {
-              return true
-            } else {
-              return false
-            }
-        })
+        this.asyncSuperConnectPlatform(platform, apiAccessToken, friendInfo.id)
       }
     }
     this.setState({connectionModalOpen: false },

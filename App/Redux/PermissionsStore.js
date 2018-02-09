@@ -19,8 +19,8 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  geolocation: null,
-  notifications: null,
+  nativeGeolocation: false,
+  nativeNotifications: false,
   locationPermissionsGranted: false,
   notificationPermissionsGranted: false,
   locationIntervalRunning: false
@@ -40,14 +40,14 @@ export const setNotifPermission = permission => {
 
 /* ----------------- Reducers ----------------- */
 
-const handleSetGeolocation = (state = INITIAL_STATE, action) => {
+const handleSetNativeGeolocation = (state = INITIAL_STATE, action) => {
   const { permission } = action.payload
-  return state.merge({ geolocation: permission })
+  return state.merge({ nativeGeolocation: permission })
 }
 
-const handleSetNotification = (state = INITIAL_STATE, action) => {
+const handleSetNativeNotification = (state = INITIAL_STATE, action) => {
   const { permission } = action.payload
-  return state.merge({ notifications: permission })
+  return state.merge({ nativeNotifications: permission })
 }
 
 const handleLocationPermissions = (state, action) => {
@@ -84,8 +84,8 @@ const removeLocationInterval = (state, action) => {
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGOUT_USER]: removeLocationInterval,
   [Types.SET_LOCATION_INTERVAL]: setLocationInterval,
-  [Types.SET_GEO_PERMISSION]: handleSetGeolocation,
-  [Types.SET_NOTIF_PERMISSION]: handleSetNotification,
+  [Types.SET_GEO_PERMISSION]: handleSetNativeGeolocation,
+  [Types.SET_NOTIF_PERMISSION]: handleSetNativeNotification,
   [Types.GRANT_LOCATION_PERMISSION]: handleLocationPermissions,
   [Types.GRANT_NOTIFICATION_PERMISSION]: handleNotificationPermissions
 })

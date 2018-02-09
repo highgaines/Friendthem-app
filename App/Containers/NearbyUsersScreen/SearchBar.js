@@ -36,6 +36,7 @@ class SearchBar extends Component {
   render = () => {
     const { numUsers, navigation } = this.props
     const { searchMode } = this.state
+    const pluralUsers = numUsers > 1 ? 'People' : 'Person'
 
     const backAction =  NavigationActions.back()
 
@@ -58,7 +59,9 @@ class SearchBar extends Component {
           </View>
         { searchMode
           ? this.renderSearchForm()
-          : <Text style={styles.numUsers}> {numUsers} People Nearby </Text>
+          : <Text style={styles.numUsers}>
+              {numUsers} {pluralUsers} Nearby
+            </Text>
         }
           <View style={styles.backIcon}>
             <Icon

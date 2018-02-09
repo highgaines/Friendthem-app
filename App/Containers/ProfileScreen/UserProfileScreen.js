@@ -74,7 +74,9 @@ class UserProfileScreen extends Component {
   }
 
   componentDidMount = () => {
-    setTimeout(() => this.triggerFriendster(), 2200)
+    if (!this.props.userInfo.social_profiles.length) {
+      setTimeout(() => this.triggerFriendster(), 1500)
+    }
   }
 
   componentWillUpdate = (nextProps, nextState) => {

@@ -42,17 +42,10 @@ class LaunchScreen extends Component {
   }
 
   componentWillMount = () => {
+    this.checkPermissions()
     if (this.props.loggedIn) {
       this.props.navigation.navigate('UserProfileScreen')
     }
-  }
-
-  componentDidMount = () => {
-    Permissions.check('location', { type: 'always' }).then(response => {
-      if (response === 'authorized') {
-        this.props.setLocationInterval()
-      }
-    })
   }
 
   componentWillUpdate = nextProps => {
@@ -62,6 +55,21 @@ class LaunchScreen extends Component {
       this.getFbProfile(nextProps.fbAuthToken)
       this.handleLoadingComplete()
     }
+  }
+
+  checkPermissions = () => {
+    const { setGeoPermission, setNotifPermission } = this.props
+
+    Permissions.check('location', { type: 'always' }).then(response => {
+      if (response === 'authorized') {
+        setGeoPermission(true)
+      }
+    })
+    Permissions.check('notification').then(response => {
+      if (response === 'authorized') {
+        setNotifPermission(true)
+      }
+    })
   }
 
   handleLoading = () => {
@@ -174,22 +182,25 @@ class LaunchScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  fbAuthToken: state.fbStore.fbAccessToken,
   nav: state.nav,
   loggedIn: state.authStore.loggedIn,
-  locationIntervalRunning: state.permissionsStore.locationIntervalRunning
+  fbAuthToken: state.fbStore.fbAccessToken,
 })
 
 const mapDispatchToProps = dispatch => {
   const { logoutUser } = AuthStoreActions
   const { fbUserInfo } = UserStoreActions
-  const { setLocationInterval } = PermissionsStoreActions
+  const {
+    setGeoPermission,
+    setNotifPermission,
+    setLocationInterval
+  } = PermissionsStoreActions
 
   return {
     ...bindActionCreators({
+      logoutUser,
       fbUserInfo,
       loginByFacebook,
-      logoutUser,
       setLocationInterval
     }, dispatch)
   }

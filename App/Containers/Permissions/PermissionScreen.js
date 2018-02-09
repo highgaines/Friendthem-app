@@ -36,15 +36,15 @@ class PermissionScreen extends Component {
       navigation,
       permissionType,
       grantLocationPermission,
-      grantNotificationPermission
+      grantNotificationPermission,
     } = this.props
     const { navigate } = navigation
 
     if (permissionType === 'geolocation') {
-      grantLocationPermission()
+      grantLocationPermission(true)
       navigate('PermissionScreen', { permissionType: 'notifications', navigation: navigation })
     } else {
-      grantNotificationPermission()
+      grantNotificationPermission(true)
       navigate('ForkScreen', { navigation: navigation })
     }
   }
@@ -111,13 +111,11 @@ class PermissionScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  // hook up state to props
+
 })
 
 const mapDispatchToProps = dispatch => {
   const {
-    setGeoPermission,
-    setNotifPermission,
     grantLocationPermission,
     grantNotificationPermission
    } = PermissionsStoreActions
@@ -126,8 +124,6 @@ const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({
       setFriendInfo,
-      setGeoPermission,
-      setNotifPermission,
       grantLocationPermission,
       grantNotificationPermission
     }, dispatch)

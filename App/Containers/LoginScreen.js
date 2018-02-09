@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { ScrollView, Text, TextInput, Image, View, TouchableOpacity } from 'react-native'
 import { CheckBox, Icon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
+import Permissions from 'react-native-permissions'
 
 import Footer from './UtilityComponents/Footer'
 import AuthStoreActions, { login } from '../Redux/AuthStore'
+import PermissionsStoreActions from '../Redux/PermissionsStore'
 import styles from './Styles/UserProfileInfoStyles'
 
 class LoginScreen extends Component {
@@ -15,15 +18,32 @@ class LoginScreen extends Component {
     this.state = {
       userEmail: '',
       userPassword: '',
-      rememberMe: false
+      rememberMe: false,
     }
   }
 
   componentDidUpdate = (prevProps) => {
-    const { loggedIn, navigation, authError } = this.props
+    const {
+      loggedIn,
+      authError,
+      navigation,
+      locationPermission,
+      notificationPermission
+    } = this.props
+    const permissionsGranted = locationPermission && notificationPermission
 
     if (loggedIn && !prevProps.loggedIn) {
-      navigation.navigate('PermissionScreen', { permissionType: 'geolocation', navigation: navigation });
+      if (permissionsGranted) {
+        navigation.navigate('ForkScreen')
+      } else if (!locationPermission) {
+        navigation.navigate('PermissionScreen', {
+          permissionType: 'geolocation', navigation: navigation
+        })
+      } else {
+        navigation.navigate('PermissionScreen', {
+          permissionType: 'notifications', navigation: navigation
+        })
+      }
     }
 
     if (authError && !prevProps.authError) {
@@ -111,12 +131,16 @@ class LoginScreen extends Component {
 
 const mapStateToProps = state => ({
   loggedIn: state.authStore.loggedIn,
-  authError: state.authStore.authError
+  authError: state.authStore.authError,
+  locationPermission: state.permissionsStore.locationPermissionsGranted,
+  notificationPermission: state.permissionsStore.notificationPermissionsGranted,
 })
 
 const mapDispatchToProps = dispatch => {
   return {
-    loginUser: (userObj) => dispatch(login(userObj))
+    ...bindActionCreators({
+      loginUser: login,
+    }, dispatch)
   }
 }
 
