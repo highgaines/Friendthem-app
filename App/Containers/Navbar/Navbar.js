@@ -84,7 +84,6 @@ class Navbar extends Component {
   }
 
   render() {
-    const { current } = this.props
 
     return(
         <View style={[this.props.navbarStyle || styles.navbarRow, { marginTop: this.props.margin }]}>
