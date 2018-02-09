@@ -1,27 +1,32 @@
-import React, { Component } from 'react'
-import { ScrollView, Text, Image, View, TouchableOpacity, Switch } from 'react-native'
+import React, { Component } from 'react';
+import { ScrollView, Text, Image, View, TouchableOpacity, Switch } from 'react-native';
 
 // Librarires
-import LinearGradient from 'react-native-linear-gradient'
-import { Icon } from 'react-native-elements'
+import LinearGradient from 'react-native-linear-gradient';
+import { Icon } from 'react-native-elements';
 import FBSDK, { LoginManager } from 'react-native-fbsdk';
 import Communications from 'react-native-communications';
+import Modal from 'react-native-modal';
 
 // Redux
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import FBStoreActions, { fbLogoutComplete } from '../../Redux/FBStore';
+import UserStoreActions, { updateSettings, getUserInfo } from '../../Redux/UserStore';
 
 // Components
-import ConnectButton from '../SuperConnectScreen/ConnectButton'
-import SocialMediaCard from '../SocialMediaCards/SocialMediaCard'
-import Navbar from '../Navbar/Navbar'
+import ConnectButton from '../SuperConnectScreen/ConnectButton';
+import SocialMediaCard from '../SocialMediaCards/SocialMediaCard';
+import Navbar from '../Navbar/Navbar';
 
 // Images
-import { Images } from '../../Themes'
+import { Images } from '../../Themes';
+
+// Constants
+import { TERMS_AND_CONDITIONS } from '../../Utils/legal';
 
 // Styles
-import styles from '../Styles/SettingsStyles'
+import styles from '../Styles/SettingsStyles';
 
 class SettingsScreen extends Component {
   constructor(props) {
@@ -29,8 +34,14 @@ class SettingsScreen extends Component {
 
     this.state = {
       silenceSwitch: false,
-      ghostSwitch: false
+      ghostSwitch: false,
+      termsVisible: false
     }
+  }
+
+  componentDidMount = () => {
+    const { getUserInfo, accessToken } = this.props
+    getUserInfo(accessToken)
   }
 
   logOut = () => {
@@ -52,17 +63,32 @@ class SettingsScreen extends Component {
 
   toggleSilenceNotification = () => {
     const { silenceSwitch } = this.state
-    this.setState({ silenceSwitch: !silenceSwitch})//, () => silenceNotifications( !silenceSwitch ))
+    const { updateSettings, accessToken } = this.props
+
+    this.setState(
+      { silenceSwitch: !silenceSwitch},
+      () => updateSettings(accessToken, 'notifications', !silenceSwitch)
+    )
   }
 
   toggleGhostMode = () => {
     const { ghostSwitch } = this.state
-    this.setState({ ghostSwitch: !ghostSwitch })//, () => ghostMode(!ghostSwitch))
+    const { updateSettings, accessToken } = this.props
+
+    this.setState(
+      { ghostSwitch: !ghostSwitch },
+      () => updateSettings(accessToken, 'ghost_mode', !ghostSwitch)
+    )
+  }
+
+  toggleTNCModal = () => {
+    const { termsVisible } = this.state
+    this.setState({ termsVisible: !termsVisible})
   }
 
   render() {
     const { navigation, toggleModal } = this.props
-    const { silenceSwitch, ghostSwitch } = this.state
+    const { silenceSwitch, ghostSwitch, termsVisible } = this.state
 
     return (
         <View style={styles.container}>
@@ -85,9 +111,23 @@ class SettingsScreen extends Component {
           <ScrollView style={styles.scrollView}>
           <View style={styles.sectionTitle}>
             <Text style={styles.sectionTitleText}>
-              General Setting
+              General Settings
             </Text>
           </View>
+          <Modal
+            animationIn="slideInUp"
+            animationOut="slideOutDown"
+            onBackdropPress={this.toggleTNCModal}
+            isVisible={termsVisible}
+          >
+            <View style={{ flex: 1 }}>
+              <ScrollView contentContainerStyle={styles.containerModal}>
+                <Text style={{ fontSize: 6 }}>
+                  {TERMS_AND_CONDITIONS}
+                </Text>
+              </ScrollView>
+            </View>
+          </Modal>
           <TouchableOpacity
             style={styles.sectionItem}
             onPress={this.handleReportProblem}
@@ -118,7 +158,10 @@ class SettingsScreen extends Component {
               style={styles.rightArrow}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.sectionItem}>
+          <TouchableOpacity
+            style={styles.sectionItem}
+            onPress={this.toggleTNCModal}
+            >
             <Image
               source={Images.file}
               />
@@ -182,13 +225,16 @@ class SettingsScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-
+  accessToken: state.authStore.accessToken,
+  ghostMode: state.userStore.ghostModeOn,
+  notifications: state.userStore.notificationsOn
 })
 
 const mapDispatchToProps = dispatch => {
   const { fbLogoutComplete } = FBStoreActions
+
   return {
-    ...bindActionCreators({ fbLogoutComplete }, dispatch)
+    ...bindActionCreators({ fbLogoutComplete, updateSettings, getUserInfo }, dispatch)
   }
 }
 
