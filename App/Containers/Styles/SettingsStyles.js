@@ -13,6 +13,12 @@ export default StyleSheet.create({
     shadowOffset: { height: 5, width: 0 },
     zIndex: 99
   },
+  containerModal: {
+    width: Metrics.screenWidth *.9,
+    padding: 10,
+    backgroundColor: 'white',
+    borderRadius: 20
+  },
   backArrow: {
     position: 'absolute',
     left: 20,

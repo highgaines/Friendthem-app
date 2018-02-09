@@ -19,7 +19,7 @@ import PersonalInfoTab from './PersonalInfoTab'
 import FriendThemModal from '../UtilityComponents/FriendThemModal'
 
 // Redux
-import UserStoreActions, { getUserId, updateInfo, updateSnapInfo } from '../../Redux/UserStore'
+import UserStoreActions, { getUserInfo, updateInfo, updateSnapInfo } from '../../Redux/UserStore'
 import AuthStoreActions, { socialMediaAuth } from '../../Redux/AuthStore'
 import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
 
@@ -57,11 +57,11 @@ class UserProfileScreen extends Component {
   }
 
   componentWillMount = () => {
-    const { apiAccessToken, navigation, getUserId, loggedIn, getUserTokens } = this.props
+    const { apiAccessToken, navigation, getUserInfo, loggedIn, getUserTokens } = this.props
     AppState.addEventListener('change', this._handleAppStateChange);
 
     if (apiAccessToken && loggedIn) {
-      getUserId(apiAccessToken)
+      getUserInfo(apiAccessToken)
       getUserTokens(apiAccessToken)
     } else {
       navigation.navigate('LaunchScreen')
@@ -153,7 +153,7 @@ class UserProfileScreen extends Component {
       userLocation,
       navigation,
       apiAccessToken,
-      getUserId,
+      getUserInfo,
       getUserTokens,
       platforms,
       updateInfo
@@ -249,7 +249,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({
-      getUserId,
+      getUserInfo,
       getUserTokens,
       updateInfo,
       updateSnapInfo,

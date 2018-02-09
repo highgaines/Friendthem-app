@@ -56,7 +56,10 @@ export const INITIAL_STATE = Immutable({
   fetching: false
 })
 
-export const getUserId = (accessToken) => {
+/* ------------- Actions ------------- */
+
+// THIS CAN BE USED TO GET ALL USER DATA
+export const getUserInfo = (accessToken) => {
   const headers = new Headers()
   headers.append('Authorization', `Bearer ${accessToken}`)
   headers.append('Content-Type', 'application/json')
@@ -106,6 +109,7 @@ export const updateUserPosition = (accessToken, coords) => {
   }
 }
 
+// EDIT PROFILE UPDATE
 export const updateInfoRequest = (data, field, content, accessToken) => {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
@@ -137,6 +141,7 @@ export const updateInfo = (field, content) => {
   return { type: Types.UPDATE_INFO, payload: { field, content } }
 }
 
+// SNAPCHAT HANDLE UPDATE
 export const updateSnapInfo = (provider, username, accessToken) => {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
@@ -164,6 +169,7 @@ export const updateSnapInfo = (provider, username, accessToken) => {
   }
 }
 
+// SETTINGS GHOST MODE AND NOTIFICATIONS UPDATE
 export const updateSettings = (accessToken, setting, mode) => {
 
   const headers = new Headers()
@@ -187,10 +193,12 @@ export const updateSettings = (accessToken, setting, mode) => {
       Types.UPDATE_SETTINGS_FAILURE
     ],
     shoudlCallApi: state => true,
-    callApi: dispatch => fetchFromApi('profile/me/', init, dispatch)
+    callApi: dispatch => fetchFromApi('profile/', init, dispatch)
   }
 }
+
 /* ------------- Reducers ------------- */
+
 const handleFbUserInfoSuccess = (state = INITIAL_STATE, action) => {
   return {
     ...state,
