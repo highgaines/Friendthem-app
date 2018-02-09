@@ -137,7 +137,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
-  const { loginUser } = AuthStoreActions
   return {
     ...bindActionCreators({
       loginUser: login,

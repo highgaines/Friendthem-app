@@ -33,13 +33,14 @@ class ForkScreen extends Component {
         if(response === 'authorized') {
           setLocationInterval()
         }
+        if (customNotificationPermission && !nativeNotifications) {
+          Permissions.request('notification').then(response => {
+            this.setState({ permissionsGranted: true })
+          })
+        }
       })
     }
-    if (customNotificationPermission && !nativeNotifications) {
-      Permissions.request('notification').then(response => {
-        this.setState({ permissionsGranted: true })
-      })
-    }
+
   }
 
   componentWillUpdate = (nextProps, nextState) => {
