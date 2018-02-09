@@ -32,3 +32,12 @@ export const MANUAL_CONNECT_PLATFORMS = [
   'facebook',
   'snapchat'
 ]
+
+export const NAVBAR_RENDER_OK = [
+  'NearbyUsersScreen',
+  'UserProfileScreen',
+  'FriendProfileScreen',
+  'NotificationsScreen',
+  'SettingsScreen',
+  'InviteUsers'
+]

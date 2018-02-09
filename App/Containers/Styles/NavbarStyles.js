@@ -5,8 +5,8 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   navbarRow: {
     justifyContent: 'space-around',
+    alignItems: 'center',
     width: '100%',
-    position: 'absolute',
     backgroundColor: 'black',
     height: 70,
     flexDirection: 'row'

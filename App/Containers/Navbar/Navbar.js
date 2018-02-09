@@ -16,6 +16,9 @@ import UserStoreActions from '../../Redux/UserStore'
 import FBStoreActions from '../../Redux/FBStore'
 import AuthStoreActions from '../../Redux/AuthStore'
 
+// Constants
+import { NAVBAR_RENDER_OK } from '../../Utils/constants';
+
 // Images
 import { Images } from '../../Themes';
 
@@ -73,13 +76,20 @@ class Navbar extends Component {
     navigate('UserProfileScreen')
   }
 
+  determineCurrentPage = (buttonName) => {
+    const { nav } = this.props
+    const currentPage = nav.routes[nav.routes.length - 1].routeName
+
+    return currentPage === buttonName
+  }
+
   render() {
     const { current } = this.props
 
     return(
         <View style={[this.props.navbarStyle || styles.navbarRow, { marginTop: this.props.margin }]}>
           <TouchableOpacity style={styles.button} onPress={this.goToProfile}>
-            <View style={[styles.container, current === 'Profile' ?
+            <View style={[styles.container, this.determineCurrentPage('UserProfileScreen') ?
               {
                 borderColor: '#ff00e1',
                 borderBottomWidth: 2
@@ -87,16 +97,16 @@ class Navbar extends Component {
               <Icon
                 name='user'
                 type='entypo'
-                color={current === 'Profile' ? "#ff00e1" : "#fff"}
+                color={this.determineCurrentPage('UserProfileScreen') ? "#ff00e1" : "#fff"}
                 containerStyle={styles.iconContainer}
               />
-              <Text style={[styles.iconText, current === 'Profile' ?
+              <Text style={[styles.iconText, this.determineCurrentPage('UserProfileScreen') ?
                 {color: '#ff00e1'} :
                 '' ]}> Profile </Text>
               </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={this.goToInviteUsers}>
-            <View style={[styles.container, current === 'Friends' ?
+            <View style={[styles.container, this.determineCurrentPage('InviteUsers') ?
               {
                 borderColor: '#ff00e1',
                 borderBottomWidth: 2
@@ -104,17 +114,17 @@ class Navbar extends Component {
               <Icon
                 name='users'
                 type='entypo'
-                color={current === 'Friends' ? "#ff00e1" : "#fff"}
+                color={this.determineCurrentPage('InviteUsers') ? "#ff00e1" : "#fff"}
                 containerStyle={styles.iconContainer}
               />
-              <Text style={[styles.iconText, current === 'Friends' ?
+              <Text style={[styles.iconText, this.determineCurrentPage('InviteUsers') ?
                 {color: '#ff00e1'} :
                 '' ]}> Friends </Text>
               </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={this.goToNearbyUsers}>
             <View
-              style={[styles.container, current === 'Nearby' ?
+              style={[styles.container, this.determineCurrentPage('NearbyUsersScreen') ?
               {
                 borderColor: '#ff00e1',
                 borderBottomWidth: 2
@@ -122,11 +132,11 @@ class Navbar extends Component {
               <Icon
                 name="500px-with-circle"
                 type="entypo"
-                color={current === 'Nearby' ? "#ff00e1" : "#fff"}
+                color={this.determineCurrentPage('NearbyUsersScreen') ? "#ff00e1" : "#fff"}
                 containerStyle={styles.iconContainer}
               />
               <Text
-                style={[styles.iconText, current === 'Nearby' ?
+                style={[styles.iconText, this.determineCurrentPage('NearbyUsersScreen') ?
                 {color: '#ff00e1'} :
                 '' ]}>
                 Nearby
@@ -134,25 +144,25 @@ class Navbar extends Component {
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={this.goToNotifications}>
-            <View style={[styles.container, current === 'Notifications' ?
+            <View style={[styles.container, this.determineCurrentPage('NotificationsScreen') ?
               {
                 borderColor: '#ff00e1',
-                borderBottomWidth: 5
+                borderBottomWidth: 2
               }: '']}>
               <Icon
                 name='notifications'
                 type='materialicons'
                 size={26}
-                color={current === 'Notifications' ? "#ff00e1" : "#fff"}
+                color={this.determineCurrentPage('NotificationsScreen') ? "#ff00e1" : "#fff"}
                 containerStyle={styles.iconContainer}
               />
-              <Text style={[styles.iconText, current === 'Notifications' ?
+              <Text style={[styles.iconText, this.determineCurrentPage('NotificationsScreen') ?
                 {color: '#ff00e1'} :
                 '' ]}> Notifications </Text>
               </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={this.goToSettings}>
-            <View style={[styles.container, current === 'Settings' ?
+            <View style={[styles.container, this.determineCurrentPage('SettingsScreen') ?
               {
                 borderColor: '#ff00e1',
                 borderBottomWidth: 2
@@ -161,10 +171,10 @@ class Navbar extends Component {
                 name='settings'
                 type='materialcommunityicons'
                 size={27}
-                color={current === 'Settings' ? "#ff00e1" : "#fff"}
+                color={this.determineCurrentPage('SettingsScreen') ? "#ff00e1" : "#fff"}
                 containerStyle={styles.iconContainer}
               />
-              <Text style={[styles.iconText, current === 'Settings' ?
+              <Text style={[styles.iconText, this.determineCurrentPage('SettingsScreen') ?
                 {color: '#ff00e1'} :
                 '' ]}> Settings </Text>
               </View>
@@ -181,7 +191,7 @@ class Navbar extends Component {
 }
 
 const mapStateToProps = state => ({
-  // access redux state for navbar
+  nav: state.nav
 })
 
 const mapDispatchToProps = dispatch => {
