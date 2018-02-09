@@ -83,7 +83,7 @@ class SuperConnect extends Component {
   superConnectPromiseLoop = () => {
     const { selectedSocialMedia, friendInfo, superConnectPlatform, apiAccessToken, setManualPlatforms } = this.props
     const { userInputRequiredPlatforms, manualPlatforms } = this.state
-    let platfrom;
+    let platform;
 
     this.setState({ connectionModalOpen: true })
     for (let i = 0; i < selectedSocialMedia.length; i++) {
