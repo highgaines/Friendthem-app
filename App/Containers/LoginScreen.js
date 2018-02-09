@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { ScrollView, Text, TextInput, Image, View, TouchableOpacity } from 'react-native'
 import { CheckBox, Icon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
@@ -7,6 +8,7 @@ import Permissions from 'react-native-permissions'
 
 import Footer from './UtilityComponents/Footer'
 import AuthStoreActions, { login } from '../Redux/AuthStore'
+import PermissionsStoreActions from '../Redux/PermissionsStore'
 import styles from './Styles/UserProfileInfoStyles'
 
 class LoginScreen extends Component {
@@ -17,35 +19,29 @@ class LoginScreen extends Component {
       userEmail: '',
       userPassword: '',
       rememberMe: false,
-      locationPermission: false,
-      notificationPermission: false
     }
-  }
-
-  componentDidMount = () => {
-    this.checkPermissions()
   }
 
   componentDidUpdate = (prevProps) => {
-    const { loggedIn, navigation, authError } = this.props
-    const { locationPermission, notificationPermission } = this.state
+    const {
+      loggedIn,
+      authError,
+      navigation,
+      locationPermission,
+      notificationPermission
+    } = this.props
     const permissionsGranted = locationPermission && notificationPermission
 
-    if (loggedIn && !prevProps.loggedIn && permissionsGranted) {
-      navigation.navigate('ForkScreen')
-    }
-
-    if (loggedIn && !prevProps.loggedIn && !permissionsGranted) {
-      if (!locationPermission) {
+    if (loggedIn && !prevProps.loggedIn) {
+      if (permissionsGranted) {
+        navigation.navigate('ForkScreen')
+      } else if (!locationPermission) {
         navigation.navigate('PermissionScreen', {
-          permissionType: 'geolocation',
-          navigation: navigation
-        });
-      }
-      if (!notificationPermission) {
+          permissionType: 'geolocation', navigation: navigation
+        })
+      } else {
         navigation.navigate('PermissionScreen', {
-          permissionType: 'notifications',
-          navigation: navigation
+          permissionType: 'notifications', navigation: navigation
         })
       }
     }
@@ -53,19 +49,6 @@ class LoginScreen extends Component {
     if (authError && !prevProps.authError) {
       alert('The information you entered was incorrect')
     }
-  }
-
-  checkPermissions = () => {
-    Permissions.check('location', { type: 'always' }).then(response => {
-      if (response === 'authorized') {
-        this.setState({ locationPermission: true })
-      }
-    })
-    Permissions.check('notification').then(response => {
-      if (response === 'authorized') {
-        this.setState({ notificationPermission: true })
-      }
-    })
   }
 
   updateState = (textValue, textName) => {
@@ -148,12 +131,17 @@ class LoginScreen extends Component {
 
 const mapStateToProps = state => ({
   loggedIn: state.authStore.loggedIn,
-  authError: state.authStore.authError
+  authError: state.authStore.authError,
+  locationPermission: state.permissionsStore.locationPermissionsGranted,
+  notificationPermission: state.permissionsStore.notificationPermissionsGranted,
 })
 
 const mapDispatchToProps = dispatch => {
+  const { loginUser } = AuthStoreActions
   return {
-    loginUser: (userObj) => dispatch(login(userObj))
+    ...bindActionCreators({
+      loginUser: login,
+    }, dispatch)
   }
 }
 

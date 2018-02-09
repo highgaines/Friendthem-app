@@ -17,24 +17,27 @@ import styles from '../Styles/ForkScreenStyles';
 import { Images } from '../../Themes';
 
 class ForkScreen extends Component {
-  componentWillMount = () => {
+
+  componentDidMount = () => {
     const {
-      locationPermission,
-      notificationPermission,
+      nativeGeolocation,
+      setLocationInterval,
+      nativeNotifications,
       locationIntervalRunning,
-      setLocationInterval
+      customGeolocationPermission,
+      customNotificationPermission,
     } = this.props
 
-    if (locationPermission && !locationIntervalRunning) {
-      Permissions.request('location', { type: 'active' }).then(response => {
+    if (customGeolocationPermission && !nativeGeolocation) {
+      Permissions.request('location', { type: 'always' }).then(response => {
         if(response === 'authorized') {
           setLocationInterval()
         }
-        if (notificationPermission) {
-          Permissions.request('notification').then(response => {
-            this.setState({ permissionsGranted: true })
-          })
-        }
+      })
+    }
+    if (customNotificationPermission && !nativeNotifications) {
+      Permissions.request('notification').then(response => {
+        this.setState({ permissionsGranted: true })
       })
     }
   }
@@ -122,11 +125,13 @@ class ForkScreen extends Component {
 
 const mapStateToProps = state => ({
   userInfo: state.userStore.userData,
-  apiAccessToken: state.authStore.accessToken,
   fbAuthToken: state.fbStore.fbAccessToken,
-  locationPermission: state.permissionsStore.locationPermissionsGranted,
-  notificationPermission: state.permissionsStore.notificationPermissionsGranted,
-  locationIntervalRunning: state.permissionsStore.locationIntervalRunning
+  apiAccessToken: state.authStore.accessToken,
+  nativeGeolocation: state.permissionsStore.nativeGeolocation,
+  nativeNotifications: state.permissionsStore.nativeNotifications,
+  locationIntervalRunning: state.permissionsStore.locationIntervalRunning,
+  customGeolocationPermission: state.permissionsStore.locationPermissionsGranted,
+  customNotificationPermission: state.permissionsStore.notificationPermissionsGranted,
 })
 
 const mapDispatchToProps = dispatch => {
