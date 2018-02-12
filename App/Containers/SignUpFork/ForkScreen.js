@@ -8,7 +8,7 @@ import Permissions from 'react-native-permissions'
 import ConnectButton from '../SuperConnectScreen/ConnectButton';
 
 import PermissionsStoreActions from '../../Redux/PermissionsStore'
-import UserStoreActions, { updateUserPosition } from '../../Redux/UserStore'
+import UserStoreActions, { updateUserPosition, getUserInfo } from '../../Redux/UserStore'
 
 // Styles
 import styles from '../Styles/ForkScreenStyles';
@@ -26,6 +26,8 @@ class ForkScreen extends Component {
       locationIntervalRunning,
       customGeolocationPermission,
       customNotificationPermission,
+      getUserInfo,
+      accessToken
     } = this.props
 
     if (customGeolocationPermission && !nativeGeolocation) {
@@ -40,7 +42,6 @@ class ForkScreen extends Component {
         }
       })
     }
-
   }
 
   componentWillUpdate = (nextProps, nextState) => {
@@ -56,10 +57,10 @@ class ForkScreen extends Component {
   }
 
   locationInterval = () => {
-    const { apiAccessToken, updateUserPosition } = this.props
+    const { accessToken, updateUserPosition } = this.props
 
     navigator.geolocation.getCurrentPosition((position) => {
-      updateUserPosition(apiAccessToken, position.coords)
+      updateUserPosition(accessToken, position.coords)
     },
       (error) => this.setState({ error: error.message }),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
@@ -104,7 +105,7 @@ class ForkScreen extends Component {
                 />
               </View>
               <Text style={styles.primSubText}>
-                {`Welcome ${userInfo.name}` }
+                Welcome!
               </Text>
               <Text style={styles.secSubText}>
                 What would you like to do?
@@ -127,7 +128,7 @@ class ForkScreen extends Component {
 const mapStateToProps = state => ({
   userInfo: state.userStore.userData,
   fbAuthToken: state.fbStore.fbAccessToken,
-  apiAccessToken: state.authStore.accessToken,
+  accessToken: state.authStore.accessToken,
   nativeGeolocation: state.permissionsStore.nativeGeolocation,
   nativeNotifications: state.permissionsStore.nativeNotifications,
   locationIntervalRunning: state.permissionsStore.locationIntervalRunning,
@@ -140,6 +141,7 @@ const mapDispatchToProps = dispatch => {
 
   return {
     ...bindActionCreators({
+      getUserInfo,
       setLocationInterval,
       updateUserPosition
     }, dispatch)
