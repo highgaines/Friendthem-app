@@ -34,7 +34,7 @@ class SearchBar extends Component {
   }
 
   render = () => {
-    const { numUsers, navigation } = this.props
+    const { numUsers, navigation, feedView, toggleNearbyFeed } = this.props
     const { searchMode } = this.state
     const pluralUsers = numUsers > 1 ? 'People' : 'Person'
 
@@ -59,9 +59,14 @@ class SearchBar extends Component {
           </View>
         { searchMode
           ? this.renderSearchForm()
-          : <Text style={styles.numUsers}>
-              {numUsers} {pluralUsers} Nearby
-            </Text>
+          : <View style={styles.tabContainer}>
+              <TouchableOpacity onPress={toggleNearbyFeed} style={feedView ? styles.tabButton : styles.selectedTabButton}>
+                <Text style={feedView ? styles.unselectedText: styles.selectedText}> People Nearby </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={toggleNearbyFeed} style={feedView ? styles.selectedTabButton : styles.tabButton}>
+                <Text style={feedView ? styles.selectedText: styles.unselectedText}> Nearby Feed </Text>
+              </TouchableOpacity>
+            </View>
         }
           <View style={styles.backIcon}>
             <Icon

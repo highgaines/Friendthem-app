@@ -1,4 +1,4 @@
-  import React, { Component } from 'react'
+import React, { Component } from 'react'
 
 import { View, TouchableOpacity, Text, Button, ScrollView, ActivityIndicator } from 'react-native';
 
@@ -26,25 +26,31 @@ class FeedContainer extends Component {
   }
 
   componentDidMount = () => {
-    const { platform, fetchFeed, userId, accessToken } = this.props
+    const {
+      platform,
+      fetchFeed,
+      userId,
+      accessToken
+    } = this.props
+
     fetchFeed(accessToken, userId, platform)
   }
 
   componentDidUpdate = prevProps => {
-    const { platform, fetchFeed, userId, accessToken } = this.props
+    const {
+      platform,
+      fetchFeed,
+      userId,
+      accessToken
+    } = this.props
+
     if (prevProps.platform !== platform) {
       fetchFeed(accessToken, userId, platform)
     }
   }
 
   renderFeedCards = platform => {
-    return this.props.feed.map( item => {
-      return(
-        <FeedCard
-          item={item}
-          />
-      )
-    })
+    return this.props.feed.map(item => <FeedCard item={item}/>)
   }
 
   render = () => {
@@ -53,14 +59,16 @@ class FeedContainer extends Component {
     return(
       <ScrollView contentContainerStyle={styles.feedContainer}>
         <Text> {platform} Feed </Text>
-        { loading ?
-          <View
-            style={styles.loading, { marginTop: 40 }}>
-            <ActivityIndicator
-              size="large"
-              color="#0000ff"
-            />
-          </View> : this.renderFeedCards(platform)}
+        { loading
+          ? <View
+              style={styles.loading, { marginTop: 40 }}>
+              <ActivityIndicator
+                size="large"
+                color="#0000ff"
+              />
+            </View>
+          : this.renderFeedCards(platform)
+        }
       </ScrollView>
     )
   }

@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native'
-import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
+import { Metrics, ApplicationStyles, Fonts, Colors } from '../../Themes/'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   linearGradient: {
-    height: 90,
+    height: 100,
     alignItems: 'stretch',
     justifyContent: 'space-between',
     paddingBottom: 25,
@@ -42,5 +42,39 @@ export default StyleSheet.create({
   },
   backIcon: {
     alignItems: 'flex-end'
+  },
+  tabContainer: {
+    height: 40,
+    width: 250,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    borderRadius: 50,
+    backgroundColor: Colors.friendThemBlue,
+    color: Colors.snow
+  },
+  selectedTabButton: {
+    flexDirection: 'row',
+    width: 120,
+    height: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.snow,
+    color: Colors.friendThemBlue,
+    borderRadius: 50
+  },
+  tabButton: {
+    fontSize: 12,
+    color: Colors.snow,
+    backgroundColor: 'transparent',
+    borderRadius: 30
+  },
+  selectedText: {
+    color: Colors.friendThemBlue,
+    textAlign: 'center'
+  },
+  unselectedText: {
+    color: Colors.snow,
+    textAlign: 'left'
   }
 })
