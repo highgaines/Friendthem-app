@@ -92,12 +92,6 @@ class NotificationsContainer extends Component {
                 leftOpenValue={-150}
               />
         </View>
-        <Navbar
-          navbarStyle={styles.navbar}
-          navigation={this.props.navigation}
-          current="Notifications"
-          margin={610}
-        />
       </View>
     )
   }

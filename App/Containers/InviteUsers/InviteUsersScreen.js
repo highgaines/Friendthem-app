@@ -125,12 +125,7 @@ class InviteUsersScreen extends Component {
             </ScrollView>
           </View>
         }
-        <Navbar
-          navbarStyle={styles.navbar}
-          navigation={navigation}
-          current="Friends"
-          margin={607}
-        />
+
       </View>
     )
   }

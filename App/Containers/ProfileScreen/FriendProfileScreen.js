@@ -206,14 +206,6 @@ class FriendProfileScreen extends Component {
             </View> :
              this.renderPlatformContainer(platform)  }
             <View>
-              <Navbar
-                navigation={navigation}
-                navbarStyle={styles.userProfNavbar}
-                openModal={this.openModal}
-                logOut={this.logOut}
-                current='Friends'
-                margin={-88}
-              />
             </View>
         </View>
     )

@@ -213,12 +213,6 @@ class SettingsScreen extends Component {
             </Text>
           </TouchableOpacity>
         </ScrollView>
-          <Navbar
-            navbarStyle={styles.userProfNavbar}
-            navigation={navigation}
-            current="Settings"
-            margin={150}
-          />
       </View>
     )
   }

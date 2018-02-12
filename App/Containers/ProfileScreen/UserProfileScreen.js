@@ -223,12 +223,6 @@ class UserProfileScreen extends Component {
             </ScrollView>
          }
             <View>
-              <Navbar
-                navbarStyle={styles.userProfNavbar}
-                navigation={navigation}
-                current='Profile'
-                margin={0}
-              />
             </View>
         </View>
     )

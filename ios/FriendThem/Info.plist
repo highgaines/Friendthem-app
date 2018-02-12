@@ -83,14 +83,14 @@
 	<string>FriendThem would like to access your Bluetooth in order to determine if friends are in range</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>FriendThem would like to access your calendar so that we may inform you about upcoming events</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>FriendThem would like to know your location so that we can better connect you with the people around you.</string>
+	<key>NSContactsUsageDescription</key>
+	<string></string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>FriendThem would like to know your location so that we can better connect you with the people around you.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
 	<string>FriendThem would like to know your location so that we can better connect you with the people around you.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>FriendThem would like to know your location so that we can better connect you with the people around you.</string>
-	<key>NSContactsUsageDescription</key>
-	<string>FriendThem would like to access your contacts to enable you to add your new friends&apos; information directly into your phonebook.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>FriendThem would like to access Speech Recognition in order to make this app more accessible to a wider audience.</string>
 	<key>UIAppFonts</key>
@@ -135,8 +135,6 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSContactsUsageDescription</key>
-	<string></string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>

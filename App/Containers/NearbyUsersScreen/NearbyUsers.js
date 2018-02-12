@@ -60,12 +60,6 @@ class NearbyUsers extends Component {
           users={input.length ? this.filterUsers(users) : users}
           navigation={navigation}
           setFriendInfo={setFriendInfo}/>
-        <Navbar
-          navbarStyle={styles.nearbyUsersNavbar}
-          current='Nearby'
-          navigation={navigation}
-          margin={607}
-        />
         {welcomeTutorialVisible ? <WelcomeScreen
           visible={welcomeTutorialVisible}
           closeModal={this.toggleWelcomeTutorial}
