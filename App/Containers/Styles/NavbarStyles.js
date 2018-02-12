@@ -8,7 +8,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     backgroundColor: 'black',
-    height: 70,
+    height: 60,
     flexDirection: 'row'
   },
   modal: {

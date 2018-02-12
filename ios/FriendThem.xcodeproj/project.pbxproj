@@ -1105,7 +1105,6 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = X8WHEJ9ZK2;
-						DevelopmentTeam = 5579CX8W95;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -1861,7 +1860,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = X8WHEJ9ZK2;
-				DEVELOPMENT_TEAM = 5579CX8W95;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1889,8 +1887,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.FriendThem2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.friendthem.friendthem;
+				PRODUCT_BUNDLE_IDENTIFIER = com.friendthem.friendthem2;
 				PRODUCT_NAME = FriendThem;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1908,7 +1905,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X8WHEJ9ZK2;
-				DEVELOPMENT_TEAM = 5579CX8W95;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1936,8 +1932,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.FriendThem2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.friendthem.friendthem;
+				PRODUCT_BUNDLE_IDENTIFIER = com.friendthem.friendthem2;
 				PRODUCT_NAME = FriendThem;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
