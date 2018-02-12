@@ -1,7 +1,8 @@
 {
  "Development": {
    "codePushKey": "",
-   "appServerRootURL": "http://localhost:8000",
+   "appServerRootURL": "http://eoghan.pagekite.me",
+
    "devClientId": "QJoCB82OO9XWUjHMViHcn0Tl84YkR8UXsVUiQc0Z",
    "devClientSecret": "enrBrQBXWpzA2sZ7RDXUVTlvO5c0qzEQHoEvEkJjQec5qyZ1Z7suspl2CI20YFjzBCDnPORmx5GnwY5BhGW4D8jsGmO6rgpitbvugyWCrwCOrWqVasXSbUrURksoPqMR",
    "devGoogleClientId": "595911831950-6lnct4nnui472l34e6asij2rnrjbdcmj.apps.googleusercontent.com",
