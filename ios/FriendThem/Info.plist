@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>11.0.3Yeah, I</string>
+	<string>11.0.3</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -84,11 +84,7 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>FriendThem would like to access your calendar so that we may inform you about upcoming events</string>
 	<key>NSContactsUsageDescription</key>
-<<<<<<< Updated upstream
-	<string></string>
-=======
 	<string>FriendThem would like to access your contacts in order to better connect you with the people you know.</string>
->>>>>>> Stashed changes
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>FriendThem would like to know your location so that we can better connect you with the people around you.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
