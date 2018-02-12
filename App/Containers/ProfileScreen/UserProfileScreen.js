@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { Text, View, Button, Linking , AppState, ScrollView, TouchableOpacity } from 'react-native'
+import { Text, View, Button, Linking , AppState, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
 
 // Libraries
 import LinearGradient from 'react-native-linear-gradient'
@@ -19,6 +17,8 @@ import PersonalInfoTab from './PersonalInfoTab'
 import FriendThemModal from '../UtilityComponents/FriendThemModal'
 
 // Redux
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import UserStoreActions, { getUserInfo, updateInfo, updateSnapInfo } from '../../Redux/UserStore'
 import AuthStoreActions, { socialMediaAuth } from '../../Redux/AuthStore'
 import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
@@ -158,7 +158,8 @@ class UserProfileScreen extends Component {
       getUserInfo,
       getUserTokens,
       platforms,
-      updateInfo
+      updateInfo,
+      fetching
     } = this.props
     const { showFriendster, socialMediaData, socialNetworkTab, syncedCardColors } = this.state
     const { devGoogleBaseURL, devGoogleApiParams, devGoogleClientId } = envConfig.Development
@@ -168,21 +169,28 @@ class UserProfileScreen extends Component {
           <LinearGradient
           colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
           start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
-          locations={[0.1, 0.3, 0.5, 0.7, 1.0]}>
+          locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
+          style={styles.linearGradient}
+          >
           <PickSocialMediaModal
             triggerModal={this.triggerFriendster}
             showModal={showFriendster}
           />
-            <View style={[styles.profileHeader, { height: 150}]}>
-              <View style={styles.profHeaderTop}>
-                <Image
-                  style={[styles.profileImage]}
-                  source={this.determineImage()} />
-              </View>
-              <Text style={styles.profileSubtext}>
-              {`${userInfo.first_name} ${userInfo.last_name}`}
-              </Text>
-            </View>
+            {fetching
+              ? <View style={[styles.profileHeader, { height: 150, justifyContent: 'center'}]}>
+                  <ActivityIndicator size="large" color="#0000ff"/>
+                </View>
+              : <View style={[styles.profileHeader, { height: 150}]}>
+                  <View style={styles.profHeaderTop}>
+                    <Image
+                      style={[styles.profileImage]}
+                      source={this.determineImage()} />
+                  </View>
+                  <Text style={styles.profileSubtext}>
+                  {`${userInfo.first_name} ${userInfo.last_name}`}
+                  </Text>
+                </View>
+              }
             <FriendThemModal
               modalVisible={this.state.snapHandleModalOpen}
               toggleSnapchatModal={this.toggleSnapchatModal}
@@ -234,6 +242,7 @@ const mapStateToProps = state => ({
   userInfo: state.userStore.userData,
   userInterests: state.userStore.interests,
   userLocation: state.userStore.location,
+  fetching: state.userStore.fetching,
   fbAuthToken: state.fbStore.fbAccessToken,
   apiAccessToken: state.authStore.accessToken,
   loggedIn: state.authStore.loggedIn,

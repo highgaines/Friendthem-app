@@ -223,19 +223,20 @@ const handleUpdateInfo = (state, action) => {
 }
 
 const handleGetUserRequest = (state, action) => {
-  return state
+  return {...state, fetching: true}
 }
 
 const handleGetUserSuccess = (state, action) => {
   return {
     ...state,
     userData: action.data,
-    userId: action.response.data.id
+    userId: action.response.data.id,
+    fetching: false
   }
 }
 
 const handleGetUserFailure = (state, action) => {
-  return state
+  return {...state, fetching: false}
 }
 
 const handleUpdateUserRequest = (state, action) => {
