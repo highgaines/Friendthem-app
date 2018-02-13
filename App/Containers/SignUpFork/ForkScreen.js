@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
-import { Text, Image, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { SocialIcon } from 'react-native-elements';
-import LinearGradient from 'react-native-linear-gradient';
+import { SocialIcon } from 'react-native-elements'
+import LinearGradient from 'react-native-linear-gradient'
 import Permissions from 'react-native-permissions'
-import ConnectButton from '../SuperConnectScreen/ConnectButton';
+import ConnectButton from '../SuperConnectScreen/ConnectButton'
+import Image from 'react-native-remote-svg'
+import { Icon } from 'react-native-elements'
 
 import PermissionsStoreActions from '../../Redux/PermissionsStore'
 import UserStoreActions, { updateUserPosition, getUserInfo } from '../../Redux/UserStore'
 
-// Styles
-import styles from '../Styles/ForkScreenStyles';
-
 //Images
 import { Images } from '../../Themes';
+
+// Styles
+import styles from '../Styles/ForkScreenStyles';
+import { determineImage } from '../../Utils/constants'
+
 
 class ForkScreen extends Component {
 
@@ -76,8 +80,6 @@ class ForkScreen extends Component {
 
   render() {
     const { navigate, userInfo } = this.props
-    const { picture } = userInfo
-    const imageSource = picture ? picture : Images.noPicSVG
 
     return (
         <View style={styles.mainContainer}>
@@ -89,11 +91,14 @@ class ForkScreen extends Component {
           >
             <View style={styles.centered}>
               <Image
-                style={{ marginTop: 100 }} source={{uri: `${Images.mainLogo}`}}
+                style={{ marginTop: 100 }} source={Images.mainLogo}
               />
-              <Image
-                style={styles.userImage} source={{uri: `${imageSource}`}}
-              />
+              <Icon
+                containerStyle={styles.userImageContainer}
+                name='ios-person'
+                type='ionicon'
+                size={115}
+                color='#000' />
               <View>
                 <SocialIcon
                   raised={false}

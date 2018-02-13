@@ -6,6 +6,8 @@ import Image from 'react-native-remote-svg';
 import { Images } from '../../Themes';
 // Styles
 import styles from '../Styles/CongratulatoryScreenStyles';
+import { determineImage } from '../../Utils/constants'
+import { Icon } from 'react-native-elements'
 
 export default CongratulatoryScreen = props => {
   const { userInfo,friendInfo, navigation, snapchatDeeplink } = props;
@@ -17,15 +19,6 @@ export default CongratulatoryScreen = props => {
 
   const snapHandlePresent = social_profiles => {
     return !!social_profiles.find(profile => profile.provider === 'snapchat')
-  }
-
-  const determineImage = (accountData) => {
-
-    if (accountData.picture) {
-      return {uri: `${accountData.picture}`}
-    } else {
-      return Images.noPicSVG
-    }
   }
 
   const displaySnapButton = snapHandlePresent(userInfo.social_profiles) &&
@@ -106,7 +99,12 @@ export default CongratulatoryScreen = props => {
             />
           </View>
           <Image style={styles.image2} source={determineImage(friendInfo)}/>
-          <Image style={styles.image1} source={determineImage(userInfo)}/>
+          <Icon
+            containerStyle={styles.image1}
+            name='ios-person'
+            type='ionicon'
+            size={115}
+            color='#000' />
         </View>
         {
           displaySnapButton ?

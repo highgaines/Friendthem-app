@@ -189,9 +189,12 @@ class UserProfileScreen extends Component {
                 </View>
               : <View style={[styles.profileHeader, { height: 150}]}>
                   <View style={styles.profHeaderTop}>
-                    <Image
-                      style={[styles.profileImage]}
-                      source={this.determineImage()} />
+                    <Icon
+                      containerStyle={[styles.profileImage]}
+                      name='ios-person'
+                      type='ionicon'
+                      size={95}
+                      color='#000' />
                   </View>
                   <Text style={styles.profileSubtext}>
                   {`${userInfo.first_name} ${userInfo.last_name}`}

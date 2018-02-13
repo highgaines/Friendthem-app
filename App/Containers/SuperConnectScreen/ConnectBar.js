@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, Image, View, TouchableOpacity, Button } from 'react-native';
+import { ScrollView, Text, View, TouchableOpacity, Button } from 'react-native';
+import Image from 'react-native-remote-svg';
 import LinearGradient from 'react-native-linear-gradient';
 
 import styles from '../Styles/ConnectBarStyles';
+import { determineImage } from '../../Utils/constants'
+import { Images } from '../../Themes';
+import { Icon } from 'react-native-elements'
 
 export default ConnectBar = props => {
   const { userData, friendInfo } = props
+
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -19,10 +24,12 @@ export default ConnectBar = props => {
             <View style={styles.userRow}>
               <View style={styles.column}>
                 <View style={styles.picAndName}>
-                  <Image
-                    source={{ uri: `${userData.picture}` }} style={styles.image}
-                  />
-
+                  <Icon
+                    containerStyle={styles.image}
+                    name='ios-person'
+                    type='ionicon'
+                    size={105}
+                    color='#000' />
                   <Text
                      style={styles.name}
                      numberOfLines={1}
@@ -37,7 +44,7 @@ export default ConnectBar = props => {
               <View style={styles.column}>
                 <View style={styles.picAndName}>
                   <Image
-                    source={{uri: `${friendInfo.picture}`}} style={styles.image}
+                    source={determineImage(friendInfo)} style={styles.image}
                   />
                   <Text
                     style={styles.name}
