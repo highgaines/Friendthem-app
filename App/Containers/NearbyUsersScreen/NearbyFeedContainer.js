@@ -36,15 +36,14 @@ class NearbyFeedContainer extends Component {
   renderFeedCards = () => {
     // map over users and render cards
     const { nearbyUsers } = this.props
-
+    return nearbyUsers.map( user => <NearbyFeedCard friendData={user}/>)
   }
 
   render = () => {
+
     return(
       <ScrollView contentContainerStyle={styles.nearbyFeedContainer}>
-        <View>
-          <Text> NEARBY FEED CONTAINER </Text>
-        </View>
+        {this.renderFeedCards()}
       </ScrollView>
     )
   }

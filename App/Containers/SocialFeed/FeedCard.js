@@ -31,16 +31,22 @@ export default FeedCard = props => {
               />
           : null
         }
-        <Text style={styles.descriptionText}>
-          { item.description }
-        </Text>
+        <View style={{ padding: 10 }}>
+          <Text numberOfLines={2} style={styles.descriptionText}>
+            { item.description }
+          </Text>
+        </View>
         <View style={styles.bottomRow}>
-          <Text style={styles.dateText}>
-            { `${month} ${day} ${year} at ${time}` }
-          </Text>
-          <Text style={styles.likeText}>
-            {`${item.num_likes} likes`}
-          </Text>
+          <View style={{ flex: 3.5 }}>
+            <Text style={styles.dateText}>
+              { `${month} ${day} ${year} at ${time}` }
+            </Text>
+          </View>
+          <View style={{ flex: 1.5 }}>
+            <Text style={styles.likeText}>
+              {`${item.num_likes} likes`}
+            </Text>
+          </View>
         </View>
       </View>
     </View>

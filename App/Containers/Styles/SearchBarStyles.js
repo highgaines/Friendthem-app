@@ -50,8 +50,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     borderRadius: 50,
-    backgroundColor: Colors.friendThemBlue,
-    color: Colors.snow
+    backgroundColor: Colors.friendThemBlue
   },
   selectedTabButton: {
     flexDirection: 'row',
@@ -60,12 +59,9 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Colors.snow,
-    color: Colors.friendThemBlue,
     borderRadius: 50
   },
   tabButton: {
-    fontSize: 12,
-    color: Colors.snow,
     backgroundColor: 'transparent',
     borderRadius: 30
   },

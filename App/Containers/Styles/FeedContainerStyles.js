@@ -7,5 +7,9 @@ export default StyleSheet.create({
     padding: 10,
     alignItems: 'center',
     paddingBottom: 100
+  },
+  nearbyFeedContainer: {
+    padding: 10,
+
   }
 })

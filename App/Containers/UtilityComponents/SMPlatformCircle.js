@@ -21,7 +21,7 @@ export default SMPlatformCircle = props => {
         case 'youtube':
           return Images.youtubeIcon
         default:
-          return Images.Friendster
+          return Images.friendster
       }
   }
 

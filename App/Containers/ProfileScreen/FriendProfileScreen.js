@@ -138,49 +138,51 @@ class FriendProfileScreen extends Component {
 
     return (
         <View>
-          <LinearGradient
-          colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
-          start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
-          locations={[0.1, 0.3, 0.5, 0.7, 1.0]}>
-            <View style={styles.profileHeader}>
-              <View style={styles.profHeaderTop}>
-                <TouchableOpacity onPress={this.handleCall}>
-                  <Icon
-                    name='phone'
-                    type='font-awesome'
-                    color='#ffffff'
-                    containerStyle={styles.phoneIcon}/>
-                </TouchableOpacity>
-                <Image
-                  style={styles.profileImage}
-                  source={{uri: friendInfo.picture}} />
-                  <TouchableOpacity onPress={this.handleEmail}>
+          <View style={styles.profile}>
+            <LinearGradient
+              colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
+              start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
+              locations={[0.1, 0.3, 0.5, 0.7, 1.0]}>
+              <View style={styles.profileHeader}>
+                <View style={styles.profHeaderTop}>
+                  <TouchableOpacity onPress={this.handleCall}>
                     <Icon
-                      name='md-mail'
-                      type='ionicon'
+                      name='phone'
+                      type='font-awesome'
                       color='#ffffff'
-                      containerStyle={styles.mailIcon}/>
-                  </TouchableOpacity>
-              </View>
-              <Text style={styles.profileSubtext}>
-              {`${friendInfo.first_name} ${friendInfo.last_name}`}
-              </Text>
-              <Text style={styles.interestsText}>
-                  {friendInfo.hobbies ? friendInfo.hobbies.join(' | ') : ''}
-              </Text>
-              <View style={{ flexDirection: 'row', marginTop: 7, justifyContent: 'space-around'}}>
-                <Icon
-                  name='location'
-                  type='entypo'
-                  size={14}
-                  color='#fff'
-                />
-                <Text style={{ color: '#fff', fontWeight: '500', backgroundColor: 'transparent', marginLeft: 7}}>
-                  {friendInfo.location}
-                </Text>
-              </View>
-            </View>
-            </LinearGradient>
+                      containerStyle={styles.phoneIcon}/>
+                    </TouchableOpacity>
+                    <Image
+                      style={styles.profileImage}
+                      source={{uri: friendInfo.picture}} />
+                      <TouchableOpacity onPress={this.handleEmail}>
+                        <Icon
+                          name='md-mail'
+                          type='ionicon'
+                          color='#ffffff'
+                          containerStyle={styles.mailIcon}/>
+                        </TouchableOpacity>
+                      </View>
+                      <Text style={styles.profileSubtext}>
+                        {`${friendInfo.first_name} ${friendInfo.last_name}`}
+                      </Text>
+                      <Text style={styles.interestsText}>
+                        {friendInfo.hobbies ? friendInfo.hobbies.join(' | ') : ''}
+                      </Text>
+                      <View style={{ flexDirection: 'row', marginTop: 7, justifyContent: 'space-around'}}>
+                        <Icon
+                          name='location'
+                          type='entypo'
+                          size={14}
+                          color='#fff'
+                        />
+                        <Text style={{ color: '#fff', fontWeight: '500', backgroundColor: 'transparent', marginLeft: 7}}>
+                          {friendInfo.location}
+                        </Text>
+                      </View>
+                    </View>
+                  </LinearGradient>
+          </View>
             <View style={styles.scrollWheelContainer}>
               <ScrollWheel
                 handlePlatformChange={this.handlePlatformChange}
