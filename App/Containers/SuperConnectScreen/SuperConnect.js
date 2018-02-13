@@ -34,13 +34,16 @@ class SuperConnect extends Component {
 
   componentWillUpdate = (nextProps, nextState) => {
     const { manualPlatforms, friendInfo, platforms } = this.props
-    const fbToken = platforms.find(platform => platform.provider === 'facebook').accessToken
 
     if (!manualPlatforms.length && nextProps.manualPlatforms.length) {
       if (nextProps.manualPlatforms.includes('facebook')) {
+        const fbToken = platforms.find(platform => platform.provider === 'facebook').accessToken
         fbProfile = friendInfo.social_profiles.find(profile => profile.provider === 'facebook')
         Linking.openURL(`https://facebook.com/${fbProfile.uid}`)
       }
+    }
+    if (true) {
+
     }
   }
 
@@ -50,9 +53,10 @@ class SuperConnect extends Component {
 
   _handleAppStateChange = (nextAppState) => {
     const returningToApp = this.state.appState.match(/inactive|background/) && nextAppState === 'active'
-    const accessToken = this.props.platforms.find(elem => elem.provider === 'facebook').access_token
+    const connectFB = this.props.platforms.find(elem => elem.provider === 'facebook')
+    const accessToken = connectFB ? connectFB.access_token : null
 
-    if (returningToApp) {
+    if (returningToApp && connectFB) {
       const friendListRequest = new GraphRequest(
         `/10154996425606714/friends/${this.props.friendInfo.id}`, //`/${this.props.userData.id}/friends/${this.props.friendInfo.id}` Hardcoded until all updated branches are merged
         {
@@ -96,8 +100,18 @@ class SuperConnect extends Component {
       }
     }
     this.setState({connectionModalOpen: false },
-      () => setManualPlatforms(userInputRequiredPlatforms)
-    )
+      () => {
+        if (userInputRequiredPlatforms.length) {
+          setManualPlatforms(userInputRequiredPlatforms)
+        } else {
+            this.props.navigation.navigate('CongratulatoryScreen', {
+              userInfo: this.props.userInfo,
+              friendInfo: this.props.friendInfo,
+              navigation: this.props.navigation,
+              snapchatDeeplink: this.snapchatDeepLinkCallback
+            })
+        }
+      })
   }
 
   socialPlatformPresent = (provider) => {

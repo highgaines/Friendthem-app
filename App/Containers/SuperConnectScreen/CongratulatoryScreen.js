@@ -19,6 +19,15 @@ export default CongratulatoryScreen = props => {
     return !!social_profiles.find(profile => profile.provider === 'snapchat')
   }
 
+  const determineImage = (accountData) => {
+
+    if (accountData.picture) {
+      return {uri: `${accountData.picture}`}
+    } else {
+      return Images.noPicSVG
+    }
+  }
+
   const displaySnapButton = snapHandlePresent(userInfo.social_profiles) &&
   snapHandlePresent(friendInfo.social_profiles)
 
@@ -96,8 +105,8 @@ export default CongratulatoryScreen = props => {
               style={styles.linearGradientBackground4}
             />
           </View>
-          <Image style={styles.image2} source={{uri: friendInfo.picture}}/>
-          <Image style={styles.image1} source={{uri: userInfo.picture}}/>
+          <Image style={styles.image2} source={determineImage(friendInfo)}/>
+          <Image style={styles.image1} source={determineImage(userInfo)}/>
         </View>
         {
           displaySnapButton ?
