@@ -11,21 +11,18 @@ import { Images } from '../../Themes'
 
 // Styles
 import styles from '../Styles/FeedCardStyles'
+import convertTime from 'convert-time'
 
 export default FeedCard = props => {
   const { item } = props
-  const displayName = item.provider === 'instagram'
-    ? item.handle
-    : item.name
+  const dateSplit = new Date(parseInt(item.date_posted) * 1000).toString().split(' ')
+  const month = dateSplit[1]
+  const day = dateSplit[2]
+  const year = dateSplit[3]
+  const time = convertTime(dateSplit[4])
   return(
     <View style={styles.cardContainer}>
-          <Text style={styles.displayName}>
-            {displayName}
-          </Text>
       <View style={styles.contentBody}>
-        <Text style={styles.descriptionText}>
-          { item.description }
-        </Text>
         {
           item.img_url
           ? <Image
@@ -34,9 +31,12 @@ export default FeedCard = props => {
               />
           : null
         }
+        <Text style={styles.descriptionText}>
+          { item.description }
+        </Text>
         <View style={styles.bottomRow}>
           <Text style={styles.dateText}>
-            { item.date_posted }
+            { `${month} ${day} ${year} at ${time}` }
           </Text>
           <Text style={styles.likeText}>
             {`${item.num_likes} likes`}
