@@ -46,6 +46,8 @@ const images = {
   noPicSVG: require('../Images/nopic-svg.svg'),
   lightbulbSVG: require('../Images/Icons/lightbulb.svg'),
   lightbulbPNG: require('../Images/Icons/lightbulb.png'),
+  closedLock: require('../Images/closed-lock.svg'),
+  showEye: require('../Images/showEye.png'),
 
   // Navbar Icons
   profileIcon: require('../Images/Icons/nav-profile-icon.svg'),
@@ -62,6 +64,7 @@ const images = {
   friendsterSVG: require('../Images/friendster-svg.svg'),
   Friendster: require('../Images/Friendster.svg'),
   snapChatLogo: require('../Images/Icons/snapIcon.svg'),
+  characterFriendThem: require('../Images/characterFriendThem.svg'),
 
   // Emblems
   emblemColor: require('../Images/Icons/emblem-color.svg'),

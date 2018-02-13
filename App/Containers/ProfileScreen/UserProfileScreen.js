@@ -15,6 +15,7 @@ import PickSocialMediaModal from '../TutorialScreens/PickSocialMediaModal'
 import ConnectButton from '../SuperConnectScreen/ConnectButton'
 import PersonalInfoTab from './PersonalInfoTab'
 import FriendThemModal from '../UtilityComponents/FriendThemModal'
+import ChangePasswordModal from './ChangePasswordModal'
 
 // Redux
 import { connect } from 'react-redux'
@@ -48,6 +49,7 @@ class UserProfileScreen extends Component {
       appState: AppState.currentState,
       socialMediaData: SOCIAL_MEDIA_DATA,
       syncedCardColors: SYNCED_CARD_COLORS,
+      showChangePasswordModal: false
     }
   }
 
@@ -147,6 +149,12 @@ class UserProfileScreen extends Component {
     this.setState({snapHandleModalOpen: !snapHandleModalOpen})
   }
 
+  toggleChangePasswordModal = () => {
+    this.setState({
+      showChangePasswordModal: !this.state.showChangePasswordModal
+    })
+  }
+
   render() {
     const {
       userId,
@@ -226,11 +234,14 @@ class UserProfileScreen extends Component {
             />
           :
             <ScrollView style={{ height: 366}}>
-              <PersonalInfoTab />
+              <PersonalInfoTab
+                toggleChangePasswordModal={this.toggleChangePasswordModal}
+                />
             </ScrollView>
          }
-            <View>
-            </View>
+         <ChangePasswordModal
+           modalVisible={this.state.showChangePasswordModal}
+         />
         </View>
     )
   }

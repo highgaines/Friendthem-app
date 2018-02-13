@@ -44,7 +44,7 @@ export default class InviteUsersModal extends Component {
               style={styles.headerGradient}>
               <ImageCircle
                 size={90}
-                extraStyles={ { borderWidth: 3, borderColor: 'white', marginTop: 5, marginBottom: 5 }}
+                extraStyles={{ borderWidth: 3, borderColor: 'white', marginTop: 5, marginBottom: 5 }}
                 source={selectedUser.userImage}
               />
               <View style={styles.imageTextContainer}>
