@@ -40,6 +40,7 @@ class NearbyFeedContainer extends Component {
   }
 
   render = () => {
+    const { loading } = this.props
 
     return(
       <ScrollView contentContainerStyle={styles.nearbyFeedContainer}>

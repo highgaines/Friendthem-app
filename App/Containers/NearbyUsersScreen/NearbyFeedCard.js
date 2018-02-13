@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // Native
-import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 
 // Components
 import ImageCircle from '../UtilityComponents/ImageCircle';
@@ -46,8 +46,7 @@ class NearbyFeedCard extends Component {
   }
 
   handlePlatformChange = platform => {
-    const { accessToken, friendData } = this.props
-    this.setState({ platform: platform }, fetchFeed(accessToken, friendData.id, platform))
+    this.setState({ platform: platform })
   }
 
   renderContent = () => {
@@ -56,7 +55,7 @@ class NearbyFeedCard extends Component {
   }
 
   render = () => {
-    const { friendData } = this.props
+    const { friendData, loading } = this.props
 
     return(
       <View style={styles.nearbyFeedCardContainer}>
@@ -67,7 +66,7 @@ class NearbyFeedCard extends Component {
             locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
             style={styles.linearGradient}
           >
-            <View style={{ flexDirection: 'row', flex: 4, padding: 20, backgroundColor: 'transparent', elevation: 3, shadowColor: 'black', shadowOffset: { width: 0, height: 0 }, shadowOpacity: 0.5, zIndex: 99}}>
+            <View style={styles.nearbyFeedCardHeader}>
               <View style={{ flex: 1 }}>
                 <ImageCircle source={friendData.picture} size={60}/>
               </View>
@@ -88,7 +87,15 @@ class NearbyFeedCard extends Component {
         </View>
         <View style={{ flex: 1, borderColor: 'black', borderWidth: 1, backgroundColor: 'white' }}>
           <ScrollView horizontal={true} contentContainerStyle={styles.contentContainer}>
-            {this.renderContent()}
+            {loading
+              ? <View style={styles.loading}>
+                  <ActivityIndicator
+                    size="large"
+                    color="#0000ff"
+                  />
+                </View>
+              : this.renderContent()
+            }
           </ScrollView>
         </View>
       </View>
@@ -100,7 +107,7 @@ const mapStateToProps = state => {
   return {
     accessToken: state.authStore.accessToken,
     feed: state.socialFeed.feed,
-    fetchingFeed: state.socialFeed.fetching,
+    loading: state.socialFeed.fetching,
     userData: state.userStore.userData
   }
 }

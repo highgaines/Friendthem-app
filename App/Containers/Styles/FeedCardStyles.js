@@ -16,6 +16,11 @@ export default StyleSheet.create({
     shadowColor: 'black',
     shadowOpacity: 0.5
   },
+  loading: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 150
+  },
   nearbyFeedCardContainer: {
     width: Metrics.screenWidth * 0.95,
     backgroundColor: 'transparent',
@@ -25,6 +30,16 @@ export default StyleSheet.create({
     },
     shadowColor: 'black',
     shadowOpacity: 0.5,
+  },
+  nearbyFeedCardHeader: {
+     flexDirection: 'row',
+     flex: 4,
+     padding: 20,
+     backgroundColor: 'transparent',
+     elevation: 3,
+     shadowColor: 'black',
+     shadowOffset: { width: 0, height: 0 }, shadowOpacity: 0.5,
+     zIndex: 99
   },
   contentContainer: {
     flexDirection: 'row',
