@@ -18,7 +18,6 @@ import styles from '../Styles/PersonalInfoTabStyles'
 class PersonalInfoTab extends Component {
   constructor(props) {
     super(props)
-
   }
 
   packageEditProfile = (field, content) => {
@@ -31,7 +30,7 @@ class PersonalInfoTab extends Component {
   }
 
   render() {
-    const { userData, editableData } = this.props
+    const { userData, editableData, toggleChangePasswordModal } = this.props
     return (
       <View style={styles.personalInfoContainer}>
         <InfoRow
@@ -88,6 +87,7 @@ class PersonalInfoTab extends Component {
         <InfoRow
           rowLabel='PASSWORD'
           field="password"
+          toggleChangePasswordModal={toggleChangePasswordModal}
           updateInfo={this.packageEditProfile}
           userInfo='********'/>
       </View>

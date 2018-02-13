@@ -31,8 +31,11 @@ export default class InfoRow extends Component {
   }
 
   render() {
-    const { rowLabel, userInfo, showSwitch, isPrivate, updateInfo } = this.props
+    const { rowLabel, userInfo, showSwitch, isPrivate, updateInfo, toggleChangePasswordModal } = this.props
     const { isEditing, flipSwitch } = this.state
+    let editPressCallback = toggleChangePasswordModal
+      ? toggleChangePasswordModal
+      : this.toggleEditMode
     return (
       <View style={styles.rowContainer}>
         <Text style={styles.rowLabelText}>{`${rowLabel}: `}</Text>
@@ -54,7 +57,7 @@ export default class InfoRow extends Component {
         }
         <TouchableOpacity
           style={styles.iconContainer}
-          onPress={this.toggleEditMode}
+          onPress={editPressCallback}
           >
           { isEditing ?
             <View style={{ position: 'absolute', right: -10, top: -10}}>
