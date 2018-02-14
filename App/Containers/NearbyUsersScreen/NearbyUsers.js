@@ -69,18 +69,23 @@ class NearbyUsers extends Component {
           feedView={feedView}
           toggleNearbyFeed={this.toggleNearbyFeed}
         />
-        {!feedView
+        {
+          !feedView
           ? <UsersContainer
               users={input.length ? this.filterUsers(users) : users}
               navigation={navigation}
               setFriendInfo={setFriendInfo}/>
           : <NearbyFeedContainer />
         }
-        {welcomeTutorialVisible ? <WelcomeScreen
-          visible={welcomeTutorialVisible}
-          closeModal={this.toggleWelcomeTutorial}
-          name='Peter Parker'
-        /> : null }
+        {
+          welcomeTutorialVisible
+          ? <WelcomeScreen
+              visible={welcomeTutorialVisible}
+              closeModal={this.toggleWelcomeTutorial}
+              name='Peter Parker'
+            />
+          : null
+        }
       </View>
     )
   }

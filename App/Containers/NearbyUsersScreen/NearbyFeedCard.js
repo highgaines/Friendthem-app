@@ -53,12 +53,25 @@ class NearbyFeedCard extends Component {
     this.setState({ platform: platform })
   }
 
+  pullUsername = platform => {
+    const { friendData } = this.props
+    let filtered = friendData.social_profiles.filter(
+      obj => obj.provider === platform
+    )
+
+    if (filtered[0]) {
+      return filtered[0].username
+    }
+  }
+
   renderDeeplinkButton = () => {
     const { platform } = this.state
     const { friendData } = this.props
 
     switch(platform) {
       case 'instagram':
+      const username = this.pullUsername('instagram')
+
         return(
           <ConnectButton
             title="Instagram"
@@ -79,7 +92,7 @@ class NearbyFeedCard extends Component {
             }}
             containerStyle={styles.deepLinkButton}
             textStyle={styles.deepLinkText}
-            onPressCallback={() => Linking.openURL('instagram://')}
+            onPressCallback={() => Linking.openURL(`instagram://user?username=${username}`)}
           />
         )
       case 'facebook':
@@ -97,7 +110,8 @@ class NearbyFeedCard extends Component {
 
   renderContent = () => {
     const { feed } = this.props
-    return feed.map( feedObj => <FeedCard item={feedObj}/>)
+    return feed.map( (feedObj, idx) =>
+      <FeedCard key={idx} item={feedObj}/>)
   }
 
   render = () => {

@@ -36,7 +36,8 @@ class NearbyFeedContainer extends Component {
   renderFeedCards = () => {
     // map over users and render cards
     const { nearbyUsers } = this.props
-    return nearbyUsers.map( user => <NearbyFeedCard friendData={user}/>)
+    return nearbyUsers.map( (user, idx) =>
+      <NearbyFeedCard key={idx} friendData={user}/>)
   }
 
   render = () => {
