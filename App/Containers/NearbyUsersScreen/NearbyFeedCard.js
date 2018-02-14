@@ -161,10 +161,6 @@ class NearbyFeedCard extends Component {
           />
         </View>
         <View style={{ flex: 1, backgroundColor: 'white' }}>
-          <View>
-            <Text> </Text>
-
-          </View>
           <ScrollView horizontal={true} contentContainerStyle={styles.contentContainer}>
             {loading
               ? <View style={styles.loading}>
