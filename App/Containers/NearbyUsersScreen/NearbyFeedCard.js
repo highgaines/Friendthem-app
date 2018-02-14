@@ -64,6 +64,17 @@ class NearbyFeedCard extends Component {
     }
   }
 
+  pullUid = platform => {
+    const { friendData } = this.props
+    let filtered = friendData.social_profiles.filter(
+      obj => obj.provider === platform
+    )
+
+    if (filtered[0]) {
+      return filtered[0].uid
+    }
+  }
+
   renderDeeplinkButton = () => {
     const { platform } = this.state
     const { friendData } = this.props
@@ -96,13 +107,14 @@ class NearbyFeedCard extends Component {
           />
         )
       case 'facebook':
+      const uid = this.pullUid('facebook')
         return(
           <ConnectButton
             title="Facebook"
             color={SYNCED_CARD_COLORS.facebook}
             containerStyle={styles.facebookDeeplinkButton}
             textStyle={styles.deepLinkText}
-            onPressCallback={() => Linking.openURL('fb://')}
+            onPressCallback={() => Linking.openURL(`fb://profile/${uid}`)}
           />
         )
     }
