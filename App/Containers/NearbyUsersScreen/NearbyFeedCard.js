@@ -70,7 +70,7 @@ class NearbyFeedCard extends Component {
 
     switch(platform) {
       case 'instagram':
-      const uid = this.pullUid('instagram')
+      const igUid = this.pullUid('instagram')
 
         return(
           <ConnectButton
@@ -92,18 +92,18 @@ class NearbyFeedCard extends Component {
             }}
             containerStyle={styles.deepLinkButton}
             textStyle={styles.deepLinkText}
-            onPressCallback={() => Linking.openURL(`instagram://user?id=${uid}`)}
+            onPressCallback={() => Linking.openURL(`instagram://user?id=${igUid}`)}
           />
         )
       case 'facebook':
-      const uid = this.pullUid('facebook')
+      const fbUid = this.pullUid('facebook')
         return(
           <ConnectButton
             title="Facebook"
             color={SYNCED_CARD_COLORS.facebook}
             containerStyle={styles.facebookDeeplinkButton}
             textStyle={styles.deepLinkText}
-            onPressCallback={() => Linking.openURL(`fb://profile/${uid}`)}
+            onPressCallback={() => Linking.openURL(`fb://profile/${fbUid}`)}
           />
         )
     }
