@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, TouchableOpacity, TextInput } from 'react-native'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import { Images } from '../../Themes'
-import LinearGradient from 'react-native-linear-gradient';
-import { Icon } from 'react-native-elements';
-import { NavigationActions } from 'react-navigation';
-import _ from 'lodash';
+import LinearGradient from 'react-native-linear-gradient'
+import { Icon } from 'react-native-elements'
+import { NavigationActions } from 'react-navigation'
+import _ from 'lodash'
 
 // Styles
-import styles from '../Styles/SearchBarStyles';
+import styles from '../Styles/SearchBarStyles'
 
 class SearchBar extends Component {
   constructor() {

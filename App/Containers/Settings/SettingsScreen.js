@@ -1,32 +1,33 @@
-import React, { Component } from 'react';
-import { ScrollView, Text, Image, View, TouchableOpacity, Switch } from 'react-native';
+import React, { Component } from 'react'
+import { ScrollView, Text, Image, View, TouchableOpacity, Switch } from 'react-native'
 
 // Librarires
-import LinearGradient from 'react-native-linear-gradient';
-import { Icon } from 'react-native-elements';
-import FBSDK, { LoginManager } from 'react-native-fbsdk';
-import Communications from 'react-native-communications';
-import Modal from 'react-native-modal';
+import LinearGradient from 'react-native-linear-gradient'
+import { Icon } from 'react-native-elements'
+import FBSDK, { LoginManager } from 'react-native-fbsdk'
+import Communications from 'react-native-communications'
+import Modal from 'react-native-modal'
+import { NavigationActions } from 'react-navigation'
 
 // Redux
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import FBStoreActions, { fbLogoutComplete } from '../../Redux/FBStore';
-import UserStoreActions, { updateSettings, getUserInfo } from '../../Redux/UserStore';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import FBStoreActions, { fbLogoutComplete } from '../../Redux/FBStore'
+import UserStoreActions, { updateSettings, getUserInfo } from '../../Redux/UserStore'
 
 // Components
-import ConnectButton from '../SuperConnectScreen/ConnectButton';
-import SocialMediaCard from '../SocialMediaCards/SocialMediaCard';
-import Navbar from '../Navbar/Navbar';
+import ConnectButton from '../SuperConnectScreen/ConnectButton'
+import SocialMediaCard from '../SocialMediaCards/SocialMediaCard'
+import Navbar from '../Navbar/Navbar'
 
 // Images
-import { Images } from '../../Themes';
+import { Images } from '../../Themes'
 
 // Constants
-import { TERMS_AND_CONDITIONS } from '../../Utils/legal';
+import { TERMS_AND_CONDITIONS } from '../../Utils/legal'
 
 // Styles
-import styles from '../Styles/SettingsStyles';
+import styles from '../Styles/SettingsStyles'
 
 class SettingsScreen extends Component {
   constructor(props) {
@@ -48,7 +49,7 @@ class SettingsScreen extends Component {
     const { toggleModal, fbLogoutComplete, navigation } = this.props
 
     toggleModal()
-    LoginManager.logOut();
+    LoginManager.logOut()
     fbLogoutComplete()
     navigation.navigate('LaunchScreen')
   }
@@ -89,7 +90,7 @@ class SettingsScreen extends Component {
   render() {
     const { navigation, toggleModal } = this.props
     const { silenceSwitch, ghostSwitch, termsVisible } = this.state
-
+    const backAction =  NavigationActions.back()
     return (
         <View style={styles.container}>
           <LinearGradient
@@ -98,7 +99,9 @@ class SettingsScreen extends Component {
             start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
             locations={[0.1, 0.3, 0.5, 0.7, 1.0]}>
             <View style={styles.topHeader}>
-              <TouchableOpacity style={styles.backArrow}>
+              <TouchableOpacity
+                onPress={() => navigation.dispatch(backAction)}
+                style={styles.backArrow}>
                 <Image
                   source={Images.backArrow}
                   />
