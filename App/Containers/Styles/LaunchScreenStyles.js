@@ -54,10 +54,10 @@ export default StyleSheet.create({
     shadowOpacity: 0.30,
     shadowRadius: 5,
     shadowColor: 'black',
-    shadowOffset: { height: 6, width: 10 }
+    shadowOffset: { height: 5, width: 10 }
   },
   buttonTextStyle: {
-    color: '#ffffff',
+    color: 'white',
     fontSize: 14,
     fontWeight: '700',
     marginLeft: 3

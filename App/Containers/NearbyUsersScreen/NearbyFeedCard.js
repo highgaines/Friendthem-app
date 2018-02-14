@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 
 // Native
-import { Text, View, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView, ActivityIndicator, Linking } from 'react-native';
 
 // Components
 import ImageCircle from '../UtilityComponents/ImageCircle';
 import SMPlatformCircle from '../UtilityComponents/SMPlatformCircle';
 import ScrollWheel from '../ProfileScreen/ScrollWheel';
 import FeedCard from '../SocialFeed/FeedCard';
+import ConnectButton from '../SuperConnectScreen/ConnectButton';
 
 // Libraries
 import { Icon } from 'react-native-elements';
@@ -17,6 +18,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchFeed } from '../../Redux/SocialFeedStore';
+
+// Constants
+import { SYNCED_CARD_COLORS } from '../../Utils/constants';
 
 // Images
 import { Images } from '../../Themes';
@@ -49,9 +53,66 @@ class NearbyFeedCard extends Component {
     this.setState({ platform: platform })
   }
 
+  pullUid = platform => {
+    const { friendData } = this.props
+    let filtered = friendData.social_profiles.filter(
+      obj => obj.provider === platform
+    )
+
+    if (filtered[0]) {
+      return filtered[0].uid
+    }
+  }
+
+  renderDeeplinkButton = () => {
+    const { platform } = this.state
+    const { friendData } = this.props
+
+    switch(platform) {
+      case 'instagram':
+      const igUid = this.pullUid('instagram')
+
+        return(
+          <ConnectButton
+            title="Instagram"
+            linearGradient={true}
+            gradientColors={
+              [
+              '#9011ba',
+              '#b31c85',
+              '#dc3369',
+              '#ed384d',
+              '#fec052'
+            ]}
+            gradientStyles={{
+              'width': 80,
+              'height': 30,
+              'borderRadius': 30,
+              'justifyContent': 'center'
+            }}
+            containerStyle={styles.deepLinkButton}
+            textStyle={styles.deepLinkText}
+            onPressCallback={() => Linking.openURL(`instagram://user?id=${igUid}`)}
+          />
+        )
+      case 'facebook':
+      const fbUid = this.pullUid('facebook')
+        return(
+          <ConnectButton
+            title="Facebook"
+            color={SYNCED_CARD_COLORS.facebook}
+            containerStyle={styles.facebookDeeplinkButton}
+            textStyle={styles.deepLinkText}
+            onPressCallback={() => Linking.openURL(`fb://profile/${fbUid}`)}
+          />
+        )
+    }
+  }
+
   renderContent = () => {
     const { feed } = this.props
-    return feed.map( feedObj => <FeedCard item={feedObj}/>)
+    return feed.map( (feedObj, idx) =>
+      <FeedCard key={idx} item={feedObj}/>)
   }
 
   render = () => {
@@ -75,6 +136,9 @@ class NearbyFeedCard extends Component {
                 <Text style={styles.hobbies}> Crypto | Gaming | Coding </Text>
                 <Text style={styles.location}> New York, NY </Text>
               </View>
+              <View style={styles.deepLinkButtonContainer}>
+                {this.renderDeeplinkButton()}
+              </View>
             </View>
           </LinearGradient>
         </View>
@@ -85,7 +149,7 @@ class NearbyFeedCard extends Component {
             profilePic={friendData.image}
           />
         </View>
-        <View style={{ flex: 1, borderColor: 'black', borderWidth: 1, backgroundColor: 'white' }}>
+        <View style={{ flex: 1, backgroundColor: 'white' }}>
           <ScrollView horizontal={true} contentContainerStyle={styles.contentContainer}>
             {loading
               ? <View style={styles.loading}>

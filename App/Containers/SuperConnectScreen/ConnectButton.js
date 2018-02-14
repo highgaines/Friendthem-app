@@ -14,6 +14,8 @@ export default function ConnectButton(props) {
     textStyle,
     iconStyle,
     containerStyle,
+    gradientColors,
+    gradientStyles,
     linearGradient,
     onPressCallback,
   } = props;
@@ -23,10 +25,12 @@ export default function ConnectButton(props) {
       onPress={onPressCallback}
       style={containerStyle}>
       <LinearGradient
-        colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
+        colors={gradientColors ? gradientColors : ['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
         start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
         locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
-        style={styles.linearGradient}>
+        style={gradientStyles
+          ? gradientStyles
+          : styles.linearGradient}>
         <View style={styles.buttonViewStyle}>
           <Icon
             name={name}

@@ -46,6 +46,39 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  deepLinkButtonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1
+  },
+  deepLinkButton: {
+    width: 80,
+    height: 30,
+    alignItems: 'center',
+    flexDirection: 'row',
+    borderRadius: 30,
+    justifyContent: 'center',
+    shadowOpacity: 0.30,
+    shadowRadius: 5,
+    shadowColor: 'black',
+    shadowOffset: { height: 5, width: 10 }
+  },
+  deepLinkText: {
+    color: 'white',
+    fontSize: 10,
+    fontWeight: '600'
+  },
+  facebookDeeplinkButton: {
+    width: 80,
+    height: 30,
+    borderRadius: 30,
+    justifyContent: 'center',
+    backgroundColor: Colors.facebook,
+    shadowOpacity: 0.30,
+    shadowRadius: 5,
+    shadowColor: 'black',
+    shadowOffset: { height: 5, width: 10 }
+  },
   header: {
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 5},
@@ -102,7 +135,7 @@ export default StyleSheet.create({
   },
   image: {
     height: Metrics.screenWidth * 0.7,
-    width: Metrics.screenWidth * 0.7,
+    width: Metrics.screenWidth * 0.65,
     marginBottom: 5
   }
 })
