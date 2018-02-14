@@ -45,7 +45,6 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 10
   },
   header: {
     shadowColor: 'black',
@@ -102,8 +101,8 @@ export default StyleSheet.create({
     fontSize: 12
   },
   image: {
-    height: Metrics.screenWidth * 0.6,
-    width: Metrics.screenWidth * 0.6,
+    height: Metrics.screenWidth * 0.7,
+    width: Metrics.screenWidth * 0.7,
     marginBottom: 5
   }
 })
