@@ -30,9 +30,15 @@ export default StyleSheet.create({
   iconText: {
     color: 'white',
     fontSize: 10,
-    textAlign: 'center'
+    textAlign: 'center',
+    zIndex: 99
   },
   button: {
-    width: 70
+    width: 80
+  },
+  peopleNearbyIcon: {
+    alignSelf: 'center',
+    position: 'absolute',
+    bottom: 0
   }
 })

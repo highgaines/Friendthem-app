@@ -54,7 +54,7 @@ const images = {
   friendsIcon: require('../Images/Icons/nav-friends-icon.svg'),
   notificationIcon: require('../Images/Icons/nav-notification-icon.svg'),
   settingsIcon: require('../Images/Icons/nav-settings-icon.svg'),
-  peopleNearbyIcon: require('../Images/Icons/nav-people-nearby-icon.svg'),
+  peopleNearbyIcon: require('../Images/peopleNearby.png'),
   nearbyUsersIcon: require('../Images/Icons/people-nearby-icon.svg'),
 
   // Logos
