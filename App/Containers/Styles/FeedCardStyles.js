@@ -135,8 +135,7 @@ export default StyleSheet.create({
   },
   image: {
     height: Metrics.screenWidth * 0.7,
-    width: Metrics.screenWidth * 0.6,
-    marginBottom: 5,
-    marginRight: 5
+    width: Metrics.screenWidth * 0.65,
+    marginBottom: 5
   }
 })
