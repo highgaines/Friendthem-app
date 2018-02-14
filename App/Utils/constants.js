@@ -20,9 +20,6 @@ export const SOCIAL_MEDIA_DATA = {
     deepLinkUrl: 'twitter://',
     userNamePath: 'screen_name'
   },
-  // linkedin: {
-  //   deepLinkUrl: 'voyager://in'
-  // },
   youtube: {
     deepLinkUrl: 'youtube://'
   },
