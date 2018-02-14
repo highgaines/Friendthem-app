@@ -50,7 +50,11 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     borderRadius: 50,
-    backgroundColor: Colors.friendThemBlue
+    backgroundColor: Colors.friendThemBlue,
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    shadowColor: 'black',
+    shadowOffset: { height: 5, width: 0 }
   },
   selectedTabButton: {
     flexDirection: 'row',
