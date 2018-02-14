@@ -244,6 +244,7 @@ class UserProfileScreen extends Component {
          }
          <ChangePasswordModal
            modalVisible={this.state.showChangePasswordModal}
+           toggleChangePasswordModal={this.toggleChangePasswordModal}
          />
         </View>
     )

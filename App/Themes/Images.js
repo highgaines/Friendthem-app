@@ -30,45 +30,45 @@ const images = {
   powerIcon: require('../Images/Icons/power-icon.png'),
   privacy: require('../Images/Icons/privacy.png'),
   rightArrow: require('../Images/Icons/rightArrow.png'),
-  fbIcon: require('../Images/Icons/fbiconsvg.svg'),
-  twitterIcon: require('../Images/Icons/twittericonsvg.svg'),
-  snapchatIcon: require('../Images/Icons/snapiconsvg.svg'),
-  igIcon: require('../Images/Icons/igiconsvg.svg'),
-  youtubeIcon: require('../Images/Icons/youtubeiconsvg.svg'),
+  fbIcon: require('../Images/Icons/fbiconsvg.png'),
+  twitterIcon: require('../Images/Icons/twittericonsvg.png'),
+  snapchatIcon: require('../Images/Icons/snapiconsvg.png'),
+  igIcon: require('../Images/Icons/igiconsvg.png'),
+  youtubeIcon: require('../Images/Icons/youtubeiconsvg.png'),
 
-  messengerIcon: require('../Images/Icons/messengericon.svg'),
-  textMessageIcon: require('../Images/Icons/texticon.svg'),
+  messengerIcon: require('../Images/Icons/messengericon.png'),
+  textMessageIcon: require('../Images/Icons/texticon.png'),
   whatsappIcon: require('../Images/whatsappicon.png'),
 
   // Images
   geolocationSVG: require('../Images/permission-geo.svg'),
-  notificationsSVG: require('../Images/notifications-svg.svg'),
-  noPicSVG: require('../Images/nopic-svg.svg'),
+  notificationsSVG: require('../Images/notifications-svg.png'),
+  noPicSVG: require('../Images/nopic-svg.png'),
   lightbulbSVG: require('../Images/Icons/lightbulb.svg'),
   lightbulbPNG: require('../Images/Icons/lightbulb.png'),
-  closedLock: require('../Images/closed-lock.svg'),
+  closedLock: require('../Images/closed-lock.png'),
   showEye: require('../Images/showEye.png'),
 
   // Navbar Icons
-  profileIcon: require('../Images/Icons/nav-profile-icon.svg'),
-  friendsIcon: require('../Images/Icons/nav-friends-icon.svg'),
-  notificationIcon: require('../Images/Icons/nav-notification-icon.svg'),
-  settingsIcon: require('../Images/Icons/nav-settings-icon.svg'),
-  peopleNearbyIcon: require('../Images/Icons/nav-people-nearby-icon.svg'),
-  nearbyUsersIcon: require('../Images/Icons/people-nearby-icon.svg'),
+  profileIcon: require('../Images/Icons/nav-profile-icon.png'),
+  friendsIcon: require('../Images/Icons/nav-friends-icon.png'),
+  notificationIcon: require('../Images/Icons/nav-notification-icon.png'),
+  settingsIcon: require('../Images/Icons/nav-settings-icon.png'),
+  peopleNearbyIcon: require('../Images/peopleNearby.png'),
+  nearbyUsersIcon: require('../Images/Icons/people-nearby-icon.png'),
 
   // Logos
   smallLogoSVG: require('../Images/logo-small-svg.svg'),
   logoPNG: require('../Images/logo-png.png'),
   friendster: require('../Images/Icons/friendster-png.png'),
-  friendsterSVG: require('../Images/friendster-svg.svg'),
-  Friendster: require('../Images/Friendster.svg'),
-  snapChatLogo: require('../Images/Icons/snapIcon.svg'),
-  characterFriendThem: require('../Images/characterFriendThem.svg'),
+  friendsterSVG: require('../Images/friendster-svg.png'),
+  Friendster: require('../Images/Friendster.png'),
+  snapChatLogo: require('../Images/Icons/snapIcon.png'),
+  characterFriendThem: require('../Images/characterFriendThem.png'),
 
   // Emblems
-  emblemColor: require('../Images/Icons/emblem-color.svg'),
-  emblemGreen: require('../Images/Icons/emblem-green.svg'),
+  emblemColor: require('../Images/Icons/emblem-color.png'),
+  emblemGreen: require('../Images/Icons/emblem-green.png'),
 }
 
 export default images

@@ -68,14 +68,14 @@ class FriendThemModal extends Component {
   }
 
   render() {
-    const { modalVisible, toggleSnapchatModal } = this.props
+    const { modalVisible, toggleChangePasswordModal } = this.props
     const { snapHandle } = this.state
 
     return (
       <Modal
       animationIn='slideInUp'
       animationOut='slideOutDown'
-      onBackdropPress={toggleSnapchatModal}
+      onBackdropPress={toggleChangePasswordModal}
       isVisible={modalVisible}>
         <View style={styles.containerModal}>
           <LinearGradient
@@ -146,7 +146,9 @@ class FriendThemModal extends Component {
             </TouchableOpacity>
           </View>
           <View style={styles.buttonGroup}>
-            <TouchableOpacity style={styles.optionButton}>
+            <TouchableOpacity
+              onPress={toggleChangePasswordModal}
+              style={styles.optionButton}>
               <Text style={styles.buttonText}>
                 Cancel
               </Text>

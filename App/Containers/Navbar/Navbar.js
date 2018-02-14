@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, Image } from 'react-native'
 
 // Libraries
 import { Icon } from 'react-native-elements'
@@ -17,13 +17,13 @@ import FBStoreActions from '../../Redux/FBStore'
 import AuthStoreActions from '../../Redux/AuthStore'
 
 // Constants
-import { NAVBAR_RENDER_OK } from '../../Utils/constants';
+import { NAVBAR_RENDER_OK } from '../../Utils/constants'
 
 // Images
-import { Images } from '../../Themes';
+import { Images } from '../../Themes'
 
 // Styles
-import styles from '../Styles/NavbarStyles';
+import styles from '../Styles/NavbarStyles'
 
 class Navbar extends Component {
   constructor(props){
@@ -43,7 +43,7 @@ class Navbar extends Component {
     const { logoutComplete, navigation } = this.props
     this.props.logoutUser()
     this.toggleModal()
-    LoginManager.logOut();
+    LoginManager.logOut()
     logoutComplete()
     navigation.navigate('LaunchScreen')
   }
@@ -141,17 +141,15 @@ class Navbar extends Component {
                 borderColor: '#ff00e1',
                 borderBottomWidth: 2
               }: '']}>
-              <Icon
-                name="500px-with-circle"
-                type="entypo"
-                color={this.determineCurrentScreen('NearbyUsersScreen') ? "#ff00e1" : "#fff"}
-                containerStyle={styles.iconContainer}
-              />
+              <Image
+                style={styles.peopleNearbyIcon}
+                source={Images.peopleNearbyIcon}
+                />
               <Text
-                style={[styles.iconText, this.determineCurrentScreen('NearbyUsersScreen') ?
+                style={[styles.iconText, {top: 27, zIndex: 99}, this.determineCurrentScreen('NearbyUsersScreen') ?
                 {color: '#ff00e1'} :
                 '' ]}>
-                Nearby
+                People Nearby
               </Text>
             </View>
           </TouchableOpacity>
