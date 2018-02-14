@@ -4,7 +4,12 @@ import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   profile: {
-
+    shadowColor: 'black',
+    backgroundColor: 'transparent',
+    elevation: 3,
+    shadowOffset: { width: 0, height: 5},
+    shadowOpacity: 0.5,
+    zIndex: 1000
   },
   profileHeader: {
     height: 210,

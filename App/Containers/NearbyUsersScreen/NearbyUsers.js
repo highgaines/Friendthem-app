@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
-import { Images } from '../../Themes';
 
+// Components
 import SearchBar from './SearchBar';
 import UsersContainer from './UsersContainer';
+import NearbyFeedContainer from './NearbyFeedContainer';
+
+// Libraries
 import LinearGradient from 'react-native-linear-gradient';
 import _ from 'lodash';
 
@@ -16,6 +19,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import FriendStoreActions from '../../Redux/FriendStore';
 
+// Images
+import { Images } from '../../Themes';
+
 // Styles
 import styles from '../Styles/NearbyUsersScreenStyles';
 
@@ -25,7 +31,8 @@ class NearbyUsers extends Component {
 
     this.state = {
       input: '',
-      welcomeTutorialVisible: true
+      welcomeTutorialVisible: true,
+      feedView: false
     }
   }
 
@@ -39,6 +46,10 @@ class NearbyUsers extends Component {
     })
   }
 
+  toggleNearbyFeed = () => {
+    this.setState({ feedView: !this.state.feedView})
+  }
+
   filterUsers = users => {
     const { input } = this.state
     return users.filter( user => user.name.includes(input) )
@@ -46,7 +57,7 @@ class NearbyUsers extends Component {
 
   render() {
     const { users, navigation, setFriendInfo } = this.props
-    const { input, welcomeTutorialVisible } = this.state
+    const { input, welcomeTutorialVisible, feedView } = this.state
 
     return(
       <View style={[styles.nearbyUsersContainer]}>
@@ -55,11 +66,16 @@ class NearbyUsers extends Component {
           navigation={navigation}
           handleChange={this.handleChange}
           input={this.state.input}
+          feedView={feedView}
+          toggleNearbyFeed={this.toggleNearbyFeed}
         />
-        <UsersContainer
-          users={input.length ? this.filterUsers(users) : users}
-          navigation={navigation}
-          setFriendInfo={setFriendInfo}/>
+        {!feedView
+          ? <UsersContainer
+              users={input.length ? this.filterUsers(users) : users}
+              navigation={navigation}
+              setFriendInfo={setFriendInfo}/>
+          : <NearbyFeedContainer />
+        }
         {welcomeTutorialVisible ? <WelcomeScreen
           visible={welcomeTutorialVisible}
           closeModal={this.toggleWelcomeTutorial}

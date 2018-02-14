@@ -4,7 +4,8 @@ import { Metrics, ApplicationStyles, Fonts, Colors } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   cardContainer: {
-    width: Metrics.screenWidth * 0.95,
+    width: Metrics.screenWidth * 0.7,
+    height: 335,
     margin: 10,
     padding: 10,
     backgroundColor: 'white',
@@ -15,10 +16,67 @@ export default StyleSheet.create({
     shadowColor: 'black',
     shadowOpacity: 0.5
   },
-  bottomRow: {
-    marginTop: 20,
+  loading: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 150
+  },
+  nearbyFeedCardContainer: {
+    width: Metrics.screenWidth * 0.95,
+    backgroundColor: 'transparent',
+    shadowOffset: {
+      width: 0,
+      height: 0
+    },
+    shadowColor: 'black',
+    shadowOpacity: 0.5,
+  },
+  nearbyFeedCardHeader: {
+     flexDirection: 'row',
+     flex: 4,
+     padding: 20,
+     backgroundColor: 'transparent',
+     elevation: 3,
+     shadowColor: 'black',
+     shadowOffset: { width: 0, height: 0 }, shadowOpacity: 0.5,
+     zIndex: 99
+  },
+  contentContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  header: {
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 5},
+    shadowOpacity: 0.5,
+    zIndex: 99
+  },
+  name: {
+    fontSize: 14,
+    fontFamily: 'Montserrat',
+    fontWeight: '800',
+    color: 'white',
+    marginBottom: 5
+  },
+  hobbies: {
+    fontSize: 12,
+    fontWeight: '500',
+    fontFamily: 'Montserrat',
+    color: 'white',
+    marginBottom: 5
+  },
+  location: {
+    fontSize: 12,
+    fontWeight: '500',
+    fontFamily: 'Montserrat',
+    color: 'white'
+  },
+  bottomRow: {
+    flex: 5,
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-start'
   },
   displayName: {
     fontWeight: 'bold',
@@ -31,19 +89,20 @@ export default StyleSheet.create({
   },
   likeText: {
     color: Colors.socialMediaBlue,
-    fontWeight: '700'
+    fontWeight: '700',
+    textAlign: 'right'
   },
   contentBody: {
-    marginTop: 20
+    justifyContent: 'space-around',
+    alignItems: 'center'
   },
   descriptionText: {
     color: Colors.charcoalGray,
-    fontSize: 18,
-    marginTop: 15
+    fontSize: 12
   },
   image: {
-    marginTop: 10,
-    height: Metrics.screenWidth * 0.9,
-    width: Metrics.screenWidth * 0.9
+    height: Metrics.screenWidth * 0.7,
+    width: Metrics.screenWidth * 0.7,
+    marginBottom: 5
   }
 })
