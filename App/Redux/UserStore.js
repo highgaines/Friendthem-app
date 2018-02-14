@@ -35,7 +35,7 @@ export const INITIAL_STATE = Immutable({
   userData: {
     username: '',
     name: '',
-    picture: '',
+    picture: null,
     email: '',
     interests: ['Crypto', 'Flying Kites', 'Gaming'],
     location: 'New York',

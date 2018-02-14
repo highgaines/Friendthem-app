@@ -6,6 +6,8 @@ import Image from 'react-native-remote-svg';
 import { Images } from '../../Themes';
 // Styles
 import styles from '../Styles/CongratulatoryScreenStyles';
+import { determineImage } from '../../Utils/constants'
+import { Icon } from 'react-native-elements'
 
 export default CongratulatoryScreen = props => {
   const { userInfo,friendInfo, navigation, snapchatDeeplink } = props;
@@ -96,8 +98,13 @@ export default CongratulatoryScreen = props => {
               style={styles.linearGradientBackground4}
             />
           </View>
-          <Image style={styles.image2} source={{uri: friendInfo.picture}}/>
-          <Image style={styles.image1} source={{uri: userInfo.picture}}/>
+          <Image style={styles.image2} source={determineImage(friendInfo)}/>
+          <Icon
+            containerStyle={styles.image1}
+            name='ios-person'
+            type='ionicon'
+            size={115}
+            color='#000' />
         </View>
         {
           displaySnapButton ?

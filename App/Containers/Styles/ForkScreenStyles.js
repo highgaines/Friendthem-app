@@ -50,12 +50,18 @@ export default StyleSheet.create({
   linearGradient: {
     flex: 1
   },
-  userImage: {
-    borderRadius: 50,
+  userImageContainer: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
     borderColor: '#fff',
     borderWidth: 2,
-    width: 100,
-    height: 100,
-    marginTop: 50
+    marginTop: 50,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  userImage: {
+    width: 90,
+    height: 90,
   }
 })

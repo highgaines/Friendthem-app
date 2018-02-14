@@ -1,3 +1,6 @@
+/************************ DATA ************************/
+import { Images } from '../Themes';
+
 export const SYNCED_CARD_COLORS = {
   facebook: '#3b5997',
   twitter: '#28a9e0',
@@ -41,3 +44,13 @@ export const NAVBAR_RENDER_OK = [
   'SettingsScreen',
   'InviteUsers'
 ]
+
+/************************ FUNCTIONS ************************/
+
+export const determineImage = (accountData) => {
+  if (accountData.picture) {
+    return {uri: `${accountData.picture}`}
+  } else {
+    return Images.noPicSVG
+  }
+}

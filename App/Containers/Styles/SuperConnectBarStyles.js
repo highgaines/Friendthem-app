@@ -10,7 +10,7 @@ export default StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     left: 0,
-    top: 550,
+    top: 200,
   },
   friendThemButton: {
     width: 170,

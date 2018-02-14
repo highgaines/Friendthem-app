@@ -55,9 +55,9 @@ export default StyleSheet.create({
     paddingBottom: 10
   },
   profileImage: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
     borderWidth: 3,
     borderColor: '#ffffff'
   },
