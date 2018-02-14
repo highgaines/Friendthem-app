@@ -171,7 +171,7 @@ class UserProfileScreen extends Component {
     } = this.props
     const { showFriendster, socialMediaData, socialNetworkTab, syncedCardColors } = this.state
     const { devGoogleBaseURL, devGoogleApiParams, devGoogleClientId } = envConfig.Development
-
+    console.log(<Icon />, true)
     return (
         <View>
           <LinearGradient

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { View, TouchableOpacity, Text, Button, ScrollView, ActivityIndicator } from 'react-native';
+import { View, TouchableOpacity, Text, Button, ScrollView, ActivityIndicator, Linking } from 'react-native';
 
 // Components
 import FeedCard from './FeedCard';
@@ -53,22 +53,31 @@ class FeedContainer extends Component {
     return this.props.feed.map(item => <FeedCard item={item}/>)
   }
 
+  linkToProfile = url => {
+    Linking.openURL(url)
+  }
+
   render = () => {
-    const { platform, loading } = this.props
+    const { platform, loading, friendInfo } = this.props
+    const isInstagram = platform === 'instagram'
+    const instaUID = friendInfo.social_profiles.find(profile => profile.provider === 'instagram').uid
+    const instaUrl = instaUID ? `https://www.instagram.com/eoghanl` : ''
+    const capitalizedPlat = platform ? `${platform.split('')[0].toUpperCase()}${platform.split('').slice(1).join('')}` : ''
 
     return(
       <ScrollView contentContainerStyle={styles.feedContainer}>
-        <Text> {platform} Feed </Text>
-        { loading
-          ? <View
-              style={styles.loading, { marginTop: 40 }}>
-              <ActivityIndicator
-                size="large"
-                color="#0000ff"
-              />
-            </View>
-          : this.renderFeedCards(platform)
-        }
+        <Text style={styles.titleText}> {capitalizedPlat} Feed </Text>
+        <TouchableOpacity style={styles.profileLinkButton}>
+          <Text style={styles.buttonText} onPress={() => this.linkToProfile(instaUrl)}>View Full Profile</Text>
+        </TouchableOpacity>
+        { loading ?
+          <View
+            style={styles.loading, { marginTop: 40 }}>
+            <ActivityIndicator
+              size="large"
+              color="#0000ff"
+            />
+          </View> : this.renderFeedCards(platform)}
       </ScrollView>
     )
   }

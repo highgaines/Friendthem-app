@@ -61,7 +61,7 @@ class FriendProfileScreen extends Component {
     const { friendInfo } = this.props
       return(
         <View style={{ height: 366 }}>
-          <FeedContainer platform={platform} userId={friendInfo.id} />
+          <FeedContainer platform={platform} userId={friendInfo.id} friendInfo={friendInfo}/>
         </View>
       )
   }
