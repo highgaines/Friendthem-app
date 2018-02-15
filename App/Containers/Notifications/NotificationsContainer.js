@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, Image, View, TouchableOpacity, ListView } from 'react-native';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Icon } from 'react-native-elements';
-import Reactotron from 'reactotron-react-native';
 
 // Libraries
 import LinearGradient from 'react-native-linear-gradient';
+import Reactotron from 'reactotron-react-native';
+import { Icon } from 'react-native-elements';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
 // Components
 import Header from './Header';
 import Navbar from '../Navbar/Navbar';
 
-// Redux Actions
+// Redux
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import NotificationStoreActions from '../../Redux/NotificationStore';
 import { fetchNotifications, deleteRowAction } from '../../Redux/NotificationStore';
 
@@ -63,9 +63,12 @@ class NotificationsContainer extends Component {
                   source={{uri: data.item.img}}
                   resizeMode='contain'
                 />
-                <Text style={styles.userName}> {data.item.name} </Text>
+                <Text style={styles.userName}>
+                  {data.item.name}
+                </Text>
                 <Text style={styles.message}>
-                  {data.item.message} </Text>
+                  {data.item.message}
+                </Text>
               </View>
             )}
             renderHiddenItem={ (data, rowMap) => (
