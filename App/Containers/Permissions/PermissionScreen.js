@@ -32,6 +32,7 @@ class PermissionScreen extends Component {
     }
   }
 
+  // console logs for testing purposes
   componentWillMount = () => {
     OneSignal.addEventListener('received', this.onReceived)
     OneSignal.addEventListener('opened', this.onOpened)
