@@ -1,4 +1,5 @@
 import { createReducer, createActions } from 'reduxsauce'
+import { fetchFromApi } from './ApiHelpers'
 import Immutable from 'seamless-immutable'
 import Reactotron from 'reactotron-react-native';
 /* ------------- Types and Action Creators ------------- */
@@ -41,7 +42,8 @@ export const INITIAL_STATE = Immutable({
       message: "wants to follow you"
     }
   ],
-  fetching: false
+  fetching: false,
+  deviceId: null
 })
 
 /* ------------- Selectors ------------- */
@@ -53,11 +55,11 @@ export const deleteRowAction = (rowKey) => {
   return { type: Types.DELETE_ROW, payload: { rowKey } }
 }
 
-export const registerForPushNotif = (authToken, deviceId) => {
+export const registerForPushNotif = (accessToken, deviceId) => {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${accessToken}`)
-
+  console.log(deviceId)
   const body = {
     device_id: deviceId
   }
@@ -96,8 +98,7 @@ const handleRegisterNotifRequest = (state, action) => {
 }
 
 const handleRegisterNotifSuccess = (state, action) => {
-  console.log("SUCCESS", action)
-  return state
+  return {...state, deviceId: action.data.device_id }
 }
 
 const handleRegisterNotifFailure = (state, action) => {

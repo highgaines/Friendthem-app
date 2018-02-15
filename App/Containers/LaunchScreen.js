@@ -201,7 +201,7 @@ const mapDispatchToProps = dispatch => {
       logoutUser,
       fbUserInfo,
       loginByFacebook,
-      setLocationInterval
+      setLocationInterval,
     }, dispatch)
   }
 }
