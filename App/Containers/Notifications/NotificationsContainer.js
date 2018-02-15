@@ -15,7 +15,7 @@ import Navbar from '../Navbar/Navbar';
 
 // Redux Actions
 import NotificationStoreActions from '../../Redux/NotificationStore';
-import { deleteRowAction } from '../../Redux/NotificationStore';
+import { fetchNotifications, deleteRowAction } from '../../Redux/NotificationStore';
 
 // Styles
 import styles from '../Styles/NotificationStyles';
@@ -25,6 +25,11 @@ class NotificationsContainer extends Component {
     super(props)
 
 }
+
+  componentDidMount = () => {
+    const { fetchNotifications, accessToken } = this.props
+    fetchNotifications(accessToken)
+  }
 
   closeRowItem = (rowMap, rowKey) => {
     if (rowMap[rowKey]) {
@@ -98,12 +103,14 @@ class NotificationsContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  notifications: state.notificationStore.notifications
+  notifications: state.notificationStore.notifications,
+  pushNotifications: state.notificationStore.pushNotifications,
+  accessToken: state.authStore.accessToken
 })
 
 const mapDispatchToProps = dispatch => {
   return {
-    ...bindActionCreators({ deleteRowAction }, dispatch)
+    ...bindActionCreators({ fetchNotifications, deleteRowAction }, dispatch)
   }
 }
 
