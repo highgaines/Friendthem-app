@@ -96,14 +96,18 @@ class Navbar extends Component {
     return currentScreen === comparison
   }
 
+  selectedStyleRender = screen => {
+    return this.determineCurrentScreen(screen)
+      ? styles.selectedScreen
+      : styles.unselectedScreen
+  }
+
   render() {
 
     return(
         <View style={[this.props.navbarStyle || styles.navbarRow, { marginTop: this.props.margin }]}>
           <TouchableOpacity style={styles.button} onPress={this.goToProfile}>
-            <View style={[styles.container, this.determineCurrentScreen('UserProfileScreen')
-              ? styles.selectedScreen
-              : styles.unselectedScreen]}>
+            <View style={[styles.container, this.selectedStyleRender('UserProfileScreen')]}>
               <Icon
                 name='user'
                 type='entypo'
@@ -116,9 +120,7 @@ class Navbar extends Component {
               </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={this.goToInviteUsers}>
-            <View style={[styles.container, this.determineCurrentScreen('InviteUsers')
-            ? styles.selectedScreen
-            : styles.unselectedScreen]}>
+            <View style={[styles.container, this.selectedStyleRender('InviteUsers')]}>
               <Icon
                 name='users'
                 type='entypo'
@@ -132,9 +134,7 @@ class Navbar extends Component {
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={this.goToNearbyUsers}>
             <View
-              style={[styles.container, this.determineCurrentScreen('NearbyUsersScreen')
-                ? styles.selectedScreen
-                : styles.unselectedScreen]}>
+              style={[styles.container, this.selectedStyleRender('NearbyUsersScreen')]}>
               <Image
                 style={styles.peopleNearbyIcon}
                 source={Images.peopleNearbyIcon}
@@ -148,9 +148,7 @@ class Navbar extends Component {
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={this.goToNotifications}>
-            <View style={[styles.container, this.determineCurrentScreen('NotificationsScreen')
-              ? styles.selectedScreen
-              : styles.unselectedScreen]}>
+            <View style={[styles.container, this.selectedStyleRender('NotificationsScreen')]}>
               <Icon
                 name='notifications'
                 type='materialicons'
@@ -164,9 +162,7 @@ class Navbar extends Component {
               </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={this.goToSettings}>
-            <View style={[styles.container, this.determineCurrentScreen('SettingsScreen')
-              ? styles.selectedScreen
-              : styles.unselectedScreen]}>
+            <View style={[styles.container, this.selectedStyleRender('SettingsScreen')]}>
               <Icon
                 name='settings'
                 type='materialcommunityicons'
