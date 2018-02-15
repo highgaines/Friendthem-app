@@ -1,6 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
-import Image from 'react-native-remote-svg';
+import { View, Image } from 'react-native';
+// import Image from 'react-native-remote-svg';
 import { SocialIcon } from 'react-native-elements';
 import { Images } from '../../Themes';
 
@@ -13,11 +13,11 @@ export default SMPlatformCircle = props => {
         case 'twitter':
           return Images.twitterIcon
         case 'facebook':
-          return Images.fbIcon
+          return Images.fbSketchPNG
         case 'snapchat':
           return Images.snapchatIcon
         case 'instagram':
-          return Images.igIcon
+          return Images.igSketchPNG
         case 'youtube':
           return Images.youtubeIcon
         default:

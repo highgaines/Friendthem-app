@@ -154,7 +154,7 @@ class FriendProfileScreen extends Component {
                     </TouchableOpacity>
                     <Image
                       style={styles.profileImage}
-                      source={{uri: friendInfo.picture}} />
+                      source={{uri: `${friendInfo.picture}`}} />
                       <TouchableOpacity onPress={this.handleEmail}>
                         <Icon
                           name='md-mail'

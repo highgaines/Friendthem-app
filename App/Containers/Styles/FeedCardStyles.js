@@ -4,7 +4,7 @@ import { Metrics, ApplicationStyles, Fonts, Colors } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   cardContainer: {
-    width: Metrics.screenWidth * 0.7,
+    width: Metrics.screenWidth * 0.9,
     height: 335,
     margin: 10,
     padding: 10,

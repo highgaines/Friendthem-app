@@ -40,5 +40,13 @@ export default StyleSheet.create({
     alignSelf: 'center',
     position: 'absolute',
     bottom: 0
+  },
+  selectedScreen: {
+    borderColor: '#ff00e1',
+    borderBottomWidth: 2
+  },
+  unselectedScreen: {
+    borderColor: 'black',
+    borderBottomWidth: 2
   }
 })
