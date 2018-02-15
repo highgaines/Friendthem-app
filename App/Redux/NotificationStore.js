@@ -84,7 +84,7 @@ export const registerForPushNotif = (accessToken, deviceId) => {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${accessToken}`)
-  console.log(deviceId)
+
   const body = {
     device_id: deviceId
   }
