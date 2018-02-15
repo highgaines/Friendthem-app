@@ -1,7 +1,10 @@
 import React from 'react';
 import { View, Image } from 'react-native';
-// import Image from 'react-native-remote-svg';
+
+// Libraries
 import { SocialIcon } from 'react-native-elements';
+
+// Images
 import { Images } from '../../Themes';
 
 export default SMPlatformCircle = props => {
