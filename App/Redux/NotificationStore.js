@@ -4,7 +4,10 @@ import Reactotron from 'reactotron-react-native';
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  deleteRow: ['rowMap', 'rowKey']
+  deleteRow: ['rowMap', 'rowKey'],
+  registerUserNotifRequest: null,
+  registerUserNotifSuccess: null,
+  registerUserNotifFailure: null
 })
 
 export const NotificationTypes = Types
@@ -50,6 +53,32 @@ export const deleteRowAction = (rowKey) => {
   return { type: Types.DELETE_ROW, payload: { rowKey } }
 }
 
+export const registerForPushNotif = (authToken, deviceId) => {
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('Authorization', `Bearer ${accessToken}`)
+
+  const body = {
+    device_id: deviceId
+  }
+
+  const init = {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(body)
+  }
+
+  return {
+    types: [
+      Types.REGISTER_USER_NOTIF_REQUEST,
+      Types.REGISTER_USER_NOTIF_SUCCESS,
+      Types.REGISTER_USER_NOTIF_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi('notifications/device/', init, dispatch)
+  }
+}
+
 /* ------------- Reducers ------------- */
 
 const DELETE_ROW = 'DELETE_ROW'
@@ -62,8 +91,24 @@ const handleDeleteRowSuccess = (state = INITIAL_STATE, action)  => {
   return state.merge({ notifications: newData })
 }
 
+const handleRegisterNotifRequest = (state, action) => {
+  return state
+}
+
+const handleRegisterNotifSuccess = (state, action) => {
+  console.log("SUCCESS", action)
+  return state
+}
+
+const handleRegisterNotifFailure = (state, action) => {
+  return state
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.DELETE_ROW]: handleDeleteRowSuccess
+  [Types.DELETE_ROW]: handleDeleteRowSuccess,
+  [Types.REGISTER_USER_NOTIF_REQUEST]: handleRegisterNotifRequest,
+  [Types.REGISTER_USER_NOTIF_SUCCESS]: handleRegisterNotifSuccess,
+  [Types.REGISTER_USER_NOTIF_FAILURE]: handleRegisterNotifFailure
 })
