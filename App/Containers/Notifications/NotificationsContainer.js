@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, Image, View, TouchableOpacity, ListView } from 'react-native';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Icon } from 'react-native-elements';
-import Reactotron from 'reactotron-react-native';
 
 // Libraries
 import LinearGradient from 'react-native-linear-gradient';
+import Reactotron from 'reactotron-react-native';
+import { Icon } from 'react-native-elements';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
 // Components
 import Header from './Header';
 import Navbar from '../Navbar/Navbar';
 
-// Redux Actions
+// Redux
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import NotificationStoreActions from '../../Redux/NotificationStore';
-import { deleteRowAction } from '../../Redux/NotificationStore';
+import { fetchNotifications, deleteRowAction } from '../../Redux/NotificationStore';
 
 // Styles
 import styles from '../Styles/NotificationStyles';
@@ -25,6 +25,11 @@ class NotificationsContainer extends Component {
     super(props)
 
 }
+
+  componentDidMount = () => {
+    const { fetchNotifications, accessToken } = this.props
+    fetchNotifications(accessToken)
+  }
 
   closeRowItem = (rowMap, rowKey) => {
     if (rowMap[rowKey]) {
@@ -58,9 +63,12 @@ class NotificationsContainer extends Component {
                   source={{uri: data.item.img}}
                   resizeMode='contain'
                 />
-                <Text style={styles.userName}> {data.item.name} </Text>
+                <Text style={styles.userName}>
+                  {data.item.name}
+                </Text>
                 <Text style={styles.message}>
-                  {data.item.message} </Text>
+                  {data.item.message}
+                </Text>
               </View>
             )}
             renderHiddenItem={ (data, rowMap) => (
@@ -98,12 +106,14 @@ class NotificationsContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  notifications: state.notificationStore.notifications
+  notifications: state.notificationStore.notifications,
+  pushNotifications: state.notificationStore.pushNotifications,
+  accessToken: state.authStore.accessToken
 })
 
 const mapDispatchToProps = dispatch => {
   return {
-    ...bindActionCreators({ deleteRowAction }, dispatch)
+    ...bindActionCreators({ fetchNotifications, deleteRowAction }, dispatch)
   }
 }
 

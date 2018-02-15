@@ -16,8 +16,13 @@
 
 @implementation AppDelegate
 
+@synthesize oneSignal = _oneSignal;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  
+  self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
+                                                         appId:@"69cf5aae-f8c2-4292-8f30-011a1a35518b"];
   NSURL *jsCodeLocation;
   
   for (NSString* family in [UIFont familyNames])

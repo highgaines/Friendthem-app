@@ -18,6 +18,7 @@ const store = createStore()
  * We separate like this to play nice with React Native's hot reloading.
  */
 class App extends Component {
+
   render () {
     console.disableYellowBox = true
     return (

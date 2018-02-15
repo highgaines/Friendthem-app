@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import SVGImage from 'react-native-svg-image';
 import LinearGradient from 'react-native-linear-gradient';
 import Image from 'react-native-remote-svg';
+import OneSignal from 'react-native-onesignal';
 
 // Components
 import ConnectButton from '../SuperConnectScreen/ConnectButton';
@@ -14,6 +15,7 @@ import ConnectButton from '../SuperConnectScreen/ConnectButton';
 // Redux
 import PermissionsStoreActions, { setGeoPermission } from '../../Redux/PermissionsStore';
 import FriendStoreActions from '../../Redux/FriendStore'
+import NotificationStoreActions, { registerForPushNotif } from '../../Redux/NotificationStore'
 
 // Images
 import { Images } from '../../Themes';
@@ -24,6 +26,46 @@ import styles from '../Styles/PermissionsScreenStyles';
 class PermissionScreen extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      deviceId: null
+    }
+  }
+
+  // console logs for testing purposes
+  componentWillMount = () => {
+    OneSignal.addEventListener('received', this.onReceived)
+    OneSignal.addEventListener('opened', this.onOpened)
+    OneSignal.addEventListener('registered', this.onRegistered)
+    OneSignal.addEventListener('ids', this.onIds)
+  }
+
+  componentWillUnmount = () => {
+    OneSignal.removeEventListener('received', this.onReceived)
+    OneSignal.removeEventListener('opened', this.onOpened)
+    OneSignal.removeEventListener('registered', this.onRegistered)
+    OneSignal.removeEventListener('ids', this.onIds)
+  }
+
+  onReceived = (notification) => {
+    console.log("Notification Received!", notification)
+  }
+
+  onOpened = openResult => {
+    console.log('Message:', openResult.notification.payload.body)
+    console.log('Data:', openResult.notification.payload.additionalData)
+    console.log('isActive:', openResult.notification.isAppInFocus)
+    console.log('openResult:', openResult)
+  }
+
+  onRegistered = notifData => {
+    console.log("Device had been registered for push notifications!", notifData)
+  }
+
+  onIds = device => {
+    const { accessToken, registerForPushNotif } = this.props
+    console.log('Device Info:', device)
+    registerForPushNotif(accessToken, device.userId)
   }
 
   handleNotNow = () => {
@@ -36,7 +78,7 @@ class PermissionScreen extends Component {
       navigation,
       permissionType,
       grantLocationPermission,
-      grantNotificationPermission,
+      grantNotificationPermission
     } = this.props
     const { navigate } = navigation
 
@@ -110,9 +152,11 @@ class PermissionScreen extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-
-})
+const mapStateToProps = state => {
+  return {
+    accessToken: state.authStore.accessToken
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   const {
@@ -125,7 +169,8 @@ const mapDispatchToProps = dispatch => {
     ...bindActionCreators({
       setFriendInfo,
       grantLocationPermission,
-      grantNotificationPermission
+      grantNotificationPermission,
+      registerForPushNotif
     }, dispatch)
   }
 }

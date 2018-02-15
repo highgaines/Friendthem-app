@@ -3,6 +3,7 @@ package com.friendthem;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.rt2zz.reactnativecontacts.ReactNativeContacts;
 import com.microsoft.codepush.react.CodePush;
 import com.tkporter.sendsms.SendSMSPackage;
@@ -39,6 +40,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeOneSignalPackage(),
             new ReactNativeContacts(),
             new CodePush(null, getApplicationContext(), BuildConfig.DEBUG),
             SendSMSPackage.getInstance(),
