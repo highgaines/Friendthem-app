@@ -96,16 +96,18 @@ class Navbar extends Component {
     return currentScreen === comparison
   }
 
+  selectedStyleRender = screen => {
+    return this.determineCurrentScreen(screen)
+      ? styles.selectedScreen
+      : styles.unselectedScreen
+  }
+
   render() {
 
     return(
         <View style={[this.props.navbarStyle || styles.navbarRow, { marginTop: this.props.margin }]}>
           <TouchableOpacity style={styles.button} onPress={this.goToProfile}>
-            <View style={[styles.container, this.determineCurrentScreen('UserProfileScreen') ?
-              {
-                borderColor: '#ff00e1',
-                borderBottomWidth: 2
-              }: '']}>
+            <View style={[styles.container, this.selectedStyleRender('UserProfileScreen')]}>
               <Icon
                 name='user'
                 type='entypo'
@@ -118,11 +120,7 @@ class Navbar extends Component {
               </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={this.goToInviteUsers}>
-            <View style={[styles.container, this.determineCurrentScreen('InviteUsers') ?
-              {
-                borderColor: '#ff00e1',
-                borderBottomWidth: 2
-              }: '']}>
+            <View style={[styles.container, this.selectedStyleRender('InviteUsers')]}>
               <Icon
                 name='users'
                 type='entypo'
@@ -136,29 +134,21 @@ class Navbar extends Component {
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={this.goToNearbyUsers}>
             <View
-              style={[styles.container, this.determineCurrentScreen('NearbyUsersScreen') ?
-              {
-                borderColor: '#ff00e1',
-                borderBottomWidth: 2
-              }: '']}>
+              style={[styles.container, this.selectedStyleRender('NearbyUsersScreen')]}>
               <Image
                 style={styles.peopleNearbyIcon}
                 source={Images.peopleNearbyIcon}
                 />
               <Text
-                style={[styles.iconText, {top: 27, zIndex: 99}, this.determineCurrentScreen('NearbyUsersScreen') ?
+                style={[styles.iconText, {top: 26, zIndex: 99}, this.determineCurrentScreen('NearbyUsersScreen') ?
                 {color: '#ff00e1'} :
                 '' ]}>
-                People Nearby
+                Nearby
               </Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={this.goToNotifications}>
-            <View style={[styles.container, this.determineCurrentScreen('NotificationsScreen') ?
-              {
-                borderColor: '#ff00e1',
-                borderBottomWidth: 2
-              }: '']}>
+            <View style={[styles.container, this.selectedStyleRender('NotificationsScreen')]}>
               <Icon
                 name='notifications'
                 type='materialicons'
@@ -172,11 +162,7 @@ class Navbar extends Component {
               </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={this.goToSettings}>
-            <View style={[styles.container, this.determineCurrentScreen('SettingsScreen') ?
-              {
-                borderColor: '#ff00e1',
-                borderBottomWidth: 2
-              }: '']}>
+            <View style={[styles.container, this.selectedStyleRender('SettingsScreen')]}>
               <Icon
                 name='settings'
                 type='materialcommunityicons'

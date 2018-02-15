@@ -30,15 +30,18 @@ const images = {
   powerIcon: require('../Images/Icons/power-icon.png'),
   privacy: require('../Images/Icons/privacy.png'),
   rightArrow: require('../Images/Icons/rightArrow.png'),
+
+  // Social Media Icons
+  messengerIcon: require('../Images/Icons/messengericon.png'),
+  textMessageIcon: require('../Images/Icons/texticon.png'),
+  whatsappIcon: require('../Images/whatsappicon.png'),
   fbIcon: require('../Images/Icons/fbiconsvg.png'),
   twitterIcon: require('../Images/Icons/twittericonsvg.png'),
   snapchatIcon: require('../Images/Icons/snapiconsvg.png'),
   igIcon: require('../Images/Icons/igiconsvg.png'),
   youtubeIcon: require('../Images/Icons/youtubeiconsvg.png'),
-
-  messengerIcon: require('../Images/Icons/messengericon.png'),
-  textMessageIcon: require('../Images/Icons/texticon.png'),
-  whatsappIcon: require('../Images/whatsappicon.png'),
+  igSketchPNG: require('../Images/Icons/sketchIG.png'),
+  fbSketchPNG: require('../Images/Icons/fbiconpng.png'),
 
   // Images
   geolocationSVG: require('../Images/permission-geo.svg'),

@@ -129,7 +129,7 @@ class NearbyFeedCard extends Component {
           >
             <View style={styles.nearbyFeedCardHeader}>
               <View style={{ flex: 1 }}>
-                <ImageCircle source={friendData.picture} size={60}/>
+                <ImageCircle source={`${friendData.picture}`} size={60}/>
               </View>
               <View style={{ flex: 3 }}>
                 <Text style={styles.name}> {`${friendData.first_name} ${friendData.last_name}`} </Text>
