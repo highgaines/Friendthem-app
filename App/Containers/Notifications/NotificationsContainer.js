@@ -60,14 +60,14 @@ class NotificationsContainer extends Component {
               <View style={styles.rowFront}>
                 <Image
                   style={styles.profileImage}
-                  source={{uri: data.item.img}}
+                  source={{uri: data.item.sender.picture}}
                   resizeMode='contain'
                 />
                 <Text style={styles.userName}>
-                  {data.item.name}
+                  {data.item.sender.first_name}
                 </Text>
                 <Text style={styles.message}>
-                  {data.item.message}
+                  {`would like to super connect with you!`}
                 </Text>
               </View>
             )}
@@ -107,7 +107,6 @@ class NotificationsContainer extends Component {
 
 const mapStateToProps = state => ({
   notifications: state.notificationStore.notifications,
-  pushNotifications: state.notificationStore.pushNotifications,
   accessToken: state.authStore.accessToken
 })
 

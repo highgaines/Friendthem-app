@@ -202,9 +202,8 @@ class FriendProfileScreen extends Component {
               />
               <SuperConnectBar
                 setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
-                superConnect={() => navigation.navigate('SuperConnectScreen')}/>
-                <View style={styles.superConnectBarContainer}>
-                </View>
+                superConnect={() => navigation.navigate('SuperConnectScreen')}
+              />
             </View> :
              this.renderPlatformContainer(platform)  }
             <View>

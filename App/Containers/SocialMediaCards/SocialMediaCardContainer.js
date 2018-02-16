@@ -1,14 +1,25 @@
 import React, { Component } from 'react'
+import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity } from 'react-native'
+
+// Components
+import SocialMediaCard from '../SocialMediaCards/SocialMediaCard'
+
+// Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity } from 'react-native'
-import FBSDK, { LoginManager, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk';
-
-import SocialMediaCard from '../SocialMediaCards/SocialMediaCard'
-import envConfig from '../../../envConfig'
-import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
 import AuthStoreActions, { loginByFacebook } from '../../Redux/AuthStore'
 import FBStoreActions from '../../Redux/FBStore';
+
+// Libraries
+import FBSDK, { LoginManager, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk';
+
+// Config
+import envConfig from '../../../envConfig'
+
+// Constants
+import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
+
+// Styles
 import styles from '../Styles/UserProfileStyles'
 
 class SocialMediaCardContainer extends Component {
