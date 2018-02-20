@@ -21,11 +21,15 @@ class PersonalInfoTab extends Component {
   }
 
   packageEditProfile = (field, content) => {
+    const { updateInfoRequest, editableData, accessToken } = this.props
+
     if (field === 'phone_number') {
       content = `+1${content}`
     }
+    if (field === 'hobbies') {
+      content = content.split(',')
+    }
 
-    const { updateInfoRequest, editableData, accessToken } = this.props
     updateInfoRequest(editableData, field, content, accessToken)
   }
 
@@ -37,7 +41,7 @@ class PersonalInfoTab extends Component {
           rowLabel='NAME'
           field="name"
           updateInfo={this.packageEditProfile}
-          userInfo={editableData.name}/>
+          userInfo={`${editableData.first_name} ${editableData.last_name}`}/>
         <InfoRow
           rowLabel='HOBBIES'
           field="hobbies"
@@ -83,13 +87,14 @@ class PersonalInfoTab extends Component {
           field="personal_email"
           updateInfo={this.packageEditProfile}
           userInfo={editableData.personal_email}
+          autoCapitalize={'none'}
           showSwitch={true}/>
         <InfoRow
           rowLabel='PASSWORD'
           field="password"
+          secureText={true}
           toggleChangePasswordModal={toggleChangePasswordModal}
-          updateInfo={this.packageEditProfile}
-          userInfo='********'/>
+          updateInfo={this.packageEditProfile}/>
       </View>
     )
   }

@@ -31,11 +31,13 @@ export default class InfoRow extends Component {
   }
 
   render() {
-    const { rowLabel, userInfo, showSwitch, isPrivate, updateInfo, toggleChangePasswordModal } = this.props
+    const { rowLabel, userInfo, showSwitch, isPrivate, updateInfo, secureText, toggleChangePasswordModal } = this.props
     const { isEditing, flipSwitch } = this.state
+
     let editPressCallback = toggleChangePasswordModal
       ? toggleChangePasswordModal
       : this.toggleEditMode
+
     return (
       <View style={styles.rowContainer}>
         <Text style={styles.rowLabelText}>{`${rowLabel}: `}</Text>
@@ -43,9 +45,12 @@ export default class InfoRow extends Component {
           <TextInput
             value={this.state.input}
             style={styles.form}
+            secureTextEntry={secureText || flipSwitch}
             onChangeText={input => this.handleChange(input)}
           /> :
-          <Text style={styles.rowTextContent}>{userInfo}</Text>}
+          <Text style={styles.rowTextContent}>
+            {secureText || flipSwitch ? '********' : userInfo}
+          </Text>}
         {
           showSwitch ?
           <Switch

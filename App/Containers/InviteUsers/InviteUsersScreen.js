@@ -57,9 +57,13 @@ class InviteUsersScreen extends Component {
     })
   }
 
+
+
   render() {
     const { networkTabSelected, showModal } = this.state;
     const { friends, selectUser, selectedUser, navigation, fetchConnectivityData, accessToken } = this.props
+
+    const pluralizeFriends = friends.length === 1 ? '' : 's'
 
     return (
       <View style={[{ flex: 1 }, this.state.showModal ? { opacity: 0.1 } : '']}>
@@ -78,7 +82,10 @@ class InviteUsersScreen extends Component {
           </View>
           <View>
             <Text style={styles.friendCount}>
-              {networkTabSelected ? `${friends.length} friends` : `${friends.length} friends` }
+              {networkTabSelected ?
+                `${friends.length} friend${pluralizeFriends}`
+                :
+                `${friends.length} friend${pluralizeFriends}` }
             </Text>
           </View>
           <View style={styles.tabSelectionContainer}>

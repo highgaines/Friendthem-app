@@ -42,7 +42,8 @@ export default StyleSheet.create({
     borderRadius: 30
   },
   switchStyle: {
-
+    position: 'absolute',
+    right: 45
   },
   iconContainer: {
     position: 'absolute',
