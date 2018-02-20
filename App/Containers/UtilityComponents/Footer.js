@@ -6,7 +6,10 @@ export default Footer = props => {
   return(
     <View style={styles.footerContainer}>
       <Text style={styles.text}> Do you already have an account? </Text>
-      <TouchableOpacity style={styles.button} onPress={navigationCallback}>
+      <TouchableOpacity
+        testID={'login_button'}
+        style={styles.button}
+        onPress={navigationCallback}>
         <Text style={{color: 'white', fontSize: 15, fontWeight: '800'}}>
           { onLoginScreen ? 'SIGN UP HERE!' : 'LOG IN HERE!' }
         </Text>

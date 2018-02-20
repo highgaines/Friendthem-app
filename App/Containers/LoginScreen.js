@@ -79,6 +79,7 @@ export class LoginScreen extends Component {
             LOG IN
           </Text>
           <TextInput
+            testID={'email_input'}
             style={styles.formInput}
             onChangeText={(textValue) => this.updateState(textValue, 'userEmail')}
             placeholder='Email Address'
@@ -88,6 +89,7 @@ export class LoginScreen extends Component {
             placeholderFontColor='#85919a'>
           </TextInput>
           <TextInput
+            testID={'password_input'}
             style={styles.formInput}
             onChangeText={(textValue) => this.updateState(textValue, 'userPassword')}
             secureTextEntry={true}
@@ -106,6 +108,7 @@ export class LoginScreen extends Component {
             onIconPress={() => this.setState({checkBoxChecked: !this.state.checkBoxChecked})}
             checked={this.state.checkBoxChecked}/>
           <TouchableOpacity
+            testID={'start_button'}
             style={[styles.loginButtonStyle, { marginTop: 20 }]}
             onPress={() => this.loginRequest()}>
             <Text style={styles.buttonText}>START</Text>
