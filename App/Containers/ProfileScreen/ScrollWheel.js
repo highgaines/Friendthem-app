@@ -8,6 +8,9 @@ import ImageCircle from '../UtilityComponents/ImageCircle';
 // Libraries
 import LinearGradient from 'react-native-linear-gradient';
 
+// Images
+import { Images } from '../../Themes';
+
 // Styles
 import styles from '../Styles/ScrollWheelStyles';
 

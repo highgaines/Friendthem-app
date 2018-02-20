@@ -31,6 +31,7 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
+  fetching: false,
   userId: null,
   userData: {
     username: '',
@@ -40,6 +41,8 @@ export const INITIAL_STATE = Immutable({
     interests: ['Crypto', 'Flying Kites', 'Gaming'],
     location: 'New York',
     snapHandle: null,
+    ghostMode: false,
+    silenceNotifications: false,
     social_profiles: [],
     geoLocation: {}
   },
@@ -80,6 +83,8 @@ export const getUserInfo = (accessToken) => {
   }
 }
 
+// GEOLOCATION POSITIONING
+
 export const updateUserPosition = (accessToken, coords) => {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
@@ -109,7 +114,8 @@ export const updateUserPosition = (accessToken, coords) => {
   }
 }
 
-// EDIT PROFILE UPDATE
+// EDIT PROFILE/UPDATE PROFILE INFORMATION
+
 export const updateInfoRequest = (data, field, content, accessToken) => {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
@@ -141,7 +147,8 @@ export const updateInfo = (field, content) => {
   return { type: Types.UPDATE_INFO, payload: { field, content } }
 }
 
-// SNAPCHAT HANDLE UPDATE
+// SNAPCHAT INFO
+
 export const updateSnapInfo = (provider, username, accessToken) => {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
@@ -169,9 +176,9 @@ export const updateSnapInfo = (provider, username, accessToken) => {
   }
 }
 
-// SETTINGS GHOST MODE AND NOTIFICATIONS UPDATE
-export const updateSettings = (accessToken, setting, mode) => {
+// USER SETTINGS - GHOST MODE AND SILENCE NOTIFICATIONS
 
+export const updateSettings = (accessToken, setting, mode) => {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${accessToken}`)
@@ -209,6 +216,7 @@ const handleFbUserInfoSuccess = (state = INITIAL_STATE, action) => {
   }
 }
 
+// ------------------------------------------------------------------------ //
 const handleUpdateInfo = (state, action) => {
 
   const { field, content } = action.payload
@@ -221,6 +229,7 @@ const handleUpdateInfo = (state, action) => {
     }
   }
 }
+// ------------------------------------------------------------------------ //
 
 const handleGetUserRequest = (state, action) => {
   return {...state, fetching: true}
@@ -234,30 +243,41 @@ const handleGetUserSuccess = (state, action) => {
     fetching: false
   }
 }
-
 const handleGetUserFailure = (state, action) => {
   return {...state, fetching: false}
 }
 
-const handleUpdateUserRequest = (state, action) => {
+// ------------------------------------------------------------------------ //
 
-  return state
+const handleUpdateUserRequest = (state, action) => {
+  return {
+    ...state,
+    fetching: true
+  }
 }
 
 const handleUpdateUserSuccess = (state, action) => {
 
   return {
     ...state,
-    editableData: action.response.data
+    editableData: action.response.data,
+    fetching: false
+  }
+}
+const handleUpdateUserFailure = (state, action) => {
+  return {
+    ...state,
+    fetching: false
   }
 }
 
-const handleUpdateUserFailure = (state, action) => {
-  return state
-}
+// ------------------------------------------------------------------------ //
 
 const handleUpdateUserPositionRequest = (state, action) => {
-  return state
+  return {
+    ...state,
+    fetching: true
+  }
 }
 
 const handleUpdateUserPositionSuccess = (state, action) => {
@@ -268,16 +288,25 @@ const handleUpdateUserPositionSuccess = (state, action) => {
 }
 
 const handleUpdateUserPositionFailure = (state, action) => {
-  return state
+  return {
+    ...state,
+    fetching: false
+  }
 }
 
+// ------------------------------------------------------------------------ //
+
 const handleUpdateSnapRequest = (state, action) => {
-  return state
+  return {
+    ...state,
+    fetching: true
+  }
 }
 
 const handleUpdateSnapSuccess = (state, action) => {
   return {
     ...state,
+    fetching: false,
     userData: {
       ...state.userData,
       snapHandle: action.data.username
@@ -286,7 +315,10 @@ const handleUpdateSnapSuccess = (state, action) => {
 }
 
 const handleUpdateSnapFailure = (state, action) => {
-  return state
+  return {
+    ...state,
+    fetching: false
+  }
 }
 
 const handleUpdateSettingsRequest = (state, action) => {
