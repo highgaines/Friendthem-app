@@ -343,24 +343,6 @@ const handleUpdateSettingsFailure = (state, action) => {
   }
 }
 
-const handleUpdateSnapRequest = (state, action) => {
-  return state
-}
-
-const handleUpdateSnapSuccess = (state, action) => {
-  return {
-    ...state,
-    userData: {
-      ...state.userData,
-      snapHandle: action.data.username
-    }
-  }
-}
-
-const handleUpdateSnapFailure = (state, action) => {
-  return state
-}
-
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
