@@ -26,7 +26,7 @@ class NotificationsContainer extends Component {
 
 }
 
-  componentDidMount = () => {
+  componentWillMount = () => {
     const { fetchNotifications, accessToken } = this.props
     fetchNotifications(accessToken)
   }
@@ -55,7 +55,7 @@ class NotificationsContainer extends Component {
           <SwipeListView
             useFlatList
             disableLeftSwipe={true}
-            data={this.props.notifications}
+            data={this.props.notifications ? this.props.notifications : []}
             renderItem={ (data, rowMap) => (
               <View style={styles.rowFront}>
                 <Image

@@ -43,7 +43,7 @@ export default StyleSheet.create({
   },
   switchStyle: {
     position: 'absolute',
-    right: 45
+    right: 65
   },
   iconContainer: {
     position: 'absolute',
