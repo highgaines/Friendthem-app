@@ -116,7 +116,7 @@ export const updateUserPosition = (accessToken, coords) => {
 
 // EDIT PROFILE/UPDATE PROFILE INFORMATION
 
-export const updateProfileInfo = (data, field, content, accessToken) => {
+export const updateInfoRequest = (data, field, content, accessToken) => {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${accessToken}`)
@@ -178,7 +178,7 @@ export const updateSnapInfo = (provider, username, accessToken) => {
 
 // USER SETTINGS - GHOST MODE AND SILENCE NOTIFICATIONS
 
-export const updateSettings = (setting, mode, accessToken) => {
+export const updateSettings = (accessToken, setting, mode) => {
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${accessToken}`)
@@ -249,14 +249,14 @@ const handleGetUserFailure = (state, action) => {
 
 // ------------------------------------------------------------------------ //
 
-const handleUpdateInfoRequest = (state, action) => {
+const handleUpdateUserRequest = (state, action) => {
   return {
     ...state,
     fetching: true
   }
 }
 
-const handleUpdateInfoSuccess = (state, action) => {
+const handleUpdateUserSuccess = (state, action) => {
 
   return {
     ...state,
@@ -264,7 +264,7 @@ const handleUpdateInfoSuccess = (state, action) => {
     fetching: false
   }
 }
-const handleUpdateInfoFailure = (state, action) => {
+const handleUpdateUserFailure = (state, action) => {
   return {
     ...state,
     fetching: false
@@ -351,9 +351,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_USER_REQUEST]: handleGetUserRequest,
   [Types.GET_USER_SUCCESS]: handleGetUserSuccess,
   [Types.GET_USER_FAILURE]: handleGetUserFailure,
-  [Types.UPDATE_INFO_REQUEST]: handleUpdateInfoRequest,
-  [Types.UPDATE_INFO_SUCCESS]: handleUpdateInfoSuccess,
-  [Types.UPDATE_INFO_FAILURE]: handleUpdateInfoFailure,
+  [Types.UPDATE_INFO_REQUEST]: handleUpdateUserRequest,
+  [Types.UPDATE_INFO_SUCCESS]: handleUpdateUserSuccess,
+  [Types.UPDATE_INFO_FAILURE]: handleUpdateUserFailure,
   [Types.UPDATE_USER_POSITION_REQUEST]: handleUpdateUserPositionRequest,
   [Types.UPDATE_USER_POSITION_SUCCESS]: handleUpdateUserPositionSuccess,
   [Types.UPDATE_USER_POSITION_FAILURE]: handleUpdateUserPositionFailure,
