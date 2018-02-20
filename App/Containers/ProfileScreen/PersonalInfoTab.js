@@ -10,7 +10,7 @@ import { Icon } from 'react-native-elements'
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import UserStoreActions, { updateProfileInfo } from '../../Redux/UserStore'
+import UserStoreActions, { updateInfoRequest } from '../../Redux/UserStore'
 
 // Styles
 import styles from '../Styles/PersonalInfoTabStyles'
@@ -25,8 +25,8 @@ class PersonalInfoTab extends Component {
       content = `+1${content}`
     }
 
-    const { updateProfileInfo, editableData, accessToken } = this.props
-    updateProfileInfo(editableData, field, content, accessToken)
+    const { updateInfoRequest, editableData, accessToken } = this.props
+    updateInfoRequest(editableData, field, content, accessToken)
   }
 
   render() {
@@ -106,7 +106,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({
-      updateProfileInfo,
+      updateInfoRequest,
     }, dispatch)
   }
 }
