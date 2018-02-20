@@ -11,7 +11,7 @@ import AuthStoreActions, { login } from '../Redux/AuthStore'
 import PermissionsStoreActions from '../Redux/PermissionsStore'
 import styles from './Styles/UserProfileInfoStyles'
 
-export class LoginScreen extends Component {
+class LoginScreen extends Component {
   constructor(props) {
     super(props)
 
