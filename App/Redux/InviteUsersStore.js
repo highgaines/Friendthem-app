@@ -10,7 +10,8 @@ const { Types, Creators } = createActions({
     selectUser: ['user'],
     connectivityInfoRequest: null,
     connectivityInfoFailure: null,
-    connectivityInfoSuccess: null
+    connectivityInfoSuccess: null,
+    logoutUser: null,
 })
 
 export const InviteUsers = Types
@@ -129,6 +130,10 @@ const handleConnectivitySuccess = (state, action) => {
   return state.merge({ connectivityData: data, fetchingData: false })
 }
 
+const handleUserLogout = (state, action) => {
+  return INITIAL_STATE
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -137,4 +142,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.CONNECTIVITY_INFO_REQUEST]: handleConnectivityRequest,
   [Types.CONNECTIVITY_INFO_SUCCESS]: handleConnectivitySuccess,
   [Types.CONNECTIVITY_INFO_FAILURE]: handleConnectivityFailure,
+  [Types.LOGOUT_USER]: handleUserLogout,
 })

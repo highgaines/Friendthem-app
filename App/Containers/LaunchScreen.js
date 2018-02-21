@@ -62,7 +62,6 @@ class LaunchScreen extends Component {
     const { setGeoPermission, setNotifPermission } = this.props
 
     Permissions.check('location', { type: 'always' }).then(response => {
-      console.log(response)
       if (response === 'authorized') {
         setGeoPermission(true)
       }
@@ -126,8 +125,7 @@ class LaunchScreen extends Component {
   }
 
   render () {
-    const { navigate } = this.props.navigation
-    const { users, fbAuthToken, logoutUser } = this.props
+    const { users, fbAuthToken, logoutUser, navigation } = this.props
     const { loading } = this.state
 
     return (
@@ -170,14 +168,14 @@ class LaunchScreen extends Component {
                     color='#fff'
                     containerStyle={styles.button}
                     textStyle={styles.buttonTextStyle}
-                    onPressCallback={() => navigate('RegisterUserScreen')}
+                    onPressCallback={() => navigation.navigate('RegisterUserScreen')}
                   />
                 </View>
               }
             </View>
           </ScrollView>
           <Footer
-            navigationCallback={() => navigate('LoginScreen')}
+            navigationCallback={() => navigation.navigate('LoginScreen')}
             styles={footerStyles}/>
         </LinearGradient>
       </View>

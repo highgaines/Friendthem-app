@@ -2,6 +2,7 @@
 
 import { Images } from '../Themes';
 import Permissions from 'react-native-permissions'
+import { NavigationActions } from 'react-navigation'
 
 /************************ DATA ************************/
 
@@ -54,4 +55,12 @@ export const determineImage = (accountData) => {
   } else {
     return Images.noPicSVG
   }
+}
+
+export const navigateWithStackReset = (screen, navigation) => {
+  navigation.dispatch(NavigationActions.reset({
+    index: 0,
+    actions: [NavigationActions.navigate({ routeName: screen })],
+    key: null
+  }))
 }

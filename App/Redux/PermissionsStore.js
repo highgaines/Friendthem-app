@@ -71,10 +71,7 @@ const setLocationInterval = (state, action) => {
 }
 
 const removeLocationInterval = (state, action) => {
-  return {
-    ...state,
-    locationIntervalRunning: false
-  }
+  return INITIAL_STATE
 }
 
 

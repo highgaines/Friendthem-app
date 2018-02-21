@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StackNavigator } from 'react-navigation'
+import { StackNavigator, NavigationActions } from 'react-navigation'
 
 // Components
 import LaunchScreen from '../Containers/LaunchScreen'
@@ -77,4 +77,15 @@ const PrimaryNav = StackNavigator({
   }
 })
 
+const navigateOnce = (getStateForAction) => (action, state) => {
+  const {type, routeName} = action;
+  return (
+    state &&
+    type === NavigationActions.NAVIGATE &&
+    routeName === state.routes[state.routes.length - 1].routeName
+  ) ? null : getStateForAction(action, state);
+};
+
+PrimaryNav.router.getStateForAction = navigateOnce(PrimaryNav.router.getStateForAction)
+debugger
 export default PrimaryNav

@@ -10,6 +10,7 @@ const { Types, Creators} = createActions({
   togglePlatform: ['platformName'],
   setManualPlatforms: ['platformArr'],
   setSuperConnectPlatforms: ['platformList'],
+  logoutUser: null,
 })
 
 export const SuperConnectTypes = Types
@@ -95,11 +96,16 @@ const handleSetManualPlatforms = (state, action) => {
   }
 }
 
+const handleUserLogout = (state, action) => {
+  return INITIAL_STATE
+}
+
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.TOGGLE_PLATFORM]: handleTogglePlatform,
   [Types.SET_MANUAL_PLATFORMS]: handleSetManualPlatforms,
   [Types.SET_SUPER_CONNECT_PLATFORMS]: handleSetSelectedSocialMedia,
   [Types.SOCIAL_MEDIA_CONNECT_REQUEST]: handleSocialMediaConnectRequest,
   [Types.SOCIAL_MEDIA_CONNECT_SUCCESS]: handleSocialMediaConnectSuccess,
-  [Types.SOCIAL_MEDIA_CONNECT_FAILURE]: handleSocialMediaConnectFailure
+  [Types.SOCIAL_MEDIA_CONNECT_FAILURE]: handleSocialMediaConnectFailure,
+  [Types.LOGOUT_USER]: handleUserLogout,
 })

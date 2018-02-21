@@ -6,7 +6,8 @@ const fbDeepLinkURL = 'fb://profile/'
 
 const { Types, Creators } = createActions({
   setFriendInfo: ['friendInfo'],
-  connectivityInfoSuccess: null
+  connectivityInfoSuccess: null,
+  logoutUser: null,
 })
 
 export const FriendTypes = Types
@@ -33,9 +34,14 @@ const handleConnectivitySuccess = (state, action) => {
   }
 }
 
+const handleUserLogout = (state, action) => {
+  return INITIAL_STATE
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.SET_FRIEND_INFO]: handleFriendInfo,
-  [Types.CONNECTIVITY_INFO_SUCCESS]: handleConnectivitySuccess
+  [Types.CONNECTIVITY_INFO_SUCCESS]: handleConnectivitySuccess,
+  [Types.LOGOUT_USER]: handleUserLogout,
 })
