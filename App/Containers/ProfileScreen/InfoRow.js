@@ -31,7 +31,7 @@ export default class InfoRow extends Component {
   }
 
   render() {
-    const { rowLabel, userInfo, showSwitch, isPrivate, updateInfo, secureText, toggleChangePasswordModal } = this.props
+    const { rowLabel, userInfo, showSwitch, isPrivate, updateInfo, secureText, toggleChangePasswordModal, field } = this.props
     const { isEditing, flipSwitch } = this.state
 
     let editPressCallback = toggleChangePasswordModal
@@ -43,17 +43,22 @@ export default class InfoRow extends Component {
         <Text style={styles.rowLabelText}>{`${rowLabel}: `}</Text>
         {isEditing ?
           <TextInput
-            testID='input'
+            testID={`input-${field}`}
             value={this.state.input}
             style={styles.form}
             secureTextEntry={secureText}
             onChangeText={input => this.handleChange(input)}
           /> :
           <Text
+<<<<<<< HEAD
             testID='input-display'
             style={styles.rowTextContent}>
             {secureText || flipSwitch ? '********' : userInfo}
           </Text>}
+=======
+            testID={`input-display-${field}`}
+            style={styles.rowTextContent}>{userInfo}</Text>}
+>>>>>>> User profile edit passing
         {
           showSwitch ?
           <Switch
@@ -64,15 +69,17 @@ export default class InfoRow extends Component {
             : null
         }
         <TouchableOpacity
-          testID='edit-pencil'
           style={styles.iconContainer}
           onPress={editPressCallback}
           >
           { isEditing ?
             <View style={{ position: 'absolute', right: -10, top: -10}}>
-              <Button title="SAVE" onPress={this.handleSubmit}/>
+              <Button
+                testID='save-button'
+                title="SAVE" onPress={this.handleSubmit}/>
             </View> :
             <Icon
+              testID={`edit-pencil-${field}`}
               name='pencil'
               type='simple-line-icon'
               size={15}
