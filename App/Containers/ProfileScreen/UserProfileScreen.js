@@ -205,7 +205,9 @@ class UserProfileScreen extends Component {
               modalVisible={this.state.snapHandleModalOpen}
               toggleSnapchatModal={this.toggleSnapchatModal}
               submitText={(inputValue, apiAccessToken) => updateSnapInfo('snapchat', inputValue, apiAccessToken)} />
-            <View style={styles.tabSelectionContainer}>
+            <View
+              testID='tab-selection-container'
+              style={styles.tabSelectionContainer}>
               <TouchableOpacity
                 onPress={() => this.setState({ socialNetworkTab: true })}
                 style={[styles.tabItem, socialNetworkTab ? styles.selected : null]}>
