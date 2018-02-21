@@ -36,13 +36,13 @@ class LoginScreen extends Component {
       if (permissionsGranted) {
         navigation.navigate('ForkScreen')
       } else if (!locationPermission) {
-        navigation.navigate('PermissionScreen', {
-          permissionType: 'geolocation', navigation: navigation
-        })
+          navigation.navigate('PermissionScreen', {
+            permissionType: 'geolocation', navigation: navigation
+          })
       } else {
-        navigation.navigate('PermissionScreen', {
-          permissionType: 'notifications', navigation: navigation
-        })
+          navigation.navigate('PermissionScreen', {
+            permissionType: 'notifications', navigation: navigation
+          })
       }
     }
 
@@ -135,8 +135,8 @@ class LoginScreen extends Component {
 const mapStateToProps = state => ({
   loggedIn: state.authStore.loggedIn,
   authError: state.authStore.authError,
-  locationPermission: state.permissionsStore.locationPermissionsGranted,
-  notificationPermission: state.permissionsStore.notificationPermissionsGranted,
+  locationPermission: state.permissionsStore.nativeGeolocation,
+  notificationPermission: state.permissionsStore.nativeNotifications,
 })
 
 const mapDispatchToProps = dispatch => {

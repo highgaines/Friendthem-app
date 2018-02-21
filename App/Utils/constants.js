@@ -1,5 +1,10 @@
-/************************ DATA ************************/
+/************************ IMPORTS ************************/
+
 import { Images } from '../Themes';
+import Permissions from 'react-native-permissions'
+import { NavigationActions } from 'react-navigation'
+
+/************************ DATA ************************/
 
 export const SYNCED_CARD_COLORS = {
   facebook: '#3b5997',

@@ -5,6 +5,7 @@ import Reactotron from 'reactotron-react-native';
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
+  logoutUser: null,
   deleteRow: ['rowMap', 'rowKey'],
   registerUserNotifRequest: null,
   registerUserNotifSuccess: null,
@@ -133,6 +134,10 @@ const handleFetchNotifSuccess = (state, action) => {
 const handleFetchNotifFailure = (state, action) => {
   return {...state, fetching: false}
 }
+
+const handleUserLogout = (state, action) => {
+  return INITIAL_STATE
+}
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -142,5 +147,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.REGISTER_USER_NOTIF_FAILURE]: handleRegisterNotifFailure,
   [Types.FETCH_NOTIFICATIONS_REQUEST]: handleFetchNotifRequest,
   [Types.FETCH_NOTIFICATIONS_SUCCESS]: handleFetchNotifSuccess,
-  [Types.FETCH_NOTIFICATIONS_FAILURE]: handleFetchNotifFailure
+  [Types.FETCH_NOTIFICATIONS_FAILURE]: handleFetchNotifFailure,
+  [Types.LOGOUT_USER]: handleUserLogout,
 })

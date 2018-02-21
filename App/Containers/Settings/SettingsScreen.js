@@ -34,8 +34,8 @@ class SettingsScreen extends Component {
     super(props)
 
     this.state = {
-      silenceSwitch: false,
-      ghostSwitch: false,
+      silenceSwitch: props.userInfo.notifications,
+      ghostSwitch: props.userInfo.ghost_mode,
       termsVisible: false
     }
   }
@@ -224,7 +224,7 @@ class SettingsScreen extends Component {
 
 const mapStateToProps = state => ({
   accessToken: state.authStore.accessToken,
-  ghostMode: state.userStore.ghostModeOn,
+  userInfo: state.userStore.userData,
   notifications: state.userStore.notificationsOn
 })
 

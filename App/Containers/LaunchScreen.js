@@ -43,6 +43,7 @@ class LaunchScreen extends Component {
 
   componentWillMount = () => {
     this.checkPermissions()
+
     if (this.props.loggedIn) {
       this.props.navigation.navigate('UserProfileScreen')
     }
@@ -123,8 +124,7 @@ class LaunchScreen extends Component {
   }
 
   render () {
-    const { navigate } = this.props.navigation
-    const { users, fbAuthToken, logoutUser } = this.props
+    const { users, fbAuthToken, logoutUser, navigation } = this.props
     const { loading } = this.state
 
     return (
@@ -167,14 +167,14 @@ class LaunchScreen extends Component {
                     color='#fff'
                     containerStyle={styles.button}
                     textStyle={styles.buttonTextStyle}
-                    onPressCallback={() => navigate('RegisterUserScreen')}
+                    onPressCallback={() => navigation.navigate('RegisterUserScreen')}
                   />
                 </View>
               }
             </View>
           </ScrollView>
           <Footer
-            navigationCallback={() => navigate('LoginScreen')}
+            navigationCallback={() => navigation.navigate('LoginScreen')}
             styles={footerStyles}/>
         </LinearGradient>
       </View>
@@ -199,10 +199,12 @@ const mapDispatchToProps = dispatch => {
 
   return {
     ...bindActionCreators({
-      logoutUser,
       fbUserInfo,
+      logoutUser,
       loginByFacebook,
-      setLocationInterval
+      setGeoPermission,
+      setNotifPermission,
+      setLocationInterval,
     }, dispatch)
   }
 }

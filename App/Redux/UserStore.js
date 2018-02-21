@@ -22,7 +22,8 @@ const { Types, Creators } = createActions({
   updateSnapFailure: null,
   updateSettingsRequest: null,
   updateSettingsSuccess: null,
-  updateSettingsFailure: null
+  updateSettingsFailure: null,
+  logoutUser: null,
 })
 
 export const UserTypes = Types
@@ -343,6 +344,10 @@ const handleUpdateSettingsFailure = (state, action) => {
   }
 }
 
+const handleUserLogout = (state, action) => {
+  return INITIAL_STATE
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -362,5 +367,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.UPDATE_SNAP_FAILURE]: handleUpdateSnapFailure,
   [Types.UPDATE_SETTINGS_REQUEST]: handleUpdateSettingsRequest,
   [Types.UPDATE_SETTINGS_SUCCESS]: handleUpdateSettingsSuccess,
-  [Types.UPDATE_SETTINGS_FAILURE]: handleUpdateSettingsFailure
+  [Types.UPDATE_SETTINGS_FAILURE]: handleUpdateSettingsFailure,
+  [Types.LOGOUT_USER]: handleUserLogout,
 })

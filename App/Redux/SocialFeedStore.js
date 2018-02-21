@@ -8,7 +8,8 @@ import Reactotron from 'reactotron-react-native';
 const { Types, Creators } = createActions({
   fetchFeedDataRequest: null,
   fetchFeedDataSuccess: null,
-  fetchFeedDataFailure: null
+  fetchFeedDataFailure: null,
+  logoutUser: null,
 })
 
 export const SocialFeed = Types
@@ -67,10 +68,15 @@ const handleFeedDataFailure = (state, action) => {
   }
 }
 
+const handleUserLogout = (state, action) => {
+  return INITIAL_STATE
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.FETCH_FEED_DATA_REQUEST]: handleFeedDataRequest,
   [Types.FETCH_FEED_DATA_SUCCESS]: handleFeedDataSuccess,
-  [Types.FETCH_FEED_DATA_FAILURE]: handleFeedDataFailure
+  [Types.FETCH_FEED_DATA_FAILURE]: handleFeedDataFailure,
+  [Types.LOGOUT_USER]: handleUserLogout,
 })

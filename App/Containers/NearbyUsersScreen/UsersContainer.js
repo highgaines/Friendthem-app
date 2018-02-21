@@ -15,13 +15,15 @@ export default function UsersContainer(props) {
 
   const userCards =
     users.map( (userObj,i) =>
-  <UserCard
-    key={i}
-    picture={userObj.picture}
-    name={userObj.first_name}
-    fbUrl={userObj.fbUrl}
-    setFriendInfo={() => viewFriendProfile(userObj)}
-  /> )
+      <UserCard
+        key={i}
+        picture={userObj.picture}
+        name={userObj.first_name}
+        fbUrl={userObj.fbUrl}
+        setFriendInfo={() => viewFriendProfile(userObj)}
+      />
+    )
+
   const arePeopleNearby = users.length
 
   return(

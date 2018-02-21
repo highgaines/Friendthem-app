@@ -2,22 +2,23 @@ import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
 
 // Components
-import SearchBar from './SearchBar';
-import UsersContainer from './UsersContainer';
-import NearbyFeedContainer from './NearbyFeedContainer';
+import SearchBar from './SearchBar'
+import UsersContainer from './UsersContainer'
+import NearbyFeedContainer from './NearbyFeedContainer'
 
 // Libraries
-import LinearGradient from 'react-native-linear-gradient';
+import LinearGradient from 'react-native-linear-gradient'
 import _ from 'lodash';
 
 // Components
-import Navbar from '../Navbar/Navbar';
-import WelcomeScreen from '../TutorialScreens/WelcomeScreen';
+import Navbar from '../Navbar/Navbar'
+import WelcomeScreen from '../TutorialScreens/WelcomeScreen'
 
 // Redux
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import FriendStoreActions from '../../Redux/FriendStore';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import FriendStoreActions from '../../Redux/FriendStore'
+import InviteUsersStoreActions, { fetchConnectivityData } from '../../Redux/InviteUsersStore'
 
 // Images
 import { Images } from '../../Themes';
@@ -34,6 +35,12 @@ class NearbyUsers extends Component {
       welcomeTutorialVisible: true,
       feedView: false
     }
+  }
+
+  componentWillMount = () => {
+    const { accessToken, fetchConnectivityData } = this.props
+
+    fetchConnectivityData(accessToken)
   }
 
   handleChange = input => {
@@ -93,6 +100,7 @@ class NearbyUsers extends Component {
 }
 
 const mapStateToProps = state => ({
+  accessToken: state.authStore.accessToken,
   users: state.friendStore.users
 })
 
@@ -100,7 +108,10 @@ const mapDispatchToProps = dispatch => {
   const { setFriendInfo } = FriendStoreActions
 
   return {
-    ...bindActionCreators({ setFriendInfo }, dispatch)
+    ...bindActionCreators({
+      setFriendInfo,
+      fetchConnectivityData
+    }, dispatch)
   }
 }
 

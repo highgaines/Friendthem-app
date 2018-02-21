@@ -11,6 +11,7 @@ import FBSDK, { LoginManager, AccessToken, GraphRequestManager, GraphRequest } f
 const { Types, Creators } = createActions({
   loginComplete: ['fbAccessToken'],
   logoutComplete: null,
+  logoutUser: null,
 })
 
 export const FBAPITypes = Types
@@ -31,9 +32,14 @@ const fbLogoutComplete = (state = INITIAL_STATE, action) => {
   return { ...state, fbAccessToken: null }
 }
 
+const handleUserLogout = (state, action) => {
+  return INITIAL_STATE
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGIN_COMPLETE]: fbLoginComplete,
-  [Types.LOGOUT_COMPLETE]: fbLogoutComplete
+  [Types.LOGOUT_COMPLETE]: fbLogoutComplete,
+  [Types.LOGOUT_USER]: handleUserLogout,
 })
