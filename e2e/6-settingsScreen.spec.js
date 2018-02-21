@@ -1,9 +1,9 @@
-describe('Permissions Screens and Fork Screen', () => {
+describe('Settings Screen', () => {
   beforeEach(async () => {
     await device.reloadReactNative();
   });
 
-  it('renders permission screens and fork screen correctly', async () => {
+  it('log in and get to homescreen', async () => {
     await element(by.id('login_button')).tap();
     await expect(element(by.text('LOG IN'))).toBeVisible()
     await element(by.id('email_input'))
@@ -16,5 +16,10 @@ describe('Permissions Screens and Fork Screen', () => {
     await element(by.text('WE WOULD ALSO LIKE TO SEND YOU NOTIFICATIONS'))
     await element(by.id('connect_button_okay').withDescendant(by.id('connect_button'))).atIndex(0).tap()
     await expect(element(by.text('Welcome!'))).toBeVisible()
+    await element(by.text('FIND PEOPLE NEARBY')).tap();
+    await element(by.id('start-button')).tap();
+    await expect(element(by.id('nearby_users_container'))).toBeVisible()
+    await element(by.id('settings_button')).tap()
+    await expect(element(by.text('General Settings'))).toBeVisible()
   })
 })

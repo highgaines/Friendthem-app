@@ -205,6 +205,7 @@ class SettingsScreen extends Component {
             />
           </TouchableOpacity>
           <TouchableOpacity
+            testID={'logout_button'}
             style={styles.logOutButton}
             onPress={() => toggleModal()}
             >
