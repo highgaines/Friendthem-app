@@ -30,6 +30,8 @@ import { Images } from '../Themes'
 import styles from './Styles/LaunchScreenStyles'
 import footerStyles from './Styles/FooterStyles'
 
+import { determinePermissions } from '../Utils/constants'
+
 class LaunchScreen extends Component {
   constructor(props) {
     super(props)
@@ -42,7 +44,8 @@ class LaunchScreen extends Component {
   }
 
   componentWillMount = () => {
-    this.checkPermissions()
+    const permissions = determinePermissions()
+    debugger
     if (this.props.loggedIn) {
       this.props.navigation.navigate('UserProfileScreen')
     }

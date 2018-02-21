@@ -1,5 +1,9 @@
-/************************ DATA ************************/
+/************************ IMPORTS ************************/
+
 import { Images } from '../Themes';
+import Permissions from 'react-native-permissions'
+
+/************************ DATA ************************/
 
 export const SYNCED_CARD_COLORS = {
   facebook: '#3b5997',
@@ -50,4 +54,12 @@ export const determineImage = (accountData) => {
   } else {
     return Images.noPicSVG
   }
+}
+
+export async function determinePermissions() {
+  let response = null
+   Permissions.check('location', { type: 'always' }).then(resp => {
+    response = resp
+   })
+   await response
 }
