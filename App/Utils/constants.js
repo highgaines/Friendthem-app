@@ -35,7 +35,8 @@ export const SOCIAL_MEDIA_DATA = {
 
 export const MANUAL_CONNECT_PLATFORMS = [
   'facebook',
-  'snapchat'
+  'snapchat',
+  'instagram'
 ]
 
 export const NAVBAR_RENDER_OK = [
