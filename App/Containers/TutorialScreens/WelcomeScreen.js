@@ -25,9 +25,11 @@ export default WelcomeScreen = props => {
             <Text style={[styles.text, { fontSize: 15}]}> Welcome to Friendthem! </Text>
             <Text style={[styles.text, { fontSize: 12, textAlign: 'center'}]}> Let's get you started by syncing up all your social media accounts</Text>
             <TouchableOpacity
+              testID='start-button'
               style={styles.startButton}
               onPress={closeModal}>
-              <Text style={[styles.text, { textAlign: 'center'}]}> START </Text>
+              <Text
+                style={[styles.text, { textAlign: 'center'}]}> START </Text>
             </TouchableOpacity>
           </View>
         </Modal>
