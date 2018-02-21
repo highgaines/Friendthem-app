@@ -19,7 +19,7 @@ describe('Settings Screen', () => {
     await element(by.text('FIND PEOPLE NEARBY')).tap();
     await element(by.id('start-button')).tap();
     await expect(element(by.id('nearby_users_container'))).toBeVisible()
-    await element(by.id('settings_button')).tap()
+    await element(by.id('settings-navbar-button')).tap()
     await expect(element(by.text('General Settings'))).toBeVisible()
   })
 })
