@@ -1,9 +1,9 @@
-describe('User Profile Screen Flow', () => {
+describe('Notification Screen Flow', () => {
   beforeEach(async () => {
     await device.reloadReactNative();
   });
 
-  it('renders the user profile screen correctly', async () => {
+  it('renders the notification screen correctly', async () => {
     await element(by.id('login_button')).tap();
     await expect(element(by.text('LOG IN'))).toBeVisible();
     await element(by.id('email_input'));
@@ -18,8 +18,7 @@ describe('User Profile Screen Flow', () => {
     await expect(element(by.text('Welcome!'))).toBeVisible();
     await element(by.text('FIND PEOPLE NEARBY')).tap();
     await element(by.id('start-button')).tap();
-    await element(by.id('profile-navbar-button')).tap();
-    await element(by.text('CLOSE')).tap();
-    await expect(element(by.id('tab-selection-container'))).toBeVisible();
+    await element(by.id('notification-navbar-button')).tap();
+    await expect(element(by.id('notification-container'))).toBeVisible();
   });
 });

@@ -151,7 +151,9 @@ class Navbar extends Component {
               </Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.goToNotifications}>
+          <TouchableOpacity
+            testID='notification-navbar-button'
+            style={styles.button} onPress={this.goToNotifications}>
             <View style={[styles.container, this.selectedStyleRender('NotificationsScreen')]}>
               <Icon
                 name='notifications'
