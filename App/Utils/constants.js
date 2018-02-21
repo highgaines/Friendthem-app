@@ -56,11 +56,3 @@ export const determineImage = (accountData) => {
     return Images.noPicSVG
   }
 }
-
-export const navigateWithStackReset = (screen, navigation) => {
-  navigation.dispatch(NavigationActions.reset({
-    index: 0,
-    actions: [NavigationActions.navigate({ routeName: screen })],
-    key: null
-  }))
-}
