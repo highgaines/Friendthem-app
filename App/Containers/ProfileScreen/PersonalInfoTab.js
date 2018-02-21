@@ -58,6 +58,7 @@ class PersonalInfoTab extends Component {
           updateInfo={this.packageEditProfile}
           userInfo={editableData.hometown}/>
         <InfoRow
+          testID='age'
           rowLabel='AGE'
           field="age"
           updateInfo={this.packageEditProfile}

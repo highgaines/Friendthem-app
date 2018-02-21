@@ -43,12 +43,15 @@ export default class InfoRow extends Component {
         <Text style={styles.rowLabelText}>{`${rowLabel}: `}</Text>
         {isEditing ?
           <TextInput
+            testID='input'
             value={this.state.input}
             style={styles.form}
             secureTextEntry={secureText}
             onChangeText={input => this.handleChange(input)}
           /> :
-          <Text style={styles.rowTextContent}>
+          <Text
+            testID='input-display'
+            style={styles.rowTextContent}>
             {secureText || flipSwitch ? '********' : userInfo}
           </Text>}
         {
@@ -61,6 +64,7 @@ export default class InfoRow extends Component {
             : null
         }
         <TouchableOpacity
+          testID='edit-pencil'
           style={styles.iconContainer}
           onPress={editPressCallback}
           >
