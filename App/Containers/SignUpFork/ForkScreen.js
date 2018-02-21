@@ -115,13 +115,15 @@ class ForkScreen extends Component {
               <Text style={styles.secSubText}>
                 What would you like to do?
               </Text>
-              <ConnectButton
-                color='#fff'
-                title='FIND PEOPLE NEARBY'
-                containerStyle={styles.button}
-                textStyle={styles.buttonTextStyle}
-                onPressCallback={this.directToNearbyUsers}
-              />
+              <View testID={'go_to_nearby_users'}>
+                <ConnectButton
+                  color='#fff'
+                  title='FIND PEOPLE NEARBY'
+                  containerStyle={styles.button}
+                  textStyle={styles.buttonTextStyle}
+                  onPressCallback={this.directToNearbyUsers}
+                />
+              </View>
             </View>
           </LinearGradient>
         </View>

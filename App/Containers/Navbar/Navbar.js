@@ -165,7 +165,9 @@ class Navbar extends Component {
                 '' ]}> Notifications </Text>
               </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.goToSettings}>
+          <TouchableOpacity
+            testID={'settings_button'}
+            style={styles.button} onPress={this.goToSettings}>
             <View style={[styles.container, this.selectedStyleRender('SettingsScreen')]}>
               <Icon
                 name='settings'

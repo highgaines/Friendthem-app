@@ -143,7 +143,8 @@ class LaunchScreen extends Component {
               <Text style={styles.primSubText}>
                 CONNECTING THE WORLD
               </Text>
-              <Text style={styles.secSubText}>
+              <Text
+                testID={'catch_phrase'} style={styles.secSubText}>
                 Life Happens when people connect
               </Text>
             </View>
