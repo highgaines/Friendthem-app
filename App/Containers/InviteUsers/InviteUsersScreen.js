@@ -57,8 +57,6 @@ class InviteUsersScreen extends Component {
     })
   }
 
-
-
   render() {
     const { networkTabSelected, showModal } = this.state;
     const { friends, selectUser, selectedUser, navigation, fetchConnectivityData, accessToken } = this.props

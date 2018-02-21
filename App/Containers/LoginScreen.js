@@ -19,7 +19,6 @@ class LoginScreen extends Component {
       userEmail: '',
       userPassword: '',
       rememberMe: false,
-      navigatingAway: false
     }
   }
 
@@ -31,25 +30,19 @@ class LoginScreen extends Component {
       locationPermission,
       notificationPermission
     } = this.props
-    const { navigatingAway } = this.state
     const permissionsGranted = locationPermission && notificationPermission
 
     if (loggedIn && !prevProps.loggedIn) {
-      if (permissionsGranted && !navigatingAway) {
-        console.log(navigatingAway)
-        this.setState({navigatingAway: true}, () => navigation.navigate('ForkScreen'))
-      } else if (!locationPermission && !navigatingAway) {
-        this.setState({navigatingAway: true},
-          () => navigation.navigate('PermissionScreen', {
+      if (permissionsGranted) {
+        navigation.navigate('ForkScreen')
+      } else if (!locationPermission) {
+          navigation.navigate('PermissionScreen', {
             permissionType: 'geolocation', navigation: navigation
           })
-        )
-      } else if (!navigatingAway){
-        this.setState({navigatingAway: true},
-          () => navigation.navigate('PermissionScreen', {
+      } else {
+          navigation.navigate('PermissionScreen', {
             permissionType: 'notifications', navigation: navigation
           })
-        )
       }
     }
 

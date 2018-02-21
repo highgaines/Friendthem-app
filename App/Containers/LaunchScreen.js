@@ -58,7 +58,7 @@ class LaunchScreen extends Component {
     }
   }
 
-  checkPermissions = async () => {
+  checkPermissions = () => {
     const { setGeoPermission, setNotifPermission } = this.props
 
     Permissions.check('location', { type: 'always' }).then(response => {
@@ -67,7 +67,6 @@ class LaunchScreen extends Component {
       }
     })
     Permissions.check('notification').then(response => {
-      console.log(response)
       if (response === 'authorized') {
         setNotifPermission(true)
       }
