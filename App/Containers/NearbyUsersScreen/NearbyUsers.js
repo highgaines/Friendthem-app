@@ -60,7 +60,8 @@ class NearbyUsers extends Component {
     const { input, welcomeTutorialVisible, feedView } = this.state
 
     return(
-      <View style={[styles.nearbyUsersContainer]}>
+      <View
+        testID={'nearby_users_container'} style={[styles.nearbyUsersContainer]}>
         <SearchBar
           numUsers={users.length}
           navigation={navigation}
