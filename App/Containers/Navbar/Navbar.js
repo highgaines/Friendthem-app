@@ -105,8 +105,12 @@ class Navbar extends Component {
   render() {
 
     return(
-        <View style={[this.props.navbarStyle || styles.navbarRow, { marginTop: this.props.margin }]}>
-          <TouchableOpacity style={styles.button} onPress={this.goToProfile}>
+        <View
+          testID='navbar'
+          style={[this.props.navbarStyle || styles.navbarRow, { marginTop: this.props.margin }]}>
+          <TouchableOpacity
+            testID='profile-navbar-button'
+            style={styles.button} onPress={this.goToProfile}>
             <View style={[styles.container, this.selectedStyleRender('UserProfileScreen')]}>
               <Icon
                 name='user'

@@ -131,19 +131,22 @@ class PermissionScreen extends Component {
             <Text style={[styles.text, { fontSize: 14 }]}>
               {this.determineText()}
              </Text>
-             <View style={styles.buttonContainer}>
+             <View testID={'button_container'} style={styles.buttonContainer}>
                <ConnectButton
+                 testID={'connect_button_not_now'}
                  title="NOT NOW"
                  containerStyle={styles.button}
                  textStyle={styles.buttonTextStyle}
                  onPressCallback={() => this.handleNotNow()}
                />
-               <ConnectButton
-                 title="OKAY!"
-                 containerStyle={styles.button}
-                 textStyle={styles.buttonTextStyle}
-                 onPressCallback={() => this.handleOkay()}
-               />
+              <View testID={'connect_button_okay'}>
+                <ConnectButton
+                  title="OKAY!"
+                  containerStyle={styles.button}
+                  textStyle={styles.buttonTextStyle}
+                  onPressCallback={() => this.handleOkay()}
+                />
+              </View>
              </View>
           </View>
         </LinearGradient>

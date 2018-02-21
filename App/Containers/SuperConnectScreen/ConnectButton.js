@@ -45,6 +45,7 @@ export default function ConnectButton(props) {
   :
   (
     <TouchableHighlight
+      testID={'connect_button'}
       onPress={onPressCallback}
       style={containerStyle}>
       <View style={styles.buttonViewStyle}>
