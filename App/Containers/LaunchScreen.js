@@ -30,8 +30,6 @@ import { Images } from '../Themes'
 import styles from './Styles/LaunchScreenStyles'
 import footerStyles from './Styles/FooterStyles'
 
-import { determinePermissions } from '../Utils/constants'
-
 class LaunchScreen extends Component {
   constructor(props) {
     super(props)
@@ -44,8 +42,8 @@ class LaunchScreen extends Component {
   }
 
   componentWillMount = () => {
-    const permissions = determinePermissions()
-    debugger
+    this.checkPermissions()
+
     if (this.props.loggedIn) {
       this.props.navigation.navigate('UserProfileScreen')
     }
@@ -60,15 +58,17 @@ class LaunchScreen extends Component {
     }
   }
 
-  checkPermissions = () => {
+  checkPermissions = async () => {
     const { setGeoPermission, setNotifPermission } = this.props
 
     Permissions.check('location', { type: 'always' }).then(response => {
+      console.log(response)
       if (response === 'authorized') {
         setGeoPermission(true)
       }
     })
     Permissions.check('notification').then(response => {
+      console.log(response)
       if (response === 'authorized') {
         setNotifPermission(true)
       }
@@ -202,10 +202,12 @@ const mapDispatchToProps = dispatch => {
 
   return {
     ...bindActionCreators({
-      logoutUser,
       fbUserInfo,
+      logoutUser,
       loginByFacebook,
-      setLocationInterval
+      setGeoPermission,
+      setNotifPermission,
+      setLocationInterval,
     }, dispatch)
   }
 }

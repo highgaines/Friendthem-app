@@ -55,11 +55,3 @@ export const determineImage = (accountData) => {
     return Images.noPicSVG
   }
 }
-
-export async function determinePermissions() {
-  let response = null
-   Permissions.check('location', { type: 'always' }).then(resp => {
-    response = resp
-   })
-   await response
-}

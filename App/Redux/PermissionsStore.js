@@ -41,13 +41,12 @@ export const setNotifPermission = permission => {
 /* ----------------- Reducers ----------------- */
 
 const handleSetNativeGeolocation = (state = INITIAL_STATE, action) => {
-  const { permission } = action.payload
-  return state.merge({ nativeGeolocation: permission })
+  return state.merge({ nativeGeolocation: action.permission })
 }
 
 const handleSetNativeNotification = (state = INITIAL_STATE, action) => {
-  const { permission } = action.payload
-  return state.merge({ nativeNotifications: permission })
+  const { permission } = action
+  return state.merge({ nativeNotifications: action.permission })
 }
 
 const handleLocationPermissions = (state, action) => {
