@@ -81,12 +81,14 @@ class PersonalInfoTab extends Component {
           field="phone_number"
           updateInfo={this.packageEditProfile}
           userInfo={editableData.phone_number}
+          switchToggled={userData.private_phone}
           showSwitch={true}/>
         <InfoRow
           rowLabel='EMAIL'
           field="personal_email"
           updateInfo={this.packageEditProfile}
           userInfo={editableData.personal_email}
+          switchToggled={userData.private_email}
           autoCapitalize={'none'}
           showSwitch={true}/>
         <InfoRow
@@ -111,7 +113,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({
-      updateInfoRequest,
+      updateInfoRequest
     }, dispatch)
   }
 }

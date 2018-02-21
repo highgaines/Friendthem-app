@@ -87,5 +87,5 @@ const navigateOnce = (getStateForAction) => (action, state) => {
 };
 
 PrimaryNav.router.getStateForAction = navigateOnce(PrimaryNav.router.getStateForAction)
-debugger
+
 export default PrimaryNav

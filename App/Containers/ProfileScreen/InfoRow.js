@@ -10,7 +10,7 @@ export default class InfoRow extends Component {
 
     this.state = {
       isEditing: false,
-      flipSwitch: false,
+      flipSwitch: props.switchToggled && props.userInfo,
       input: props.userInfo
     }
   }
@@ -45,7 +45,7 @@ export default class InfoRow extends Component {
           <TextInput
             value={this.state.input}
             style={styles.form}
-            secureTextEntry={secureText || flipSwitch}
+            secureTextEntry={secureText}
             onChangeText={input => this.handleChange(input)}
           /> :
           <Text style={styles.rowTextContent}>
