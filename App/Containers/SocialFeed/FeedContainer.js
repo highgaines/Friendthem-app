@@ -50,7 +50,7 @@ class FeedContainer extends Component {
   }
 
   renderFeedCards = platform => {
-    return this.props.feed.map(item => <FeedCard item={item}/>)
+    return this.props.feed.map( (item, idx) => <FeedCard key={idx} item={item}/>)
   }
 
   linkToProfile = url => {
