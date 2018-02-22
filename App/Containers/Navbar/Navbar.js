@@ -123,7 +123,9 @@ class Navbar extends Component {
                 '' ]}> Profile </Text>
               </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.goToInviteUsers}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={this.goToInviteUsers}>
             <View style={[styles.container, this.selectedStyleRender('InviteUsers')]}>
               <Icon
                 name='users'
