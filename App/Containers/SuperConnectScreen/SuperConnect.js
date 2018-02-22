@@ -24,7 +24,8 @@ class SuperConnect extends Component {
       connectionModalOpen: false,
       userInputRequiredPlatforms: [],
       appState: AppState.currentState,
-      manualPlatforms: MANUAL_CONNECT_PLATFORMS,
+      manualPlatformsList: MANUAL_CONNECT_PLATFORMS,
+      manualPlatformIndex: 0
     }
   }
 
@@ -32,18 +33,22 @@ class SuperConnect extends Component {
     AppState.addEventListener('change', this._handleAppStateChange);
   }
 
-  componentWillUpdate = (nextProps, nextState) => {
-    const { manualPlatforms, friendInfo, platforms } = this.props
+  componentDidUpdate = (prevProps, prevState) => {
+    const { manualPlatforms, friendInfo, platforms, setManualPlatforms } = this.props
+    const { userInputRequiredPlatforms, manualPlatformIndex } = this.state
+    const manualPlatformsUpdated = manualPlatforms.length && !prevProps.manualPlatforms.length
+    const maxIndex = manualPlatformIndex === manualPlatforms.length
 
-    if (!manualPlatforms.length && nextProps.manualPlatforms.length) {
-      if (nextProps.manualPlatforms.includes('facebook')) {
-        const fbToken = platforms.find(platform => platform.provider === 'facebook').accessToken
-        fbProfile = friendInfo.social_profiles.find(profile => profile.provider === 'facebook')
-        Linking.openURL(`https://facebook.com/${fbProfile.uid}`)
-      }
-    }
-    if (true) {
-
+    if (manualPlatformsUpdated || (manualPlatformIndex > prevState.manualPlatformIndex && !maxIndex)) {
+      this.deepLinkToPlatform(userInputRequiredPlatforms[manualPlatformIndex])
+    } else if (maxIndex && manualPlatformIndex === prevState.manualPlatformIndex && manualPlatforms.length) {
+        setManualPlatforms([])
+        this.props.navigation.navigate('CongratulatoryScreen', {
+          userInfo: this.props.userInfo,
+          friendInfo: this.props.friendInfo,
+          navigation: this.props.navigation,
+          snapchatDeeplink: this.snapchatDeepLinkCallback
+        })
     }
   }
 
@@ -51,12 +56,25 @@ class SuperConnect extends Component {
     AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
+  deepLinkToPlatform = (platformName) => {
+    const { manualPlatforms, friendInfo, platforms } = this.props
+    const token = platforms.find(platform => platform.provider === platformName).access_token
+    const profile = friendInfo.social_profiles.find(profile => profile.provider === platformName)
+    const userIdentifier = platformName === 'facebook' ? profile.uid : profile.username
+
+    Linking.openURL(`https:/${platformName}.com/${userIdentifier}`)
+  }
+
   _handleAppStateChange = (nextAppState) => {
+    const { manualPlatforms } = this.props
+    const { manualPlatformIndex } = this.state
     const returningToApp = this.state.appState.match(/inactive|background/) && nextAppState === 'active'
     const connectFB = this.props.platforms.find(elem => elem.provider === 'facebook')
     const accessToken = connectFB ? connectFB.access_token : null
 
-    if (returningToApp && connectFB) {
+    if (returningToApp && manualPlatformIndex < manualPlatforms.length) {
+      this.setState({ manualPlatformIndex: manualPlatformIndex + 1 })
+    } else if (returningToApp && connectFB) {
       const friendListRequest = new GraphRequest(
         `/10154996425606714/friends/${this.props.friendInfo.id}`, //`/${this.props.userData.id}/friends/${this.props.friendInfo.id}` Hardcoded until all updated branches are merged
         {
@@ -86,14 +104,15 @@ class SuperConnect extends Component {
 
   superConnectPromiseLoop = () => {
     const { selectedSocialMedia, friendInfo, superConnectPlatform, apiAccessToken, setManualPlatforms } = this.props
-    const { userInputRequiredPlatforms, manualPlatforms } = this.state
+    const { userInputRequiredPlatforms, manualPlatformsList } = this.state
     let platform;
 
     this.setState({ connectionModalOpen: true })
     for (let i = 0; i < selectedSocialMedia.length; i++) {
       this.setState({ connectionStepCount: i + 1 })
       platform = selectedSocialMedia[i]
-      if (manualPlatforms.includes(platform)) {
+
+      if (manualPlatformsList.includes(platform)) {
         userInputRequiredPlatforms.push(platform)
       } else {
         this.asyncSuperConnectPlatform(platform, apiAccessToken, friendInfo.id)
