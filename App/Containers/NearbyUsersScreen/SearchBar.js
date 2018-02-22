@@ -1,11 +1,17 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, TouchableOpacity, TextInput } from 'react-native'
+
+// Redux
 import { connect } from 'react-redux'
 import { Images } from '../../Themes'
-import LinearGradient from 'react-native-linear-gradient'
+import _ from 'lodash'
+
+// Libraries
 import { Icon } from 'react-native-elements'
 import { NavigationActions } from 'react-navigation'
-import _ from 'lodash'
+
+// HOC
+import LinearGradientWrapper from '../../HOCs/LinearGradientWrapper'
 
 // Styles
 import styles from '../Styles/SearchBarStyles'
@@ -41,12 +47,6 @@ class SearchBar extends Component {
     const backAction =  NavigationActions.back()
 
     return(
-      <LinearGradient
-        colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
-        start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
-        locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
-        style={styles.linearGradient}
-      >
         <View style={styles.searchBar}>
           <View style={styles.searchIcon}>
             <Icon
@@ -78,7 +78,6 @@ class SearchBar extends Component {
             />
           </View>
         </View>
-      </LinearGradient>
     )
   }
 }
@@ -87,4 +86,4 @@ const mapStateToProps = state => ({
 
 })
 
-export default connect(mapStateToProps)(SearchBar)
+export default connect(mapStateToProps)(LinearGradientWrapper(SearchBar, styles.linearGradient))

@@ -3,7 +3,6 @@ import { ScrollView, Text, Image, View, TouchableOpacity, Button, ActivityIndica
 
 // Libraries
 import { SocialIcon } from 'react-native-elements'
-import LinearGradient from 'react-native-linear-gradient'
 import FBSDK, { LoginManager, LoginButton, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk'
 import Permissions from 'react-native-permissions'
 
@@ -11,6 +10,9 @@ import Permissions from 'react-native-permissions'
 import ConnectButton from './SuperConnectScreen/ConnectButton'
 import FBLogin from './FBLogin'
 import Footer from './UtilityComponents/Footer'
+
+// HOC
+import LinearGradientWrapper from '../HOCs/LinearGradientWrapper'
 
 // Config
 import envConfig from '../../envConfig'
@@ -128,13 +130,7 @@ class LaunchScreen extends Component {
     const { loading } = this.state
 
     return (
-      <View style={styles.mainContainer}>
-        <LinearGradient
-          colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
-          start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
-          locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
-          style={styles.linearGradient}
-          >
+        <View style={styles.mainContainer}>
           <ScrollView style={styles.container}>
             <View style={styles.centered}>
               <Image
@@ -176,8 +172,7 @@ class LaunchScreen extends Component {
           <Footer
             navigationCallback={() => navigation.navigate('LoginScreen')}
             styles={footerStyles}/>
-        </LinearGradient>
-      </View>
+        </View>
     )
   }
 }
@@ -209,4 +204,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LaunchScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(LinearGradientWrapper(LaunchScreen))

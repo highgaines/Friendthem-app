@@ -12,6 +12,9 @@ import OneSignal from 'react-native-onesignal';
 // Components
 import ConnectButton from '../SuperConnectScreen/ConnectButton';
 
+// HOC
+import LinearGradientWrapper from '../../HOCs/LinearGradientWrapper';
+
 // Redux
 import PermissionsStoreActions, { setGeoPermission } from '../../Redux/PermissionsStore';
 import FriendStoreActions from '../../Redux/FriendStore'
@@ -118,12 +121,6 @@ class PermissionScreen extends Component {
     const { permissionType } = this.props
 
     return (
-      <View style={{ flex: 1 }}>
-        <LinearGradient
-          colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
-          start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
-          locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
-          style={{ flex: 1}}>
           <View style={styles.container}>
             <Text style={[styles.text, { fontSize: 18 }]}>
                {this.determineTitle()}
@@ -149,8 +146,6 @@ class PermissionScreen extends Component {
               </View>
              </View>
           </View>
-        </LinearGradient>
-      </View>
     )
   }
 }
@@ -178,4 +173,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PermissionScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(LinearGradientWrapper(PermissionScreen))

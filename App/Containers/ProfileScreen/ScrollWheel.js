@@ -5,8 +5,8 @@ import { ScrollView, Text, Image, TouchableOpacity, View } from 'react-native';
 import SMPlatformCircle from '../UtilityComponents/SMPlatformCircle';
 import ImageCircle from '../UtilityComponents/ImageCircle';
 
-// Libraries
-import LinearGradient from 'react-native-linear-gradient';
+// HOC
+import LinearGradientWrapper from '../../HOCs/LinearGradientWrapper';
 
 // Images
 import { Images } from '../../Themes';
@@ -14,7 +14,7 @@ import { Images } from '../../Themes';
 // Styles
 import styles from '../Styles/ScrollWheelStyles';
 
-export default class ScrollWheel extends Component {
+class ScrollWheel extends Component {
   constructor(props) {
     super(props)
 
@@ -24,18 +24,12 @@ export default class ScrollWheel extends Component {
     const { handlePlatformChange, handleBackToProfile, selected, profilePic } = this.props
 
     return (
-        <LinearGradient
-          colors={['#2aa5c0','#5664bd', '#9011ba', '#b31c85', '#e73436']}
-          start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
-          locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
-          style={styles.linearGradient}
+          <ScrollView
+            style={styles.scrollContainer}
+            contentContainerStyle={styles.container}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
           >
-            <ScrollView
-              style={styles.scrollContainer}
-              contentContainerStyle={styles.container}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-            >
             <View style={styles.platforms}>
 
               <TouchableOpacity onPress={() => handlePlatformChange('facebook')}>
@@ -48,6 +42,11 @@ export default class ScrollWheel extends Component {
                 <Text style={selected === 'instagram' ? [styles.text, { color: 'white'}] : styles.text}> Instagram </Text>
               </TouchableOpacity>
 
+              <TouchableOpacity onPress={() => handlePlatformChange('twitter')}>
+                <SMPlatformCircle platform="twitter" size={70}/>
+                <Text style={selected === 'twitter' ? [styles.text, { color: 'white'}] : styles.text}> Twitter </Text>
+              </TouchableOpacity>
+
               <TouchableOpacity onPress={() => handleBackToProfile()}>
                 <SMPlatformCircle size={70}/>
                 <Text style={selected === 'profile' ? [styles.text, { color: 'white'}] : styles.text}> Profile </Text>
@@ -55,7 +54,10 @@ export default class ScrollWheel extends Component {
 
             </View>
           </ScrollView>
-        </LinearGradient>
     )
   }
 }
+
+const colors = ['#2aa5c0','#5664bd', '#9011ba', '#b31c85', '#e73436']
+
+export default LinearGradientWrapper(ScrollWheel, styles.linearGradient, colors)

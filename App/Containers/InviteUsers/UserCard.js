@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, TouchableOpacity, ScrollView, Text, Button } from 'react-native';
 
-import Image from 'react-native-remote-svg';
-
+// Components
 import SMPlatformCircle from '../UtilityComponents/SMPlatformCircle';
 import ImageCircle from '../UtilityComponents/ImageCircle';
 
 // Libraries
+import Image from 'react-native-remote-svg';
 import * as Animatable from 'react-native-animatable';
 import Communications from 'react-native-communications';
 
@@ -16,8 +16,7 @@ import styles from '../Styles/InviteUserCardStyles';
 // Images
 import { Images } from '../../Themes';
 
-export default UserCard = props => {
-  const { userImage, userName, userPlatforms, triggerModal, selectUser } = props
+export default UserCard = ({ userImage, userName, userPlatforms, triggerModal, selectUser }) => {
 
   const handleSend = () => {
     const userData = {

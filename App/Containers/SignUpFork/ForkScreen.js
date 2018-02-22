@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
+
+// Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { SocialIcon } from 'react-native-elements'
-import LinearGradient from 'react-native-linear-gradient'
-import Permissions from 'react-native-permissions'
-import ConnectButton from '../SuperConnectScreen/ConnectButton'
-import Image from 'react-native-remote-svg'
-import { Icon } from 'react-native-elements'
-
 import PermissionsStoreActions from '../../Redux/PermissionsStore'
 import UserStoreActions, { updateUserPosition, getUserInfo } from '../../Redux/UserStore'
+
+// Components
+import ConnectButton from '../SuperConnectScreen/ConnectButton'
+
+// HOC
+import LinearGradientWrapper from '../../HOCs/LinearGradientWrapper'
+
+// Libraries
+import { SocialIcon } from 'react-native-elements'
+import Permissions from 'react-native-permissions'
+import Image from 'react-native-remote-svg'
+import { Icon } from 'react-native-elements'
 
 //Images
 import { Images } from '../../Themes';
@@ -82,13 +89,6 @@ class ForkScreen extends Component {
     const { navigate, userInfo } = this.props
 
     return (
-        <View style={styles.mainContainer}>
-          <LinearGradient
-            colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
-            start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
-            locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
-            style={styles.linearGradient}
-          >
             <View style={styles.centered}>
               <Image
                 style={{ marginTop: 100 }} source={Images.mainLogo}
@@ -125,9 +125,6 @@ class ForkScreen extends Component {
                 />
               </View>
             </View>
-          </LinearGradient>
-        </View>
-
     )
   }
 }
@@ -155,4 +152,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ForkScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(LinearGradientWrapper(ForkScreen, styles.linearGradient))
