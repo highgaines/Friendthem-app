@@ -20,8 +20,9 @@ export default FeedCard = props => {
   const day = dateSplit[2]
   const year = dateSplit[3]
   const time = convertTime(dateSplit[4])
+
   return(
-    <View style={styles.cardContainer}>
+    <View style={[styles.cardContainer, item.provider === 'twitter' ? {'height': 90 } : null]}>
       <View style={styles.contentBody}>
         {
           item.img_url
