@@ -50,15 +50,10 @@ export default class InfoRow extends Component {
             onChangeText={input => this.handleChange(input)}
           /> :
           <Text
-<<<<<<< HEAD
-            testID='input-display'
+            testID={`input-display-${field}`}
             style={styles.rowTextContent}>
             {secureText || flipSwitch ? '********' : userInfo}
           </Text>}
-=======
-            testID={`input-display-${field}`}
-            style={styles.rowTextContent}>{userInfo}</Text>}
->>>>>>> User profile edit passing
         {
           showSwitch ?
           <Switch
