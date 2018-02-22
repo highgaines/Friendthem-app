@@ -15,7 +15,7 @@ describe('Login Flow', () => {
     await element(by.id('email_input')).typeText('naz@simplefractal.com');
     await element(by.id('password_input')).typeText('snap');
     await element(by.id('start_button')).tap();
-    await element(by.text('WE WOULD LIKE TO ACCESS YOUR LOCATION'))
+    await expect(element(by.text('Welcome!'))).toBeVisible()
   })
 
   it('unable to log in when password is incorrect', async () => {

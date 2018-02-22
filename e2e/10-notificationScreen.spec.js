@@ -1,9 +1,9 @@
-describe('Navbar Flow', () => {
+describe('Notification Screen Flow', () => {
   beforeEach(async () => {
     await device.reloadReactNative();
   });
 
-  it('renders the navbar correctly', async () => {
+  it('renders the notification screen correctly', async () => {
     await element(by.id('login_button')).tap();
     await expect(element(by.text('LOG IN'))).toBeVisible();
     await element(by.id('email_input'));
@@ -13,6 +13,7 @@ describe('Navbar Flow', () => {
     await expect(element(by.text('Welcome!'))).toBeVisible();
     await element(by.text('FIND PEOPLE NEARBY')).tap();
     await element(by.id('start-button')).tap();
-    await expect(element(by.id('navbar'))).toBeVisible();
+    await element(by.id('notification-navbar-button')).tap();
+    await expect(element(by.id('notification-container'))).toBeVisible();
   });
 });

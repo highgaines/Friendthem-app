@@ -7,9 +7,8 @@ import { SocialIcon } from 'react-native-elements';
 // Images
 import { Images } from '../../Themes';
 
-export default SMPlatformCircle = props => {
+export default SMPlatformCircle = ({size, extraStyles, platform, light, button}) => {
   // if you want button form, add button={true} prop
-  const { size, extraStyles, platform, light, button } = props
 
   const renderIcon = arg => {
       switch(arg) {

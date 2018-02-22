@@ -124,7 +124,9 @@ class SettingsScreen extends Component {
             isVisible={termsVisible}
           >
             <View style={{ flex: 1 }}>
-              <ScrollView contentContainerStyle={styles.containerModal}>
+              <ScrollView
+                testID='terms-and-conditions'
+                contentContainerStyle={styles.containerModal}>
                 <Text style={{ fontSize: 6 }}>
                   {TERMS_AND_CONDITIONS}
                 </Text>
@@ -164,6 +166,7 @@ class SettingsScreen extends Component {
           <TouchableOpacity
             style={styles.sectionItem}
             onPress={this.toggleTNCModal}
+            testID='terms-and-conditions-button'
             >
             <Image
               source={Images.file}

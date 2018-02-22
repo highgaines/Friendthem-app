@@ -218,6 +218,7 @@ class UserProfileScreen extends Component {
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
+                testID='personal-info-tab'
                 onPress={() => this.setState({ socialNetworkTab: false })}
                 style={[styles.tabItem, socialNetworkTab ? null : styles.selected]}>
                 <Text

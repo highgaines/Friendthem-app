@@ -36,7 +36,7 @@ const images = {
   textMessageIcon: require('../Images/Icons/texticon.png'),
   whatsappIcon: require('../Images/whatsappicon.png'),
   fbIcon: require('../Images/Icons/fbiconsvg.png'),
-  twitterIcon: require('../Images/Icons/twittericonsvg.png'),
+  twitterIcon: require('../Images/Icons/twitter-png.png'),
   snapchatIcon: require('../Images/Icons/snapiconsvg.png'),
   igIcon: require('../Images/Icons/igiconsvg.png'),
   youtubeIcon: require('../Images/Icons/youtubeiconsvg.png'),

@@ -47,7 +47,9 @@ class NotificationsContainer extends Component {
       <View>
         <Header title='Notifications' />
         <View style={styles.listContainer}>
-          <View style={styles.sectionTitle}>
+          <View
+            testID='notification-container'
+            style={styles.sectionTitle}>
             <Text style={styles.sectionTitleText}>
               Most Recent
             </Text>
