@@ -34,6 +34,8 @@ class ForkScreen extends Component {
       accessToken
     } = this.props
 
+    getUserInfo(accessToken);
+
     if (customGeolocationPermission && !nativeGeolocation) {
       Permissions.request('location', { type: 'always' }).then(response => {
         if(response === 'authorized') {
