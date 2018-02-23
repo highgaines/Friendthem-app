@@ -82,6 +82,15 @@ class NearbyFeedCard extends Component {
     }
   }
 
+  pullUsername = platform => {
+    const { friendData } = this.props
+    let filtered = friendData.social_profiles.filter( obj => obj.provider === platform)
+
+    if (filtered[0]) {
+      return filtered[0].username
+    }
+  }
+
   renderDeeplinkButton = () => {
     const { platform } = this.state
     const { friendData } = this.props
@@ -119,9 +128,20 @@ class NearbyFeedCard extends Component {
           <ConnectButton
             title="Facebook"
             color={SYNCED_CARD_COLORS.facebook}
-            containerStyle={styles.facebookDeeplinkButton}
+            containerStyle={[styles.deepLinkButton, styles.facebookDeeplinkButton]}
             textStyle={styles.deepLinkText}
             onPressCallback={() => Linking.openURL(`fb://profile/${fbUid}`)}
+          />
+        )
+      case 'twitter':
+      const twitterUsername = this.pullUsername('twitter')
+        return(
+          <ConnectButton
+            title="Twitter"
+            color={SYNCED_CARD_COLORS.twitter}
+            containerStyle={[styles.deepLinkButton, styles.twitterDeeplinkButton]}
+            textStyle={styles.deepLinkText}
+            onPressCallback={() => Linking.openURL(`twitter://user?screen_name=${twitterUsername}`)}
           />
         )
     }

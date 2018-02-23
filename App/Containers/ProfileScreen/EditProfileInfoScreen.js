@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { Text, Image, Switch, View, ScrollView, TouchableOpacity } from 'react-native'
+
+// Libraries
 import LinearGradient from 'react-native-linear-gradient'
 import { Icon } from 'react-native-elements'
 
 // Components
 import PersonalInfoTab from './PersonalInfoTab'
 import SocialMediaInfoTab from './SocialMediaInfoTab'
+
+// Redux
+import { connect } from 'react-redux'
 
 // Styles
 import styles from '../Styles/EditProfileInfoStyles'
