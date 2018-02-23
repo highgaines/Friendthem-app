@@ -4,10 +4,13 @@ import { Text, Image, Switch, View, ScrollView, TouchableOpacity } from 'react-n
 import LinearGradient from 'react-native-linear-gradient'
 import { Icon } from 'react-native-elements'
 
-import styles from '../Styles/EditProfileInfoStyles'
-
+// Components
 import PersonalInfoTab from './PersonalInfoTab'
 import SocialMediaInfoTab from './SocialMediaInfoTab'
+
+// Styles
+import styles from '../Styles/EditProfileInfoStyles'
+
 
 class EditProfileInfoScreen extends Component {
   constructor(props) {
