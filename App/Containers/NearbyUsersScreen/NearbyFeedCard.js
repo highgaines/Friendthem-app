@@ -9,6 +9,7 @@ import SMPlatformCircle from '../UtilityComponents/SMPlatformCircle';
 import ScrollWheel from '../ProfileScreen/ScrollWheel';
 import FeedCard from '../SocialFeed/FeedCard';
 import ConnectButton from '../SuperConnectScreen/ConnectButton';
+import SocialMediaCard from '../SocialMediaCards/SocialMediaCard';
 
 // Libraries
 import { Icon } from 'react-native-elements';
@@ -47,6 +48,23 @@ class NearbyFeedCard extends Component {
     if (prevState.platform !== this.state.platform) {
       fetchFeed(accessToken, friendData.id, this.state.platform)
     }
+  }
+
+  renderSocialMediaCards = () => {
+    const { social_profiles } = this.props.friendData
+    return social_profiles.map( socialProfile =>
+      <SocialMediaCard
+        platformName={socialProfile.provider === 'google-oauth2' ? 'youtube' : socialProfile.provider}
+        userName={socialProfile.username}
+        synced={true}
+        readOnly={true}
+        syncedBGColor={socialProfile.provider === 'google-oauth2' ? 'red' : SYNCED_CARD_COLORS[socialProfile.provider]}
+      />
+    )
+  }
+
+  handleGoToProfile = () => {
+    this.setState({ platform: 'profile'})
   }
 
   handlePlatformChange = platform => {
@@ -111,12 +129,15 @@ class NearbyFeedCard extends Component {
 
   renderContent = () => {
     const { feed } = this.props
-    return feed.map( (feedObj, idx) =>
+    const { platform } = this.state
+    return platform === 'profile' ? this.renderSocialMediaCards() :
+    feed.map( (feedObj, idx) =>
       <FeedCard key={idx} item={feedObj}/>)
   }
 
   render = () => {
     const { friendData, loading } = this.props
+    const { platform } = this.state
 
     return(
       <View style={styles.nearbyFeedCardContainer}>
@@ -145,12 +166,16 @@ class NearbyFeedCard extends Component {
         <View style={styles.scrollWheel}>
           <ScrollWheel
             handlePlatformChange={this.handlePlatformChange}
-            selected={this.state.platform}
+            handleBackToProfile={this.handleGoToProfile}
+            selected={platform}
             profilePic={friendData.image}
           />
         </View>
         <View style={{ flex: 1, backgroundColor: 'white' }}>
-          <ScrollView horizontal={true} contentContainerStyle={styles.contentContainer}>
+          <ScrollView
+            horizontal={platform === 'profile' ? false : true}
+            contentContainerStyle={[styles.contentContainer, platform === 'profile' ? { 'flex': 1, 'flexWrap': 'wrap', 'justifyContent': 'flex-start' } : '']}
+          >
             {loading
               ? <View style={styles.loading}>
                   <ActivityIndicator

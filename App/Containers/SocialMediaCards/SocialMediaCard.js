@@ -45,6 +45,7 @@ export default class SocialMediaCard extends Component {
       synced,
       selected,
       socialAuth,
+      readOnly,
       syncedBGColor
     }  = this.props
     const cardStyle = synced ?
@@ -55,7 +56,7 @@ export default class SocialMediaCard extends Component {
     return (
       <TouchableOpacity
         style={cardStyle}
-        onPress={this.handlePush}
+        onPress={readOnly ? null : this.handlePush}
       >
         {
           selected ?

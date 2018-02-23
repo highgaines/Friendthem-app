@@ -5,9 +5,7 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   scrollContainer: {
     height: 90,
-    backgroundColor: 'transparent',
-    borderColor: 'black',
-    borderWidth: 2
+    backgroundColor: 'transparent'
   },
   container: {
     justifyContent: 'center',
