@@ -99,12 +99,17 @@ export default CongratulatoryScreen = props => {
             />
           </View>
           <Image style={styles.image2} source={determineImage(friendInfo)}/>
-          <Icon
+          {
+            userInfo.picture ?
+            <Image style={styles.image1} source={{uri: `${userInfo.picture}`}} />
+            :
+            <Icon
             containerStyle={styles.image1}
             name='ios-person'
             type='ionicon'
             size={115}
             color='#000' />
+          }
         </View>
         {
           displaySnapButton ?

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 
 // Redux
 import { connect } from 'react-redux';
@@ -16,7 +16,6 @@ import LinearGradientWrapper from '../../HOCs/LinearGradientWrapper'
 // Libraries
 import { SocialIcon } from 'react-native-elements'
 import Permissions from 'react-native-permissions'
-import Image from 'react-native-remote-svg'
 import { Icon } from 'react-native-elements'
 import OneSignal from 'react-native-onesignal';
 
@@ -94,12 +93,20 @@ class ForkScreen extends Component {
               <Image
                 style={{ marginTop: 100 }} source={Images.mainLogo}
               />
-              <Icon
-                containerStyle={styles.userImageContainer}
-                name='ios-person'
-                type='ionicon'
-                size={115}
-                color='#000' />
+              {
+                userInfo.picture ?
+                <Image
+                  style={styles.userImageContainer}
+                  source={{uri: `${userInfo.picture}`}}
+                />
+                :
+                <Icon
+                  containerStyle={styles.userImageContainer}
+                  name='ios-person'
+                  type='ionicon'
+                  size={115}
+                  color='#000' />
+              }
               <View>
                 <SocialIcon
                   raised={false}
