@@ -88,7 +88,7 @@ class LaunchScreen extends Component {
 
     const responseInfoCallback = (error, result) => {
       if (error) {
-        console.log(error)
+        //console.log(error)
         return error
       } else {
         fbUserInfo(result)
@@ -129,7 +129,7 @@ class LaunchScreen extends Component {
     const { navigate } = this.props.navigation
     const { users, fbAuthToken, logoutUser } = this.props
     const { loading } = this.state
-
+    alert('hello, world') //Test for code push, delete this nephew
     return (
         <View style={styles.mainContainer}>
           <ScrollView style={styles.container}>
