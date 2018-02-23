@@ -9,6 +9,7 @@ import SMPlatformCircle from '../UtilityComponents/SMPlatformCircle';
 import ScrollWheel from '../ProfileScreen/ScrollWheel';
 import FeedCard from '../SocialFeed/FeedCard';
 import ConnectButton from '../SuperConnectScreen/ConnectButton';
+import SocialMediaCard from '../SocialMediaCards/SocialMediaCard';
 
 // Libraries
 import { Icon } from 'react-native-elements';
@@ -49,6 +50,23 @@ class NearbyFeedCard extends Component {
     }
   }
 
+  renderSocialMediaCards = () => {
+    const { social_profiles } = this.props.friendData
+    return social_profiles.map( socialProfile =>
+      <SocialMediaCard
+        platformName={socialProfile.provider === 'google-oauth2' ? 'youtube' : socialProfile.provider}
+        userName={socialProfile.username}
+        synced={true}
+        readOnly={true}
+        syncedBGColor={socialProfile.provider === 'google-oauth2' ? 'red' : SYNCED_CARD_COLORS[socialProfile.provider]}
+      />
+    )
+  }
+
+  handleGoToProfile = () => {
+    this.setState({ platform: 'profile'})
+  }
+
   handlePlatformChange = platform => {
     this.setState({ platform: platform })
   }
@@ -61,6 +79,15 @@ class NearbyFeedCard extends Component {
 
     if (filtered[0]) {
       return filtered[0].uid
+    }
+  }
+
+  pullUsername = platform => {
+    const { friendData } = this.props
+    let filtered = friendData.social_profiles.filter( obj => obj.provider === platform)
+
+    if (filtered[0]) {
+      return filtered[0].username
     }
   }
 
@@ -101,9 +128,20 @@ class NearbyFeedCard extends Component {
           <ConnectButton
             title="Facebook"
             color={SYNCED_CARD_COLORS.facebook}
-            containerStyle={styles.facebookDeeplinkButton}
+            containerStyle={[styles.deepLinkButton, styles.facebookDeeplinkButton]}
             textStyle={styles.deepLinkText}
             onPressCallback={() => Linking.openURL(`fb://profile/${fbUid}`)}
+          />
+        )
+      case 'twitter':
+      const twitterUsername = this.pullUsername('twitter')
+        return(
+          <ConnectButton
+            title="Twitter"
+            color={SYNCED_CARD_COLORS.twitter}
+            containerStyle={[styles.deepLinkButton, styles.twitterDeeplinkButton]}
+            textStyle={styles.deepLinkText}
+            onPressCallback={() => Linking.openURL(`twitter://user?screen_name=${twitterUsername}`)}
           />
         )
     }
@@ -111,12 +149,15 @@ class NearbyFeedCard extends Component {
 
   renderContent = () => {
     const { feed } = this.props
-    return feed.map( (feedObj, idx) =>
+    const { platform } = this.state
+    return platform === 'profile' ? this.renderSocialMediaCards() :
+    feed.map( (feedObj, idx) =>
       <FeedCard key={idx} item={feedObj}/>)
   }
 
   render = () => {
     const { friendData, loading } = this.props
+    const { platform } = this.state
 
     return(
       <View style={styles.nearbyFeedCardContainer}>
@@ -145,12 +186,16 @@ class NearbyFeedCard extends Component {
         <View style={styles.scrollWheel}>
           <ScrollWheel
             handlePlatformChange={this.handlePlatformChange}
-            selected={this.state.platform}
+            handleBackToProfile={this.handleGoToProfile}
+            selected={platform}
             profilePic={friendData.image}
           />
         </View>
         <View style={{ flex: 1, backgroundColor: 'white' }}>
-          <ScrollView horizontal={true} contentContainerStyle={styles.contentContainer}>
+          <ScrollView
+            horizontal={platform === 'profile' ? false : true}
+            contentContainerStyle={[styles.contentContainer, platform === 'profile' ? { 'flex': 1, 'flexWrap': 'wrap', 'justifyContent': 'flex-start' } : '']}
+          >
             {loading
               ? <View style={styles.loading}>
                   <ActivityIndicator

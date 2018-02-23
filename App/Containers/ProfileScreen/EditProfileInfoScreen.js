@@ -1,13 +1,20 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { Text, Image, Switch, View, ScrollView, TouchableOpacity } from 'react-native'
+
+// Libraries
 import LinearGradient from 'react-native-linear-gradient'
 import { Icon } from 'react-native-elements'
 
-import styles from '../Styles/EditProfileInfoStyles'
-
+// Components
 import PersonalInfoTab from './PersonalInfoTab'
 import SocialMediaInfoTab from './SocialMediaInfoTab'
+
+// Redux
+import { connect } from 'react-redux'
+
+// Styles
+import styles from '../Styles/EditProfileInfoStyles'
+
 
 class EditProfileInfoScreen extends Component {
   constructor(props) {

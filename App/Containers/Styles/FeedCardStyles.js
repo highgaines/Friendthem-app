@@ -69,15 +69,10 @@ export default StyleSheet.create({
     fontWeight: '600'
   },
   facebookDeeplinkButton: {
-    width: 80,
-    height: 30,
-    borderRadius: 30,
-    justifyContent: 'center',
-    backgroundColor: Colors.facebook,
-    shadowOpacity: 0.30,
-    shadowRadius: 5,
-    shadowColor: 'black',
-    shadowOffset: { height: 5, width: 10 }
+    backgroundColor: Colors.facebook
+  },
+  twitterDeeplinkButton: {
+    backgroundColor: Colors.twitter
   },
   header: {
     shadowColor: 'black',
