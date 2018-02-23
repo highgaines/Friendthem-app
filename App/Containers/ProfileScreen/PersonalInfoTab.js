@@ -41,7 +41,7 @@ class PersonalInfoTab extends Component {
           rowLabel='NAME'
           field="name"
           updateInfo={this.packageEditProfile}
-          userInfo={`${userData.first_name} ${userData.last_name}`}/>
+          userInfo={`${userData.first_name || ''} ${userData.last_name || ''}`}/>
         <InfoRow
           rowLabel='HOBBIES'
           field="hobbies"
