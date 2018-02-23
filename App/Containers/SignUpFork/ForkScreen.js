@@ -18,6 +18,7 @@ import { SocialIcon } from 'react-native-elements'
 import Permissions from 'react-native-permissions'
 import Image from 'react-native-remote-svg'
 import { Icon } from 'react-native-elements'
+import OneSignal from 'react-native-onesignal';
 
 //Images
 import { Images } from '../../Themes';
@@ -49,9 +50,7 @@ class ForkScreen extends Component {
           setLocationInterval()
         }
         if (customNotificationPermission && !nativeNotifications) {
-          Permissions.request('notification').then(response => {
-            this.setState({ permissionsGranted: true })
-          })
+          OneSignal.registerForPushNotifications()
         }
       })
     }

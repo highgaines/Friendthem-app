@@ -78,6 +78,12 @@ class SocialMediaCardContainer extends Component {
     }
   }
 
+  socialPlatformUsername = (platform) => {
+    const { social_profiles } = this.props.userInfo
+
+    return social_profiles.find(profile => profile.provider === platform).username
+  }
+
   render() {
     const {
       platforms,
@@ -103,7 +109,7 @@ class SocialMediaCardContainer extends Component {
           const isSelected = platformSelected(socialPlatform)
           const isSynced = !!currentPlatform
           const capitalizeName = (name) => name[0].toUpperCase() + name.slice(1)
-          const userName = currentPlatform && false ? currentPlatform['access_token'][socialMediaData[socialPlatform]['userNamePath']] : null
+          const userName = currentPlatform ? this.socialPlatformUsername(isYoutube ? 'google-oauth2' : socialPlatform) : null
           const friendPlatfromPresent = fromFriendProfile ?
             friendPlatforms.some(socialElem =>
               socialElem.provider === socialPlatform
