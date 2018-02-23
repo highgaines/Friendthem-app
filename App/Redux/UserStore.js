@@ -363,10 +363,6 @@ const handleUpdateSettingsFailure = (state, action) => {
 }
 
 const handleUserLogout = (state, action) => {
-  analytics.track({
-    userId: state.userId,
-    event: 'Logout User'
-  })
   return INITIAL_STATE
 }
 

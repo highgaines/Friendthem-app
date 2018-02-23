@@ -11,6 +11,10 @@ import AuthStoreActions, { login } from '../Redux/AuthStore'
 import PermissionsStoreActions from '../Redux/PermissionsStore'
 import styles from './Styles/UserProfileInfoStyles'
 
+import Analytics from 'analytics-react-native'
+
+const analytics = new Analytics('4oWQ8t7HH7pjXWW49ZZnUiXKwS77I4Gh')
+
 class LoginScreen extends Component {
   constructor(props) {
     super(props)
@@ -56,12 +60,21 @@ class LoginScreen extends Component {
   }
 
   loginRequest = () => {
-    const { userEmail, userPassword } = this.state
+    const { userEmail, userPassword, userStore } = this.state
 
     this.props.loginUser({
       username: userEmail,
       password: userPassword
     })
+
+    analytics.track({
+      userId: userStore.userId,
+      event: 'Login User Request',
+      properties: {
+        username: userEmail
+      }
+    })
+
   }
 
   render() {
@@ -137,6 +150,7 @@ const mapStateToProps = state => ({
   authError: state.authStore.authError,
   locationPermission: state.permissionsStore.nativeGeolocation,
   notificationPermission: state.permissionsStore.nativeNotifications,
+  userStore: state.userStore
 })
 
 const mapDispatchToProps = dispatch => {

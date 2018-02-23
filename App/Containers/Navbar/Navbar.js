@@ -15,6 +15,9 @@ import FriendStoreActions from '../../Redux/FriendStore'
 import UserStoreActions from '../../Redux/UserStore'
 import FBStoreActions from '../../Redux/FBStore'
 import AuthStoreActions from '../../Redux/AuthStore'
+import Analytics from 'analytics-react-native'
+
+const analytics = new Analytics('4oWQ8t7HH7pjXWW49ZZnUiXKwS77I4Gh')
 
 // Constants
 import { NAVBAR_RENDER_OK } from '../../Utils/constants'
@@ -40,11 +43,16 @@ class Navbar extends Component {
   }
 
   logOut = () => {
-    const { logoutComplete, navigation } = this.props
+    const { logoutComplete, navigation, userStore } = this.props
     this.props.logoutUser()
     this.toggleModal()
     LoginManager.logOut()
     logoutComplete()
+    analytics.track({
+      userId: userStore.userId,
+      event: 'User Log Out',
+      properties: userStore.userData
+    })
     navigation.navigate('LaunchScreen')
   }
 
@@ -193,7 +201,8 @@ class Navbar extends Component {
 }
 
 const mapStateToProps = state => ({
-  reduxNav: state.nav
+  reduxNav: state.nav,
+  userStore: state.userStore
 })
 
 const mapDispatchToProps = dispatch => {
