@@ -133,7 +133,7 @@ class FriendProfileScreen extends Component {
   }
 
   render() {
-    const { friendInfo, superConnect, navigation, setSuperConnectPlatforms } = this.props
+    const { friendInfo, superConnect, navigation, setSuperConnectPlatforms, userData, userId } = this.props
     const { showModal, socialMediaData, syncedCardColors, selectedSocialMedia, platform } = this.state
 
     return (
@@ -203,6 +203,8 @@ class FriendProfileScreen extends Component {
               <SuperConnectBar
                 setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
                 superConnect={() => navigation.navigate('SuperConnectScreen')}
+                userData={userInfo}
+                userId={userId}
               />
             </View> :
              this.renderPlatformContainer(platform)  }
@@ -215,6 +217,7 @@ class FriendProfileScreen extends Component {
 
 const mapStateToProps = state => ({
   userInfo: state.userStore.userData,
+  userId: state.userStore.userId,
   friendInfo: state.friendStore.friendData,
   platforms: state.tokenStore.platforms,
   fbAuthToken: state.fbStore.fbAccessToken,

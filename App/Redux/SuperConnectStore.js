@@ -2,6 +2,7 @@ import { createActions, createReducer } from 'reduxsauce'
 import { fetchFromApi } from './ApiHelpers'
 import Immutable from 'seamless-immutable'
 import envConfig from '../../envConfig'
+const analytics = new Analytics(envConfig.Development.SegmentAPIKey)
 
 const { Types, Creators} = createActions({
   socialMediaConnectRequest: null,

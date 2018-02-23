@@ -2,6 +2,8 @@ import { createReducer, createActions } from 'reduxsauce'
 import { fetchFromApi } from './ApiHelpers'
 import Immutable from 'seamless-immutable'
 import envConfig from '../../envConfig'
+import Analytics from 'analytics-react-native'
+const analytics = new Analytics(envConfig.Development.SegmentAPIKey)
 
 /* ------------- Types and Action Creators ------------- */
 
@@ -237,6 +239,10 @@ const handleGetUserRequest = (state, action) => {
 }
 
 const handleGetUserSuccess = (state, action) => {
+  analytics.identify({
+    userId: action.response.data.id,
+    traits: action.data
+  })
   return {
     ...state,
     userData: action.data,
@@ -258,6 +264,10 @@ const handleUpdateUserRequest = (state, action) => {
 }
 
 const handleUpdateUserSuccess = (state, action) => {
+  analytics.track({
+    userId: state.userId,
+    event: 'Update User Success'
+  })
 
   return {
     ...state,
@@ -282,6 +292,10 @@ const handleUpdateUserPositionRequest = (state, action) => {
 }
 
 const handleUpdateUserPositionSuccess = (state, action) => {
+  analytics.track({
+    userId: state.userId,
+    event: 'Update User Position Success'
+  })
   return {
     ...state,
     geoLocation: action.data.last_location
@@ -330,7 +344,10 @@ const handleUpdateSettingsRequest = (state, action) => {
 }
 
 const handleUpdateSettingsSuccess = (state, action) => {
-
+  analytics.track({
+    userId: state.userId,
+    event: 'Update Settings Success'
+  })
   return {
     ...state,
     fetching: false

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { View, TouchableHighlight, Text } from 'react-native'
 import { Icon } from 'react-native-elements'
-import LinearGradient from 'react-native-linear-gradient';
+import LinearGradient from 'react-native-linear-gradient'
 
-import styles from '../Styles/SuperConnectBarStyles';
+import styles from '../Styles/SuperConnectBarStyles'
 
 export default function ConnectButton(props) {
   const {
@@ -18,7 +18,7 @@ export default function ConnectButton(props) {
     gradientStyles,
     linearGradient,
     onPressCallback,
-  } = props;
+  } = props
 
   return linearGradient ? (
     <TouchableHighlight
