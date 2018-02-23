@@ -2,6 +2,7 @@ import { createActions, createReducer } from 'reduxsauce'
 import { fetchFromApi } from './ApiHelpers'
 import Immutable from 'seamless-immutable'
 import envConfig from '../../envConfig'
+import Analytics from 'analytics-react-native'
 const analytics = new Analytics(envConfig.Development.SegmentAPIKey)
 
 const { Types, Creators} = createActions({
