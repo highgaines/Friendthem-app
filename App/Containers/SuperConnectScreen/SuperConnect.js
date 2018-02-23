@@ -58,43 +58,29 @@ class SuperConnect extends Component {
 
   deepLinkToPlatform = (platformName) => {
     const { manualPlatforms, friendInfo, platforms } = this.props
-    const token = platforms.find(platform => platform.provider === platformName).access_token
     const profile = friendInfo.social_profiles.find(profile => profile.provider === platformName)
     const userIdentifier = platformName === 'facebook' ? profile.uid : profile.username
+    const deepLinkURL = `${platformName}://${userIdentifier}`
 
-    Linking.openURL(`https:/${platformName}.com/${userIdentifier}`)
+    Linking.canOpenURL(deepLinkURL).then(response => {
+      if (response) {
+        Linking.openURL(deepLinkURL)
+      } else {
+        Linking.openURL(`https:/${platformName}.com/${userIdentifier}`)
+      }
+    })
   }
 
   _handleAppStateChange = (nextAppState) => {
-    const { manualPlatforms } = this.props
-    const { manualPlatformIndex } = this.state
-    const returningToApp = this.state.appState.match(/inactive|background/) && nextAppState === 'active'
-    const connectFB = this.props.platforms.find(elem => elem.provider === 'facebook')
-    const accessToken = connectFB ? connectFB.access_token : null
+    const { manualPlatforms, platforms } = this.props
+    const { manualPlatformIndex, appState } = this.state
+    const returningToApp = appState.match(/inactive|background/) && nextAppState === 'active'
+    const connectFB = platforms.find(elem => elem.provider === 'facebook')
 
     if (returningToApp && manualPlatformIndex < manualPlatforms.length) {
       this.setState({ manualPlatformIndex: manualPlatformIndex + 1 })
-    } else if (returningToApp && connectFB) {
-      const friendListRequest = new GraphRequest(
-        `/10154996425606714/friends/${this.props.friendInfo.id}`, //`/${this.props.userData.id}/friends/${this.props.friendInfo.id}` Hardcoded until all updated branches are merged
-        {
-          accessToken: accessToken
-        },
-        (error, result) => {
-          if(result && !error) {
-            this.props.navigation.navigate('CongratulatoryScreen', {
-              userInfo: this.props.userInfo,
-              friendInfo: this.props.friendInfo,
-              navigation: this.props.navigation,
-              snapchatDeeplink: this.snapchatDeepLinkCallback
-            })
-          } else {
-            console.log(error, result)
-          }
-        }
-      )
-      new GraphRequestManager().addRequest(friendListRequest).start();
     }
+
     this.setState({ appState: nextAppState });
   }
 
@@ -112,7 +98,9 @@ class SuperConnect extends Component {
       this.setState({ connectionStepCount: i + 1 })
       platform = selectedSocialMedia[i]
 
-      if (manualPlatformsList.includes(platform)) {
+      if (platform === 'snapchat') {
+        continue
+      } else if (manualPlatformsList.includes(platform)) {
         userInputRequiredPlatforms.push(platform)
       } else {
         this.asyncSuperConnectPlatform(platform, apiAccessToken, friendInfo.id)
