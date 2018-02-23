@@ -24,12 +24,17 @@ export default ConnectBar = props => {
             <View style={styles.userRow}>
               <View style={styles.column}>
                 <View style={styles.picAndName}>
-                  <Icon
-                    containerStyle={styles.image}
-                    name='ios-person'
-                    type='ionicon'
-                    size={105}
-                    color='#000' />
+                  {
+                    userData.picture ?
+                    <Image style={styles.image} source={{uri: userData.picture}} />
+                    :
+                    <Icon
+                      containerStyle={styles.image}
+                      name='ios-person'
+                      type='ionicon'
+                      size={105}
+                      color='#000' />
+                  }
                   <Text
                      style={styles.name}
                      numberOfLines={1}
