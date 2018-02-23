@@ -16,8 +16,8 @@ import UserStoreActions from '../../Redux/UserStore'
 import FBStoreActions from '../../Redux/FBStore'
 import AuthStoreActions from '../../Redux/AuthStore'
 import Analytics from 'analytics-react-native'
-
-const analytics = new Analytics('4oWQ8t7HH7pjXWW49ZZnUiXKwS77I4Gh')
+import envConfig from '../../../envConfig'
+const analytics = new Analytics(envConfig.Development.SegmentAPIKey)
 
 // Constants
 import { NAVBAR_RENDER_OK } from '../../Utils/constants'

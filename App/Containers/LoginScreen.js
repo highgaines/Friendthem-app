@@ -12,8 +12,8 @@ import PermissionsStoreActions from '../Redux/PermissionsStore'
 import styles from './Styles/UserProfileInfoStyles'
 
 import Analytics from 'analytics-react-native'
-
-const analytics = new Analytics('4oWQ8t7HH7pjXWW49ZZnUiXKwS77I4Gh')
+import envConfig from '../../envConfig'
+const analytics = new Analytics(envConfig.Development.SegmentAPIKey)
 
 class LoginScreen extends Component {
   constructor(props) {

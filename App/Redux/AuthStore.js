@@ -4,7 +4,7 @@ import Immutable from 'seamless-immutable'
 import envConfig from '../../envConfig'
 import Analytics from 'analytics-react-native'
 
-const analytics = new Analytics('4oWQ8t7HH7pjXWW49ZZnUiXKwS77I4Gh')
+const analytics = new Analytics(envConfig.Development.SegmentAPIKey)
 /* ------ Types and Action Creators ------ */
 
 const { Types, Creators } = createActions({

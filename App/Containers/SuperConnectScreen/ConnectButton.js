@@ -4,9 +4,6 @@ import { Icon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 
 import styles from '../Styles/SuperConnectBarStyles'
-import Analytics from 'analytics-react-native'
-
-const analytics = new Analytics('4oWQ8t7HH7pjXWW49ZZnUiXKwS77I4Gh')
 
 export default function ConnectButton(props) {
   const {

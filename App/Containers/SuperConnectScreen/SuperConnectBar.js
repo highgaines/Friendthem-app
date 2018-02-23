@@ -5,8 +5,8 @@ import ConnectButton from './ConnectButton'
 
 import styles from '../Styles/SuperConnectBarStyles'
 import Analytics from 'analytics-react-native'
-
-const analytics = new Analytics('4oWQ8t7HH7pjXWW49ZZnUiXKwS77I4Gh')
+import envConfig from '../../../envConfig'
+const analytics = new Analytics(envConfig.Development.SegmentAPIKey)
 
 export default class SuperConnectBar extends Component {
   navigateToSuperConnect = () => {
