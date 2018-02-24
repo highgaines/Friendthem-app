@@ -81,7 +81,7 @@ class SocialMediaCardContainer extends Component {
   socialPlatformUsername = (platform) => {
     const { social_profiles } = this.props.userInfo
     const currentPlatform = social_profiles.find(profile => profile.provider === platform)
-    debugger
+
     return currentPlatform ? currentPlatform.username : null
   }
 
@@ -111,7 +111,7 @@ class SocialMediaCardContainer extends Component {
           const isSynced = !!currentPlatform
           const capitalizeName = (name) => name[0].toUpperCase() + name.slice(1)
           const userName = currentPlatform ? this.socialPlatformUsername(isYoutube ? 'google-oauth2' : socialPlatform) : null
-          const friendPlatfromPresent = fromFriendProfile ?
+          const friendPlatfromPresent = fromFriendProfile && friendPlatforms ?
             friendPlatforms.some(socialElem =>
               socialElem.provider === socialPlatform
             ) : true
