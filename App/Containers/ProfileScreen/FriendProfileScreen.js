@@ -133,7 +133,7 @@ class FriendProfileScreen extends Component {
   }
 
   render() {
-    const { friendInfo, superConnect, navigation, setSuperConnectPlatforms, userData, userId } = this.props
+    const { friendInfo, superConnect, navigation, setSuperConnectPlatforms, userInfo, userId } = this.props
     const { showModal, socialMediaData, syncedCardColors, selectedSocialMedia, platform } = this.state
 
     return (

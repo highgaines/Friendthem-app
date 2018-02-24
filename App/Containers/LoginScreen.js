@@ -68,7 +68,7 @@ class LoginScreen extends Component {
     })
 
     analytics.track({
-      userId: userStore.userId,
+      userId: userStore && userStore.userId ? userStore.userId : 'anonymousId',
       event: 'Login User Request',
       properties: {
         username: userEmail

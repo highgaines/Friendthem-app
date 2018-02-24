@@ -80,8 +80,9 @@ class SocialMediaCardContainer extends Component {
 
   socialPlatformUsername = (platform) => {
     const { social_profiles } = this.props.userInfo
-
-    return social_profiles.find(profile => profile.provider === platform).username
+    const currentPlatform = social_profiles.find(profile => profile.provider === platform)
+    debugger
+    return currentPlatform ? currentPlatform.username : null
   }
 
   render() {
