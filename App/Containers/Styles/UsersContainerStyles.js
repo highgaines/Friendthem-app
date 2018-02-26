@@ -58,7 +58,7 @@ export default StyleSheet.create({
     shadowOffset: { height: 3, width: 3 }
   },
   mainImage: {
-    height: 200,
-    width: 200
+    height: 158,
+    width: 186
   }
 })
