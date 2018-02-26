@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, Image, TouchableOpacity, TextInput, View } from 'react-native';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Icon } from 'react-native-elements';
 
 // Redux
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import InviteUsersStore from '../../Redux/InviteUsersStore'
 import { sendInviteToUser } from '../../Redux/InviteUsersStore'
+
+// Libraries
+import { Icon } from 'react-native-elements';
 
 // Styles
 import styles from '../Styles/SearchBarStyles';

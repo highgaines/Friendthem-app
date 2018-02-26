@@ -77,7 +77,7 @@ class NotificationsContainer extends Component {
               <View style={styles.rowBack}>
                 <TouchableOpacity
                   style={[styles.backRightBtn, styles.backRightBtnLeft]}
-                  onPress={() => this.deleteRow(rowMap, data.item.key)}
+                  onPress={() => console.log('deleted')}
                   >
                     <Icon
                       name="delete"
@@ -88,7 +88,7 @@ class NotificationsContainer extends Component {
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={[styles.backRightBtn, styles.backRightBtnRight]}
-                    onPress={() => this.deleteRow(rowMap, data.item.key)}
+                    onPress={() => console.log('silenced')}
                     >
                       <Icon
                         name="volume-mute"
