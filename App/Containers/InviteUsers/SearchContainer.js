@@ -38,8 +38,6 @@ class SearchContainer extends Component {
     return contactList.map( (contact, idx) =>
       <UserCard
         key={idx}
-        userImage={contact.thumbnailPath}
-        hasThumbnail={contact.hasThumbnail}
         firstName={contact.givenName}
         lastName={contact.familyName}
         phoneNumbers={contact.phoneNumbers}

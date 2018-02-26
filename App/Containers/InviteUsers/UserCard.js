@@ -16,8 +16,6 @@ import styles from '../Styles/InviteUserCardStyles';
 import { Images } from '../../Themes';
 
 export default UserCard = ({
-  userImage,
-  hasThumbnail,
   firstName,
   lastName,
   phoneNumbers,
@@ -47,9 +45,6 @@ export default UserCard = ({
     let emailAddress = determineAnyEmail()
     Communications.email(emailAddress, 'Friend Them is Great! Download it here!')
   }
-
-  const determineImage = () => hasThumbnail ? userImage : Images.noPicSVG
-
 
   return (
     <Animatable.View style={styles.userCardContainer} animation="slideInLeft">
