@@ -54,10 +54,12 @@ const handleFeedDataRequest = (state, action) => {
 }
 
 const handleFeedDataSuccess = (state, action) => {
+  const feedData = action.response.data
+
   return {
     ...state,
     fetching: false,
-    feed: action.response.data.data
+    feed: [...state.feed, feedData]
   }
 }
 
