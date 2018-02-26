@@ -63,7 +63,7 @@ class NearbyUsers extends Component {
   }
 
   render() {
-    const { users, navigation, setFriendInfo } = this.props
+    const { users, navigation, setFriendInfo, locationPermission } = this.props
     const { input, welcomeTutorialVisible, feedView } = this.state
 
     return(
@@ -82,6 +82,7 @@ class NearbyUsers extends Component {
           ? <UsersContainer
               users={input.length ? this.filterUsers(users) : users}
               navigation={navigation}
+              locationPermission={locationPermission}
               setFriendInfo={setFriendInfo}/>
           : <NearbyFeedContainer />
         }
@@ -101,6 +102,7 @@ class NearbyUsers extends Component {
 
 const mapStateToProps = state => ({
   accessToken: state.authStore.accessToken,
+  locationPermission: state.permissionsStore.nativeGeolocation,
   users: state.friendStore.users
 })
 
