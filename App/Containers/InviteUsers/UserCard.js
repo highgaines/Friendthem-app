@@ -27,9 +27,7 @@ export default UserCard = ({
 
 
   const determineMobileNumber = () => {
-    let mobile = phoneNumbers.filter( numberObj => numberObj.label === 'mobile')
-
-    return mobile.number
+    return phoneNumbers[0] ? phoneNumbers[0].number : null
   }
 
   const determineAnyEmail = () => {
