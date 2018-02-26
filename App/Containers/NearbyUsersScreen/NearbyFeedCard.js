@@ -148,11 +148,16 @@ class NearbyFeedCard extends Component {
   }
 
   renderContent = () => {
-    const { feed } = this.props
+    const { feed, friendData } = this.props
     const { platform } = this.state
-    return platform === 'profile' ? this.renderSocialMediaCards() :
-    feed.map( (feedObj, idx) =>
-      <FeedCard key={idx} item={feedObj}/>)
+
+    const filteredFeed = feed.filter( feedObj => feedObj.user_id === friendData.id)
+
+    return platform === 'profile'
+    ? this.renderSocialMediaCards()
+    : filteredFeed.length
+      ? filteredFeed[0].data.map( (feedObj, idx) => <FeedCard key={idx} item={feedObj}/> )
+      : null
   }
 
   render = () => {
