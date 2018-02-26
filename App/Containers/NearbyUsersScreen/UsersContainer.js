@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, View, TouchableOpacity } from 'react-native'
+import { ScrollView, Text, View, TouchableOpacity, Linking } from 'react-native'
 import Image from 'react-native-remote-svg'
 import UserCard from './UserCard'
 // Styles
@@ -7,7 +7,7 @@ import styles from '../Styles/UsersContainerStyles'
 import SocialMediaCard from '../SocialMediaCards/SocialMediaCard'
 import { Images } from '../../Themes'
 export default function UsersContainer(props) {
-  const { users, navigation, setFriendInfo } = props
+  const { users, navigation, setFriendInfo, locationPermission } = props
   const viewFriendProfile = userObj => {
     setFriendInfo(userObj)
     navigation.navigate('FriendProfileScreen', { })
@@ -26,12 +26,21 @@ export default function UsersContainer(props) {
 
   const arePeopleNearby = users.length
 
+  const buttonAction = () => {
+    if (locationPermission) {
+      navigation.navigate('InviteUsersScreen')
+    } else {
+        Linking.openURL('app-settings:')
+    }
+  }
+
   return(
     <ScrollView contentContainerStyle={arePeopleNearby ? styles.container : [styles.container, {justifyContent: 'center'}]}>
       {
         users.length
         ? userCards
-        : <View style={styles.noNearbyUsersContainer}>
+        :
+        <View style={styles.noNearbyUsersContainer}>
           <Image
             source={Images.characterFriendThem}
             style={styles.mainImage}
@@ -40,9 +49,14 @@ export default function UsersContainer(props) {
             NO PEOPLE NEARBY?
           </Text>
           <Text style={styles.locationMessage}>
-            It looks like you don't have your location services turned on.
+            {
+              locationPermission ?
+              "It looks like there are no users in your area at the moment."
+              :
+              "It looks like you don't have your location services turned on."
+            }
             <Text style={styles.deepLinkText}>
-              { } Jump to settings to turn on?
+              { } {locationPermission ? "Invite someone to try Friendthem?" : "Jump to settings to turn on?"}
             </Text>
           </Text>
           <View style={styles.buttonGroup}>
@@ -51,7 +65,14 @@ export default function UsersContainer(props) {
                 NO, THANKS :(
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.optionButton}>
+            <TouchableOpacity
+              onPress={
+                locationPermission ?
+                () => navigation.navigate('InviteUsers')
+                :
+                () => Linking.openURL('app-settings:')
+              }
+              style={styles.optionButton}>
               <Text style={styles.buttonText}>
                 YES, LET'S GO :)
               </Text>

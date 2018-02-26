@@ -40,9 +40,12 @@ class SuperConnect extends Component {
     const maxIndex = manualPlatformIndex === manualPlatforms.length
 
     if (manualPlatformsUpdated || (manualPlatformIndex > prevState.manualPlatformIndex && !maxIndex)) {
-      this.deepLinkToPlatform(userInputRequiredPlatforms[manualPlatformIndex])
-    } else if (maxIndex && manualPlatformIndex === prevState.manualPlatformIndex && manualPlatforms.length) {
-        setManualPlatforms([])
+      if (userInputRequiredPlatforms[manualPlatformIndex]) {
+        this.deepLinkToPlatform(userInputRequiredPlatforms[manualPlatformIndex])
+      }
+    }
+    if (maxIndex && manualPlatformIndex === prevState.manualPlatformIndex && manualPlatforms.length) {
+        this.setState({ manualPlatformIndex: 0 }, () => setManualPlatforms([]))
         this.props.navigation.navigate('CongratulatoryScreen', {
           userInfo: this.props.userInfo,
           friendInfo: this.props.friendInfo,
