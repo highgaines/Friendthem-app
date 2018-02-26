@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, TouchableOpacity, ScrollView, Text, Button } from 'react-native';
+import { View, Image, TouchableOpacity, ScrollView, Text, Button } from 'react-native';
 
 // Components
 import SMPlatformCircle from '../UtilityComponents/SMPlatformCircle';
 import ImageCircle from '../UtilityComponents/ImageCircle';
 
 // Libraries
-import Image from 'react-native-remote-svg';
 import * as Animatable from 'react-native-animatable';
 import Communications from 'react-native-communications';
 
@@ -45,7 +44,7 @@ export default UserCard = ({
   }
 
   const handleEmailInvite = () => {
-    let emailAddress = determineAnyEMail()
+    let emailAddress = determineAnyEmail()
     Communications.email(emailAddress, 'Friend Them is Great! Download it here!')
   }
 
@@ -71,7 +70,8 @@ export default UserCard = ({
           style={styles.inviteRowContent}
           onPress={() => handleEmailInvite()}>
           <Image
-            source={Images.messengerIcon}
+            style={{ width: 37, height: 37 }}
+            source={Images.emailIcon}
           />
         </TouchableOpacity>
       </View>
