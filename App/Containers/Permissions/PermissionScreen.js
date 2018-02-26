@@ -8,6 +8,7 @@ import SVGImage from 'react-native-svg-image';
 import LinearGradient from 'react-native-linear-gradient';
 import Image from 'react-native-remote-svg';
 import OneSignal from 'react-native-onesignal';
+import Contacts from 'react-native-contacts';
 
 // Components
 import ConnectButton from '../SuperConnectScreen/ConnectButton';
@@ -19,6 +20,7 @@ import LinearGradientWrapper from '../../HOCs/LinearGradientWrapper';
 import PermissionsStoreActions, { setGeoPermission } from '../../Redux/PermissionsStore';
 import FriendStoreActions from '../../Redux/FriendStore'
 import NotificationStoreActions, { registerForPushNotif } from '../../Redux/NotificationStore'
+import { storeContactInfo } from '../../Redux/InviteUsersStore'
 
 // Images
 import { Images } from '../../Themes';
@@ -80,6 +82,7 @@ class PermissionScreen extends Component {
     const {
       navigation,
       permissionType,
+      storeContactInfo,
       grantLocationPermission,
       grantNotificationPermission
     } = this.props
@@ -90,6 +93,13 @@ class PermissionScreen extends Component {
       navigate('PermissionScreen', { permissionType: 'notifications', navigation: navigation })
     } else {
       grantNotificationPermission(true)
+      Contacts.getAll( (err, contacts) => {
+        if (err === 'denied') {
+          console.log('DENIED')
+        } else {
+          storeContactInfo(contacts)
+        }
+      })
       navigate('ForkScreen', { navigation: navigation })
     }
   }
@@ -165,6 +175,7 @@ const mapDispatchToProps = dispatch => {
 
   return {
     ...bindActionCreators({
+      storeContactInfo,
       setFriendInfo,
       grantLocationPermission,
       grantNotificationPermission,

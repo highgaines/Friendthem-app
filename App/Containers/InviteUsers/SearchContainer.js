@@ -34,13 +34,16 @@ class SearchContainer extends Component {
   }
 
   renderUserList = () => {
-    const { userList, triggerModal, selectUser } = this.props
-    return userList.map( (user, idx) =>
+    const { contactList, triggerModal, selectUser } = this.props
+    return contactList.map( (contact, idx) =>
       <UserCard
         key={idx}
-        userImage={user.image}
-        userName={user.name}
-        userPlatforms={user.platforms}
+        userImage={contact.thumbnailPath}
+        hasThumbnail={contact.hasThumbnail}
+        firstName={contact.givenName}
+        lastName={contact.familyName}
+        phoneNumbers={contact.phoneNumbers}
+        emailAddresses={contact.emailAddresses}
         triggerModal={triggerModal}
         selectUser={selectUser}
       /> )
@@ -56,7 +59,7 @@ class SearchContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  userList: state.inviteUsersStore.userList
+  contactList: state.inviteUsersStore.contactList
 })
 
 const mapDispatchToProps = dispatch => ({

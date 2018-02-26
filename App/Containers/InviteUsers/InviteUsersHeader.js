@@ -16,7 +16,7 @@ export default InviteUsersHeader = props => {
           color="#000"
         />
         <Text style={styles.firstRowText}>
-          Invite friends to fill out their super profile
+          Invite friends to join Friend Them!
         </Text>
       </View>
     </View>

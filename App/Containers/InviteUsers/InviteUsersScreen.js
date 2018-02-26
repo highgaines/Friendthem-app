@@ -9,6 +9,7 @@ import InviteUsersStoreActions, { selectUser, fetchConnectivityData } from '../.
 // Libraries
 import Reactotron from 'reactotron-react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Contacts from 'react-native-contacts';
 
 // Components
 import InviteUsersHeader from './InviteUsersHeader';
@@ -59,7 +60,7 @@ class InviteUsersScreen extends Component {
 
   render() {
     const { networkTabSelected, showModal } = this.state;
-    const { friends, selectUser, selectedUser, navigation, fetchConnectivityData, accessToken } = this.props
+    const { friends, selectUser, navigation, fetchConnectivityData, accessToken } = this.props
 
     const pluralizeFriends = friends.length === 1 ? '' : 's'
 
@@ -70,14 +71,6 @@ class InviteUsersScreen extends Component {
           start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
           locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
           style={styles.headerGradient}>
-          <View style={{ alignItems: 'center', justifyContent: 'center'}}>
-            <InviteUsersModal
-              showModal={showModal}
-              modalStyle={styles.modal}
-              triggerModal={this.triggerModal}
-              selectedUser={selectedUser}
-            />
-          </View>
           <View>
             <Text style={styles.friendCount}>
               {networkTabSelected ?
@@ -137,10 +130,10 @@ class InviteUsersScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  selectedUser: state.inviteUsersStore.selectedUser,
   nav: state.nav,
   accessToken: state.authStore.accessToken,
-  friends: state.inviteUsersStore.connectivityData
+  friends: state.inviteUsersStore.connectivityData,
+  contacts: state.inviteUsersStore.contactList
 })
 
 const mapDispatchToProps = dispatch => {
