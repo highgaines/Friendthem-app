@@ -54,12 +54,21 @@ const handleFeedDataRequest = (state, action) => {
 }
 
 const handleFeedDataSuccess = (state, action) => {
-  const feedData = action.response.data
-
+  const feedData = action.response.data.data
+  const provider = action.response.data.data[0].provider
+  const userId = action.response.data.user_id
+  const oldData = state.feed[userId]
+  const newData = {
+    [userId]: {
+      ...oldData,
+      [provider]: feedData
+    }
+  }
+  console.log(action)
   return {
     ...state,
     fetching: false,
-    feed: [...state.feed, feedData]
+    feed: {...state.feed, newData }
   }
 }
 
