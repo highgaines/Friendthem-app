@@ -179,7 +179,9 @@ class SettingsScreen extends Component {
               style={styles.rightArrow}
               />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.sectionItem}>
+          <TouchableOpacity
+            activeOpacity={1}
+            style={styles.sectionItem}>
             <Image
               source={Images.inclinedBell}
               />
@@ -193,7 +195,9 @@ class SettingsScreen extends Component {
               style={styles.switchStyle}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.sectionItem}>
+          <TouchableOpacity
+            activeOpacity={1}
+            style={styles.sectionItem}>
             <Image
               source={Images.ghost}
               />
@@ -208,6 +212,7 @@ class SettingsScreen extends Component {
             />
           </TouchableOpacity>
           <TouchableOpacity
+            activeOpacity={1}
             testID={'logout_button'}
             style={styles.logOutButton}
             onPress={() => toggleModal()}
