@@ -56,6 +56,7 @@ export default class SocialMediaCard extends Component {
     return (
       <TouchableOpacity
         style={cardStyle}
+        activeOpacity={readOnly ? 1 : 0.2 }
         onPress={readOnly ? null : this.handlePush}
       >
         {

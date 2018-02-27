@@ -219,6 +219,7 @@ const mapDispatchToProps = dispatch => {
       setLocationInterval,
       setGeoPermission,
       setNotifPermission,
+      setNativeContactsPermission,
     }, dispatch)
   }
 }

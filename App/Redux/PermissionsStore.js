@@ -30,22 +30,23 @@ export const INITIAL_STATE = Immutable({
 
 /* ----------------- Actions ------------------ */
 
-export const setGeolocationPermission = permission => {
-  // api action
-  return { type: Types.SET_GEO_PERMISSION, payload: { permission }}
-}
-
-export const setNotifPermission = permission => {
-  // api action
-  return { type: Types.SET_NOTIF_PERMISSION, payload: { permission }}
-}
-
-export const setNativeContactsPermission = permission => {
-  return { type: Types.SET_NATIVE_CONTACTS_PERMISSION, payload: { permission }}
-}
+// export const setGeolocationPermission = permission => {
+//   // api action
+//   return { type: Types.SET_GEO_PERMISSION, payload: { permission }}
+// }
+//
+// export const setNotifPermission = permission => {
+//   // api action
+//   return { type: Types.SET_NOTIF_PERMISSION, payload: { permission }}
+// }
+//
+// export const setNativeContactsPermission = permission => {
+//   return { type: Types.SET_NATIVE_CONTACTS_PERMISSION, payload: { permission }}
+// }
 /* ----------------- Reducers ----------------- */
 
 const handleSetNativeGeolocation = (state = INITIAL_STATE, action) => {
+  const { permission } = action
   return state.merge({ nativeGeolocation: permission })
 }
 
