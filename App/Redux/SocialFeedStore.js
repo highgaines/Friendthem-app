@@ -68,7 +68,7 @@ const handleFeedDataSuccess = (state, action) => {
   return {
     ...state,
     fetching: false,
-    feed: {...state.feed, newData }
+    feed: {...state.feed, ...newData }
   }
 }
 
