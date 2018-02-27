@@ -5,6 +5,7 @@ import { ScrollView, Text, Image, View, TouchableOpacity, Button, ActivityIndica
 import { SocialIcon } from 'react-native-elements'
 import FBSDK, { LoginManager, LoginButton, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk'
 import Permissions from 'react-native-permissions'
+import Contacts from 'react-native-contacts'
 
 // Components
 import ConnectButton from './SuperConnectScreen/ConnectButton'
@@ -61,7 +62,7 @@ class LaunchScreen extends Component {
   }
 
   checkPermissions = () => {
-    const { setGeoPermission, setNotifPermission } = this.props
+    const { setGeoPermission, setNotifPermission, setNativeContactsPermission } = this.props
 
     Permissions.check('location', { type: 'always' }).then(response => {
       if (response === 'authorized') {
@@ -71,6 +72,11 @@ class LaunchScreen extends Component {
     Permissions.check('notification').then(response => {
       if (response === 'authorized') {
         setNotifPermission(true)
+      }
+    })
+    Contacts.checkPermission( (err, permission) => {
+      if (permission === 'authorized') {
+        setNativeContactsPermission(true)
       }
     })
   }
@@ -84,7 +90,7 @@ class LaunchScreen extends Component {
   }
 
   getFbProfile = accessToken => {
-    const { fbUserInfo, navigation, loginByFacebook } = this.props
+    const { fbUserInfo, navigation, loginByFacebook, nativeGeolocation, nativeNotifications } = this.props
 
     const responseInfoCallback = (error, result) => {
       if (error) {
@@ -92,10 +98,19 @@ class LaunchScreen extends Component {
         return error
       } else {
         fbUserInfo(result)
-        navigation.navigate('PermissionScreen', {
-          permissionType: 'geolocation',
-          navigation: navigation
-        })
+        if (!nativeGeolocation) {
+          navigation.navigate('PermissionScreen', {
+            permissionType: 'geolocation',
+            navigation: navigation
+          })
+        } else if (!nativeNotifications) {
+          navigation.navigate('PermissionScreen', {
+            permissionType: 'notifications',
+            navigation: navigation
+          })
+        } else {
+          navigation.navigate('ForkScreen')
+        }
       }
     }
 
@@ -182,6 +197,8 @@ const mapStateToProps = state => ({
   nav: state.nav,
   loggedIn: state.authStore.loggedIn,
   fbAuthToken: state.fbStore.fbAccessToken,
+  nativeGeolocation: state.permissionsStore.nativeGeolocation,
+  nativeNotifications: state.permissionsStore.nativeNotifications,
 })
 
 const mapDispatchToProps = dispatch => {
@@ -189,6 +206,7 @@ const mapDispatchToProps = dispatch => {
   const { fbUserInfo } = UserStoreActions
   const {
     setGeoPermission,
+    setNativeContactsPermission,
     setNotifPermission,
     setLocationInterval
   } = PermissionsStoreActions

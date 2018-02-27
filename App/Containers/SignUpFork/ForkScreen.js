@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import PermissionsStoreActions from '../../Redux/PermissionsStore'
 import UserStoreActions, { updateUserPosition, getUserInfo } from '../../Redux/UserStore'
+import { storeContactInfo } from '../../Redux/InviteUsersStore'
 
 // Components
 import ConnectButton from '../SuperConnectScreen/ConnectButton'
@@ -18,6 +19,7 @@ import { SocialIcon } from 'react-native-elements'
 import Permissions from 'react-native-permissions'
 import { Icon } from 'react-native-elements'
 import OneSignal from 'react-native-onesignal';
+import Contacts from 'react-native-contacts';
 
 //Images
 import { Images } from '../../Themes';
@@ -34,6 +36,7 @@ class ForkScreen extends Component {
       nativeGeolocation,
       setLocationInterval,
       nativeNotifications,
+      nativeContactsPermission,
       locationIntervalRunning,
       customGeolocationPermission,
       customNotificationPermission,
@@ -48,8 +51,17 @@ class ForkScreen extends Component {
         if(response === 'authorized') {
           setLocationInterval()
         }
-        if (customNotificationPermission && !nativeNotifications) {
-          OneSignal.registerForPushNotifications()
+        if (!nativeContactsPermission) {
+          Contacts.getAll( (err, contacts) => {
+            if (err === 'denied') {
+              console.log('DENIED')
+            } else {
+              storeContactInfo(contacts)
+            }
+            if (customNotificationPermission && !nativeNotifications) {
+              OneSignal.registerForPushNotifications()
+            }
+          })
         }
       })
     }
@@ -146,6 +158,7 @@ const mapStateToProps = state => ({
   locationIntervalRunning: state.permissionsStore.locationIntervalRunning,
   customGeolocationPermission: state.permissionsStore.locationPermissionsGranted,
   customNotificationPermission: state.permissionsStore.notificationPermissionsGranted,
+  nativeContactsPermission: state.permissionsStore.nativeContactsPermission
 })
 
 const mapDispatchToProps = dispatch => {
@@ -155,6 +168,7 @@ const mapDispatchToProps = dispatch => {
     ...bindActionCreators({
       getUserInfo,
       setLocationInterval,
+      storeContactInfo,
       updateUserPosition
     }, dispatch)
   }

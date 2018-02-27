@@ -7,6 +7,7 @@ import Reactotron from 'reactotron-react-native';
 const { Types, Creators } = createActions({
   setGeoPermission: ['permission'],
   setNotifPermission: ['permission'],
+  setNativeContactsPermission: ['permission'],
   grantLocationPermission: ['response'],
   grantNotificationPermission: ['response'],
   setLocationInterval: null,
@@ -21,6 +22,7 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   nativeGeolocation: false,
   nativeNotifications: false,
+  nativeContactsPermission: false,
   locationPermissionsGranted: false,
   notificationPermissionsGranted: false,
   locationIntervalRunning: false
@@ -38,15 +40,23 @@ export const setNotifPermission = permission => {
   return { type: Types.SET_NOTIF_PERMISSION, payload: { permission }}
 }
 
+export const setNativeContactsPermission = permission => {
+  return { type: Types.SET_NATIVE_CONTACTS_PERMISSION, payload: { permission }}
+}
 /* ----------------- Reducers ----------------- */
 
 const handleSetNativeGeolocation = (state = INITIAL_STATE, action) => {
-  return state.merge({ nativeGeolocation: action.permission })
+  return state.merge({ nativeGeolocation: permission })
 }
 
 const handleSetNativeNotification = (state = INITIAL_STATE, action) => {
   const { permission } = action
-  return state.merge({ nativeNotifications: action.permission })
+  return state.merge({ nativeNotifications: permission })
+}
+
+const handleSetNativeContactsPermission = (state = INITIAL_STATE, action) => {
+  const { permission } = action
+  return state.merge({ nativeContactsPermission: permission})
 }
 
 const handleLocationPermissions = (state, action) => {
@@ -82,6 +92,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.SET_LOCATION_INTERVAL]: setLocationInterval,
   [Types.SET_GEO_PERMISSION]: handleSetNativeGeolocation,
   [Types.SET_NOTIF_PERMISSION]: handleSetNativeNotification,
+  [Types.SET_NATIVE_CONTACTS_PERMISSION]: handleSetNativeContactsPermission,
   [Types.GRANT_LOCATION_PERMISSION]: handleLocationPermissions,
   [Types.GRANT_NOTIFICATION_PERMISSION]: handleNotificationPermissions
 })
