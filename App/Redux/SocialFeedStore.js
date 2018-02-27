@@ -64,7 +64,7 @@ const handleFeedDataSuccess = (state, action) => {
       [provider]: feedData
     }
   }
-  console.log(action)
+
   return {
     ...state,
     fetching: false,

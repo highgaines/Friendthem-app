@@ -88,8 +88,6 @@ export default StyleSheet.create({
     marginRight: 25
   },
   footerContainer: {
-    borderTopWidth: 0.5,
-    borderTopColor: '#fff',
     height: 80,
     marginLeft: 10,
     marginRight: 10,
@@ -101,7 +99,6 @@ export default StyleSheet.create({
     fontSize: 15,
     fontFamily: 'montserrat',
     textAlign: 'center',
-    letterSpacing: 1,
     backgroundColor: 'transparent'
   },
   button: {

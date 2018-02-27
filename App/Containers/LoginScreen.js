@@ -1,18 +1,27 @@
 import React, { Component } from 'react'
+import { ScrollView, Text, TextInput, Image, View, TouchableOpacity } from 'react-native'
+
+// Components
+import Footer from './UtilityComponents/Footer'
+
+// Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { ScrollView, Text, TextInput, Image, View, TouchableOpacity } from 'react-native'
+import AuthStoreActions, { login } from '../Redux/AuthStore'
+import PermissionsStoreActions from '../Redux/PermissionsStore'
+
+// Libraries
 import { CheckBox, Icon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
 import Permissions from 'react-native-permissions'
+import Analytics from 'analytics-react-native'
 
-import Footer from './UtilityComponents/Footer'
-import AuthStoreActions, { login } from '../Redux/AuthStore'
-import PermissionsStoreActions from '../Redux/PermissionsStore'
+// Styles
 import styles from './Styles/UserProfileInfoStyles'
 
-import Analytics from 'analytics-react-native'
+// ENV
 import envConfig from '../../envConfig'
+
 const analytics = new Analytics(envConfig.Development.SegmentAPIKey)
 
 class LoginScreen extends Component {
