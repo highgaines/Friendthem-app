@@ -92,6 +92,7 @@ class SocialMediaCardContainer extends Component {
       snapchatCallback,
       platformSynced,
       fromFriendProfile,
+      fromUserProfile,
       friendPlatforms,
       platformSelected
     } = this.props
@@ -115,14 +116,15 @@ class SocialMediaCardContainer extends Component {
             friendPlatforms.some(socialElem =>
               socialElem.provider === socialPlatform
             ) : true
-
+          console.log(isSynced, fromUserProfile)
           if (friendPlatfromPresent) {
             return (
               <SocialMediaCard
                 key={idx}
                 platformName={capitalizeName(socialPlatform)}
                 synced={isSynced}
-                socialAuth={!isSynced && fromFriendProfile ?
+                readOnly={isSynced && fromUserProfile}
+                socialAuth={(!isSynced && fromFriendProfile) ?
                   () => null : this.determineSocialAuth(socialPlatform)
                 }
                 platformAuth={isYoutube ? 'google-oauth2' : socialPlatform}

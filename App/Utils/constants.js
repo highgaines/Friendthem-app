@@ -16,10 +16,12 @@ export const SYNCED_CARD_COLORS = {
 
 export const SOCIAL_MEDIA_DATA = {
   facebook: {
-    deepLinkUrl: 'fb://'
+    deepLinkUrl: 'fb://',
+    superConnectDeepLink: 'fb://profile/'
   },
   instagram: {
-    deepLinkUrl: 'instagram://'
+    deepLinkUrl: 'instagram://',
+    superConnectDeepLink: 'instagram://user?username='
   },
   twitter: {
     deepLinkUrl: 'twitter://',

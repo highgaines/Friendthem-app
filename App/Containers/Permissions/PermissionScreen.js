@@ -93,13 +93,6 @@ class PermissionScreen extends Component {
       navigate('PermissionScreen', { permissionType: 'notifications', navigation: navigation })
     } else {
       grantNotificationPermission(true)
-      Contacts.getAll( (err, contacts) => {
-        if (err === 'denied') {
-          console.log('DENIED')
-        } else {
-          storeContactInfo(contacts)
-        }
-      })
       navigate('ForkScreen', { navigation: navigation })
     }
   }

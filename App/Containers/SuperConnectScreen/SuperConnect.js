@@ -10,7 +10,7 @@ import ConnectBar from './ConnectBar'
 import ButtonsContainer from './ButtonsContainer'
 import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer';
 import SuperConnectActions, { superConnectPlatform } from '../../Redux/SuperConnectStore'
-import { MANUAL_CONNECT_PLATFORMS } from '../../Utils/constants'
+import { MANUAL_CONNECT_PLATFORMS, SOCIAL_MEDIA_DATA } from '../../Utils/constants'
 
 class SuperConnect extends Component {
   constructor(props) {
@@ -63,7 +63,8 @@ class SuperConnect extends Component {
     const { manualPlatforms, friendInfo, platforms } = this.props
     const profile = friendInfo.social_profiles.find(profile => profile.provider === platformName)
     const userIdentifier = platformName === 'facebook' ? profile.uid : profile.username
-    const deepLinkURL = `${platformName}://${userIdentifier}`
+    const deepLinkPlatform = SOCIAL_MEDIA_DATA[platformName].superConnectDeepLink
+    const deepLinkURL = `${deepLinkPlatform}${userIdentifier}`
 
     Linking.canOpenURL(deepLinkURL).then(response => {
       if (response) {

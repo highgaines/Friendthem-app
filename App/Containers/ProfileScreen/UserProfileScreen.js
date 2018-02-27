@@ -106,7 +106,7 @@ class UserProfileScreen extends Component {
           if (response) {
             Linking.openURL(`${deepLinkAuth}`)
           } else {
-              Linking.openURL(`${authRedirectUrl}`)
+            Linking.openURL(`${authRedirectUrl}`)
           }
       })
     }
@@ -240,7 +240,7 @@ class UserProfileScreen extends Component {
 
         {  socialNetworkTab ?
             <SocialMediaCardContainer
-              fromFriendProfile={false}
+              fromUserProfile={true}
               platformSelected={(platform) => false}
               snapchatCallback={this.toggleSnapchatModal}
               onPressCallback={(platform) => this.authenticateSocialMedia(platform)}
