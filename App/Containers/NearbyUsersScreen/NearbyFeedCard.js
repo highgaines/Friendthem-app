@@ -1,33 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 // Native
-import { Text, View, TouchableOpacity, ScrollView, ActivityIndicator, Linking } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView, ActivityIndicator, Linking } from 'react-native'
 
 // Components
-import ImageCircle from '../UtilityComponents/ImageCircle';
-import SMPlatformCircle from '../UtilityComponents/SMPlatformCircle';
-import ScrollWheel from '../ProfileScreen/ScrollWheel';
-import FeedCard from '../SocialFeed/FeedCard';
-import ConnectButton from '../SuperConnectScreen/ConnectButton';
-import SocialMediaCard from '../SocialMediaCards/SocialMediaCard';
+import ImageCircle from '../UtilityComponents/ImageCircle'
+import SMPlatformCircle from '../UtilityComponents/SMPlatformCircle'
+import ScrollWheel from '../ProfileScreen/ScrollWheel'
+import FeedCard from '../SocialFeed/FeedCard'
+import ConnectButton from '../SuperConnectScreen/ConnectButton'
+import SocialMediaCard from '../SocialMediaCards/SocialMediaCard'
 
 // Libraries
-import { Icon } from 'react-native-elements';
-import LinearGradient from 'react-native-linear-gradient';
+import { Icon } from 'react-native-elements'
+import LinearGradient from 'react-native-linear-gradient'
 
 // Redux
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { fetchFeed } from '../../Redux/SocialFeedStore';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { fetchFeed } from '../../Redux/SocialFeedStore'
 
 // Constants
-import { SYNCED_CARD_COLORS } from '../../Utils/constants';
+import { SYNCED_CARD_COLORS } from '../../Utils/constants'
 
 // Images
-import { Images } from '../../Themes';
+import { Images } from '../../Themes'
 
 // Styles
-import styles from '../Styles/FeedCardStyles';
+import styles from '../Styles/FeedCardStyles'
 
 class NearbyFeedCard extends Component {
   constructor(props){

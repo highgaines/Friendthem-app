@@ -30,6 +30,7 @@ export default StyleSheet.create({
     },
     shadowColor: 'black',
     shadowOpacity: 0.5,
+    marginBottom: 10
   },
   nearbyFeedCardHeader: {
      flexDirection: 'row',
