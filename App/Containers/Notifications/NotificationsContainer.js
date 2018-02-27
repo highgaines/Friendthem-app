@@ -15,7 +15,7 @@ import Navbar from '../Navbar/Navbar';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import NotificationStoreActions from '../../Redux/NotificationStore';
-import { fetchNotifications, deleteRowAction } from '../../Redux/NotificationStore';
+import { fetchNotifications, deleteRowAction, deleteNotification } from '../../Redux/NotificationStore';
 
 // Styles
 import styles from '../Styles/NotificationStyles';
@@ -37,9 +37,10 @@ class NotificationsContainer extends Component {
     }
   }
 
-  deleteRow = (rowMap, rowKey) => {
-    this.closeRowItem(rowMap, rowKey)
-    this.props.deleteRowAction(rowKey)
+  triggerDeleteAction = data => {
+    const { deleteNotification, accessToken, fetchNotifications } = this.props
+    const { id } = data.item
+    deleteNotification(accessToken, id).then( () => fetchNotifications(accessToken) )
   }
 
   render() {
@@ -77,7 +78,7 @@ class NotificationsContainer extends Component {
               <View style={styles.rowBack}>
                 <TouchableOpacity
                   style={[styles.backRightBtn, styles.backRightBtnLeft]}
-                  onPress={() => console.log('deleted')}
+                  onPress={() => this.triggerDeleteAction(data)}
                   >
                     <Icon
                       name="delete"
@@ -114,7 +115,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    ...bindActionCreators({ fetchNotifications, deleteRowAction }, dispatch)
+    ...bindActionCreators({ fetchNotifications, deleteRowAction, deleteNotification }, dispatch)
   }
 }
 

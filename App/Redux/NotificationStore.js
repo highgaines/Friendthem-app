@@ -12,7 +12,10 @@ const { Types, Creators } = createActions({
   registerUserNotifFailure: null,
   fetchNotificationsRequest: null,
   fetchNotificationsSuccess: null,
-  fetchNotificationsFailure: null
+  fetchNotificationsFailure: null,
+  deleteNotificationRequest: null,
+  deleteNotificationSuccess: null,
+  deleteNotificationFailure: null
 })
 
 export const NotificationTypes = Types
@@ -54,6 +57,27 @@ export const fetchNotifications = accessToken => {
     ],
     shouldCallApi: state => true,
     callApi: dispatch => fetchFromApi('notifications/', init, dispatch)
+  }
+}
+
+export const deleteNotification = (accessToken, notifId) => {
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('Authorization', `Bearer ${accessToken}`)
+
+  const init = {
+    method: 'DELETE',
+    headers
+  }
+
+  return {
+    types: [
+      Types.DELETE_NOTIFICATION_REQUEST,
+      Types.DELETE_NOTIFICATION_SUCCESS,
+      Types.DELETE_NOTIFICATION_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi(`notifications/${notifId}/`, init, dispatch)
   }
 }
 
@@ -135,9 +159,26 @@ const handleFetchNotifFailure = (state, action) => {
   return {...state, fetching: false}
 }
 
+// DELETE NOTIFICATIONS
+
+const handleDeleteNotifRequest = (state, action) => {
+  return {...state, fetching: true}
+}
+
+const handleDeleteNotifSuccess = (state, action) => {
+  return {...state, fetching: false}
+}
+
+const handleDeleteNotifFailure = (state, action) => {
+  return {...state, fetching: false}
+}
+
+// LOGOUT
 const handleUserLogout = (state, action) => {
   return INITIAL_STATE
 }
+
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -148,5 +189,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.FETCH_NOTIFICATIONS_REQUEST]: handleFetchNotifRequest,
   [Types.FETCH_NOTIFICATIONS_SUCCESS]: handleFetchNotifSuccess,
   [Types.FETCH_NOTIFICATIONS_FAILURE]: handleFetchNotifFailure,
+  [Types.DELETE_NOTIFICATION_REQUEST]: handleDeleteNotifRequest,
+  [Types.DELETE_NOTIFICATION_SUCCESS]: handleDeleteNotifSuccess,
+  [Types.DELETE_NOTIFICATION_FAILURE]: handleDeleteNotifFailure,
   [Types.LOGOUT_USER]: handleUserLogout,
 })

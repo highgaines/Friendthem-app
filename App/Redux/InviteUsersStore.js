@@ -62,7 +62,6 @@ export const fetchConnectivityData = (accessToken) => {
 
 const handleStoreContactInfo = (state, action) => {
   const { data } = action.payload
-  console.log(action)
   return state.merge({ contactList: data })
 }
 
