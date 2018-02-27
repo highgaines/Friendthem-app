@@ -1,26 +1,28 @@
-import React, { Component } from 'react';
-import { View, TouchableOpacity, Text, ScrollView } from 'react-native';
+import React, { Component } from 'react'
+import { View, TouchableOpacity, Text, ScrollView } from 'react-native'
 
 // Redux
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import InviteUsersStoreActions, { selectUser, fetchConnectivityData } from '../../Redux/InviteUsersStore';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import InviteUsersStoreActions, { selectUser, fetchConnectivityData } from '../../Redux/InviteUsersStore'
 
 // Libraries
-import Reactotron from 'reactotron-react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import Contacts from 'react-native-contacts';
+import Reactotron from 'reactotron-react-native'
+import LinearGradient from 'react-native-linear-gradient'
+import Contacts from 'react-native-contacts'
 
 // Components
-import InviteUsersHeader from './InviteUsersHeader';
-import SearchContainer from './SearchContainer';
-import InviteUsersModal from './InviteUsersModal';
-import UsersContainer from '../NearbyUsersScreen/UsersContainer';
-import ConnectivityCard from './ConnectivityCard';
-import Navbar from '../Navbar/Navbar';
+import InviteUsersHeader from './InviteUsersHeader'
+import SearchContainer from './SearchContainer'
+import InviteUsersModal from './InviteUsersModal'
+import UsersContainer from '../NearbyUsersScreen/UsersContainer'
+import ConnectivityCard from './ConnectivityCard'
+import Navbar from '../Navbar/Navbar'
 
 // Styles
-import styles from '../Styles/InviteUsersScreenStyles';
+import styles from '../Styles/InviteUsersScreenStyles'
+
+import { LazyloadScrollView, LazyloadView, LazyloadImage } from 'react-native-lazyload-deux'
 
 class InviteUsersScreen extends Component {
   constructor(props) {
@@ -45,7 +47,7 @@ class InviteUsersScreen extends Component {
     const { friends, navigation } = this.props
 
     return friends.map( (friend, idx) => {
-      return(
+      return (
         <ConnectivityCard
           key={idx}
           name={friend.first_name ? friend.first_name : "BOB"}
@@ -59,7 +61,7 @@ class InviteUsersScreen extends Component {
   }
 
   render() {
-    const { networkTabSelected, showModal } = this.state;
+    const { networkTabSelected, showModal } = this.state
     const {
       friends,
       selectUser,
@@ -73,21 +75,21 @@ class InviteUsersScreen extends Component {
     const pluralizeContacts = contacts.length === 1 ? '' : 's'
 
     return (
-      <View style={[{ flex: 1 }, this.state.showModal ? { opacity: 0.1 } : '']}>
+      <LazyloadView style={[{ flex: 1 }, this.state.showModal ? { opacity: 0.1 } : '']}>
         <LinearGradient
           colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
           start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
           locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
           style={styles.headerGradient}>
-          <View>
+          <LazyloadView>
             <Text style={styles.friendCount}>
               {networkTabSelected ?
                 `${friends.length} friend${pluralizeFriends}`
                 :
                 `${contacts.length} friend${pluralizeContacts}` }
             </Text>
-          </View>
-          <View style={styles.tabSelectionContainer}>
+          </LazyloadView>
+          <LazyloadView style={styles.tabSelectionContainer}>
             <TouchableOpacity
               onPress={() => this.setState({ networkTabSelected: false })}
               style={[styles.tabItem, networkTabSelected ? null : styles.selected]}>
@@ -106,17 +108,17 @@ class InviteUsersScreen extends Component {
                   ON FRIENDTHEM
                 </Text>
               </TouchableOpacity>
-          </View>
+          </LazyloadView>
         </LinearGradient>
         {!networkTabSelected ?
-          <View style={{ flex: 1}}>
+          <LazyloadView style={{ flex: 1}}>
             <InviteUsersHeader />
             <SearchContainer
               triggerModal={this.triggerModal}
               selectUser={selectUser}
             />
-          </View> :
-          <View>
+        </LazyloadView> :
+          <LazyloadView>
             <Text
               style={{
                   padding: 10,
@@ -126,13 +128,13 @@ class InviteUsersScreen extends Component {
                 }}>
               Connectivity
             </Text>
-            <ScrollView contentContainerStyle={styles.userContainer}>
+            <LazyloadScrollView contentContainerStyle={styles.userContainer}>
               {this.renderConnectivityCards()}
-            </ScrollView>
-          </View>
+            </LazyloadScrollView>
+          </LazyloadView>
         }
 
-      </View>
+      </LazyloadView>
     )
   }
 }

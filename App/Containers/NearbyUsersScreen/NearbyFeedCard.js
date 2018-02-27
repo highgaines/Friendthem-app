@@ -29,6 +29,8 @@ import { Images } from '../../Themes'
 // Styles
 import styles from '../Styles/FeedCardStyles'
 
+import { LazyloadScrollView, LazyloadView, LazyloadImage } from 'react-native-lazyload-deux'
+
 class NearbyFeedCard extends Component {
   constructor(props){
     super(props)
@@ -165,54 +167,54 @@ class NearbyFeedCard extends Component {
     const { platform } = this.state
 
     return(
-      <View style={styles.nearbyFeedCardContainer}>
-        <View style={styles.header}>
+      <LazyloadView style={styles.nearbyFeedCardContainer}>
+        <LazyloadView style={styles.header}>
           <LinearGradient
             colors={['#2aa5c0','#5664bd', '#9011ba', '#b31c85', '#e73436']}
             start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
             locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
             style={styles.linearGradient}
           >
-            <View style={styles.nearbyFeedCardHeader}>
-              <View style={{ flex: 1 }}>
+            <LazyloadView style={styles.nearbyFeedCardHeader}>
+              <LazyloadView style={{ flex: 1 }}>
                 <ImageCircle source={`${friendData.picture}`} size={60}/>
-              </View>
-              <View style={{ flex: 3 }}>
+              </LazyloadView>
+              <LazyloadView style={{ flex: 3 }}>
                 <Text style={styles.name}> {`${friendData.first_name} ${friendData.last_name}`} </Text>
                 <Text style={styles.hobbies}> Crypto | Gaming | Coding </Text>
                 <Text style={styles.location}> New York, NY </Text>
-              </View>
-              <View style={styles.deepLinkButtonContainer}>
+              </LazyloadView>
+              <LazyloadView style={styles.deepLinkButtonContainer}>
                 {this.renderDeeplinkButton()}
-              </View>
-            </View>
+              </LazyloadView>
+            </LazyloadView>
           </LinearGradient>
-        </View>
-        <View style={styles.scrollWheel}>
+        </LazyloadView>
+        <LazyloadView style={styles.scrollWheel}>
           <ScrollWheel
             handlePlatformChange={this.handlePlatformChange}
             handleBackToProfile={this.handleGoToProfile}
             selected={platform}
             profilePic={friendData.image}
           />
-        </View>
-        <View style={{ flex: 1, backgroundColor: 'white' }}>
-          <ScrollView
+      </LazyloadView>
+        <LazyloadView style={{ flex: 1, backgroundColor: 'white' }}>
+          <LazyloadScrollView
             horizontal={platform === 'profile' ? false : true}
             contentContainerStyle={[styles.contentContainer, platform === 'profile' ? { 'flex': 1, 'flexWrap': 'wrap', 'justifyContent': 'flex-start' } : '']}
           >
             {loading
-              ? <View style={styles.loading}>
+              ? <LazyloadView style={styles.loading}>
                   <ActivityIndicator
                     size="large"
                     color="#0000ff"
                   />
-                </View>
+              </LazyloadView>
               : this.renderContent()
             }
-          </ScrollView>
-        </View>
-      </View>
+          </LazyloadScrollView>
+        </LazyloadView>
+      </LazyloadView>
     )
   }
 }
