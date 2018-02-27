@@ -100,6 +100,12 @@
 	<string>FriendThem would like to access the motion data on your device.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>FriendThem would like to access Speech Recognition in order to make this app more accessible to a wider audience.</string>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>FriendThem would like access to your photo gallery</string>
+  <key>NSCameraUsageDescription</key>
+  <string>FriendThem would like to use your camera</string>
+  <key>NSPhotoLibraryAddUsageDescription</key>
+  <string>FriendThem would like to save photos to your photo gallery</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
