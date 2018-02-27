@@ -59,7 +59,7 @@ class NearbyUsers extends Component {
 
   filterUsers = users => {
     const { input } = this.state
-    return users.filter( user => user.name.includes(input) )
+    return users.filter( user => user.first_name.includes(input) || user.last_name.includes(input) )
   }
 
   render() {
