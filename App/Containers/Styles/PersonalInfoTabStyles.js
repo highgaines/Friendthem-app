@@ -28,7 +28,7 @@ export default StyleSheet.create({
     fontWeight: '700',
     fontSize: 13,
     color: '#9ca4ab',
-    marginRight: 10
+    marginRight: 110
   },
   form: {
     height: 25,
