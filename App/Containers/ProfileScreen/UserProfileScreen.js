@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { Text, View, Button, Linking , AppState, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { Text, View, Button, Linking , AppState, ScrollView, TouchableOpacity, ActivityIndicator, ActionSheetIOS } from 'react-native'
 
 // Libraries
 import LinearGradient from 'react-native-linear-gradient'
 import { Icon } from 'react-native-elements'
 import Image from 'react-native-remote-svg'
-import RNYoutubeOAuth from 'react-native-youtube-oauth';
+import RNYoutubeOAuth from 'react-native-youtube-oauth'
 import TimerMixin from 'react-timer-mixin'
+import ImagePicker from 'react-native-image-picker'
 
 // Components
 import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer'
@@ -53,10 +54,6 @@ class UserProfileScreen extends Component {
     }
   }
 
-  triggerFriendster = () => {
-    const { showFriendster } = this.state
-    this.setState({ showFriendster: !showFriendster })
-  }
 
   componentWillMount = () => {
     const { apiAccessToken, navigation, getUserInfo, loggedIn, getUserTokens } = this.props
@@ -110,6 +107,11 @@ class UserProfileScreen extends Component {
           }
       })
     }
+  }
+
+  triggerFriendster = () => {
+    const { showFriendster } = this.state
+    this.setState({ showFriendster: !showFriendster })
   }
 
   _handleAppStateChange = nextAppState => {
@@ -194,7 +196,11 @@ class UserProfileScreen extends Component {
                   <View style={styles.profHeaderTop}>
                   {
                     userInfo.picture ?
-                    <Image style={[styles.profileImage]} source={{uri: `${userInfo.picture}`}} />
+                    <TouchableOpacity onPress={this.handleImagePress}>
+                      <Image
+                        style={[styles.profileImage]} source={{uri: `${userInfo.picture}`}}
+                      />
+                    </TouchableOpacity>
                     :
                     <Icon
                       containerStyle={[styles.profileImage]}
@@ -221,7 +227,7 @@ class UserProfileScreen extends Component {
                 style={[styles.tabItem, socialNetworkTab ? styles.selected : null]}>
                 <Text
                   style={[styles.tabText, socialNetworkTab ? styles.selectedText : null]}
-                  >
+                >
                   SOCIAL NETWORKS
                 </Text>
               </TouchableOpacity>
