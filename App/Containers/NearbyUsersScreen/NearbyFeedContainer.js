@@ -35,6 +35,7 @@ class NearbyFeedContainer extends Component {
     fetchConnectivityData(accessToken)
   }
 
+
   renderFeedCards = () => {
     // map over users and render cards
     const { nearbyUsers } = this.props

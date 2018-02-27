@@ -16,6 +16,8 @@ import styles from '../Styles/SearchBarStyles';
 // Components
 import UserCard from './UserCard';
 
+import { LazyloadScrollView } from 'react-native-lazyload-deux'
+
 class SearchContainer extends Component {
   constructor(props) {
     super(props)
@@ -51,9 +53,9 @@ class SearchContainer extends Component {
 
   render() {
     return (
-        <ScrollView contentContainerStyle={styles.searchContainer}>
+        <LazyloadScrollView contentContainerStyle={styles.searchContainer}>
           {this.renderUserList()}
-        </ScrollView>
+        </LazyloadScrollView>
     )
   }
 }
