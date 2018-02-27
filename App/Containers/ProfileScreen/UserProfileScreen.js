@@ -106,7 +106,7 @@ class UserProfileScreen extends Component {
           if (response) {
             Linking.openURL(`${deepLinkAuth}`)
           } else {
-              Linking.openURL(`${authRedirectUrl}`)
+            Linking.openURL(`${authRedirectUrl}`)
           }
       })
     }
