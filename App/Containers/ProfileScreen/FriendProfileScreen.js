@@ -196,13 +196,17 @@ class FriendProfileScreen extends Component {
               <SocialMediaCardContainer
                 fromFriendProfile={true}
                 friendPlatforms={friendInfo.social_profiles}
-                onPressCallback={(platform) => this.toggleSocialMediaSelection(platform === 'google-oauth2' ? 'youtube' : platform)}
+                onPressCallback={(platform) => this.toggleSocialMediaSelection(platform)}
                 platformSynced={socialMedia => this.socialPlatformPresent(socialMedia)}
                 platformSelected={socialMedia => selectedSocialMedia.includes(socialMedia)}
               />
               <SuperConnectBar
                 setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
-                superConnect={() => navigation.navigate('SuperConnectScreen')}
+                superConnect={() => {
+                 setSuperConnectPlatforms(['facebook', 'instagram', ])
+                 navigation.navigate('SuperConnectScreen')}
+               }
+
                 userData={userInfo}
                 userId={userId}
               />
