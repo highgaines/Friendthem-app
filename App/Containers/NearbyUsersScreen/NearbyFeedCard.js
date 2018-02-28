@@ -36,7 +36,8 @@ class NearbyFeedCard extends Component {
     super(props)
 
     this.state = {
-      platform: 'instagram'
+      platform: 'instagram',
+      loadInThisCard: false
     }
   }
 
@@ -70,7 +71,7 @@ class NearbyFeedCard extends Component {
   }
 
   handlePlatformChange = platform => {
-    this.setState({ platform: platform })
+    this.setState({ platform: platform, loadInThisCard: true })
   }
 
   pullUid = platform => {
@@ -164,7 +165,7 @@ class NearbyFeedCard extends Component {
   render = () => {
     const { friendData, loading } = this.props
     const { platform } = this.state
-
+    const socialPlatforms = friendData.social_profiles.map(prof => prof.provider)
     return(
       <LazyloadView style={styles.nearbyFeedCardContainer}>
         <LazyloadView style={styles.header}>
@@ -195,6 +196,7 @@ class NearbyFeedCard extends Component {
             handleBackToProfile={this.handleGoToProfile}
             selected={platform}
             profilePic={friendData.image}
+            socialPlatforms={socialPlatforms}
           />
       </LazyloadView>
         <LazyloadView style={{ flex: 1, backgroundColor: 'white' }}>
@@ -202,7 +204,7 @@ class NearbyFeedCard extends Component {
             horizontal={platform === 'profile' ? false : true}
             contentContainerStyle={[styles.contentContainer, platform === 'profile' ? { 'flex': 1, 'flexWrap': 'wrap', 'justifyContent': 'flex-start' } : '']}
           >
-            {loading
+            {loading && this.state.loadInThisCard
               ? <LazyloadView style={styles.loading}>
                   <ActivityIndicator
                     size="large"
