@@ -18,49 +18,63 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
+import com.facebook.appevents.AppEventsLogger;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
 
-  private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+    private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
 
-        @Override
-        protected String getJSBundleFile() {
-        return CodePush.getJSBundleFile();
-        }
+    protected static CallbackManager getCallbackManager() {
+        return mCallbackManager;
+    }
 
-    @Override
-    public boolean getUseDeveloperSupport() {
-      return BuildConfig.DEBUG;
+  private final ReactNativeHost mReactNativeHost;
+
+    {
+        mReactNativeHost = new ReactNativeHost(this) {
+
+            @Override
+            protected String getJSBundleFile() {
+                return CodePush.getJSBundleFile();
+            }
+
+            @Override
+            public boolean getUseDeveloperSupport() {
+                return BuildConfig.DEBUG;
+            }
+
+            @Override
+            protected List<ReactPackage> getPackages() {
+                return Arrays.<ReactPackage>asList(
+                        new MainReactPackage(),
+                        new ReactNativeOneSignalPackage(),
+                        new ReactNativeContacts(),
+                        new CodePush(null, getApplicationContext(), BuildConfig.DEBUG),
+                        SendSMSPackage.getInstance(),
+                        new VectorIconsPackage(),
+                        new SvgPackage(),
+                        new RNSensitiveInfoPackage(),
+                        new LinearGradientPackage(),
+                        new ReactNativeConfigPackage(),
+                        new A0Auth0Package(),
+                        new FBSDKPackage(mCallbackManager)
+                );
+            }
+
+            @Override
+            protected String getJSMainModuleName() {
+                return "index";
+            }
+        };
     }
 
     @Override
-    protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new ReactNativeOneSignalPackage(),
-            new ReactNativeContacts(),
-            new CodePush(null, getApplicationContext(), BuildConfig.DEBUG),
-            SendSMSPackage.getInstance(),
-            new VectorIconsPackage(),
-            new SvgPackage(),
-            new RNSensitiveInfoPackage(),
-            new LinearGradientPackage(),
-            new FBSDKPackage(),
-            new ReactNativeConfigPackage(),
-            new A0Auth0Package()
-      );
-    }
-
-    @Override
-    protected String getJSMainModuleName() {
-      return "index";
-    }
-  };
-
-  @Override
   public ReactNativeHost getReactNativeHost() {
     return mReactNativeHost;
   }

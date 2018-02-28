@@ -104,6 +104,9 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
+        manifestPlaceholders = [onesignal_app_id: "69cf5aae-f8c2-4292-8f30-011a1a35518b",
+                                onesignal_google_project_number: "REMOTE"]
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -150,7 +153,9 @@ dependencies {
     compile project(':react-native-config')
     compile project(':react-native-auth0')
     compile fileTree(dir: "libs", include: ["*.jar"])
-    compile "com.android.support:appcompat-v7:26.0.2"
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:recyclerview-v7:26.1.0'
+    compile 'com.android.support:cardview-v7:26.1.0'
     compile "com.facebook.react:react-native:+"  // From node_modules
 }
 
