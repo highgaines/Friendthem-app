@@ -268,6 +268,7 @@ class UserProfileScreen extends Component {
                         type='ionicon'
                         size={95}
                         color='#000' />
+                      <Image style={styles.cameraIcon} source={Images.cameraIcon}/>
                     </TouchableOpacity>
                   }
                   </View>
