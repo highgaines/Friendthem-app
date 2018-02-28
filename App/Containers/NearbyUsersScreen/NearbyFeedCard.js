@@ -72,6 +72,7 @@ class NearbyFeedCard extends Component {
 
   handlePlatformChange = platform => {
     this.setState({ platform: platform, loadInThisCard: true })
+    setTimeout(() => this.setState({ loadInThisCard: false }), 2000)
   }
 
   pullUid = platform => {
