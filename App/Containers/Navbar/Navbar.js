@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity, Image } from 'react-native'
 // Libraries
 import { Icon } from 'react-native-elements'
 import FBSDK, { LoginManager } from 'react-native-fbsdk'
+import Analytics from 'analytics-react-native'
 
 // Components
 import LogoutModal from './LogoutModal'
@@ -15,7 +16,8 @@ import FriendStoreActions from '../../Redux/FriendStore'
 import UserStoreActions from '../../Redux/UserStore'
 import FBStoreActions from '../../Redux/FBStore'
 import AuthStoreActions from '../../Redux/AuthStore'
-import Analytics from 'analytics-react-native'
+
+// Config
 import envConfig from '../../../envConfig'
 const analytics = new Analytics(envConfig.Development.SegmentAPIKey)
 
@@ -27,6 +29,7 @@ import { Images } from '../../Themes'
 
 // Styles
 import styles from '../Styles/NavbarStyles'
+import { ifIphoneX } from '../../Themes/Helpers'
 
 class Navbar extends Component {
   constructor(props){
@@ -111,11 +114,15 @@ class Navbar extends Component {
   }
 
   render() {
+    const ipxNav = {'height': 70}
+    const renderIpxNav = ifIphoneX(ipxNav, '')
 
+    const ipxIcon = {'bottom': 20}
+    const renderIpxIcon = ifIphoneX(ipxIcon, '')
     return(
         <View
           testID='navbar'
-          style={[this.props.navbarStyle || styles.navbarRow, { marginTop: this.props.margin }]}>
+          style={[this.props.navbarStyle || styles.navbarRow, { marginTop: this.props.margin }, renderIpxNav]}>
           <TouchableOpacity
             testID='profile-navbar-button'
             style={styles.button} onPress={this.goToProfile}>
@@ -148,7 +155,7 @@ class Navbar extends Component {
             <View
               style={[styles.container, this.selectedStyleRender('NearbyUsersScreen')]}>
               <Image
-                style={styles.peopleNearbyIcon}
+                style={[styles.peopleNearbyIcon, renderIpxIcon]}
                 source={Images.peopleNearbyIcon}
                 />
               <Text
