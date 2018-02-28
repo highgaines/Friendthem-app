@@ -8,6 +8,7 @@ import Image from 'react-native-remote-svg'
 import RNYoutubeOAuth from 'react-native-youtube-oauth'
 import TimerMixin from 'react-timer-mixin'
 import ImagePicker from 'react-native-image-picker'
+import { uploadToAWS } from '../../Utils/functions'
 
 // Components
 import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer'
@@ -21,7 +22,7 @@ import ChangePasswordModal from './ChangePasswordModal'
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import UserStoreActions, { getUserInfo, updateInfo, updateSnapInfo } from '../../Redux/UserStore'
+import UserStoreActions, { getUserInfo, updateInfo, updateSnapInfo, updateInfoRequest, getFBPhotos } from '../../Redux/UserStore'
 import AuthStoreActions, { socialMediaAuth } from '../../Redux/AuthStore'
 import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
 
@@ -43,6 +44,7 @@ class UserProfileScreen extends Component {
     super(props)
 
     this.state = {
+      profilePic: props.userInfo.picture,
       externalAuth: false,
       showFriendster: false,
       currentPlatform: null,
@@ -150,6 +152,13 @@ class UserProfileScreen extends Component {
   }
 
   handleImagePress = () => {
+    const { id } = this.props.userInfo
+    const {
+      editableData,
+      apiAccessToken,
+      getFBPhotos,
+      updateInfoRequest
+    } = this.props
 
     const options = {
       title: 'Profile Picture Options',
@@ -174,17 +183,20 @@ class UserProfileScreen extends Component {
         console.log('ImagePicker Error: ', response.error);
       }
       else if (response.customButton === 'fb') {
-        console.log('User tapped import from facebook')
         // fetch fb pics and change social media cards into pic cards
+        console.log('User tapped import from facebook')
+        getFBPhotos(apiAccessToken)
       }
       else if (response.customButton === 'delete') {
-        console.log('User tapped delete current photo')
         // remove picture from backend and replace with noPicSVG
+        console.log('User tapped delete current photo')
+        this.setState({ profilePic: ''}, () => updateInfoRequest(editableData, 'picture', '', apiAccessToken))
+
       }
       else {
-        let source = { uri: response.uri };
-        console.log(source)
         // use AWS upload function here to send uri
+        let source = response.uri;
+        this.setState({ profilePic: source }, () => uploadToAWS(source, id, updateInfoRequest, editableData, apiAccessToken))
       }
     })
   }
@@ -241,20 +253,22 @@ class UserProfileScreen extends Component {
               : <View style={[styles.profileHeader, { height: 150}, renderIpxHeader]}>
                   <View style={styles.profHeaderTop}>
                   {
-                    userInfo.picture ?
+                    this.state.profilePic ?
                     <TouchableOpacity onPress={this.handleImagePress}>
                       <Image
-                        style={[styles.profileImage]} source={{uri: `${userInfo.picture}`}}
+                        style={[styles.profileImage]} source={{uri: `${this.state.profilePic}`}}
                       />
                       <Image style={styles.cameraIcon} source={Images.cameraIcon}/>
                     </TouchableOpacity>
                     :
-                    <Icon
-                      containerStyle={[styles.profileImage]}
-                      name='ios-person'
-                      type='ionicon'
-                      size={95}
-                      color='#000' />
+                    <TouchableOpacity onPress={this.handleImagePress}>
+                      <Icon
+                        containerStyle={[styles.profileImage]}
+                        name='ios-person'
+                        type='ionicon'
+                        size={95}
+                        color='#000' />
+                    </TouchableOpacity>
                   }
                   </View>
                   <Text style={styles.profileSubtext}>
@@ -318,6 +332,8 @@ class UserProfileScreen extends Component {
 const mapStateToProps = state => ({
   userId: state.userStore.userId,
   userInfo: state.userStore.userData,
+  editableData: state.userStore.editableData,
+  userPhotos: state.userStore.userPhotos,
   userInterests: state.userStore.interests,
   userLocation: state.userStore.location,
   fetching: state.userStore.fetching,
@@ -332,9 +348,11 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({
+      getFBPhotos,
       getUserInfo,
       getUserTokens,
       updateInfo,
+      updateInfoRequest,
       updateSnapInfo,
       socialMediaAuth,
     }, dispatch)

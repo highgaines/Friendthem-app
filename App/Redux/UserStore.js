@@ -13,6 +13,9 @@ const { Types, Creators } = createActions({
   getUserRequest: null,
   getUserSuccess: null,
   getUserFailure: null,
+  getFbPhotosRequest: null,
+  getFbPhotosSuccess: null,
+  getFbPhotosFailure: null,
   updateInfoRequest: null,
   updateInfoSuccess: null,
   updateInfoFailure: null,
@@ -57,6 +60,7 @@ export const INITIAL_STATE = Immutable({
     hometown: '',
     phone_number: '',
   },
+  userPhotos: [],
   ghostModeOn: true,
   notificationsOn: true,
   fetching: false
@@ -85,6 +89,30 @@ export const getUserInfo = (accessToken) => {
     callApi: dispatch => fetchFromApi('profile/me/', init, dispatch)
   }
 }
+
+// FETCH FB PHOTOS
+
+export const getFBPhotos = (accessToken) => {
+  const headers = new Headers()
+  headers.append('Authorization', `Bearer ${accessToken}`)
+  headers.append('Content-Type', 'application/json')
+
+  const init = {
+    method: 'GET',
+    headers
+  }
+
+  return {
+    types: [
+      Types.GET_FB_PHOTOS_REQUEST,
+      Types.GET_FB_PHOTOS_SUCCESS,
+      Types.GET_FB_PHOTOS_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi('pictures/', init, dispatch)
+ }
+}
+
 
 // GEOLOCATION POSITIONING
 
@@ -365,6 +393,30 @@ const handleUserLogout = (state, action) => {
   return INITIAL_STATE
 }
 
+/*----------------- GET PHOTOS REDUCERS ---------------*/
+
+const handleGetPhotosRequest = (state, action) => {
+  return {
+    ...state,
+    fetching: true
+  }
+}
+
+const handleGetPhotosSuccess = (state, action) => {
+  return {
+    ...state,
+    userPhotos: action.response,
+    fetching: false
+  }
+}
+
+const handleGetPhotosFailure = (state, action) => {
+  return {
+    ...state,
+    fetching: false
+  }
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -373,6 +425,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_USER_REQUEST]: handleGetUserRequest,
   [Types.GET_USER_SUCCESS]: handleGetUserSuccess,
   [Types.GET_USER_FAILURE]: handleGetUserFailure,
+  [Types.GET_FB_PHOTOS_REQUEST]: handleGetPhotosRequest,
+  [Types.GET_FB_PHOTOS_SUCCESS]: handleGetPhotosSuccess,
+  [Types.GET_FB_PHOTOS_FAILURE]: handleGetPhotosFailure,
   [Types.UPDATE_INFO_REQUEST]: handleUpdateUserRequest,
   [Types.UPDATE_INFO_SUCCESS]: handleUpdateUserSuccess,
   [Types.UPDATE_INFO_FAILURE]: handleUpdateUserFailure,

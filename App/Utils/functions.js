@@ -1,40 +1,30 @@
 import { RNS3 } from 'react-native-aws3';
 import envConfig from '../../envConfig'
 
-export const uploadToAWS = (file, userId) => {
+export const uploadToAWS = async (uri, userId, callback, data, token) => {
 
   const file = {
     // `uri` can also be a file system path (i.e. file://)
-    uri: file,
+    uri: uri,
     name: `profile-pic-${userId}.jpg`,
     type: "image/jpg"
   }
-  const { AWSAccessKeyID, AWSSecretKey } = envConfig.development
+  const { AWSAccessKeyID, AWSSecretKey } = envConfig.Development
 
   const options = {
-    keyPrefix: "uploads/",
-    bucket: "friend-them",
+    bucket: "friendthem-staging",
     region: "us-east-1",
     accessKey: `${AWSAccessKeyID}`,
     secretKey: `${AWSSecretKey}`,
     successActionStatus: 201
   }
 
-  RNS3.put(file, options).then(response => {
+  await RNS3.put(file, options).then(response => {
     if (response.status !== 201)
       throw new Error("Failed to upload image to S3");
-    console.log(response.body);
-    /**
-     * {
-     *   postResponse: {
-     *     bucket: "your-bucket",
-     *     etag : "9f620878e06d28774406017480a59fd4",
-     *     key: "uploads/image.png",
-     *     location: "https://your-bucket.s3.amazonaws.com/uploads%2Fimage.png"
-     *   }
-     * }
-     */
-  });
 
+    let bucketUrl = response.body.postResponse.location
+    callback(data, 'picture', bucketUrl, token)
 
+  }).catch( error => console.log(error))
 }
