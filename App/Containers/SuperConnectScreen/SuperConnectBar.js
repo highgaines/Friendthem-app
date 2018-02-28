@@ -22,8 +22,10 @@ export default class SuperConnectBar extends Component {
   }
 
   render() {
+    const { iphoneXStyle } = this.props
+
     return (
-      <View style={styles.buttonContainer}>
+      <View style={[styles.buttonContainer, iphoneXStyle]}>
         <ConnectButton
           name='people'
           type='simple-line-icons'

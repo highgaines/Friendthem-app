@@ -30,6 +30,7 @@ import { Images } from '../../Themes'
 
 // Styles
 import styles from '../Styles/UserProfileStyles'
+import { ifIphoneX } from '../../Themes/Helpers'
 
 // Constants
 import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
@@ -217,6 +218,11 @@ class UserProfileScreen extends Component {
     const { showFriendster, socialMediaData, socialNetworkTab, syncedCardColors } = this.state
     const { devGoogleBaseURL, devGoogleApiParams, devGoogleClientId } = envConfig.Development
 
+    const ipxHeader = { marginTop: 50 }
+    const renderIpxHeader = ifIphoneX(ipxHeader, '')
+
+    const ipxInfoTab = ifIphoneX({ 'height': 480}, {'height': 366})
+
     return (
         <View>
           <LinearGradient
@@ -232,7 +238,7 @@ class UserProfileScreen extends Component {
               ? <View style={[styles.profileHeader, { height: 150, justifyContent: 'center'}]}>
                   <ActivityIndicator size="large" color="#0000ff"/>
                 </View>
-              : <View style={[styles.profileHeader, { height: 150}]}>
+              : <View style={[styles.profileHeader, { height: 150}, renderIpxHeader]}>
                   <View style={styles.profHeaderTop}>
                   {
                     userInfo.picture ?
@@ -294,7 +300,7 @@ class UserProfileScreen extends Component {
               platformSynced={((socialMedia) => this.socialPlatformPresent(socialMedia))}
             />
           :
-            <ScrollView style={{ height: 366}}>
+            <ScrollView style={ipxInfoTab}>
               <PersonalInfoTab
                 toggleChangePasswordModal={this.toggleChangePasswordModal}
                 />
