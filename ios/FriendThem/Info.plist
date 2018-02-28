@@ -88,6 +88,8 @@
 	<string>FriendThem would like to access your Bluetooth in order to determine if friends are in range</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>FriendThem would like to access your calendar so that we may inform you about upcoming events</string>
+	<key>NSCameraUsageDescription</key>
+	<string>FriendThem would like to use your camera</string>
 	<key>NSContactsUsageDescription</key>
 	<string>FriendThem would like to access your contacts in order to better connect you with the people you know.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
@@ -98,14 +100,12 @@
 	<string>FriendThem would like to know your location so that we can better connect you with the people around you.</string>
 	<key>NSMotionUsageDescription</key>
 	<string>FriendThem would like to access the motion data on your device.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>FriendThem would like to save photos to your photo gallery</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>FriendThem would like access to your photo gallery</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>FriendThem would like to access Speech Recognition in order to make this app more accessible to a wider audience.</string>
-  <key>NSPhotoLibraryUsageDescription</key>
-  <string>FriendThem would like access to your photo gallery</string>
-  <key>NSCameraUsageDescription</key>
-  <string>FriendThem would like to use your camera</string>
-  <key>NSPhotoLibraryAddUsageDescription</key>
-  <string>FriendThem would like to save photos to your photo gallery</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
@@ -142,6 +142,8 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
