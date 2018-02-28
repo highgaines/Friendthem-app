@@ -8,7 +8,7 @@ import { Images } from '../../Themes';
 import styles from '../Styles/TutorialScreenStyles';
 
 export default WelcomeScreen = props => {
-  const { name, closeModal, visible } = props
+  const { name, closeModal, visible, navigation, toggleWelcomeTutorial } = props
 
   return (
     <View style={styles.container}>
@@ -27,7 +27,11 @@ export default WelcomeScreen = props => {
             <TouchableOpacity
               testID='start-button'
               style={styles.startButton}
-              onPress={closeModal}>
+              onPress={() => {
+                closeModal()
+                toggleWelcomeTutorial()
+                navigation.navigate('UserProfileScreen')
+              }}>
               <Text
                 style={[styles.text, { textAlign: 'center'}]}> START </Text>
             </TouchableOpacity>

@@ -13,7 +13,7 @@ import { Images } from '../../Themes'
 import styles from '../Styles/FeedCardStyles'
 import convertTime from 'convert-time'
 
-import { LazyloadView, LazyloadImage } from 'react-native-lazyload-deux'
+import { LazyloadView } from 'react-native-lazyload-deux'
 
 export default FeedCard = props => {
   const { item } = props
@@ -28,7 +28,7 @@ export default FeedCard = props => {
       <LazyloadView style={styles.contentBody}>
         {
           item.img_url
-          ? <LazyloadImage
+          ? <Image
               source={{ uri: item.img_url }}
               style={styles.image}
               />

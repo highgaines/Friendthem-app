@@ -32,8 +32,8 @@ class NearbyUsers extends Component {
 
     this.state = {
       input: '',
-      welcomeTutorialVisible: true,
-      feedView: false
+      feedView: false,
+      welcomeTutorialVisible: props.welcomeTutorialVisible
     }
   }
 
@@ -64,7 +64,7 @@ class NearbyUsers extends Component {
 
   render() {
     const { users, navigation, setFriendInfo, locationPermission } = this.props
-    const { input, welcomeTutorialVisible, feedView } = this.state
+    const { input, feedView, welcomeTutorialVisible } = this.state
 
     return(
       <View
@@ -92,6 +92,8 @@ class NearbyUsers extends Component {
               visible={welcomeTutorialVisible}
               closeModal={this.toggleWelcomeTutorial}
               name='Peter Parker'
+              navigation={navigation}
+              toggleWelcomeTutorial={this.toggleWelcomeTutorial}
             />
           : null
         }

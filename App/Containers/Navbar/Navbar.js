@@ -60,7 +60,7 @@ class Navbar extends Component {
     const { navigate } = this.props.navigation
 
     if (!this.determineCurrentScreen('NearbyUsersScreen')){
-      navigate('NearbyUsersScreen')
+      navigate('NearbyUsersScreen', { welcomeTutorialVisible: false })
     }
   }
 

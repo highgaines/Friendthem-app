@@ -39,7 +39,7 @@ class FriendProfileScreen extends Component {
       feedContainer: false,
       socialMediaData: SOCIAL_MEDIA_DATA,
       syncedCardColors: SYNCED_CARD_COLORS,
-      selectedSocialMedia: []
+      selectedSocialMedia: ['facebook']
     }
   }
 
@@ -135,7 +135,7 @@ class FriendProfileScreen extends Component {
   render() {
     const { friendInfo, superConnect, navigation, setSuperConnectPlatforms, userInfo, userId } = this.props
     const { showModal, socialMediaData, syncedCardColors, selectedSocialMedia, platform } = this.state
-
+    const socialPlatforms = friendInfo.social_profiles.map(prof => prof.provider)
     return (
         <View>
           <View style={styles.profile}>
@@ -170,12 +170,16 @@ class FriendProfileScreen extends Component {
                         {friendInfo.hobbies ? friendInfo.hobbies.join(' | ') : ''}
                       </Text>
                       <View style={{ flexDirection: 'row', marginTop: 7, justifyContent: 'space-around'}}>
-                        <Icon
-                          name='location'
-                          type='entypo'
-                          size={14}
-                          color='#fff'
-                        />
+                        {
+                          friendInfo.location
+                          ? <Icon
+                              name='location'
+                              type='entypo'
+                              size={14}
+                              color='#fff'
+                            />
+                          : null
+                        }
                         <Text style={{ color: '#fff', fontWeight: '500', backgroundColor: 'transparent', marginLeft: 7}}>
                           {friendInfo.location}
                         </Text>
@@ -189,6 +193,7 @@ class FriendProfileScreen extends Component {
                 handleBackToProfile={this.handleBackToProfile}
                 selected={this.state.platform}
                 profilePic={friendInfo.picture}
+                socialPlatforms={socialPlatforms}
               />
             </View>
 
@@ -196,13 +201,17 @@ class FriendProfileScreen extends Component {
               <SocialMediaCardContainer
                 fromFriendProfile={true}
                 friendPlatforms={friendInfo.social_profiles}
-                onPressCallback={(platform) => this.toggleSocialMediaSelection(platform === 'google-oauth2' ? 'youtube' : platform)}
+                onPressCallback={(platform) => this.toggleSocialMediaSelection(platform)}
                 platformSynced={socialMedia => this.socialPlatformPresent(socialMedia)}
                 platformSelected={socialMedia => selectedSocialMedia.includes(socialMedia)}
               />
               <SuperConnectBar
                 setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
-                superConnect={() => navigation.navigate('SuperConnectScreen')}
+                superConnect={() => {
+                 setSuperConnectPlatforms(['facebook', 'instagram', 'twitter', 'snapchat'])
+                 navigation.navigate('SuperConnectScreen')}
+               }
+
                 userData={userInfo}
                 userId={userId}
               />
