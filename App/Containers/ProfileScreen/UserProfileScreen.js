@@ -158,7 +158,8 @@ class UserProfileScreen extends Component {
       ],
       storageOptions: {
         skipBackup: true,
-        path: 'images'
+        path: 'images',
+        quality: 1
       }
     };
 

@@ -39,6 +39,7 @@
 		2D7DFE5636044C86AF7E3C7B /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 696C6E9279864D8FADCD36FF /* libRNImagePicker.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* FriendThemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* FriendThemTests.m */; };
 		396EEEB6202CA6280034D5DD /* libRCTContacts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 396EEE8E202CA6090034D5DD /* libRCTContacts.a */; settings = {ATTRIBUTES = (Weak, ); }; };
+		39BC747E20464D24004C96FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39BC747D20464D24004C96FA /* LaunchScreen.storyboard */; };
 		39E4EBEA201138A4001A65A5 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39E4EBBB201137E6001A65A5 /* libART.a */; settings = {ATTRIBUTES = (Weak, ); }; };
 		420D143E8BD141DA8A49F0C9 /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BAEC5A02514EB5992555AD /* libCodePush.a */; settings = {ATTRIBUTES = (Weak, ); }; };
 		423C29E79CDF45BDB69C8B01 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E6ADA2E7E997469A85731C82 /* Ionicons.ttf */; };
@@ -507,6 +508,7 @@
 		2D02E47B1E0B4A5D006451C7 /* FriendThem-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FriendThem-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* FriendThem-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FriendThem-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		31DE6FD7CE5E46AFBF9CCCF5 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		39BC747D20464D24004C96FA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39E4EBB5201137E6001A65A5 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		3D30DBF209DA49FCB41241AE /* libRNSensitiveInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSensitiveInfo.a; sourceTree = "<group>"; };
 		4394B4CC70FB43FA8D3EB512 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
@@ -727,6 +729,7 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				39BC747D20464D24004C96FA /* LaunchScreen.storyboard */,
 			);
 			name = FriendThem;
 			sourceTree = "<group>";
@@ -1708,6 +1711,7 @@
 				A5FFC8F61FE97AA4007F713A /* Montserrat-ThinItalic.ttf in Resources */,
 				423C29E79CDF45BDB69C8B01 /* Ionicons.ttf in Resources */,
 				A5FFC8E71FE97AA4007F713A /* Montserrat-LightItalic.ttf in Resources */,
+				39BC747E20464D24004C96FA /* LaunchScreen.storyboard in Resources */,
 				E44880F9C79C4A51AE06E8C4 /* MaterialCommunityIcons.ttf in Resources */,
 				C39377643A4148F597177D40 /* MaterialIcons.ttf in Resources */,
 				A5FFC8F01FE97AA4007F713A /* Montserrat-ExtraLight.ttf in Resources */,
