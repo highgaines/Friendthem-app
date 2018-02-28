@@ -196,7 +196,7 @@ class FriendProfileScreen extends Component {
               <SocialMediaCardContainer
                 fromFriendProfile={true}
                 friendPlatforms={friendInfo.social_profiles}
-                onPressCallback={(platform) => this.toggleSocialMediaSelection(platform)}
+                onPressCallback={(platform) => this.toggleSocialMediaSelection(platform === 'google-oauth2' ? 'youtube' : platform)}
                 platformSynced={socialMedia => this.socialPlatformPresent(socialMedia)}
                 platformSelected={socialMedia => selectedSocialMedia.includes(socialMedia)}
               />
