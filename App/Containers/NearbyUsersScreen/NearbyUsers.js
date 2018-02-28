@@ -47,12 +47,6 @@ class NearbyUsers extends Component {
     this.setState({input: input})
   }
 
-  toggleWelcomeTutorial = () => {
-    this.setState({
-      welcomeTutorialVisible: false
-    })
-  }
-
   toggleNearbyFeed = () => {
     this.setState({ feedView: !this.state.feedView})
   }
@@ -60,6 +54,11 @@ class NearbyUsers extends Component {
   filterUsers = users => {
     const { input } = this.state
     return users.filter( user => user.first_name.includes(input) || user.last_name.includes(input) )
+  }
+
+  toggleWelcomeTutorial = () => {
+    const { welcomeTutorialVisible } = this.state
+    this.setState({ welcomeTutorialVisible: !welcomeTutorialVisible})
   }
 
   render() {

@@ -3,55 +3,55 @@
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "FriendThemLogo-3.png",
+      "filename" : "2x20PT.png",
       "scale" : "2x"
     },
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "FriendThemLogoMed.png",
+      "filename" : "3x20PT.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "FriendThemLogo-4.png",
+      "filename" : "2x29PT.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "FriendThemLogoMed-1.png",
+      "filename" : "3x29PT.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "FriendThemLogo-5.png",
+      "filename" : "2x40PT.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "FriendThemLogoMed-2.png",
+      "filename" : "3x40PT.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "FriendThemLogo-6.png",
+      "filename" : "2x60PT.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "FriendThemLogoMed-3.png",
+      "filename" : "3x60PT.png",
       "scale" : "3x"
     },
     {
       "size" : "1024x1024",
       "idiom" : "ios-marketing",
-      "filename" : "FriendThemLogoSm.png",
+      "filename" : "appstore 1024pt.png",
       "scale" : "1x"
     }
   ],

@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import { Text, View, Button, Linking , AppState, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { Text, View, Button, Linking , AppState, ScrollView, TouchableOpacity, ActivityIndicator, ActionSheetIOS } from 'react-native'
 
 // Libraries
 import LinearGradient from 'react-native-linear-gradient'
 import { Icon } from 'react-native-elements'
 import Image from 'react-native-remote-svg'
-import RNYoutubeOAuth from 'react-native-youtube-oauth';
+import RNYoutubeOAuth from 'react-native-youtube-oauth'
 import TimerMixin from 'react-timer-mixin'
+import ImagePicker from 'react-native-image-picker'
+import { uploadToAWS } from '../../Utils/functions'
 
 // Components
 import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer'
@@ -20,7 +22,7 @@ import ChangePasswordModal from './ChangePasswordModal'
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import UserStoreActions, { getUserInfo, updateInfo, updateSnapInfo } from '../../Redux/UserStore'
+import UserStoreActions, { getUserInfo, updateInfo, updateSnapInfo, updateInfoRequest, getFBPhotos } from '../../Redux/UserStore'
 import AuthStoreActions, { socialMediaAuth } from '../../Redux/AuthStore'
 import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
 
@@ -29,6 +31,7 @@ import { Images } from '../../Themes'
 
 // Styles
 import styles from '../Styles/UserProfileStyles'
+import { ifIphoneX } from '../../Themes/Helpers'
 
 // Constants
 import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
@@ -41,6 +44,7 @@ class UserProfileScreen extends Component {
     super(props)
 
     this.state = {
+      profilePic: props.userInfo.picture,
       externalAuth: false,
       showFriendster: false,
       currentPlatform: null,
@@ -53,10 +57,6 @@ class UserProfileScreen extends Component {
     }
   }
 
-  triggerFriendster = () => {
-    const { showFriendster } = this.state
-    this.setState({ showFriendster: !showFriendster })
-  }
 
   componentWillMount = () => {
     const { apiAccessToken, navigation, getUserInfo, loggedIn, getUserTokens } = this.props
@@ -112,6 +112,11 @@ class UserProfileScreen extends Component {
     }
   }
 
+  triggerFriendster = () => {
+    const { showFriendster } = this.state
+    this.setState({ showFriendster: !showFriendster })
+  }
+
   _handleAppStateChange = nextAppState => {
     this.setState({appState: nextAppState})
   }
@@ -146,6 +151,56 @@ class UserProfileScreen extends Component {
     }
   }
 
+  handleImagePress = () => {
+    const { id } = this.props.userInfo
+    const {
+      editableData,
+      apiAccessToken,
+      getFBPhotos,
+      updateInfoRequest
+    } = this.props
+
+    const options = {
+      title: 'Profile Picture Options',
+      customButtons: [
+        {name: 'fb', title: 'Choose Photo from Facebook'},
+        {name: 'delete', title: 'Delete current photo'},
+      ],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+        quality: 1
+      }
+    };
+
+    ImagePicker.showImagePicker(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      }
+      else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      }
+      else if (response.customButton === 'fb') {
+        // fetch fb pics and change social media cards into pic cards
+        console.log('User tapped import from facebook')
+        getFBPhotos(apiAccessToken)
+      }
+      else if (response.customButton === 'delete') {
+        // remove picture from backend and replace with noPicSVG
+        console.log('User tapped delete current photo')
+        this.setState({ profilePic: ''}, () => updateInfoRequest(editableData, 'picture', '', apiAccessToken))
+
+      }
+      else {
+        // use AWS upload function here to send uri
+        let source = response.uri;
+        this.setState({ profilePic: source }, () => uploadToAWS(source, id, updateInfoRequest, editableData, apiAccessToken))
+      }
+    })
+  }
+
   toggleSnapchatModal = () => {
     const { snapHandleModalOpen } = this.state
 
@@ -175,6 +230,11 @@ class UserProfileScreen extends Component {
     const { showFriendster, socialMediaData, socialNetworkTab, syncedCardColors } = this.state
     const { devGoogleBaseURL, devGoogleApiParams, devGoogleClientId } = envConfig.Development
 
+    const ipxHeader = { marginTop: 50 }
+    const renderIpxHeader = ifIphoneX(ipxHeader, '')
+
+    const ipxInfoTab = ifIphoneX({ 'height': 480}, {'height': 366})
+
     return (
         <View>
           <LinearGradient
@@ -190,18 +250,26 @@ class UserProfileScreen extends Component {
               ? <View style={[styles.profileHeader, { height: 150, justifyContent: 'center'}]}>
                   <ActivityIndicator size="large" color="#0000ff"/>
                 </View>
-              : <View style={[styles.profileHeader, { height: 150}]}>
+              : <View style={[styles.profileHeader, { height: 150}, renderIpxHeader]}>
                   <View style={styles.profHeaderTop}>
                   {
-                    userInfo.picture ?
-                    <Image style={[styles.profileImage]} source={{uri: `${userInfo.picture}`}} />
+                    this.state.profilePic ?
+                    <TouchableOpacity onPress={this.handleImagePress}>
+                      <Image
+                        style={[styles.profileImage]} source={{uri: `${this.state.profilePic}`}}
+                      />
+                      <Image style={styles.cameraIcon} source={Images.cameraIcon}/>
+                    </TouchableOpacity>
                     :
-                    <Icon
-                      containerStyle={[styles.profileImage]}
-                      name='ios-person'
-                      type='ionicon'
-                      size={95}
-                      color='#000' />
+                    <TouchableOpacity onPress={this.handleImagePress}>
+                      <Icon
+                        containerStyle={[styles.profileImage]}
+                        name='ios-person'
+                        type='ionicon'
+                        size={95}
+                        color='#000' />
+                      <Image style={styles.cameraIcon} source={Images.cameraIcon}/>
+                    </TouchableOpacity>
                   }
                   </View>
                   <Text style={styles.profileSubtext}>
@@ -221,7 +289,7 @@ class UserProfileScreen extends Component {
                 style={[styles.tabItem, socialNetworkTab ? styles.selected : null]}>
                 <Text
                   style={[styles.tabText, socialNetworkTab ? styles.selectedText : null]}
-                  >
+                >
                   SOCIAL NETWORKS
                 </Text>
               </TouchableOpacity>
@@ -247,7 +315,7 @@ class UserProfileScreen extends Component {
               platformSynced={((socialMedia) => this.socialPlatformPresent(socialMedia))}
             />
           :
-            <ScrollView style={{ height: 366}}>
+            <ScrollView style={ipxInfoTab}>
               <PersonalInfoTab
                 toggleChangePasswordModal={this.toggleChangePasswordModal}
                 />
@@ -265,6 +333,8 @@ class UserProfileScreen extends Component {
 const mapStateToProps = state => ({
   userId: state.userStore.userId,
   userInfo: state.userStore.userData,
+  editableData: state.userStore.editableData,
+  userPhotos: state.userStore.userPhotos,
   userInterests: state.userStore.interests,
   userLocation: state.userStore.location,
   fetching: state.userStore.fetching,
@@ -279,9 +349,11 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({
+      getFBPhotos,
       getUserInfo,
       getUserTokens,
       updateInfo,
+      updateInfoRequest,
       updateSnapInfo,
       socialMediaAuth,
     }, dispatch)
