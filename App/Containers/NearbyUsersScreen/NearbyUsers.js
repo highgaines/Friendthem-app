@@ -92,6 +92,7 @@ class NearbyUsers extends Component {
               visible={welcomeTutorialVisible}
               closeModal={this.toggleWelcomeTutorial}
               name='Peter Parker'
+              navigation={navigation}
             />
           : null
         }
