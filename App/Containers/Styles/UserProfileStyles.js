@@ -140,5 +140,12 @@ export default StyleSheet.create({
     fontWeight: '700',
     marginLeft: 3,
     fontFamily: Fonts.type.base,
+  },
+  cameraIcon: {
+    position: 'absolute',
+    width: 50,
+    height: 50,
+    top: 60,
+    left: 60
   }
 })

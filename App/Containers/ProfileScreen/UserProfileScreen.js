@@ -148,6 +148,45 @@ class UserProfileScreen extends Component {
     }
   }
 
+  handleImagePress = () => {
+
+    const options = {
+      title: 'Profile Picture Options',
+      customButtons: [
+        {name: 'fb', title: 'Choose Photo from Facebook'},
+        {name: 'delete', title: 'Delete current photo'},
+      ],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images'
+      }
+    };
+
+    ImagePicker.showImagePicker(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      }
+      else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      }
+      else if (response.customButton === 'fb') {
+        console.log('User tapped import from facebook')
+        // fetch fb pics and change social media cards into pic cards
+      }
+      else if (response.customButton === 'delete') {
+        console.log('User tapped delete current photo')
+        // remove picture from backend and replace with noPicSVG
+      }
+      else {
+        let source = { uri: response.uri };
+        console.log(source)
+        // use AWS upload function here to send uri
+      }
+    })
+  }
+
   toggleSnapchatModal = () => {
     const { snapHandleModalOpen } = this.state
 
@@ -200,6 +239,7 @@ class UserProfileScreen extends Component {
                       <Image
                         style={[styles.profileImage]} source={{uri: `${userInfo.picture}`}}
                       />
+                      <Image style={styles.cameraIcon} source={Images.cameraIcon}/>
                     </TouchableOpacity>
                     :
                     <Icon
