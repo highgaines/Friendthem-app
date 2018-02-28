@@ -6,6 +6,8 @@ import UserCard from './UserCard'
 import styles from '../Styles/UsersContainerStyles'
 import SocialMediaCard from '../SocialMediaCards/SocialMediaCard'
 import { Images } from '../../Themes'
+
+import { LazyloadScrollView, lazy } from 'react-native-lazyload-deux'
 export default function UsersContainer(props) {
   const { users, navigation, setFriendInfo, locationPermission } = props
   const viewFriendProfile = userObj => {
@@ -35,12 +37,12 @@ export default function UsersContainer(props) {
   }
 
   return(
-    <ScrollView contentContainerStyle={arePeopleNearby ? styles.container : [styles.container, {justifyContent: 'center'}]}>
+    <LazyloadScrollView contentContainerStyle={arePeopleNearby ? styles.container : [styles.container, {justifyContent: 'center'}]}>
       {
         users.length
         ? userCards
         :
-        <View style={styles.noNearbyUsersContainer}>
+        <LazyloadView style={styles.noNearbyUsersContainer}>
           <Image
             source={Images.characterFriendThem}
             style={styles.mainImage}
@@ -59,7 +61,7 @@ export default function UsersContainer(props) {
               { } {locationPermission ? "Invite someone to try Friendthem?" : "Jump to settings to turn on?"}
             </Text>
           </Text>
-          <View style={styles.buttonGroup}>
+          <LazyloadView style={styles.buttonGroup}>
             <TouchableOpacity style={styles.optionButton}>
               <Text style={styles.buttonText}>
                 NO, THANKS :(
@@ -77,8 +79,8 @@ export default function UsersContainer(props) {
                 YES, LET'S GO :)
               </Text>
             </TouchableOpacity>
-          </View>
-        </View> }
-    </ScrollView>
+          </LazyloadView>
+        </LazyloadView> }
+    </LazyloadScrollView>
   )
 }

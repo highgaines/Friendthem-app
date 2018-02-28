@@ -13,6 +13,8 @@ import { Images } from '../../Themes'
 import styles from '../Styles/FeedCardStyles'
 import convertTime from 'convert-time'
 
+import { LazyloadView, LazyloadImage } from 'react-native-lazyload-deux'
+
 export default FeedCard = props => {
   const { item } = props
   const dateSplit = new Date(parseInt(item.date_posted) * 1000).toString().split(' ')
@@ -22,34 +24,34 @@ export default FeedCard = props => {
   const time = convertTime(dateSplit[4])
 
   return(
-    <View style={[styles.cardContainer, item.provider === 'twitter' ? {'height': 90 } : null]}>
-      <View style={styles.contentBody}>
+    <LazyloadView style={[styles.cardContainer, item.provider === 'twitter' ? {'height': 90 } : null]}>
+      <LazyloadView style={styles.contentBody}>
         {
           item.img_url
-          ? <Image
+          ? <LazyloadImage
               source={{ uri: item.img_url }}
               style={styles.image}
               />
           : null
         }
-        <View style={{ padding: 10 }}>
+        <LazyloadView style={{ padding: 10 }}>
           <Text numberOfLines={2} style={styles.descriptionText}>
             { item.description }
           </Text>
-        </View>
-        <View style={styles.bottomRow}>
-          <View style={{ flex: 3.5 }}>
+        </LazyloadView>
+        <LazyloadView style={styles.bottomRow}>
+          <LazyloadView style={{ flex: 3.5 }}>
             <Text style={styles.dateText}>
               { `${month} ${day} ${year} at ${time}` }
             </Text>
-          </View>
-          <View style={{ flex: 1.5 }}>
+          </LazyloadView>
+          <LazyloadView style={{ flex: 1.5 }}>
             <Text style={styles.likeText}>
               {`${item.num_likes} likes`}
             </Text>
-          </View>
-        </View>
-      </View>
-    </View>
+          </LazyloadView>
+        </LazyloadView>
+      </LazyloadView>
+    </LazyloadView>
   )
 }

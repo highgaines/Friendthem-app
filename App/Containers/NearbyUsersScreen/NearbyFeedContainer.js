@@ -1,26 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import { ScrollView, View, TouchableOpacity, Text, Button, ActivityIndicator } from 'react-native';
+import { ScrollView, View, TouchableOpacity, Text, Button, ActivityIndicator } from 'react-native'
 
 // Components
-import NearbyFeedCard from './NearbyFeedCard';
+import NearbyFeedCard from './NearbyFeedCard'
 
 // Libraries
-import { Icon } from 'react-native-elements';
-import Image from 'react-native-remote-svg';
+import { Icon } from 'react-native-elements'
+import Image from 'react-native-remote-svg'
 
 // Redux
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import SocialFeedStoreActions from '../../Redux/SocialFeedStore';
-import UserStoreActions from '../../Redux/UserStore';
-import InviteUsersStoreActions, { fetchConnectivityData } from '../../Redux/InviteUsersStore';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import SocialFeedStoreActions from '../../Redux/SocialFeedStore'
+import UserStoreActions from '../../Redux/UserStore'
+import InviteUsersStoreActions, { fetchConnectivityData } from '../../Redux/InviteUsersStore'
 
 // Images
-import { Images } from '../../Themes';
+import { Images } from '../../Themes'
 
 // Styles
-import styles from '../Styles/FeedContainerStyles';
+import styles from '../Styles/FeedContainerStyles'
+
+import { LazyloadScrollView } from 'react-native-lazyload-deux'
 
 class NearbyFeedContainer extends Component {
   constructor(props){
@@ -33,6 +35,7 @@ class NearbyFeedContainer extends Component {
     fetchConnectivityData(accessToken)
   }
 
+
   renderFeedCards = () => {
     // map over users and render cards
     const { nearbyUsers } = this.props
@@ -44,9 +47,9 @@ class NearbyFeedContainer extends Component {
     const { loading } = this.props
 
     return(
-      <ScrollView contentContainerStyle={styles.nearbyFeedContainer}>
+      <LazyloadScrollView contentContainerStyle={styles.nearbyFeedContainer}>
         {this.renderFeedCards()}
-      </ScrollView>
+      </LazyloadScrollView>
     )
   }
 }
