@@ -56,6 +56,11 @@ class NearbyUsers extends Component {
     return users.filter( user => user.first_name.includes(input) || user.last_name.includes(input) )
   }
 
+  toggleWelcomeTutorial = () => {
+    const { welcomeTutorialVisible } = this.state
+    this.setState({ welcomeTutorialVisible: !welcomeTutorialVisible})
+  }
+
   render() {
     const { users, navigation, setFriendInfo, locationPermission } = this.props
     const { input, feedView, welcomeTutorialVisible } = this.state
