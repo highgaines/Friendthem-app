@@ -79,7 +79,7 @@ class SocialMediaCardContainer extends Component {
   }
 
   socialPlatformUsername = (platform) => {
-    const { social_profiles } = this.props.userInfo
+    const { social_profiles } = this.props.fromFriendProfile ? this.props.friendData : this.props.userInfo
     const currentPlatform = social_profiles.find(profile => profile.provider === platform)
 
     return currentPlatform ? currentPlatform.username : null
@@ -116,7 +116,7 @@ class SocialMediaCardContainer extends Component {
             friendPlatforms.some(socialElem =>
               socialElem.provider === socialPlatform
             ) : true
-          console.log(isSynced, fromUserProfile)
+
           if (friendPlatfromPresent) {
             return (
               <SocialMediaCard
@@ -146,6 +146,7 @@ class SocialMediaCardContainer extends Component {
 const mapStateToProps = state => ({
   userId: state.userStore.userId,
   userInfo: state.userStore.userData,
+  friendData: state.friendStore.friendData,
   platforms: state.tokenStore.platforms,
   fbAuthToken: state.fbStore.fbAccessToken,
   accessToken: state.authStore.accessToken,
