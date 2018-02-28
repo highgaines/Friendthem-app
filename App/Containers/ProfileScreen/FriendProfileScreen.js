@@ -39,7 +39,7 @@ class FriendProfileScreen extends Component {
       feedContainer: false,
       socialMediaData: SOCIAL_MEDIA_DATA,
       syncedCardColors: SYNCED_CARD_COLORS,
-      selectedSocialMedia: []
+      selectedSocialMedia: ['facebook']
     }
   }
 
@@ -203,7 +203,7 @@ class FriendProfileScreen extends Component {
               <SuperConnectBar
                 setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
                 superConnect={() => {
-                 setSuperConnectPlatforms(['facebook', 'instagram', ])
+                 setSuperConnectPlatforms(['facebook', 'instagram', 'twitter', 'snapchat'])
                  navigation.navigate('SuperConnectScreen')}
                }
 
