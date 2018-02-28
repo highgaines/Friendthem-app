@@ -8,7 +8,7 @@ import { Images } from '../../Themes';
 import styles from '../Styles/TutorialScreenStyles';
 
 export default WelcomeScreen = props => {
-  const { name, closeModal, visible, navigation } = props
+  const { name, closeModal, visible, navigation, toggleWelcomeTutorial } = props
 
   return (
     <View style={styles.container}>
@@ -29,6 +29,7 @@ export default WelcomeScreen = props => {
               style={styles.startButton}
               onPress={() => {
                 closeModal()
+                toggleWelcomeTutorial()
                 navigation.navigate('UserProfileScreen')
               }}>
               <Text
