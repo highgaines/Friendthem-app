@@ -32,6 +32,7 @@ const images = {
   rightArrow: require('../Images/Icons/rightArrow.png'),
 
   // Social Media Icons
+  cameraIcon: require('../Images/Icons/camera-icon.png'),
   messengerIcon: require('../Images/Icons/messengericon.png'),
   textMessageIcon: require('../Images/Icons/texticon.png'),
   whatsappIcon: require('../Images/whatsappicon.png'),
