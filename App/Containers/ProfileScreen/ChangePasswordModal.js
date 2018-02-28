@@ -85,7 +85,7 @@ class FriendThemModal extends Component {
             style={styles.headerGradient}>
             <Image
               source={Images.closedLock}
-              style={{height: 50, width: 50, zIndex: 99}}
+              style={{height: 57, width: 37, zIndex: 99}}
               />
             <Text style={styles.headerText}>
               Enter New Password
