@@ -21,8 +21,7 @@ class ScrollWheel extends Component {
   }
 
   render() {
-    const { handlePlatformChange, handleBackToProfile, selected, profilePic } = this.props
-
+    const { handlePlatformChange, handleBackToProfile, selected, profilePic, socialPlatforms } = this.props
     return (
           <ScrollView
             style={styles.scrollContainer}
@@ -31,22 +30,30 @@ class ScrollWheel extends Component {
             showsHorizontalScrollIndicator={false}
           >
             <View style={styles.platforms}>
-
-              <TouchableOpacity onPress={() => handlePlatformChange('facebook')}>
-                <SMPlatformCircle platform="facebook" size={70}/>
-                <Text style={selected === 'facebook' ? [styles.text, { color: 'white'}] : styles.text}> Facebook </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity onPress={() => handlePlatformChange('instagram')}>
-                <SMPlatformCircle platform="instagram" size={70}/>
-                <Text style={selected === 'instagram' ? [styles.text, { color: 'white'}] : styles.text}> Instagram </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity onPress={() => handlePlatformChange('twitter')}>
-                <SMPlatformCircle platform="twitter" size={70}/>
-                <Text style={selected === 'twitter' ? [styles.text, { color: 'white'}] : styles.text}> Twitter </Text>
-              </TouchableOpacity>
-
+              {
+                socialPlatforms.includes('facebook')
+                ? <TouchableOpacity onPress={() => handlePlatformChange('facebook')}>
+                  <SMPlatformCircle platform="facebook" size={70}/>
+                  <Text style={selected === 'facebook' ? [styles.text, { color: 'white'}] : styles.text}> Facebook </Text>
+                </TouchableOpacity>
+                : null
+              }
+              {
+                socialPlatforms.includes('instagram')
+                ? <TouchableOpacity onPress={() => handlePlatformChange('instagram')}>
+                  <SMPlatformCircle platform="instagram" size={70}/>
+                  <Text style={selected === 'instagram' ? [styles.text, { color: 'white'}] : styles.text}> Instagram </Text>
+                </TouchableOpacity>
+                : null
+              }
+              {
+                socialPlatforms.includes('twitter')
+                ? <TouchableOpacity onPress={() => handlePlatformChange('twitter')}>
+                  <SMPlatformCircle platform="twitter" size={70}/>
+                  <Text style={selected === 'twitter' ? [styles.text, { color: 'white'}] : styles.text}> Twitter </Text>
+                </TouchableOpacity>
+                : null
+              }
               <TouchableOpacity onPress={() => handleBackToProfile()}>
                 <SMPlatformCircle size={70}/>
                 <Text style={selected === 'profile' ? [styles.text, { color: 'white'}] : styles.text}> Profile </Text>
