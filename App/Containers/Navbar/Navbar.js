@@ -109,7 +109,7 @@ class Navbar extends Component {
 
   selectedStyleRender = screen => {
     return this.determineCurrentScreen(screen)
-      ? styles.selectedScreen
+      ? ifIphoneX(styles.unselectedScreen, styles.selectedScreen)
       : styles.unselectedScreen
   }
 

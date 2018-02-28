@@ -27,7 +27,7 @@ import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
 
 // Styles
 import styles from '../Styles/UserProfileStyles'
-
+import { ifIphoneX } from '../../Themes/Helpers'
 
 class FriendProfileScreen extends Component {
   constructor(props) {
@@ -135,7 +135,12 @@ class FriendProfileScreen extends Component {
   render() {
     const { friendInfo, superConnect, navigation, setSuperConnectPlatforms, userInfo, userId } = this.props
     const { showModal, socialMediaData, syncedCardColors, selectedSocialMedia, platform } = this.state
+
     const socialPlatforms = friendInfo.social_profiles.map(prof => prof.provider)
+
+    const ipxHeader = { 'marginTop': 60 }
+    const renderIpxHeader = ifIphoneX(ipxHeader, '')
+
     return (
         <View>
           <View style={styles.profile}>
@@ -143,7 +148,7 @@ class FriendProfileScreen extends Component {
               colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
               start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
               locations={[0.1, 0.3, 0.5, 0.7, 1.0]}>
-              <View style={styles.profileHeader}>
+              <View style={[styles.profileHeader, renderIpxHeader]}>
                 <View style={styles.profHeaderTop}>
                   <TouchableOpacity onPress={this.handleCall}>
                     <Icon
@@ -214,6 +219,7 @@ class FriendProfileScreen extends Component {
 
                 userData={userInfo}
                 userId={userId}
+                iphoneXStyle={ifIphoneX({'top': 300}, '')}
               />
             </View> :
              this.renderPlatformContainer(platform)  }

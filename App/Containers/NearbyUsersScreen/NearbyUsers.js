@@ -47,12 +47,6 @@ class NearbyUsers extends Component {
     this.setState({input: input})
   }
 
-  toggleWelcomeTutorial = () => {
-    this.setState({
-      welcomeTutorialVisible: false
-    })
-  }
-
   toggleNearbyFeed = () => {
     this.setState({ feedView: !this.state.feedView})
   }
