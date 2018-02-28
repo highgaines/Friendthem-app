@@ -6,8 +6,8 @@ import UserCard from './UserCard'
 import styles from '../Styles/UsersContainerStyles'
 import SocialMediaCard from '../SocialMediaCards/SocialMediaCard'
 import { Images } from '../../Themes'
+import { LazyloadScrollView, LazyloadView, lazy } from 'react-native-lazyload-deux'
 
-import { LazyloadScrollView, lazy } from 'react-native-lazyload-deux'
 export default function UsersContainer(props) {
   const { users, navigation, setFriendInfo, locationPermission } = props
   const viewFriendProfile = userObj => {
