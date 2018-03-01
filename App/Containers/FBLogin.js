@@ -10,15 +10,18 @@ import styles from './Styles/LaunchScreenStyles';
 class FBLogin extends Component {
 
   handleFBLogin = () => {
+
     const userPermissions = ["public_profile", "user_friends", "email"]
     const { handleLoading, handleLoadingComplete } = this.props
     handleLoading()
     LoginManager.logInWithReadPermissions(userPermissions).then((result) => {
+
       if (result.isCancelled) {
           handleLoadingComplete()
           console.log('Login cancelled')
         } else {
           AccessToken.getCurrentAccessToken().then((data) => {
+
             this.props.fbLoginComplete(data.accessToken)
           })
         }
