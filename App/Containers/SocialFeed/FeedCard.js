@@ -40,7 +40,7 @@ export default FeedCard = props => {
           </Text>
         </LazyloadView>
         <LazyloadView style={styles.bottomRow}>
-          <LazyloadView style={{ flex: 3.5 }}>
+          <LazyloadView>
             <Text style={styles.dateText}>
               { `${month} ${day} ${year} at ${time}` }
             </Text>

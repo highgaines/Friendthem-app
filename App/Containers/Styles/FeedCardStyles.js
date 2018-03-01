@@ -114,12 +114,13 @@ export default StyleSheet.create({
   dateText: {
     fontSize: 11,
     color: 'gray',
-    top: 3
+    bottom: 2
   },
   likeText: {
     color: Colors.socialMediaBlue,
     fontWeight: '700',
-    textAlign: 'right'
+    textAlign: 'right',
+    bottom: 5
   },
   contentBody: {
     justifyContent: 'space-around',
