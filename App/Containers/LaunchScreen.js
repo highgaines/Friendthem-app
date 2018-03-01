@@ -3,7 +3,13 @@ import { ScrollView, Text, Image, View, TouchableOpacity, Button, ActivityIndica
 
 // Libraries
 import { SocialIcon } from 'react-native-elements'
-import FBSDK, { LoginManager, LoginButton, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk'
+import FBSDK, {
+  LoginManager,
+  LoginButton,
+  AccessToken,
+  GraphRequestManager,
+  GraphRequest
+} from 'react-native-fbsdk'
 import Permissions from 'react-native-permissions'
 import Contacts from 'react-native-contacts'
 
@@ -32,6 +38,7 @@ import { Images } from '../Themes'
 // Styles
 import styles from './Styles/LaunchScreenStyles'
 import footerStyles from './Styles/FooterStyles'
+import { ifIphoneX } from '../Themes/Helpers'
 
 class LaunchScreen extends Component {
   constructor(props) {
@@ -142,7 +149,7 @@ class LaunchScreen extends Component {
 
   render () {
     const { navigate } = this.props.navigation
-    const { users, fbAuthToken, logoutUser } = this.props
+    const { users, fbAuthToken, logoutUser, fbLoginComplete } = this.props
     const { loading } = this.state
 
     return (
@@ -150,7 +157,7 @@ class LaunchScreen extends Component {
           <ScrollView style={styles.container}>
             <View style={styles.centered}>
               <Image
-                style={{ marginTop: 100 }} source={require('../Images/logo.png')}
+                style={ifIphoneX({ marginTop: 200 }, { marginTop: 100 })} source={require('../Images/logo.png')}
               />
               <Text style={styles.primSubText}>
                 CONNECTING THE WORLD

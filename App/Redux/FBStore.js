@@ -25,6 +25,7 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Reducers ------------- */
 const fbLoginComplete = (state = INITIAL_STATE, action) => {
+  console.log('LOGIN COMPLETE')
   return { ...state, fbAccessToken: action.fbAccessToken }
 }
 
