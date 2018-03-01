@@ -17,11 +17,9 @@ class FBLogin extends Component {
     LoginManager.logInWithReadPermissions(userPermissions).then((result) => {
 
       if (result.isCancelled) {
-
           handleLoadingComplete()
           console.log('Login cancelled')
         } else {
-
           AccessToken.getCurrentAccessToken().then((data) => {
 
             this.props.fbLoginComplete(data.accessToken)
@@ -29,7 +27,6 @@ class FBLogin extends Component {
         }
       },
       (error) =>  {
-
         console.log('Login fail with error: ' + error)
       }
     )
