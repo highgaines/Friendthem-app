@@ -44,8 +44,11 @@ class ForkScreen extends Component {
       accessToken
     } = this.props
 
-    getUserInfo(accessToken);
+    if (accessToken) {
+      getUserInfo(accessToken);
+    }
 
+    console.log(nativeContactsPermission)
     if (customGeolocationPermission && !nativeGeolocation) {
       Permissions.request('location', { type: 'always' }).then(response => {
         if(response === 'authorized') {
@@ -68,7 +71,7 @@ class ForkScreen extends Component {
   }
 
   componentWillUpdate = (nextProps, nextState) => {
-    const { locationIntervalRunning } = this.props
+    const { locationIntervalRunning, getUserInfo } = this.props
 
     if (!locationIntervalRunning && nextProps.locationIntervalRunning) {
       this.locationInterval()
@@ -77,7 +80,11 @@ class ForkScreen extends Component {
     if (locationIntervalRunning && !nextProps.locationIntervalRunning) {
       clearInterval(this.locationInterval)
     }
+    if (!this.props.accessToken && nextProps.accessToken) {
+      getUserInfo(nextProps.accessToken)
+    }
   }
+
 
   locationInterval = () => {
     const { accessToken, updateUserPosition } = this.props

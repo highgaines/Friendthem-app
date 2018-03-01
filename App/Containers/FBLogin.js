@@ -21,7 +21,6 @@ class FBLogin extends Component {
           console.log('Login cancelled')
         } else {
           AccessToken.getCurrentAccessToken().then((data) => {
-
             this.props.fbLoginComplete(data.accessToken)
           })
         }

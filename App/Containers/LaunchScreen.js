@@ -97,6 +97,7 @@ class LaunchScreen extends Component {
   }
 
   getFbProfile = accessToken => {
+
     const { fbUserInfo, navigation, loginByFacebook, nativeGeolocation, nativeNotifications } = this.props
 
     const responseInfoCallback = (error, result) => {
