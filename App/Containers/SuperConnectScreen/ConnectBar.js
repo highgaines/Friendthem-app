@@ -9,7 +9,7 @@ import { Images } from '../../Themes';
 import { Icon } from 'react-native-elements'
 
 export default ConnectBar = props => {
-  const { userData, friendInfo } = props
+  const { userData, friendInfo } = props;
 
   return (
     <View style={styles.container}>

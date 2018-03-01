@@ -21,7 +21,7 @@ import { Icon } from 'react-native-elements'
 import OneSignal from 'react-native-onesignal';
 import Contacts from 'react-native-contacts';
 
-//Images
+// Images
 import { Images } from '../../Themes';
 
 // Styles
@@ -109,7 +109,7 @@ class ForkScreen extends Component {
                 userInfo.picture ?
                 <Image
                   style={styles.userImageContainer}
-                  source={{uri: `${userInfo.picture}`}}
+                  source={userInfo.picture ? {uri: `${userInfo.picture}`} : Images.noPicSVG}
                 />
                 :
                 <Icon

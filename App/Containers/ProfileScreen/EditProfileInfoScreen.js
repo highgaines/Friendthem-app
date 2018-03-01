@@ -12,6 +12,9 @@ import SocialMediaInfoTab from './SocialMediaInfoTab'
 // Redux
 import { connect } from 'react-redux'
 
+// Images
+import { Images } from '../../Themes';
+
 // Styles
 import styles from '../Styles/EditProfileInfoStyles'
 
@@ -47,7 +50,7 @@ class EditProfileInfoScreen extends Component {
             </TouchableOpacity>
             <Image
               style={styles.headerImage}
-              source={{uri: `${userInfo.picture}`}} />
+              source={userInfo.picture ? {uri: `${userInfo.picture}`} : Images.noPicSVG} />
             <TouchableOpacity style={[styles.headerButton, {marginLeft: 20}]}>
               <Text style={styles.headerButtonText}>Save</Text>
             </TouchableOpacity>
