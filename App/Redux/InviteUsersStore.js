@@ -7,7 +7,7 @@ import Reactotron from 'reactotron-react-native';
 
 const { Types, Creators } = createActions({
     selectUser: ['user'],
-    storeContactInfo: null,
+    storeContactInfo: ['data'],
     connectivityInfoRequest: null,
     connectivityInfoFailure: null,
     connectivityInfoSuccess: null,

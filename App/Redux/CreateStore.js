@@ -26,7 +26,7 @@ export default (rootReducer, rootSaga) => {
 
   /* ------------- Thunk Middleware ------------- */
 
-  middleware.push(thunk)
+  // middleware.push(thunk)
   middleware.push(apiMiddleware)
 
   /* ------------- Assemble Middleware ------------- */

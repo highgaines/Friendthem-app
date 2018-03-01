@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import PermissionsStoreActions from '../../Redux/PermissionsStore'
 import UserStoreActions, { updateUserPosition, getUserInfo } from '../../Redux/UserStore'
-import { storeContactInfo } from '../../Redux/InviteUsersStore'
+import InviteUsersStoreActions, { storeContactInfo } from '../../Redux/InviteUsersStore'
 
 // Components
 import ConnectButton from '../SuperConnectScreen/ConnectButton'
@@ -54,11 +54,12 @@ class ForkScreen extends Component {
         if(response === 'authorized') {
           setLocationInterval()
         }
-        if (!nativeContactsPermission) {
+        if (true || !nativeContactsPermission) {
           Contacts.getAll( (err, contacts) => {
             if (err === 'denied') {
               console.log('DENIED')
             } else {
+              debugger
               storeContactInfo(contacts)
             }
             if (customNotificationPermission && !nativeNotifications) {
