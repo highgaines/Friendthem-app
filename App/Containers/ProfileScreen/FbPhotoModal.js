@@ -80,7 +80,8 @@ class PhotoModal extends Component {
         animationOut='slideOutDown'
         onBackdropPress={togglePhotoModal}
         isVisible={modalVisible} >
-        <View style={styles.container}>
+        { photoLength ?
+          <View style={styles.container}>
         { this.renderImages() }
           <View style={styles.buttonContainer}>
           { this.state.startingIndex !== 0
@@ -121,6 +122,12 @@ class PhotoModal extends Component {
             </TouchableOpacity>
           </View>
         </View>
+        : <View style={styles.container}>
+          <Text style={styles.noPhotosText}>
+            Sorry, no photos were found.
+          </Text>
+        </View>
+      }
       </Modal>
     )
   }

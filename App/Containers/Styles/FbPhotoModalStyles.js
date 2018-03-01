@@ -60,5 +60,9 @@ export default StyleSheet.create({
     shadowRadius: 3,
     shadowColor: 'blue',
     shadowOffset: { height: 3, width: 3 }
+  },
+  noPhotosText: {
+    alignSelf: 'center',
+    top: Metrics.screenHeight * 0.3
   }
 })
