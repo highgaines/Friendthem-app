@@ -101,7 +101,7 @@ export default CongratulatoryScreen = props => {
           <Image style={styles.image2} source={determineImage(friendInfo)}/>
           {
             userInfo.picture ?
-            <Image style={styles.image1} source={{uri: `${userInfo.picture}`}} />
+            <Image style={styles.image1} source={userInfo.picture ? {uri: `${userInfo.picture}`} : Images.noPicSVG} />
             :
             <Icon
             containerStyle={styles.image1}

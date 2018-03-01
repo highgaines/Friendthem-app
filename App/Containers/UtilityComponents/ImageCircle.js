@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image } from 'react-native';
+import { Images } from '../../Themes';
 
 export default ImageCircle = props => {
   const { size, extraStyles, source } = props
@@ -11,7 +12,7 @@ export default ImageCircle = props => {
         width: size,
         borderRadius: size/2
       }, extraStyles]}
-      source={{uri: source}}
+      source={source ? {uri: source} : Images.noPicSVG}
     />
   )
 }

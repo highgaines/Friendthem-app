@@ -17,6 +17,9 @@ import { bindActionCreators } from 'redux';
 import NotificationStoreActions from '../../Redux/NotificationStore';
 import { fetchNotifications, deleteRowAction, deleteNotification } from '../../Redux/NotificationStore';
 
+// Images
+import { Images } from '../../Themes';
+
 // Styles
 import styles from '../Styles/NotificationStyles';
 
@@ -63,7 +66,7 @@ class NotificationsContainer extends Component {
               <View style={styles.rowFront}>
                 <Image
                   style={styles.profileImage}
-                  source={{uri: data.item.sender.picture}}
+                  source={data.item.sender.picture ? {uri: data.item.sender.picture} : Images.noPicSVG}
                   resizeMode='contain'
                 />
                 <Text style={styles.userName}>

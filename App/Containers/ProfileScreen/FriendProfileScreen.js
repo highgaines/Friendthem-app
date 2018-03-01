@@ -25,6 +25,9 @@ import FeedContainer from '../SocialFeed/FeedContainer'
 // Constants
 import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
 
+// Images
+import { Images } from '../../Themes';
+
 // Styles
 import styles from '../Styles/UserProfileStyles'
 import { ifIphoneX } from '../../Themes/Helpers'
@@ -159,7 +162,7 @@ class FriendProfileScreen extends Component {
                     </TouchableOpacity>
                     <Image
                       style={styles.profileImage}
-                      source={{uri: `${friendInfo.picture}`}} />
+                      source={friendInfo.picture ? {uri: `${friendInfo.picture}`} : Images.noPicSVG} />
                       <TouchableOpacity onPress={this.handleEmail}>
                         <Icon
                           name='md-mail'

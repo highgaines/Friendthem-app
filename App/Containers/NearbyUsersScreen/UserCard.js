@@ -14,7 +14,7 @@ export default function UserCard(props) {
     <TouchableOpacity
       style={styles.card}
       onPress={setFriendInfo}>
-      <Image style={styles.cardImage} source={{uri: `${picture}`}} />
+      <Image style={styles.cardImage} source={picture ? {uri: `${picture}`} : Images.noPicSVG} />
       <LazyloadView style={styles.cardText}>
         <Text
           style={{ fontFamily: 'Montserrat', fontSize: 13 }}
