@@ -18,6 +18,7 @@ import ConnectButton from '../SuperConnectScreen/ConnectButton'
 import PersonalInfoTab from './PersonalInfoTab'
 import FriendThemModal from '../UtilityComponents/FriendThemModal'
 import ChangePasswordModal from './ChangePasswordModal'
+import FbPhotoModal from './FbPhotoModal'
 
 // Redux
 import { connect } from 'react-redux'
@@ -53,7 +54,8 @@ class UserProfileScreen extends Component {
       appState: AppState.currentState,
       socialMediaData: SOCIAL_MEDIA_DATA,
       syncedCardColors: SYNCED_CARD_COLORS,
-      showChangePasswordModal: false
+      showChangePasswordModal: false,
+      showFbPhotoModal: false
     }
   }
 
@@ -112,6 +114,14 @@ class UserProfileScreen extends Component {
     }
   }
 
+  togglePhotoModal = () => {
+    this.setState({ showFbPhotoModal: !this.state.showFbPhotoModal })
+  }
+
+  updateProfilePictureState = (url) => {
+    this.setState({ profilePic: url })
+  }
+
   triggerFriendster = () => {
     const { showFriendster } = this.state
     this.setState({ showFriendster: !showFriendster })
@@ -157,7 +167,8 @@ class UserProfileScreen extends Component {
       editableData,
       apiAccessToken,
       getFBPhotos,
-      updateInfoRequest
+      updateInfoRequest,
+      userPhotos
     } = this.props
 
     const options = {
@@ -186,6 +197,8 @@ class UserProfileScreen extends Component {
         // fetch fb pics and change social media cards into pic cards
         console.log('User tapped import from facebook')
         getFBPhotos(apiAccessToken)
+        this.togglePhotoModal()
+
       }
       else if (response.customButton === 'delete') {
         // remove picture from backend and replace with noPicSVG
@@ -225,7 +238,8 @@ class UserProfileScreen extends Component {
       getUserTokens,
       platforms,
       updateInfo,
-      fetching
+      fetching,
+      userPhotos
     } = this.props
     const { showFriendster, socialMediaData, socialNetworkTab, syncedCardColors } = this.state
     const { devGoogleBaseURL, devGoogleApiParams, devGoogleClientId } = envConfig.Development
@@ -321,10 +335,16 @@ class UserProfileScreen extends Component {
                 />
             </ScrollView>
          }
-         <ChangePasswordModal
-           modalVisible={this.state.showChangePasswordModal}
-           toggleChangePasswordModal={this.toggleChangePasswordModal}
-         />
+          <ChangePasswordModal
+             modalVisible={this.state.showChangePasswordModal}
+             toggleChangePasswordModal={this.toggleChangePasswordModal}
+           />
+          <FbPhotoModal
+            modalVisible={this.state.showFbPhotoModal}
+            togglePhotoModal={this.togglePhotoModal}
+            userPhotos={userPhotos}
+            updateProfilePictureState={this.updateProfilePictureState}
+           />
         </View>
     )
   }

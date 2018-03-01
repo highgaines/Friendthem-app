@@ -60,7 +60,7 @@ export const INITIAL_STATE = Immutable({
     hometown: '',
     phone_number: '',
   },
-  userPhotos: [],
+  userPhotos: {},
   ghostModeOn: true,
   notificationsOn: true,
   fetching: false
