@@ -60,7 +60,7 @@ class UserProfileScreen extends Component {
 
   componentWillMount = () => {
     const { apiAccessToken, navigation, getUserInfo, loggedIn, getUserTokens } = this.props
-    AppState.addEventListener('change', this._handleAppStateChange);
+    AppState.addEventListener('change', this._handleAppStateChange)
 
     if (apiAccessToken && loggedIn) {
       getUserInfo(apiAccessToken)
@@ -72,7 +72,7 @@ class UserProfileScreen extends Component {
 
   componentWillUnmount = () => {
     this.setState({ showFriendster: false })
-    AppState.removeEventListener('change', this._handleAppStateChange);
+    AppState.removeEventListener('change', this._handleAppStateChange)
   }
 
   componentDidMount = () => {
@@ -171,16 +171,16 @@ class UserProfileScreen extends Component {
         path: 'images',
         quality: 1
       }
-    };
+    }
 
     ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response = ', response);
+      console.log('Response = ', response)
 
       if (response.didCancel) {
-        console.log('User cancelled image picker');
+        console.log('User cancelled image picker')
       }
       else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
+        console.log('ImagePicker Error: ', response.error)
       }
       else if (response.customButton === 'fb') {
         // fetch fb pics and change social media cards into pic cards
@@ -195,7 +195,7 @@ class UserProfileScreen extends Component {
       }
       else {
         // use AWS upload function here to send uri
-        let source = response.uri;
+        let source = response.uri
         this.setState({ profilePic: source }, () => uploadToAWS(source, id, updateInfoRequest, editableData, apiAccessToken))
       }
     })

@@ -66,6 +66,7 @@ export default class InfoRow extends Component {
         <TouchableOpacity
           style={styles.iconContainer}
           onPress={editPressCallback}
+          hitSlop={{right: 10, left: 10, top: 10, bottom: 10}}
           >
           { isEditing ?
             <View style={{ position: 'absolute', right: -10, top: -10}}>
