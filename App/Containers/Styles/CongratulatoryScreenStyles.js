@@ -5,8 +5,10 @@ import { ifIphoneX } from '../../Themes/Helpers'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: ifIphoneX({
+    alignItems: 'center',
+    marginTop: 35,
     height: Metrics.screenHeight
-  }, {marginTop: 25, height: Metrics.screenHeight}),
+  }, {alignItems: 'center', marginTop: 25, height: Metrics.screenHeight}),
   linearGradient: {
     height: 70,
     justifyContent: 'flex-end'
@@ -23,7 +25,7 @@ export default StyleSheet.create({
   textContainer: {
     flex: 5,
     justifyContent: 'flex-end',
-    alignItems: 'flex-end',
+    alignItems: 'center',
     marginRight: 100
   },
   superConnectText: {
