@@ -96,7 +96,7 @@ class FriendProfileScreen extends Component {
     }
 
     ActionSheetIOS.showActionSheetWithOptions({
-      options: [`Call 3472917739`, 'Add To Contacts', 'Cancel']
+      options: [`Call ${friendInfo.phone_}`, 'Add To Contacts', 'Cancel']
     }, (buttonIndex) => {
       if (buttonIndex === 0) {
         Communications.phonecall('3472917739', true)

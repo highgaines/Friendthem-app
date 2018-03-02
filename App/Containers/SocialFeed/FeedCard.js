@@ -24,7 +24,7 @@ export default FeedCard = props => {
   const time = convertTime(dateSplit[4])
 
   return(
-    <LazyloadView style={[styles.cardContainer, item.provider === 'twitter' ? {'height': 90 } : null]}>
+    <LazyloadView style={[styles.cardContainer, !item.img_url ? {'height': 90 } : null]}>
       <LazyloadView style={styles.contentBody}>
         {
           item.img_url
@@ -40,16 +40,12 @@ export default FeedCard = props => {
           </Text>
         </LazyloadView>
         <LazyloadView style={styles.bottomRow}>
-          <LazyloadView>
             <Text style={styles.dateText}>
               { `${month} ${day} ${year} at ${time}` }
             </Text>
-          </LazyloadView>
-          <LazyloadView style={{ flex: 1.5 }}>
             <Text style={styles.likeText}>
               {`${item.num_likes} likes`}
             </Text>
-          </LazyloadView>
         </LazyloadView>
       </LazyloadView>
     </LazyloadView>

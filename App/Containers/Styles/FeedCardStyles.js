@@ -102,10 +102,11 @@ export default StyleSheet.create({
     color: 'white'
   },
   bottomRow: {
-    flex: 5,
-    padding: 10,
     flexDirection: 'row',
-    justifyContent: 'flex-start'
+    justifyContent: 'space-between',
+    top: 5,
+    width: Metrics.screenWidth * 0.9,
+    paddingHorizontal: 15
   },
   displayName: {
     fontWeight: 'bold',

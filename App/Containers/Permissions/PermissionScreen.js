@@ -131,6 +131,9 @@ class PermissionScreen extends Component {
             <Text style={[styles.text, { fontSize: 14 }]}>
               {this.determineText()}
              </Text>
+             <Image
+               source={this.determineImage()}
+               />
              <View testID={'button_container'} style={styles.buttonContainer}>
                <ConnectButton
                  testID={'connect_button_not_now'}
