@@ -8,7 +8,7 @@ import ConnectButton from './ConnectButton';
 import styles from '../Styles/ButtonContainerStyles';
 
 export default ButtonsContainer = props => {
-  const { friendName, deepLinkURL, navigation, friendUrlm, superConnectPromiseLoop } = props
+  const { friendName, deepLinkURL, navigation, friendUrlm, superConnectPromiseLoop, copy } = props
   const backAction = NavigationActions.back()
 
   const goBack = () => {
@@ -29,7 +29,7 @@ export default ButtonsContainer = props => {
             textAlign: 'center',
             fontFamily: 'Montserrat'
           }}>
-        {`Are you sure you want to super connect with ${friendName}?`}
+        {`${copy} ${friendName}?`}
       </Text>
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
         <ConnectButton

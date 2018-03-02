@@ -61,6 +61,7 @@ class SuperConnect extends Component {
 
   deepLinkToPlatform = (platformName) => {
     const { manualPlatforms, friendInfo, platforms } = this.props
+    debugger
     const profile = friendInfo.social_profiles.find(profile => profile.provider === platformName)
     const userIdentifier = platformName === 'facebook' ? profile.uid : profile.username
     const deepLinkPlatform = SOCIAL_MEDIA_DATA[platformName].superConnectDeepLink
@@ -173,6 +174,7 @@ class SuperConnect extends Component {
             superConnectPromiseLoop={selectedSocialMedia.length ?
               this.superConnectPromiseLoop : () => false
             }
+            copy={this.props.copy}
             navigation={navigation}
             facebookUrl={friendInfo.fbUrl}
             friendName={`${friendInfo.first_name}`} />

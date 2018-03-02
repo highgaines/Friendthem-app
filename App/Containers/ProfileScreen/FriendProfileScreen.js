@@ -135,6 +135,10 @@ class FriendProfileScreen extends Component {
     }
   }
 
+  getSCEligiblePlatforms = () => {
+    return this.props.friendInfo && this.props.friendInfo.social_profiles.map( obj => obj.provider) || [];
+  }
+
   render() {
     const { friendInfo, superConnect, navigation, setSuperConnectPlatforms, userInfo, userId } = this.props
     const { showModal, socialMediaData, syncedCardColors, selectedSocialMedia, platform } = this.state
@@ -225,12 +229,13 @@ class FriendProfileScreen extends Component {
               />
               <SuperConnectBar
                 setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
-                superConnect={() => {
-                 setSuperConnectPlatforms(['facebook', 'instagram', 'twitter', 'snapchat'])
-                 navigation.navigate('SuperConnectScreen')}
+                superConnect={(platformsSelected, copy) => {
+                 setSuperConnectPlatforms(platformsSelected, copy)
+                 navigation.navigate('SuperConnectScreen', { copy: copy})}
                }
-
+                selected={this.state.selectedSocialMedia}
                 userData={userInfo}
+                platforms={this.getSCEligiblePlatforms()}
                 userId={userId}
                 iphoneXStyle={ifIphoneX({'top': 300}, '')}
               />
