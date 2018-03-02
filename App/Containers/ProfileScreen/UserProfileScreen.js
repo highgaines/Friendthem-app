@@ -104,13 +104,18 @@ class UserProfileScreen extends Component {
 
       this.setState({externalAuth: true})
 
-      Linking.canOpenURL(deepLinkAuth).then(response => {
-          if (response) {
-            Linking.openURL(`${deepLinkAuth}`)
-          } else {
-            Linking.openURL(`${authRedirectUrl}`)
-          }
-      })
+      // Instagram deeplink OAUTH is broken so use web URL
+      if (currentPlatform === 'instagram') {
+        Linking.openURL(`${authRedirectUrl}`)
+      } else {
+        Linking.canOpenURL(deepLinkAuth).then(response => {
+            if (response) {
+              Linking.openURL(`${deepLinkAuth}`)
+            } else {
+              Linking.openURL(`${authRedirectUrl}`)
+            }
+        })
+      }
     }
   }
 
