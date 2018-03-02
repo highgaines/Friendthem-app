@@ -75,6 +75,7 @@ class PermissionScreen extends Component {
 
   handleNotNow = () => {
     // redux action to continue WITHOUT gelocation
+    this.props.navigation.navigate('LaunchScreen')
   }
 
   handleOkay = () => {

@@ -31,7 +31,7 @@ class ScrollWheel extends Component {
           >
             <View style={styles.platforms}>
               {
-                socialPlatforms.includes('facebook')
+                socialPlatforms && socialPlatforms.includes('facebook')
                 ? <TouchableOpacity onPress={() => handlePlatformChange('facebook')}>
                   <SMPlatformCircle platform="facebook" size={70}/>
                   <Text style={selected === 'facebook' ? [styles.text, { color: 'white'}] : styles.text}> Facebook </Text>
@@ -39,7 +39,7 @@ class ScrollWheel extends Component {
                 : null
               }
               {
-                socialPlatforms.includes('instagram')
+                socialPlatforms && socialPlatforms.includes('instagram')
                 ? <TouchableOpacity onPress={() => handlePlatformChange('instagram')}>
                   <SMPlatformCircle platform="instagram" size={70}/>
                   <Text style={selected === 'instagram' ? [styles.text, { color: 'white'}] : styles.text}> Instagram </Text>
@@ -47,7 +47,7 @@ class ScrollWheel extends Component {
                 : null
               }
               {
-                socialPlatforms.includes('twitter')
+                socialPlatforms && socialPlatforms.includes('twitter')
                 ? <TouchableOpacity onPress={() => handlePlatformChange('twitter')}>
                   <SMPlatformCircle platform="twitter" size={70}/>
                   <Text style={selected === 'twitter' ? [styles.text, { color: 'white'}] : styles.text}> Twitter </Text>
