@@ -20,7 +20,6 @@ import LinearGradientWrapper from '../../HOCs/LinearGradientWrapper';
 import PermissionsStoreActions, { setGeoPermission } from '../../Redux/PermissionsStore';
 import FriendStoreActions from '../../Redux/FriendStore'
 import NotificationStoreActions, { registerForPushNotif } from '../../Redux/NotificationStore'
-import { storeContactInfo } from '../../Redux/InviteUsersStore'
 
 // Images
 import { Images } from '../../Themes';
@@ -172,7 +171,6 @@ const mapDispatchToProps = dispatch => {
 
   return {
     ...bindActionCreators({
-      storeContactInfo,
       setFriendInfo,
       grantLocationPermission,
       grantNotificationPermission,

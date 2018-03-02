@@ -4,7 +4,7 @@ import { View, TouchableOpacity, Text, ScrollView } from 'react-native'
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import InviteUsersStoreActions, { selectUser, fetchConnectivityData } from '../../Redux/InviteUsersStore'
+import InviteUsersStoreActions, { selectUser, fetchConnectivityData, storeContactInfo } from '../../Redux/InviteUsersStore'
 
 // Libraries
 import Reactotron from 'reactotron-react-native'
@@ -39,7 +39,7 @@ class InviteUsersScreen extends Component {
   }
 
   componentDidMount = () => {
-    const { fetchConnectivityData, accessToken } = this.props
+    const { fetchConnectivityData, accessToken, storeContactInfo } = this.props
     fetchConnectivityData(accessToken)
   }
 
@@ -149,7 +149,11 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
 
   return {
-    ...bindActionCreators({ selectUser, fetchConnectivityData }, dispatch)
+    ...bindActionCreators({
+      selectUser,
+      fetchConnectivityData,
+      storeContactInfo
+    }, dispatch)
   }
 }
 

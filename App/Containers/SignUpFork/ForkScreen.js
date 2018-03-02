@@ -41,6 +41,7 @@ class ForkScreen extends Component {
       customGeolocationPermission,
       customNotificationPermission,
       getUserInfo,
+      storeContactInfo,
       accessToken
     } = this.props
 
@@ -48,23 +49,21 @@ class ForkScreen extends Component {
       getUserInfo(accessToken);
     }
 
-    console.log(nativeContactsPermission)
+    Contacts.getAll( (err, contacts) => {
+      if (err === 'denied') {
+        console.log('DENIED')
+      } else {
+        storeContactInfo(contacts)
+      }
+      if (customNotificationPermission && !nativeNotifications) {
+        OneSignal.registerForPushNotifications()
+      }
+    })
+
     if (customGeolocationPermission && !nativeGeolocation) {
       Permissions.request('location', { type: 'always' }).then(response => {
         if(response === 'authorized') {
           setLocationInterval()
-        }
-        if (!nativeContactsPermission) {
-          Contacts.getAll( (err, contacts) => {
-            if (err === 'denied') {
-              console.log('DENIED')
-            } else {
-              storeContactInfo(contacts)
-            }
-            if (customNotificationPermission && !nativeNotifications) {
-              OneSignal.registerForPushNotifications()
-            }
-          })
         }
       })
     }
