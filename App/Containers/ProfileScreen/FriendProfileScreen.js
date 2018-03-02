@@ -139,7 +139,9 @@ class FriendProfileScreen extends Component {
     const { friendInfo, superConnect, navigation, setSuperConnectPlatforms, userInfo, userId } = this.props
     const { showModal, socialMediaData, syncedCardColors, selectedSocialMedia, platform } = this.state
 
-    const socialPlatforms = friendInfo.social_profiles.map(prof => prof.provider)
+    const socialPlatforms = friendInfo 
+    && friendInfo.social_profiles
+    && friendInfo.social_profiles.map(prof => prof.provider)
 
     const ipxHeader = { 'marginTop': 60 }
     const renderIpxHeader = ifIphoneX(ipxHeader, '')

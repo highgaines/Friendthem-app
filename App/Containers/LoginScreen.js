@@ -145,6 +145,9 @@ class LoginScreen extends Component {
               navigationCallback={() =>
                 this.props.navigation.navigate('RegisterUserScreen')
               }
+              launchScreenNavigation={
+                () => this.props.navigation.navigate('LaunchScreen')
+              }
               onLoginScreen={true}
               styles={styles}/>
           </View>

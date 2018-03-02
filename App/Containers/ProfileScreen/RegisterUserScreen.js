@@ -133,6 +133,9 @@ class RegisterUserScreen extends Component {
             navigationCallback={
               () => navigation.navigate('LoginScreen')
             }
+            launchScreenNavigation={
+              () => navigation.navigate('LaunchScreen')
+            }
             styles={styles} />
         </LinearGradient>
       </View>

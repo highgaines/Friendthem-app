@@ -195,6 +195,7 @@ class LaunchScreen extends Component {
           </ScrollView>
           <Footer
             navigationCallback={() => navigate('LoginScreen')}
+            isLaunchScreen
             styles={footerStyles}/>
         </View>
     )
