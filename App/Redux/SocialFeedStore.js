@@ -54,7 +54,6 @@ const handleFeedDataRequest = (state, action) => {
 }
 
 const handleFeedDataSuccess = (state, action) => {
-  debugger
   const feedData = action.response.data.data
   const provider = feedData.length ? action.response.data.data[0].provider : ''
   const userId = action.response.data.user_id
