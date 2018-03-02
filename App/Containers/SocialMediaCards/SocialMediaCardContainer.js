@@ -108,7 +108,7 @@ class SocialMediaCardContainer extends Component {
         Object.keys(socialMediaData).map((socialPlatform, idx) => {
           const isYoutube = socialPlatform === 'youtube'
           const currentPlatform = platformSynced(isYoutube ? 'google-oauth2' : socialPlatform)
-          const isSelected = platformSelected(socialPlatform)
+          const isSelected = platformSelected(isYoutube ? 'google-oauth2': socialPlatform)
           const isSynced = !!currentPlatform
           const capitalizeName = (name) => name[0].toUpperCase() + name.slice(1)
           const userName = currentPlatform ? this.socialPlatformUsername(isYoutube ? 'google-oauth2' : socialPlatform) : null
