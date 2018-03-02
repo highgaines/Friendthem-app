@@ -77,7 +77,7 @@ class FeedContainer extends Component {
         <Text style={styles.titleText}> {capitalizedPlat} Feed </Text>
           {loading
             ? <View
-              style={styles.loading, { marginTop: 40 }}>
+                style={styles.loading, { marginTop: 40 }}>
                 <ActivityIndicator
                   size="large"
                   color="#0000ff"

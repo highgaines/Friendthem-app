@@ -39,6 +39,7 @@ import { Images } from '../Themes'
 import styles from './Styles/LaunchScreenStyles'
 import footerStyles from './Styles/FooterStyles'
 import { ifIphoneX } from '../Themes/Helpers'
+import navigationAware from '../Navigation/navigationAware'
 
 class LaunchScreen extends Component {
   constructor(props) {
@@ -55,7 +56,7 @@ class LaunchScreen extends Component {
     this.checkPermissions()
 
     if (this.props.loggedIn) {
-      this.props.navigation.navigate('UserProfileScreen')
+      this.props.navigation.navigate('NearbyUsersScreen')
     }
   }
 
@@ -66,6 +67,11 @@ class LaunchScreen extends Component {
       this.getFbProfile(nextProps.fbAuthToken)
       this.handleLoadingComplete()
     }
+
+    if (nextProps.loggedIn && nextProps.routeName === 'LaunchScreen') {
+      nextProps.navigation.navigate('NearbyUsersScreen')
+    }
+
   }
 
   checkPermissions = () => {
@@ -233,4 +239,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LinearGradientWrapper(LaunchScreen))
+export default navigationAware(connect(mapStateToProps, mapDispatchToProps)(LinearGradientWrapper(LaunchScreen)))
