@@ -36,7 +36,8 @@ export default UserCard = ({
 
   const handleTextInvite = () => {
     let phoneNumber = determineMobileNumber()
-    Communications.text(phoneNumber, 'Friend Them is Great! Download it here!')
+    debugger
+    Communications.textWithoutEncoding(phoneNumber, 'Friend Them is Great! Download it here!')
   }
 
   const handleEmailInvite = () => {

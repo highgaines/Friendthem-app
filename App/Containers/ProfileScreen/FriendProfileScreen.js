@@ -79,13 +79,13 @@ class FriendProfileScreen extends Component {
 
   handleEmail = () => {
     // email action here - needs to be hooked up to friend/user's actual e-mail
-    Communications.email([''], null, null, 'Subject Here: ', 'my body text')
+    Communications.email([''], null, null, 'Subject Here', 'Message Body Here...')
   }
 
   handleCall = () => {
     // call action here - needs to be hooked up to user phone number
     const { friendInfo } = this.props
-
+    const { phone_number } = friendInfo
     const userData = {
       phoneNumbers: [{
         label: 'mobile',

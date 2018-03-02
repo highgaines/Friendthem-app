@@ -125,16 +125,6 @@ class ForkScreen extends Component {
                   size={115}
                   color='#000' />
               }
-              <View>
-                <SocialIcon
-                  raised={false}
-                  iconSize={15}
-                  type='facebook'
-                  iconStyle={{
-                    backgroundColor: 'transparent'
-                  }}
-                />
-              </View>
               <Text style={styles.primSubText}>
                 Welcome!
               </Text>

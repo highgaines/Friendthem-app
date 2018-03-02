@@ -182,7 +182,7 @@ class NearbyFeedCard extends Component {
               </LazyloadView>
               <LazyloadView style={{ flex: 3 }}>
                 <Text style={styles.name}> {`${friendData.first_name} ${friendData.last_name}`} </Text>
-                <Text style={styles.hobbies}> Crypto | Gaming | Coding </Text>
+                <Text style={styles.hobbies}> Music | Cars | Life </Text>
                 <Text style={styles.location}> New York, NY </Text>
               </LazyloadView>
               <LazyloadView style={styles.deepLinkButtonContainer}>
