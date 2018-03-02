@@ -79,7 +79,7 @@ class FriendProfileScreen extends Component {
 
   handleEmail = () => {
     // email action here - needs to be hooked up to friend/user's actual e-mail
-    Communications.email(['naz@simplefractal.com'], null, null, 'ITS ALIVE!!!', 'my body text')
+    Communications.email([''], null, null, 'Subject Here: ', 'my body text')
   }
 
   handleCall = () => {
