@@ -136,7 +136,8 @@ class FriendProfileScreen extends Component {
   }
 
   getSCEligiblePlatforms = () => {
-    return this.props.friendInfo && this.props.friendInfo.social_profiles.map( obj => obj.provider) || [];
+    return this.props.friendInfo &&
+    this.props.friendInfo.social_profiles && this.props.friendInfo.social_profiles.map( obj => obj.provider) || [];
   }
 
   render() {
