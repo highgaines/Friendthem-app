@@ -67,8 +67,7 @@ export default StyleSheet.create({
       fontSize: 11
     },
     userName: {
-      fontWeight: '800',
-      marginRight: 15
+      fontWeight: '800'
     },
     sectionTitle: {
       height: 60,
