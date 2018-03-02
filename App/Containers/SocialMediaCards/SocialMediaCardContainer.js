@@ -113,7 +113,7 @@ class SocialMediaCardContainer extends Component {
           const capitalizeName = (name) => name[0].toUpperCase() + name.slice(1)
           const userName = currentPlatform ? this.socialPlatformUsername(isYoutube ? 'google-oauth2' : socialPlatform) : null
           const friendPlatfromPresent = fromFriendProfile && friendPlatforms ?
-            friendPlatforms.find(socialElem => {
+            friendPlatforms && friendPlatforms.find(socialElem => {
               if (isYoutube) {
                 return socialElem.provider === 'google-oauth2'
               } else {
