@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native'
 import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
+import { ifIphoneX } from '../../Themes/Helpers'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
-  container: {
+  container: ifIphoneX({
     flex: 3
-  },
+  }, {marginTop: 25}),
   linearGradient: {
     height: 70,
     justifyContent: 'flex-end'
