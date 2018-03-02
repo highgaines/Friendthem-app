@@ -43,6 +43,7 @@ export default class InfoRow extends Component {
         <Text style={styles.rowLabelText}>{`${rowLabel}: `}</Text>
         {isEditing ?
           <TextInput
+            keyboardType={field === 'age' ? 'numeric' : undefined}
             testID={`input-${field}`}
             value={this.state.input}
             style={styles.form}
