@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Text, TextInput, View, Button, TouchableOpacity, Image } from 'react-native'
+
 // Libraries
 import Modal from 'react-native-modal'
+import { Icon } from 'react-native-elements'
 
 // Redux
 import { connect } from 'react-redux'
@@ -88,9 +90,11 @@ class PhotoModal extends Component {
             ? <TouchableOpacity
               onPress={() => this.shiftStartingIndex('backward')}
               style={styles.button}>
-              <Text style={{color: 'white'}}>
-                Back
-              </Text>
+              <Icon
+                name="arrow-left"
+                type="entypo"
+                color="blue"
+              />
             </TouchableOpacity>
             : <View />
           }
@@ -98,9 +102,11 @@ class PhotoModal extends Component {
             ? <TouchableOpacity
               onPress={() => this.shiftStartingIndex('forward')}
               style={styles.button}>
-              <Text style={{color: 'white'}}>
-                Next
-              </Text>
+              <Icon
+                name="arrow-right"
+                type="entypo"
+                color="blue"
+              />
             </TouchableOpacity>
             : <View />
           }

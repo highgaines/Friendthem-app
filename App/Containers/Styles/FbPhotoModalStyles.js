@@ -7,6 +7,7 @@ export default StyleSheet.create({
     height: Metrics.screenHeight * 0.7,
     width: Metrics.screenWidth * 0.9,
     backgroundColor: 'white',
+    borderRadius: 10,
     alignSelf: 'center',
   },
   imageContainer: {
@@ -28,9 +29,8 @@ export default StyleSheet.create({
   },
   button: {
     margin: 10,
-    backgroundColor: Colors.buttonBlue,
     width: 50,
-    height: 20,
+    height: 30,
     alignItems: 'center',
     justifyContent: 'center'
   },
