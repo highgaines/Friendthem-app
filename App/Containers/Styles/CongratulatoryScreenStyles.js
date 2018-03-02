@@ -5,8 +5,8 @@ import { ifIphoneX } from '../../Themes/Helpers'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: ifIphoneX({
-    flex: 3
-  }, {marginTop: 25}),
+    height: Metrics.screenHeight
+  }, {marginTop: 25, height: Metrics.screenHeight}),
   linearGradient: {
     height: 70,
     justifyContent: 'flex-end'
