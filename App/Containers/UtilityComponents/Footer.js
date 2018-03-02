@@ -25,7 +25,7 @@ export default Footer = props => {
             fontSize: 12,
             alignSelf: 'center'
           }}>
-            Back to Launch Screen
+            Choose another login option
           </Text>
         </TouchableOpacity>
         : null

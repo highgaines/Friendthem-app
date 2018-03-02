@@ -139,7 +139,7 @@ class FriendProfileScreen extends Component {
     const { friendInfo, superConnect, navigation, setSuperConnectPlatforms, userInfo, userId } = this.props
     const { showModal, socialMediaData, syncedCardColors, selectedSocialMedia, platform } = this.state
 
-    const socialPlatforms = friendInfo 
+    const socialPlatforms = friendInfo
     && friendInfo.social_profiles
     && friendInfo.social_profiles.map(prof => prof.provider)
 
@@ -155,23 +155,31 @@ class FriendProfileScreen extends Component {
               locations={[0.1, 0.3, 0.5, 0.7, 1.0]}>
               <View style={[styles.profileHeader, renderIpxHeader]}>
                 <View style={styles.profHeaderTop}>
-                  <TouchableOpacity onPress={this.handleCall}>
-                    <Icon
-                      name='phone'
-                      type='font-awesome'
-                      color='#ffffff'
-                      containerStyle={styles.phoneIcon}/>
-                    </TouchableOpacity>
+                  {
+                    friendInfo.phone_number
+                    ? <TouchableOpacity onPress={this.handleCall}>
+                        <Icon
+                        name='phone'
+                        type='font-awesome'
+                        color='#ffffff'
+                        containerStyle={styles.phoneIcon}/>
+                      </TouchableOpacity>
+                    : null
+                  }
                     <Image
                       style={styles.profileImage}
                       source={friendInfo.picture ? {uri: `${friendInfo.picture}`} : Images.noPicSVG} />
-                      <TouchableOpacity onPress={this.handleEmail}>
-                        <Icon
-                          name='md-mail'
-                          type='ionicon'
-                          color='#ffffff'
-                          containerStyle={styles.mailIcon}/>
-                        </TouchableOpacity>
+                      {
+                        friendInfo.email
+                        ? <TouchableOpacity onPress={this.handleEmail}>
+                          <Icon
+                            name='md-mail'
+                            type='ionicon'
+                            color='#ffffff'
+                            containerStyle={styles.mailIcon}/>
+                          </TouchableOpacity>
+                        : null
+                      }
                       </View>
                       <Text style={styles.profileSubtext}>
                         {`${friendInfo.first_name} ${friendInfo.last_name}`}

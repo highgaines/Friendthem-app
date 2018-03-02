@@ -62,16 +62,13 @@ class FeedContainer extends Component {
   render = () => {
     const { platform, loading, friendInfo } = this.props
     const isInstagram = platform === 'instagram'
-    const instaUID = friendInfo.social_profiles.find(profile => profile.provider === 'instagram').uid
-    const instaUrl = instaUID ? `https://www.instagram.com/eoghanl` : ''
+    const instaObject = friendInfo && friendInfo.social_profiles && friendInfo.social_profiles.find(profile => profile.provider === 'instagram')
+    const instaUrl = instaObject && instaObject.uid ? `https://www.instagram.com/eoghanl` : ''
     const capitalizedPlat = platform ? `${platform.split('')[0].toUpperCase()}${platform.split('').slice(1).join('')}` : ''
 
     return(
       <ScrollView contentContainerStyle={styles.feedContainer}>
         <Text style={styles.titleText}> {capitalizedPlat} Feed </Text>
-        <TouchableOpacity style={styles.profileLinkButton}>
-          <Text style={styles.buttonText} onPress={() => this.linkToProfile(instaUrl)}>View Full Profile</Text>
-        </TouchableOpacity>
         { loading ?
           <View
             style={styles.loading, { marginTop: 40 }}>
