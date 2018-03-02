@@ -30,7 +30,8 @@ class FeedContainer extends Component {
       platform,
       fetchFeed,
       userId,
-      accessToken
+      accessToken,
+      loading
     } = this.props
 
     fetchFeed(accessToken, userId, platform)
@@ -52,7 +53,13 @@ class FeedContainer extends Component {
   renderFeedCards = platform => {
     const { userId, feed } = this.props
     const userFeedArr = feed[userId] && feed[userId][platform] ? feed[userId][platform] : []
-    return userFeedArr.map( (item, idx) => <FeedCard key={idx} item={item}/>)
+    return userFeedArr.length
+    ? userFeedArr.map( (item, idx) => <FeedCard key={idx} item={item}/>)
+    : <View style={{top: 100}}>
+      <Text>
+        Sorry, there's no content to display!
+      </Text>
+    </View>
   }
 
   linkToProfile = url => {
@@ -65,18 +72,18 @@ class FeedContainer extends Component {
     const instaObject = friendInfo && friendInfo.social_profiles && friendInfo.social_profiles.find(profile => profile.provider === 'instagram')
     const instaUrl = instaObject && instaObject.uid ? `https://www.instagram.com/eoghanl` : ''
     const capitalizedPlat = platform ? `${platform.split('')[0].toUpperCase()}${platform.split('').slice(1).join('')}` : ''
-
     return(
       <ScrollView contentContainerStyle={styles.feedContainer}>
         <Text style={styles.titleText}> {capitalizedPlat} Feed </Text>
-        { loading ?
-          <View
-            style={styles.loading, { marginTop: 40 }}>
-            <ActivityIndicator
-              size="large"
-              color="#0000ff"
-            />
-          </View> : this.renderFeedCards(platform)}
+          {loading
+            ? <View
+              style={styles.loading, { marginTop: 40 }}>
+                <ActivityIndicator
+                  size="large"
+                  color="#0000ff"
+                  />
+              </View> :
+              this.renderFeedCards(platform)}
       </ScrollView>
     )
   }
