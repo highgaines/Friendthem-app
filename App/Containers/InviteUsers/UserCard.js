@@ -41,7 +41,11 @@ export default UserCard = ({
 
   const handleEmailInvite = () => {
     let emailAddress = determineAnyEmail()
-    Communications.email(emailAddress, 'Friend Them is Great! Download it here!')
+    if (emailAddress) {
+      Communications.email(emailAddress, 'Friend Them is Great! Download it here!')
+    } else {
+      alert(`You do not have an e-mail on file for ${firstName}`)
+    }
   }
 
   return (
