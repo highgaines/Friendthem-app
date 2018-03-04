@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Linking, Button } from 'react-native';
+
+// Libraries
 import { NavigationActions } from 'react-navigation';
 import LinearGradient from 'react-native-linear-gradient';
 import Image from 'react-native-remote-svg';
+import { Icon } from 'react-native-elements'
+
+// Images
 import { Images } from '../../Themes';
+
 // Styles
 import styles from '../Styles/CongratulatoryScreenStyles';
 import { determineImage } from '../../Utils/constants'
-import { Icon } from 'react-native-elements'
 
 export default CongratulatoryScreen = props => {
   const { userInfo,friendInfo, navigation, snapchatDeeplink } = props;
