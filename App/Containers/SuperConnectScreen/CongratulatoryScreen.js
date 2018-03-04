@@ -34,13 +34,6 @@ export default CongratulatoryScreen = props => {
           style={styles.linearGradient}
           >
             <View style={styles.row}>
-              <View style={styles.okButton}>
-              <TouchableOpacity style={styles.button} onPress={handleNavigation} title="OK">
-              <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>
-                {`< Home`}
-              </Text>
-              </TouchableOpacity>
-              </View>
               <View style={styles.textContainer}>
                 <Text style={styles.superConnectText}> Super Connect </Text>
               </View>
@@ -111,6 +104,13 @@ export default CongratulatoryScreen = props => {
             color='#000' />
           }
         </View>
+        <TouchableOpacity
+          style={styles.connectButton}
+          onPress={handleNavigation}>
+          <Text style={styles.connectButtonText}>
+            Go Home
+          </Text>
+        </TouchableOpacity>
         {
           displaySnapButton ?
           <View style={styles.subTextContainer}>

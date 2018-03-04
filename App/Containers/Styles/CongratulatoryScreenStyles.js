@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
+import { Metrics, ApplicationStyles, Fonts, Colors } from '../../Themes/'
 import { ifIphoneX } from '../../Themes/Helpers'
 
 export default StyleSheet.create({
@@ -15,18 +15,18 @@ export default StyleSheet.create({
   },
   headerBar: {
     backgroundColor: 'transparent',
-    justifyContent: 'flex-start'
+    justifyContent: 'center'
   },
   row: {
-    flex: 6,
     flexDirection: 'row',
+    justifyContent: 'center',
+    width: Metrics.screenWidth,
     marginBottom: 20
   },
   textContainer: {
     flex: 5,
     justifyContent: 'flex-end',
-    alignItems: 'center',
-    marginRight: 100
+    alignItems: 'center'
   },
   superConnectText: {
     color: 'white',
@@ -134,6 +134,22 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  connectButton: {
+    width: 200,
+    height: 50,
+    borderRadius: 75,
+    backgroundColor: Colors.friendThemBlue,
+    flexDirection: 'row',
+    marginLeft: 20,
+    alignItems: 'center',
+    color: 'white',
+    justifyContent: 'space-around'
+  },
+  connectButtonText: {
+    justifyContent: 'center',
+    color: 'white',
+    fontSize: 18
   },
   snapchatButtonText: {
     marginRight: 10
