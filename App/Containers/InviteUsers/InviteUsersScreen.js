@@ -29,7 +29,7 @@ class InviteUsersScreen extends Component {
     super(props)
 
     this.state = {
-      networkTabSelected: true,
+      networkTabSelected: false,
       showModal: false
     }
   }
