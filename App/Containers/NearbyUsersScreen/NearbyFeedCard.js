@@ -207,6 +207,7 @@ class NearbyFeedCard extends Component {
         <LazyloadView style={{ flex: 1, backgroundColor: 'white' }}>
           <LazyloadScrollView
             horizontal={platform === 'profile' ? false : true}
+            showsHorizontalScrollIndicator
             contentContainerStyle={[styles.contentContainer, platform === 'profile' ? { 'flex': 1, 'flexWrap': 'wrap', 'justifyContent': 'flex-start' } : '']}
           >
             {loading && this.state.loadInThisCard
