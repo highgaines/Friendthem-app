@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity, AppState, ActionSheetIOS } from 'react-native'
 
 // Libraries
+import { CachedImage } from 'react-native-img-cache';
 import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from 'react-native-elements';
 import FBSDK, { LoginManager } from 'react-native-fbsdk';
@@ -171,7 +172,7 @@ class FriendProfileScreen extends Component {
                       </TouchableOpacity>
                     : null
                   }
-                    <Image
+                    <CachedImage
                       style={styles.profileImage}
                       source={friendInfo.picture ? {uri: `${friendInfo.picture}`} : Images.noPicSVG} />
                       {
