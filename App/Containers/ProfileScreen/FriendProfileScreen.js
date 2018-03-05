@@ -65,7 +65,11 @@ class FriendProfileScreen extends Component {
     const { friendInfo } = this.props
       return(
         <View style={{ height: 366 }}>
-          <FeedContainer platform={platform} userId={friendInfo.id} friendInfo={friendInfo}/>
+          <FeedContainer
+            platform={platform}
+            userId={friendInfo.id}
+            friendInfo={friendInfo}
+          />
         </View>
       )
   }
@@ -81,9 +85,9 @@ class FriendProfileScreen extends Component {
   handleEmail = () => {
     // email action here - needs to be hooked up to friend/user's actual e-mail
     const { friendInfo } = this.props
-    const { email } = friendInfo
-    if (email) {
-      Communications.email([email], null, null, 'Subject Here', 'Message Body Here...')
+    const { personal_email } = friendInfo
+    if (personal_email) {
+      Communications.email([personal_email], null, null, 'Subject Here', 'Message Body Here...')
     } else {
       alert(`Sorry, ${friendInfo.first_name} has not shared this information`)
     }
