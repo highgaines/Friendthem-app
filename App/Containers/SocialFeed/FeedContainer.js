@@ -137,7 +137,7 @@ class FeedContainer extends Component {
     return userFeedArr.length
     ? userFeedArr.map( (item, idx) => <FeedCard key={idx} item={item}/>)
     : <View style={{top: 100}}>
-        <Text>
+        <Text style={{ textAlign: 'center' }}>
           Sorry, there's no content to display!
         </Text>
         <View style={styles.deepLinkButtonContainer}>
