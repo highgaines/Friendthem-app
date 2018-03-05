@@ -34,12 +34,7 @@ class ForkScreen extends Component {
 
   componentDidMount = () => {
     const {
-      nativeGeolocation,
-      setLocationInterval,
       nativeNotifications,
-      nativeContactsPermission,
-      locationIntervalRunning,
-      customGeolocationPermission,
       customNotificationPermission,
       getUserInfo,
       storeContactInfo,
@@ -60,14 +55,6 @@ class ForkScreen extends Component {
         OneSignal.registerForPushNotifications()
       }
     })
-
-    if (customGeolocationPermission && !nativeGeolocation) {
-      Permissions.request('location', { type: 'always' }).then(response => {
-        if(response === 'authorized') {
-          setLocationInterval()
-        }
-      })
-    }
   }
 
   componentWillUpdate = (nextProps, nextState) => {
@@ -150,21 +137,16 @@ const mapStateToProps = state => ({
   userInfo: state.userStore.userData,
   fbAuthToken: state.fbStore.fbAccessToken,
   accessToken: state.authStore.accessToken,
-  nativeGeolocation: state.permissionsStore.nativeGeolocation,
   nativeNotifications: state.permissionsStore.nativeNotifications,
   locationIntervalRunning: state.permissionsStore.locationIntervalRunning,
-  customGeolocationPermission: state.permissionsStore.locationPermissionsGranted,
   customNotificationPermission: state.permissionsStore.notificationPermissionsGranted,
   nativeContactsPermission: state.permissionsStore.nativeContactsPermission
 })
 
 const mapDispatchToProps = dispatch => {
-  const { setLocationInterval } = PermissionsStoreActions
-
   return {
     ...bindActionCreators({
       getUserInfo,
-      setLocationInterval,
       storeContactInfo,
       updateUserPosition
     }, dispatch)

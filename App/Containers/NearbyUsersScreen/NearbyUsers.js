@@ -8,6 +8,7 @@ import NearbyFeedContainer from './NearbyFeedContainer'
 
 // Libraries
 import LinearGradient from 'react-native-linear-gradient'
+import Permissions from 'react-native-permissions'
 import _ from 'lodash';
 
 // Components
@@ -17,6 +18,7 @@ import WelcomeScreen from '../TutorialScreens/WelcomeScreen'
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import PermissionsStoreActions from '../../Redux/PermissionsStore'
 import FriendStoreActions from '../../Redux/FriendStore'
 import InviteUsersStoreActions, { fetchConnectivityData } from '../../Redux/InviteUsersStore'
 
@@ -38,9 +40,17 @@ class NearbyUsers extends Component {
   }
 
   componentWillMount = () => {
-    const { accessToken, fetchConnectivityData } = this.props
+    const { accessToken, fetchConnectivityData, customGeolocationPermission, locationPermission, setLocationInterval } = this.props
 
     fetchConnectivityData(accessToken)
+
+    if (customGeolocationPermission && !locationPermission) {
+      Permissions.request('location', { type: 'whenInUse' }).then(response => {
+        if(response === 'authorized') {
+          setLocationInterval()
+        }
+      })
+    }
   }
 
   handleChange = input => {
@@ -104,16 +114,19 @@ class NearbyUsers extends Component {
 const mapStateToProps = state => ({
   accessToken: state.authStore.accessToken,
   locationPermission: state.permissionsStore.nativeGeolocation,
-  users: state.friendStore.users
+  users: state.friendStore.users,
+  customGeolocationPermission: state.permissionsStore.locationPermissionsGranted,
 })
 
 const mapDispatchToProps = dispatch => {
   const { setFriendInfo } = FriendStoreActions
+  const { setLocationInterval } = PermissionsStoreActions
 
   return {
     ...bindActionCreators({
       setFriendInfo,
-      fetchConnectivityData
+      fetchConnectivityData,
+      setLocationInterval
     }, dispatch)
   }
 }
