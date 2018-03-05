@@ -6,7 +6,7 @@ export default StyleSheet.create({
   cardContainer: {
     width: Metrics.screenWidth * 0.9,
     height: 335,
-    marginBottom: 10,
+    margin: 10,
     padding: 10,
     backgroundColor: 'white',
     shadowOffset:{
