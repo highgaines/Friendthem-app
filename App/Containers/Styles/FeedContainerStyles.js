@@ -5,7 +5,6 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   feedContainer: {
     padding: 10,
-    alignItems: 'center',
     paddingBottom: 100
   },
   nearbyFeedContainer: {

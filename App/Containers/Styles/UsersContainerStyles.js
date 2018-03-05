@@ -5,10 +5,10 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
     backgroundColor: '#f2f2f2',
-    height: Metrics.screenHeight,
+    height: Metrics.screenHeight * 1.2,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginBottom: 70
+    paddingBottom: 270
   },
   socialAccountContainer: {
     paddingHorizontal: 10,

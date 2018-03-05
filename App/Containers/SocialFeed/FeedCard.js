@@ -41,7 +41,7 @@ export default FeedCard = props => {
         </LazyloadView>
         <LazyloadView style={styles.bottomRow}>
           <Text style={styles.dateText}>
-            { `${month} ${day} ${year} at ${time}` }
+            { `${month} ${day}, ${year} at ${time}` }
           </Text>
           <Text style={styles.likeText}>
             {`${item.num_likes} likes`}
