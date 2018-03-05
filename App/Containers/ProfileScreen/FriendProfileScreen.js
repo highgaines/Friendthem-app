@@ -97,7 +97,7 @@ class FriendProfileScreen extends Component {
     // call action here - needs to be hooked up to user phone number
     const { friendInfo } = this.props
     const { phone_number } = friendInfo
-    console.log(phone_number)
+
     if (phone_number) {
       const userData = {
         phoneNumbers: [{
