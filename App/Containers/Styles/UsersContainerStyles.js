@@ -8,6 +8,7 @@ export default StyleSheet.create({
     height: Metrics.screenHeight * 1.2,
     flexDirection: 'row',
     flexWrap: 'wrap',
+    justifyContent: 'center',
     paddingBottom: 270
   },
   socialAccountContainer: {
