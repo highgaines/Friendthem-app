@@ -6,7 +6,7 @@ export default StyleSheet.create({
   cardContainer: {
     width: Metrics.screenWidth * 0.9,
     height: 335,
-    margin: 10,
+    marginBottom: 10,
     padding: 10,
     backgroundColor: 'white',
     shadowOffset:{
@@ -132,8 +132,8 @@ export default StyleSheet.create({
     fontSize: 12
   },
   image: {
-    height: Metrics.screenWidth * 0.7,
-    width: Metrics.screenWidth * 0.65,
+    height: Metrics.screenWidth * 0.70,
+    width: Metrics.screenWidth * 0.85,
     marginBottom: 5
   }
 })
