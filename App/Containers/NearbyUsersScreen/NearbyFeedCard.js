@@ -36,7 +36,7 @@ class NearbyFeedCard extends Component {
     super(props)
 
     this.state = {
-      platform: 'instagram',
+      platform: 'twitter',
       loadInThisCard: false
     }
   }

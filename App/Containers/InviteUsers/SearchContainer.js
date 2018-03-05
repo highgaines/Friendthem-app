@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, Image, TouchableOpacity, TextInput, View } from 'react-native';
+import { ScrollView, Text, Image, TouchableOpacity, TextInput, View, FlatList } from 'react-native';
 
 // Redux
 import { connect } from 'react-redux';
@@ -37,24 +37,24 @@ class SearchContainer extends Component {
     )
   }
 
-  renderUserList = () => {
-    const { contactList, triggerModal, selectUser } = this.props
-    return contactList.map( (contact, idx) =>
-      <UserCard
-        key={idx}
-        firstName={contact.givenName}
-        lastName={contact.familyName}
-        phoneNumbers={contact.phoneNumbers}
-        emailAddresses={contact.emailAddresses}
-        triggerModal={triggerModal}
-        selectUser={selectUser}
-      /> )
-  }
-
   render() {
+    const { contactList, triggerModal, selectUser } = this.props
+
     return (
         <LazyloadScrollView contentContainerStyle={styles.searchContainer}>
-          {this.renderUserList()}
+          <FlatList
+            data={contactList}
+            renderItem={({item}) => (
+              <UserCard
+                firstName={item.givenName}
+                lastName={item.familyName}
+                phoneNumbers={item.phoneNumbers}
+                emailAddresses={item.emailAddresses}
+                triggerModal={triggerModal}
+                selectUser={selectUser}
+              />
+            )}
+          />
         </LazyloadScrollView>
     )
   }
