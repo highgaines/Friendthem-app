@@ -6,13 +6,16 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: ifIphoneX({
     alignItems: 'center',
-    marginTop: 35,
     height: Metrics.screenHeight
-  }, {alignItems: 'center', marginTop: 25, height: Metrics.screenHeight}),
-  linearGradient: {
+  }, {alignItems: 'center', height: Metrics.screenHeight}),
+  linearGradient: ifIphoneX({
+    height: 70,
+    justifyContent: 'flex-end',
+    padding: 20
+  },{
     height: 70,
     justifyContent: 'flex-end'
-  },
+  }),
   headerBar: {
     backgroundColor: 'transparent',
     justifyContent: 'center'
