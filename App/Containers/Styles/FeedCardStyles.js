@@ -132,8 +132,8 @@ export default StyleSheet.create({
     fontSize: 12
   },
   image: {
-    height: Metrics.screenWidth * 0.7,
-    width: Metrics.screenWidth * 0.65,
+    height: Metrics.screenWidth * 0.70,
+    width: Metrics.screenWidth * 0.85,
     marginBottom: 5
   }
 })

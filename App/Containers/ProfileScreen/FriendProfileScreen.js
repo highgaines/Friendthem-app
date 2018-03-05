@@ -65,7 +65,11 @@ class FriendProfileScreen extends Component {
     const { friendInfo } = this.props
       return(
         <View style={{ height: 366 }}>
-          <FeedContainer platform={platform} userId={friendInfo.id} friendInfo={friendInfo}/>
+          <FeedContainer
+            platform={platform}
+            userId={friendInfo.id}
+            friendInfo={friendInfo}
+          />
         </View>
       )
   }
@@ -80,37 +84,48 @@ class FriendProfileScreen extends Component {
 
   handleEmail = () => {
     // email action here - needs to be hooked up to friend/user's actual e-mail
-    Communications.email([''], null, null, 'Subject Here', 'Message Body Here...')
+    const { friendInfo } = this.props
+    const { personal_email } = friendInfo
+    if (personal_email) {
+      Communications.email([personal_email], null, null, 'Subject Here', 'Message Body Here...')
+    } else {
+      alert(`Sorry, ${friendInfo.first_name} has not shared this information`)
+    }
   }
 
   handleCall = () => {
     // call action here - needs to be hooked up to user phone number
     const { friendInfo } = this.props
     const { phone_number } = friendInfo
-    const userData = {
-      phoneNumbers: [{
-        label: 'mobile',
-        number: `${phone_number}`
-      }],
-      familyName: `${friendInfo.last_name}`,
-      givenName: `${friendInfo.first_name}`,
-    }
 
-    ActionSheetIOS.showActionSheetWithOptions({
-      options: [
-        `Call ${friendInfo.first_name}`,
-        `Text ${friendInfo.first_name}`,
-        'Add To Contacts',
-        'Cancel']
-    }, (buttonIndex) => {
-      if (buttonIndex === 0) {
-        Communications.phonecall(`${phone_number}`, true)
-      } else if (buttonIndex ===1) {
-        Communications.textWithoutEncoding(`${phone_number}`, `Hey, ${friendInfo.first_name}!`)
-      } else if (buttonIndex === 2) {
-        Contacts.openContactForm(userData, (err) => { console.log(err)})
+    if (phone_number) {
+      const userData = {
+        phoneNumbers: [{
+          label: 'mobile',
+          number: `${phone_number}`
+        }],
+        familyName: `${friendInfo.last_name}`,
+        givenName: `${friendInfo.first_name}`,
       }
-    })
+
+      ActionSheetIOS.showActionSheetWithOptions({
+        options: [
+          `Call ${friendInfo.first_name}`,
+          `Text ${friendInfo.first_name}`,
+          'Add To Contacts',
+          'Cancel']
+      }, (buttonIndex) => {
+        if (buttonIndex === 0) {
+          Communications.phonecall(`${phone_number}`, true)
+        } else if (buttonIndex ===1) {
+          Communications.textWithoutEncoding(`${phone_number}`, `Hey, ${friendInfo.first_name}!`)
+        } else if (buttonIndex === 2) {
+          Contacts.openContactForm(userData, (err) => { console.log(err)})
+        }
+      })
+    } else {
+      alert(`Sorry, ${friendInfo.first_name} has not shared this information`)
+    }
   }
 
   socialPlatformPresent = (provider) => {
@@ -167,31 +182,23 @@ class FriendProfileScreen extends Component {
               locations={[0.1, 0.3, 0.5, 0.7, 1.0]}>
               <View style={[styles.profileHeader, renderIpxHeader]}>
                 <View style={styles.profHeaderTop}>
-                  {
-                    friendInfo.phone_number
-                    ? <TouchableOpacity onPress={this.handleCall}>
+                      <TouchableOpacity onPress={this.handleCall}>
                         <Icon
                         name='phone'
                         type='font-awesome'
                         color='#ffffff'
                         containerStyle={styles.phoneIcon}/>
                       </TouchableOpacity>
-                    : null
-                  }
                     <CachedImage
                       style={styles.profileImage}
                       source={friendInfo.picture ? {uri: `${friendInfo.picture}`} : Images.noPicSVG} />
-                      {
-                        friendInfo.email
-                        ? <TouchableOpacity onPress={this.handleEmail}>
+                        <TouchableOpacity onPress={this.handleEmail}>
                           <Icon
                             name='md-mail'
                             type='ionicon'
                             color='#ffffff'
                             containerStyle={styles.mailIcon}/>
-                          </TouchableOpacity>
-                        : null
-                      }
+                        </TouchableOpacity>
                       </View>
                       <Text style={styles.profileSubtext}>
                         {`${friendInfo.first_name} ${friendInfo.last_name}`}
