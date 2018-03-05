@@ -96,8 +96,9 @@ class FeedContainer extends Component {
               '#fec052'
             ]}
             gradientStyles={{
-              'width': 100,
-              'height': 30,
+              'width': 150,
+              'height': 50,
+              'marginTop': 20,
               'borderRadius': 30,
               'justifyContent': 'center'
             }}

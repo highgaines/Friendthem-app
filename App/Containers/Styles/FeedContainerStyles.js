@@ -34,8 +34,9 @@ export default StyleSheet.create({
     flex: 1
   },
   deepLinkButton: {
-    width: 100,
-    height: 30,
+    marginTop: 20,
+    width: 150,
+    height: 50,
     alignItems: 'center',
     flexDirection: 'row',
     borderRadius: 30,
@@ -47,7 +48,7 @@ export default StyleSheet.create({
   },
   deepLinkText: {
     color: 'white',
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: '600'
   },
   facebookDeeplinkButton: {

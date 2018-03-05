@@ -92,7 +92,8 @@ class NearbyUsers extends Component {
               users={input.length ? this.filterUsers(users) : users}
               navigation={navigation}
               locationPermission={locationPermission}
-              setFriendInfo={setFriendInfo}/>
+              setFriendInfo={setFriendInfo}
+            />
           : <NearbyFeedContainer />
         }
         {
