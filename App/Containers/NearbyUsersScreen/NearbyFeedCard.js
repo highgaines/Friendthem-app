@@ -182,7 +182,11 @@ class NearbyFeedCard extends Component {
               </LazyloadView>
               <LazyloadView style={{ flex: 3 }}>
                 <Text style={styles.name}> {`${friendData.first_name} ${friendData.last_name}`} </Text>
-                <Text style={styles.hobbies}> Music | Cars | Life </Text>
+                {
+                    friendData && friendData.hobbies && friendData.hobbies.length
+                    ? <Text style={styles.hobbies}>{ friendData.hobbies } </Text>
+                    : null
+                }
                 <Text style={styles.location}> New York, NY </Text>
               </LazyloadView>
               <LazyloadView style={styles.deepLinkButtonContainer}>
@@ -203,6 +207,7 @@ class NearbyFeedCard extends Component {
         <LazyloadView style={{ flex: 1, backgroundColor: 'white' }}>
           <LazyloadScrollView
             horizontal={platform === 'profile' ? false : true}
+            showsHorizontalScrollIndicator
             contentContainerStyle={[styles.contentContainer, platform === 'profile' ? { 'flex': 1, 'flexWrap': 'wrap', 'justifyContent': 'flex-start' } : '']}
           >
             {loading && this.state.loadInThisCard
