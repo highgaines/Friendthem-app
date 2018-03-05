@@ -60,7 +60,8 @@ export default StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
-    padding: 5
+    padding: 5,
+    marginBottom: 70
   },
   navbar: {
     justifyContent: 'space-around',

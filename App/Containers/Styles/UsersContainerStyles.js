@@ -7,7 +7,8 @@ export default StyleSheet.create({
     backgroundColor: '#f2f2f2',
     height: Metrics.screenHeight,
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    marginBottom: 70
   },
   socialAccountContainer: {
     paddingHorizontal: 10,
