@@ -1,17 +1,22 @@
 import React from 'react';
-import { Image } from 'react-native';
+
+// Libraries
+import { CachedImage } from "react-native-img-cache";
+
+// Images
 import { Images } from '../../Themes';
 
 export default ImageCircle = props => {
   const { size, extraStyles, source } = props
 
   return (
-    <Image
+    <CachedImage
       style={[{
         height: size,
         width: size,
         borderRadius: size/2
       }, extraStyles]}
+      mutable
       source={source ? {uri: source} : Images.noPicSVG}
     />
   )

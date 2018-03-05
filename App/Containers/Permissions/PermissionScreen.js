@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // Libraries
 import SVGImage from 'react-native-svg-image';
 import LinearGradient from 'react-native-linear-gradient';
-import Image from 'react-native-remote-svg';
 import OneSignal from 'react-native-onesignal';
 import Contacts from 'react-native-contacts';
 

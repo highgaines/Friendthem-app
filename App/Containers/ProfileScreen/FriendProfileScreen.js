@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity, AppState, ActionSheetIOS } from 'react-native'
 
 // Libraries
+import { CachedImage } from 'react-native-img-cache';
 import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from 'react-native-elements';
 import FBSDK, { LoginManager } from 'react-native-fbsdk';
@@ -89,18 +90,24 @@ class FriendProfileScreen extends Component {
     const userData = {
       phoneNumbers: [{
         label: 'mobile',
-        number: '3472917739'
+        number: `${phone_number}`
       }],
       familyName: `${friendInfo.last_name}`,
       givenName: `${friendInfo.first_name}`,
     }
 
     ActionSheetIOS.showActionSheetWithOptions({
-      options: [`Call ${friendInfo.phone_}`, 'Add To Contacts', 'Cancel']
+      options: [
+        `Call ${friendInfo.first_name}`,
+        `Text ${friendInfo.first_name}`,
+        'Add To Contacts',
+        'Cancel']
     }, (buttonIndex) => {
       if (buttonIndex === 0) {
-        Communications.phonecall('3472917739', true)
-      } else if (buttonIndex === 1) {
+        Communications.phonecall(`${phone_number}`, true)
+      } else if (buttonIndex ===1) {
+        Communications.textWithoutEncoding(`${phone_number}`, `Hey, ${friendInfo.first_name}!`)
+      } else if (buttonIndex === 2) {
         Contacts.openContactForm(userData, (err) => { console.log(err)})
       }
     })
@@ -171,7 +178,7 @@ class FriendProfileScreen extends Component {
                       </TouchableOpacity>
                     : null
                   }
-                    <Image
+                    <CachedImage
                       style={styles.profileImage}
                       source={friendInfo.picture ? {uri: `${friendInfo.picture}`} : Images.noPicSVG} />
                       {

@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Linking, Button } from 'react-native';
+
+// Libraries
 import { NavigationActions } from 'react-navigation';
 import LinearGradient from 'react-native-linear-gradient';
 import Image from 'react-native-remote-svg';
+import { Icon } from 'react-native-elements'
+
+// Images
 import { Images } from '../../Themes';
+
 // Styles
 import styles from '../Styles/CongratulatoryScreenStyles';
 import { determineImage } from '../../Utils/constants'
-import { Icon } from 'react-native-elements'
 
 export default CongratulatoryScreen = props => {
   const { userInfo,friendInfo, navigation, snapchatDeeplink } = props;
@@ -34,13 +39,6 @@ export default CongratulatoryScreen = props => {
           style={styles.linearGradient}
           >
             <View style={styles.row}>
-              <View style={styles.okButton}>
-              <TouchableOpacity style={styles.button} onPress={handleNavigation} title="OK">
-              <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>
-                {`< Home`}
-              </Text>
-              </TouchableOpacity>
-              </View>
               <View style={styles.textContainer}>
                 <Text style={styles.superConnectText}> Super Connect </Text>
               </View>
@@ -111,6 +109,13 @@ export default CongratulatoryScreen = props => {
             color='#000' />
           }
         </View>
+        <TouchableOpacity
+          style={styles.connectButton}
+          onPress={handleNavigation}>
+          <Text style={styles.connectButtonText}>
+            Go Home
+          </Text>
+        </TouchableOpacity>
         {
           displaySnapButton ?
           <View style={styles.subTextContainer}>

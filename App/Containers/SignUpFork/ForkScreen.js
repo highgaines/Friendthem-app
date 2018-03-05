@@ -15,6 +15,7 @@ import ConnectButton from '../SuperConnectScreen/ConnectButton'
 import LinearGradientWrapper from '../../HOCs/LinearGradientWrapper'
 
 // Libraries
+import {CachedImage} from "react-native-img-cache";
 import { SocialIcon } from 'react-native-elements'
 import Permissions from 'react-native-permissions'
 import { Icon } from 'react-native-elements'
@@ -108,12 +109,12 @@ class ForkScreen extends Component {
 
     return (
             <View style={styles.centered}>
-              <Image
+              <CachedImage
                 style={{ marginTop: 100 }} source={Images.mainLogo}
               />
               {
                 userInfo.picture ?
-                <Image
+                <CachedImage
                   style={styles.userImageContainer}
                   source={userInfo.picture ? {uri: `${userInfo.picture}`} : Images.noPicSVG}
                 />

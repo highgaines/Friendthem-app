@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, View, TouchableOpacity, Linking } from 'react-native'
-import Image from 'react-native-remote-svg'
+
+// Libraries
+import { CachedImage } from "react-native-img-cache";
+import { LazyloadScrollView, LazyloadView } from 'react-native-lazyload-deux'
+
+// Components
 import UserCard from './UserCard'
+import SocialMediaCard from '../SocialMediaCards/SocialMediaCard'
+
 // Styles
 import styles from '../Styles/UsersContainerStyles'
-import SocialMediaCard from '../SocialMediaCards/SocialMediaCard'
+
+// Images
 import { Images } from '../../Themes'
-import { LazyloadScrollView, LazyloadView } from 'react-native-lazyload-deux'
 
 export default function UsersContainer(props) {
   const { users, navigation, setFriendInfo, locationPermission } = props
@@ -43,7 +50,7 @@ export default function UsersContainer(props) {
         ? userCards
         :
         <LazyloadView style={styles.noNearbyUsersContainer}>
-          <Image
+          <CachedImage
             source={Images.characterFriendThem}
             style={styles.mainImage}
             />

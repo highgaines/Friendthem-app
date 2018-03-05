@@ -41,11 +41,15 @@ export default UserCard = ({
 
   const handleEmailInvite = () => {
     let emailAddress = determineAnyEmail()
-    Communications.email(emailAddress, 'Friend Them is Great! Download it here!')
+    if (emailAddress) {
+      Communications.email(emailAddress, 'Friend Them is Great! Download it here!')
+    } else {
+      alert(`You do not have an e-mail on file for ${firstName}`)
+    }
   }
 
   return (
-    <Animatable.View style={styles.userCardContainer} animation="slideInLeft">
+    <View style={styles.userCardContainer}>
 
       <View style={styles.infoColumn}>
         <Text style={styles.userNameText}> {`${firstName} ${lastName}`} </Text>
@@ -68,7 +72,6 @@ export default UserCard = ({
           />
         </TouchableOpacity>
       </View>
-
-    </Animatable.View>
+    </View>
   )
 }
