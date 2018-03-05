@@ -116,7 +116,7 @@ class PermissionScreen extends Component {
     const { permissionType } = this.props
 
     return permissionType === 'geolocation' ?
-    {uri: `${Images.geolocationSVG}`} : {uri: `${Images.notificationsSVG}`}
+    Images.geolocationSVG : Images.notificationsSVG
   }
 
   render() {
