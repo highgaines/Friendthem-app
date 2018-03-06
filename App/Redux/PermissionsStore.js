@@ -61,24 +61,15 @@ const handleSetNativeContactsPermission = (state = INITIAL_STATE, action) => {
 }
 
 const handleLocationPermissions = (state, action) => {
-  return {
-    ...state,
-    locationPermissionsGranted: true
-  }
+  return state.set('locationPermissionsGranted', true)
 }
 
 const handleNotificationPermissions = (state, action) => {
-  return {
-    ...state,
-    notificationPermissionsGranted: true
-  }
+  return state.set('notificationPermissionsGranted', true)
 }
 
 const setLocationInterval = (state, action) => {
-  return {
-    ...state,
-    locationIntervalRunning: true
-  }
+  return state.set('locationIntervalRunning', true)
 }
 
 const removeLocationInterval = (state, action) => {
