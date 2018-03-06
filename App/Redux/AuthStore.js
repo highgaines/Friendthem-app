@@ -23,7 +23,10 @@ const { Types, Creators } = createActions({
   loginFacebookFailure: null,
   socialMediaAuthRequest: null,
   socialMediaAuthSuccess: null,
-  socialMediaAuthFailure: null
+  socialMediaAuthFailure: null,
+  refreshAuthTokenRequest: null,
+  refreshAuthTokenSuccess: null,
+  refreshAuthTokenFailure: null
 })
 
 export const AuthTypes = Types
@@ -100,8 +103,6 @@ export const login = (userObj) => {
   }
 }
 
-
-
 export const loginByFacebook = (userObj, accessToken = null) => {
   const body = { ...userObj }
 
@@ -168,6 +169,33 @@ export const socialMediaAuth = (platform, userId, apiAccessToken) => {
   }
 }
 
+export const refreshAuthToken = refreshToken => {
+  const body = {
+    client_id: envConfig.Development.devClientId,
+    client_secret: envConfig.Development.devClientSecret,
+    refresh_token: refreshToken,
+    grant_type: 'refresh_token'
+  }
+
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+
+  const init= {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(body)
+  }
+
+  return {
+    types: [
+      Types.REFRESH_AUTH_TOKEN_REQUEST,
+      Types.REFRESH_AUTH_TOKEN_SUCCESS,
+      Types.REFRESH_AUTH_TOKEN_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi('auth/token/', init, dispatch)
+  }
+}
 
 /* -------- Reducers -------- */
 
@@ -235,6 +263,26 @@ const handleSocialMediaAuthFailure = (state, action) => {
   return state;
 }
 
+const handleRefreshAuthTokenRequest = (state, action) => {
+  return state;
+}
+
+const handleRefreshAuthTokenSuccess = (state, action) => {
+  const { data } = action;
+
+  return state.merge({
+    accessToken: data.access_token,
+    expiresIn: data.expires_in,
+    tokenType: data.token_Type,
+    scope: data.scope,
+    refreshToken: data.refresh_token
+  });
+}
+
+const handleRefreshAuthTokenFailure = (state, action) => {
+  return state;
+}
+
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGOUT_USER]: handleUserLogout,
   [Types.LOGIN_REQUEST]: loginRequest,
@@ -248,5 +296,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.REGISTER_FAILURE]: registerAccountFailure,
   [Types.SOCIAL_MEDIA_AUTH_REQUEST]: handleSocialMediaAuthRequest,
   [Types.SOCIAL_MEDIA_AUTH_SUCCESS]: handleSocialMediaAuthSuccess,
-  [Types.SOCIAL_MEDIA_AUTH_FAILURE]: handleSocialMediaAuthFailure
+  [Types.SOCIAL_MEDIA_AUTH_FAILURE]: handleSocialMediaAuthFailure,
+  [Types.REFRESH_AUTH_TOKEN_REQUEST]: handleRefreshAuthTokenRequest,
+  [Types.REFRESH_AUTH_TOKEN_SUCCESS]: handleRefreshAuthTokenSuccess,
+  [Types.REFRESH_AUTH_TOKEN_FAILURE]: handleRefreshAuthTokenFailure
 })
