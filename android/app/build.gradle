@@ -107,6 +107,8 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        manifestPlaceholders = [onesignal_app_id: "xxxx",
+                                onesignal_google_project_number: "xxxx"]
     }
     splits {
         abi {
@@ -140,7 +142,6 @@ android {
 dependencies {
     compile project(':react-native-fetch-blob')
     compile project(':react-native-fast-image')
-    compile project(':react-native-image-crop-picker')
     compile project(':react-native-picker')
     compile project(':react-native-image-picker')
     compile project(':react-native-onesignal')
