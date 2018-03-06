@@ -124,58 +124,58 @@ const handleDeleteRowSuccess = (state = INITIAL_STATE, action)  => {
 // REGISTER USER FOR NOTIFICATIONS
 
 const handleRegisterNotifRequest = (state, action) => {
-  return {...state, fetching: true}
+  return state.set('fetching', true);
 }
 
 const handleRegisterNotifSuccess = (state, action) => {
   const { device_id } = action.data
-  return {
-    ...state,
+
+  return state.merge({
     deviceId: device_id,
     fetching: false
-  }
+  });
 }
 
 const handleRegisterNotifFailure = (state, action) => {
-  return {...state, fetching: false}
+  return state.set('fetching', false);
 }
 
 // FETCH NOTIFICATIONS
 
 const handleFetchNotifRequest = (state, action) => {
-  return {...state, fetching: true}
+  return state.set('fetching', true);
 }
 
 const handleFetchNotifSuccess = (state, action) => {
   const { data } = action
-  return {
-    ...state,
+
+  return state.merge({
     notifications: data,
     fetching: false
-  }
+  });
 }
 
 const handleFetchNotifFailure = (state, action) => {
-  return {...state, fetching: false}
+  return state.set('fetching', false);
 }
 
 // DELETE NOTIFICATIONS
 
 const handleDeleteNotifRequest = (state, action) => {
-  return {...state, fetching: true}
+  return state.set('fetching', true);
 }
 
 const handleDeleteNotifSuccess = (state, action) => {
-  return {...state, fetching: false}
+  return state.set('fetching', false);
 }
 
 const handleDeleteNotifFailure = (state, action) => {
-  return {...state, fetching: false}
+  return state.set('fetching', false);
 }
 
 // LOGOUT
 const handleUserLogout = (state, action) => {
-  return INITIAL_STATE
+  return INITIAL_STATE;
 }
 
 

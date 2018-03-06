@@ -50,7 +50,7 @@ export const fetchFeed = (accessToken, userId, platform) => {
 /* ------------- Reducers ------------- */
 
 const handleFeedDataRequest = (state, action) => {
-  return { ...state, fetching: true }
+  return state.set('fetching', true);
 }
 
 const handleFeedDataSuccess = (state, action) => {
@@ -64,22 +64,19 @@ const handleFeedDataSuccess = (state, action) => {
       [provider]: feedData
     }
   }
-  return {
-    ...state,
+
+  return state.merge({
     fetching: false,
-    feed: {...state.feed, ...newData }
-  }
+    feed: state.feed.merge(newData)
+  });
 }
 
 const handleFeedDataFailure = (state, action) => {
-  return {
-    ...state,
-    fetching: false
-  }
+  return state.set('fetching', false);
 }
 
 const handleUserLogout = (state, action) => {
-  return INITIAL_STATE
+  return INITIAL_STATE;
 }
 
 /* ------------- Hookup Reducers To Types ------------- */

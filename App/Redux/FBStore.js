@@ -25,15 +25,15 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Reducers ------------- */
 const fbLoginComplete = (state = INITIAL_STATE, action) => {
-  return { ...state, fbAccessToken: action.fbAccessToken }
+  return state.set('fbAccessToken', action.fbAccessToken);
 }
 
 const fbLogoutComplete = (state = INITIAL_STATE, action) => {
-  return { ...state, fbAccessToken: null }
+  return state.set('fbAccessToken', null);
 }
 
 const handleUserLogout = (state, action) => {
-  return INITIAL_STATE
+  return INITIAL_STATE;
 }
 
 /* ------------- Hookup Reducers To Types ------------- */

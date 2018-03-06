@@ -22,20 +22,17 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Reducers ------------- */
 const handleFriendInfo = (state = INITIAL_STATE, action) => {
-  return { ...state, friendData: action.friendInfo }
+  return state.set('friendData', action.friendInfo);
 }
 
 const handleConnectivitySuccess = (state, action) => {
   const { data } = action
 
-  return {
-    ...state,
-    users: [...data]
-  }
+  return state.set('users', data);
 }
 
 const handleUserLogout = (state, action) => {
-  return INITIAL_STATE
+  return INITIAL_STATE;
 }
 
 /* ------------- Hookup Reducers To Types ------------- */
