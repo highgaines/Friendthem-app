@@ -67,7 +67,7 @@ const handleFeedDataSuccess = (state, action) => {
 
   return state.merge({
     fetching: false,
-    feed: state.feed.merge(newData)
+    feed: newData
   });
 }
 

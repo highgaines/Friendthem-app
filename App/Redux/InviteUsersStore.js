@@ -11,6 +11,9 @@ const { Types, Creators } = createActions({
     connectivityInfoRequest: null,
     connectivityInfoFailure: null,
     connectivityInfoSuccess: null,
+    getFriendsRequest: null,
+    getFriendsSuccess: null,
+    getFriendsFailure: null,
     logoutUser: null,
 })
 
@@ -21,6 +24,7 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   contactList: [],
+  myFriends: [],
   selectedUser: '',
   connectivityData: []
 })
@@ -57,6 +61,27 @@ export const fetchConnectivityData = (accessToken) => {
   }
 }
 
+export const fetchMyFriendsData = (accessToken) => {
+
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('Authorization', `Bearer ${accessToken}`)
+
+  const init = {
+    method: 'GET',
+    headers
+  }
+
+  return {
+    types: [
+      Types.GET_FRIENDS_REQUEST,
+      Types.GET_FRIENDS_SUCCESS,
+      Types.GET_FRIENDS_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi('connect/users/', init, dispatch)
+  }
+}
 
 /* ------------- Reducers ------------- */
 
@@ -90,6 +115,21 @@ const handleUserLogout = (state, action) => {
   return INITIAL_STATE
 }
 
+// Get Friends Reducers
+
+const handleGetFriendsRequest = (state, action) => {
+  return state.merge({ fetchingData: true })
+}
+
+const handleGetFriendsSuccess = (state, action) => {
+  const { data } = action.response
+  return state.merge({ myFriends: data, fetchingData: false })
+}
+
+const handleGetFriendsFailure = (state, action) => {
+  return state.merge({ fetchingData: false })
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -99,4 +139,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.CONNECTIVITY_INFO_SUCCESS]: handleConnectivitySuccess,
   [Types.CONNECTIVITY_INFO_FAILURE]: handleConnectivityFailure,
   [Types.LOGOUT_USER]: handleUserLogout,
+  [Types.GET_FRIENDS_REQUEST]: handleGetFriendsRequest,
+  [Types.GET_FRIENDS_SUCCESS]: handleGetFriendsSuccess,
+  [Types.GET_FRIENDS_FAILURE]: handleGetFriendsFailure
 })

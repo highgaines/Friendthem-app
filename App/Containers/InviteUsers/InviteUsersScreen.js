@@ -4,7 +4,7 @@ import { View, TouchableOpacity, Text, ScrollView } from 'react-native'
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import InviteUsersStoreActions, { selectUser, fetchConnectivityData, storeContactInfo } from '../../Redux/InviteUsersStore'
+import InviteUsersStoreActions, { selectUser, fetchConnectivityData, storeContactInfo, fetchMyFriendsData } from '../../Redux/InviteUsersStore'
 
 // Libraries
 import Reactotron from 'reactotron-react-native'
@@ -39,14 +39,14 @@ class InviteUsersScreen extends Component {
   }
 
   componentDidMount = () => {
-    const { fetchConnectivityData, accessToken, storeContactInfo } = this.props
-    fetchConnectivityData(accessToken)
+    const { fetchMyFriendsData, fetchConnectivityData, accessToken, storeContactInfo } = this.props
+    fetchMyFriendsData(accessToken)
   }
 
   renderConnectivityCards = () => {
-    const { friends, navigation } = this.props
+    const { myFriends, navigation } = this.props
 
-    return friends.map( (friend, idx) => {
+    return myFriends.map( (friend, idx) => {
       return (
         <ConnectivityCard
           key={idx}
@@ -63,7 +63,7 @@ class InviteUsersScreen extends Component {
   render() {
     const { networkTabSelected, showModal } = this.state
     const {
-      friends,
+      myFriends,
       selectUser,
       navigation,
       fetchConnectivityData,
@@ -71,7 +71,7 @@ class InviteUsersScreen extends Component {
       contacts
     } = this.props
 
-    const pluralizeFriends = friends.length === 1 ? '' : 's'
+    const pluralizeFriends = myFriends.length === 1 ? '' : 's'
     const pluralizeContacts = contacts.length === 1 ? '' : 's'
 
     return (
@@ -84,7 +84,7 @@ class InviteUsersScreen extends Component {
           <LazyloadView>
             <Text style={styles.friendCount}>
               {networkTabSelected ?
-                `${friends.length} friend${pluralizeFriends}`
+                `${myFriends.length} friend${pluralizeFriends}`
                 :
                 `${contacts.length} friend${pluralizeContacts}` }
             </Text>
@@ -143,6 +143,7 @@ const mapStateToProps = state => ({
   nav: state.nav,
   accessToken: state.authStore.accessToken,
   friends: state.inviteUsersStore.connectivityData,
+  myFriends: state.inviteUsersStore.myFriends,
   contacts: state.inviteUsersStore.contactList
 })
 
@@ -152,7 +153,8 @@ const mapDispatchToProps = dispatch => {
     ...bindActionCreators({
       selectUser,
       fetchConnectivityData,
-      storeContactInfo
+      storeContactInfo,
+      fetchMyFriendsData
     }, dispatch)
   }
 }

@@ -28,7 +28,7 @@ export const superConnectPlatform = (platformName, apiAccessToken, friendId) => 
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${apiAccessToken}`)
-
+  console.log(platformName)
   const body = {
     provider: platformName,
     user_2: friendId

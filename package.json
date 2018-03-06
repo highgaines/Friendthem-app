@@ -64,6 +64,7 @@
     "react-native-lazyload-deux": "^2.0.4",
     "react-native-linear-gradient": "github:react-native-community/react-native-linear-gradient",
     "react-native-modal": "^4.1.1",
+    "react-native-modal-selector": "0.0.25",
     "react-native-modalbox": "^1.4.2",
     "react-native-onesignal": "^3.0.9",
     "react-native-permissions": "^1.1.1",
