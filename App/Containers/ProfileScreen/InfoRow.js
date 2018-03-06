@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, Button, TextInput, View, Switch, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
-
+import ModalSelector from 'react-native-modal-selector'
 import styles from '../Styles/PersonalInfoTabStyles'
 
 export default class InfoRow extends Component {
@@ -30,6 +30,20 @@ export default class InfoRow extends Component {
     this.setState({ isEditing: false}, () => updateInfo(field, input) )
   }
 
+  renderAgeModal = () => {
+    const { updateInfo, field, userInfo } = this.props
+    let ageArray = []
+    for (let i = 18; i < 80; i++) {
+      ageArray.push({ key: i, label: i })
+    }
+    return (
+      <ModalSelector
+         data={ageArray}
+         initValue={userInfo}
+         onChange={option => { updateInfo(field, option.label) }} />
+    )
+  }
+
   render() {
     const { rowLabel, userInfo, showSwitch, isPrivate, updateInfo, secureText, toggleChangePasswordModal, field } = this.props
     const { isEditing, flipSwitch } = this.state
@@ -39,22 +53,34 @@ export default class InfoRow extends Component {
       : this.toggleEditMode
 
     return (
-      <View style={styles.rowContainer}>
+      <TouchableOpacity
+        onPress={editPressCallback}
+        activeOpacity={1}
+        style={styles.rowContainer}>
         <Text style={styles.rowLabelText}>{`${rowLabel}: `}</Text>
-        {isEditing ?
-          <TextInput
-            keyboardType={field === 'age' ? 'numeric' : undefined}
-            testID={`input-${field}`}
-            value={this.state.input}
-            style={styles.form}
-            secureTextEntry={secureText}
-            onChangeText={input => this.handleChange(input)}
-          /> :
-          <Text
-            testID={`input-display-${field}`}
-            style={styles.rowTextContent}>
-            {secureText || flipSwitch ? '********' : userInfo}
-          </Text>}
+        {
+          field === 'age'
+          ? null
+          : isEditing ?
+            <TextInput
+              keyboardType={field === 'age' ? 'numeric' : undefined}
+              testID={`input-${field}`}
+              value={this.state.input}
+              style={styles.form}
+              secureTextEntry={secureText}
+              onBlur={this.handleSubmit}
+              autoFocus
+              onChangeText={input => this.handleChange(input)}
+            /> :
+            <TouchableOpacity
+              onPress={editPressCallback}
+              >
+              <Text
+                testID={`input-display-${field}`}
+                style={styles.rowTextContent}>
+                {secureText || flipSwitch ? '********' : userInfo}
+              </Text>
+            </TouchableOpacity> }
         {
           showSwitch ?
           <Switch
@@ -64,26 +90,10 @@ export default class InfoRow extends Component {
             style={styles.switchStyle} />
             : null
         }
-        <TouchableOpacity
-          style={styles.iconContainer}
-          onPress={editPressCallback}
-          hitSlop={{right: 10, left: 10, top: 10, bottom: 10}}
-          >
-          { isEditing ?
-            <View style={{ position: 'absolute', right: -10, top: -10}}>
-              <Button
-                testID='save-button'
-                title="SAVE" onPress={this.handleSubmit}/>
-            </View> :
-            <Icon
-              testID={`edit-pencil-${field}`}
-              name='pencil'
-              type='simple-line-icon'
-              size={15}
-              color='#6f6f71'
-            /> }
-          </TouchableOpacity>
-      </View>
+        { field === 'age' ?
+          this.renderAgeModal()
+          : null }
+      </TouchableOpacity>
     )
   }
 }
