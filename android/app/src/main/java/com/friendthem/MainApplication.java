@@ -3,6 +3,7 @@ package com.friendthem;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.smixx.fabric.FabricPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.dylanvann.fastimage.FastImageViewPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
@@ -45,6 +46,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new FabricPackage(),
             new RNFetchBlobPackage(),
             new FastImageViewPackage(),
             new PickerPackage(),

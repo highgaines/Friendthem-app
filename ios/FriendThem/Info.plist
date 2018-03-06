@@ -52,6 +52,20 @@
 	<string>16</string>
 	<key>CodePushDeploymentKey</key>
 	<string>g7k0ocqVaUUVLvbquNuRP-QnOi-Qfda3ef3e-5a38-4dfe-9133-1afc3eb3b7df</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>6128821f06097e315b0c64f18736d591d5c0195f</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>FacebookAppID</key>
 	<string>191012727596336</string>
 	<key>FacebookDisplayName</key>
