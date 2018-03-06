@@ -39,7 +39,10 @@ export default class InfoRow extends Component {
       : this.toggleEditMode
 
     return (
-      <View style={styles.rowContainer}>
+      <TouchableOpacity
+        onPress={editPressCallback}
+        activeOpacity={1}
+        style={styles.rowContainer}>
         <Text style={styles.rowLabelText}>{`${rowLabel}: `}</Text>
         {isEditing ?
           <TextInput
@@ -48,13 +51,19 @@ export default class InfoRow extends Component {
             value={this.state.input}
             style={styles.form}
             secureTextEntry={secureText}
+            onBlur={this.handleSubmit}
+            autoFocus
             onChangeText={input => this.handleChange(input)}
           /> :
-          <Text
-            testID={`input-display-${field}`}
-            style={styles.rowTextContent}>
-            {secureText || flipSwitch ? '********' : userInfo}
-          </Text>}
+          <TouchableOpacity
+            onPress={editPressCallback}
+            >
+            <Text
+              testID={`input-display-${field}`}
+              style={styles.rowTextContent}>
+              {secureText || flipSwitch ? '********' : userInfo}
+            </Text>
+          </TouchableOpacity> }
         {
           showSwitch ?
           <Switch
@@ -64,26 +73,7 @@ export default class InfoRow extends Component {
             style={styles.switchStyle} />
             : null
         }
-        <TouchableOpacity
-          style={styles.iconContainer}
-          onPress={editPressCallback}
-          hitSlop={{right: 10, left: 10, top: 10, bottom: 10}}
-          >
-          { isEditing ?
-            <View style={{ position: 'absolute', right: -10, top: -10}}>
-              <Button
-                testID='save-button'
-                title="SAVE" onPress={this.handleSubmit}/>
-            </View> :
-            <Icon
-              testID={`edit-pencil-${field}`}
-              name='pencil'
-              type='simple-line-icon'
-              size={15}
-              color='#6f6f71'
-            /> }
-          </TouchableOpacity>
-      </View>
+      </TouchableOpacity>
     )
   }
 }
