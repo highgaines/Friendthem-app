@@ -16,7 +16,7 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <asl.h>
-#import "RCTLog.h"
+#import <React/RCTLog.h>
 
 @implementation AppDelegate
 
