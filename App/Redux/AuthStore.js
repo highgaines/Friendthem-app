@@ -195,7 +195,7 @@ const registerAccountSuccess = (state = INITIAL_STATE, action) => {
 }
 
 const registerAccountFailure = (state = INITIAL_STATE, action) => {
-  return Immutable({
+  return state.merge({
     userInfoAdded: false,
     authError: true
   });
