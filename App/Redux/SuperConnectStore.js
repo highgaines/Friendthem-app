@@ -55,10 +55,7 @@ export const superConnectPlatform = (platformName, apiAccessToken, friendId) => 
 const handleSetSelectedSocialMedia = (state, action) => {
   const { platformList } = action
 
-  return {
-    ...state,
-    selectedSocialMedia: platformList
-  }
+  return state.set('selectedSocialMedia', platformList);
 }
 
 const handleTogglePlatform = (state, action) => {
@@ -67,39 +64,30 @@ const handleTogglePlatform = (state, action) => {
   const itemIndex = selectedSocialMedia.findIndex(socialMedia => socialMedia === platformName)
 
   if (itemIndex < 0) {
-    return {
-      ...state,
-      selectedSocialMedia: [...selectedSocialMedia, platformName]
-    }
+    return state.update('selectedSocialMedia', selectedMedia => selectedMedia.push(platformName));
   } else {
-      return {
-        ...state,
-        selectedSocialMedia: [...selectedSocialMedia.slice(0, itemIndex), ...selectedSocialMedia.slice(itemIndex + 1)]
-      }
+    return state.update('selectedSocialMedia', selectedMedia => selectedMedia.delete(itemIndex));
   }
 }
 
 const handleSocialMediaConnectRequest = (state, action) => {
-  return state
+  return state;
 }
 
 const handleSocialMediaConnectSuccess = (state, action) => {
-  return state
+  return state;
 }
 
 const handleSocialMediaConnectFailure = (state, action) => {
-  return state
+  return state;
 }
 
 const handleSetManualPlatforms = (state, action) => {
-  return {
-    ...state,
-    manualPlatforms: action.platformArr
-  }
+  return state.set('manualPlatforms', action.platformArr);
 }
 
 const handleUserLogout = (state, action) => {
-  return INITIAL_STATE
+  return INITIAL_STATE;
 }
 
 export const reducer = createReducer(INITIAL_STATE, {

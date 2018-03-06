@@ -238,32 +238,21 @@ export const updateSettings = (accessToken, setting, mode) => {
 /* ------------- Reducers ------------- */
 
 const handleFbUserInfoSuccess = (state = INITIAL_STATE, action) => {
-  return {
-    ...state,
-    userData: {
-      ...state.userData,
-      ...action.userInfo
-    }
-  }
+  return state.merge({
+    userData: state.userData.merge(action.userInfo)
+  });
 }
 
 // ------------------------------------------------------------------------ //
 const handleUpdateInfo = (state, action) => {
-
   const { field, content } = action.payload
 
-  return {
-    ...state,
-    userData: {
-      ...state.userData,
-      [field]: content
-    }
-  }
+  return state.setIn(['userData', field], content);
 }
 // ------------------------------------------------------------------------ //
 
 const handleGetUserRequest = (state, action) => {
-  return {...state, fetching: true}
+  return state.set('fetching', true);
 }
 
 const handleGetUserSuccess = (state, action) => {
@@ -271,24 +260,21 @@ const handleGetUserSuccess = (state, action) => {
     userId: action.response.data.id,
     traits: action.data
   })
-  return {
-    ...state,
+
+  return state.merge({
     userData: action.data,
     userId: action.response.data.id,
     fetching: false
-  }
+  });
 }
 const handleGetUserFailure = (state, action) => {
-  return {...state, fetching: false}
+  return state.set('fetching', false);
 }
 
 // ------------------------------------------------------------------------ //
 
 const handleUpdateUserRequest = (state, action) => {
-  return {
-    ...state,
-    fetching: true
-  }
+  return state.set('fetching', true);
 }
 
 const handleUpdateUserSuccess = (state, action) => {
@@ -297,26 +283,19 @@ const handleUpdateUserSuccess = (state, action) => {
     event: 'Update User Success'
   })
 
-  return {
-    ...state,
+  return state.merge({
     editableData: action.response.data,
     fetching: false
-  }
+  });
 }
 const handleUpdateUserFailure = (state, action) => {
-  return {
-    ...state,
-    fetching: false
-  }
+  return state.set('fetching', false);
 }
 
 // ------------------------------------------------------------------------ //
 
 const handleUpdateUserPositionRequest = (state, action) => {
-  return {
-    ...state,
-    fetching: true
-  }
+  return state.set('fetching', true);
 }
 
 const handleUpdateUserPositionSuccess = (state, action) => {
@@ -324,51 +303,31 @@ const handleUpdateUserPositionSuccess = (state, action) => {
     userId: state.userId,
     event: 'Update User Position Success'
   })
-  return {
-    ...state,
-    geoLocation: action.data.last_location
-  }
+  return state.set('geoLocation', action.data.last_location);
 }
 
 const handleUpdateUserPositionFailure = (state, action) => {
-  return {
-    ...state,
-    fetching: false
-  }
+  return state.set('fetching', false);
 }
 
 // ------------------------------------------------------------------------ //
 
 const handleUpdateSnapRequest = (state, action) => {
-  return {
-    ...state,
-    fetching: true
-  }
+  return state.set('fetching', true);
 }
 
 const handleUpdateSnapSuccess = (state, action) => {
-  return {
-    ...state,
-    fetching: false,
-    userData: {
-      ...state.userData,
-      snapHandle: action.data.username
-    }
-  }
+  return state
+    .set('fetching', false)
+    .setIn(['userData', 'snapHandle'], action.data.username);
 }
 
 const handleUpdateSnapFailure = (state, action) => {
-  return {
-    ...state,
-    fetching: false
-  }
+  return state.set('fetching', false);
 }
 
 const handleUpdateSettingsRequest = (state, action) => {
-  return {
-    ...state,
-    fetching: true
-  }
+  return state.set('fetching', true);
 }
 
 const handleUpdateSettingsSuccess = (state, action) => {
@@ -376,17 +335,11 @@ const handleUpdateSettingsSuccess = (state, action) => {
     userId: state.userId,
     event: 'Update Settings Success'
   })
-  return {
-    ...state,
-    fetching: false
-  }
+  return state.set('fetching', false);
 }
 
 const handleUpdateSettingsFailure = (state, action) => {
-  return {
-    ...state,
-    fetching: false
-  }
+  return state.set('fetching', false);
 }
 
 const handleUserLogout = (state, action) => {
@@ -396,25 +349,18 @@ const handleUserLogout = (state, action) => {
 /*----------------- GET PHOTOS REDUCERS ---------------*/
 
 const handleGetPhotosRequest = (state, action) => {
-  return {
-    ...state,
-    fetching: true
-  }
+  return state.set('fetching', true);
 }
 
 const handleGetPhotosSuccess = (state, action) => {
-  return {
-    ...state,
+  return state.merge({
     userPhotos: action.response,
     fetching: false
-  }
+  });
 }
 
 const handleGetPhotosFailure = (state, action) => {
-  return {
-    ...state,
-    fetching: false
-  }
+  return state.set('fetching', false);
 }
 
 /* ------------- Hookup Reducers To Types ------------- */

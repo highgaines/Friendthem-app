@@ -46,36 +46,27 @@ export const getUserTokens = (accessToken) => {
 }
 
 const handleUserLogout = (state, action) => {
-  return INITIAL_STATE
+  return INITIAL_STATE;
 }
 
 const handleSocialMediaSuccess = (state, action) => {
-  return {
-    ...state,
-    authRedirectUrl: action.data.redirect_url
-  }
+  return state.set('authRedirectUrl', action.data.redirect_url);
 }
 
 const handleGetUserTokenRequest = (state, action) => {
-  return state
+  return state;
 }
 
 const handleGetUserTokenSuccess = (state, action) => {
-  return {
-    ...state,
-    platforms: action.data
-  }
+  return state.set('platforms', action.data);
 }
 
 const handleGetUserTokenFailure = (state, action) => {
-  return state
+  return state;
 }
 
 const handleSocialMediaRequest = (state, action) => {
-  return {
-    ...state,
-    authRedirectUrl: null
-  }
+  return state.set('authRedirectUrl');
 }
 
 export const reducer = createReducer(INITIAL_STATE, {

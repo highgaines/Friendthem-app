@@ -172,17 +172,17 @@ export const socialMediaAuth = (platform, userId, apiAccessToken) => {
 /* -------- Reducers -------- */
 
 const handleUserLogout = (state, action) => {
-  return INITIAL_STATE
+  return INITIAL_STATE;
 }
 
 const registerAccountRequest = (state = INITIAL_STATE, action) => {
-  return state
+  return state;
 }
 
 const registerAccountSuccess = (state = INITIAL_STATE, action) => {
   const { data } = action.response
-  return {
-    ...state,
+
+  return state.merge({
     userInfoAdded: true,
     loggedIn: true,
     accessToken: data.access_token,
@@ -191,14 +191,14 @@ const registerAccountSuccess = (state = INITIAL_STATE, action) => {
     scope: data.scope,
     refreshToken: data.refresh_token,
     authError: false
-  }
+  });
 }
 
 const registerAccountFailure = (state = INITIAL_STATE, action) => {
-  return {
+  return Immutable({
     userInfoAdded: false,
     authError: true
-  }
+  });
 }
 
 const loginRequest = (state = INITIAL_STATE, action) => {
@@ -207,8 +207,8 @@ const loginRequest = (state = INITIAL_STATE, action) => {
 
 const loginSuccess = (state = INITIAL_STATE, action) => {
   const { data } = action
-  return {
-    ...state,
+
+  return state.merge({
     loggedIn: true,
     accessToken: data.access_token,
     expiresIn: data.expires_in,
@@ -216,26 +216,23 @@ const loginSuccess = (state = INITIAL_STATE, action) => {
     scope: data.scope,
     refreshToken: data.refresh_token,
     authError: false
-  }
+  });
 }
 
 const loginFailure = (state = INITIAL_STATE, action) => {
-  return {
-    ...state,
-    authError: true
-  }
+  return state.set('authError', true);
 }
 
 const handleSocialMediaAuthRequest = (state, action) => {
-    return state
+  return state;
 }
 
 const handleSocialMediaAuthSuccess = (state, action) => {
-  return state
+  return state;
 }
 
 const handleSocialMediaAuthFailure = (state, action) => {
-  return state
+  return state;
 }
 
 export const reducer = createReducer(INITIAL_STATE, {
