@@ -21,6 +21,7 @@ import { bindActionCreators } from 'redux'
 import PermissionsStoreActions from '../../Redux/PermissionsStore'
 import FriendStoreActions from '../../Redux/FriendStore'
 import InviteUsersStoreActions, { fetchConnectivityData } from '../../Redux/InviteUsersStore'
+import UserStoreActions, { updateUserPosition } from '../../Redux/UserStore'
 
 // Images
 import { Images } from '../../Themes';
@@ -40,10 +41,15 @@ class NearbyUsers extends Component {
   }
 
   componentWillMount = () => {
-    const { accessToken, fetchConnectivityData, customGeolocationPermission, locationPermission, setLocationInterval } = this.props
+    const {
+      accessToken,
+      fetchConnectivityData,
+      customGeolocationPermission,
+      locationPermission,
+      setLocationInterval
+    } = this.props
 
     fetchConnectivityData(accessToken)
-
     if (customGeolocationPermission && !locationPermission) {
       Permissions.request('location', { type: 'whenInUse' }).then(response => {
         if(response === 'authorized') {
@@ -51,6 +57,17 @@ class NearbyUsers extends Component {
         }
       })
     }
+  }
+
+
+  locationInterval = () => {
+    const { accessToken, updateUserPosition } = this.props
+    navigator.geolocation.getCurrentPosition((position) => {
+      updateUserPosition(accessToken, position.coords)
+    },
+      (error) => this.setState({ error: error.message }),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    )
   }
 
   handleChange = input => {
@@ -125,6 +142,7 @@ const mapDispatchToProps = dispatch => {
 
   return {
     ...bindActionCreators({
+      updateUserPosition,
       setFriendInfo,
       fetchConnectivityData,
       setLocationInterval

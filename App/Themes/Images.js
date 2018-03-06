@@ -47,6 +47,7 @@ const images = {
 
   // Images
   geolocationSVG: require('../Images/permission-geo.svg'),
+  geolocationPNG: require('../Images/Permission-Location.png'),
   notificationsSVG: require('../Images/notificationpngbell.png'),
   noPicSVG: require('../Images/nopic-svg.png'),
   lightbulbSVG: require('../Images/Icons/lightbulb.svg'),

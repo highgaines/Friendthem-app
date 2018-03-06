@@ -9,7 +9,7 @@ import Modal from 'react-native-modal'
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import UserStoreActions, { updateSnapInfo } from '../../Redux/UserStore'
+import UserStoreActions, { updateSnapInfo, updatePassword } from '../../Redux/UserStore'
 
 // Styles
 import styles from '../Styles/ChangePasswordModalStyles'
@@ -65,6 +65,23 @@ class FriendThemModal extends Component {
     this.setState({
       isConfirmPasswordHidden: !this.state.isConfirmPasswordHidden
     })
+  }
+
+  handleSubmitPW = () => {
+    const { accessToken, updatePassword, toggleChangePasswordModal } = this.props
+    const { oldPassword, newPassword } = this.state
+
+    if (this.comparePasswords()) {
+      updatePassword(accessToken, oldPassword, newPassword)
+      toggleChangePasswordModal()
+    } else {
+      alert("passwords dont match")
+    }
+  }
+
+  comparePasswords = () => {
+    const { newPassword, confirmPassword} = this.state
+    return newPassword === confirmPassword
   }
 
   render() {
@@ -153,7 +170,10 @@ class FriendThemModal extends Component {
                 Cancel
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.optionButton}>
+            <TouchableOpacity
+              style={styles.optionButton}
+              onPress={this.handleSubmitPW}
+            >
               <Text style={styles.buttonText}>
                 Save
               </Text>
@@ -167,13 +187,15 @@ class FriendThemModal extends Component {
 
 const mapStateToProps = (state) => ({
   userId: state.userStore.userId,
-  accessToken: state.authStore.accessToken
+  accessToken: state.authStore.accessToken,
+  passwordUpdate: state.userStore.passwordUpdated
 })
 
 const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({
-      updateSnapInfo
+      updateSnapInfo,
+      updatePassword
     }, dispatch)
   }
 }

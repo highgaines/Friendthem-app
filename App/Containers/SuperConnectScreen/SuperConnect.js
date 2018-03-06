@@ -104,8 +104,8 @@ class SuperConnect extends Component {
 
       if (platform === 'snapchat') {
         continue
-      } else if (manualPlatformsList.includes(platform)) {
-        userInputRequiredPlatforms.push(platform)
+      } else if (!manualPlatformsList.includes(platform)) {
+        this.setState({ userInputRequiredPlatforms: [...userInputRequiredPlatforms, platform]})
       } else {
         this.asyncSuperConnectPlatform(platform, apiAccessToken, friendInfo.id, userId)
       }

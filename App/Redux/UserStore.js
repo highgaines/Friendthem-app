@@ -25,6 +25,9 @@ const { Types, Creators } = createActions({
   updateSnapRequest: null,
   updateSnapSuccess: null,
   updateSnapFailure: null,
+  updatePasswordRequest: null,
+  updatePasswordSuccess: null,
+  updatePasswordFailure: null,
   updateSettingsRequest: null,
   updateSettingsSuccess: null,
   updateSettingsFailure: null,
@@ -63,7 +66,8 @@ export const INITIAL_STATE = Immutable({
   userPhotos: {},
   ghostModeOn: true,
   notificationsOn: true,
-  fetching: false
+  fetching: false,
+  passwordUpdated: false
 })
 
 /* ------------- Actions ------------- */
@@ -235,6 +239,35 @@ export const updateSettings = (accessToken, setting, mode) => {
   }
 }
 
+export const updatePassword = (accessToken, oldPassword, newPassword) => {
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('Authorization', `Bearer ${accessToken}`)
+
+  const body ={
+    client_id: envConfig.Development.devClientId,
+    client_secret: envConfig.Development.devClientSecret,
+    old_password: oldPassword,
+    new_password: newPassword
+  }
+
+  const init = {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(body)
+  }
+
+  return {
+    types: [
+      Types.UPDATE_PASSWORD_REQUEST,
+      Types.UPDATE_PASSWORD_SUCCESS,
+      Types.UPDATE_PASSWORD_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi('auth/change_password', init, dispatch)
+  }
+}
+
 /* ------------- Reducers ------------- */
 
 const handleFbUserInfoSuccess = (state = INITIAL_STATE, action) => {
@@ -363,6 +396,23 @@ const handleGetPhotosFailure = (state, action) => {
   return state.set('fetching', false);
 }
 
+/*----------------- UPDATE PASSWORD REDUCERS  ---------------*/
+
+const handleUpdatePWRequest = (state, action) => {
+  return state.set({ requestingPWUpdate: true })
+}
+
+const handleUpdatePWSuccess = (state, action) => {
+  return state.merge({
+    requestingPWUpdate: false,
+    passwordUpdated: true
+  })
+}
+
+const handleUpdatePWFailure = (state, action) => {
+  return state.set({ requestingPWUpdate: false})
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -383,6 +433,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.UPDATE_SNAP_REQUEST]: handleUpdateSnapRequest,
   [Types.UPDATE_SNAP_SUCCESS]: handleUpdateSnapSuccess,
   [Types.UPDATE_SNAP_FAILURE]: handleUpdateSnapFailure,
+  [Types.UPDATE_PASSWORD_REQUEST]: handleUpdatePWRequest,
+  [Types.UPDATE_PASSWORD_SUCCESS]: handleUpdatePWSuccess,
+  [Types.UPDATE_PASSWORD_FAILURE]: handleUpdatePWFailure,
   [Types.UPDATE_SETTINGS_REQUEST]: handleUpdateSettingsRequest,
   [Types.UPDATE_SETTINGS_SUCCESS]: handleUpdateSettingsSuccess,
   [Types.UPDATE_SETTINGS_FAILURE]: handleUpdateSettingsFailure,
