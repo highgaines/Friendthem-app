@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity,
+        Image, PermissionsAndroid, Platform } from 'react-native';
 
 // Redux
 import { connect } from 'react-redux';
@@ -29,6 +30,39 @@ import { Images } from '../../Themes';
 import styles from '../Styles/ForkScreenStyles';
 import { determineImage } from '../../Utils/constants'
 
+const RequestContactsPermission =
+  async function(
+    storeContactInfo,
+    customNotificationPermission,
+    nativeNotifications
+  ) {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+      {
+        'title': 'Cool Photo App Contacts Permission',
+        'message': 'Cool Photo App needs access to your contacts'
+      }
+    )
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      Contacts.getAll( (err, contacts) => {
+        if (err === 'denied') {
+          console.log('DENIED')
+        } else {
+          storeContactInfo(contacts)
+        }
+        if (customNotificationPermission && !nativeNotifications) {
+          OneSignal.registerForPushNotifications()
+        }
+      })
+    } else {
+      console.log("Camera permission denied")
+    }
+  } catch (err) {
+    console.warn(err)
+  }
+}
+
 
 class ForkScreen extends Component {
 
@@ -45,16 +79,26 @@ class ForkScreen extends Component {
       getUserInfo(accessToken);
     }
 
-    Contacts.getAll( (err, contacts) => {
-      if (err === 'denied') {
-        console.log('DENIED')
-      } else {
-        storeContactInfo(contacts)
-      }
-      if (customNotificationPermission && !nativeNotifications) {
-        OneSignal.registerForPushNotifications()
-      }
-    })
+    if (Platform.OS === 'ios') {
+      Contacts.getAll( (err, contacts) => {
+        if (err === 'denied') {
+          console.log('DENIED')
+        } else {
+          storeContactInfo(contacts)
+        }
+        if (customNotificationPermission && !nativeNotifications) {
+          OneSignal.registerForPushNotifications()
+        }
+      })
+    } else {
+      // get dangerous permissions for contacts on Android
+      RequestContactsPermission(
+          storeContactInfo,
+          customNotificationPermission,
+          nativeNotifications
+      )
+    }
+
   }
 
   componentWillUpdate = (nextProps, nextState) => {

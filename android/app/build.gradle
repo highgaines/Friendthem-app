@@ -98,6 +98,10 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
 
+    dexOptions {
+        jumboMode = true
+    }
+
     defaultConfig {
         applicationId "com.friendthem"
         minSdkVersion 16
@@ -107,7 +111,7 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
-        manifestPlaceholders = [onesignal_app_id: "xxxx",
+        manifestPlaceholders = [onesignal_app_id: "69cf5aae-f8c2-4292-8f30-011a1a35518b",
                                 onesignal_google_project_number: "xxxx"]
     }
     splits {
