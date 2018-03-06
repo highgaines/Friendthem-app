@@ -18,7 +18,7 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  feed: [],
+  feed: {},
   fetching: false
 })
 
@@ -58,12 +58,12 @@ const handleFeedDataSuccess = (state, action) => {
   const provider = feedData.length ? action.response.data.data[0].provider : ''
   const userId = action.response.data.user_id
   const oldData = state.feed[userId]
-  const newData = {
+  const newData = Immutable({
     [userId]: {
       ...oldData,
       [provider]: feedData
     }
-  }
+  })
 
   return state.merge({
     fetching: false,
