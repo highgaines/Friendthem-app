@@ -264,7 +264,7 @@ export const updatePassword = (accessToken, oldPassword, newPassword) => {
       Types.UPDATE_PASSWORD_FAILURE
     ],
     shouldCallApi: state => true,
-    callApi: dispatch => fetchFromApi('auth/change_password', init, dispatch)
+    callApi: dispatch => fetchFromApi('auth/change_password/', init, dispatch)
   }
 }
 
