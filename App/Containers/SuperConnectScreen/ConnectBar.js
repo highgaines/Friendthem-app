@@ -9,7 +9,7 @@ import { Images } from '../../Themes';
 import { Icon } from 'react-native-elements'
 
 export default ConnectBar = props => {
-  const { userData, friendInfo } = props;
+  const { userData, friendInfo, copy } = props
 
   return (
     <View style={styles.container}>
@@ -20,7 +20,13 @@ export default ConnectBar = props => {
         style={styles.linearGradient}
         >
           <View style={styles.rows}>
-            <Text style={styles.titleRow}> Super Connect </Text>
+            <Text style={styles.titleRow}>
+              {
+                copy.includes('SuperConnect')
+                ? 'Super Connect'
+                : 'Friend Them'
+              }
+            </Text>
             <View style={styles.userRow}>
               <View style={styles.column}>
                 <View style={styles.picAndName}>

@@ -146,7 +146,7 @@ class SuperConnect extends Component {
   }
 
   render() {
-    const { userInfo, friendInfo, navigation, selectedSocialMedia, togglePlatform, platforms } = this.props
+    const { userInfo, friendInfo, navigation, selectedSocialMedia, togglePlatform, platforms, copy } = this.props
     const { connectionModalOpen, connectionStepCount } = this.state
 
     return(
@@ -159,7 +159,7 @@ class SuperConnect extends Component {
             </Modal>
           : null
         }
-        <ConnectBar userData={userInfo} friendInfo={friendInfo}/>
+        <ConnectBar copy={copy} userData={userInfo} friendInfo={friendInfo}/>
         <SocialMediaCardContainer
           fromFriendProfile={true}
           friendPlatforms={friendInfo.social_profiles}
