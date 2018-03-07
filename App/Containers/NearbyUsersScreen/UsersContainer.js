@@ -16,11 +16,7 @@ import styles from '../Styles/UsersContainerStyles'
 import { Images } from '../../Themes'
 
 export default function UsersContainer(props) {
-  const { users, navigation, setFriendInfo, locationPermission } = props
-  const viewFriendProfile = userObj => {
-    setFriendInfo(userObj)
-    navigation.navigate('FriendProfileScreen', { })
-  }
+  const { users, navigation, locationPermission, viewFriendProfile } = props
 
   const userCards =
     users.map( (userObj,i) =>

@@ -164,9 +164,10 @@ class NearbyFeedCard extends Component {
   }
 
   render = () => {
-    const { friendData, loading } = this.props
+    const { friendData, loading, setFriendInfo } = this.props
     const { platform } = this.state
     const socialPlatforms = friendData.social_profiles.map(prof => prof.provider)
+    
     return(
       <LazyloadView style={styles.nearbyFeedCardContainer}>
         <LazyloadView style={styles.header}>
@@ -178,7 +179,10 @@ class NearbyFeedCard extends Component {
           >
             <LazyloadView style={styles.nearbyFeedCardHeader}>
               <LazyloadView style={{ flex: 1 }}>
-                <ImageCircle source={`${friendData.picture}`} size={60}/>
+                <TouchableOpacity
+                  onPress={setFriendInfo}>
+                  <ImageCircle source={`${friendData.picture}`} size={60}/>
+                </TouchableOpacity>
               </LazyloadView>
               <LazyloadView style={{ flex: 3 }}>
                 <Text style={styles.name}> {`${friendData.first_name} ${friendData.last_name}`} </Text>

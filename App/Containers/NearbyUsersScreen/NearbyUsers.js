@@ -88,8 +88,13 @@ class NearbyUsers extends Component {
     this.setState({ welcomeTutorialVisible: !welcomeTutorialVisible})
   }
 
+  viewFriendProfile = userObj => {
+    this.props.setFriendInfo(userObj);
+    this.props.navigation.navigate('FriendProfileScreen', { });
+  };
+
   render() {
-    const { users, navigation, setFriendInfo, locationPermission } = this.props
+    const { users, navigation, locationPermission } = this.props
     const { input, feedView, welcomeTutorialVisible } = this.state
 
     return(
@@ -109,9 +114,9 @@ class NearbyUsers extends Component {
               users={input.length ? this.filterUsers(users) : users}
               navigation={navigation}
               locationPermission={locationPermission}
-              setFriendInfo={setFriendInfo}
+              viewFriendProfile={this.viewFriendProfile}
             />
-          : <NearbyFeedContainer />
+          : <NearbyFeedContainer viewFriendProfile={this.viewFriendProfile}/>
         }
         {
           welcomeTutorialVisible
