@@ -33,6 +33,10 @@ class PersonalInfoTab extends Component {
     updateInfoRequest(editableData, field, content, accessToken)
   }
 
+  updatePrivacy = (field, status) => {
+    this.packageEditProfile(field, status);
+  };
+
   render() {
     const { userData, editableData, toggleChangePasswordModal } = this.props
 
@@ -84,7 +88,8 @@ class PersonalInfoTab extends Component {
           updateInfo={this.packageEditProfile}
           userInfo={editableData.phone_number.replace("+", "")}
           switchToggled={userData.private_phone}
-          showSwitch={true}/>
+          showSwitch={true}
+          switchCallback={status => this.updatePrivacy('private_phone', status)}/>
         <InfoRow
           rowLabel='EMAIL'
           field="personal_email"
@@ -92,7 +97,8 @@ class PersonalInfoTab extends Component {
           userInfo={editableData.personal_email}
           switchToggled={userData.private_email}
           autoCapitalize={'none'}
-          showSwitch={true}/>
+          showSwitch={true}
+          switchCallback={status => this.updatePrivacy('private_email', status)}/>
         <InfoRow
           rowLabel='PASSWORD'
           field="password"

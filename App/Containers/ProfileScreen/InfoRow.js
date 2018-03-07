@@ -45,7 +45,7 @@ export default class InfoRow extends Component {
   }
 
   render() {
-    const { rowLabel, userInfo, showSwitch, isPrivate, updateInfo, secureText, toggleChangePasswordModal, field } = this.props
+    const { rowLabel, userInfo, showSwitch, isPrivate, updateInfo, secureText, toggleChangePasswordModal, field, switchCallback } = this.props
     const { isEditing, flipSwitch } = this.state
 
     let editPressCallback = toggleChangePasswordModal
@@ -85,7 +85,10 @@ export default class InfoRow extends Component {
           showSwitch ?
           <Switch
             onTintColor='#f6385e'
-            onValueChange={() => this.setState({flipSwitch: !flipSwitch})}
+            onValueChange={() => {
+              this.setState({flipSwitch: !flipSwitch});
+              switchCallback( !flipSwitch);
+            }}
             value={flipSwitch}
             style={styles.switchStyle} />
             : null
