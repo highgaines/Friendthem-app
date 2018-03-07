@@ -87,18 +87,18 @@ class PersonalInfoTab extends Component {
           field="phone_number"
           updateInfo={this.packageEditProfile}
           userInfo={editableData.phone_number.replace("+", "")}
-          switchToggled={userData.private_phone}
+          switchToggled={editableData.phone_is_private}
           showSwitch={true}
-          switchCallback={status => this.updatePrivacy('private_phone', status)}/>
+          switchCallback={status => this.updatePrivacy('phone_is_private', status)}/>
         <InfoRow
           rowLabel='EMAIL'
           field="personal_email"
           updateInfo={this.packageEditProfile}
           userInfo={editableData.personal_email}
-          switchToggled={userData.private_email}
+          switchToggled={editableData.email_is_private}
           autoCapitalize={'none'}
           showSwitch={true}
-          switchCallback={status => this.updatePrivacy('private_email', status)}/>
+          switchCallback={status => this.updatePrivacy('email_is_private', status)}/>
         <InfoRow
           rowLabel='PASSWORD'
           field="password"
