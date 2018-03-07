@@ -25,7 +25,7 @@ import FbPhotoModal from './FbPhotoModal'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import UserStoreActions, { getUserInfo, updateInfo, updateSnapInfo, updateInfoRequest, getFBPhotos } from '../../Redux/UserStore'
-import AuthStoreActions, { socialMediaAuth } from '../../Redux/AuthStore'
+import AuthStoreActions, { socialMediaAuth, socialMediaAuthErrors } from '../../Redux/AuthStore'
 import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
 
 // Images
@@ -141,7 +141,9 @@ class UserProfileScreen extends Component {
     const { userId, apiAccessToken } = this.props
 
     this.setState({currentPlatform: platform})
-    this.props.socialMediaAuth(platform, userId, apiAccessToken)
+    this.props.socialMediaAuth(platform, userId, apiAccessToken).then( () =>
+    this.props.socialMediaAuthErrors(apiAccessToken)
+    )
   }
 
   socialPlatformPresent = (provider) => {
@@ -310,7 +312,12 @@ class UserProfileScreen extends Component {
               }
             <FriendThemModal
               modalVisible={this.state.snapHandleModalOpen}
-              toggleSnapchatModal={this.toggleSnapchatModal}
+              snapchat={true}
+              form={true}
+              headerText={'Snapchat'}
+              text='Entering your Snapchat handle here will help us
+              connect you with people more seamlessly.'
+              toggleModal={this.toggleSnapchatModal}
               submitText={(inputValue, apiAccessToken) => updateSnapInfo('snapchat', inputValue, apiAccessToken)} />
             <View
               testID='tab-selection-container'
@@ -386,6 +393,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({
+      socialMediaAuthErrors,
       getFBPhotos,
       getUserInfo,
       getUserTokens,

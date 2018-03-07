@@ -16,6 +16,7 @@ import { NavigationActions } from 'react-navigation'
 import FBStoreActions from '../../Redux/FBStore'
 import SuperConnectActions from '../../Redux/SuperConnectStore'
 import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
+import FriendStoreActions, { checkFriendConnection } from '../../Redux/FriendStore'
 
 // Components
 import Navbar from '../Navbar/Navbar'
@@ -55,6 +56,14 @@ class FriendProfileScreen extends Component {
       getUserTokens(apiAccessToken)
     } else {
       navigation.navigate('LaunchScreen')
+    }
+  }
+
+  componentDidMount = () => {
+    const { apiAccessToken, friendInfo, checkFriendConnection, loggedIn } = this.props
+
+    if (apiAccessToken && loggedIn) {
+      checkFriendConnection(apiAccessToken, friendInfo.id)
     }
   }
 
@@ -296,6 +305,7 @@ const mapDispatchToProps = dispatch => {
     ...bindActionCreators({
       fbLogoutComplete: logoutComplete,
       setSuperConnectPlatforms,
+      checkFriendConnection,
       getUserTokens,
     }, dispatch)
   }
