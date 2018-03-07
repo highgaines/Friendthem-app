@@ -89,7 +89,7 @@ export default class InfoRow extends Component {
               this.setState({flipSwitch: !flipSwitch});
               switchCallback( !flipSwitch);
             }}
-            value={flipSwitch}
+            value={!!flipSwitch}
             style={styles.switchStyle} />
             : null
         }
