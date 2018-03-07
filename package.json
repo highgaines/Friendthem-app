@@ -118,7 +118,6 @@
     "mocha": "^5.0.1",
     "mockery": "^2.1.0",
     "react-dom": "16.0.0",
-    "react-native-code-push": "^5.2.1",
     "react-native-elements": "^0.18.5",
     "react-test-renderer": "^16.0.0",
     "reactotron-react-native": "^1.14.0",

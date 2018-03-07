@@ -9,7 +9,6 @@ import com.beefe.picker.PickerViewPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.rt2zz.reactnativecontacts.ReactNativeContacts;
-import com.microsoft.codepush.react.CodePush;
 import com.tkporter.sendsms.SendSMSPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.horcrux.svg.SvgPackage;
@@ -39,11 +38,6 @@ public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
 
-        @Override
-        protected String getJSBundleFile() {
-        return CodePush.getJSBundleFile();
-        }
-
     @Override
     public boolean getUseDeveloperSupport() {
       return BuildConfig.DEBUG;
@@ -59,7 +53,6 @@ public class MainApplication extends Application implements ReactApplication {
             new ImagePickerPackage(),
             new ReactNativeOneSignalPackage(),
             new ReactNativeContacts(),
-            new CodePush(null, getApplicationContext(), BuildConfig.DEBUG),
             SendSMSPackage.getInstance(),
             new VectorIconsPackage(),
             new SvgPackage(),

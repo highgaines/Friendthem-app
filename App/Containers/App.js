@@ -4,13 +4,6 @@ import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import RootContainer from './RootContainer'
 import createStore from '../Redux'
-import codePush from "react-native-code-push";
-
-let codePushOptions = {
-  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
-  updateDialog: true,
-  installMode: codePush.InstallMode.IMMEDIATE
-}
 
 // create our store
 const store = createStore()
@@ -37,5 +30,5 @@ class App extends Component {
 
 // allow reactotron overlay for fast design in dev mode
 export default DebugConfig.useReactotron
-  ? codePush(codePushOptions)(console.tron.overlay(App))
-  : codePush(codePushOptions)(App)
+  ? console.tron.overlay(App)
+  : App
