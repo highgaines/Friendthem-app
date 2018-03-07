@@ -81,7 +81,7 @@ class PersonalInfoTab extends Component {
           rowLabel='PHONE'
           field="phone_number"
           updateInfo={this.packageEditProfile}
-          userInfo={editableData.phone_number}
+          userInfo={editableData.phone_number.replace("+", "")}
           switchToggled={userData.private_phone}
           showSwitch={true}/>
         <InfoRow

@@ -55,7 +55,7 @@ export const superConnectPlatform = (platformName, apiAccessToken, friendId) => 
 const handleSetSelectedSocialMedia = (state, action) => {
   const { platformList } = action
 
-  return state.set('selectedSocialMedia', platformList);
+  return state.set('selectedSocialMedia', Immutable(platformList));
 }
 
 const handleTogglePlatform = (state, action) => {
@@ -66,7 +66,7 @@ const handleTogglePlatform = (state, action) => {
   if (itemIndex < 0) {
     return state.update('selectedSocialMedia', selectedMedia => selectedMedia.push(platformName));
   } else {
-    return state.update('selectedSocialMedia', selectedMedia => selectedMedia.delete(itemIndex));
+    return state.update('selectedSocialMedia', selectedMedia => selectedMedia.slice(0, itemIndex).concat(selectedMedia.slice(itemIndex + 1)));
   }
 }
 
