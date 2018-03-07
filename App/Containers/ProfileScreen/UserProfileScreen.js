@@ -9,6 +9,7 @@ import RNYoutubeOAuth from 'react-native-youtube-oauth'
 import TimerMixin from 'react-timer-mixin'
 import ImagePicker from 'react-native-image-picker'
 import { uploadToAWS } from '../../Utils/functions'
+import { NavigationActions } from 'react-navigation'
 
 // Components
 import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer'
@@ -248,7 +249,7 @@ class UserProfileScreen extends Component {
     } = this.props
     const { showFriendster, socialMediaData, socialNetworkTab, syncedCardColors } = this.state
     const { devGoogleBaseURL, devGoogleApiParams, devGoogleClientId } = envConfig.Development
-
+    const backAction =  NavigationActions.back()
     const ipxHeader = { marginTop: 50 }
     const renderIpxHeader = ifIphoneX(ipxHeader, '')
 
@@ -270,6 +271,15 @@ class UserProfileScreen extends Component {
                   <ActivityIndicator size="large" color="#0000ff"/>
                 </View>
               : <View style={[styles.profileHeader, { height: 150}, renderIpxHeader]}>
+                  <View style={styles.backIcon}>
+                    <Icon
+                      name='arrow-back'
+                      type='materialicons'
+                      size={36}
+                      color='#FFF'
+                      onPress={() => navigation.dispatch(backAction) }
+                    />
+                  </View>
                   <View style={styles.profHeaderTop}>
                   {
                     this.state.profilePic ?
@@ -291,9 +301,11 @@ class UserProfileScreen extends Component {
                     </TouchableOpacity>
                   }
                   </View>
-                  <Text style={styles.profileSubtext}>
-                  {`${userInfo.first_name} ${userInfo.last_name}`}
-                  </Text>
+                  <View style={{ marginBottom: 20 }}>
+                    <Text style={styles.profileSubtext}>
+                      {`${userInfo.first_name} ${userInfo.last_name}`}
+                    </Text>
+                  </View>
                 </View>
               }
             <FriendThemModal

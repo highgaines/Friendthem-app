@@ -17,17 +17,19 @@ export default StyleSheet.create({
     backgroundColor: 'transparent',
     marginTop: 50,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center'
   },
   searchIcon: {
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    marginLeft: 20
   },
   searchForm: {
     height: 35,
     width: 200,
     borderColor: 'white',
     borderWidth: 2,
+    marginRight: 20,
     borderRadius: 50,
     paddingLeft: 10,
     color: 'white'

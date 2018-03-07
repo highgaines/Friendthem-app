@@ -44,18 +44,9 @@ class SearchBar extends Component {
     const { searchMode } = this.state
     const pluralUsers = numUsers > 1 ? 'People' : 'Person'
 
-    const backAction =  NavigationActions.back()
-
     return(
         <View style={styles.searchBar}>
-          <View style={styles.searchIcon}>
-            <Icon
-              name='search'
-              type='evilicon'
-              size={36}
-              color='#FFF'
-              onPress={this.toggleSearch}
-            />
+          <View style={styles.backIcon}>
           </View>
         { searchMode
           ? this.renderSearchForm()
@@ -68,13 +59,13 @@ class SearchBar extends Component {
               </TouchableOpacity>
             </View>
         }
-          <View style={styles.backIcon}>
+          <View style={styles.searchIcon}>
             <Icon
-              name='arrow-back'
-              type='materialicons'
+              name='search'
+              type='evilicon'
               size={36}
               color='#FFF'
-              onPress={() => navigation.dispatch(backAction) }
+              onPress={this.toggleSearch}
             />
           </View>
         </View>

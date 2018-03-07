@@ -122,7 +122,7 @@ class ForkScreen extends Component {
               <View testID={'go_to_nearby_users'}>
                 <ConnectButton
                   color='#fff'
-                  title='GO TO USER PROFILE'
+                  title='GO TO MY PROFILE'
                   containerStyle={styles.button}
                   textStyle={styles.buttonTextStyle}
                   onPressCallback={this.directToNearbyUsers}
