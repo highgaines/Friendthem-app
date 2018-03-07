@@ -55,11 +55,11 @@ class SettingsScreen extends Component {
   }
 
   handleReportProblem = () => {
-    Communications.email(['customerservice@friendthem.com'], null, null, 'Report A Problem', 'Please explain your problem here...')
+    Communications.email(['support@friendthem.com'], null, null, 'Report A Problem', 'Please explain your problem here...')
   }
 
   handleSuggestion = () => {
-    Communications.email(['suggestions@friendthem.com'], null, null, 'Offer A Suggestion', 'Please give us some detailed feedback on how we can make our app better here...')
+    Communications.email(['support@friendthem.com'], null, null, 'Offer A Suggestion', 'Please give us some detailed feedback on how we can make our app better here...')
   }
 
   toggleSilenceNotification = () => {
@@ -86,6 +86,34 @@ class SettingsScreen extends Component {
     const { termsVisible } = this.state
     this.setState({ termsVisible: !termsVisible})
   }
+
+  sendEmail = subjectTitle => {
+    Communications.email(["support@friendthem.com"], null, null, subjectTitle, 'Message Body Here...')
+  }
+
+  renderEmailLinks = () => {
+    const EMAIL_LINKS = ["Join Team Friendthem", "Build Your Following", "Be a Friend of the Week", "Share a Story"];
+
+    return EMAIL_LINKS.map((linkTitle, index) => (
+      <TouchableOpacity
+        style={styles.sectionItem}
+        onPress={() => this.sendEmail(linkTitle)}
+        key={index}
+        >
+        {/* TODO placeholder image, need to replace with real image */}
+        <Image
+          source={Images.lightbulbPNG}
+        />
+        <Text style={styles.sectionItemText}>
+          {linkTitle}
+        </Text>
+        <Image
+          source={Images.rightArrow}
+          style={styles.rightArrow}
+        />
+      </TouchableOpacity>
+    ));
+  };
 
   render() {
     const { navigation, toggleModal } = this.props
@@ -211,6 +239,7 @@ class SettingsScreen extends Component {
               style={styles.ghostSwitchStyle}
             />
           </TouchableOpacity>
+          {this.renderEmailLinks()}
           <TouchableOpacity
             activeOpacity={1}
             testID={'logout_button'}
