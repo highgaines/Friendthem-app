@@ -35,6 +35,7 @@ class PersonalInfoTab extends Component {
 
   render() {
     const { userData, editableData, toggleChangePasswordModal } = this.props
+
     return (
       <View style={styles.personalInfoContainer}>
         <InfoRow
