@@ -68,6 +68,14 @@ export default StyleSheet.create({
     color: '#ffffff',
     fontFamily: Fonts.type.base,
   },
+  profileHometownText: {
+    fontSize: 12,
+    fontWeight: '500',
+    backgroundColor: 'transparent',
+    color: '#ffffff',
+    fontFamily: Fonts.type.base,
+    marginTop: 5
+  },
   linearGradient: {
     flex: 1
   },
