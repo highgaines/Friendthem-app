@@ -86,7 +86,7 @@ class UserProfileScreen extends Component {
   }
 
   componentWillUpdate = (nextProps, nextState) => {
-    const { getUserTokens, apiAccessToken,  } = this.props
+    const { getUserTokens, apiAccessToken } = this.props
     const { externalAuth, appState } = this.state
     const returningToApp = appState.match(/inactive|background/) && nextState.appState === 'active'
 
@@ -121,7 +121,6 @@ class UserProfileScreen extends Component {
     }
     const authHasErrors = prevProps.authErrors && this.props.authErrors && prevProps.authErrors.length < this.props.authErrors.length
     if (authHasErrors) {
-      console.log('here')
       this.toggleErrorModal()
     }
   }

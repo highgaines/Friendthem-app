@@ -122,7 +122,6 @@ class SocialMediaCardContainer extends Component {
             }) : true
 
           if (friendPlatfromPresent) {
-            console.log(socialPlatform, isSynced)
             return (
               <SocialMediaCard
                 key={idx}
