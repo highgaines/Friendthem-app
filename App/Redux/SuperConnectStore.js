@@ -64,7 +64,7 @@ const handleTogglePlatform = (state, action) => {
   const itemIndex = selectedSocialMedia.findIndex(socialMedia => socialMedia === platformName)
 
   if (itemIndex < 0) {
-    return state.update('selectedSocialMedia', selectedMedia => [...selectedMedia, platformName]);
+    return state.update('selectedSocialMedia', selectedMedia => selectedMedia.concat([platformName]));
   } else {
     return state.update('selectedSocialMedia', selectedMedia => selectedMedia.slice(0, itemIndex).concat(selectedMedia.slice(itemIndex + 1)));
   }
