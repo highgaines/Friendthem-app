@@ -116,25 +116,6 @@ export default CongratulatoryScreen = props => {
             Go Home
           </Text>
         </TouchableOpacity>
-        {
-          displaySnapButton ?
-          <View style={styles.subTextContainer}>
-            <Text style={styles.superConnectSubtext}>
-              {`Do you want to connect with ${fullFriendName} on Snapchat?`}
-            </Text>
-            <TouchableOpacity
-              style={styles.snapChatConnectButton}
-              onPress={snapchatDeeplink}>
-              <Text style={styles.snapchatButtonText}>
-                Open Snapchat
-              </Text>
-              <Image
-                style={styles.snapChatLogo}
-                source={Images.snapChatLogo}
-              />
-            </TouchableOpacity>
-          </View> : null
-        }
       </View>
     </View>
   )

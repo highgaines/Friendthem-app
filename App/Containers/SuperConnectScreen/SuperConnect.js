@@ -27,6 +27,8 @@ class SuperConnect extends Component {
       manualPlatformsList: MANUAL_CONNECT_PLATFORMS,
       manualPlatformIndex: 0
     }
+
+    this.initialState = this.state
   }
 
   componentDidMount = () => {
@@ -34,33 +36,33 @@ class SuperConnect extends Component {
   }
 
   componentDidUpdate = (prevProps, prevState) => {
-    const { manualPlatforms, friendInfo, platforms, setManualPlatforms } = this.props
+    const { friendInfo, platforms, setManualPlatforms } = this.props
     const { userInputRequiredPlatforms, manualPlatformIndex } = this.state
-    const manualPlatformsUpdated = manualPlatforms.length && !prevProps.manualPlatforms.length
-    const maxIndex = manualPlatformIndex === manualPlatforms.length
+    const manualPlatformsUpdated = userInputRequiredPlatforms.length && !prevState.userInputRequiredPlatforms.length
+    const maxIndex = manualPlatformIndex === userInputRequiredPlatforms.length
 
     if (manualPlatformsUpdated || (manualPlatformIndex > prevState.manualPlatformIndex && !maxIndex)) {
       if (userInputRequiredPlatforms[manualPlatformIndex]) {
         this.deepLinkToPlatform(userInputRequiredPlatforms[manualPlatformIndex])
       }
     }
-    if (maxIndex && manualPlatformIndex === prevState.manualPlatformIndex && manualPlatforms.length) {
-        this.setState({ manualPlatformIndex: 0 }, () => setManualPlatforms([]))
+    if (maxIndex && manualPlatformIndex === prevState.manualPlatformIndex && userInputRequiredPlatforms.length) {
+        this.setState(this.setState(this.initialState), () => setManualPlatforms([]))
         this.props.navigation.navigate('CongratulatoryScreen', {
           userInfo: this.props.userInfo,
           friendInfo: this.props.friendInfo,
-          navigation: this.props.navigation,
-          snapchatDeeplink: this.snapchatDeepLinkCallback
+          navigation: this.props.navigation
         })
     }
   }
 
   componentWillUnmount = () => {
+    this.props.setManualPlatforms([])
     AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
   deepLinkToPlatform = (platformName) => {
-    const { manualPlatforms, friendInfo, platforms } = this.props
+    const { friendInfo, platforms } = this.props
     const profile = friendInfo.social_profiles.find(profile => profile.provider === platformName)
     const userIdentifier = platformName === 'facebook' ? profile.uid : profile.username
     const deepLinkPlatform = SOCIAL_MEDIA_DATA[platformName].superConnectDeepLink
@@ -76,13 +78,13 @@ class SuperConnect extends Component {
   }
 
   _handleAppStateChange = (nextAppState) => {
-    const { manualPlatforms, platforms, apiAccessToken, friendInfo } = this.props
-    const { manualPlatformIndex, appState } = this.state
+    const { platforms, apiAccessToken, friendInfo } = this.props
+    const { manualPlatformIndex, appState, userInputRequiredPlatforms } = this.state
     const returningToApp = appState.match(/inactive|background/) && nextAppState === 'active'
     const connectFB = platforms.find(elem => elem.provider === 'facebook')
 
-    if (returningToApp && manualPlatformIndex < manualPlatforms.length) {
-      this.asyncSuperConnectPlatform(manualPlatforms[manualPlatformIndex], apiAccessToken, friendInfo.id)
+    if (returningToApp && manualPlatformIndex < userInputRequiredPlatforms.length) {
+      this.asyncSuperConnectPlatform(userInputRequiredPlatforms[manualPlatformIndex], apiAccessToken, friendInfo.id)
       this.setState({ manualPlatformIndex: manualPlatformIndex + 1 })
     }
 
@@ -90,40 +92,35 @@ class SuperConnect extends Component {
   }
 
   asyncSuperConnectPlatform = async (platform, apiAccessToken, friendId) => {
-    await this.props.superConnectPlatform(platform, apiAccessToken, friendId)
+    const platName = platform === 'google-oauth2' ? "youtube" : platform
+    await this.props.superConnectPlatform(platName, apiAccessToken, friendId)
   }
 
   superConnectPromiseLoop = () => {
     const { selectedSocialMedia, friendInfo, superConnectPlatform, apiAccessToken, setManualPlatforms, userId } = this.props
     const { userInputRequiredPlatforms, manualPlatformsList } = this.state
-    let platform
+    let platform = ''
+    let tempUserInputArr = []
 
-    this.setState({ connectionModalOpen: true })
     for (let i = 0; i < selectedSocialMedia.length; i++) {
-      this.setState({ connectionStepCount: i + 1 })
       platform = selectedSocialMedia[i]
 
-      if (platform === 'snapchat') {
-        continue
-      } else if (manualPlatformsList.includes(platform)) {
-        userInputRequiredPlatforms.push(platform)
+      if (manualPlatformsList.includes(platform)) {
+        tempUserInputArr.push(platform)
       } else {
         this.asyncSuperConnectPlatform(platform, apiAccessToken, friendInfo.id, userId)
       }
     }
-    this.setState({connectionModalOpen: false },
-      () => {
-        if (userInputRequiredPlatforms.length) {
-          setManualPlatforms(userInputRequiredPlatforms)
-        } else {
-            this.props.navigation.navigate('CongratulatoryScreen', {
-              userInfo: this.props.userInfo,
-              friendInfo: this.props.friendInfo,
-              navigation: this.props.navigation,
-              snapchatDeeplink: this.snapchatDeepLinkCallback
-            })
-        }
-      })
+    if (tempUserInputArr.length) {
+      this.setState({ userInputRequiredPlatforms: tempUserInputArr })
+    } else {
+        this.setState(this.initialState)
+        this.props.navigation.navigate('CongratulatoryScreen', {
+          userInfo: this.props.userInfo,
+          friendInfo: this.props.friendInfo,
+          navigation: this.props.navigation
+        })
+      }
   }
 
   socialPlatformPresent = (provider) => {
@@ -137,13 +134,6 @@ class SuperConnect extends Component {
       default:
         return platforms.find(platformObj => platformObj.provider === provider)
     }
-  }
-
-  snapchatDeepLinkCallback = () => {
-    const { friendInfo } = this.props
-    const snapInfo = friendInfo.social_profiles.find(profile => profile.provider === 'snapchat')
-
-    Linking.openURL(`snapchat://add/${snapInfo.username}`)
   }
 
   render() {
@@ -191,7 +181,6 @@ const mapStateToProps = state => ({
   friendInfo: state.friendStore.friendData,
   fbAuthToken: state.fbStore.fbAccessToken,
   apiAccessToken: state.authStore.accessToken,
-  manualPlatforms: state.superConnect.manualPlatforms,
   selectedSocialMedia: state.superConnect.selectedSocialMedia
 })
 
