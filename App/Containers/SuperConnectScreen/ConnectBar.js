@@ -22,7 +22,7 @@ export default ConnectBar = props => {
           <View style={styles.rows}>
             <Text style={styles.titleRow}>
               {
-                copy.includes('SuperConnect')
+                copy.includes('Super Connect')
                 ? 'Super Connect'
                 : 'Friend Them'
               }
@@ -49,7 +49,9 @@ export default ConnectBar = props => {
               </View>
               <View style={styles.column}>
                 <View style={styles.friendThemLogo}>
-                  <Image source={require('../../Images/logowithouttext3.png')} />
+                  <Image
+                    style={styles.superConnectIcon}
+                    source={Images.newSuperConnectIcon} />
                 </View>
               </View>
               <View style={styles.column}>

@@ -68,15 +68,12 @@ class FriendThemModal extends Component {
   }
 
   handleSubmitPW = () => {
-    const { accessToken, updatePassword, toggleChangePasswordModal } = this.props
+    const { accessToken, updatePassword, toggleChangePasswordModal, toggleConfirmPasswordModal } = this.props
     const { oldPassword, newPassword } = this.state
 
-    if (this.comparePasswords()) {
-      updatePassword(accessToken, oldPassword, newPassword)
-      toggleChangePasswordModal()
-    } else {
-      alert("passwords dont match")
-    }
+    updatePassword(accessToken, oldPassword, newPassword)
+    toggleChangePasswordModal()
+    setTimeout(() => toggleConfirmPasswordModal(), 1000)
   }
 
   comparePasswords = () => {

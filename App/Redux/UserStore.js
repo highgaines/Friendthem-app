@@ -411,7 +411,7 @@ const handleUpdatePWSuccess = (state, action) => {
 }
 
 const handleUpdatePWFailure = (state, action) => {
-  return state.set({ requestingPWUpdate: false})
+  return state.merge({ passwordUpdated: false, requestingPWUpdate: false})
 }
 
 /* ------------- Hookup Reducers To Types ------------- */

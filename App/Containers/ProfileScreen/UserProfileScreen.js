@@ -20,6 +20,7 @@ import PersonalInfoTab from './PersonalInfoTab'
 import FriendThemModal from '../UtilityComponents/FriendThemModal'
 import ChangePasswordModal from './ChangePasswordModal'
 import FbPhotoModal from './FbPhotoModal'
+import ConfirmPasswordChangeModal from './ConfirmPasswordChangeModal'
 
 // Redux
 import { connect } from 'react-redux'
@@ -57,7 +58,8 @@ class UserProfileScreen extends Component {
       syncedCardColors: SYNCED_CARD_COLORS,
       showChangePasswordModal: false,
       showFbPhotoModal: false,
-      showErrorModal: false
+      showErrorModal: false,
+      showConfirmPasswordChangeModal: false
     }
   }
 
@@ -244,6 +246,10 @@ class UserProfileScreen extends Component {
     this.setState({ showErrorModal: !showErrorModal })
   }
 
+  toggleConfirmPasswordModal = () => {
+    this.setState({ showConfirmPasswordChangeModal: !this.state.showConfirmPasswordChangeModal })
+  }
+
   checkForErrors = () => {
     const { authErrors } = this.props
     if (authErrors.length) {
@@ -256,7 +262,6 @@ class UserProfileScreen extends Component {
     const { apiAccessToken } = this.props
     this.props.socialMediaAuthErrors(apiAccessToken)
   }
-
 
   render() {
     const {
@@ -280,7 +285,6 @@ class UserProfileScreen extends Component {
     const renderIpxHeader = ifIphoneX(ipxHeader, '')
 
     const ipxInfoTab = ifIphoneX({ 'height': 480}, {'height': 366})
-
     return (
         <View>
           <LinearGradient
@@ -393,6 +397,11 @@ class UserProfileScreen extends Component {
           <ChangePasswordModal
              modalVisible={this.state.showChangePasswordModal}
              toggleChangePasswordModal={this.toggleChangePasswordModal}
+             toggleConfirmPasswordModal={this.toggleConfirmPasswordModal}
+           />
+         <ConfirmPasswordChangeModal
+           toggleModal={this.toggleConfirmPasswordModal}
+           modalVisible={this.state.showConfirmPasswordChangeModal}
            />
           <FbPhotoModal
             modalVisible={this.state.showFbPhotoModal}

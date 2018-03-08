@@ -46,7 +46,7 @@ class InviteUsersScreen extends Component {
   renderConnectivityCards = () => {
     const { myFriends, navigation } = this.props
 
-    return myFriends.map( (friend, idx) => {
+    return myFriends && myFriends.map( (friend, idx) => {
       return (
         <ConnectivityCard
           key={idx}
@@ -83,7 +83,7 @@ class InviteUsersScreen extends Component {
           style={styles.headerGradient}>
           <LazyloadView>
             <Text style={styles.friendCount}>
-              {networkTabSelected ?
+              {myFriends && contacts && networkTabSelected ?
                 `${myFriends.length} friend${pluralizeFriends}`
                 :
                 `${contacts.length} friend${pluralizeContacts}` }
