@@ -122,8 +122,8 @@ export const getFBPhotos = (accessToken) => {
 
 export const updateUserPosition = (accessToken, coords) => {
   const headers = new Headers()
-  headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${accessToken}`)
+  headers.append('Content-Type', 'application/json')
 
   const body = {
     last_location: {
@@ -153,8 +153,8 @@ export const updateUserPosition = (accessToken, coords) => {
 
 export const updateInfoRequest = (data, field, content, accessToken) => {
   const headers = new Headers()
-  headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${accessToken}`)
+  headers.append('Content-Type', 'application/json')
 
   const body = {
     ...data,
@@ -186,8 +186,8 @@ export const updateInfo = (field, content) => {
 
 export const updateSnapInfo = (provider, username, accessToken) => {
   const headers = new Headers()
-  headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${accessToken}`)
+  headers.append('Content-Type', 'application/json')
 
   const body = {
     provider: provider,
@@ -215,8 +215,8 @@ export const updateSnapInfo = (provider, username, accessToken) => {
 
 export const updateSettings = (accessToken, setting, mode) => {
   const headers = new Headers()
-  headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${accessToken}`)
+  headers.append('Content-Type', 'application/json')
 
   const body = {
     [setting]: mode
@@ -241,8 +241,8 @@ export const updateSettings = (accessToken, setting, mode) => {
 
 export const updatePassword = (accessToken, oldPassword, newPassword) => {
   const headers = new Headers()
-  headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${accessToken}`)
+  headers.append('Content-Type', 'application/json')
 
   const body ={
     client_id: envConfig.Development.devClientId,

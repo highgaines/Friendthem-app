@@ -76,12 +76,13 @@ class SuperConnect extends Component {
   }
 
   _handleAppStateChange = (nextAppState) => {
-    const { manualPlatforms, platforms } = this.props
+    const { manualPlatforms, platforms, apiAccessToken, friendInfo } = this.props
     const { manualPlatformIndex, appState } = this.state
     const returningToApp = appState.match(/inactive|background/) && nextAppState === 'active'
     const connectFB = platforms.find(elem => elem.provider === 'facebook')
 
     if (returningToApp && manualPlatformIndex < manualPlatforms.length) {
+      this.asyncSuperConnectPlatform(manualPlatforms[manualPlatformIndex], apiAccessToken, friendInfo.id)
       this.setState({ manualPlatformIndex: manualPlatformIndex + 1 })
     }
 

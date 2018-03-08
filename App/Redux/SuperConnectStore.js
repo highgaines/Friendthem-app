@@ -28,7 +28,7 @@ export const superConnectPlatform = (platformName, apiAccessToken, friendId) => 
   const headers = new Headers()
   headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${apiAccessToken}`)
-  console.log(platformName)
+
   const body = {
     provider: platformName,
     user_2: friendId
@@ -64,7 +64,7 @@ const handleTogglePlatform = (state, action) => {
   const itemIndex = selectedSocialMedia.findIndex(socialMedia => socialMedia === platformName)
 
   if (itemIndex < 0) {
-    return state.update('selectedSocialMedia', selectedMedia => selectedMedia.push(platformName));
+    return state.update('selectedSocialMedia', selectedMedia => [...selectedMedia, platformName]);
   } else {
     return state.update('selectedSocialMedia', selectedMedia => selectedMedia.slice(0, itemIndex).concat(selectedMedia.slice(itemIndex + 1)));
   }
