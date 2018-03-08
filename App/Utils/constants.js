@@ -31,7 +31,8 @@ export const SOCIAL_MEDIA_DATA = {
     deepLinkUrl: 'youtube://'
   },
   snapchat: {
-    deepLinkUrl: 'snapchat://'
+    deepLinkUrl: 'snapchat://',
+    superConnectDeepLink: 'snapchat://add/'
   }
 }
 
