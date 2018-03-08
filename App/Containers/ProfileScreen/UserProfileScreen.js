@@ -24,7 +24,7 @@ import FbPhotoModal from './FbPhotoModal'
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import UserStoreActions, { getUserInfo, updateInfo, updateSnapInfo, updateInfoRequest, getFBPhotos } from '../../Redux/UserStore'
+import UserStoreActions, { getUserInfo, updateInfo, updateSnapInfo, updateInfoRequest, getFBPhotos, clearAuthErrors } from '../../Redux/UserStore'
 import AuthStoreActions, { socialMediaAuth, socialMediaAuthErrors } from '../../Redux/AuthStore'
 import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
 
@@ -56,7 +56,8 @@ class UserProfileScreen extends Component {
       socialMediaData: SOCIAL_MEDIA_DATA,
       syncedCardColors: SYNCED_CARD_COLORS,
       showChangePasswordModal: false,
-      showFbPhotoModal: false
+      showFbPhotoModal: false,
+      showErrorModal: false
     }
   }
 
@@ -85,7 +86,7 @@ class UserProfileScreen extends Component {
   }
 
   componentWillUpdate = (nextProps, nextState) => {
-    const { getUserTokens, apiAccessToken } = this.props
+    const { getUserTokens, apiAccessToken,  } = this.props
     const { externalAuth, appState } = this.state
     const returningToApp = appState.match(/inactive|background/) && nextState.appState === 'active'
 
@@ -117,6 +118,11 @@ class UserProfileScreen extends Component {
             }
         })
       }
+    }
+    const authHasErrors = prevProps.authErrors && this.props.authErrors && prevProps.authErrors.length < this.props.authErrors.length
+    if (authHasErrors) {
+      console.log('here')
+      this.toggleErrorModal()
     }
   }
 
@@ -234,6 +240,25 @@ class UserProfileScreen extends Component {
     })
   }
 
+  toggleErrorModal = () => {
+    const { showErrorModal } = this.state
+    this.setState({ showErrorModal: !showErrorModal })
+  }
+
+  checkForErrors = () => {
+    const { authErrors } = this.props
+    if (authErrors.length) {
+      this.toggleErrorModal()
+    }
+  }
+
+  // test action to fetch errors during authentication
+  getErrors = () => {
+    const { apiAccessToken } = this.props
+    this.props.socialMediaAuthErrors(apiAccessToken)
+  }
+
+
   render() {
     const {
       userId,
@@ -249,7 +274,7 @@ class UserProfileScreen extends Component {
       fetching,
       userPhotos
     } = this.props
-    const { showFriendster, socialMediaData, socialNetworkTab, syncedCardColors } = this.state
+    const { showFriendster, socialMediaData, socialNetworkTab, syncedCardColors, showErrorModal } = this.state
     const { devGoogleBaseURL, devGoogleApiParams, devGoogleClientId } = envConfig.Development
     const backAction =  NavigationActions.back()
     const ipxHeader = { marginTop: 50 }
@@ -314,11 +339,18 @@ class UserProfileScreen extends Component {
               modalVisible={this.state.snapHandleModalOpen}
               snapchat={true}
               form={true}
-              headerText={'Snapchat'}
+              headerText='Snapchat'
               text='Entering your Snapchat handle here will help us
               connect you with people more seamlessly.'
               toggleModal={this.toggleSnapchatModal}
               submitText={(inputValue, apiAccessToken) => updateSnapInfo('snapchat', inputValue, apiAccessToken)} />
+            <FriendThemModal
+              modalVisible={showErrorModal}
+              toggleModal={this.toggleErrorModal}
+              headerText='Whoops!'
+              text='We encountered an error when we tried syncing one of your accounts'
+              okActionCallback={this.props.clearAuthErors}
+            />
             <View
               testID='tab-selection-container'
               style={styles.tabSelectionContainer}>
@@ -394,6 +426,7 @@ const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({
       socialMediaAuthErrors,
+      clearAuthErrors,
       getFBPhotos,
       getUserInfo,
       getUserTokens,

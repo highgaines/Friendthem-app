@@ -11,6 +11,7 @@ const { Types, Creators } = createActions({
   authErrorsRequest: null,
   authErrorsSuccess: null,
   authErrorsFailure: null,
+  authErrorClear: null,
   logoutUser: null,
   loginRequest: null,
   loginSuccess: null,
@@ -47,6 +48,7 @@ export const INITIAL_STATE = Immutable({
   userInfoAdded: false,
   authError: false,
   redirectUrl: null,
+  authErrors: []
 })
 
 
@@ -193,6 +195,10 @@ export const socialMediaAuthErrors = (accessToken) => {
   }
 }
 
+export const clearAuthErrors = () => {
+  return { type: Types.AUTH_ERROR_CLEAR }
+}
+
 export const refreshAuthToken = refreshToken => {
   const body = {
     client_id: envConfig.Development.devClientId,
@@ -313,17 +319,22 @@ const handleAuthErrorsRequest = (state, action) => {
 
 const handleAuthErrorsSuccess = (state, action) => {
   console.log(action)
-  return state
+  return state.set('authErrors', action.response.data)
 }
 
 const handleAuthErrorsFailure = (state, action) => {
   return state
 }
 
+const handleClearAuthErrors = (state, action) => {
+  return state.set('authErrors', Immutable([]))
+}
+
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.AUTH_ERRORS_REQUEST]: handleAuthErrorsRequest,
   [Types.AUTH_ERRORS_SUCCESS]: handleAuthErrorsSuccess,
   [Types.AUTH_ERRORS_FAILURE]: handleAuthErrorsFailure,
+  [Types.AUTH_ERROR_CLEAR]: handleClearAuthErrors,
   [Types.LOGOUT_USER]: handleUserLogout,
   [Types.LOGIN_REQUEST]: loginRequest,
   [Types.LOGIN_SUCCESS]: loginSuccess,

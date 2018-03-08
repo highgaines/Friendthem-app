@@ -30,6 +30,13 @@ class FriendThemModal extends Component {
     toggleModal()
   }
 
+  okAction = () => {
+    const { okActionCallback } = this.props
+
+    okActionCallback()
+    toggleModal()
+  }
+
   render() {
     const { modalVisible, toggleModal, snapchat, headerText, text, form } = this.props
     const { input } = this.state
@@ -77,7 +84,10 @@ class FriendThemModal extends Component {
                     <Text style={styles.buttonText}>Submit</Text>
                 </TouchableOpacity>
               </View>
-            : <TouchableOpacity>
+            : <TouchableOpacity
+                style={styles.modalButton}
+                onPress={() => this.okAction()}
+              >
                 <Text style={styles.buttonText}> Okay </Text>
               </TouchableOpacity>
             }
