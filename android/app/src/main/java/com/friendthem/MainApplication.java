@@ -39,11 +39,11 @@ public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
 
-        @Override
-        protected String getJSBundleFile() {
-        return CodePush.getJSBundleFile();
-        }
-    
+    @Override
+    protected String getJSBundleFile() {
+    return CodePush.getJSBundleFile();
+    }
+
 
     @Override
     public boolean getUseDeveloperSupport() {
@@ -54,7 +54,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new CodePush(null, getApplicationContext(), BuildConfig.DEBUG),
+            new CodePush("iSovlppbBdHwLSg3CpxuaiiM5pgIfda3ef3e-5a38-4dfe-9133-1afc3eb3b7df", getApplicationContext(), BuildConfig.DEBUG),
             new RNFetchBlobPackage(),
             new FastImageViewPackage(),
             new PickerViewPackage(),

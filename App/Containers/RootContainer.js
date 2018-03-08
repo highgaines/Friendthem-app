@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { View, StatusBar, AppState } from 'react-native'
+import { View, StatusBar, AppState, Platform } from 'react-native'
 
 import ReduxNavigation from '../Navigation/ReduxNavigation'
 import ReduxPersist from '../Config/ReduxPersist'
@@ -48,6 +48,19 @@ class RootContainer extends Component {
 
     if (this.props.appState !== ACTIVE && nextProps.appState === ACTIVE) {
       this.asyncAuthTokenUpdate(refreshToken)
+    if (Platform.OS === 'ios' &&
+        this.props.appState !== ACTIVE &&
+        nextProps.appState === ACTIVE) {
+      this.props.refreshAuthToken(refreshToken);
+    }
+
+    if (accessToken) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        updateUserPosition(accessToken, position.coords)
+      },
+        (error) => this.setState({ error: error.message }),
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+      )
     }
   }
 

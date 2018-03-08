@@ -1,13 +1,14 @@
 import '../Config'
 import DebugConfig from '../Config/DebugConfig'
 import React, { Component } from 'react'
+import { Platform } from 'react-native'
 import { Provider } from 'react-redux'
 import RootContainer from './RootContainer'
 import createStore from '../Redux'
 import codePush from "react-native-code-push"
 
 let codePushOptions = {
-  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
+  checkFrequency: Platform.OS == 'ios' ? codePush.CheckFrequency.ON_APP_RESUME : null,
   updateDialog: true,
   installMode: codePush.InstallMode.IMMEDIATE
 }
