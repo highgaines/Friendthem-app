@@ -56,5 +56,8 @@ export default StyleSheet.create({
     fontWeight: '500',
     fontSize: 14,
     fontFamily: Fonts.type.base,
+  },
+  superConnectIcon: {
+    right: 10
   }
 })

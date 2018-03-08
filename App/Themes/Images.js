@@ -30,6 +30,7 @@ const images = {
   powerIcon: require('../Images/Icons/power-icon.png'),
   privacy: require('../Images/Icons/privacy.png'),
   rightArrow: require('../Images/Icons/rightArrow.png'),
+  newSuperConnectIcon: require('../Images/newSuperConnectIcon.png'),
 
   // Social Media Icons
   cameraIcon: require('../Images/Icons/camera-icon.png'),
