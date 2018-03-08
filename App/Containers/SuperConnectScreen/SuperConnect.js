@@ -56,6 +56,7 @@ class SuperConnect extends Component {
   }
 
   componentWillUnmount = () => {
+    this.props.setManualPlatforms([])
     AppState.removeEventListener('change', this._handleAppStateChange);
   }
 

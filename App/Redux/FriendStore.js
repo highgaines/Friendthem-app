@@ -32,7 +32,7 @@ export const checkFriendConnection = (accessToken, friendUserId) => {
     const headers = new Headers()
     headers.append("Authorization", `Bearer ${accessToken}`)
     headers.append("Content-Type", "application/json")
-    console.log('here', accessToken)
+
     const init = {
       method: "GET",
       headers
