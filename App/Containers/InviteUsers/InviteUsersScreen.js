@@ -84,9 +84,9 @@ class InviteUsersScreen extends Component {
           <LazyloadView>
             <Text style={styles.friendCount}>
               {networkTabSelected ?
-                `${myFriends.length} friend${pluralizeFriends}`
+                `${myFriends && myFriends.length} friend${pluralizeFriends}`
                 :
-                `${contacts.length} friend${pluralizeContacts}` }
+                `${contacts && contacts.length} friend${pluralizeContacts}` }
             </Text>
           </LazyloadView>
           <LazyloadView style={styles.tabSelectionContainer}>
