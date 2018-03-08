@@ -32,7 +32,6 @@ class SuperConnect extends Component {
   }
 
   componentDidMount = () => {
-    console.log(this.props.userInputRequiredPlatforms)
     AppState.addEventListener('change', this._handleAppStateChange);
   }
 
@@ -41,7 +40,7 @@ class SuperConnect extends Component {
     const { userInputRequiredPlatforms, manualPlatformIndex } = this.state
     const manualPlatformsUpdated = userInputRequiredPlatforms.length && !prevState.userInputRequiredPlatforms.length
     const maxIndex = manualPlatformIndex === userInputRequiredPlatforms.length
-    debugger
+
     if (manualPlatformsUpdated || (manualPlatformIndex > prevState.manualPlatformIndex && !maxIndex)) {
       if (userInputRequiredPlatforms[manualPlatformIndex]) {
         this.deepLinkToPlatform(userInputRequiredPlatforms[manualPlatformIndex])
@@ -94,7 +93,8 @@ class SuperConnect extends Component {
   }
 
   asyncSuperConnectPlatform = async (platform, apiAccessToken, friendId) => {
-    await this.props.superConnectPlatform(platform, apiAccessToken, friendId)
+    const platName = platform === 'google-oauth2' ? "youtube" : platform
+    await this.props.superConnectPlatform(platName, apiAccessToken, friendId)
   }
 
   superConnectPromiseLoop = () => {
