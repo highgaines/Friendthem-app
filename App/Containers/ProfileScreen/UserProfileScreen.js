@@ -13,10 +13,10 @@ import { NavigationActions } from 'react-navigation'
 
 // Components
 import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer'
-import Navbar from '../Navbar/Navbar'
 import PickSocialMediaModal from '../TutorialScreens/PickSocialMediaModal'
 import ConnectButton from '../SuperConnectScreen/ConnectButton'
 import PersonalInfoTab from './PersonalInfoTab'
+import MyPicturesContainer from './MyPicturesContainer'
 import FriendThemModal from '../UtilityComponents/FriendThemModal'
 import ChangePasswordModal from './ChangePasswordModal'
 import FbPhotoModal from './FbPhotoModal'
@@ -51,7 +51,7 @@ class UserProfileScreen extends Component {
       externalAuth: false,
       showFriendster: false,
       currentPlatform: null,
-      socialNetworkTab: true,
+      tab: 'Networks',
       snapHandleModalOpen: false,
       appState: AppState.currentState,
       socialMediaData: SOCIAL_MEDIA_DATA,
@@ -264,6 +264,39 @@ class UserProfileScreen extends Component {
     this.props.socialMediaAuthErrors(apiAccessToken)
   }
 
+  renderContainer = () => {
+    const { userInfo } = this.props
+    const { tab } = this.state
+
+    if (tab === "Networks") {
+      return (
+        <SocialMediaCardContainer
+          fromUserProfile={true}
+          platformSelected={(platform) => false}
+          snapchatCallback={this.toggleSnapchatModal}
+          onPressCallback={(platform) => this.authenticateSocialMedia(platform)}
+          platformSynced={((socialMedia) => this.socialPlatformPresent(socialMedia))}
+        />
+      )
+    } else if (tab === "Info") {
+      const ipxInfoTab = ifIphoneX({ 'height': 480}, {'height': 366})
+      return(
+        <ScrollView style={ipxInfoTab}>
+          <PersonalInfoTab
+            toggleChangePasswordModal={this.toggleChangePasswordModal}
+          />
+        </ScrollView>
+      )
+    } else if (tab === "Pics") {
+      return (
+      <MyPicturesContainer
+        userInfo={userInfo}
+        togglePhotoModal={this.togglePhotoModal}
+      />
+      )
+    }
+  }
+
   render() {
     const {
       userId,
@@ -279,8 +312,22 @@ class UserProfileScreen extends Component {
       isFetchingInitialUser,
       userPhotos
     } = this.props
-    const { showFriendster, socialMediaData, socialNetworkTab, syncedCardColors, showErrorModal } = this.state
-    const { devGoogleBaseURL, devGoogleApiParams, devGoogleClientId } = envConfig.Development
+
+    const {
+      showFriendster,
+      socialMediaData,
+      socialNetworkTab,
+      syncedCardColors,
+      showErrorModal,
+      tab
+    } = this.state
+
+    const {
+      devGoogleBaseURL,
+      devGoogleApiParams,
+      devGoogleClientId
+    } = envConfig.Development
+
     const backAction =  NavigationActions.back()
     const ipxHeader = { marginTop: 50 }
     const renderIpxHeader = ifIphoneX(ipxHeader, '')
@@ -359,42 +406,36 @@ class UserProfileScreen extends Component {
               testID='tab-selection-container'
               style={styles.tabSelectionContainer}>
               <TouchableOpacity
-                onPress={() => this.setState({ socialNetworkTab: true })}
-                style={[styles.tabItem, socialNetworkTab ? styles.selected : null]}>
+                onPress={() => this.setState({ tab: "Networks" })}
+                style={[styles.tabItem, tab === "Networks" ? styles.selected : null]}>
                 <Text
-                  style={[styles.tabText, socialNetworkTab ? styles.selectedText : null]}
+                  style={[styles.tabText, tab === "Networks" ? styles.selectedText : null]}
                 >
                   SOCIAL NETWORKS
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 testID='personal-info-tab'
-                onPress={() => this.setState({ socialNetworkTab: false })}
-                style={[styles.tabItem, socialNetworkTab ? null : styles.selected]}>
+                onPress={() => this.setState({ tab: "Info" })}
+                style={[styles.tabItem, tab === "Info" ? styles.selected : null]}>
                 <Text
-                  style={[styles.tabText, socialNetworkTab ? null : styles.selectedText]}
+                  style={[styles.tabText, tab === "Info" ? styles.selectedText : null]}
                   >
                   PERSONAL INFO
                 </Text>
               </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.setState({ tab: "Pics" })}
+                style={[styles.tabItem, tab === "Pics" ? styles.selected : null]}>
+                <Text
+                  style={[styles.tabText, tab === "Pics" ? styles.selectedText : null]}
+                >
+                  MY PICTURES
+                </Text>
+              </TouchableOpacity>
             </View>
             </LinearGradient>
-
-        {  socialNetworkTab ?
-            <SocialMediaCardContainer
-              fromUserProfile={true}
-              platformSelected={(platform) => false}
-              snapchatCallback={this.toggleSnapchatModal}
-              onPressCallback={(platform) => this.authenticateSocialMedia(platform)}
-              platformSynced={((socialMedia) => this.socialPlatformPresent(socialMedia))}
-            />
-          :
-            <ScrollView style={ipxInfoTab}>
-              <PersonalInfoTab
-                toggleChangePasswordModal={this.toggleChangePasswordModal}
-                />
-            </ScrollView>
-         }
+            {this.renderContainer()}
           <ChangePasswordModal
              modalVisible={this.state.showChangePasswordModal}
              toggleChangePasswordModal={this.toggleChangePasswordModal}

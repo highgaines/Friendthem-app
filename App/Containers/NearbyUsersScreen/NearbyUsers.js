@@ -135,7 +135,6 @@ class NearbyUsers extends Component {
           ? <WelcomeScreen
               visible={welcomeTutorialVisible}
               closeModal={this.toggleWelcomeTutorial}
-              name='Peter Parker'
               navigation={navigation}
               toggleWelcomeTutorial={this.toggleWelcomeTutorial}
             />

@@ -16,6 +16,15 @@ const { Types, Creators } = createActions({
   getFbPhotosRequest: null,
   getFbPhotosSuccess: null,
   getFbPhotosFailure: null,
+  getMyPicsRequest: null,
+  getMyPicsSuccess: null,
+  getMyPicsFailure: null,
+  deletePicRequest: null,
+  deletePicSuccess: null,
+  deletePicFailure: null,
+  addPicRequest: null,
+  addPicSuccess: null,
+  addPicFailure: null,
   updateInfoRequest: null,
   updateInfoSuccess: null,
   updateInfoFailure: null,
@@ -67,7 +76,10 @@ export const INITIAL_STATE = Immutable({
   userPhotos: {},
   ghostModeOn: true,
   notificationsOn: true,
-  passwordUpdated: false
+  passwordUpdated: false,
+  fetching: false,
+  passwordUpdated: false,
+  myPictures: []
 })
 
 /* ------------- Actions ------------- */
@@ -113,10 +125,83 @@ export const getFBPhotos = (accessToken) => {
       Types.GET_FB_PHOTOS_FAILURE
     ],
     shouldCallApi: state => true,
-    callApi: dispatch => fetchFromApi('pictures/', init, dispatch)
+    callApi: dispatch => fetchFromApi('pictures/facebook/', init, dispatch)
  }
 }
 
+// FETCH MY PICS
+
+export const getMyPics = (accessToken) => {
+  const headers = new Headers()
+  headers.append('Authorization', `Bearer ${accessToken}`)
+  headers.append('Content-Type', 'application/json')
+
+  const init = {
+    method: 'GET',
+    headers
+  }
+
+  return {
+    types: [
+      Types.GET_MY_PICS_REQUEST,
+      Types.GET_MY_PICS_SUCCESS,
+      Types.GET_MY_PICS_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi('pictures/', init, dispatch)
+  }
+}
+
+// DELETE ONE OF MY PICS
+
+export const deletePic = (accessToken, pictureId) => {
+  const headers = new Headers()
+  headers.append('Authorization', `Bearer ${accessToken}`)
+  headers.append('Content-Type', 'application/json')
+
+  const init = {
+    method: "DELETE",
+    headers
+  }
+
+  return {
+    types: [
+      Types.DELETE_PIC_REQUEST,
+      Types.DELETE_PIC_SUCCESS,
+      Types.DELETE_PIC_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi(`pictures/${pictureId}/`, init, dispatch)
+  }
+}
+
+// POST NEW PIC
+
+export const addPic = (accessToken, source) => {
+  const headers = new Headers()
+  headers.append('Authorization', `Bearer ${accessToken}`)
+  headers.append('Content-Type', 'application/json')
+
+  const body = {
+    url: source
+  }
+
+  const init = {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(body)
+  }
+
+  return {
+    types: [
+      Types.ADD_PIC_REQUEST,
+      Types.ADD_PIC_SUCCESS,
+      Types.ADD_PIC_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi('pictures/', init, dispatch)
+  }
+}
 
 // GEOLOCATION POSITIONING
 
@@ -400,7 +485,7 @@ const handleGetPhotosFailure = (state, action) => {
 /*----------------- UPDATE PASSWORD REDUCERS  ---------------*/
 
 const handleUpdatePWRequest = (state, action) => {
-  return state.set({ requestingPWUpdate: true })
+  return state.merge({ requestingPWUpdate: true })
 }
 
 const handleUpdatePWSuccess = (state, action) => {
@@ -414,6 +499,48 @@ const handleUpdatePWFailure = (state, action) => {
   return state.merge({ passwordUpdated: false, requestingPWUpdate: false})
 }
 
+/*----------------- GET PICS REDUCERS  ---------------*/
+
+const handleGetMyPicsRequest = (state, action) => {
+  return state
+}
+
+const handleGetMyPicsSuccess = (state, action) => {
+  return state.set('myPictures', action.data)
+}
+
+const handleGetMyPicsFailure = (state, action) => {
+  return state
+}
+
+/*----------------- DELETE PIC REDUCERS  ---------------*/
+
+const handleDeletePicRequest = (state, action) => {
+  return state
+}
+
+const handleDeletePicSuccess = (state, action) => {
+  return state.set('myPictures', action.data)
+}
+
+const handleDeletePicFailure = (state, action) => {
+  return state
+}
+
+/*----------------- ADD PIC REDUCERS  ---------------*/
+
+const handleAddPicRequest = (state, action) => {
+  return state
+}
+
+const handleAddPicSuccess = (state, action) => {
+  return state.set('myPictures', action.data)
+}
+
+const handleAddPicFailure = (state, action) => {
+  return state
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -425,6 +552,15 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_FB_PHOTOS_REQUEST]: handleGetPhotosRequest,
   [Types.GET_FB_PHOTOS_SUCCESS]: handleGetPhotosSuccess,
   [Types.GET_FB_PHOTOS_FAILURE]: handleGetPhotosFailure,
+  [Types.GET_MY_PICS_REQUEST]: handleGetMyPicsRequest,
+  [Types.GET_MY_PICS_SUCCESS]: handleGetMyPicsSuccess,
+  [Types.GET_MY_PICS_FAILURE]: handleGetMyPicsFailure,
+  [Types.DELETE_PIC_REQUEST]: handleDeletePicRequest,
+  [Types.DELETE_PIC_SUCCESS]: handleDeletePicSuccess,
+  [Types.DELETE_PIC_FAILURE]: handleDeletePicFailure,
+  [Types.ADD_PIC_REQUEST]: handleAddPicRequest,
+  [Types.ADD_PIC_SUCCESS]: handleAddPicSuccess,
+  [Types.ADD_PIC_FAILURE]: handleAddPicFailure,
   [Types.UPDATE_INFO_REQUEST]: handleUpdateUserRequest,
   [Types.UPDATE_INFO_SUCCESS]: handleUpdateUserSuccess,
   [Types.UPDATE_INFO_FAILURE]: handleUpdateUserFailure,
