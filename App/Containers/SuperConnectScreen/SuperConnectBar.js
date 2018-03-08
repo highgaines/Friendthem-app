@@ -25,7 +25,7 @@ export default class SuperConnectBar extends Component {
   render() {
     const { iphoneXStyle, platforms } = this.props
 
-    const superConnectCopy = 'Are you sure you would like to SuperConnect on all platforms with'
+    const superConnectCopy = 'Are you sure you would like to Super Connect on all platforms with'
 
     const friendThemCopy = 'Are you sure you would like to connect on the selected platforms with'
 
