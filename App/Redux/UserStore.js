@@ -296,6 +296,7 @@ const handleGetUserSuccess = (state, action) => {
 
   return state.merge({
     userData: action.data,
+    editableData: action.data,
     userId: action.response.data.id,
     fetching: false
   });
