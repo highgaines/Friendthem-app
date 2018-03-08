@@ -94,22 +94,6 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableProguardInReleaseBuilds = false
 
-// For purposes of building the APK from terminal
-def getPassword(String currentUser, String keyChain) {
-   def stdout = new ByteArrayOutputStream()
-   def stderr = new ByteArrayOutputStream()
-   exec {
-       commandLine 'security', '-q', 'find-generic-password', '-a', currentUser, '-s', keyChain, '-w'
-       standardOutput = stdout
-       errorOutput = stderr
-       ignoreExitValue true
-   }
-   //noinspection GroovyAssignabilityCheck
-      stdout.toString().trim()
-}
-
-def pass = getPassword("Alan Stone", "android_keystore") // when releasing, change this to your username and keystore password set in keychain
-
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
@@ -127,16 +111,16 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
-        manifestPlaceholders = [onesignal_app_id: "69cf5aae-f8c2-4292-8f30-011a1a35518b",
+        manifestPlaceholders = [onesignal_app_id: '"' + FRIENDTHEM_ONESIGNAL_ID + '"',
                                 onesignal_google_project_number: "xxxx"]
     }
     signingConfigs {
         release {
             if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
-                storeFile file(MYAPP_RELEASE_STORE_FILE)
-                storePassword pass
-                keyAlias MYAPP_RELEASE_KEY_ALIAS
-                keyPassword pass
+                storeFile file(FRIENDTHEM_RELEASE_STORE_FILE)
+                storePassword FRIENDTHEM_RELEASE_STORE_PASSWORD
+                keyAlias FRIENDTHEM_RELEASE_KEY_ALIAS
+                keyPassword FRIENDTHEM_RELEASE_KEY_PASSWORD
             }
         }
     }
