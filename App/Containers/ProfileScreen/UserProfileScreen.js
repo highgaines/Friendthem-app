@@ -247,7 +247,6 @@ class UserProfileScreen extends Component {
   }
 
   toggleConfirmPasswordModal = () => {
-    console.log('call confirm password modal')
     this.setState({ showConfirmPasswordChangeModal: !this.state.showConfirmPasswordChangeModal })
   }
 
