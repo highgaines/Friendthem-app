@@ -203,6 +203,9 @@ class FriendProfileScreen extends Component {
                       <Text style={styles.profileSubtext}>
                         {`${friendInfo.first_name} ${friendInfo.last_name}`}
                       </Text>
+                      <Text style={styles.profileHometownText}>
+                        {friendInfo.hometown}
+                      </Text>
                       <Text style={styles.interestsText}>
                         {friendInfo.hobbies ? friendInfo.hobbies.join(' | ') : ''}
                       </Text>
