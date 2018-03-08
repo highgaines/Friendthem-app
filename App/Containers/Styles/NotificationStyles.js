@@ -64,7 +64,8 @@ export default StyleSheet.create({
       borderColor: '#f2f2f2'
     },
     message: {
-      fontSize: 11
+      fontSize: 11,
+      marginLeft: 7
     },
     userName: {
       fontWeight: '800'

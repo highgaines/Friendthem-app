@@ -71,8 +71,8 @@ class InviteUsersScreen extends Component {
       contacts
     } = this.props
 
-    const pluralizeFriends = myFriends.length === 1 ? '' : 's'
-    const pluralizeContacts = contacts.length === 1 ? '' : 's'
+    const pluralizeFriends = myFriends && myFriends.length === 1 ? '' : 's'
+    const pluralizeContacts = contacts && contacts.length === 1 ? '' : 's'
 
     return (
       <LazyloadView style={[{ flex: 1 }, this.state.showModal ? { opacity: 0.1 } : '']}>
