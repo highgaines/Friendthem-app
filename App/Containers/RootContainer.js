@@ -33,6 +33,10 @@ class RootContainer extends Component {
     }
   }
 
+  asyncAuthTokenUpdate = async (refreshToken) => {
+    await this.props.refreshAuthToken(refreshToken)
+  }
+
   componentWillReceiveProps = nextProps => {
     const {
       appState,
@@ -43,7 +47,7 @@ class RootContainer extends Component {
     } = this.props;
 
     if (this.props.appState !== ACTIVE && nextProps.appState === ACTIVE) {
-      this.props.refreshAuthToken(refreshToken);
+      this.asyncAuthTokenUpdate(refreshToken)
     }
   }
 
