@@ -45,7 +45,7 @@ class PhotoModal extends Component {
 
   renderImages = () => {
     const { userPhotos } = this.props
-    const imagesToDisplay = userPhotos && userPhotos.data &&  userPhotos.data.data.slice(this.state.startingIndex, this.state.startingIndex + 9)
+    const imagesToDisplay = userPhotos && userPhotos.data && userPhotos.data.data && userPhotos.data.data.slice(this.state.startingIndex, this.state.startingIndex + 9)
     return (
       <View style={styles.imageContainer}>
         {
@@ -74,7 +74,7 @@ class PhotoModal extends Component {
   render() {
     const { userPhotos, togglePhotoModal, modalVisible } = this.props
     const { snapHandle } = this.state
-    const photoLength = userPhotos && userPhotos.data && userPhotos.data.data.length
+    const photoLength = userPhotos && userPhotos.data && userPhotos.data.data && userPhotos.data.data.length
 
     return (
       <Modal

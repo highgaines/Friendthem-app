@@ -5,7 +5,7 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   personalInfoContainer: {
     backgroundColor: '#f5f8f8',
-    flex: 1
+    height: Metrics.screenHeight * 1
   },
   rowContainer: {
     flexDirection: 'row',

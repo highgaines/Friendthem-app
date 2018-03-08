@@ -11,7 +11,8 @@ export default StyleSheet.create({
     marginTop: 15,
     marginLeft: 20,
     backgroundColor: 'white',
-    borderRadius: 20
+    borderRadius: 20,
+    alignSelf: 'center'
   },
   headerGradient: {
     width: 500,
@@ -72,7 +73,7 @@ export default StyleSheet.create({
     zIndex: 99,
     borderTopWidth: 1,
     borderColor: Colors.borderGray,
-    width: Metrics.screenWidth * 0.8,
+    width: 300,
     justifyContent: 'center'
   },
   textInput: {
@@ -91,7 +92,7 @@ export default StyleSheet.create({
   },
   buttonGroup: {
     flexDirection: 'row',
-    width: Metrics.screenWidth * 0.7,
+    width: 250,
     justifyContent: 'space-between',
     top: 100,
     alignSelf: 'center'

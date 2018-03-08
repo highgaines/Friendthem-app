@@ -56,6 +56,6 @@ export default StyleSheet.create({
     color: '#fff'
   },
   tabDisplay: {
-    flex: 1
+    height: Metrics.screenHeight
   }
 })

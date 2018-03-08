@@ -36,7 +36,7 @@ class EditProfileInfoScreen extends Component {
     const { userInfo } = this.props
     const { infoTabSelect } = this.state
     return (
-      <View style={{flex: 1}}>
+      <View>
         <LinearGradient
           colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
           start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
@@ -87,7 +87,8 @@ class EditProfileInfoScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  userInfo: state.userStore.userData
+  userInfo: state.userStore.userData,
+  passwordUpdated: state.userStore.passwordUpdated
 })
 
 const mapDispatchToProps = dispatch => {
