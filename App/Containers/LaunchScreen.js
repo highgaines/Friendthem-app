@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Image, View, TouchableOpacity, Button, ActivityIndicator } from 'react-native'
+import { ScrollView, Text, Image, View,
+         TouchableOpacity, Button,
+         ActivityIndicator } from 'react-native'
 
 // Libraries
 import { SocialIcon } from 'react-native-elements'
@@ -23,6 +25,7 @@ import LinearGradientWrapper from '../HOCs/LinearGradientWrapper'
 
 // Config
 import envConfig from '../../envConfig'
+import isIOS from '../Utils/constants'
 
 //Redux
 import { connect } from 'react-redux'
@@ -81,11 +84,13 @@ class LaunchScreen extends Component {
         setGeoPermission(true)
       }
     })
-    Permissions.check('notification').then(response => {
-      if (response === 'authorized') {
-        setNotifPermission(true)
-      }
-    })
+    if (isIOS) {
+      Permissions.check('notification').then(response => {
+        if (response === 'authorized') {
+          setNotifPermission(true)
+        }
+      })
+    }
     Contacts.checkPermission( (err, permission) => {
       if (permission === 'authorized') {
         setNativeContactsPermission(true)

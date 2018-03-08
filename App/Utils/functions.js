@@ -1,5 +1,8 @@
 import { RNS3 } from 'react-native-aws3';
-import envConfig from '../../envConfig'
+import envConfig from '../../envConfig';
+import OneSignal from 'react-native-onesignal';
+import Contacts from 'react-native-contacts';
+import { PermissionsAndroid } from 'react-native';
 
 export const uploadToAWS = async (uri, userId, callback, data, token) => {
 
@@ -57,3 +60,38 @@ export const uploadToAWS2 = async (uri, userId, callback, pictureId, token) => {
 
   }).catch( error => console.log(error))
 }
+
+export const RequestContactsPermission =
+  async (
+    storeContactInfo,
+    customNotificationPermission,
+    nativeNotifications
+  ) => {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+      {
+        'title': 'Access to Contacts',
+        'message': 'Friendthem would like access to your contacts so you can manage them all in one place.'
+      }
+    )
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      Contacts.getAll( (err, contacts) => {
+        if (err === 'denied') {
+          console.log('DENIED')
+        } else {
+          console.log('SUCCESS')
+          storeContactInfo(contacts)
+        }
+        if (customNotificationPermission && !nativeNotifications) {
+          OneSignal.registerForPushNotifications()
+        }
+      })
+    } else {
+      console.log("Camera permission denied")
+    }
+  } catch (err) {
+    console.warn(err)
+  }
+}
+

@@ -29,39 +29,40 @@ import { Images } from '../../Themes';
 // Styles
 import styles from '../Styles/ForkScreenStyles';
 import { determineImage } from '../../Utils/constants'
+import { RequestContactsPermission } from '../../Utils/functions'
 
-const RequestContactsPermission =
-  async function(
-    storeContactInfo,
-    customNotificationPermission,
-    nativeNotifications
-  ) {
-  try {
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
-      {
-        'title': 'Cool Photo App Contacts Permission',
-        'message': 'Cool Photo App needs access to your contacts'
-      }
-    )
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      Contacts.getAll( (err, contacts) => {
-        if (err === 'denied') {
-          console.log('DENIED')
-        } else {
-          storeContactInfo(contacts)
-        }
-        if (customNotificationPermission && !nativeNotifications) {
-          OneSignal.registerForPushNotifications()
-        }
-      })
-    } else {
-      console.log("Camera permission denied")
-    }
-  } catch (err) {
-    console.warn(err)
-  }
-}
+// const RequestContactsPermission =
+//   async function(
+//     storeContactInfo,
+//     customNotificationPermission,
+//     nativeNotifications
+//   ) {
+//   try {
+//     const granted = await PermissionsAndroid.request(
+//       PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+//       {
+//         'title': 'Cool Photo App Contacts Permission',
+//         'message': 'Cool Photo App needs access to your contacts'
+//       }
+//     )
+//     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+//       Contacts.getAll( (err, contacts) => {
+//         if (err === 'denied') {
+//           console.log('DENIED')
+//         } else {
+//           storeContactInfo(contacts)
+//         }
+//         if (customNotificationPermission && !nativeNotifications) {
+//           OneSignal.registerForPushNotifications()
+//         }
+//       })
+//     } else {
+//       console.log("Camera permission denied")
+//     }
+//   } catch (err) {
+//     console.warn(err)
+//   }
+// }
 
 
 class ForkScreen extends Component {

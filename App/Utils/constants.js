@@ -3,6 +3,11 @@
 import { Images } from '../Themes';
 import Permissions from 'react-native-permissions'
 import { NavigationActions } from 'react-navigation'
+import { Platform } from 'react-native'
+
+/************************ PLATFORM ************************/
+export const isIOS = Platform.OS === 'ios'
+export const isAndroid = Platform.OS === 'android'
 
 /************************ DATA ************************/
 
