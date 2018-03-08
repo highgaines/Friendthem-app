@@ -286,7 +286,6 @@ class UserProfileScreen extends Component {
     const renderIpxHeader = ifIphoneX(ipxHeader, '')
 
     const ipxInfoTab = ifIphoneX({ 'height': 480}, {'height': 366})
-    console.log(this.state.showConfirmPasswordChangeModal)
     return (
         <View>
           <LinearGradient
