@@ -12,7 +12,7 @@ export default StyleSheet.create({
     zIndex: 1000
   },
   profileHeader: {
-    height: 210,
+    height: 230,
     width: '100%',
     alignItems: 'center',
     marginTop: 30,
@@ -22,6 +22,10 @@ export default StyleSheet.create({
     shadowColor: 'black',
     shadowOffset: { height: 6, width: 10 },
     zIndex: 99
+  },
+  backIcon: {
+    alignSelf: 'flex-start',
+    position: 'absolute'
   },
   profHeaderTop: {
     height: 125,

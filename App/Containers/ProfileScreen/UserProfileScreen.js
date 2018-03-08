@@ -9,6 +9,7 @@ import RNYoutubeOAuth from 'react-native-youtube-oauth'
 import TimerMixin from 'react-timer-mixin'
 import ImagePicker from 'react-native-image-picker'
 import { uploadToAWS } from '../../Utils/functions'
+import { NavigationActions } from 'react-navigation'
 
 // Components
 import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer'
@@ -23,8 +24,8 @@ import FbPhotoModal from './FbPhotoModal'
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import UserStoreActions, { getUserInfo, updateInfo, updateSnapInfo, updateInfoRequest, getFBPhotos } from '../../Redux/UserStore'
-import AuthStoreActions, { socialMediaAuth } from '../../Redux/AuthStore'
+import UserStoreActions, { getUserInfo, updateInfo, updateSnapInfo, updateInfoRequest, getFBPhotos, clearAuthErrors } from '../../Redux/UserStore'
+import AuthStoreActions, { socialMediaAuth, socialMediaAuthErrors } from '../../Redux/AuthStore'
 import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
 
 // Images
@@ -55,7 +56,8 @@ class UserProfileScreen extends Component {
       socialMediaData: SOCIAL_MEDIA_DATA,
       syncedCardColors: SYNCED_CARD_COLORS,
       showChangePasswordModal: false,
-      showFbPhotoModal: false
+      showFbPhotoModal: false,
+      showErrorModal: false
     }
   }
 
@@ -117,6 +119,10 @@ class UserProfileScreen extends Component {
         })
       }
     }
+    const authHasErrors = prevProps.authErrors && this.props.authErrors && prevProps.authErrors.length < this.props.authErrors.length
+    if (authHasErrors) {
+      this.toggleErrorModal()
+    }
   }
 
   togglePhotoModal = () => {
@@ -140,7 +146,9 @@ class UserProfileScreen extends Component {
     const { userId, apiAccessToken } = this.props
 
     this.setState({currentPlatform: platform})
-    this.props.socialMediaAuth(platform, userId, apiAccessToken)
+    this.props.socialMediaAuth(platform, userId, apiAccessToken).then( () =>
+    this.props.socialMediaAuthErrors(apiAccessToken)
+    )
   }
 
   socialPlatformPresent = (provider) => {
@@ -231,6 +239,25 @@ class UserProfileScreen extends Component {
     })
   }
 
+  toggleErrorModal = () => {
+    const { showErrorModal } = this.state
+    this.setState({ showErrorModal: !showErrorModal })
+  }
+
+  checkForErrors = () => {
+    const { authErrors } = this.props
+    if (authErrors.length) {
+      this.toggleErrorModal()
+    }
+  }
+
+  // test action to fetch errors during authentication
+  getErrors = () => {
+    const { apiAccessToken } = this.props
+    this.props.socialMediaAuthErrors(apiAccessToken)
+  }
+
+
   render() {
     const {
       userId,
@@ -246,9 +273,9 @@ class UserProfileScreen extends Component {
       fetching,
       userPhotos
     } = this.props
-    const { showFriendster, socialMediaData, socialNetworkTab, syncedCardColors } = this.state
+    const { showFriendster, socialMediaData, socialNetworkTab, syncedCardColors, showErrorModal } = this.state
     const { devGoogleBaseURL, devGoogleApiParams, devGoogleClientId } = envConfig.Development
-
+    const backAction =  NavigationActions.back()
     const ipxHeader = { marginTop: 50 }
     const renderIpxHeader = ifIphoneX(ipxHeader, '')
 
@@ -270,6 +297,15 @@ class UserProfileScreen extends Component {
                   <ActivityIndicator size="large" color="#0000ff"/>
                 </View>
               : <View style={[styles.profileHeader, { height: 150}, renderIpxHeader]}>
+                  <View style={styles.backIcon}>
+                    <Icon
+                      name='arrow-back'
+                      type='materialicons'
+                      size={36}
+                      color='#FFF'
+                      onPress={() => navigation.dispatch(backAction) }
+                    />
+                  </View>
                   <View style={styles.profHeaderTop}>
                   {
                     this.state.profilePic ?
@@ -291,15 +327,29 @@ class UserProfileScreen extends Component {
                     </TouchableOpacity>
                   }
                   </View>
-                  <Text style={styles.profileSubtext}>
-                  {`${userInfo.first_name} ${userInfo.last_name}`}
-                  </Text>
+                  <View style={{ marginBottom: 20 }}>
+                    <Text style={styles.profileSubtext}>
+                      {`${userInfo.first_name} ${userInfo.last_name}`}
+                    </Text>
+                  </View>
                 </View>
               }
             <FriendThemModal
               modalVisible={this.state.snapHandleModalOpen}
-              toggleSnapchatModal={this.toggleSnapchatModal}
+              snapchat={true}
+              form={true}
+              headerText='Snapchat'
+              text='Entering your Snapchat handle here will help us
+              connect you with people more seamlessly.'
+              toggleModal={this.toggleSnapchatModal}
               submitText={(inputValue, apiAccessToken) => updateSnapInfo('snapchat', inputValue, apiAccessToken)} />
+            <FriendThemModal
+              modalVisible={showErrorModal}
+              toggleModal={this.toggleErrorModal}
+              headerText='Whoops!'
+              text='We encountered an error when we tried syncing one of your accounts'
+              okActionCallback={this.props.clearAuthErors}
+            />
             <View
               testID='tab-selection-container'
               style={styles.tabSelectionContainer}>
@@ -374,6 +424,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({
+      socialMediaAuthErrors,
+      clearAuthErrors,
       getFBPhotos,
       getUserInfo,
       getUserTokens,

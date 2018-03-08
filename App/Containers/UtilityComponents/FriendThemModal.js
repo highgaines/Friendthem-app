@@ -19,26 +19,33 @@ class FriendThemModal extends Component {
     super(props)
 
     this.state = {
-      snapHandle: ''
+      input: ''
     }
   }
 
   submitSnapHandle = () => {
-    const { submitText, toggleSnapchatModal, accessToken, updateSnapInfo } = this.props
+    const { submitText, toggleModal, accessToken, updateSnapInfo } = this.props
 
-    updateSnapInfo('snapchat', this.state.snapHandle, accessToken)
-    toggleSnapchatModal()
+    updateSnapInfo('snapchat', this.state.input, accessToken)
+    toggleModal()
+  }
+
+  okAction = () => {
+    const { okActionCallback } = this.props
+
+    okActionCallback()
+    toggleModal()
   }
 
   render() {
-    const { modalVisible, toggleSnapchatModal } = this.props
-    const { snapHandle } = this.state
+    const { modalVisible, toggleModal, snapchat, headerText, text, form } = this.props
+    const { input } = this.state
 
     return (
       <Modal
       animationIn='slideInUp'
       animationOut='slideOutDown'
-      onBackdropPress={toggleSnapchatModal}
+      onBackdropPress={toggleModal}
       isVisible={modalVisible}>
         <View style={styles.containerModal}>
           <LinearGradient
@@ -46,30 +53,44 @@ class FriendThemModal extends Component {
             start={{x: 0.0, y: 1.0}} end={{x: 0.8, y: 0.8}}
             locations={[0.5, 0.7, 0.8, 0.9, 1.0]}
             style={styles.headerGradient}>
-            <Icon
-              name={'snapchat-ghost'}
-              type='font-awesome'
-              color='#fff'
-              size={50}/>
+            { snapchat
+              ? <Icon
+                  name={'snapchat-ghost'}
+                  type='font-awesome'
+                  color='#fff'
+                  size={50}
+                />
+              : null
+            }
             <Text style={styles.headerText}>
-              Snapchat
+              {headerText}
             </Text>
           </LinearGradient>
           <Text style={styles.modalBodyText}>
-            Entering your Snapchat handle here will help us
-            connect you with people more seamlessly.
+            {text}
           </Text>
-          <TextInput
-            style={styles.modalTextInput}
-            value={snapHandle}
-            autoCapitalize={'none'}
-            autoCorrect={false}
-            onChangeText={(value) => this.setState({snapHandle: value})}/>
-          <TouchableOpacity
-            style={styles.modalButton}
-            onPress={() => this.submitSnapHandle()}>
-            <Text style={styles.buttonText}>Submit</Text>
-          </TouchableOpacity>
+          {form
+            ? <View style={{ alignItems: 'center' }}>
+                <TextInput
+                  style={styles.modalTextInput}
+                  value={input}
+                  autoCapitalize={'none'}
+                  autoCorrect={false}
+                  onChangeText={(value) => this.setState({input: value})}/>
+                <TouchableOpacity
+                  style={styles.modalButton}
+                  onPress={() => this.submitSnapHandle()}
+                >
+                    <Text style={styles.buttonText}>Submit</Text>
+                </TouchableOpacity>
+              </View>
+            : <TouchableOpacity
+                style={styles.modalButton}
+                onPress={() => this.okAction()}
+              >
+                <Text style={styles.buttonText}> Okay </Text>
+              </TouchableOpacity>
+            }
         </View>
       </Modal>
     )

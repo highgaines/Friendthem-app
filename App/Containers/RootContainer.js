@@ -45,15 +45,6 @@ class RootContainer extends Component {
     if (this.props.appState !== ACTIVE && nextProps.appState === ACTIVE) {
       this.props.refreshAuthToken(refreshToken);
     }
-
-    if (accessToken) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        updateUserPosition(accessToken, position.coords)
-      },
-        (error) => this.setState({ error: error.message }),
-        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-      )
-    }
   }
 
 

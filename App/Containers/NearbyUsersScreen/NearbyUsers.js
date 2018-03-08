@@ -59,6 +59,18 @@ class NearbyUsers extends Component {
     }
   }
 
+  componentDidMount = () => {
+    const { updateUserPosition, accessToken } = this.props
+    if (accessToken) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        updateUserPosition(accessToken, position.coords)
+      },
+        (error) => this.setState({ error: error.message }),
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+      )
+    }
+  }
+
 
   locationInterval = () => {
     const { accessToken, updateUserPosition } = this.props

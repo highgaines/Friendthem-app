@@ -10,11 +10,13 @@ import { Icon } from 'react-native-elements';
 import FBSDK, { LoginManager } from 'react-native-fbsdk';
 import Communications from 'react-native-communications';
 import Contacts from 'react-native-contacts';
+import { NavigationActions } from 'react-navigation'
 
 // Redux
 import FBStoreActions from '../../Redux/FBStore'
 import SuperConnectActions from '../../Redux/SuperConnectStore'
 import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
+import FriendStoreActions, { checkFriendConnection } from '../../Redux/FriendStore'
 
 // Components
 import Navbar from '../Navbar/Navbar'
@@ -54,6 +56,14 @@ class FriendProfileScreen extends Component {
       getUserTokens(apiAccessToken)
     } else {
       navigation.navigate('LaunchScreen')
+    }
+  }
+
+  componentDidMount = () => {
+    const { apiAccessToken, friendInfo, checkFriendConnection, loggedIn } = this.props
+
+    if (apiAccessToken && loggedIn) {
+      checkFriendConnection(apiAccessToken, friendInfo.id)
     }
   }
 
@@ -173,6 +183,8 @@ class FriendProfileScreen extends Component {
     const ipxHeader = { 'marginTop': 60 }
     const renderIpxHeader = ifIphoneX(ipxHeader, '')
 
+    const backAction =  NavigationActions.back()
+
     return (
         <View>
           <View style={styles.profile}>
@@ -181,6 +193,15 @@ class FriendProfileScreen extends Component {
               start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
               locations={[0.1, 0.3, 0.5, 0.7, 1.0]}>
               <View style={[styles.profileHeader, renderIpxHeader]}>
+                <View style={styles.backIcon}>
+                  <Icon
+                    name='arrow-back'
+                    type='materialicons'
+                    size={36}
+                    color='#FFF'
+                    onPress={() => navigation.dispatch(backAction) }
+                  />
+                </View>
                 <View style={styles.profHeaderTop}>
                       <TouchableOpacity onPress={this.handleCall}>
                         <Icon
@@ -284,6 +305,7 @@ const mapDispatchToProps = dispatch => {
     ...bindActionCreators({
       fbLogoutComplete: logoutComplete,
       setSuperConnectPlatforms,
+      checkFriendConnection,
       getUserTokens,
     }, dispatch)
   }
