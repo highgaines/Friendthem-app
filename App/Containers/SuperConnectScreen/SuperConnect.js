@@ -51,8 +51,7 @@ class SuperConnect extends Component {
         this.props.navigation.navigate('CongratulatoryScreen', {
           userInfo: this.props.userInfo,
           friendInfo: this.props.friendInfo,
-          navigation: this.props.navigation,
-          snapchatDeeplink: this.snapchatDeepLinkCallback
+          navigation: this.props.navigation
         })
     }
   }
@@ -119,8 +118,7 @@ class SuperConnect extends Component {
         this.props.navigation.navigate('CongratulatoryScreen', {
           userInfo: this.props.userInfo,
           friendInfo: this.props.friendInfo,
-          navigation: this.props.navigation,
-          snapchatDeeplink: this.snapchatDeepLinkCallback
+          navigation: this.props.navigation
         })
       }
   }
