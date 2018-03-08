@@ -14,14 +14,10 @@ import { Images } from '../../Themes'
 class ConfirmPasswordChangeModal extends Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-    }
   }
 
   render() {
     const { modalVisible, toggleModal, passwordUpdate } = this.props
-    const { snapHandle } = this.state
 
     return (
       <Modal
