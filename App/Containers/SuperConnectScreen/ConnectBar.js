@@ -22,7 +22,7 @@ export default ConnectBar = props => {
           <View style={styles.rows}>
             <Text style={styles.titleRow}>
               {
-                copy.includes('SuperConnect')
+                copy.includes('Super Connect')
                 ? 'Super Connect'
                 : 'Friend Them'
               }
