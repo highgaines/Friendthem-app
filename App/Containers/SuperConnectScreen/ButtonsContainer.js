@@ -8,7 +8,7 @@ import ConnectButton from './ConnectButton';
 import styles from '../Styles/ButtonContainerStyles';
 
 export default ButtonsContainer = props => {
-  const { friendName, deepLinkURL, navigation, friendUrlm, superConnectPromiseLoop, copy } = props
+  const { friendName, deepLinkURL, navigation, friendUrlm, superConnectPromiseLoop, copy, allPlatformsSynced } = props
   const backAction = NavigationActions.back()
 
   const goBack = () => {
@@ -42,15 +42,18 @@ export default ButtonsContainer = props => {
           linearGradient={true}
           textStyle={styles.textStyle}/>
 
-        <ConnectButton
-          name='check'
-          type='entypo'
-          color='#ffffff'
-          onPressCallback={letsDoIt}
-          title="LET'S DO IT"
-          containerStyle={styles.button}
-          linearGradient={true}
-          textStyle={styles.textStyle}/>
+        {
+          allPlatformsSynced ? null :
+          <ConnectButton
+            name='check'
+            type='entypo'
+            color='#ffffff'
+            onPressCallback={letsDoIt}
+            title="LET'S DO IT"
+            containerStyle={styles.button}
+            linearGradient={true}
+            textStyle={styles.textStyle}/>
+        }
       </View>
     </View>
   )

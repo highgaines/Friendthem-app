@@ -18,7 +18,7 @@ export default class SocialMediaCard extends Component {
   }
 
   determineConnectedStatus = () => {
-    return this.props.synced && this.props.connectedWithVisitor
+    return this.props.synced && this.props.connectedWithVisitor || this.props.fromUserProfile
   }
 
   onPressFunctionality = () => {
@@ -30,17 +30,9 @@ export default class SocialMediaCard extends Component {
   }
 
   renderIcon = () => {
-    const { platformName, synced, syncedBGColor } = this.props;
+    const { platformName, synced, syncedBGColor, fromUserProfile } = this.props;
 
     if (this.determineConnectedStatus()) {
-      return (
-        <Icon
-          name={platformName.toLowerCase()}
-          type='font-awesome'
-          color={syncedBGColor}
-          size={40} />
-      )
-    } else if (synced) {
       return (
         <Icon
           name={platformName.toLowerCase()}
@@ -48,6 +40,14 @@ export default class SocialMediaCard extends Component {
           color="#fff"
           size={40}
         />
+      )
+    } else if (synced) {
+      return (
+        <Icon
+          name={platformName.toLowerCase()}
+          type='font-awesome'
+          color={syncedBGColor}
+          size={40} />
       )
     } else {
       return (
@@ -64,6 +64,7 @@ export default class SocialMediaCard extends Component {
   render() {
     const {
       platformName,
+      fromUserProfile,
       userName,
       inverted,
       synced,
@@ -74,8 +75,8 @@ export default class SocialMediaCard extends Component {
       syncedBGColor
     }  = this.props
     const cardStyle = this.determineConnectedStatus() ?
-      styles.invertedCard : synced ?
-        [styles.cardSelected, { backgroundColor: syncedBGColor }] : styles.cardUnselected
+       [styles.cardSelected, { backgroundColor: syncedBGColor }] : synced ?
+         styles.invertedCard : styles.cardUnselected
 
     return (
       <TouchableOpacity
@@ -103,16 +104,16 @@ export default class SocialMediaCard extends Component {
 
           <Text
             style={this.determineConnectedStatus() ?
-              styles.platformNameInverted : synced ?
-                styles.platformName : styles.unsyncedPlatformName
+              styles.platformName : synced ?
+                styles.platformNameInverted : styles.unsyncedPlatformName
             }>
             {platformName}
           </Text>
 
           <Text
             style={this.determineConnectedStatus() ?
-              styles.userNameInverted : synced ?
-                styles.userName : styles.unsyncedUserName
+              styles.userName : synced ?
+                styles.userNameInverted : styles.unsyncedUserName
             }>
             {userName || 'Sync Account'}
           </Text>
