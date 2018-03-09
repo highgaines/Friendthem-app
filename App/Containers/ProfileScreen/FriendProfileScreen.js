@@ -173,7 +173,7 @@ class FriendProfileScreen extends Component {
   }
 
   render() {
-    const { friendInfo, superConnect, navigation, setSuperConnectPlatforms, userInfo, userId } = this.props
+    const { friendInfo, connection, superConnect, navigation, setSuperConnectPlatforms, userInfo, userId } = this.props
     const { showModal, socialMediaData, syncedCardColors, selectedSocialMedia, platform } = this.state
 
     const socialPlatforms = friendInfo
@@ -261,6 +261,7 @@ class FriendProfileScreen extends Component {
             { platform === 'profile' ? <View>
               <SocialMediaCardContainer
                 fromFriendProfile={true}
+                connection={connection}
                 friendPlatforms={friendInfo.social_profiles}
                 onPressCallback={(platform) => this.toggleSocialMediaSelection(platform)}
                 platformSynced={socialMedia => this.socialPlatformPresent(socialMedia)}
@@ -292,6 +293,7 @@ const mapStateToProps = state => ({
   userId: state.userStore.userId,
   friendInfo: state.friendStore.friendData,
   platforms: state.tokenStore.platforms,
+  connection: state.friendStore.connection,
   fbAuthToken: state.fbStore.fbAccessToken,
   apiAccessToken: state.authStore.accessToken,
   loggedIn: state.authStore.loggedIn,

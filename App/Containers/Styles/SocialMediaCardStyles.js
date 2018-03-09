@@ -30,6 +30,17 @@ export default StyleSheet.create({
     shadowOffset: { height: 0, width: 0 },
     marginHorizontal: 5
   },
+  myPicsCard: {
+    height: 120,
+    width: '30%',
+    borderRadius: 10,
+    marginTop: 10,
+    shadowOpacity: 0.75,
+    shadowRadius: 5,
+    shadowColor: 'black',
+    shadowOffset: { height: 0, width: 0 },
+    marginHorizontal: 5
+  },
   invertedCard: {
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
