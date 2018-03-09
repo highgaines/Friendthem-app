@@ -17,13 +17,12 @@ export default StyleSheet.create({
     backgroundColor: 'transparent',
     marginTop: 50,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center'
   },
   searchIcon: {
-    position: 'absolute',
-    right: 10,
-    top: 3
+    alignItems: 'flex-start',
+    marginLeft: 20
   },
   searchForm: {
     height: 35,
@@ -51,16 +50,13 @@ export default StyleSheet.create({
     width: 250,
     flexDirection: 'row',
     alignItems: 'center',
-    alignSelf: 'center',
     justifyContent: 'space-around',
     borderRadius: 50,
     backgroundColor: Colors.friendThemBlue,
     shadowOpacity: 0.5,
     shadowRadius: 5,
     shadowColor: 'black',
-    position: 'absolute',
-    shadowOffset: { height: 5, width: 0 },
-    top: 0
+    shadowOffset: { height: 5, width: 0 }
   },
   selectedTabButton: {
     flexDirection: 'row',
