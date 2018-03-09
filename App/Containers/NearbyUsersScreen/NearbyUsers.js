@@ -118,7 +118,6 @@ class NearbyUsers extends Component {
     const { users, navigation, locationPermission } = this.props
     const { input, feedView, welcomeTutorialVisible } = this.state
 
-    console.log(welcomeTutorialVisible)
     return(
       <View
         testID={'nearby_users_container'} style={[styles.nearbyUsersContainer]}>

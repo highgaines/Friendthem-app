@@ -12,7 +12,7 @@ export default WelcomeScreen = props => {
   return (
     <View style={styles.container}>
       <Modal
-        visible={false}
+        visible={visible}
         animationType={'slide'}
         transparent={true}
         onRequestClose={toggleWelcomeTutorial}
