@@ -111,8 +111,8 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
-        manifestPlaceholders = [onesignal_app_id: '"' + FRIENDTHEM_ONESIGNAL_ID + '"',
-                                onesignal_google_project_number: "xxxx"]
+        manifestPlaceholders = [onesignal_app_id: FRIENDTHEM_ONESIGNAL_ID,
+                                onesignal_google_project_number: FRIENDTHEM_PROJ_NUM]
     }
     signingConfigs {
         release {

@@ -47,6 +47,7 @@ import navigationAware from '../Navigation/navigationAware'
 // Utils
 import { isIOS, isAndroid } from '../Utils/constants'
 import { RequestContactsPermission, RequestLocationPermission } from '../Utils/functions'
+import OneSignal from 'react-native-onesignal';
 
 class LaunchScreen extends Component {
   constructor(props) {
@@ -65,6 +66,7 @@ class LaunchScreen extends Component {
     if (this.props.loggedIn) {
       this.props.navigation.navigate('NearbyUsersScreen')
     }
+
   }
 
   componentWillUpdate = nextProps => {
@@ -90,8 +92,13 @@ class LaunchScreen extends Component {
 
     if (!isAndroid) {
       return
-    } else if (hasContacts) {
-      setNotifPermission(true)
+    } else if (!customNotificationPermission) {
+      OneSignal.getPermissionSubscriptionState((status) => {
+        console.log(status)
+        if (status.notificationsEnabled) {
+          setNotifPermission(true)
+        }
+      })
     }
   }
 
@@ -110,7 +117,6 @@ class LaunchScreen extends Component {
       })
     }
     Contacts.checkPermission( (err, permission) => {
-      console.log(permission)
       if (permission === 'authorized') {
         setNativeContactsPermission(true)
       }
@@ -238,7 +244,7 @@ const mapStateToProps = state => ({
   nativeGeolocation: state.permissionsStore.nativeGeolocation,
   nativeNotifications: state.permissionsStore.nativeNotifications,
   contactList: state.inviteUsersStore.contactList,
-  customNotificationPermission: state.permissionsStore.notificationPermissionsGranted,
+  customNotificationPermission: state.permissionsStore.notificationPermissionsGranted
 })
 
 const mapDispatchToProps = dispatch => {

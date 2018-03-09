@@ -61,6 +61,7 @@ export const uploadToAWS2 = async (uri, userId, callback, pictureId, token) => {
   }).catch( error => console.log(error))
 }
 
+// For Android only
 export const RequestContactsPermission =
   async (
     storeContactInfo,
@@ -83,9 +84,6 @@ export const RequestContactsPermission =
           console.log('SUCCESS')
           storeContactInfo(contacts)
         }
-        if (customNotificationPermission && !nativeNotifications) {
-          OneSignal.registerForPushNotifications()
-        }
       })
     } else {
       console.log("Contacts permission denied")
@@ -96,7 +94,6 @@ export const RequestContactsPermission =
 }
 
 export const RequestLocationPermission = async (setLocationInterval) => {
-  console.log('Begin Fn')
   try {
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -105,7 +102,6 @@ export const RequestLocationPermission = async (setLocationInterval) => {
         'message': 'Friendthem would like access to your location so you can connect with nearby users.'
       }
     )
-    console.log(granted)
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
       Contacts.getAll( (err, contacts) => {
         if (err === 'denied') {
@@ -121,6 +117,5 @@ export const RequestLocationPermission = async (setLocationInterval) => {
   } catch (err) {
     console.warn(err)
   }
-  console.log('End Fn')
 }
 
