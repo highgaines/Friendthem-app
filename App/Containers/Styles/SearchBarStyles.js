@@ -34,6 +34,21 @@ export default StyleSheet.create({
     paddingLeft: 10,
     color: 'white'
   },
+  searchFormDark: {
+    backgroundColor: 'transparent',
+    height: 35,
+    width: '90%',
+    borderColor: 'black',
+    borderWidth: 2,
+    borderRadius: 50,
+    marginBottom: 10,
+    marginTop: 10,
+    marginLeft: '5%',
+    marginRight: '5%',
+    paddingLeft: 10,
+    paddingRight: 10,
+    color: 'black'
+  },
   numUsers: {
     width: '100%',
     color: 'white',

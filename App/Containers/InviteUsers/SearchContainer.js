@@ -33,25 +33,34 @@ class SearchContainer extends Component {
     const { input } = this.state;
 
     return (
-      <TextInput
-        style={styles.searchForm}
-        onChangeText={searchTerm => {
-          const nameArray = ["givenName", "familyName"];
-          const filteredContactList = contactList.filter(contact => (
-            nameArray.some(nameKey => (
-              contact[nameKey]
-                .toLowerCase()
-                .includes(searchTerm.toLowerCase())
-            ))
-          ))
-
-          this.setState({
-            input: searchTerm,
-            searchableContactList: filteredContactList
-          });
+      <View
+        style={{
+          borderColor: 'black',
+          borderBottomWidth: 1,
+          borderTopWidth: 1
         }}
-        value={input}
-      />
+      >
+        <TextInput
+          placeholder="Search a friend by name"
+          style={styles.searchFormDark}
+          onChangeText={searchTerm => {
+            const nameArray = ["givenName", "familyName"];
+            const filteredContactList = contactList.filter(contact => (
+              nameArray.some(nameKey => (
+                contact[nameKey]
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase())
+              ))
+            ))
+
+            this.setState({
+              input: searchTerm,
+              searchableContactList: filteredContactList
+            });
+          }}
+          value={input}
+        />
+      </View>
     )
   }
 
