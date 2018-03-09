@@ -71,6 +71,7 @@ class RegisterUserScreen extends Component {
             autoCapitalize={'words'}
             autoCorrect={false}
             autoFocus={true}
+            underlineColorAndroid='rgba(0,0,0,0)'
             placeholder='Name'>
           </TextInput>
           <TextInput
@@ -78,6 +79,7 @@ class RegisterUserScreen extends Component {
             onChangeText={(textValue) => this.updateState(textValue, 'userEmail')}
             autoCapitalize={'none'}
             autoCorrect={false}
+            underlineColorAndroid='rgba(0,0,0,0)'
             placeholder='Email Address'>
           </TextInput>
           <TextInput
@@ -85,6 +87,7 @@ class RegisterUserScreen extends Component {
             onChangeText={(textValue) => this.updateState(textValue, 'userPassword')}
             secureTextEntry={true}
             autoCorrect={false}
+            underlineColorAndroid='rgba(0,0,0,0)'
             placeholder='Password'>
           </TextInput>
           <TextInput
@@ -92,6 +95,7 @@ class RegisterUserScreen extends Component {
             onChangeText={(textValue) => this.updateState(textValue, 'confirmPassword')}
             secureTextEntry={true}
             autoCorrect={false}
+            underlineColorAndroid='rgba(0,0,0,0)'
             placeholder='Confirm Password'>
           </TextInput>
           <CheckBox

@@ -74,6 +74,7 @@ class FriendThemModal extends Component {
                 <TextInput
                   style={styles.modalTextInput}
                   value={input}
+                  underlineColorAndroid='rgba(0,0,0,0)'
                   autoCapitalize={'none'}
                   autoCorrect={false}
                   onChangeText={(value) => this.setState({input: value})}/>

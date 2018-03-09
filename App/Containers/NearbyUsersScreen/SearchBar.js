@@ -28,6 +28,7 @@ class SearchBar extends Component {
   renderSearchForm = () => {
     return (
       <TextInput
+        underlineColorAndroid='rgba(0,0,0,0)'
         style={styles.searchForm}
         onChangeText={input => this.props.handleChange(input)}
         value={this.props.input}

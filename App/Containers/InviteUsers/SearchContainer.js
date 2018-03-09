@@ -31,6 +31,7 @@ class SearchContainer extends Component {
     return (
       <TextInput
         style={styles.searchForm}
+        underlineColorAndroid='rgba(0,0,0,0)'
         onChangeText={input => this.props.handleChange(input)}
         value={this.state.input}
       />
