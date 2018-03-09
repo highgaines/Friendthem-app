@@ -23,28 +23,57 @@ class SearchContainer extends Component {
     super(props)
 
     this.state = {
-      input: ''
+      input: '',
+      searchableContactList: props.contactList
     }
   }
 
   renderSearchForm = () => {
+    const { contactList } = this.props;
+    const { input } = this.state;
+
     return (
-      <TextInput
-        style={styles.searchForm}
-        underlineColorAndroid='rgba(0,0,0,0)'
-        onChangeText={input => this.props.handleChange(input)}
-        value={this.state.input}
-      />
+      <View
+        style={{
+          borderColor: 'black',
+          borderBottomWidth: 1,
+          borderTopWidth: 1
+        }}
+      >
+        <TextInput
+          placeholder="Search a friend by name"
+          style={styles.searchFormDark}
+          onChangeText={searchTerm => {
+            const nameArray = ["givenName", "familyName"];
+            const filteredContactList = contactList.filter(contact => (
+              nameArray.some(nameKey => (
+                contact[nameKey]
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase())
+              ))
+            ))
+
+            this.setState({
+              input: searchTerm,
+              searchableContactList: filteredContactList
+            });
+          }}
+          value={input}
+          underlineColorAndroid='rgba(0,0,0,0)'
+        />
+      </View>
     )
   }
 
   render() {
-    const { contactList, triggerModal, selectUser } = this.props
+    const { triggerModal, selectUser } = this.props;
+    const { searchableContactList } = this.state;
 
     return (
         <LazyloadScrollView contentContainerStyle={styles.searchContainer}>
+          {this.renderSearchForm()}
           <FlatList
-            data={contactList}
+            data={searchableContactList}
             renderItem={({item}) => (
               <UserCard
                 firstName={item.givenName}
