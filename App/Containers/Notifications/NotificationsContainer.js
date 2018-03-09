@@ -67,7 +67,6 @@ class NotificationsContainer extends Component {
                 <Image
                   style={styles.profileImage}
                   source={data.item.sender.picture ? {uri: data.item.sender.picture} : Images.noPicSVG}
-                  resizeMode='contain'
                 />
                 <Text style={styles.userName}>
                   {data.item.sender.first_name}

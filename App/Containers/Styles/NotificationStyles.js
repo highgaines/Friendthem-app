@@ -20,67 +20,68 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   rowFront: {
-  		alignItems: 'center',
-  		backgroundColor: '#f2f2f2',
-  		borderTopColor: 'black',
-      borderTopWidth: 1,
-      flex: 1,
-      flexDirection: 'row',
-  		justifyContent: 'flex-start',
-  		height: 80,
-  	},
-  	rowBack: {
-  		alignItems: 'center',
-  		backgroundColor: '#f2f2f2',
-  		flex: 1,
-  		flexDirection: 'row',
-  		justifyContent: 'space-between',
-  		paddingLeft: 15,
-  	},
-    rowBackText: {
-      color: 'white'
-    },
-    backRightBtn: {
-      alignItems: 'center',
-		  bottom: 0,
-		  justifyContent: 'center',
-		  position: 'absolute',
-		  top: 0,
-		  width: 75
-    },
-    backRightBtnLeft: {
-      backgroundColor: 'red',
-		  right: 75
-    },
-    backRightBtnRight: {
-      backgroundColor: 'blue',
-      right: 0
-    },
-    profileImage: {
-      width: 75,
-      height: 75,
-      borderRadius: 75/2,
-      borderWidth: 1,
-      borderColor: '#f2f2f2'
-    },
-    message: {
-      fontSize: 11,
-      marginLeft: 7
-    },
-    userName: {
-      fontWeight: '800'
-    },
-    sectionTitle: {
-      height: 60,
-      backgroundColor: 'white',
-      justifyContent: 'center',
-      paddingLeft: 15,
-      borderBottomWidth: 0.5,
-      borderBottomColor: Colors.borderGray
-    },
-    sectionTitleText: {
-      color: Colors.medGray,
-      opacity: 0.8,
-      fontSize: 16
-    }
+		alignItems: 'center',
+		backgroundColor: '#f2f2f2',
+		borderTopColor: 'black',
+    borderTopWidth: 1,
+    flex: 1,
+    flexDirection: 'row',
+		justifyContent: 'flex-start',
+		height: 80,
+  },
+	rowBack: {
+		alignItems: 'center',
+		backgroundColor: '#f2f2f2',
+		flex: 1,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		paddingLeft: 15,
+	},
+  rowBackText: {
+    color: 'white'
+  },
+  backRightBtn: {
+    alignItems: 'center',
+	  bottom: 0,
+	  justifyContent: 'center',
+	  position: 'absolute',
+	  top: 0,
+	  width: 75
+  },
+  backRightBtnLeft: {
+    backgroundColor: 'red',
+	  right: 75
+  },
+  backRightBtnRight: {
+    backgroundColor: 'blue',
+    right: 0
+  },
+  profileImage: {
+    width: 75,
+    height: 75,
+    marginHorizontal: 10,
+    borderRadius: 75/2,
+    borderWidth: 1,
+    borderColor: '#f2f2f2'
+  },
+  message: {
+    fontSize: 11,
+    marginLeft: 7
+  },
+  userName: {
+    fontWeight: '800'
+  },
+  sectionTitle: {
+    height: 60,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    paddingLeft: 15,
+    borderBottomWidth: 0.5,
+    borderBottomColor: Colors.borderGray
+  },
+  sectionTitleText: {
+    color: Colors.medGray,
+    opacity: 0.8,
+    fontSize: 16
+  }
 })
