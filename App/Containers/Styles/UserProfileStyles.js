@@ -45,7 +45,7 @@ export default StyleSheet.create({
   },
   tabText: {
     color: '#a6acb1',
-    fontSize: 15,
+    fontSize: 11,
     fontWeight: '600',
     backgroundColor: 'transparent',
     textAlign: 'center'
@@ -112,6 +112,19 @@ export default StyleSheet.create({
     justifyContent: 'flex-start',
     width: '100%',
     height: 450
+  },
+  myPicsCard: {
+    height: 120,
+    width: '30%',
+    borderRadius: 10,
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowOpacity: 0.75,
+    shadowRadius: 5,
+    shadowColor: 'black',
+    shadowOffset: { height: 0, width: 0 },
+    marginHorizontal: 5
   },
   SuperConnectBarContainer: {
     alignItems: 'center'

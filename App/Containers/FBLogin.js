@@ -46,7 +46,7 @@ class FBLogin extends Component {
         (
           <SocialIcon
             button
-            iconSize={15}
+            iconSize={18}
             title='Logout'
             onPress={this.handleFBLogout}
             type='facebook'
@@ -56,7 +56,7 @@ class FBLogin extends Component {
         (
           <SocialIcon
             button
-            iconSize={15}
+            iconSize={18}
             title='Start With Facebook'
             onPress={this.handleFBLogin}
             type='facebook'

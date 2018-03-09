@@ -318,7 +318,6 @@ const handleAuthErrorsRequest = (state, action) => {
 }
 
 const handleAuthErrorsSuccess = (state, action) => {
-  console.log(action)
   return state.set('authErrors', action.response.data)
 }
 

@@ -80,9 +80,14 @@ class SocialMediaCardContainer extends Component {
 
   socialPlatformUsername = (platform) => {
     const { social_profiles } = this.props.fromFriendProfile ? this.props.friendData : this.props.userInfo
-    const currentPlatform = social_profiles.find(profile => profile.provider === platform)
+    const currentPlatform = social_profiles ? social_profiles.find(profile => profile.provider === platform) : null
 
     return currentPlatform ? currentPlatform.username : null
+  }
+
+  checkConnection = platform => {
+    const { connection } = this.props
+    return connection.find( connObj => connObj.provider === platform)
   }
 
   render() {
@@ -127,6 +132,7 @@ class SocialMediaCardContainer extends Component {
                 key={idx}
                 platformName={capitalizeName(socialPlatform)}
                 synced={isSynced}
+                connectedWithVisitor={isSynced && fromFriendProfile ? this.checkConnection(socialPlatform) : null}
                 readOnly={isSynced && fromUserProfile}
                 socialAuth={(!isSynced && fromFriendProfile) ?
                   () => null : this.determineSocialAuth(socialPlatform)
