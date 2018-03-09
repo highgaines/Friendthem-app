@@ -60,7 +60,7 @@ class FriendProfileScreen extends Component {
   }
 
   componentDidMount = () => {
-    const { apiAccessToken, friendInfo, checkFriendConnection, loggedIn } = this.props
+    const { apiAccessToken, friendInfo, checkFriendConnection, loggedIn, getMyPics } = this.props
 
     if (apiAccessToken && loggedIn) {
       checkFriendConnection(apiAccessToken, friendInfo.id)
@@ -73,6 +73,10 @@ class FriendProfileScreen extends Component {
 
   renderPlatformContainer = platform => {
     const { friendInfo } = this.props
+
+    if (platform === "camera") {
+      return this.renderPictures()
+    } else{
       return(
         <View style={{ height: 366 }}>
           <FeedContainer
@@ -82,6 +86,29 @@ class FriendProfileScreen extends Component {
           />
         </View>
       )
+    }
+  }
+
+  renderPictures = () => {
+    const { friendInfo } = this.props
+    let mappedPictures
+
+    if (friendInfo && friendInfo.pictures) {
+      mappedPictures = friendInfo.pictures.map( imageObj => {
+        return(
+          <CachedImage
+            style={styles.myPicsCard}
+            source={{uri: imageObj.url}}
+          />
+        )
+      })
+    }
+
+    return (
+    <ScrollView contentContainerStyle={styles.socialAccountContainer}>
+      {mappedPictures}
+    </ScrollView>
+    )
   }
 
   handlePlatformChange = platform => {
@@ -309,7 +336,7 @@ const mapDispatchToProps = dispatch => {
       fbLogoutComplete: logoutComplete,
       setSuperConnectPlatforms,
       checkFriendConnection,
-      getUserTokens,
+      getUserTokens
     }, dispatch)
   }
 }

@@ -87,8 +87,7 @@ export default class InfoRow extends Component {
           <Switch
             onTintColor='#f6385e'
             onValueChange={() => {
-              this.setState({flipSwitch: !flipSwitch});
-              switchCallback( !flipSwitch);
+              this.setState({flipSwitch: !flipSwitch}, ()  => switchCallback(flipSwitch));
             }}
             value={!!flipSwitch}
             style={styles.switchStyle} />

@@ -366,7 +366,7 @@ class UserProfileScreen extends Component {
                       <Image
                         style={[styles.profileImage]} source={{uri: `${this.state.profilePic}`}}
                       />
-                      <Image style={styles.cameraIcon} source={Images.cameraIcon}/>
+                      <Image style={styles.cameraIcon} source={Images.cameraIconSmall}/>
                     </TouchableOpacity>
                     :
                     <TouchableOpacity onPress={this.handleImagePress}>

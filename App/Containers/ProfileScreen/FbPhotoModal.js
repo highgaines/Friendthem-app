@@ -8,7 +8,7 @@ import { Icon } from 'react-native-elements'
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import UserStoreActions, { updateInfoRequest } from '../../Redux/UserStore'
+import UserStoreActions, { editPic, updateInfoRequest } from '../../Redux/UserStore'
 
 // Styles
 import styles from '../Styles/FbPhotoModalStyles'
@@ -43,8 +43,13 @@ class PhotoModal extends Component {
     togglePhotoModal()
   }
 
+  onChangeMyPictures = () => {
+    const { editPic, picId, accessToken } = this.props
+    editPic(accessToken, this.state.selectedImageObject.picture, picId)
+  }
+
   renderImages = () => {
-    const { userPhotos } = this.props
+    const { userPhotos, myPicturesBool } = this.props
     const imagesToDisplay = userPhotos && userPhotos.data && userPhotos.data.data && userPhotos.data.data.slice(this.state.startingIndex, this.state.startingIndex + 9)
     return (
       <View style={styles.imageContainer}>
@@ -55,7 +60,7 @@ class PhotoModal extends Component {
               const imageStyle = imageSelected ? [styles.image, { borderWidth: 5, borderColor: '#8cff1a' }] : styles.image
               return (
                 <TouchableOpacity
-                  onPress={() => this.onImageSelect(imageObj)}
+                  onPress={myPicturesBool ? () => this.onImageSelect(imageObj) : () => this.onChangeMyPictures() }
                   >
                   <Image
                     source={{uri: imageObj.picture}}
@@ -148,7 +153,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({
-      updateInfoRequest
+      updateInfoRequest,
+      editPic
     }, dispatch)
   }
 }

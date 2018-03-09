@@ -14,11 +14,13 @@ import SocialMediaCard from '../SocialMediaCards/SocialMediaCard'
 // Libraries
 import { Icon } from 'react-native-elements'
 import LinearGradient from 'react-native-linear-gradient'
+import { CachedImage } from "react-native-img-cache";
 
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { fetchFeed } from '../../Redux/SocialFeedStore'
+import { getMyPics } from '../../Redux/UserStore'
 
 // Constants
 import { SYNCED_CARD_COLORS } from '../../Utils/constants'
@@ -41,15 +43,17 @@ class NearbyFeedCard extends Component {
     }
   }
 
-  componentDidMount = () => {
-    const { fetchFeed, friendData, accessToken } = this.props
-    fetchFeed(accessToken, friendData.id, this.state.platform)
-  }
+  // componentDidMount = () => {
+  //   const { fetchFeed, friendData, accessToken } = this.props
+  //   fetchFeed(accessToken, friendData.id, this.state.platform)
+  // }
 
   componentDidUpdate = (prevProps, prevState) => {
-    const { fetchFeed, friendData, accessToken } = this.props
-    if (prevState.platform !== this.state.platform) {
+    const { fetchFeed, friendData, accessToken, getMyPics } = this.props
+    if (prevState.platform !== this.state.platform && this.state.platform !== 'camera') {
       fetchFeed(accessToken, friendData.id, this.state.platform)
+    } else if (prevState.platform !== this.state.platform && this.state.platform === 'camera') {
+
     }
   }
 
@@ -151,6 +155,28 @@ class NearbyFeedCard extends Component {
     }
   }
 
+  renderPictures = () => {
+    const { friendData } = this.props
+    let mappedPictures
+
+    if (friendData && friendData.pictures) {
+      mappedPictures = friendData.pictures.map( imageObj => {
+        return(
+          <CachedImage
+            style={styles.myPicsCard}
+            source={{uri: imageObj.url}}
+          />
+        )
+      })
+    }
+
+    return (
+    <View style={styles.socialAccountContainer}>
+      {mappedPictures}
+    </View>
+    )
+  }
+
   renderContent = () => {
     const { feed, friendData } = this.props
     const { platform } = this.state
@@ -158,16 +184,20 @@ class NearbyFeedCard extends Component {
 
     const filteredFeed = feed[id] && feed[id][platform] ? feed[id][platform] : []
 
-    return platform === 'profile'
-    ? this.renderSocialMediaCards()
-    : filteredFeed.map( (feedObj, idx) => <FeedCard key={idx} item={feedObj}/> )
+    if (platform === 'profile'){
+      return this.renderSocialMediaCards()
+    } else if (platform === 'camera') {
+      return this.renderPictures()
+    } else {
+      return filteredFeed.map( (feedObj, idx) => <FeedCard key={idx} item={feedObj}/> )
+    }
   }
 
   render = () => {
     const { friendData, loading, setFriendInfo } = this.props
     const { platform } = this.state
     const socialPlatforms = friendData.social_profiles.map(prof => prof.provider)
-    
+
     return(
       <LazyloadView style={styles.nearbyFeedCardContainer}>
         <LazyloadView style={styles.header}>
@@ -241,7 +271,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    ...bindActionCreators({ fetchFeed }, dispatch)
+    ...bindActionCreators({ fetchFeed, getMyPics }, dispatch)
   }
 }
 

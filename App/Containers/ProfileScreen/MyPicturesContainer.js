@@ -111,49 +111,61 @@ class MyPicturesContainer extends Component {
   renderImages = () => {
     const { myPictures } = this.props
 
-    return myPictures.map( (imageObj, idx) => {
-      return(
-        <TouchableOpacity
-          key={idx}
-          onPress={() => this.handleImagePress(imageObj.id, true)}
-          style={styles.myPicsCard}
-        >
-          <CachedImage
-            style={{ width: '100%', height: 120, borderRadius: 10}}
-            source={{uri: imageObj.url}}
-          />
-        </TouchableOpacity>
-      )
-    })
+    if (myPictures) {
+      return myPictures.map( (imageObj, idx) => {
+        return(
+          <TouchableOpacity
+            key={idx}
+            onPress={() => this.handleImagePress(imageObj.id, true)}
+            style={styles.myPicsCard}
+            >
+              <CachedImage
+                style={{ width: '100%', height: 120, borderRadius: 10}}
+                source={{uri: imageObj.url}}
+              />
+            <View style={{ backgroundColor: 'white', borderRadius: 30, padding: 3, position: 'absolute', top: '70%', right: 5}}>
+              <Icon
+                name="edit"
+                type="entypo"
+                size={20}
+                color="blue"
+              />
+            </View>
+            </TouchableOpacity>
+          )
+        })
+      }
   }
 
 
 
   renderAddImageCard = () => {
     const { myPictures } = this.props
-    const calculatedPictureId = myPictures.length
 
-    return(
-      <TouchableOpacity
-        onPress={() => this.handleImagePress(calculatedPictureId)}
-        style={[styles.myPicsCard, { justifyContent: 'center', alignItems: 'center'}]}
-      >
-        <Text style={{ fontSize: 20, fontWeight: '600'}}> Add Image </Text>
-        <Icon
-            name='circle-with-plus'
-            type='entypo'
-            size={50}
-            color='#fff'
-          />
-      </TouchableOpacity>
-    )
+    if (myPictures) {
+      const calculatedPictureId = myPictures.length
+      return(
+        <TouchableOpacity
+          onPress={() => this.handleImagePress(calculatedPictureId)}
+          style={[styles.myPicsCard, { justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}]}
+          >
+            <Text style={{ fontSize: 18, fontWeight: '600'}}> Add Image </Text>
+            <Icon
+              name='circle-with-plus'
+              type='entypo'
+              size={50}
+              color='#d3d3d3'
+            />
+          </TouchableOpacity>
+        )
+    }
   }
 
   render() {
     const { myPictures, fetchingMyPics} = this.props
 
     return fetchingMyPics
-    ? <ActivityIndicator size="large" color="#0000ff" />
+    ? <View style={{ marginTop: 20 }}> <ActivityIndicator size="large" color="#0000ff" /> </View>
     : <View style={styles.socialAccountContainer}>
         {this.renderImages()}
         { myPictures.length < 6 ? this.renderAddImageCard() : null}

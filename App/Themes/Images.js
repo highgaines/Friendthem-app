@@ -43,6 +43,8 @@ const images = {
   fbSketchPNG: require('../Images/Icons/fbiconpng.png'),
   greenCheckIcon: require('../Images/greencheckmark.png'),
   blueCheckIcon: require('../Images/bluecheckmark.png'),
+  cameraIcon: require('../Images/Icons/camera-icon.png'),
+  cameraIconSmall: require('../Images/Icons/camera-icon-small.png'),
 
   // Images
   geolocationPNG: require('../Images/Permission-Location.png'),

@@ -20,11 +20,21 @@ export default SMPlatformCircle = ({size, extraStyles, platform, light, button})
           return Images.snapchatIcon
         case 'instagram':
           return Images.igSketchPNG
+        case 'camera':
+          return Images.cameraIcon
         case 'youtube':
           return Images.youtubeIcon
         default:
           return Images.friendster
       }
+  }
+
+  customStyling = () => {
+    if (platform === "camera") {
+      return { borderWidth: 2, borderColor: 'white', borderRadius: size/2, marginVertical: 10 }
+    } else if (platform === "profile") {
+      return { marginVertical: 2 }
+    }
   }
 
   return (
@@ -33,10 +43,11 @@ export default SMPlatformCircle = ({size, extraStyles, platform, light, button})
         backgroundColor: '#fff'
       }, extraStyles}>
       <Image
-        style={{
+        style={[{
           width: size,
-          height: size
-        }}
+          height: size},
+          customStyling()
+        ]}
         source={renderIcon(platform)}
       />
     </View>

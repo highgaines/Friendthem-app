@@ -39,14 +39,6 @@ class ScrollWheel extends Component {
                 : null
               }
               {
-                socialPlatforms && socialPlatforms.includes('instagram')
-                ? <TouchableOpacity onPress={() => handlePlatformChange('instagram')}>
-                  <SMPlatformCircle platform="instagram" size={70}/>
-                  <Text style={selected === 'instagram' ? [styles.text, { color: 'white'}] : styles.text}> Instagram </Text>
-                </TouchableOpacity>
-                : null
-              }
-              {
                 socialPlatforms && socialPlatforms.includes('twitter')
                 ? <TouchableOpacity onPress={() => handlePlatformChange('twitter')}>
                   <SMPlatformCircle platform="twitter" size={70}/>
@@ -55,8 +47,12 @@ class ScrollWheel extends Component {
                 : null
               }
               <TouchableOpacity onPress={() => handleBackToProfile()}>
-                <SMPlatformCircle size={70}/>
-                <Text style={selected === 'profile' ? [styles.text, { color: 'white'}] : styles.text}> Profile </Text>
+                <SMPlatformCircle platform="profile" size={65}/>
+                <Text style={selected === 'profile' ? [styles.text, { color: 'white'}] : styles.text}> Platforms </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 5 }} onPress={() => handlePlatformChange('camera')}>
+                <SMPlatformCircle platform="camera" size={50}/>
+                <Text style={selected === 'camera' ? [styles.text, { color: 'white'}] : styles.text}> My Pictures </Text>
               </TouchableOpacity>
 
             </View>

@@ -46,6 +46,28 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 10
+  },
+  socialAccountContainer: {
+    flexWrap: 'wrap',
+    paddingHorizontal: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    width: '100%',
+    height: 450
+  },
+  myPicsCard: {
+    height: 120,
+    width: '30%',
+    borderRadius: 10,
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowOpacity: 0.75,
+    shadowRadius: 5,
+    shadowColor: 'black',
+    shadowOffset: { height: 0, width: 0 },
+    marginHorizontal: 5
   },
   deepLinkButtonContainer: {
     justifyContent: 'center',
