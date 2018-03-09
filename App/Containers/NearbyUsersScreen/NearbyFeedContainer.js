@@ -52,13 +52,12 @@ class NearbyFeedContainer extends Component {
     return(
       <LazyloadScrollView contentContainerStyle={styles.nearbyFeedContainer}>
         {nearbyUsers.length
-          ? <View style={{alignSelf: 'center', top: 100}}>
+          ? this.renderFeedCards()
+          : <View style={{alignSelf: 'center', top: 100}}>
             <Text>
               There are no users nearby.
             </Text>
-          </View>
-
-          : this.renderFeedCards() }
+          </View> }
       </LazyloadScrollView>
     )
   }
