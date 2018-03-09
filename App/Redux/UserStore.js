@@ -521,7 +521,6 @@ const handleDeletePicRequest = (state, action) => {
 }
 
 const handleDeletePicSuccess = (state, action) => {
-  debugger
   return state
 }
 
