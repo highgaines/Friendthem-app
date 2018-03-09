@@ -118,6 +118,8 @@ export default StyleSheet.create({
     width: '30%',
     borderRadius: 10,
     marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
     shadowOpacity: 0.75,
     shadowRadius: 5,
     shadowColor: 'black',

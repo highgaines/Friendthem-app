@@ -78,6 +78,7 @@ export const INITIAL_STATE = Immutable({
   notificationsOn: true,
   passwordUpdated: false,
   fetching: false,
+  fetchingMyPics: false,
   passwordUpdated: false,
   myPictures: []
 })
@@ -468,18 +469,18 @@ const handleUserLogout = (state, action) => {
 /*----------------- GET PHOTOS REDUCERS ---------------*/
 
 const handleGetPhotosRequest = (state, action) => {
-  return state.set('fetching', true);
+  return state.set('fetchingMyPics', true);
 }
 
 const handleGetPhotosSuccess = (state, action) => {
   return state.merge({
     userPhotos: action.response,
-    fetching: false
+    fetchingMyPics: false
   });
 }
 
 const handleGetPhotosFailure = (state, action) => {
-  return state.set('fetching', false);
+  return state.set('fetchingMyPics', false);
 }
 
 /*----------------- UPDATE PASSWORD REDUCERS  ---------------*/
@@ -520,7 +521,8 @@ const handleDeletePicRequest = (state, action) => {
 }
 
 const handleDeletePicSuccess = (state, action) => {
-  return state.set('myPictures', action.data)
+  debugger
+  return state
 }
 
 const handleDeletePicFailure = (state, action) => {
@@ -534,7 +536,7 @@ const handleAddPicRequest = (state, action) => {
 }
 
 const handleAddPicSuccess = (state, action) => {
-  return state.set('myPictures', action.data)
+  return state.update('myPictures', picArr => picArr.concat([action.data]))
 }
 
 const handleAddPicFailure = (state, action) => {

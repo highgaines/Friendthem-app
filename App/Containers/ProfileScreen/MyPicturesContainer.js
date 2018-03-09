@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, Image, View, ActionSheetIOS, TouchableOpacity, ActivityIndicator } from 'react-native'
 
 // Libraries
+import { CachedImage } from "react-native-img-cache";
 import { Icon } from 'react-native-elements'
 import { uploadToAWS, uploadToAWS2 } from '../../Utils/functions'
 import ImagePicker from 'react-native-image-picker'
@@ -27,15 +28,7 @@ class MyPicturesContainer extends Component {
     super(props)
 
     this.state = {
-      pic: '',
-      dummyData: [
-        {url: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/24301357_10101682515692025_688989114175452534_n.jpg?oh=66b2cdce4d4d5d443c4156f6a4e81347&oe=5B07BC92'},
-        {url: 'https://scontent-lga3-1.xx.fbcdn.net/v/t31.0-8/23270226_10101658951684485_977597476345122145_o.jpg?oh=b36f1034d10153952b23ed2407492e96&oe=5B4C5745'},
-        {url: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/19420766_10101528166873295_5937630718577662222_n.jpg?oh=6fcfb6a95c56b3b4bdfb0a42b9d2000b&oe=5B02C766'},
-        {url: 'https://scontent-lga3-1.xx.fbcdn.net/v/t31.0-8/18055990_10101455154141395_1449195833100672529_o.jpg?oh=890ec6f2f150d59970b63dedffa23c77&oe=5B411BB6'},
-        {url: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/15621734_10101337453718985_366056588442519810_n.jpg?oh=2b7bfe8ef016feaf1cabc0fa7946c0f8&oe=5B4CD03D'},
-        {url: 'https://scontent-lga3-1.xx.fbcdn.net/v/t31.0-8/14556604_10101965462853963_3292444078014420283_o.jpg?oh=99d58a2115d6c2e9ccb18b45b3554d1b&oe=5B0E2854'}
-      ]
+      pic: ''
     }
   }
 
@@ -45,7 +38,7 @@ class MyPicturesContainer extends Component {
     getMyPics(accessToken)
   }
 
-  handleImagePress = pictureId => {
+  handleImagePress = (pictureId=null, primary) => {
     const { id } = this.props.userInfo
     const {
       editableData,
@@ -59,8 +52,8 @@ class MyPicturesContainer extends Component {
       togglePhotoModal
     } = this.props
 
-    const options = {
-      title: 'Profile Picture Options',
+    const primaryOptions = {
+      title: 'My Pictures Options',
       customButtons: [
         {name: 'fb', title: 'Choose Photo from Facebook'},
         {name: 'delete', title: 'Delete current photo'},
@@ -71,6 +64,20 @@ class MyPicturesContainer extends Component {
         quality: 1
       }
     }
+
+    const secondaryOptions = {
+      title: 'What would you like to do?',
+      customButtons: [
+        {name: 'fb', title: 'Choose Photo from Facebook'}
+      ],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+        quality: 1
+      }
+    }
+
+    const options = primary ? primaryOptions : secondaryOptions
 
     ImagePicker.showImagePicker(options, (response) => {
       console.log('Response = ', response)
@@ -102,15 +109,15 @@ class MyPicturesContainer extends Component {
   }
 
   renderImages = () => {
-    const { myPictures } = this.props
+    const { myPictures, fetchingMyPics } = this.props
     return myPictures.map( (imageObj, idx) => {
       return(
         <TouchableOpacity
           key={idx}
-          onPress={() => this.handleImagePress(imageObj.id)}
+          onPress={() => this.handleImagePress(imageObj.id, true)}
           style={styles.myPicsCard}
         >
-          <Image
+          <CachedImage
             style={{ width: '100%', height: 120, borderRadius: 10}}
             source={{uri: imageObj.url}}
           />
@@ -119,12 +126,37 @@ class MyPicturesContainer extends Component {
     })
   }
 
-  render() {
+
+
+  renderAddImageCard = () => {
+    const { myPictures } = this.props
+    const calculatedPictureId = myPictures.length
+
     return(
-      <View style={styles.socialAccountContainer}>
-        {this.renderImages()}
-      </View>
+      <TouchableOpacity
+        onPress={() => this.handleImagePress(calculatedPictureId)}
+        style={[styles.myPicsCard, { justifyContent: 'center', alignItems: 'center'}]}
+      >
+        <Text style={{ fontSize: 20, fontWeight: '600'}}> Add Image </Text>
+        <Icon
+            name='circle-with-plus'
+            type='entypo'
+            size={50}
+            color='#fff'
+          />
+      </TouchableOpacity>
     )
+  }
+
+  render() {
+    const { myPictures, fetchingMyPics} = this.props
+
+    return fetchingMyPics
+    ? <ActivityIndicator size="large" color="#0000ff" />
+    : <View style={styles.socialAccountContainer}>
+        {this.renderImages()}
+        { myPictures.length < 6 ? this.renderAddImageCard() : null}
+      </View>
   }
 }
 
@@ -134,7 +166,8 @@ const mapStateToProps = state => {
     userPhotos: state.userStore.userPhotos,
     fetching: state.userStore.fetching,
     editableData: state.userStore.editableData,
-    accessToken: state.authStore.accessToken
+    accessToken: state.authStore.accessToken,
+    fetchingMyPics: state.userStore.fetchingMyPics
   }
 }
 
