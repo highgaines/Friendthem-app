@@ -241,6 +241,20 @@
 			remoteGlobalIDString = 1441618E1BD0A79300FA4F59;
 			remoteInfo = RCTContacts;
 		};
+		39C70697205351E50001D8C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1393886FCEC8445E849E20E3 /* CodePush.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = CodePush;
+		};
+		39C70699205351E50001D8C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1393886FCEC8445E849E20E3 /* CodePush.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F886647B1F4ADB500036D01B;
+			remoteInfo = "CodePush-tvOS";
+		};
 		39CB9BA71FE052DF008CFC09 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8FC18AE6E8A14C7AA278F142 /* RNVectorIcons.xcodeproj */;
@@ -829,6 +843,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		39C70693205351E50001D8C4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				39C70698205351E50001D8C4 /* libCodePush.a */,
+				39C7069A205351E50001D8C4 /* libCodePush.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		39CB9B7C1FE052D9008CFC09 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -1260,6 +1283,7 @@
 				},
 				{
 					ProductGroup = A5443CFF20534D700035A0FC /* Products */;
+					ProductGroup = 39C70693205351E50001D8C4 /* Products */;
 					ProjectRef = 1393886FCEC8445E849E20E3 /* CodePush.xcodeproj */;
 				},
 				{
@@ -1516,6 +1540,20 @@
 			fileType = archive.ar;
 			path = libRCTContacts.a;
 			remoteRef = 396EEE8D202CA6090034D5DD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		39C70698205351E50001D8C4 /* libCodePush.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCodePush.a;
+			remoteRef = 39C70697205351E50001D8C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		39C7069A205351E50001D8C4 /* libCodePush.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCodePush.a;
+			remoteRef = 39C70699205351E50001D8C4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		39CB9BA81FE052DF008CFC09 /* libRNVectorIcons.a */ = {
