@@ -59,6 +59,7 @@ class SearchContainer extends Component {
             });
           }}
           value={input}
+          underlineColorAndroid='rgba(0,0,0,0)'
         />
       </View>
     )

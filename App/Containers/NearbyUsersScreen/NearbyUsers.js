@@ -29,6 +29,10 @@ import { Images } from '../../Themes';
 // Styles
 import styles from '../Styles/NearbyUsersScreenStyles';
 
+// Utils
+import { isIOS, isAndroid } from '../../Utils/constants'
+import { RequestLocationPermission } from '../../Utils/functions'
+
 class NearbyUsers extends Component {
   constructor(props) {
     super(props)
@@ -51,11 +55,15 @@ class NearbyUsers extends Component {
 
     fetchConnectivityData(accessToken)
     if (customGeolocationPermission && !locationPermission) {
-      Permissions.request('location', { type: 'whenInUse' }).then(response => {
-        if(response === 'authorized') {
-          setLocationInterval()
-        }
-      })
+      if (isIOS) {
+        Permissions.request('location', { type: 'whenInUse' }).then(response => {
+          if(response === 'authorized') {
+            setLocationInterval()
+          }
+        })
+      } else if (isAndroid) {
+        RequestLocationPermission(setLocationInterval)
+      }
     }
   }
 

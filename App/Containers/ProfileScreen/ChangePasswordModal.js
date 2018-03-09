@@ -110,6 +110,7 @@ class FriendThemModal extends Component {
               Current Password
             </Text>
             <TextInput
+              underlineColorAndroid='rgba(0,0,0,0)'
               secureTextEntry={this.state.isOldPasswordHidden}
               style={styles.textInput}
               value={this.state.oldPassword}
@@ -128,6 +129,7 @@ class FriendThemModal extends Component {
               New Password
             </Text>
             <TextInput
+              underlineColorAndroid='rgba(0,0,0,0)'
               secureTextEntry={this.state.isNewPasswordHidden}
               style={styles.textInput}
               value={this.state.newPassword}
@@ -146,6 +148,7 @@ class FriendThemModal extends Component {
               Confirm Password
             </Text>
             <TextInput
+              underlineColorAndroid='rgba(0,0,0,0)'
               secureTextEntry={this.state.isConfirmPasswordHidden}
               style={styles.textInput}
               value={this.state.confirmPassword}

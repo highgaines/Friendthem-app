@@ -67,6 +67,7 @@ export default class InfoRow extends Component {
               testID={`input-${field}`}
               value={this.state.input}
               style={styles.form}
+              underlineColorAndroid='rgba(0,0,0,0)'
               secureTextEntry={secureText}
               onBlur={this.handleSubmit}
               autoFocus
