@@ -108,6 +108,7 @@ class LoginScreen extends Component {
             autoCapitalize={'none'}
             autoCorrect={false}
             autoFocus={true}
+            underlineColorAndroid='rgba(0,0,0,0)'
             placeholderFontColor='#85919a'>
           </TextInput>
           <TextInput
@@ -116,6 +117,7 @@ class LoginScreen extends Component {
             onChangeText={(textValue) => this.updateState(textValue, 'userPassword')}
             secureTextEntry={true}
             autoCorrect={false}
+            underlineColorAndroid='rgba(0,0,0,0)'
             placeholder='Password'
             placeholderFontColor='#85919a'>
           </TextInput>

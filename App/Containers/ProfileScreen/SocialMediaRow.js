@@ -32,6 +32,7 @@ export default class InfoRow extends Component {
         </View>
         <View style={styles.inputRow}>
           <TextInput
+            underlineColorAndroid='rgba(0,0,0,0)'
             style={userPlatformName && !locked ? styles.textInputSync : styles.textInputNonSync}
             placeholder="Add Username"
             value={userPlatformName} />

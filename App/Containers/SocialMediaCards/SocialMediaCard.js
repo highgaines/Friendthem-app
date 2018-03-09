@@ -17,24 +17,48 @@ export default class SocialMediaCard extends Component {
     this.props.socialAuth(this.props.platformAuth)
   }
 
-  renderIcon = () => {
-    const { platformName, synced } = this.props;
+  determineConnectedStatus = () => {
+    return this.props.synced && this.props.connectedWithVisitor
+  }
 
-    return synced ? (
-      <Icon
-        name={platformName.toLowerCase()}
-        type='font-awesome'
-        color="#fff"
-        size={40}
-      />
-    ) : (
-      <Icon
-        name={platformName.toLowerCase()}
-        type='font-awesome'
-        color="#ABABAB"
-        size={40}
-      />
-    )
+  onPressFunctionality = () => {
+    const { readOnly, connectedWithVisitor, toggleBanner } = this.props
+
+    return connectedWithVisitor ?
+      toggleBanner : readOnly ?
+        null : this.handlePush
+  }
+
+  renderIcon = () => {
+    const { platformName, synced, syncedBGColor } = this.props;
+
+    if (this.determineConnectedStatus()) {
+      return (
+        <Icon
+          name={platformName.toLowerCase()}
+          type='font-awesome'
+          color={syncedBGColor}
+          size={40} />
+      )
+    } else if (synced) {
+      return (
+        <Icon
+          name={platformName.toLowerCase()}
+          type='font-awesome'
+          color="#fff"
+          size={40}
+        />
+      )
+    } else {
+      return (
+        <Icon
+          name={platformName.toLowerCase()}
+          type='font-awesome'
+          color="#ABABAB"
+          size={40}
+        />
+      )
+    }
   }
 
   render() {
@@ -44,30 +68,33 @@ export default class SocialMediaCard extends Component {
       inverted,
       synced,
       selected,
-      connectedWithVisitor,
       socialAuth,
+      connectedWithVisitor,
       readOnly,
       syncedBGColor
     }  = this.props
-    const cardStyle = synced ?
-      [styles.cardSelected, { backgroundColor: syncedBGColor }]
-      :
-      styles.cardUnselected
+    const cardStyle = this.determineConnectedStatus() ?
+      styles.invertedCard : synced ?
+        [styles.cardSelected, { backgroundColor: syncedBGColor }] : styles.cardUnselected
 
     return (
       <TouchableOpacity
         style={cardStyle}
-        disabled={connectedWithVisitor ? true : false}
         activeOpacity={readOnly ? 1 : 0.2 }
-        onPress={readOnly ? null : this.handlePush}
+        onPress={this.onPressFunctionality()}
       >
         {
-          selected ?
+          this.determineConnectedStatus() ?
           <Icon
             name='check-circle'
             type='font-awesome'
             color={'green'}
-            containerStyle={styles.checkIcon} /> : null
+            containerStyle={styles.checkIcon} /> : selected ?
+            <Icon
+              name='check-circle'
+              type='font-awesome'
+              color={'blue'}
+              containerStyle={styles.checkIcon} /> : null
         }
         <View style={styles.socialMediaImage}>
           { this.renderIcon() }
@@ -75,13 +102,18 @@ export default class SocialMediaCard extends Component {
         <View style={styles.socialMediaText}>
 
           <Text
-            style={synced ? styles.platformName : styles.unsyncedPlatformName }
-          >
+            style={this.determineConnectedStatus() ?
+              styles.platformNameInverted : synced ?
+                styles.platformName : styles.unsyncedPlatformName
+            }>
             {platformName}
           </Text>
 
           <Text
-            style={synced ? styles.userName : styles.unsyncedUserName }>
+            style={this.determineConnectedStatus() ?
+              styles.userNameInverted : synced ?
+                styles.userName : styles.unsyncedUserName
+            }>
             {userName || 'Sync Account'}
           </Text>
         </View>

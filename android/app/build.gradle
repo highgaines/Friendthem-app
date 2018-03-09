@@ -98,6 +98,10 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
 
+    dexOptions {
+        jumboMode = true
+    }
+
     defaultConfig {
         applicationId "com.friendthem"
         minSdkVersion 16
@@ -106,6 +110,18 @@ android {
         versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
+        }
+        manifestPlaceholders = [onesignal_app_id: FRIENDTHEM_ONESIGNAL_ID,
+                                onesignal_google_project_number: FRIENDTHEM_PROJ_NUM]
+    }
+    signingConfigs {
+        release {
+            if (project.hasProperty('FRIENDTHEM_RELEASE_STORE_FILE')) {
+                storeFile file(FRIENDTHEM_RELEASE_STORE_FILE)
+                storePassword FRIENDTHEM_RELEASE_STORE_PASSWORD
+                keyAlias FRIENDTHEM_RELEASE_KEY_ALIAS
+                keyPassword FRIENDTHEM_RELEASE_KEY_PASSWORD
+            }
         }
     }
     splits {
@@ -120,6 +136,7 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release
@@ -138,14 +155,13 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-code-push')
     compile project(':react-native-fetch-blob')
     compile project(':react-native-fast-image')
-    compile project(':react-native-image-crop-picker')
     compile project(':react-native-picker')
     compile project(':react-native-image-picker')
     compile project(':react-native-onesignal')
     compile project(':react-native-contacts')
-    compile project(':react-native-code-push')
     compile project(':react-native-sms')
     compile project(':react-native-vector-icons')
     compile project(':react-native-svg')

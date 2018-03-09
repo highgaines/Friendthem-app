@@ -2,11 +2,7 @@
 const images = {
   logo: require('../Images/ir.png'),
   mainLogo: require('../Images/logo.png'),
-  clearLogo: require('../Images/top_logo.png'),
   launch: require('../Images/launch-icon.png'),
-  ready: require('../Images/your-app.png'),
-  ignite: require('../Images/ignite_logo.png'),
-  igniteClear: require('../Images/ignite-logo-transparent.png'),
   tileBg: require('../Images/tile_bg.png'),
   background: require('../Images/BG.png'),
   buttonBackground: require('../Images/button-bg.png'),
@@ -49,11 +45,9 @@ const images = {
   blueCheckIcon: require('../Images/bluecheckmark.png'),
 
   // Images
-  geolocationSVG: require('../Images/permission-geo.svg'),
   geolocationPNG: require('../Images/Permission-Location.png'),
   notificationsSVG: require('../Images/notificationpngbell.png'),
   noPicSVG: require('../Images/nopic-svg.png'),
-  lightbulbSVG: require('../Images/Icons/lightbulb.svg'),
   lightbulbPNG: require('../Images/Icons/lightbulb.png'),
   closedLock: require('../Images/closed-lock.png'),
   showEye: require('../Images/showEye.png'),
@@ -67,7 +61,6 @@ const images = {
   nearbyUsersIcon: require('../Images/Icons/people-nearby-icon.png'),
 
   // Logos
-  smallLogoSVG: require('../Images/logo-small-svg.svg'),
   logoPNG: require('../Images/logo-png.png'),
   friendster: require('../Images/Icons/friendster-png.png'),
   friendsterSVG: require('../Images/friendster-svg.png'),
@@ -78,6 +71,7 @@ const images = {
   // Emblems
   emblemColor: require('../Images/Icons/emblem-color.png'),
   emblemGreen: require('../Images/Icons/emblem-green.png'),
+  friendThemLogoNoText: require('../Images/logowithouttext3.png')
 }
 
 export default images
