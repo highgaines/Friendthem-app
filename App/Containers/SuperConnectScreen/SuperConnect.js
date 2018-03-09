@@ -10,6 +10,7 @@ import ConnectBar from './ConnectBar'
 import ButtonsContainer from './ButtonsContainer'
 import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer';
 import SuperConnectActions, { superConnectPlatform } from '../../Redux/SuperConnectStore'
+import FriendStoreActions from '../../Redux/FriendStore'
 import { MANUAL_CONNECT_PLATFORMS, SOCIAL_MEDIA_DATA } from '../../Utils/constants'
 
 class SuperConnect extends Component {
@@ -36,7 +37,7 @@ class SuperConnect extends Component {
   }
 
   componentDidUpdate = (prevProps, prevState) => {
-    const { friendInfo, platforms, setManualPlatforms } = this.props
+    const { friendInfo, platforms, setManualPlatforms, setFriendInfo } = this.props
     const { userInputRequiredPlatforms, manualPlatformIndex } = this.state
     const manualPlatformsUpdated = userInputRequiredPlatforms.length && !prevState.userInputRequiredPlatforms.length
     const maxIndex = manualPlatformIndex === userInputRequiredPlatforms.length
@@ -51,7 +52,8 @@ class SuperConnect extends Component {
         this.props.navigation.navigate('CongratulatoryScreen', {
           userInfo: this.props.userInfo,
           friendInfo: this.props.friendInfo,
-          navigation: this.props.navigation
+          navigation: this.props.navigation,
+          setFriendInfo: setFriendInfo
         })
     }
   }
@@ -186,12 +188,14 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   const { togglePlatform, setManualPlatforms } = SuperConnectActions
+  const { setFriendInfo } = FriendStoreActions
 
   return {
     ...bindActionCreators({
       togglePlatform,
       setManualPlatforms,
-      superConnectPlatform
+      superConnectPlatform,
+      setFriendInfo
     }, dispatch)
   }
 }

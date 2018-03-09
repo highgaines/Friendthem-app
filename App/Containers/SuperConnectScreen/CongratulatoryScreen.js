@@ -15,11 +15,12 @@ import styles from '../Styles/CongratulatoryScreenStyles';
 import { determineImage } from '../../Utils/constants'
 
 export default CongratulatoryScreen = props => {
-  const { userInfo,friendInfo, navigation, snapchatDeeplink } = props;
+  const { userInfo,friendInfo, navigation, setFriendInfo } = props;
   const fullFriendName = `${friendInfo.first_name} ${friendInfo.last_name}`
 
   const handleNavigation = () => {
-    navigation.navigate('UserProfileScreen')
+    setFriendInfo(friendInfo)
+    navigation.navigate('FriendProfileScreen')
   }
 
   const snapHandlePresent = social_profiles => {
@@ -113,7 +114,7 @@ export default CongratulatoryScreen = props => {
           style={styles.connectButton}
           onPress={handleNavigation}>
           <Text style={styles.connectButtonText}>
-            Go Home
+            Back To Profile
           </Text>
         </TouchableOpacity>
       </View>
