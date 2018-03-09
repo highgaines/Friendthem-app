@@ -85,6 +85,11 @@ class SocialMediaCardContainer extends Component {
     return currentPlatform ? currentPlatform.username : null
   }
 
+  checkConnection = platform => {
+    const { connection } = this.props
+    return connection.find( connObj => connObj.provider === platform)
+  }
+
   render() {
     const {
       platforms,
@@ -127,6 +132,7 @@ class SocialMediaCardContainer extends Component {
                 key={idx}
                 platformName={capitalizeName(socialPlatform)}
                 synced={isSynced}
+                connectedWithVisitor={isSynced && fromFriendProfile ? this.checkConnection(socialPlatform) : null}
                 readOnly={isSynced && fromUserProfile}
                 socialAuth={(!isSynced && fromFriendProfile) ?
                   () => null : this.determineSocialAuth(socialPlatform)

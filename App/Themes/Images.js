@@ -45,6 +45,8 @@ const images = {
   youtubeIcon: require('../Images/Icons/youtubeiconsvg.png'),
   igSketchPNG: require('../Images/Icons/sketchIG.png'),
   fbSketchPNG: require('../Images/Icons/fbiconpng.png'),
+  greenCheckIcon: require('../Images/greencheckmark.png'),
+  blueCheckIcon: require('../Images/bluecheckmark.png'),
 
   // Images
   geolocationSVG: require('../Images/permission-geo.svg'),
