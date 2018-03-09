@@ -116,7 +116,7 @@ android {
     }
     signingConfigs {
         release {
-            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+            if (project.hasProperty('FRIENDTHEM_RELEASE_STORE_FILE')) {
                 storeFile file(FRIENDTHEM_RELEASE_STORE_FILE)
                 storePassword FRIENDTHEM_RELEASE_STORE_PASSWORD
                 keyAlias FRIENDTHEM_RELEASE_KEY_ALIAS

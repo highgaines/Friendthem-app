@@ -88,10 +88,39 @@ export const RequestContactsPermission =
         }
       })
     } else {
-      console.log("Camera permission denied")
+      console.log("Contacts permission denied")
     }
   } catch (err) {
     console.warn(err)
   }
+}
+
+export const RequestLocationPermission = async (setLocationInterval) => {
+  console.log('Begin Fn')
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      {
+        'title': 'Access to Location',
+        'message': 'Friendthem would like access to your location so you can connect with nearby users.'
+      }
+    )
+    console.log(granted)
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      Contacts.getAll( (err, contacts) => {
+        if (err === 'denied') {
+          console.log('DENIED')
+        } else {
+          console.log('SUCCESS')
+          setLocationInterval()
+        }
+      })
+    } else {
+      console.log("Location permission denied")
+    }
+  } catch (err) {
+    console.warn(err)
+  }
+  console.log('End Fn')
 }
 

@@ -46,7 +46,7 @@ import navigationAware from '../Navigation/navigationAware'
 
 // Utils
 import { isIOS, isAndroid } from '../Utils/constants'
-import { RequestContactsPermission } from '../Utils/functions'
+import { RequestContactsPermission, RequestLocationPermission } from '../Utils/functions'
 
 class LaunchScreen extends Component {
   constructor(props) {
@@ -92,12 +92,6 @@ class LaunchScreen extends Component {
       return
     } else if (hasContacts) {
       setNotifPermission(true)
-    } else if (!hasContacts && loggedIn) {
-      RequestContactsPermission(
-        storeContactInfo,
-        customNotificationPermission,
-        nativeNotifications
-      )
     }
   }
 
@@ -116,6 +110,7 @@ class LaunchScreen extends Component {
       })
     }
     Contacts.checkPermission( (err, permission) => {
+      console.log(permission)
       if (permission === 'authorized') {
         setNativeContactsPermission(true)
       }
