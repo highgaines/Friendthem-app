@@ -64,7 +64,7 @@ export default StyleSheet.create({
     shadowRadius: 5,
     shadowColor: 'black',
     shadowOffset: { height: 0, width: 0 },
-    marginHorizontal: 5
+    marginRight: 10
   },
   deepLinkButtonContainer: {
     justifyContent: 'center',
