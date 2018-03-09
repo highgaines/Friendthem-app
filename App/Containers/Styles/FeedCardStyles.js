@@ -50,17 +50,14 @@ export default StyleSheet.create({
   },
   socialAccountContainer: {
     flexWrap: 'wrap',
-    paddingHorizontal: 10,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    width: '100%',
-    height: 450
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    flexDirection: 'row'
   },
   myPicsCard: {
     height: 120,
-    width: '30%',
+    width: 100,
     borderRadius: 10,
-    marginTop: 10,
     justifyContent: 'center',
     alignItems: 'center',
     shadowOpacity: 0.75,
