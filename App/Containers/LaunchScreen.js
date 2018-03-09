@@ -25,7 +25,6 @@ import LinearGradientWrapper from '../HOCs/LinearGradientWrapper'
 
 // Config
 import envConfig from '../../envConfig'
-import isIOS from '../Utils/constants'
 
 //Redux
 import { connect } from 'react-redux'
@@ -34,6 +33,7 @@ import UserStoreActions, { fbUserInfo } from '../Redux/UserStore'
 import FriendStoreActions from '../Redux/FriendStore'
 import AuthStoreActions, { loginByFacebook } from '../Redux/AuthStore'
 import PermissionsStoreActions from '../Redux/PermissionsStore'
+import { storeContactInfo } from '../Redux/InviteUsersStore'
 
 // Images
 import { Images } from '../Themes'
@@ -43,6 +43,10 @@ import styles from './Styles/LaunchScreenStyles'
 import footerStyles from './Styles/FooterStyles'
 import { ifIphoneX } from '../Themes/Helpers'
 import navigationAware from '../Navigation/navigationAware'
+
+// Utils
+import { isIOS, isAndroid } from '../Utils/constants'
+import { RequestContactsPermission } from '../Utils/functions'
 
 class LaunchScreen extends Component {
   constructor(props) {
@@ -75,6 +79,26 @@ class LaunchScreen extends Component {
       nextProps.navigation.navigate('NearbyUsersScreen')
     }
 
+  }
+
+  componentDidUpdate = (prevProps) => {
+    const { contactList, storeContactInfo,
+            customNotificationPermission,
+            nativeNotifications, setNotifPermission,
+            loggedIn } = this.props
+    const hasContacts = contactList.length > 0
+
+    if (!isAndroid) {
+      return
+    } else if (hasContacts) {
+      setNotifPermission(true)
+    } else if (!hasContacts && loggedIn) {
+      RequestContactsPermission(
+        storeContactInfo,
+        customNotificationPermission,
+        nativeNotifications
+      )
+    }
   }
 
   checkPermissions = () => {
@@ -218,6 +242,8 @@ const mapStateToProps = state => ({
   fbAuthToken: state.fbStore.fbAccessToken,
   nativeGeolocation: state.permissionsStore.nativeGeolocation,
   nativeNotifications: state.permissionsStore.nativeNotifications,
+  contactList: state.inviteUsersStore.contactList,
+  customNotificationPermission: state.permissionsStore.notificationPermissionsGranted,
 })
 
 const mapDispatchToProps = dispatch => {
@@ -239,6 +265,7 @@ const mapDispatchToProps = dispatch => {
       setGeoPermission,
       setNotifPermission,
       setNativeContactsPermission,
+      storeContactInfo
     }, dispatch)
   }
 }
