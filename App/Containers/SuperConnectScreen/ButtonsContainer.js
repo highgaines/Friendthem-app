@@ -29,7 +29,7 @@ export default ButtonsContainer = props => {
             textAlign: 'center',
             fontFamily: 'Montserrat'
           }}>
-        {`${copy} ${friendName}?`}
+        { allPlatformsSynced ? 'Add more social media accounts to connect even further!' : `${copy} ${friendName}?`}
       </Text>
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
         <ConnectButton
