@@ -48,6 +48,7 @@ class RootContainer extends Component {
 
     if (this.props.appState !== ACTIVE && nextProps.appState === ACTIVE) {
       this.asyncAuthTokenUpdate(refreshToken)
+    }
     if (Platform.OS === 'ios' &&
         this.props.appState !== ACTIVE &&
         nextProps.appState === ACTIVE) {
