@@ -275,7 +275,7 @@ class UserProfileScreen extends Component {
       getUserTokens,
       platforms,
       updateInfo,
-      fetching,
+      isFetchingInitialUser,
       userPhotos
     } = this.props
     const { showFriendster, socialMediaData, socialNetworkTab, syncedCardColors, showErrorModal } = this.state
@@ -296,7 +296,7 @@ class UserProfileScreen extends Component {
             triggerModal={this.triggerFriendster}
             showModal={showFriendster}
           />
-            {fetching
+            {isFetchingInitialUser
               ? <View style={[styles.profileHeader, { height: 150, justifyContent: 'center'}]}>
                   <ActivityIndicator size="large" color="#0000ff"/>
                 </View>
@@ -421,7 +421,7 @@ const mapStateToProps = state => ({
   userPhotos: state.userStore.userPhotos,
   userInterests: state.userStore.interests,
   userLocation: state.userStore.location,
-  fetching: state.userStore.fetching,
+  isFetchingInitialUser: state.userStore.isFetchingInitialUser,
   fbAuthToken: state.fbStore.fbAccessToken,
   apiAccessToken: state.authStore.accessToken,
   loggedIn: state.authStore.loggedIn,
