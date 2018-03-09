@@ -86,7 +86,7 @@ class PersonalInfoTab extends Component {
           rowLabel='PHONE'
           field="phone_number"
           updateInfo={this.packageEditProfile}
-          userInfo={editableData.phone_number.replace("+", "")}
+          userInfo={editableData && editableData.phone_number && editableData.phone_number.replace("+", "")}
           switchToggled={editableData.phone_is_private}
           showSwitch={true}
           switchCallback={status => this.updatePrivacy('phone_is_private', status)}/>

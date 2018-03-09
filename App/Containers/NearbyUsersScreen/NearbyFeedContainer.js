@@ -47,11 +47,17 @@ class NearbyFeedContainer extends Component {
   }
 
   render = () => {
-    const { loading } = this.props
+    const { loading, nearbyUsers } = this.props
 
     return(
       <LazyloadScrollView contentContainerStyle={styles.nearbyFeedContainer}>
-        {this.renderFeedCards()}
+        {nearbyUsers.length
+          ? this.renderFeedCards()
+          : <View style={{alignSelf: 'center', top: 100}}>
+            <Text>
+              There are no users nearby.
+            </Text>
+          </View> }
       </LazyloadScrollView>
     )
   }
