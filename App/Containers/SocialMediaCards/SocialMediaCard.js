@@ -21,6 +21,14 @@ export default class SocialMediaCard extends Component {
     return this.props.synced && this.props.connectedWithVisitor
   }
 
+  onPressFunctionality = () => {
+    const { readOnly, connectedWithVisitor, toggleBanner } = this.props
+
+    return connectedWithVisitor ?
+      toggleBanner : readOnly ?
+        null : this.handlePush
+  }
+
   renderIcon = () => {
     const { platformName, synced, syncedBGColor } = this.props;
 
@@ -73,7 +81,7 @@ export default class SocialMediaCard extends Component {
       <TouchableOpacity
         style={cardStyle}
         activeOpacity={readOnly ? 1 : 0.2 }
-        onPress={readOnly ? null : this.handlePush}
+        onPress={this.onPressFunctionality()}
       >
         {
           this.determineConnectedStatus() ?
@@ -81,7 +89,7 @@ export default class SocialMediaCard extends Component {
             name='check-circle'
             type='font-awesome'
             color={'green'}
-            containerStyle={styles.checkIcon} /> : synced ?
+            containerStyle={styles.checkIcon} /> : selected ?
             <Icon
               name='check-circle'
               type='font-awesome'

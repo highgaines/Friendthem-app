@@ -7,6 +7,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import { SocialIcon } from 'react-native-elements'
 
 import ConnectBar from './ConnectBar'
+import ConnectivityBanner from '../UtilityComponents/ConnectivityBanner'
 import ButtonsContainer from './ButtonsContainer'
 import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer';
 import SuperConnectActions, { superConnectPlatform } from '../../Redux/SuperConnectStore'
@@ -21,8 +22,9 @@ class SuperConnect extends Component {
 
     this.state = {
       fbToken: null,
-      connectionStepCount: null,
-      connectionModalOpen: false,
+      bannerVisible: false,
+      bannerName: '',
+      bannerPlatform: '',
       userInputRequiredPlatforms: [],
       appState: AppState.currentState,
       manualPlatformsList: MANUAL_CONNECT_PLATFORMS,
@@ -138,23 +140,46 @@ class SuperConnect extends Component {
     }
   }
 
+  toggleConnectivityBanner = (friendName, platformName, timeout = null) => {
+    if (timeout) {
+      this.setState({
+        bannerVisible: true,
+        bannerName: friendName,
+        bannerPlatform: platformName
+      })
+      setTimeout(() => this.setState({
+        bannerVisible: false,
+        bannerName: '',
+        bannerPlatform: ''
+      }), timeout)
+    } else {
+      this.setState({
+        bannerVisible: true,
+        bannerName: friendName,
+        bannerPlatform: platformName
+      })
+    }
+  }
+
   render() {
-    const { userInfo, friendInfo, navigation, selectedSocialMedia, togglePlatform, platforms, copy } = this.props
-    const { connectionModalOpen, connectionStepCount } = this.state
+    const { userInfo, friendInfo, navigation, selectedSocialMedia, togglePlatform, platforms, copy, connection } = this.props
+    const { bannerVisible, bannerName, bannerPlatform } = this.state
+    const { social_profiles, first_name } = friendInfo
+
+    if (social_profiles.length && connection.length === social_profiles.length) {
+      this.toggleConnectivityBanner(first_name, 'on all shared accounts')
+    }
 
     return(
       <View style={{ flex: 1 }}>
-        { connectionModalOpen ?
-            <Modal>
-              <Text>
-                {`Connecting: Step ${connectionStepCount} of ${selectedSocialMedia.length}`}
-              </Text>
-            </Modal>
-          : null
-        }
         <ConnectBar copy={copy} userData={userInfo} friendInfo={friendInfo}/>
+        {
+          bannerVisible ? <ConnectivityBanner name={bannerName} platform={bannerPlatform}/> : null
+        }
         <SocialMediaCardContainer
           fromFriendProfile={true}
+          toggleBanner={this.toggleConnectivityBanner}
+          connection={connection}
           friendPlatforms={friendInfo.social_profiles}
           onPressCallback={(platform) => togglePlatform(platform)}
           platformSynced={platform => this.socialPlatformPresent(platform)}
@@ -181,6 +206,7 @@ const mapStateToProps = state => ({
   userInfo: state.userStore.userData,
   platforms: state.tokenStore.platforms,
   friendInfo: state.friendStore.friendData,
+  connection: state.friendStore.connection,
   fbAuthToken: state.fbStore.fbAccessToken,
   apiAccessToken: state.authStore.accessToken,
   selectedSocialMedia: state.superConnect.selectedSocialMedia

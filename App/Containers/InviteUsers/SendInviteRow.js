@@ -25,7 +25,7 @@ export default SendInviteRow = props => {
 
   const handleInvite = () => {
     if (platform === 'Text Message') {
-      Communications.text('3472917739', 'Friendthem is Great! Download it here! https://itunes.apple.com/us/app/friendthem/id422255598?ls=1&mt=8')
+      Communications.text('3472917739', 'Friendthem is Great! Download it here: https://itunes.apple.com/us/app/friendthem/id422255598?ls=1&mt=8')
     }
   }
 

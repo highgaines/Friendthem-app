@@ -29,7 +29,7 @@ class SocialMediaCardContainer extends Component {
     this.state = {
       currentPlatform: '',
       socialMediaData: SOCIAL_MEDIA_DATA,
-      syncedCardColors: SYNCED_CARD_COLORS
+      syncedCardColors: SYNCED_CARD_COLORS,
     }
   }
 
@@ -99,7 +99,9 @@ class SocialMediaCardContainer extends Component {
       fromFriendProfile,
       fromUserProfile,
       friendPlatforms,
-      platformSelected
+      friendData,
+      platformSelected,
+      toggleBanner,
     } = this.props
     const {
       socialMediaData,
@@ -131,6 +133,7 @@ class SocialMediaCardContainer extends Component {
               <SocialMediaCard
                 key={idx}
                 platformName={capitalizeName(socialPlatform)}
+                toggleBanner={() => toggleBanner(friendData.first_name, capitalizeName(socialPlatform), 3000)}
                 synced={isSynced}
                 connectedWithVisitor={isSynced && fromFriendProfile ? this.checkConnection(socialPlatform) : null}
                 readOnly={isSynced && fromUserProfile}
@@ -141,6 +144,7 @@ class SocialMediaCardContainer extends Component {
                 userName={userName}
                 syncedBGColor={syncedCardColors[socialPlatform]}
                 selected={isSelected}
+
               />
             )
           } else {
