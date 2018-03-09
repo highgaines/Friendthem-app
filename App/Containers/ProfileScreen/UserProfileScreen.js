@@ -310,7 +310,8 @@ class UserProfileScreen extends Component {
       platforms,
       updateInfo,
       isFetchingInitialUser,
-      userPhotos
+      userPhotos,
+      fetchingMyPics
     } = this.props
 
     const {
@@ -435,7 +436,7 @@ class UserProfileScreen extends Component {
               </TouchableOpacity>
             </View>
             </LinearGradient>
-            {this.renderContainer()}
+            {fetchingMyPics ? <ActivityIndicator size="large" color="#0000ff"/> : this.renderContainer()}
           <ChangePasswordModal
              modalVisible={this.state.showChangePasswordModal}
              toggleChangePasswordModal={this.toggleChangePasswordModal}
@@ -464,6 +465,7 @@ const mapStateToProps = state => ({
   userInterests: state.userStore.interests,
   userLocation: state.userStore.location,
   isFetchingInitialUser: state.userStore.isFetchingInitialUser,
+  fetchingMyPics: state.userStore.fetchingMyPics,
   fbAuthToken: state.fbStore.fbAccessToken,
   apiAccessToken: state.authStore.accessToken,
   loggedIn: state.authStore.loggedIn,

@@ -531,15 +531,15 @@ const handleDeletePicFailure = (state, action) => {
 /*----------------- ADD PIC REDUCERS  ---------------*/
 
 const handleAddPicRequest = (state, action) => {
-  return state
+  return state.set('fetchingMyPics', true)
 }
 
 const handleAddPicSuccess = (state, action) => {
-  return state.update('myPictures', picArr => picArr.concat([action.data]))
+  return state.update('myPictures', picArr => picArr.concat([action.data])).merge({'fetchingMyPics': false})
 }
 
 const handleAddPicFailure = (state, action) => {
-  return state
+  return state.set('fetchingMyPics', false)
 }
 
 /* ------------- Hookup Reducers To Types ------------- */

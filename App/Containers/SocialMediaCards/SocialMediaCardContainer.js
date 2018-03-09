@@ -87,7 +87,7 @@ class SocialMediaCardContainer extends Component {
 
   checkConnection = platform => {
     const { connection } = this.props
-    return connection.find( connObj => connObj.provider === platform)
+    return connection ? connection.find( connObj => connObj.provider === platform) : null
   }
 
   render() {
