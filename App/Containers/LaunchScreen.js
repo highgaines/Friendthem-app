@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Image, View, TouchableOpacity, Button, ActivityIndicator } from 'react-native'
+import { ScrollView, Text, Image, View,
+         TouchableOpacity, Button,
+         ActivityIndicator } from 'react-native'
 
 // Libraries
 import { SocialIcon } from 'react-native-elements'
@@ -31,6 +33,7 @@ import UserStoreActions, { fbUserInfo } from '../Redux/UserStore'
 import FriendStoreActions from '../Redux/FriendStore'
 import AuthStoreActions, { loginByFacebook } from '../Redux/AuthStore'
 import PermissionsStoreActions from '../Redux/PermissionsStore'
+import { storeContactInfo } from '../Redux/InviteUsersStore'
 
 // Images
 import { Images } from '../Themes'
@@ -40,6 +43,11 @@ import styles from './Styles/LaunchScreenStyles'
 import footerStyles from './Styles/FooterStyles'
 import { ifIphoneX } from '../Themes/Helpers'
 import navigationAware from '../Navigation/navigationAware'
+
+// Utils
+import { isIOS, isAndroid } from '../Utils/constants'
+import { RequestContactsPermission, RequestLocationPermission } from '../Utils/functions'
+import OneSignal from 'react-native-onesignal';
 
 class LaunchScreen extends Component {
   constructor(props) {
@@ -58,6 +66,7 @@ class LaunchScreen extends Component {
     if (this.props.loggedIn) {
       this.props.navigation.navigate('NearbyUsersScreen')
     }
+
   }
 
   componentWillUpdate = nextProps => {
@@ -74,19 +83,39 @@ class LaunchScreen extends Component {
 
   }
 
+  componentDidUpdate = (prevProps) => {
+    const { contactList, storeContactInfo,
+            customNotificationPermission,
+            nativeNotifications, setNotifPermission,
+            loggedIn } = this.props
+    const hasContacts = contactList.length > 0
+
+    if (!isAndroid) {
+      return
+    } else if (!customNotificationPermission) {
+      OneSignal.getPermissionSubscriptionState((status) => {
+        console.log(status)
+        if (status.notificationsEnabled) {
+          setNotifPermission(true)
+        }
+      })
+    }
+  }
+
   checkPermissions = () => {
     const { setGeoPermission, setNotifPermission, setNativeContactsPermission } = this.props
-
     Permissions.check('location', { type: 'always' }).then(response => {
       if (response === 'authorized') {
         setGeoPermission(true)
       }
     })
-    Permissions.check('notification').then(response => {
-      if (response === 'authorized') {
-        setNotifPermission(true)
-      }
-    })
+    if (isIOS) {
+      Permissions.check('notification').then(response => {
+        if (response === 'authorized') {
+          setNotifPermission(true)
+        }
+      })
+    }
     Contacts.checkPermission( (err, permission) => {
       if (permission === 'authorized') {
         setNativeContactsPermission(true)
@@ -214,6 +243,8 @@ const mapStateToProps = state => ({
   fbAuthToken: state.fbStore.fbAccessToken,
   nativeGeolocation: state.permissionsStore.nativeGeolocation,
   nativeNotifications: state.permissionsStore.nativeNotifications,
+  contactList: state.inviteUsersStore.contactList,
+  customNotificationPermission: state.permissionsStore.notificationPermissionsGranted
 })
 
 const mapDispatchToProps = dispatch => {
@@ -235,6 +266,7 @@ const mapDispatchToProps = dispatch => {
       setGeoPermission,
       setNotifPermission,
       setNativeContactsPermission,
+      storeContactInfo
     }, dispatch)
   }
 }

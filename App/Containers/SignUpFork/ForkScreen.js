@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity,
+        Image, PermissionsAndroid, Platform } from 'react-native';
 
 // Redux
 import { connect } from 'react-redux';
@@ -29,6 +30,8 @@ import { Images } from '../../Themes';
 import styles from '../Styles/ForkScreenStyles';
 import { determineImage } from '../../Utils/constants'
 
+// Utils
+import { RequestContactsPermission } from '../../Utils/functions'
 
 class ForkScreen extends Component {
 
@@ -45,16 +48,26 @@ class ForkScreen extends Component {
       getUserInfo(accessToken);
     }
 
-    Contacts.getAll( (err, contacts) => {
-      if (err === 'denied') {
-        console.log('DENIED')
-      } else {
-        storeContactInfo(contacts)
-      }
-      if (customNotificationPermission && !nativeNotifications) {
-        OneSignal.registerForPushNotifications()
-      }
-    })
+    if (Platform.OS === 'ios') {
+      Contacts.getAll( (err, contacts) => {
+        if (err === 'denied') {
+          console.log('DENIED')
+        } else {
+          storeContactInfo(contacts)
+        }
+        if (customNotificationPermission && !nativeNotifications) {
+          OneSignal.registerForPushNotifications()
+        }
+      })
+    } else {
+      // get dangerous permissions for contacts on Android
+      RequestContactsPermission(
+          storeContactInfo,
+          customNotificationPermission,
+          nativeNotifications
+      )
+    }
+
   }
 
   componentWillUpdate = (nextProps, nextState) => {

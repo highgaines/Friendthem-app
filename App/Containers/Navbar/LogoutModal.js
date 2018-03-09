@@ -11,6 +11,7 @@ export default class LogoutModal extends Component {
           transparent={true}
           visible={showModal}
           animationType='slide'
+          onRequestClose={() => {}}
           >
             <View style={modalStyle}>
               <Text style={{ fontSize: 15, color: 'black' }}> Are you sure you want to logout? </Text>

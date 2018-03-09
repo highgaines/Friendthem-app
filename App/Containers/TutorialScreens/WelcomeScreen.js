@@ -9,14 +9,13 @@ import styles from '../Styles/TutorialScreenStyles';
 
 export default WelcomeScreen = props => {
   const { name, closeModal, visible, navigation, toggleWelcomeTutorial } = props
-
   return (
     <View style={styles.container}>
       <Modal
         visible={visible}
         animationType={'slide'}
         transparent={true}
-        onRequestClose={() => closeModal()}
+        onRequestClose={toggleWelcomeTutorial}
         >
           <View style={styles.modalContainer}>
             <Image
