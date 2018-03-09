@@ -39,7 +39,8 @@ export default StyleSheet.create({
   peopleNearbyIcon: {
     alignSelf: 'center',
     position: 'absolute',
-    bottom: 0
+    bottom: -10,
+    zIndex: 200
   },
   selectedScreen: {
     borderColor: '#ff00e1',

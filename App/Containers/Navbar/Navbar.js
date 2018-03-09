@@ -159,7 +159,7 @@ class Navbar extends Component {
                 source={Images.peopleNearbyIcon}
                 />
               <Text
-                style={[styles.iconText, {top: 26, zIndex: 99}, this.determineCurrentScreen('NearbyUsersScreen') ?
+                style={[styles.iconText, {top: 35, zIndex: 99}, this.determineCurrentScreen('NearbyUsersScreen') ?
                 {color: '#ff00e1'} :
                 '' ]}>
                 Nearby
