@@ -20,7 +20,7 @@ export default CongratulatoryScreen = props => {
 
   const handleNavigation = () => {
     setFriendInfo(friendInfo)
-    navigation.navigate('FriendProfileScreen')
+    navigation.pop(2)
   }
 
   const snapHandlePresent = social_profiles => {
