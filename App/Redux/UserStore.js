@@ -41,6 +41,7 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   fetching: false,
+  isFetchingInitialUser: false,
   userId: null,
   userData: {
     username: '',
@@ -66,7 +67,6 @@ export const INITIAL_STATE = Immutable({
   userPhotos: {},
   ghostModeOn: true,
   notificationsOn: true,
-  fetching: false,
   passwordUpdated: false
 })
 
@@ -285,7 +285,7 @@ const handleUpdateInfo = (state, action) => {
 // ------------------------------------------------------------------------ //
 
 const handleGetUserRequest = (state, action) => {
-  return state.set('fetching', true);
+  return state.set('isFetchingInitialUser', true);
 }
 
 const handleGetUserSuccess = (state, action) => {
@@ -298,11 +298,11 @@ const handleGetUserSuccess = (state, action) => {
     userData: action.data,
     editableData: action.data,
     userId: action.response.data.id,
-    fetching: false
+    isFetchingInitialUser: false
   });
 }
 const handleGetUserFailure = (state, action) => {
-  return state.set('fetching', false);
+  return state.set('isFetchingInitialUser', false);
 }
 
 // ------------------------------------------------------------------------ //
