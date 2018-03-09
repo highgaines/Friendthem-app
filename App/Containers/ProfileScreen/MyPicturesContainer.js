@@ -123,7 +123,7 @@ class MyPicturesContainer extends Component {
                 style={{ width: '100%', height: 120, borderRadius: 10}}
                 source={{uri: imageObj.url}}
               />
-            <View style={{ backgroundColor: 'white', borderRadius: 30, padding: 3, position: 'absolute', top: '70%', right: 5}}>
+            <View style={{ backgroundColor: 'white', borderRadius: 50, padding: 3, position: 'absolute', top: '70%', right: 5}}>
               <Icon
                 name="edit"
                 type="entypo"
