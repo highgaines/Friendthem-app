@@ -39,7 +39,7 @@ export default class InfoRow extends Component {
     return (
       <ModalSelector
          data={ageArray}
-         initValue={userInfo}
+         initValue={userInfo ? userInfo.toString() : '18'}
          onChange={option => { updateInfo(field, option.label) }} />
     )
   }
