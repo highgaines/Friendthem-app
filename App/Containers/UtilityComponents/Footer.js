@@ -20,7 +20,6 @@ export default Footer = props => {
           onPress={launchScreenNavigation}
           >
           <Text style={{
-            top: 10,
             color: 'white',
             fontSize: 12,
             alignSelf: 'center'

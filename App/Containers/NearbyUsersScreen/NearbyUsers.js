@@ -54,7 +54,6 @@ class NearbyUsers extends Component {
     } = this.props
 
     fetchConnectivityData(accessToken)
-
     if (customGeolocationPermission && !locationPermission) {
       if (isIOS) {
         Permissions.request('location', { type: 'whenInUse' }).then(response => {
