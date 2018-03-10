@@ -8,7 +8,7 @@ import { Icon } from 'react-native-elements'
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import UserStoreActions, { editPic, updateInfoRequest } from '../../Redux/UserStore'
+import UserStoreActions, { updateInfoRequest, addPic } from '../../Redux/UserStore'
 
 // Styles
 import styles from '../Styles/FbPhotoModalStyles'
@@ -37,16 +37,23 @@ class PhotoModal extends Component {
   }
 
   onChangeImage = () => {
-    const { updateInfoRequest, editableData, accessToken, togglePhotoModal, updateProfilePictureState } = this.props
-    updateInfoRequest(editableData, 'picture', this.state.selectedImageObject.picture, accessToken)
-    updateProfilePictureState(this.state.selectedImageObject.picture)
-    togglePhotoModal()
+    const { updateInfoRequest, editableData, accessToken, togglePhotoModal, updateProfilePictureState, isProfile } = this.props
+
+    if (isProfile){
+      updateInfoRequest(editableData, 'picture', this.state.selectedImageObject.picture, accessToken)
+      updateProfilePictureState(this.state.selectedImageObject.picture)
+      togglePhotoModal()
+    } else {
+      this.onChangeMyPictures()
+      togglePhotoModal()
+    }
   }
 
   onChangeMyPictures = () => {
-    const { editPic, picId, accessToken } = this.props
-    editPic(accessToken, this.state.selectedImageObject.picture, picId)
+    const { accessToken, addPic } = this.props
+    addPic(accessToken, this.state.selectedImageObject.picture)
   }
+
 
   renderImages = () => {
     const { userPhotos, myPicturesBool } = this.props
@@ -60,7 +67,7 @@ class PhotoModal extends Component {
               const imageStyle = imageSelected ? [styles.image, { borderWidth: 5, borderColor: '#8cff1a' }] : styles.image
               return (
                 <TouchableOpacity
-                  onPress={myPicturesBool ? () => this.onImageSelect(imageObj) : () => this.onChangeMyPictures() }
+                  onPress={() => this.onImageSelect(imageObj)}
                   >
                   <Image
                     source={{uri: imageObj.picture}}
@@ -154,7 +161,7 @@ const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({
       updateInfoRequest,
-      editPic
+      addPic
     }, dispatch)
   }
 }

@@ -560,7 +560,6 @@ const handleAddPicRequest = (state, action) => {
 }
 
 const handleAddPicSuccess = (state, action) => {
-  debugger
   return state.update('myPictures', picArr => picArr.concat([action.data])).merge({'fetchingMyPics': false})
 }
 

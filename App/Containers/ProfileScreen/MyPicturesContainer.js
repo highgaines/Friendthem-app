@@ -92,7 +92,7 @@ class MyPicturesContainer extends Component {
         // fetch fb pics and change social media cards into pic cards
         console.log('User tapped import from facebook')
         getFBPhotos(accessToken)
-        togglePhotoModal()
+        togglePhotoModal(false)
 
       }
       else if (response.customButton === 'delete') {
@@ -103,7 +103,8 @@ class MyPicturesContainer extends Component {
       else {
         // use AWS upload function here to send uri
         let source = response.uri
-        this.setState({ pic: source }, () => uploadToAWS2(source, id, addPic, pictureId, accessToken))
+        console.log(source)
+         uploadToAWS2(source, id, addPic, pictureId, accessToken)
       }
     })
   }
@@ -144,7 +145,7 @@ class MyPicturesContainer extends Component {
     const { myPictures } = this.props
 
     if (myPictures) {
-      const calculatedPictureId = myPictures.length
+      const calculatedPictureId = Date.now()
       return(
         <TouchableOpacity
           onPress={() => this.handleImagePress(calculatedPictureId)}

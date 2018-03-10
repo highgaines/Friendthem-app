@@ -289,7 +289,7 @@ class FriendProfileScreen extends Component {
               <SocialMediaCardContainer
                 fromFriendProfile={true}
                 connection={connection}
-                toggleBanner={() => { } }
+                toggleBanner={() => console.log('') }
                 friendPlatforms={friendInfo.social_profiles}
                 onPressCallback={(platform) => this.toggleSocialMediaSelection(platform)}
                 platformSynced={socialMedia => this.socialPlatformPresent(socialMedia)}
