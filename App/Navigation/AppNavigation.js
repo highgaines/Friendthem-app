@@ -79,6 +79,7 @@ const PrimaryNav = StackNavigator({
 
 const navigateOnce = (getStateForAction) => (action, state) => {
   const {type, routeName} = action;
+
   return (
     state &&
     type === NavigationActions.NAVIGATE &&
