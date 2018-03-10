@@ -458,20 +458,6 @@
 			remoteGlobalIDString = 9350E0F11CE3B0920041D815;
 			remoteInfo = RCTFBSDK;
 		};
-		A5443D0320534D700035A0FC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1393886FCEC8445E849E20E3 /* CodePush.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = CodePush;
-		};
-		A5443D0520534D700035A0FC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1393886FCEC8445E849E20E3 /* CodePush.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F886647B1F4ADB500036D01B;
-			remoteInfo = "CodePush-tvOS";
-		};
 		A575D58F1FF30585008D198A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B10CE50B2FF24ED8B05B9B54 /* RNSVG.xcodeproj */;
@@ -1026,15 +1012,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A5443CFF20534D700035A0FC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A5443D0420534D700035A0FC /* libCodePush.a */,
-				A5443D0620534D700035A0FC /* libCodePush.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		A553FA9A200679B500EF97BA /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1282,7 +1259,6 @@
 					ProjectRef = C5634B3F305F47A5896309A9 /* BVLinearGradient.xcodeproj */;
 				},
 				{
-					ProductGroup = A5443CFF20534D700035A0FC /* Products */;
 					ProductGroup = 39C70693205351E50001D8C4 /* Products */;
 					ProjectRef = 1393886FCEC8445E849E20E3 /* CodePush.xcodeproj */;
 				},
@@ -1757,20 +1733,6 @@
 			fileType = archive.ar;
 			path = libRCTFBSDK.a;
 			remoteRef = A54114A81FDB01B500AC2A83 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		A5443D0420534D700035A0FC /* libCodePush.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libCodePush.a;
-			remoteRef = A5443D0320534D700035A0FC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		A5443D0620534D700035A0FC /* libCodePush.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libCodePush.a;
-			remoteRef = A5443D0520534D700035A0FC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		A575D5901FF30585008D198A /* libRNSVG.a */ = {
