@@ -101,15 +101,28 @@ class SuperConnect extends Component {
   }
 
   superConnectPromiseLoop = () => {
-    const { selectedSocialMedia, friendInfo, superConnectPlatform, apiAccessToken, setManualPlatforms, userId } = this.props
+    const {
+      selectedSocialMedia,
+      friendInfo,
+      superConnectPlatform,
+      apiAccessToken,
+      setManualPlatforms,
+      userId,
+      connection,
+      setFriendInfo
+     } = this.props
     const { userInputRequiredPlatforms, manualPlatformsList } = this.state
+    const checkConnection = platform => connection.find(element => element.provider === platform)
     let platform = ''
     let tempUserInputArr = []
 
     for (let i = 0; i < selectedSocialMedia.length; i++) {
       platform = selectedSocialMedia[i]
 
-      if (manualPlatformsList.includes(platform)) {
+      if (checkConnection(platform)) {
+        continue
+      }
+      else if (manualPlatformsList.includes(platform)) {
         tempUserInputArr.push(platform)
       } else {
         this.asyncSuperConnectPlatform(platform, apiAccessToken, friendInfo.id, userId)
@@ -122,7 +135,8 @@ class SuperConnect extends Component {
         this.props.navigation.navigate('CongratulatoryScreen', {
           userInfo: this.props.userInfo,
           friendInfo: this.props.friendInfo,
-          navigation: this.props.navigation
+          navigation: this.props.navigation,
+          setFriendInfo: setFriendInfo
         })
       }
   }
@@ -165,8 +179,9 @@ class SuperConnect extends Component {
     const { userInfo, friendInfo, navigation, selectedSocialMedia, togglePlatform, platforms, copy, connection } = this.props
     const { bannerVisible, bannerName, bannerPlatform } = this.state
     const { social_profiles, first_name } = friendInfo
+    const allPlatformsSynced = social_profiles.length && connection.length === social_profiles.length
 
-    if (social_profiles.length && !bannerVisible && connection.length === social_profiles.length) {
+    if (allPlatformsSynced  && !bannerVisible) {
       this.toggleConnectivityBanner(first_name, 'on all shared accounts')
     }
 
@@ -193,6 +208,7 @@ class SuperConnect extends Component {
             }
             copy={this.props.copy}
             navigation={navigation}
+            allPlatformsSynced={allPlatformsSynced}
             facebookUrl={friendInfo.fbUrl}
             friendName={`${friendInfo.first_name}`} />
         </View>

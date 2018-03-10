@@ -132,6 +132,7 @@ class SocialMediaCardContainer extends Component {
             return (
               <SocialMediaCard
                 key={idx}
+                fromUserProfile={fromUserProfile}
                 platformName={capitalizeName(socialPlatform)}
                 toggleBanner={() => toggleBanner(friendData.first_name, capitalizeName(socialPlatform), 3000)}
                 synced={isSynced}

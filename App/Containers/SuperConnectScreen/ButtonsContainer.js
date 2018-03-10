@@ -8,7 +8,7 @@ import ConnectButton from './ConnectButton';
 import styles from '../Styles/ButtonContainerStyles';
 
 export default ButtonsContainer = props => {
-  const { friendName, deepLinkURL, navigation, friendUrlm, superConnectPromiseLoop, copy } = props
+  const { friendName, deepLinkURL, navigation, friendUrlm, superConnectPromiseLoop, copy, allPlatformsSynced } = props
   const backAction = NavigationActions.back()
 
   const goBack = () => {
@@ -29,7 +29,7 @@ export default ButtonsContainer = props => {
             textAlign: 'center',
             fontFamily: 'Montserrat'
           }}>
-        {`${copy} ${friendName}?`}
+        { allPlatformsSynced ? 'Add more social media accounts to connect even further!' : `${copy} ${friendName}?`}
       </Text>
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
         <ConnectButton
@@ -42,15 +42,18 @@ export default ButtonsContainer = props => {
           linearGradient={true}
           textStyle={styles.textStyle}/>
 
-        <ConnectButton
-          name='check'
-          type='entypo'
-          color='#ffffff'
-          onPressCallback={letsDoIt}
-          title="LET'S DO IT"
-          containerStyle={styles.button}
-          linearGradient={true}
-          textStyle={styles.textStyle}/>
+        {
+          allPlatformsSynced ? null :
+          <ConnectButton
+            name='check'
+            type='entypo'
+            color='#ffffff'
+            onPressCallback={letsDoIt}
+            title="LET'S DO IT"
+            containerStyle={styles.button}
+            linearGradient={true}
+            textStyle={styles.textStyle}/>
+        }
       </View>
     </View>
   )
