@@ -43,11 +43,6 @@ class NearbyFeedCard extends Component {
     }
   }
 
-  // componentDidMount = () => {
-  //   const { fetchFeed, friendData, accessToken } = this.props
-  //   fetchFeed(accessToken, friendData.id, this.state.platform)
-  // }
-
   componentDidUpdate = (prevProps, prevState) => {
     const { fetchFeed, friendData, accessToken, getMyPics } = this.props
     if (prevState.platform !== this.state.platform && this.state.platform !== 'camera') {
