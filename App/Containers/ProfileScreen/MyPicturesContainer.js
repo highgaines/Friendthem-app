@@ -115,12 +115,13 @@ class MyPicturesContainer extends Component {
       return myPictures.map( (imageObj, idx) => {
         return(
           <TouchableOpacity
-            key={idx}
+            key={imageObj.id}
             onPress={() => this.handleImagePress(imageObj.id, true)}
             style={styles.myPicsCard}
             >
               <CachedImage
                 style={{ width: '100%', height: 120, borderRadius: 10}}
+                mutable
                 source={{uri: imageObj.url}}
               />
             <View style={{ backgroundColor: 'white', borderRadius: 50, padding: 3, position: 'absolute', top: '70%', right: 5}}>
@@ -149,7 +150,7 @@ class MyPicturesContainer extends Component {
           onPress={() => this.handleImagePress(calculatedPictureId)}
           style={[styles.myPicsCard, { justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}]}
           >
-            <Text style={{ fontSize: 18, fontWeight: '600'}}> Add Image </Text>
+            <Text style={{ color: '#d3d3d3', marginBottom: 10, fontSize: 18, fontWeight: '600'}}> Add Image </Text>
             <Icon
               name='circle-with-plus'
               type='entypo'
