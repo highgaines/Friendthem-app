@@ -36,13 +36,13 @@ export default UserCard = ({
 
   const handleTextInvite = () => {
     let phoneNumber = determineMobileNumber()
-    Communications.textWithoutEncoding(phoneNumber, 'Friend Them is Great! Download it here!')
+    Communications.textWithoutEncoding(phoneNumber, 'Friend Them is Great! Download it here! https://itunes.apple.com/us/app/friendthem/id422255598?ls=1&mt=8')
   }
 
   const handleEmailInvite = () => {
     let emailAddress = determineAnyEmail()
     if (emailAddress) {
-      Communications.email(emailAddress, 'Friend Them is Great! Download it here!')
+      Communications.email(emailAddress, 'Friend Them is Great! Download it here! https://itunes.apple.com/us/app/friendthem/id422255598?ls=1&mt=8')
     } else {
       alert(`You do not have an e-mail on file for ${firstName}`)
     }
