@@ -92,7 +92,7 @@ class MyPicturesContainer extends Component {
         // fetch fb pics and change social media cards into pic cards
         console.log('User tapped import from facebook')
         getFBPhotos(accessToken)
-        togglePhotoModal()
+        togglePhotoModal(false)
 
       }
       else if (response.customButton === 'delete') {
@@ -103,7 +103,7 @@ class MyPicturesContainer extends Component {
       else {
         // use AWS upload function here to send uri
         let source = response.uri
-        this.setState({ pic: source }, () => uploadToAWS2(source, id, addPic, pictureId, accessToken))
+         uploadToAWS2(source, id, addPic, pictureId, accessToken)
       }
     })
   }
@@ -111,49 +111,62 @@ class MyPicturesContainer extends Component {
   renderImages = () => {
     const { myPictures } = this.props
 
-    return myPictures.map( (imageObj, idx) => {
-      return(
-        <TouchableOpacity
-          key={idx}
-          onPress={() => this.handleImagePress(imageObj.id, true)}
-          style={styles.myPicsCard}
-        >
-          <CachedImage
-            style={{ width: '100%', height: 120, borderRadius: 10}}
-            source={{uri: imageObj.url}}
-          />
-        </TouchableOpacity>
-      )
-    })
+    if (myPictures) {
+      return myPictures.map( (imageObj, idx) => {
+        return(
+          <TouchableOpacity
+            key={imageObj.id}
+            onPress={() => this.handleImagePress(imageObj.id, true)}
+            style={styles.myPicsCard}
+            >
+              <CachedImage
+                style={{ width: '100%', height: 120, borderRadius: 10}}
+                mutable
+                source={{uri: imageObj.url}}
+              />
+            <View style={{ backgroundColor: 'white', borderRadius: 50, padding: 3, position: 'absolute', top: '70%', right: 5}}>
+              <Icon
+                name="edit"
+                type="entypo"
+                size={20}
+                color="blue"
+              />
+            </View>
+            </TouchableOpacity>
+          )
+        })
+      }
   }
 
 
 
   renderAddImageCard = () => {
     const { myPictures } = this.props
-    const calculatedPictureId = myPictures.length
 
-    return(
-      <TouchableOpacity
-        onPress={() => this.handleImagePress(calculatedPictureId)}
-        style={[styles.myPicsCard, { justifyContent: 'center', alignItems: 'center'}]}
-      >
-        <Text style={{ fontSize: 20, fontWeight: '600'}}> Add Image </Text>
-        <Icon
-            name='circle-with-plus'
-            type='entypo'
-            size={50}
-            color='#fff'
-          />
-      </TouchableOpacity>
-    )
+    if (myPictures) {
+      const calculatedPictureId = Date.now()
+      return(
+        <TouchableOpacity
+          onPress={() => this.handleImagePress(calculatedPictureId)}
+          style={[styles.myPicsCard, { justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}]}
+          >
+            <Text style={{ color: '#d3d3d3', marginBottom: 10, fontSize: 18, fontWeight: '600'}}> Add Image </Text>
+            <Icon
+              name='circle-with-plus'
+              type='entypo'
+              size={50}
+              color='#d3d3d3'
+            />
+          </TouchableOpacity>
+        )
+    }
   }
 
   render() {
     const { myPictures, fetchingMyPics} = this.props
 
     return fetchingMyPics
-    ? <ActivityIndicator size="large" color="#0000ff" />
+    ? <View style={{ marginTop: 20 }}> <ActivityIndicator size="large" color="#0000ff" /> </View>
     : <View style={styles.socialAccountContainer}>
         {this.renderImages()}
         { myPictures.length < 6 ? this.renderAddImageCard() : null}

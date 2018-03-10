@@ -25,6 +25,9 @@ const { Types, Creators } = createActions({
   addPicRequest: null,
   addPicSuccess: null,
   addPicFailure: null,
+  editPicRequest: null,
+  editPicSuccess: null,
+  editPicFailure: null,
   updateInfoRequest: null,
   updateInfoSuccess: null,
   updateInfoFailure: null,
@@ -201,6 +204,28 @@ export const addPic = (accessToken, source) => {
     ],
     shouldCallApi: state => true,
     callApi: dispatch => fetchFromApi('pictures/', init, dispatch)
+  }
+}
+
+// EDIT PIC
+
+export const editPic = (accessToken, source, picId) => {
+  const headers = new Headers()
+  headers.append('Authorization', `Bearer ${accessToken}`)
+  headers.append('Content-Type', 'application/json')
+
+  const body = {
+    url: source
+  }
+
+  return {
+    types: [
+      Types.EDIT_PIC_REQUEST,
+      Types.EDIT_PIC_SUCCESS,
+      Types.EDIT_PIC_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi(`pictures/${picId}/`, init, dispatch)
   }
 }
 
@@ -521,7 +546,7 @@ const handleDeletePicRequest = (state, action) => {
 }
 
 const handleDeletePicSuccess = (state, action) => {
-  return state
+  return state.set('fetchingMyPics', false).set('myPictures', action.data)
 }
 
 const handleDeletePicFailure = (state, action) => {
@@ -539,6 +564,20 @@ const handleAddPicSuccess = (state, action) => {
 }
 
 const handleAddPicFailure = (state, action) => {
+  return state.set('fetchingMyPics', false)
+}
+
+/*----------------- EDIT PIC REDUCERS  ---------------*/
+
+const handleEditPicRequest = (state, action) => {
+  return state.set('fetchingMyPics', true)
+}
+
+const handleEditPicSuccess = (state, action) => {
+  return state.update('myPictures', picArr => picArr.concat([action.data])).merge({'fetchingMyPics': false})
+}
+
+const handleEditPicFailure = (state, action) => {
   return state.set('fetchingMyPics', false)
 }
 
@@ -562,6 +601,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.ADD_PIC_REQUEST]: handleAddPicRequest,
   [Types.ADD_PIC_SUCCESS]: handleAddPicSuccess,
   [Types.ADD_PIC_FAILURE]: handleAddPicFailure,
+  [Types.EDIT_PIC_REQUEST]: handleEditPicRequest,
+  [Types.EDIT_PIC_SUCCESS]: handleEditPicSuccess,
+  [Types.EDIT_PIC_FAILURE]: handleEditPicFailure,
   [Types.UPDATE_INFO_REQUEST]: handleUpdateUserRequest,
   [Types.UPDATE_INFO_SUCCESS]: handleUpdateUserSuccess,
   [Types.UPDATE_INFO_FAILURE]: handleUpdateUserFailure,

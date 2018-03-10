@@ -58,6 +58,7 @@ class UserProfileScreen extends Component {
       syncedCardColors: SYNCED_CARD_COLORS,
       showChangePasswordModal: false,
       showFbPhotoModal: false,
+      isProfile: false,
       showErrorModal: false,
       showConfirmPasswordChangeModal: false
     }
@@ -128,8 +129,11 @@ class UserProfileScreen extends Component {
     }
   }
 
-  togglePhotoModal = () => {
-    this.setState({ showFbPhotoModal: !this.state.showFbPhotoModal })
+  togglePhotoModal = (isProfile = true) => {
+    this.setState(
+      { showFbPhotoModal: !this.state.showFbPhotoModal,
+        isProfile: isProfile
+      })
   }
 
   updateProfilePictureState = (url) => {
@@ -366,7 +370,7 @@ class UserProfileScreen extends Component {
                       <Image
                         style={[styles.profileImage]} source={{uri: `${this.state.profilePic}`}}
                       />
-                      <Image style={styles.cameraIcon} source={Images.cameraIcon}/>
+                      <Image style={styles.cameraIcon} source={Images.cameraIconSmall}/>
                     </TouchableOpacity>
                     :
                     <TouchableOpacity onPress={this.handleImagePress}>
@@ -376,7 +380,7 @@ class UserProfileScreen extends Component {
                         type='ionicon'
                         size={95}
                         color='#000' />
-                      <Image style={styles.cameraIcon} source={Images.cameraIcon}/>
+                      <Image style={styles.cameraIcon} source={Images.cameraIconSmall}/>
                     </TouchableOpacity>
                   }
                   </View>
@@ -450,6 +454,7 @@ class UserProfileScreen extends Component {
             modalVisible={this.state.showFbPhotoModal}
             togglePhotoModal={this.togglePhotoModal}
             userPhotos={userPhotos}
+            isProfile={this.state.isProfile}
             updateProfilePictureState={this.updateProfilePictureState}
            />
         </View>

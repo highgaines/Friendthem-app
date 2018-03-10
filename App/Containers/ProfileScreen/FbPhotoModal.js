@@ -8,7 +8,7 @@ import { Icon } from 'react-native-elements'
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import UserStoreActions, { updateInfoRequest } from '../../Redux/UserStore'
+import UserStoreActions, { updateInfoRequest, addPic } from '../../Redux/UserStore'
 
 // Styles
 import styles from '../Styles/FbPhotoModalStyles'
@@ -37,14 +37,26 @@ class PhotoModal extends Component {
   }
 
   onChangeImage = () => {
-    const { updateInfoRequest, editableData, accessToken, togglePhotoModal, updateProfilePictureState } = this.props
-    updateInfoRequest(editableData, 'picture', this.state.selectedImageObject.picture, accessToken)
-    updateProfilePictureState(this.state.selectedImageObject.picture)
-    togglePhotoModal()
+    const { updateInfoRequest, editableData, accessToken, togglePhotoModal, updateProfilePictureState, isProfile } = this.props
+
+    if (isProfile){
+      updateInfoRequest(editableData, 'picture', this.state.selectedImageObject.picture, accessToken)
+      updateProfilePictureState(this.state.selectedImageObject.picture)
+      togglePhotoModal()
+    } else {
+      this.onChangeMyPictures()
+      togglePhotoModal()
+    }
   }
 
+  onChangeMyPictures = () => {
+    const { accessToken, addPic } = this.props
+    addPic(accessToken, this.state.selectedImageObject.picture)
+  }
+
+
   renderImages = () => {
-    const { userPhotos } = this.props
+    const { userPhotos, myPicturesBool } = this.props
     const imagesToDisplay = userPhotos && userPhotos.data && userPhotos.data.data && userPhotos.data.data.slice(this.state.startingIndex, this.state.startingIndex + 9)
     return (
       <View style={styles.imageContainer}>
@@ -148,7 +160,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({
-      updateInfoRequest
+      updateInfoRequest,
+      addPic
     }, dispatch)
   }
 }

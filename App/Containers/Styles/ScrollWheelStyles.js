@@ -13,7 +13,7 @@ export default StyleSheet.create({
   },
   platforms: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center'
   },
   text: {

@@ -18,7 +18,7 @@ export default class SocialMediaCard extends Component {
   }
 
   determineConnectedStatus = () => {
-    return this.props.synced && this.props.connectedWithVisitor || this.props.fromUserProfile
+    return this.props.synced && this.props.connectedWithVisitor || this.props.fromUserProfile && this.props.synced
   }
 
   onPressFunctionality = () => {

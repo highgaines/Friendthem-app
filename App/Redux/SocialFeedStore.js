@@ -57,18 +57,8 @@ const handleFeedDataSuccess = (state, action) => {
   const feedData = action.response.data.data
   const provider = feedData.length ? action.response.data.data[0].provider : ''
   const userId = action.response.data.user_id
-  const oldData = state.feed[userId]
-  const newData = Immutable({
-    [userId]: {
-      ...oldData,
-      [provider]: feedData
-    }
-  })
 
-  return state.merge({
-    fetching: false,
-    feed: newData
-  });
+  return state.set('fetching', false).update('feed', (oldFeed) => oldFeed.setIn([userId, provider], feedData))
 }
 
 const handleFeedDataFailure = (state, action) => {
