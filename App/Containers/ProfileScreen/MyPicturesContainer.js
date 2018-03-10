@@ -124,12 +124,12 @@ class MyPicturesContainer extends Component {
                 mutable
                 source={{uri: imageObj.url}}
               />
-            <View style={{ backgroundColor: 'white', borderRadius: 50, padding: 3, position: 'absolute', top: '70%', right: 5}}>
+            <View style={{ backgroundColor: 'blue', borderRadius: 50, borderColor: 'white', borderWidth: 2, padding: 3, position: 'absolute', top: '78%', right: 5}}>
               <Icon
                 name="edit"
                 type="entypo"
-                size={20}
-                color="blue"
+                size={12}
+                color="white"
               />
             </View>
             </TouchableOpacity>
