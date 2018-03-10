@@ -103,7 +103,6 @@ class MyPicturesContainer extends Component {
       else {
         // use AWS upload function here to send uri
         let source = response.uri
-        console.log(source)
          uploadToAWS2(source, id, addPic, pictureId, accessToken)
       }
     })
