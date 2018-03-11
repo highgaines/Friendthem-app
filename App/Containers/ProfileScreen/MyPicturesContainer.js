@@ -95,7 +95,8 @@ class MyPicturesContainer extends Component {
         // fetch fb pics and change social media cards into pic cards
         console.log('User tapped import from facebook')
         getFBPhotos(accessToken)
-        togglePhotoModal(false, pictureId)
+
+        togglePhotoModal(false, primary ? pictureId : null)
 
       }
       else if (response.customButton === 'delete') {
