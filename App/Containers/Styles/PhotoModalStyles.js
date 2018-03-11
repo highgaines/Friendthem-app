@@ -11,8 +11,8 @@ export default StyleSheet.create({
     borderRadius: 10,
     alignSelf: 'center',
   },{
-    height: Metrics.screenHeight * 0.7,
-    width: Metrics.screenWidth * 0.9,
+    height: Metrics.screenHeight * 0.4,
+    width: Metrics.screenWidth * 0.8,
     backgroundColor: 'white',
     borderRadius: 10,
     alignSelf: 'center',

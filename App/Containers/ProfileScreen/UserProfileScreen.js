@@ -129,10 +129,11 @@ class UserProfileScreen extends Component {
     }
   }
 
-  togglePhotoModal = (isProfile = true) => {
+  togglePhotoModal = (isProfile = true, pictureId) => {
     this.setState(
       { showFbPhotoModal: !this.state.showFbPhotoModal,
-        isProfile: isProfile
+        isProfile: isProfile,
+        editingPictureId: pictureId
       })
   }
 
@@ -270,7 +271,7 @@ class UserProfileScreen extends Component {
 
   renderContainer = () => {
     const { userInfo } = this.props
-    const { tab } = this.state
+    const { tab, editingPictureId } = this.state
 
     if (tab === "Networks") {
       return (
@@ -324,7 +325,8 @@ class UserProfileScreen extends Component {
       socialNetworkTab,
       syncedCardColors,
       showErrorModal,
-      tab
+      tab,
+      editingPictureId
     } = this.state
 
     const {
@@ -457,6 +459,7 @@ class UserProfileScreen extends Component {
            />
           <FbPhotoModal
             modalVisible={this.state.showFbPhotoModal}
+            editingPictureId={editingPictureId}
             togglePhotoModal={this.togglePhotoModal}
             userPhotos={userPhotos}
             isProfile={this.state.isProfile}

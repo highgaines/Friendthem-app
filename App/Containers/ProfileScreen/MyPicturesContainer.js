@@ -58,7 +58,7 @@ class MyPicturesContainer extends Component {
       title: 'My Pictures Options',
       customButtons: [
         // will add when edit is working again
-        // {name: 'fb', title: 'Choose Photo from Facebook'},
+        {name: 'fb', title: 'Choose Photo from Facebook'},
         {name: 'delete', title: 'Delete current photo'},
       ],
       storageOptions: {
@@ -95,7 +95,7 @@ class MyPicturesContainer extends Component {
         // fetch fb pics and change social media cards into pic cards
         console.log('User tapped import from facebook')
         getFBPhotos(accessToken)
-        togglePhotoModal(false)
+        togglePhotoModal(false, pictureId)
 
       }
       else if (response.customButton === 'delete') {
@@ -119,7 +119,7 @@ class MyPicturesContainer extends Component {
       return myPictures.map( (imageObj, idx) => {
         return(
           <TouchableOpacity
-            key={imageObj.id}
+            key={imageObj.idx}
             onPress={() => this.handleImagePress(imageObj.id, true)}
             style={styles.myPicsCard}
             >
