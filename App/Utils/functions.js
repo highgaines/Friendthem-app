@@ -33,7 +33,7 @@ export const uploadToAWS = async (uri, userId, callback, data, token) => {
 }
 
 
-export const uploadToAWS2 = async (uri, userId, callback, pictureId, token) => {
+export const uploadToAWS2 = async (uri, userId, callback, pictureId, token, primary) => {
 
   const file = {
     // `uri` can also be a file system path (i.e. file://)
@@ -56,7 +56,11 @@ export const uploadToAWS2 = async (uri, userId, callback, pictureId, token) => {
       throw new Error("Failed to upload image to S3");
 
     let bucketUrl = response.body.postResponse.location
-    callback(token, bucketUrl)
+    if (primary) {
+      callback(token, bucketUrl, pictureId)
+    } else {
+      callback(token, bucketUrl, pictureId)
+    }
 
   }).catch( error => console.log(error))
 }
@@ -118,4 +122,3 @@ export const RequestLocationPermission = async (setLocationInterval) => {
     console.warn(err)
   }
 }
-
