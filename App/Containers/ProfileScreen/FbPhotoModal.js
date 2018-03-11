@@ -8,7 +8,7 @@ import { Icon } from 'react-native-elements'
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import UserStoreActions, { updateInfoRequest, addPic } from '../../Redux/UserStore'
+import UserStoreActions, { updateInfoRequest, addPic, editPic } from '../../Redux/UserStore'
 
 // Styles
 import styles from '../Styles/PhotoModalStyles'
@@ -37,21 +37,28 @@ class PhotoModal extends Component {
   }
 
   onChangeImage = () => {
-    const { updateInfoRequest, editableData, accessToken, togglePhotoModal, updateProfilePictureState, isProfile } = this.props
+    const { updateInfoRequest, editableData, accessToken, editingPictureId, togglePhotoModal, updateProfilePictureState, isProfile } = this.props
 
     if (isProfile){
       updateInfoRequest(editableData, 'picture', this.state.selectedImageObject.picture, accessToken)
       updateProfilePictureState(this.state.selectedImageObject.picture)
       togglePhotoModal()
     } else {
-      this.onChangeMyPictures()
+      this.onChangeMyPictures(editingPictureId)
       togglePhotoModal()
     }
   }
 
-  onChangeMyPictures = () => {
-    const { accessToken, addPic } = this.props
-    addPic(accessToken, this.state.selectedImageObject.picture)
+  onChangeMyPictures = (pictureId) => {
+    const { accessToken, addPic, editPic } = this.props
+
+    const { picture } = this.state.selectedImageObject
+
+    if (pictureId) {
+      editPic(accessToken, picture, pictureId)
+    } else {
+      addPic(accessToken, picture)
+    }
   }
 
 
@@ -61,12 +68,13 @@ class PhotoModal extends Component {
     return (
       <View style={styles.imageContainer}>
         {
-          imagesToDisplay && imagesToDisplay.map(imageObj =>
+          imagesToDisplay && imagesToDisplay.map((imageObj, i) =>
             {
               let imageSelected = this.state.selectedImageObject.id === imageObj.id
               const imageStyle = imageSelected ? [styles.image, { borderWidth: 5, borderColor: '#8cff1a' }] : styles.image
               return (
                 <TouchableOpacity
+                  key={i}
                   onPress={() => this.onImageSelect(imageObj)}
                   >
                   <Image
@@ -161,7 +169,8 @@ const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({
       updateInfoRequest,
-      addPic
+      addPic,
+      editPic
     }, dispatch)
   }
 }

@@ -198,7 +198,7 @@ class NearbyFeedCard extends Component {
       return this.renderPictures()
     } else if (filteredFeed && filteredFeed.length) {
       return filteredFeed.map( (feedObj, idx) => <FeedCard key={idx} item={feedObj}/> )
-    } else {
+    } else if (filteredFeed) {
       return (<View style={{ marginTop: 20, justifyContent: 'flex-start', alignItems: 'center', padding: 10}}>
         <Text style={{ fontSize: 16, fontWeight: '500', textAlign: 'center'}}>
           Whoops! No content available to display!
