@@ -68,12 +68,13 @@ class PhotoModal extends Component {
     return (
       <View style={styles.imageContainer}>
         {
-          imagesToDisplay && imagesToDisplay.map(imageObj =>
+          imagesToDisplay && imagesToDisplay.map((imageObj, i) =>
             {
               let imageSelected = this.state.selectedImageObject.id === imageObj.id
               const imageStyle = imageSelected ? [styles.image, { borderWidth: 5, borderColor: '#8cff1a' }] : styles.image
               return (
                 <TouchableOpacity
+                  key={i}
                   onPress={() => this.onImageSelect(imageObj)}
                   >
                   <Image

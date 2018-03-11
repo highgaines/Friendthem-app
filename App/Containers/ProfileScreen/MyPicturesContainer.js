@@ -107,7 +107,7 @@ class MyPicturesContainer extends Component {
         // use AWS upload function here to send uri
         let source = response.uri
         let callback = primary ? editPic : addPic
-         uploadToAWS2(source, id, callback, pictureId, accessToken, primary)
+        uploadToAWS2(source, id, callback, pictureId, accessToken)
       }
     })
   }
@@ -119,7 +119,7 @@ class MyPicturesContainer extends Component {
       return myPictures.map( (imageObj, idx) => {
         return(
           <TouchableOpacity
-            key={imageObj.idx}
+            key={idx}
             onPress={() => this.handleImagePress(imageObj.id, true)}
             style={styles.myPicsCard}
             >
@@ -141,8 +141,6 @@ class MyPicturesContainer extends Component {
         })
       }
   }
-
-
 
   renderAddImageCard = () => {
     const { myPictures } = this.props
