@@ -1,13 +1,27 @@
 import { StyleSheet } from 'react-native'
 import { Metrics, ApplicationStyles, Fonts, Colors } from '../../Themes/'
+import { ifIphoneX } from '../../Themes/Helpers'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
-  container: {
+  container: ifIphoneX({
+    height: Metrics.screenHeight * 0.5,
+    width: Metrics.screenWidth * 0.9,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    alignSelf: 'center',
+  },{
     height: Metrics.screenHeight * 0.7,
     width: Metrics.screenWidth * 0.9,
     backgroundColor: 'white',
     borderRadius: 10,
+    alignSelf: 'center',
+  }),
+  fullScreen: {
+    height: Metrics.screenHeight * 0.7,
+    width: Metrics.screenWidth * 0.9,
+    borderRadius: 10,
+    justifyContent: 'center',
     alignSelf: 'center',
   },
   imageContainer: {
@@ -22,6 +36,12 @@ export default StyleSheet.create({
     height: Metrics.screenHeight * 0.15,
     width: Metrics.screenHeight * 0.15,
     margin: 5
+  },
+  expandedImage : {
+    zIndex: 102,
+    borderRadius: 10,
+    height: Metrics.screenHeight * 0.7,
+    width: Metrics.screenWidth * 0.9
   },
   buttonContainer: {
     flexDirection: 'row',

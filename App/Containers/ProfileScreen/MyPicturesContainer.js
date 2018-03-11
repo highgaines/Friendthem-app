@@ -16,6 +16,7 @@ import UserStoreActions, {
   getFBPhotos,
   updateInfoRequest,
   addPic,
+  editPic,
   deletePic
 } from '../../Redux/UserStore'
 
@@ -47,6 +48,7 @@ class MyPicturesContainer extends Component {
       updateInfoRequest,
       userPhotos,
       addPic,
+      editPic,
       deletePic,
       myPictures,
       togglePhotoModal
@@ -55,7 +57,8 @@ class MyPicturesContainer extends Component {
     const primaryOptions = {
       title: 'My Pictures Options',
       customButtons: [
-        {name: 'fb', title: 'Choose Photo from Facebook'},
+        // will add when edit is working again
+        // {name: 'fb', title: 'Choose Photo from Facebook'},
         {name: 'delete', title: 'Delete current photo'},
       ],
       storageOptions: {
@@ -103,7 +106,8 @@ class MyPicturesContainer extends Component {
       else {
         // use AWS upload function here to send uri
         let source = response.uri
-         uploadToAWS2(source, id, addPic, pictureId, accessToken)
+        let callback = primary ? editPic : addPic
+         uploadToAWS2(source, id, callback, pictureId, accessToken, primary)
       }
     })
   }
@@ -111,7 +115,7 @@ class MyPicturesContainer extends Component {
   renderImages = () => {
     const { myPictures } = this.props
 
-    if (myPictures) {
+    if (myPictures && myPictures.length) {
       return myPictures.map( (imageObj, idx) => {
         return(
           <TouchableOpacity
@@ -169,7 +173,7 @@ class MyPicturesContainer extends Component {
     ? <View style={{ marginTop: 20 }}> <ActivityIndicator size="large" color="#0000ff" /> </View>
     : <View style={styles.socialAccountContainer}>
         {this.renderImages()}
-        { myPictures.length < 6 ? this.renderAddImageCard() : null}
+        { myPictures && myPictures.length < 6 ? this.renderAddImageCard() : null}
       </View>
   }
 }
@@ -192,6 +196,7 @@ const mapDispatchToProps = dispatch => {
       getFBPhotos,
       getMyPics,
       addPic,
+      editPic,
       deletePic
     }, dispatch)
   }

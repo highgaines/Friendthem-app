@@ -138,8 +138,8 @@ class FeedContainer extends Component {
     return userFeedArr.length
     ? userFeedArr.map( (item, idx) => <FeedCard key={idx} item={item}/>)
     : <View style={{top: 100}}>
-        <Text style={{ textAlign: 'center' }}>
-          Sorry, there's no content to display!
+        <Text style={{ fontSize: 16, fontWeight: '500', textAlign: 'center'}}>
+          Whoops! There is no content to render!
         </Text>
         <View style={styles.deepLinkButtonContainer}>
           {this.renderDeeplinkButton(platform)}
@@ -159,7 +159,7 @@ class FeedContainer extends Component {
     const capitalizedPlat = platform ? `${platform.split('')[0].toUpperCase()}${platform.split('').slice(1).join('')}` : ''
     return(
       <ScrollView contentContainerStyle={styles.feedContainer}>
-        <Text style={styles.titleText}> {capitalizedPlat} Feed </Text>
+        <Text style={[styles.titleText, { fontWeight: '600', fontStyle: 'italic'}]}> {capitalizedPlat} Feed </Text>
           {loading
             ? <View
                 style={styles.loading, { marginTop: 40 }}>

@@ -440,7 +440,12 @@ class UserProfileScreen extends Component {
               </TouchableOpacity>
             </View>
             </LinearGradient>
-            {fetchingMyPics ? <ActivityIndicator size="large" color="#0000ff"/> : this.renderContainer()}
+            {fetchingMyPics
+              ? <View style={{ marginTop: 40 }}>
+                  <ActivityIndicator size="large" color="#0000ff"/>
+                </View>
+              : this.renderContainer()
+            }
           <ChangePasswordModal
              modalVisible={this.state.showChangePasswordModal}
              toggleChangePasswordModal={this.toggleChangePasswordModal}

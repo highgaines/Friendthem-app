@@ -218,6 +218,12 @@ export const editPic = (accessToken, source, picId) => {
     url: source
   }
 
+  const init = {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify(body)
+  }
+
   return {
     types: [
       Types.EDIT_PIC_REQUEST,
