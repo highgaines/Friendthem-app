@@ -57,7 +57,7 @@ class PhotoModal extends Component {
 
   renderImages = () => {
     const { userPhotos, myPicturesBool } = this.props
-    const imagesToDisplay = userPhotos && userPhotos.data && userPhotos.data.data && userPhotos.data.data.slice(this.state.startingIndex, this.state.startingIndex + 9)
+    const imagesToDisplay = userPhotos && userPhotos.data && userPhotos.data.data && userPhotos.data.data.slice(this.state.startingIndex, this.state.startingIndex + 4)
     return (
       <View style={styles.imageContainer}>
         {

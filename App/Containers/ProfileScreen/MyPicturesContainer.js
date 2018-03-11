@@ -173,7 +173,7 @@ class MyPicturesContainer extends Component {
     ? <View style={{ marginTop: 20 }}> <ActivityIndicator size="large" color="#0000ff" /> </View>
     : <View style={styles.socialAccountContainer}>
         {this.renderImages()}
-        { myPictures.length < 6 ? this.renderAddImageCard() : null}
+        { myPictures && myPictures.length < 6 ? this.renderAddImageCard() : null}
       </View>
   }
 }
