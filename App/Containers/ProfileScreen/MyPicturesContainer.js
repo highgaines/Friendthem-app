@@ -57,7 +57,6 @@ class MyPicturesContainer extends Component {
     const primaryOptions = {
       title: 'My Pictures Options',
       customButtons: [
-        // will add when edit is working again
         {name: 'fb', title: 'Choose Photo from Facebook'},
         {name: 'delete', title: 'Delete current photo'},
       ],
