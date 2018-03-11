@@ -111,7 +111,7 @@ class MyPicturesContainer extends Component {
   renderImages = () => {
     const { myPictures } = this.props
 
-    if (myPictures) {
+    if (myPictures && myPictures.length) {
       return myPictures.map( (imageObj, idx) => {
         return(
           <TouchableOpacity

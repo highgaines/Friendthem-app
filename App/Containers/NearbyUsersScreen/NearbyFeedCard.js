@@ -38,7 +38,7 @@ class NearbyFeedCard extends Component {
     super(props)
 
     this.state = {
-      platform: 'instagram',
+      platform: 'profile',
       loadInThisCard: false
     }
   }
@@ -163,6 +163,19 @@ class NearbyFeedCard extends Component {
           />
         )
       })
+    } else {
+      return mappedPictures = <View style={{ justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={{ fontSize: 16, fontWeight: '500', textAlign: 'center'}}>
+          Whoops! Looks this user has not set up My Pictures yet!
+        </Text>
+        <View style={{ padding: 20 }}>
+          <Icon
+            name="emoji-sad"
+            type="entypo"
+            size={100}
+          />
+        </View>
+      </View>
     }
 
     return (
@@ -183,8 +196,21 @@ class NearbyFeedCard extends Component {
       return this.renderSocialMediaCards()
     } else if (platform === 'camera') {
       return this.renderPictures()
-    } else {
+    } else if (filteredFeed && filteredFeed.length) {
       return filteredFeed.map( (feedObj, idx) => <FeedCard key={idx} item={feedObj}/> )
+    } else {
+      return (<View style={{ marginTop: 20, justifyContent: 'flex-start', alignItems: 'center', padding: 10}}>
+        <Text style={{ fontSize: 16, fontWeight: '500', textAlign: 'center'}}>
+          Whoops! No content available to display!
+        </Text>
+        <View style={{ padding: 20 }}>
+          <Icon
+            name="emoji-sad"
+            type="entypo"
+            size={100}
+          />
+        </View>
+      </View>)
     }
   }
 

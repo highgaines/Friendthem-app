@@ -11,7 +11,7 @@ import { bindActionCreators } from 'redux'
 import UserStoreActions, { updateInfoRequest, addPic } from '../../Redux/UserStore'
 
 // Styles
-import styles from '../Styles/FbPhotoModalStyles'
+import styles from '../Styles/PhotoModalStyles'
 import { Images } from '../../Themes'
 
 class PhotoModal extends Component {

@@ -24,6 +24,7 @@ import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContain
 import SuperConnectBar from '../SuperConnectScreen/SuperConnectBar'
 import ScrollWheel from './ScrollWheel'
 import FeedContainer from '../SocialFeed/FeedContainer'
+import MyPicturesModal from './MyPicturesModal'
 
 // Constants
 import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
@@ -42,6 +43,8 @@ class FriendProfileScreen extends Component {
     this.state = {
       showModal: false,
       platform: 'profile',
+      currentPic: '',
+      myPicturesModalVisible: false,
       feedContainer: false,
       socialMediaData: SOCIAL_MEDIA_DATA,
       syncedCardColors: SYNCED_CARD_COLORS,
@@ -89,19 +92,47 @@ class FriendProfileScreen extends Component {
     }
   }
 
+  handlePicturePush = pressedPicObj => {
+    const { myPicturesModalVisible, currentPic } = this.state
+
+    this.setState({ myPicturesModalVisible: true, currentPic: pressedPicObj })
+  }
+
+  toggleMyPicturesModal = () => {
+    const { myPicturesModalVisible } = this.state
+
+    this.setState({ myPicturesModalVisible: !myPicturesModalVisible })
+  }
+
   renderPictures = () => {
     const { friendInfo } = this.props
     let mappedPictures
 
-    if (friendInfo && friendInfo.pictures) {
+    if (friendInfo && friendInfo.pictures && friendInfo.pictures.length) {
       mappedPictures = friendInfo.pictures.map( imageObj => {
         return(
-          <CachedImage
-            style={styles.myPicsCard}
-            source={{uri: imageObj.url}}
-          />
+          <TouchableOpacity style={styles.myPicsCard} onPress={() => this.handlePicturePush(imageObj)}>
+            <CachedImage
+              style={{ width: '100%', height: 120, borderRadius: 10}}
+              source={{uri: imageObj.url}}
+            />
+          </TouchableOpacity>
         )
       })
+    } else {
+      mappedPictures =
+      <View style={{ marginTop: 20, justifyContent: 'flex-start', alignItems: 'center', padding: 10}}>
+        <Text style={{ fontSize: 16, fontWeight: '500', textAlign: 'center'}}>
+          Whoops! Looks this user has not set up My Pictures yet!
+        </Text>
+        <View style={{ padding: 20 }}>
+          <Icon
+            name="emoji-sad"
+            type="entypo"
+            size={100}
+          />
+        </View>
+      </View>
     }
 
     return (
@@ -201,7 +232,16 @@ class FriendProfileScreen extends Component {
 
   render() {
     const { friendInfo, connection, superConnect, navigation, setSuperConnectPlatforms, userInfo, userId } = this.props
-    const { showModal, socialMediaData, syncedCardColors, selectedSocialMedia, platform } = this.state
+
+    const {
+      showModal,
+      socialMediaData,
+      syncedCardColors,
+      selectedSocialMedia,
+      platform,
+      currentPic,
+      myPicturesModalVisible
+    } = this.state
 
     const socialPlatforms = friendInfo
     && friendInfo.social_profiles
@@ -214,6 +254,11 @@ class FriendProfileScreen extends Component {
 
     return (
         <View>
+          <MyPicturesModal
+            imageObj={currentPic}
+            visible={myPicturesModalVisible}
+            toggle={this.toggleMyPicturesModal}
+          />
           <View style={styles.profile}>
             <LinearGradient
               colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
@@ -228,6 +273,7 @@ class FriendProfileScreen extends Component {
                     color='#FFF'
                     onPress={() => navigation.dispatch(backAction) }
                   />
+
                 </View>
                 <View style={styles.profHeaderTop}>
                       <TouchableOpacity onPress={this.handleCall}>
