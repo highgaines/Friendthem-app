@@ -138,7 +138,10 @@ class NearbyUsers extends Component {
               locationPermission={locationPermission}
               viewFriendProfile={this.viewFriendProfile}
             />
-          : <NearbyFeedContainer viewFriendProfile={this.viewFriendProfile}/>
+          : <NearbyFeedContainer
+            input={input}
+            filterUsers={this.filterUsers}
+            viewFriendProfile={this.viewFriendProfile}/>
         }
         {
           welcomeTutorialVisible
