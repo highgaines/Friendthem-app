@@ -130,18 +130,23 @@ class NearbyUsers extends Component {
           feedView={feedView}
           toggleNearbyFeed={this.toggleNearbyFeed}
         />
-        {
-          !feedView
-          ? <UsersContainer
-              users={input.length ? this.filterUsers(users) : users}
-              navigation={navigation}
-              locationPermission={locationPermission}
-              viewFriendProfile={this.viewFriendProfile}
-            />
-          : <NearbyFeedContainer
-            input={input}
-            filterUsers={this.filterUsers}
-            viewFriendProfile={this.viewFriendProfile}/>
+      { input.length && !this.filterUsers(users).length
+          ? <View style={{alignSelf: 'center', top: 150}}>
+            <Text>
+              Sorry, no nearby users match your search!
+            </Text>
+          </View>
+          : !feedView
+            ? <UsersContainer
+                users={input.length ? this.filterUsers(users) : users}
+                navigation={navigation}
+                locationPermission={locationPermission}
+                viewFriendProfile={this.viewFriendProfile}
+              />
+            : <NearbyFeedContainer
+              input={input}
+              filterUsers={this.filterUsers}
+              viewFriendProfile={this.viewFriendProfile}/>
         }
         {
           welcomeTutorialVisible
