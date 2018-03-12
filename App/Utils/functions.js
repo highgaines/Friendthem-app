@@ -22,8 +22,7 @@ export const uploadToAWS = async (uri, userId, callback, data, token) => {
     successActionStatus: 201
   }
 
-  await RNS3.put(file, options)
-  .then(response => {
+  await RNS3.put(file, options).then(response => {
     if (response.status !== 201)
       throw new Error("Failed to upload image to S3");
 
@@ -53,7 +52,7 @@ export const uploadToAWS2 = async (uri, userId, callback, pictureId, uploadProgr
   }
 
   await RNS3.put(file, options)
-  .progress( e => uploadProgress(e.percent)).then(response => {
+  .progress(e => uploadProgress(e.percent)).then(response => {
     if (response.status !== 201)
       throw new Error("Failed to upload image to S3");
 
