@@ -30,7 +30,7 @@ class SearchBar extends Component {
       <TextInput
         underlineColorAndroid='rgba(0,0,0,0)'
         style={styles.searchForm}
-        onChangeText={input => this.props.handleChange(input)}
+        onChangeText={input => this.props.handleChange(input.toLowerCase())}
         value={this.props.input}
       />
     )

@@ -100,7 +100,9 @@ class NearbyUsers extends Component {
 
   filterUsers = users => {
     const { input } = this.state
-    return users.filter( user => user.first_name.includes(input) || user.last_name.includes(input) )
+
+    const lowerCaseTrim = userName => userName.toLowerCase().includes(input.trim())
+    return users.filter( user => lowerCaseTrim(user.first_name) || lowerCaseTrim(user.last_name) )
   }
 
   toggleWelcomeTutorial = () => {
