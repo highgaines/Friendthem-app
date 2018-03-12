@@ -126,7 +126,6 @@ class UserProfileScreen extends Component {
       }
     }
 
-    console.log(doneFetching)
     if (!refreshingToken && prevProps.refreshingToken || doneFetching) {
       getUserInfo(apiAccessToken)
       getUserTokens(apiAccessToken)
