@@ -100,8 +100,8 @@ class NearbyUsers extends Component {
 
   filterUsers = users => {
     const { input } = this.state
+    const lowerCaseTrim = userName => userName.toLowerCase().includes(input.toLowerCase().trim())
 
-    const lowerCaseTrim = userName => userName.toLowerCase().includes(input.trim())
     return users.filter( user => lowerCaseTrim(user.first_name) || lowerCaseTrim(user.last_name) )
   }
 
