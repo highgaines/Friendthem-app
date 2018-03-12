@@ -80,7 +80,6 @@ export const INITIAL_STATE = Immutable({
   ghostModeOn: true,
   notificationsOn: true,
   passwordUpdated: false,
-  fetching: false,
   fetchingMyPics: false,
   passwordUpdated: false,
   myPictures: []
@@ -454,7 +453,10 @@ const handleUpdateUserPositionSuccess = (state, action) => {
     userId: state.userId,
     event: 'Update User Position Success'
   })
-  return state.set('geoLocation', action.data.last_location);
+  return state.merge({
+    'geoLocation': action.data.last_location,
+    'fetching': false
+  });
 }
 
 const handleUpdateUserPositionFailure = (state, action) => {
