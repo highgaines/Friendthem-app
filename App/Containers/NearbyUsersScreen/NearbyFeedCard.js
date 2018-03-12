@@ -236,7 +236,7 @@ class NearbyFeedCard extends Component {
                   <ImageCircle source={`${friendData.picture}`} size={60}/>
                 </TouchableOpacity>
               </LazyloadView>
-              <LazyloadView style={{ flex: 3 }}>
+              <LazyloadView style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'flex-start', padding: 5 }}>
                 <Text style={styles.name}> {`${friendData.first_name} ${friendData.last_name}`} </Text>
                 {
                     friendData && friendData.hobbies && friendData.hobbies.length
