@@ -37,7 +37,7 @@ import styles from '../Styles/UserProfileStyles'
 import { ifIphoneX } from '../../Themes/Helpers'
 
 // Constants
-import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS, isAndroid } from '../../Utils/constants'
+import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
 
 // Env
 import envConfig from '../../../envConfig'
@@ -113,14 +113,17 @@ class UserProfileScreen extends Component {
       this.setState({externalAuth: true})
 
       // Instagram deeplink OAUTH is broken so use web URL
-      Linking.canOpenURL(deepLinkAuth).then(response => {
-          if (response) {
-            Linking.openURL(`${deepLinkAuth}`)
-          } else {
-            Linking.openURL(`${authRedirectUrl}`)
-          }
-      })
-
+      if (currentPlatform === 'instagram') {
+        Linking.openURL(`${authRedirectUrl}`)
+      } else {
+        Linking.canOpenURL(deepLinkAuth).then(response => {
+            if (response) {
+              Linking.openURL(`${deepLinkAuth}`)
+            } else {
+              Linking.openURL(`${authRedirectUrl}`)
+            }
+        })
+      }
     }
 
     if (!refreshingToken && prevProps.refreshingToken || doneFetching) {
