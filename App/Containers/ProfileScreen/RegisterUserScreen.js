@@ -13,7 +13,8 @@ class RegisterUserScreen extends Component {
     super(props)
 
     this.state = {
-      userName: '',
+      firstName: '',
+      lastName: '',
       userEmail: '',
       userPassword: '',
       confirmPassword: '',
@@ -42,6 +43,8 @@ class RegisterUserScreen extends Component {
 
     confirmPassword === userPassword ?
       this.props.registerUserRequest({
+        first_name: this.state.firstName,
+        last_name: this.state.lastName,
         username: this.state.userEmail,
         password: this.state.userPassword
       })
@@ -67,12 +70,20 @@ class RegisterUserScreen extends Component {
           </Text>
           <TextInput
             style={styles.formInput}
-            onChangeText={(textValue) => this.updateState(textValue, 'userName')}
+            onChangeText={(textValue) => this.updateState(textValue, 'firstName')}
             autoCapitalize={'words'}
             autoCorrect={false}
             autoFocus={true}
             underlineColorAndroid='rgba(0,0,0,0)'
-            placeholder='Name'>
+            placeholder='First Name'>
+          </TextInput>
+          <TextInput
+            style={styles.formInput}
+            onChangeText={(textValue) => this.updateState(textValue, 'lastName')}
+            autoCapitalize={'words'}
+            autoCorrect={false}
+            underlineColorAndroid='rgba(0,0,0,0)'
+            placeholder='Last Name'>
           </TextInput>
           <TextInput
             style={styles.formInput}

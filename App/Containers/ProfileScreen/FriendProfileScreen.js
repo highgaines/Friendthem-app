@@ -253,7 +253,7 @@ class FriendProfileScreen extends Component {
     const backAction =  NavigationActions.back()
 
     return (
-        <View>
+        <View style={{ alignItems: 'center' }}>
           <MyPicturesModal
             imageObj={currentPic}
             visible={myPicturesModalVisible}
@@ -355,8 +355,6 @@ class FriendProfileScreen extends Component {
               />
             </View> :
              this.renderPlatformContainer(platform)  }
-            <View>
-            </View>
         </View>
     )
   }

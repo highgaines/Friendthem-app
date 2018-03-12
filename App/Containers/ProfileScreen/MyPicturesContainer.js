@@ -7,6 +7,7 @@ import { Icon } from 'react-native-elements'
 import { uploadToAWS, uploadToAWS2 } from '../../Utils/functions'
 import ImagePicker from 'react-native-image-picker'
 import FbPhotoModal from './FbPhotoModal'
+import * as Progress from 'react-native-progress'
 
 // Redux
 import { connect } from 'react-redux'
@@ -14,6 +15,7 @@ import { bindActionCreators } from 'redux'
 import UserStoreActions, {
   getMyPics,
   getFBPhotos,
+  uploadProgress,
   updateInfoRequest,
   addPic,
   editPic,
@@ -23,13 +25,15 @@ import UserStoreActions, {
 // Styles
 import styles from '../Styles/UserProfileStyles'
 import { ifIphoneX } from '../../Themes/Helpers'
+import { Metrics } from '../../Themes/'
 
 class MyPicturesContainer extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      pic: ''
+      pic: '',
+
     }
   }
 
@@ -38,6 +42,7 @@ class MyPicturesContainer extends Component {
     const { getMyPics, accessToken } = this.props
     getMyPics(accessToken)
   }
+
 
   handleImagePress = (pictureId=null, primary) => {
     const { id } = this.props.userInfo
@@ -49,6 +54,7 @@ class MyPicturesContainer extends Component {
       userPhotos,
       addPic,
       editPic,
+      uploadProgress,
       deletePic,
       myPictures,
       togglePhotoModal
@@ -107,7 +113,7 @@ class MyPicturesContainer extends Component {
         // use AWS upload function here to send uri
         let source = response.uri
         let callback = primary ? editPic : addPic
-        uploadToAWS2(source, id, callback, pictureId, accessToken)
+        uploadToAWS2(source, id, callback, pictureId, uploadProgress, accessToken)
       }
     })
   }
@@ -123,9 +129,8 @@ class MyPicturesContainer extends Component {
             onPress={() => this.handleImagePress(imageObj.id, true)}
             style={styles.myPicsCard}
             >
-              <CachedImage
+              <Image
                 style={{ width: '100%', height: 120, borderRadius: 10}}
-                mutable
                 source={{uri: imageObj.url}}
               />
             <View style={{ backgroundColor: 'blue', borderRadius: 50, borderColor: 'white', borderWidth: 2, padding: 3, position: 'absolute', top: '78%', right: 5}}>
@@ -141,6 +146,7 @@ class MyPicturesContainer extends Component {
         })
       }
   }
+
 
   renderAddImageCard = () => {
     const { myPictures } = this.props
@@ -165,13 +171,20 @@ class MyPicturesContainer extends Component {
   }
 
   render() {
-    const { myPictures, fetchingMyPics} = this.props
+    const { myPictures, fetchingMyPics, uploadProgressNumber} = this.props
 
     return fetchingMyPics
     ? <View style={{ marginTop: 20 }}> <ActivityIndicator size="large" color="#0000ff" /> </View>
     : <View style={styles.socialAccountContainer}>
         {this.renderImages()}
         { myPictures && myPictures.length < 6 ? this.renderAddImageCard() : null}
+        { uploadProgressNumber > 0 && uploadProgressNumber < 1
+          ? <View style={[styles.progressBarContainer]}>
+              <Text style={{ fontSize: 13, backgroundColor: 'transparent', textAlign: 'center', fontWeight: '500'}}> Uploading Image... </Text>
+              <Progress.Bar progress={uploadProgressNumber} width={Metrics.screenWidth * .8} />
+            </View>
+          : null
+        }
       </View>
   }
 }
@@ -180,6 +193,7 @@ const mapStateToProps = state => {
   return {
     myPictures: state.userStore.myPictures,
     userPhotos: state.userStore.userPhotos,
+    uploadProgressNumber: state.userStore.updateProgress,
     fetching: state.userStore.fetching,
     editableData: state.userStore.editableData,
     accessToken: state.authStore.accessToken,
@@ -192,6 +206,7 @@ const mapDispatchToProps = dispatch => {
     ...bindActionCreators({
       updateInfoRequest,
       getFBPhotos,
+      uploadProgress,
       getMyPics,
       addPic,
       editPic,
