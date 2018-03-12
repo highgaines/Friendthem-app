@@ -54,7 +54,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new CodePush("iSovlppbBdHwLSg3CpxuaiiM5pgIfda3ef3e-5a38-4dfe-9133-1afc3eb3b7df", getApplicationContext(), BuildConfig.DEBUG),
+            new CodePush("_mXkZDIcf_e_Cu2hZ-DwQNlfYW7hfda3ef3e-5a38-4dfe-9133-1afc3eb3b7df", getApplicationContext(), BuildConfig.DEBUG),
             new RNFetchBlobPackage(),
             new FastImageViewPackage(),
             new PickerViewPackage(),

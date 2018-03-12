@@ -28,8 +28,35 @@ class SearchContainer extends Component {
     }
   }
 
-  renderSearchForm = () => {
+  filterContacts = (searchTerm, contactList) => {
+    const nameArray = ["givenName", "familyName"];
+    return (
+      contactList.filter(contact => (
+        nameArray.some(nameKey => {
+          if (contact[nameKey]) {
+            return (
+              contact[nameKey]
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase())
+            )
+          }
+        })
+      ))
+    )
+  }
+
+  onChangeText = (searchTerm) => {
     const { contactList } = this.props;
+    const filteredContactList =
+      this.filterContacts(searchTerm, contactList)
+
+    this.setState({
+      input: searchTerm,
+      searchableContactList: filteredContactList
+    });
+  }
+
+  renderSearchForm = () => {
     const { input } = this.state;
 
     return (
@@ -43,21 +70,7 @@ class SearchContainer extends Component {
         <TextInput
           placeholder="Search a friend by name"
           style={styles.searchFormDark}
-          onChangeText={searchTerm => {
-            const nameArray = ["givenName", "familyName"];
-            const filteredContactList = contactList.filter(contact => (
-              nameArray.some(nameKey => (
-                contact[nameKey]
-                  .toLowerCase()
-                  .includes(searchTerm.toLowerCase())
-              ))
-            ))
-
-            this.setState({
-              input: searchTerm,
-              searchableContactList: filteredContactList
-            });
-          }}
+          onChangeText={searchTerm => this.onChangeText(searchTerm)}
           value={input}
           underlineColorAndroid='rgba(0,0,0,0)'
         />

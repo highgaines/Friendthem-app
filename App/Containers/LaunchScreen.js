@@ -94,7 +94,6 @@ class LaunchScreen extends Component {
       return
     } else if (!customNotificationPermission) {
       OneSignal.getPermissionSubscriptionState((status) => {
-        console.log(status)
         if (status.notificationsEnabled) {
           setNotifPermission(true)
         }
