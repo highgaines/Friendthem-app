@@ -9,8 +9,8 @@ export const uploadToAWS = async (uri, userId, callback, data, token) => {
   const file = {
     // `uri` can also be a file system path (i.e. file://)
     uri: uri,
-    name: `profile-pic-${userId}.jpg`,
-    type: "image/jpg"
+    name: `profile-pic-${userId}.png`,
+    type: "image/png"
   }
   const { AWSAccessKeyID, AWSSecretKey } = envConfig.Development
 
@@ -22,7 +22,8 @@ export const uploadToAWS = async (uri, userId, callback, data, token) => {
     successActionStatus: 201
   }
 
-  await RNS3.put(file, options).then(response => {
+  await RNS3.put(file, options)
+  .then(response => {
     if (response.status !== 201)
       throw new Error("Failed to upload image to S3");
 
@@ -33,13 +34,13 @@ export const uploadToAWS = async (uri, userId, callback, data, token) => {
 }
 
 
-export const uploadToAWS2 = async (uri, userId, callback, pictureId, token) => {
+export const uploadToAWS2 = async (uri, userId, callback, pictureId, uploadProgress, token) => {
 
   const file = {
     // `uri` can also be a file system path (i.e. file://)
     uri: uri,
-    name: `my-pictures-${userId}-${pictureId}.jpg`,
-    type: "image/jpg"
+    name: `my-pictures-${userId}-${pictureId}.png`,
+    type: "image/png"
   }
   const { AWSAccessKeyID, AWSSecretKey } = envConfig.Development
 
@@ -51,7 +52,8 @@ export const uploadToAWS2 = async (uri, userId, callback, pictureId, token) => {
     successActionStatus: 201
   }
 
-  await RNS3.put(file, options).then(response => {
+  await RNS3.put(file, options)
+  .progress( e => uploadProgress(e.percent)).then(response => {
     if (response.status !== 201)
       throw new Error("Failed to upload image to S3");
 

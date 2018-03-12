@@ -33,13 +33,13 @@ export default StyleSheet.create({
     backgroundColor: 'transparent',
     color: '#fff',
     marginBottom: 10,
-    fontSize: 15,
+    fontSize: 12,
     fontWeight: '800'
   },
   formInput: {
     width: '90%',
-    height: 45,
-    borderRadius: 50,
+    height: 35,
+    borderRadius: 40,
     backgroundColor: '#fff',
     marginVertical: 7.5,
     paddingHorizontal: 15

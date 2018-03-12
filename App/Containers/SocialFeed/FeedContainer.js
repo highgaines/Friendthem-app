@@ -159,7 +159,6 @@ class FeedContainer extends Component {
     const capitalizedPlat = platform ? `${platform.split('')[0].toUpperCase()}${platform.split('').slice(1).join('')}` : ''
     return(
       <ScrollView contentContainerStyle={styles.feedContainer}>
-        <Text style={[styles.titleText, { fontWeight: '600', fontStyle: 'italic'}]}> {capitalizedPlat} Feed </Text>
           {loading
             ? <View
                 style={styles.loading, { marginTop: 40 }}>
