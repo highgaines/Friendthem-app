@@ -37,8 +37,11 @@ class NearbyFeedContainer extends Component {
 
   renderFeedCards = () => {
     // map over users and render cards
-    const { nearbyUsers, viewFriendProfile } = this.props
-    return nearbyUsers.map( (user, idx) => {
+    const { nearbyUsers, viewFriendProfile, input, filterUsers } = this.props
+    let filteredUsers = input.length ? nearbyUsers.filter(user => {
+      return user.first_name.toLowerCase().includes(input.toLowerCase()) || user.last_name.toLowerCase().includes(input.toLowerCase())
+    }) : nearbyUsers
+    return filteredUsers.map( (user, idx) => {
       if(user.social_profiles && user.social_profiles.length > 1) {
         return(
           <NearbyFeedCard

@@ -60,7 +60,6 @@ class NotificationsContainer extends Component {
           </View>
           <SwipeListView
             useFlatList
-            disableLeftSwipe={true}
             data={this.props.notifications ? this.props.notifications : []}
             renderItem={ (data, rowMap) => (
               <View style={styles.rowFront}>
@@ -102,7 +101,7 @@ class NotificationsContainer extends Component {
                     </TouchableOpacity>
                   </View>
                 )}
-                leftOpenValue={-150}
+                rightOpenValue={-150}
               />
         </View>
       </View>
