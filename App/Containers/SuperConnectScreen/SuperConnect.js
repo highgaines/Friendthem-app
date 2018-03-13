@@ -11,7 +11,7 @@ import ConnectivityBanner from '../UtilityComponents/ConnectivityBanner'
 import ButtonsContainer from './ButtonsContainer'
 import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer';
 import SuperConnectActions, { superConnectPlatform } from '../../Redux/SuperConnectStore'
-import FriendStoreActions from '../../Redux/FriendStore'
+import FriendStoreActions, { checkFriendConnection } from '../../Redux/FriendStore'
 import { MANUAL_CONNECT_PLATFORMS, SOCIAL_MEDIA_DATA } from '../../Utils/constants'
 
 class SuperConnect extends Component {
@@ -39,7 +39,7 @@ class SuperConnect extends Component {
   }
 
   componentDidUpdate = (prevProps, prevState) => {
-    const { friendInfo, platforms, setManualPlatforms, setFriendInfo } = this.props
+    const { apiAccessToken, friendInfo, platforms, setManualPlatforms, setFriendInfo, checkFriendConnection } = this.props
     const { userInputRequiredPlatforms, manualPlatformIndex } = this.state
     const manualPlatformsUpdated = userInputRequiredPlatforms.length && !prevState.userInputRequiredPlatforms.length
     const maxIndex = manualPlatformIndex === userInputRequiredPlatforms.length
@@ -55,7 +55,8 @@ class SuperConnect extends Component {
           userInfo: this.props.userInfo,
           friendInfo: this.props.friendInfo,
           navigation: this.props.navigation,
-          setFriendInfo: setFriendInfo
+          setFriendInfo: setFriendInfo,
+          updateConnectionInfo: () => checkFriendConnection(apiAccessToken, friendInfo.id)
         })
     }
   }
@@ -237,7 +238,8 @@ const mapDispatchToProps = dispatch => {
       togglePlatform,
       setManualPlatforms,
       superConnectPlatform,
-      setFriendInfo
+      setFriendInfo,
+      checkFriendConnection
     }, dispatch)
   }
 }
