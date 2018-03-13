@@ -122,8 +122,8 @@ class MyPicturesContainer extends Component {
   renderImages = () => {
     const { myPictures } = this.props
     if (myPictures && myPictures.length) {
-      const sortedPictures = myPictures.concat([]).sort( (a, b) => a.id - b.id )
-      return sortedPictures.map( (imageObj, idx) => {
+
+      return myPictures.map( (imageObj, idx) => {
 
         return(
           <TouchableOpacity
