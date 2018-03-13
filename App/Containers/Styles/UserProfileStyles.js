@@ -112,7 +112,7 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    width: '100%',
+    width: Metrics.screenWidth,
     height: 450
   },
   progressBarContainer: {
