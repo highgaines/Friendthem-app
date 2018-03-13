@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
-import { SocialIcon } from 'react-native-elements';
+import { SocialIcon } from 'react-native-elements'
 import FBSDK, { LoginManager, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk';
 
-import FBStoreActions from '../Redux/FBStore';
-import styles from './Styles/LaunchScreenStyles';
+import FBStoreActions from '../Redux/FBStore'
+import styles from './Styles/LaunchScreenStyles'
 
 class FBLogin extends Component {
 

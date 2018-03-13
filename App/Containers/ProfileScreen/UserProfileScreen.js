@@ -292,9 +292,8 @@ class UserProfileScreen extends Component {
         />
       )
     } else if (tab === "Info") {
-      const ipxInfoTab = ifIphoneX({ 'height': 480}, {'height': 366})
       return(
-        <ScrollView style={ipxInfoTab}>
+        <ScrollView style={styles.scrollContainer}>
           <PersonalInfoTab
             toggleChangePasswordModal={this.toggleChangePasswordModal}
           />

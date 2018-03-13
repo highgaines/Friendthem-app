@@ -4,13 +4,11 @@ import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   personalInfoContainer: {
-    backgroundColor: '#f5f8f8',
-    height: Metrics.screenHeight * 1
+    backgroundColor: '#f5f8f8'
   },
   rowContainer: {
     flexDirection: 'row',
-    flex: 1,
-    width: '100%',
+    width: Metrics.screenWidth,
     height: 70,
     justifyContent: 'flex-start',
     padding: 20,

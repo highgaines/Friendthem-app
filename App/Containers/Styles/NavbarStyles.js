@@ -21,7 +21,7 @@ export default StyleSheet.create({
     borderColor: 'black',
     borderRadius: 50,
     marginTop: 280,
-    marginLeft: 15
+    alignSelf: 'center'
   },
   iconContainer: {
     justifyContent: 'center',

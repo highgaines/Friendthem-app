@@ -11,7 +11,6 @@ import SuperConnect from '../Containers/SuperConnectScreen/SuperConnect'
 import CongratulatoryScreen from '../Containers/SuperConnectScreen/CongratulatoryScreen'
 import ForkScreen from '../Containers/SignUpFork/ForkScreen'
 import RegisterUserScreen from '../Containers/ProfileScreen/RegisterUserScreen'
-import EditProfileInfoScreen from '../Containers/ProfileScreen/EditProfileInfoScreen'
 import NotificationsContainer from '../Containers/Notifications/NotificationsContainer'
 import SettingsScreen from '../Containers/Settings/SettingsScreen'
 import LoginScreen from '../Containers/LoginScreen'
@@ -48,9 +47,6 @@ const PrimaryNav = StackNavigator({
     mapNavigationStateParamsToProps(CongratulatoryScreen) },
   RegisterUserScreen: {
     screen: mapNavigationStateParamsToProps(RegisterUserScreen)
-  },
-  EditProfileInfoScreen: {
-    screen: mapNavigationStateParamsToProps(EditProfileInfoScreen)
   },
   NotificationsScreen: {
     screen: mapNavigationStateParamsToProps(NotificationsContainer)
