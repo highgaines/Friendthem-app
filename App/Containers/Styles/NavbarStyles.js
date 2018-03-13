@@ -39,7 +39,7 @@ export default StyleSheet.create({
   peopleNearbyIcon: {
     alignSelf: 'center',
     position: 'absolute',
-    bottom: -10,
+    bottom: 0,
     zIndex: 200
   },
   selectedScreen: {

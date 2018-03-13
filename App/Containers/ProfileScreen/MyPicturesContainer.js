@@ -113,19 +113,21 @@ class MyPicturesContainer extends Component {
         // use AWS upload function here to send uri
         let source = response.uri
         let callback = primary ? editPic : addPic
-        uploadToAWS2(source, id, callback, pictureId, uploadProgress, accessToken)
+        let newUrlId = primary ? Date.now() : null
+        uploadToAWS2(source, id, callback, pictureId, uploadProgress, accessToken, newUrlId)
       }
     })
   }
 
   renderImages = () => {
     const { myPictures } = this.props
-
     if (myPictures && myPictures.length) {
+
       return myPictures.map( (imageObj, idx) => {
+
         return(
           <TouchableOpacity
-            key={idx}
+            key={imageObj.url}
             onPress={() => this.handleImagePress(imageObj.id, true)}
             style={styles.myPicsCard}
             >
@@ -141,7 +143,7 @@ class MyPicturesContainer extends Component {
                 color="white"
               />
             </View>
-            </TouchableOpacity>
+          </TouchableOpacity>
           )
         })
       }
