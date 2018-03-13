@@ -111,7 +111,10 @@ class FriendProfileScreen extends Component {
     if (friendInfo && friendInfo.pictures && friendInfo.pictures.length) {
       mappedPictures = friendInfo.pictures.map( imageObj => {
         return(
-          <TouchableOpacity style={styles.myPicsCard} onPress={() => this.handlePicturePush(imageObj)}>
+          <TouchableOpacity
+            key={imageObj.id}
+            style={styles.myPicsCard}
+            onPress={() => this.handlePicturePush(imageObj)}>
             <CachedImage
               style={{ width: '100%', height: 120, borderRadius: 10}}
               source={{uri: imageObj.url}}
