@@ -34,8 +34,6 @@ export default StyleSheet.create({
     borderWidth: 5
   },
   tabSelectionContainer: {
-    flexDirection: 'row',
-    marginTop: 30
   },
   tabItem: {
     backgroundColor: 'transparent',
@@ -56,6 +54,7 @@ export default StyleSheet.create({
     color: '#fff'
   },
   tabDisplay: {
-    height: Metrics.screenHeight
+    backgroundColor: 'blue',
+    height: 5000
   }
 })

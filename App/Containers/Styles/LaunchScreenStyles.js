@@ -43,7 +43,7 @@ export default StyleSheet.create({
     fontFamily: Fonts.type.base,
   },
   button: {
-    width: Metrics.screenWidth * 0.60,
+    width: 225,
     height: 47,
     alignItems: 'center',
     flexDirection: 'row',
@@ -52,9 +52,9 @@ export default StyleSheet.create({
     borderRadius: 100,
     justifyContent: 'center',
     shadowOpacity: 0.30,
-    shadowRadius: 5,
+    shadowRadius: 1,
     shadowColor: 'black',
-    shadowOffset: { height: 5, width: 10 }
+    shadowOffset: { height: 0, width: 1 }
   },
   buttonTextStyle: {
     color: 'white',

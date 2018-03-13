@@ -35,7 +35,7 @@ class PersonalInfoTab extends Component {
 
   updatePrivacy = (field, status) => {
     this.packageEditProfile(field, status);
-  };
+  }
 
   render() {
     const { userData, editableData, toggleChangePasswordModal } = this.props
