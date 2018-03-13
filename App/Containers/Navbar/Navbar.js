@@ -143,7 +143,7 @@ class Navbar extends Component {
       return(
           <View
             testID='navbar'
-            style={[this.props.navbarStyle || styles.navbarRow, { marginTop: this.props.margin }, renderIpxNav]}>
+            style={[this.props.navbarStyle || styles.navbarRow, { marginTop: this.props.margin, alignItems: 'center', justifyContent: 'center' }, renderIpxNav]}>
             <TouchableOpacity
               testID='profile-navbar-button'
               style={styles.button} onPress={this.goToProfile}>

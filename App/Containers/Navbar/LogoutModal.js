@@ -6,7 +6,7 @@ export default class LogoutModal extends Component {
   render() {
     const { showModal, logOut, toggleModal, modalStyle } = this.props
     return (
-      <View>
+      <View style={{alignSelf: 'center'}}>
         <Modal
           transparent={true}
           visible={showModal}
