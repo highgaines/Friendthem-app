@@ -37,7 +37,7 @@ import styles from '../Styles/UserProfileStyles'
 import { ifIphoneX } from '../../Themes/Helpers'
 
 // Constants
-import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
+import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS, isIOS } from '../../Utils/constants'
 
 // Env
 import envConfig from '../../../envConfig'
@@ -90,7 +90,7 @@ class UserProfileScreen extends Component {
   }
 
   componentWillUpdate = (nextProps, nextState) => {
-    const { getUserTokens, apiAccessToken } = this.props
+    const { getUserInfo, apiAccessToken } = this.props
     const { externalAuth, appState } = this.state
     const returningToApp = appState.match(/inactive|background/) && nextState.appState === 'active'
 
@@ -107,7 +107,7 @@ class UserProfileScreen extends Component {
 
     if (authRedirectUrl && !prevProps.authRedirectUrl && currentPlatform) {
       const platformName = currentPlatform === 'google-oauth2' ? 'youtube' : currentPlatform
-      const deepLinkBase = socialMediaData[platformName].deepLinkUrl
+      const deepLinkBase = isIOS ? socialMediaData[platformName].deepLinkUrl : socialMediaData[platformName].androidDeepLinkUrl
       const deepLinkAuth = `${deepLinkBase}${authRedirectUrl.split('.com/')[1]}`
 
       this.setState({externalAuth: true})
