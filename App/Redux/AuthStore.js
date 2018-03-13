@@ -249,7 +249,8 @@ const registerAccountSuccess = (state = INITIAL_STATE, action) => {
     tokenType: data.token_type,
     scope: data.scope,
     refreshToken: data.refresh_token,
-    authError: false
+    authError: false,
+    authExpiration: Date.now() + (data.expires_in * 1000)
   });
 }
 
@@ -274,7 +275,8 @@ const loginSuccess = (state = INITIAL_STATE, action) => {
     tokenType: data.token_Type,
     scope: data.scope,
     refreshToken: data.refresh_token,
-    authError: false
+    authError: false,
+    authExpiration: Date.now() + (data.expires_in * 1000)
   });
 }
 
@@ -307,7 +309,8 @@ const handleRefreshAuthTokenSuccess = (state, action) => {
     tokenType: data.token_Type,
     scope: data.scope,
     refreshToken: data.refresh_token,
-    refreshingToken: false
+    refreshingToken: false,
+    authExpiration: Date.now() + (data.expires_in * 1000)
   });
 }
 

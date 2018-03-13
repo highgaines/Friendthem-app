@@ -43,13 +43,16 @@ class RootContainer extends Component {
       accessToken,
       refreshToken,
       updateUserPosition,
-      refreshAuthToken
+      refreshAuthToken,
+      authExpiration
     } = this.props;
 
-    if (this.props.appState !== ACTIVE && nextProps.appState === ACTIVE) {
+    const now = Date.now()
+    const isExpired = now - authExpiration >= 0
+
+    if (isExpired) {
       this.asyncAuthTokenUpdate(refreshToken)
     }
-
   }
 
 
@@ -65,7 +68,8 @@ class RootContainer extends Component {
 
 const mapStateToProps = state => ({
   refreshToken: state.authStore.refreshToken,
-  accessToken: state.authStore.accessToken
+  accessToken: state.authStore.accessToken,
+  authExpiration: state.authStore.authExpiration
 });
 
 // wraps dispatch to create nicer functions to call within our component
