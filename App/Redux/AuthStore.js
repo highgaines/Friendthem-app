@@ -48,7 +48,8 @@ export const INITIAL_STATE = Immutable({
   userInfoAdded: false,
   authError: false,
   redirectUrl: null,
-  authErrors: []
+  authErrors: [],
+  refreshingToken: false
 })
 
 
@@ -294,7 +295,7 @@ const handleSocialMediaAuthFailure = (state, action) => {
 }
 
 const handleRefreshAuthTokenRequest = (state, action) => {
-  return state;
+  return state.set('refreshingToken', true);
 }
 
 const handleRefreshAuthTokenSuccess = (state, action) => {
@@ -305,7 +306,8 @@ const handleRefreshAuthTokenSuccess = (state, action) => {
     expiresIn: data.expires_in,
     tokenType: data.token_Type,
     scope: data.scope,
-    refreshToken: data.refresh_token
+    refreshToken: data.refresh_token,
+    refreshingToken: false
   });
 }
 

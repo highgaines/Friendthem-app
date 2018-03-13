@@ -100,7 +100,9 @@ class NearbyUsers extends Component {
 
   filterUsers = users => {
     const { input } = this.state
-    return users.filter( user => user.first_name.includes(input) || user.last_name.includes(input) )
+    const lowerCaseTrim = userName => userName.toLowerCase().includes(input.toLowerCase().trim())
+
+    return users.filter( user => lowerCaseTrim(user.first_name) || lowerCaseTrim(user.last_name) )
   }
 
   toggleWelcomeTutorial = () => {
@@ -128,15 +130,23 @@ class NearbyUsers extends Component {
           feedView={feedView}
           toggleNearbyFeed={this.toggleNearbyFeed}
         />
-        {
-          !feedView
-          ? <UsersContainer
-              users={input.length ? this.filterUsers(users) : users}
-              navigation={navigation}
-              locationPermission={locationPermission}
-              viewFriendProfile={this.viewFriendProfile}
-            />
-          : <NearbyFeedContainer viewFriendProfile={this.viewFriendProfile}/>
+      { input.length && !this.filterUsers(users).length
+          ? <View style={{alignSelf: 'center', top: 150}}>
+            <Text>
+              Sorry, no nearby users match your search!
+            </Text>
+          </View>
+          : !feedView
+            ? <UsersContainer
+                users={input.length ? this.filterUsers(users) : users}
+                navigation={navigation}
+                locationPermission={locationPermission}
+                viewFriendProfile={this.viewFriendProfile}
+              />
+            : <NearbyFeedContainer
+              input={input}
+              filterUsers={this.filterUsers}
+              viewFriendProfile={this.viewFriendProfile}/>
         }
         {
           welcomeTutorialVisible

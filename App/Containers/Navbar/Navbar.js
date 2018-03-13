@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import { View, Text, TouchableOpacity, Image, Keyboard } from 'react-native'
 
 // Libraries
 import { Icon } from 'react-native-elements'
@@ -37,8 +37,27 @@ class Navbar extends Component {
 
     this.state = {
       highlighted: '',
-      logoutModalOpen: false
+      logoutModalOpen: false,
+      keyboardHidden: true
     }
+  }
+
+  componentWillMount () {
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
+  }
+
+  componentWillUnmount () {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardDidShow = () => {
+    this.setState({ keyboardHidden: false })
+  }
+
+  _keyboardDidHide = () => {
+    this.setState({ keyboardHidden: true })
   }
 
   toggleModal = () => {
@@ -119,93 +138,98 @@ class Navbar extends Component {
 
     const ipxIcon = {'bottom': 20}
     const renderIpxIcon = ifIphoneX(ipxIcon, '')
-    return(
-        <View
-          testID='navbar'
-          style={[this.props.navbarStyle || styles.navbarRow, { marginTop: this.props.margin }, renderIpxNav]}>
-          <TouchableOpacity
-            testID='profile-navbar-button'
-            style={styles.button} onPress={this.goToProfile}>
-            <View style={[styles.container, this.selectedStyleRender('UserProfileScreen')]}>
-              <Icon
-                name='user'
-                type='entypo'
-                color={this.determineCurrentScreen('UserProfileScreen') ? "#ff00e1" : "#fff"}
-                containerStyle={styles.iconContainer}
-              />
-              <Text style={[styles.iconText, this.determineCurrentScreen('UserProfileScreen') ?
-                {color: '#ff00e1'} :
-                '' ]}> Profile </Text>
-              </View>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.goToInviteUsers}>
-            <View style={[styles.container, this.selectedStyleRender('InviteUsers')]}>
-              <Icon
-                name='users'
-                type='entypo'
-                color={this.determineCurrentScreen('InviteUsers') ? "#ff00e1" : "#fff"}
-                containerStyle={styles.iconContainer}
-              />
-              <Text style={[styles.iconText, this.determineCurrentScreen('InviteUsers') ?
-                {color: '#ff00e1'} :
-                '' ]}> Friends </Text>
-              </View>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.goToNearbyUsers}>
-            <View
-              style={[styles.container, this.selectedStyleRender('NearbyUsersScreen')]}>
-              <Image
-                style={[styles.peopleNearbyIcon, renderIpxIcon]}
-                source={Images.peopleNearbyIcon}
+
+    if (this.state.keyboardHidden) {
+      return(
+          <View
+            testID='navbar'
+            style={[this.props.navbarStyle || styles.navbarRow, { marginTop: this.props.margin }, renderIpxNav]}>
+            <TouchableOpacity
+              testID='profile-navbar-button'
+              style={styles.button} onPress={this.goToProfile}>
+              <View style={[styles.container, this.selectedStyleRender('UserProfileScreen')]}>
+                <Icon
+                  name='user'
+                  type='entypo'
+                  color={this.determineCurrentScreen('UserProfileScreen') ? "#ff00e1" : "#fff"}
+                  containerStyle={styles.iconContainer}
                 />
-              <Text
-                style={[styles.iconText, {top: 35, zIndex: 99}, this.determineCurrentScreen('NearbyUsersScreen') ?
-                {color: '#ff00e1'} :
-                '' ]}>
-                Nearby
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            testID='notification-navbar-button'
-            style={styles.button} onPress={this.goToNotifications}>
-            <View style={[styles.container, this.selectedStyleRender('NotificationsScreen')]}>
-              <Icon
-                name='notifications'
-                type='materialicons'
-                size={26}
-                color={this.determineCurrentScreen('NotificationsScreen') ? "#ff00e1" : "#fff"}
-                containerStyle={styles.iconContainer}
-              />
-              <Text style={[styles.iconText, this.determineCurrentScreen('NotificationsScreen') ?
-                {color: '#ff00e1'} :
-                '' ]}> Notifications </Text>
+                <Text style={[styles.iconText, this.determineCurrentScreen('UserProfileScreen') ?
+                  {color: '#ff00e1'} :
+                  '' ]}> Profile </Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={this.goToInviteUsers}>
+              <View style={[styles.container, this.selectedStyleRender('InviteUsers')]}>
+                <Icon
+                  name='users'
+                  type='entypo'
+                  color={this.determineCurrentScreen('InviteUsers') ? "#ff00e1" : "#fff"}
+                  containerStyle={styles.iconContainer}
+                />
+                <Text style={[styles.iconText, this.determineCurrentScreen('InviteUsers') ?
+                  {color: '#ff00e1'} :
+                  '' ]}> Friends </Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={this.goToNearbyUsers}>
+              <View
+                style={[styles.container, this.selectedStyleRender('NearbyUsersScreen')]}>
+                <Image
+                  style={[styles.peopleNearbyIcon, renderIpxIcon]}
+                  source={Images.peopleNearbyIcon}
+                  />
+                <Text
+                  style={[styles.iconText, {top: 35, zIndex: 99}, this.determineCurrentScreen('NearbyUsersScreen') ?
+                  {color: '#ff00e1'} :
+                  '' ]}>
+                  Nearby
+                </Text>
               </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            testID='settings-navbar-button'
-            style={styles.button} onPress={this.goToSettings}>
-            <View style={[styles.container, this.selectedStyleRender('SettingsScreen')]}>
-              <Icon
-                name='settings'
-                type='materialcommunityicons'
-                size={27}
-                color={this.determineCurrentScreen('SettingsScreen') ? "#ff00e1" : "#fff"}
-                containerStyle={styles.iconContainer}
-              />
-              <Text style={[styles.iconText, this.determineCurrentScreen('SettingsScreen') ?
-                {color: '#ff00e1'} :
-                '' ]}> Settings </Text>
-              </View>
-          </TouchableOpacity>
-          <LogoutModal
-            showModal={this.state.logoutModalOpen}
-            logOut={this.logOut}
-            toggleModal={this.toggleModal}
-            modalStyle={styles.modal}
-          />
-        </View>
-    )
+            </TouchableOpacity>
+            <TouchableOpacity
+              testID='notification-navbar-button'
+              style={styles.button} onPress={this.goToNotifications}>
+              <View style={[styles.container, this.selectedStyleRender('NotificationsScreen')]}>
+                <Icon
+                  name='notifications'
+                  type='materialicons'
+                  size={26}
+                  color={this.determineCurrentScreen('NotificationsScreen') ? "#ff00e1" : "#fff"}
+                  containerStyle={styles.iconContainer}
+                />
+                <Text style={[styles.iconText, this.determineCurrentScreen('NotificationsScreen') ?
+                  {color: '#ff00e1'} :
+                  '' ]}> Notifications </Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              testID='settings-navbar-button'
+              style={styles.button} onPress={this.goToSettings}>
+              <View style={[styles.container, this.selectedStyleRender('SettingsScreen')]}>
+                <Icon
+                  name='settings'
+                  type='materialcommunityicons'
+                  size={27}
+                  color={this.determineCurrentScreen('SettingsScreen') ? "#ff00e1" : "#fff"}
+                  containerStyle={styles.iconContainer}
+                />
+                <Text style={[styles.iconText, this.determineCurrentScreen('SettingsScreen') ?
+                  {color: '#ff00e1'} :
+                  '' ]}> Settings </Text>
+                </View>
+            </TouchableOpacity>
+            <LogoutModal
+              showModal={this.state.logoutModalOpen}
+              logOut={this.logOut}
+              toggleModal={this.toggleModal}
+              modalStyle={styles.modal}
+            />
+          </View>
+      )
+    } else {
+      return null
+    }
   }
 }
 

@@ -6,6 +6,7 @@ export default StyleSheet.create({
   profile: {
     shadowColor: 'black',
     backgroundColor: 'transparent',
+    width: Metrics.screenWidth,
     elevation: 3,
     shadowOffset: { width: 0, height: 5},
     shadowOpacity: 0.5,
@@ -33,6 +34,7 @@ export default StyleSheet.create({
   },
   scrollWheelContainer: {
     shadowOpacity: 0.15,
+    width: Metrics.screenWidth,
     shadowRadius: 5,
     shadowColor: 'black',
     shadowOffset: { height: 6, width: 10 },
@@ -110,8 +112,14 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    width: '100%',
+    width: Metrics.screenWidth,
     height: 450
+  },
+  progressBarContainer: {
+    width: Metrics.screenWidth,
+    marginTop: 20,
+    paddingRight: 20,
+    alignItems: 'center'
   },
   myPicsCard: {
     height: 120,

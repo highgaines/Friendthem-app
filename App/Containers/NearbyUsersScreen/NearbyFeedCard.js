@@ -54,8 +54,9 @@ class NearbyFeedCard extends Component {
 
   renderSocialMediaCards = () => {
     const { social_profiles } = this.props.friendData
-    return social_profiles.map( socialProfile =>
+    return social_profiles.map( (socialProfile, idx) =>
       <SocialMediaCard
+        key={idx}
         platformName={socialProfile.provider === 'google-oauth2' ? 'youtube' : socialProfile.provider}
         userName={socialProfile.username}
         synced={true}
@@ -235,7 +236,7 @@ class NearbyFeedCard extends Component {
                   <ImageCircle source={`${friendData.picture}`} size={60}/>
                 </TouchableOpacity>
               </LazyloadView>
-              <LazyloadView style={{ flex: 3 }}>
+              <LazyloadView style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'flex-start', padding: 5 }}>
                 <Text style={styles.name}> {`${friendData.first_name} ${friendData.last_name}`} </Text>
                 {
                     friendData && friendData.hobbies && friendData.hobbies.length
@@ -259,9 +260,9 @@ class NearbyFeedCard extends Component {
             socialPlatforms={socialPlatforms}
           />
       </LazyloadView>
-        <LazyloadView style={{ flex: 1, backgroundColor: 'white' }}>
+        <LazyloadView style={{ flex: 1, backgroundColor: 'white'}}>
           <LazyloadScrollView
-            horizontal={platform === 'profile' ? false : true}
+            horizontal={platform === 'profile' || platform === 'camera' ? false : true}
             showsHorizontalScrollIndicator
             contentContainerStyle={[styles.contentContainer, platform === 'profile' ? { 'flex': 1, 'flexWrap': 'wrap', 'justifyContent': 'flex-start' } : '']}
           >

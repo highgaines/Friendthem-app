@@ -25,6 +25,7 @@ const { Types, Creators } = createActions({
   addPicRequest: null,
   addPicSuccess: null,
   addPicFailure: null,
+  progressUpdate: null,
   editPicRequest: null,
   editPicSuccess: null,
   editPicFailure: null,
@@ -80,7 +81,7 @@ export const INITIAL_STATE = Immutable({
   ghostModeOn: true,
   notificationsOn: true,
   passwordUpdated: false,
-  fetching: false,
+  updateProgress: 0,
   fetchingMyPics: false,
   passwordUpdated: false,
   myPictures: []
@@ -205,6 +206,10 @@ export const addPic = (accessToken, source) => {
     shouldCallApi: state => true,
     callApi: dispatch => fetchFromApi('pictures/', init, dispatch)
   }
+}
+
+export const uploadProgress = (data) => {
+  return { type: Types.PROGRESS_UPDATE, payload: { data } }
 }
 
 // EDIT PIC
@@ -454,7 +459,10 @@ const handleUpdateUserPositionSuccess = (state, action) => {
     userId: state.userId,
     event: 'Update User Position Success'
   })
-  return state.set('geoLocation', action.data.last_location);
+  return state.merge({
+    'geoLocation': action.data.last_location,
+    'fetching': false
+  });
 }
 
 const handleUpdateUserPositionFailure = (state, action) => {
@@ -587,6 +595,11 @@ const handleEditPicFailure = (state, action) => {
   return state.set('fetchingMyPics', false)
 }
 
+const handleProgressUpdate = (state, action) => {
+  const { data } = action.payload
+  return state.merge({ updateProgress: data })
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -607,6 +620,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.ADD_PIC_REQUEST]: handleAddPicRequest,
   [Types.ADD_PIC_SUCCESS]: handleAddPicSuccess,
   [Types.ADD_PIC_FAILURE]: handleAddPicFailure,
+  [Types.PROGRESS_UPDATE]: handleProgressUpdate,
   [Types.EDIT_PIC_REQUEST]: handleEditPicRequest,
   [Types.EDIT_PIC_SUCCESS]: handleEditPicSuccess,
   [Types.EDIT_PIC_FAILURE]: handleEditPicFailure,

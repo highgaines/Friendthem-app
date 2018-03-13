@@ -22,22 +22,31 @@ export const SYNCED_CARD_COLORS = {
 export const SOCIAL_MEDIA_DATA = {
   facebook: {
     deepLinkUrl: 'fb://',
-    superConnectDeepLink: 'fb://profile/'
+    androidDeepLinkUrl: 'intent://#Intent;package=com.facebook.katana;scheme=fb://profile/;end',
+    superConnectDeepLink: 'fb://profile/',
+    androidConnectDeepLink: (userId) => `intent://#Intent;package=com.facebook.katana;scheme=fb://page/${userId}?referrer=app_link;end`
   },
   instagram: {
     deepLinkUrl: 'instagram://',
-    superConnectDeepLink: 'instagram://user?username='
+    androidDeepLinkUrl: 'intent://instagram.com/_u//#Intent;package=com.instagram.android;scheme=https;end',
+    superConnectDeepLink: 'instagram://user?username=',
+    androidConnectDeepLink: (userName) => `intent://instagram.com/_u/${userName}/#Intent;package=com.instagram.android;scheme=https;end`
+
   },
   twitter: {
     deepLinkUrl: 'twitter://',
+    androidDeepLinkUrl: 'intent://twitter.com/#Intent;package=com.twitter.android;scheme=https;end',
     userNamePath: 'screen_name'
   },
   youtube: {
-    deepLinkUrl: 'youtube://'
+    deepLinkUrl: 'youtube://',
+    androidDeepLinkUrl: 'www.youtube.com'
   },
   snapchat: {
     deepLinkUrl: 'snapchat://',
-    superConnectDeepLink: 'snapchat://add/'
+    androidDeepLinkUrl: 'snapchat://',
+    superConnectDeepLink: 'snapchat://add/',
+    androidConnectDeepLink: 'snapchat://add/'
   }
 }
 

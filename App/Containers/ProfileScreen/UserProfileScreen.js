@@ -95,13 +95,15 @@ class UserProfileScreen extends Component {
     const returningToApp = appState.match(/inactive|background/) && nextState.appState === 'active'
 
     if (externalAuth && returningToApp) {
-      this.setState({externalAuth: false}, () => getUserTokens(apiAccessToken))
+      this.setState({externalAuth: false}, () => getUserInfo(apiAccessToken))
     }
+
   }
 
   componentDidUpdate = prevProps => {
-    const { authRedirectUrl } = this.props
+    const { apiAccessToken, authRedirectUrl, refreshingToken, getUserInfo, getUserTokens, fetching } = this.props
     const { socialMediaData, currentPlatform } = this.state
+    const doneFetching = prevProps.fetching && !fetching
 
     if (authRedirectUrl && !prevProps.authRedirectUrl && currentPlatform) {
       const platformName = currentPlatform === 'google-oauth2' ? 'youtube' : currentPlatform
@@ -123,6 +125,12 @@ class UserProfileScreen extends Component {
         })
       }
     }
+
+    if (!refreshingToken && prevProps.refreshingToken || doneFetching) {
+      getUserInfo(apiAccessToken)
+      getUserTokens(apiAccessToken)
+    }
+
     const authHasErrors = prevProps.authErrors && this.props.authErrors && prevProps.authErrors.length < this.props.authErrors.length
     if (authHasErrors) {
       this.toggleErrorModal()
@@ -166,9 +174,9 @@ class UserProfileScreen extends Component {
       case 'snapchat':
         return userInfo.social_profiles.filter( profile => profile.provider === 'snapchat').length
       case 'youtube':
-        return platforms.find(platformObj => platformObj.provider === 'google-oauth2')
+        return userInfo.social_profiles.find(platformObj => platformObj.provider === 'google-oauth2')
       default:
-        return platforms.find(platformObj => platformObj.provider === provider)
+        return userInfo.social_profiles.find(platformObj => platformObj.provider === provider)
     }
   }
 
@@ -401,7 +409,7 @@ class UserProfileScreen extends Component {
               text='Entering your Snapchat handle here will help us
               connect you with people more seamlessly.'
               toggleModal={this.toggleSnapchatModal}
-              submitText={(inputValue, apiAccessToken) => updateSnapInfo('snapchat', inputValue, apiAccessToken)} />
+              submitText={(inputValue, apiAccessToken) => this.props.updateSnapInfo('snapchat', inputValue, apiAccessToken)} />
             <FriendThemModal
               modalVisible={showErrorModal}
               toggleModal={this.toggleErrorModal}
@@ -471,20 +479,22 @@ class UserProfileScreen extends Component {
 }
 
 const mapStateToProps = state => ({
+  apiAccessToken: state.authStore.accessToken,
+  authRedirectUrl: state.tokenStore.authRedirectUrl,
+  editableData: state.userStore.editableData,
+  fbAuthToken: state.fbStore.fbAccessToken,
+  fetching: state.userStore.fetching,
+  fetchingMyPics: state.userStore.fetchingMyPics,
+  isFetchingInitialUser: state.userStore.isFetchingInitialUser,
+  loggedIn: state.authStore.loggedIn,
+  needsFetchTokens: state.tokenStore.needsFetchTokens,
+  platforms: state.tokenStore.platforms,
+  refreshingToken: state.authStore.refreshingToken,
   userId: state.userStore.userId,
   userInfo: state.userStore.userData,
-  editableData: state.userStore.editableData,
   userPhotos: state.userStore.userPhotos,
   userInterests: state.userStore.interests,
   userLocation: state.userStore.location,
-  isFetchingInitialUser: state.userStore.isFetchingInitialUser,
-  fetchingMyPics: state.userStore.fetchingMyPics,
-  fbAuthToken: state.fbStore.fbAccessToken,
-  apiAccessToken: state.authStore.accessToken,
-  loggedIn: state.authStore.loggedIn,
-  platforms: state.tokenStore.platforms,
-  needsFetchTokens: state.tokenStore.needsFetchTokens,
-  authRedirectUrl: state.tokenStore.authRedirectUrl
 })
 
 const mapDispatchToProps = dispatch => {

@@ -239,6 +239,11 @@ class SettingsScreen extends Component {
               style={styles.ghostSwitchStyle}
             />
           </TouchableOpacity>
+          <View style={styles.sectionTitle}>
+            <Text style={styles.sectionTitleText}>
+              Contact Us!
+            </Text>
+          </View>
           {this.renderEmailLinks()}
           <TouchableOpacity
             activeOpacity={1}
