@@ -293,7 +293,7 @@ class UserProfileScreen extends Component {
       )
     } else if (tab === "Info") {
       return(
-        <ScrollView style={{height: 450, paddingBottom: 100}}>
+        <ScrollView style={styles.scrollContainer}>
           <PersonalInfoTab
             toggleChangePasswordModal={this.toggleChangePasswordModal}
           />

@@ -180,5 +180,8 @@ export default StyleSheet.create({
     height: 50,
     top: 60,
     left: 60
+  },
+  scrollContainer: {
+    height: Metrics.screenHeight * 0.58
   }
 })

@@ -43,7 +43,7 @@ export default StyleSheet.create({
     fontFamily: Fonts.type.base,
   },
   button: {
-    width: 225,
+    width: Metrics.screenWidth * 0.63,
     height: 47,
     alignItems: 'center',
     flexDirection: 'row',
