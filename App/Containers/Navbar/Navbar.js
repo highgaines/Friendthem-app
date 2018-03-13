@@ -136,7 +136,7 @@ class Navbar extends Component {
     const ipxNav = {'height': 70}
     const renderIpxNav = ifIphoneX(ipxNav, '')
 
-    const ipxIcon = {'bottom': 20}
+    const ipxIcon = {'bottom': 15}
     const renderIpxIcon = ifIphoneX(ipxIcon, '')
 
     if (this.state.keyboardHidden) {
@@ -180,7 +180,7 @@ class Navbar extends Component {
                   source={Images.peopleNearbyIcon}
                   />
                 <Text
-                  style={[styles.iconText, {top: 35, zIndex: 99}, this.determineCurrentScreen('NearbyUsersScreen') ?
+                  style={[styles.iconText, {top: 27}, this.determineCurrentScreen('NearbyUsersScreen') ?
                   {color: '#ff00e1'} :
                   '' ]}>
                   Nearby
