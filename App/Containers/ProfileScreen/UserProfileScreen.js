@@ -90,7 +90,7 @@ class UserProfileScreen extends Component {
   }
 
   componentWillUpdate = (nextProps, nextState) => {
-    const { getUserTokens, apiAccessToken } = this.props
+    const { getUserInfo, apiAccessToken } = this.props
     const { externalAuth, appState } = this.state
     const returningToApp = appState.match(/inactive|background/) && nextState.appState === 'active'
 
