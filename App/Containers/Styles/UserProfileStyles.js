@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
 
 export default StyleSheet.create({
@@ -182,6 +182,6 @@ export default StyleSheet.create({
     left: 60
   },
   scrollContainer: {
-    height: Metrics.screenHeight * 0.58
+    height: Platform.OS === 'ios' ? Metrics.screenHeight * 0.6 : Metrics.screenHeight * 0.5
   }
 })
