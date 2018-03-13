@@ -182,6 +182,6 @@ export default StyleSheet.create({
     left: 60
   },
   scrollContainer: {
-    height: Platform.OS === 'ios' ? Metrics.screenHeight * 0.6 : Metrics.screenHeight * 0.5
+    height: Platform.OS === 'ios' ? Metrics.screenHeight * 0.6 : Metrics.screenHeight * 0.55
   }
 })

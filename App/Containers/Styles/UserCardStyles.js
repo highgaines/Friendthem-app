@@ -10,7 +10,7 @@ export default StyleSheet.create({
     height: 140,
     marginTop: 5,
     borderRadius: 10,
-    width: 115,
+    width: Metrics.screenWidth * 0.3,
     shadowOpacity: 0.2,
     shadowRadius: 5,
     shadowColor: 'black',
