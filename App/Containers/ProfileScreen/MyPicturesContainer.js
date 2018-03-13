@@ -121,9 +121,9 @@ class MyPicturesContainer extends Component {
 
   renderImages = () => {
     const { myPictures } = this.props
-
     if (myPictures && myPictures.length) {
-      return myPictures.map( (imageObj, idx) => {
+      const sortedPictures = myPictures.sort( (a, b) => a.id - b.id )
+      return sortedPictures.map( (imageObj, idx) => {
 
         return(
           <TouchableOpacity
@@ -131,10 +131,9 @@ class MyPicturesContainer extends Component {
             onPress={() => this.handleImagePress(imageObj.id, true)}
             style={styles.myPicsCard}
             >
-              <CachedImage
+              <Image
                 style={{ width: '100%', height: 120, borderRadius: 10}}
                 source={{uri: imageObj.url}}
-                mutable
               />
             <View style={{ backgroundColor: 'blue', borderRadius: 50, borderColor: 'white', borderWidth: 2, padding: 3, position: 'absolute', top: '78%', right: 5}}>
               <Icon
@@ -144,7 +143,7 @@ class MyPicturesContainer extends Component {
                 color="white"
               />
             </View>
-            </TouchableOpacity>
+          </TouchableOpacity>
           )
         })
       }
