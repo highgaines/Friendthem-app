@@ -122,7 +122,7 @@ class MyPicturesContainer extends Component {
   renderImages = () => {
     const { myPictures } = this.props
     if (myPictures && myPictures.length) {
-      const sortedPictures = myPictures.sort( (a, b) => a.id - b.id )
+      const sortedPictures = myPictures.concat([]).sort( (a, b) => a.id - b.id )
       return sortedPictures.map( (imageObj, idx) => {
 
         return(
