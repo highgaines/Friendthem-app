@@ -42,7 +42,8 @@ class NearbyFeedCard extends Component {
       platform: 'profile',
       loadInThisCard: false,
       showModal: false,
-      currentPics: ''
+      currentPics: '',
+      currentPicIdx: 0
     }
   }
 
@@ -154,10 +155,10 @@ class NearbyFeedCard extends Component {
     }
   }
 
-  handlePicturePush = imageObjs => {
+  handlePicturePush = (imageObjs, idx) => {
     const { showModal, currentPics } = this.state
 
-    this.setState({ showModal: true, currentPics: imageObjs })
+    this.setState({ showModal: true, currentPics: imageObjs, currentPicIdx: idx })
   }
 
   renderPictures = () => {
@@ -165,10 +166,10 @@ class NearbyFeedCard extends Component {
     let mappedPictures
 
     if (friendData && friendData.pictures) {
-      mappedPictures = friendData.pictures.map( imageObj => {
+      mappedPictures = friendData.pictures.map( (imageObj, idx) => {
         return(
           <TouchableOpacity
-            onPress={() => this.handlePicturePush(friendData.pictures)}
+            onPress={() => this.handlePicturePush(friendData.pictures, idx)}
             style={styles.myPicsCard}>
             <CachedImage
               style={{ height: '100%', width: '100%', 'borderRadius': 10}}
@@ -236,7 +237,7 @@ class NearbyFeedCard extends Component {
 
   render = () => {
     const { friendData, loading, setFriendInfo } = this.props
-    const { platform, currentPics, showModal } = this.state
+    const { platform, currentPics, showModal, currentPicIdx } = this.state
     const socialPlatforms = friendData.social_profiles.map(prof => prof.provider)
 
     return(
@@ -245,6 +246,7 @@ class NearbyFeedCard extends Component {
           imageObjects={currentPics}
           visible={showModal}
           toggle={this.toggleMyPicturesModal}
+          xOffset={(1787/5) * (currentPicIdx)}
         />
         <LazyloadView style={styles.header}>
           <LinearGradient
