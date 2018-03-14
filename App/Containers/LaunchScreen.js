@@ -195,10 +195,12 @@ class LaunchScreen extends Component {
             <View style={styles.centered}>
               <Animatable.View
                 animation="bounceIn"
+                duration={3000}
+                delay={500}
                 >
                 <CachedImage
                   style={ifIphoneX({ marginTop: 200 }, { marginTop: 100})}
-                  source={`${Images.mainLogo}`}
+                  source={Images.mainLogo}
                 />
               </Animatable.View>
               <Text style={styles.primSubText}>

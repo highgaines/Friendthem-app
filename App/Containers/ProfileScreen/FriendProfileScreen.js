@@ -45,6 +45,7 @@ class FriendProfileScreen extends Component {
       showModal: false,
       platform: 'profile',
       currentPic: '',
+      currentPicIdx: 0,
       myPicturesModalVisible: false,
       feedContainer: false,
       socialMediaData: SOCIAL_MEDIA_DATA,
@@ -95,10 +96,8 @@ class FriendProfileScreen extends Component {
     }
   }
 
-  handlePicturePush = pressedPicObj => {
-    const { myPicturesModalVisible, currentPic } = this.state
-
-    this.setState({ myPicturesModalVisible: true, currentPic: pressedPicObj })
+  handlePicturePush = (pressedPicObj, idx) => {
+    this.setState({ myPicturesModalVisible: true, currentPic: pressedPicObj, currentPicIdx: idx })
   }
 
   toggleMyPicturesModal = () => {
@@ -112,12 +111,12 @@ class FriendProfileScreen extends Component {
     let mappedPictures
 
     if (friendInfo && friendInfo.pictures && friendInfo.pictures.length) {
-      mappedPictures = friendInfo.pictures.map( imageObj => {
+      mappedPictures = friendInfo.pictures.map( (imageObj, idx) => {
         return(
           <TouchableOpacity
             key={imageObj.id}
             style={styles.myPicsCard}
-            onPress={() => this.handlePicturePush(friendInfo.pictures)}>
+            onPress={() => this.handlePicturePush(friendInfo.pictures, idx)}>
             <CachedImage
               style={{ width: '100%', height: 120, borderRadius: 10}}
               source={{uri: imageObj.url}}
@@ -248,6 +247,7 @@ class FriendProfileScreen extends Component {
       selectedSocialMedia,
       platform,
       currentPic,
+      currentPicIdx,
       myPicturesModalVisible
     } = this.state
 
@@ -265,6 +265,7 @@ class FriendProfileScreen extends Component {
           <MyPicturesModal
             imageObjects={currentPic}
             visible={myPicturesModalVisible}
+            xOffset={(1787/5) * (currentPicIdx)}
             toggle={this.toggleMyPicturesModal}
           />
           <View style={styles.profile}>
