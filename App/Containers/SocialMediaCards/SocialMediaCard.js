@@ -14,7 +14,6 @@ import styles from '../Styles/SocialMediaCardStyles';
 export default class SocialMediaCard extends Component {
 
   handlePush = () => {
-    this.props.registerCardPress()
     this.props.socialAuth(this.props.platformAuth)
   }
 
@@ -26,7 +25,7 @@ export default class SocialMediaCard extends Component {
     const { readOnly, connectedWithVisitor, toggleBanner, cardPressed } = this.props
 
     return connectedWithVisitor ?
-      toggleBanner : readOnly || cardPressed ?
+      toggleBanner : readOnly ?
         null : this.handlePush
   }
 
