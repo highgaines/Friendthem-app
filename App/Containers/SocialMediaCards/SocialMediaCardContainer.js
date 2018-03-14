@@ -30,6 +30,7 @@ class SocialMediaCardContainer extends Component {
       currentPlatform: '',
       socialMediaData: SOCIAL_MEDIA_DATA,
       syncedCardColors: SYNCED_CARD_COLORS,
+      cardPressed: false
     }
   }
 
@@ -90,6 +91,11 @@ class SocialMediaCardContainer extends Component {
     return connection ? connection.find( connObj => connObj.provider === platform) : null
   }
 
+  cardPressTimeout = () => {
+    this.setState({cardPressed: true})
+    this.setTimeout(500, () => this.setState({cardPressed: false}))
+  }
+
   render() {
     const {
       platforms,
@@ -145,7 +151,8 @@ class SocialMediaCardContainer extends Component {
                 userName={userName}
                 syncedBGColor={syncedCardColors[socialPlatform]}
                 selected={isSelected}
-
+                registerCardPress={this.cardPressTimeout}
+                cardPressed={this.state.cardPressed}
               />
             )
           } else {

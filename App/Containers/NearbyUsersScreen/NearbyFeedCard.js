@@ -24,7 +24,7 @@ import { fetchFeed } from '../../Redux/SocialFeedStore'
 import { getMyPics } from '../../Redux/UserStore'
 
 // Constants
-import { SYNCED_CARD_COLORS } from '../../Utils/constants'
+import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS, isIOS } from '../../Utils/constants'
 
 // Images
 import { Images } from '../../Themes'
