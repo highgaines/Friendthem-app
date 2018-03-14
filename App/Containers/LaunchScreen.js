@@ -14,6 +14,8 @@ import FBSDK, {
 } from 'react-native-fbsdk'
 import Permissions from 'react-native-permissions'
 import Contacts from 'react-native-contacts'
+import * as Animatable from 'react-native-animatable'
+import { CachedImage } from "react-native-img-cache";
 
 // Components
 import ConnectButton from './SuperConnectScreen/ConnectButton'
@@ -191,9 +193,14 @@ class LaunchScreen extends Component {
         <View style={styles.mainContainer}>
           <ScrollView style={styles.container}>
             <View style={styles.centered}>
-              <Image
-                style={ifIphoneX({ marginTop: 200 }, { marginTop: 100 })} source={require('../Images/logo.png')}
-              />
+              <Animatable.View
+                animation="bounceIn"
+                >
+                <CachedImage
+                  style={ifIphoneX({ marginTop: 200 }, { marginTop: 100})}
+                  source={`${Images.mainLogo}`}
+                />
+              </Animatable.View>
               <Text style={styles.primSubText}>
                 CONNECTING THE WORLD
               </Text>
@@ -219,6 +226,8 @@ class LaunchScreen extends Component {
                   <ConnectButton
                     title='Start With Email'
                     color='#fff'
+                    name='email-outline'
+                    type='material-community'
                     containerStyle={styles.button}
                     textStyle={styles.buttonTextStyle}
                     onPressCallback={() => navigate('RegisterUserScreen')}

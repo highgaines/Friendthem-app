@@ -61,6 +61,10 @@ export default class SocialMediaCard extends Component {
     }
   }
 
+  capitalizePlatform = platformName => {
+    return platformName.charAt(0).toUpperCase() + platformName.slice(1)
+  }
+
   render() {
     const {
       platformName,
@@ -107,10 +111,12 @@ export default class SocialMediaCard extends Component {
               styles.platformName : synced ?
                 styles.platformNameInverted : styles.unsyncedPlatformName
             }>
-            {platformName}
+            {this.capitalizePlatform(platformName)}
           </Text>
 
           <Text
+            ellipsizeMode="tail"
+            numberOfLines={1}
             style={this.determineConnectedStatus() ?
               styles.userName : synced ?
                 styles.userNameInverted : styles.unsyncedUserName

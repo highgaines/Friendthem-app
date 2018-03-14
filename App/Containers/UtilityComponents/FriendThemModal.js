@@ -31,14 +31,14 @@ class FriendThemModal extends Component {
   }
 
   okAction = () => {
-    const { okActionCallback } = this.props
+    const { okActionCallback, toggleModal } = this.props
 
     okActionCallback()
     toggleModal()
   }
 
   render() {
-    const { modalVisible, toggleModal, snapchat, headerText, text, form } = this.props
+    const { modalVisible, toggleModal, snapchat, headerText, text, form, logout } = this.props
     const { input } = this.state
 
     return (
@@ -55,10 +55,19 @@ class FriendThemModal extends Component {
             style={styles.headerGradient}>
             { snapchat
               ? <Icon
-                  name={'snapchat-ghost'}
+                  name='snapchat-ghost'
                   type='font-awesome'
                   color='#fff'
                   size={50}
+                />
+              : null
+            }
+            { logout
+              ? <Icon
+                  name="logout"
+                  type="material-community"
+                  color="#fff"
+                  size={55}
                 />
               : null
             }
@@ -89,8 +98,17 @@ class FriendThemModal extends Component {
                 style={styles.modalButton}
                 onPress={() => this.okAction()}
               >
-                <Text style={styles.buttonText}> Okay </Text>
+                <Text style={styles.buttonText}> {logout ? 'Logout' : 'Okay'} </Text>
               </TouchableOpacity>
+            }
+            { logout
+              ? <TouchableOpacity
+                  style={styles.modalButton}
+                  onPress={toggleModal}
+                >
+                  <Text style={styles.buttonText}> Cancel </Text>
+                </TouchableOpacity>
+                : null
             }
         </View>
       </Modal>

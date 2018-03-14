@@ -5,7 +5,7 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   containerModal: {
     width: 300,
-    height: 295,
+    height: 280,
     overflow: 'hidden',
     alignItems: 'center',
     marginTop: 15,

@@ -8,6 +8,7 @@ import Analytics from 'analytics-react-native'
 
 // Components
 import LogoutModal from './LogoutModal'
+import FriendThemModal from '../UtilityComponents/FriendThemModal'
 
 // Redux
 import { connect } from 'react-redux'
@@ -219,11 +220,12 @@ class Navbar extends Component {
                   '' ]}> Settings </Text>
                 </View>
             </TouchableOpacity>
-            <LogoutModal
-              showModal={this.state.logoutModalOpen}
-              logOut={this.logOut}
+            <FriendThemModal
+              modalVisible={this.state.logoutModalOpen}
+              okActionCallback={this.logOut}
+              logout={true}
               toggleModal={this.toggleModal}
-              modalStyle={styles.modal}
+              text='Would you like to log out of Friendthem?'
             />
           </View>
       )
