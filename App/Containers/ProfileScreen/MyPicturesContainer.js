@@ -7,6 +7,7 @@ import { Icon } from 'react-native-elements'
 import { uploadToAWS, uploadToAWS2 } from '../../Utils/functions'
 import ImagePicker from 'react-native-image-picker'
 import FbPhotoModal from './FbPhotoModal'
+import * as Animatable from 'react-native-animatable';
 import * as Progress from 'react-native-progress'
 
 // Redux
@@ -126,24 +127,24 @@ class MyPicturesContainer extends Component {
       return myPictures.map( (imageObj, idx) => {
 
         return(
-          <TouchableOpacity
-            key={imageObj.url}
-            onPress={() => this.handleImagePress(imageObj.id, true)}
-            style={styles.myPicsCard}
-            >
-              <Image
-                style={{ width: '100%', height: 120, borderRadius: 10}}
-                source={{uri: imageObj.url}}
-              />
-            <View style={{ backgroundColor: 'blue', borderRadius: 50, borderColor: 'white', borderWidth: 2, padding: 3, position: 'absolute', top: '78%', right: 5}}>
-              <Icon
-                name="edit"
-                type="entypo"
-                size={12}
-                color="white"
-              />
-            </View>
-          </TouchableOpacity>
+            <TouchableOpacity
+              key={imageObj.url}
+              onPress={() => this.handleImagePress(imageObj.id, true)}
+              style={styles.myPicsCard}
+              >
+                <Image
+                  style={{ width: '100%', height: 120, borderRadius: 10}}
+                  source={{uri: imageObj.url}}
+                />
+                <View style={{ backgroundColor: 'blue', borderRadius: 50, borderColor: 'white', borderWidth: 2, padding: 3, position: 'absolute', top: '78%', right: 5}}>
+                  <Icon
+                    name="edit"
+                    type="entypo"
+                    size={12}
+                    color="white"
+                  />
+                </View>
+              </TouchableOpacity>
           )
         })
       }

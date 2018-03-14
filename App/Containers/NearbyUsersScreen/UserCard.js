@@ -2,14 +2,17 @@ import React, { Component } from 'react';
 import { ScrollView, Text, View, TouchableOpacity, Linking, Image } from 'react-native';
 
 // Libraries
-import { CachedImage } from "react-native-img-cache";
+import { CachedImage } from "react-native-img-cache"
 import { LazyloadView } from 'react-native-lazyload-deux'
 
+// Components
+import ImageCircle from '../UtilityComponents/ImageCircle'
+
 // Styles
-import styles from '../Styles/UserCardStyles';
+import styles from '../Styles/UserCardStyles'
 
 // Images
-import { Images } from '../../Themes';
+import { Images } from '../../Themes'
 
 export default function UserCard(props) {
   const { picture, name, fbUrl, setFriendInfo } = props
@@ -18,10 +21,9 @@ export default function UserCard(props) {
     <TouchableOpacity
       style={styles.card}
       onPress={setFriendInfo}>
-      <CachedImage
-        style={styles.cardImage}
-        mutable
-        source={picture ? {uri: `${picture}`} : Images.noPicSVG}
+      <ImageCircle
+        size={75}
+        source={picture}
       />
       <LazyloadView style={styles.cardText}>
         <Text

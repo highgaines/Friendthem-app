@@ -10,6 +10,7 @@ import TimerMixin from 'react-timer-mixin'
 import ImagePicker from 'react-native-image-picker'
 import { uploadToAWS } from '../../Utils/functions'
 import { NavigationActions } from 'react-navigation'
+import * as Animatable from 'react-native-animatable'
 
 // Components
 import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer'
@@ -283,28 +284,34 @@ class UserProfileScreen extends Component {
 
     if (tab === "Networks") {
       return (
-        <SocialMediaCardContainer
-          fromUserProfile={true}
-          platformSelected={(platform) => false}
-          snapchatCallback={this.toggleSnapchatModal}
-          onPressCallback={(platform) => this.authenticateSocialMedia(platform)}
-          platformSynced={((socialMedia) => this.socialPlatformPresent(socialMedia))}
-        />
+        <Animatable.View animation="slideInLeft">
+          <SocialMediaCardContainer
+            fromUserProfile={true}
+            platformSelected={(platform) => false}
+            snapchatCallback={this.toggleSnapchatModal}
+            onPressCallback={(platform) => this.authenticateSocialMedia(platform)}
+            platformSynced={((socialMedia) => this.socialPlatformPresent(socialMedia))}
+          />
+        </Animatable.View>
       )
     } else if (tab === "Info") {
       return(
         <ScrollView style={styles.scrollContainer}>
+          <Animatable.View animation="slideInLeft">
           <PersonalInfoTab
             toggleChangePasswordModal={this.toggleChangePasswordModal}
           />
+        </Animatable.View>
         </ScrollView>
       )
     } else if (tab === "Pics") {
       return (
-      <MyPicturesContainer
-        userInfo={userInfo}
-        togglePhotoModal={this.togglePhotoModal}
-      />
+        <Animatable.View animation="slideInLeft">
+          <MyPicturesContainer
+            userInfo={userInfo}
+            togglePhotoModal={this.togglePhotoModal}
+          />
+        </Animatable.View>
       )
     }
   }

@@ -6,13 +6,13 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: ifIphoneX({
     height: Metrics.screenHeight * 0.5,
-    width: Metrics.screenWidth * 0.9,
+    width: Metrics.screenWidth * 0.6,
     backgroundColor: 'white',
     borderRadius: 10,
     alignSelf: 'center',
   },{
     height: Metrics.screenHeight * 0.4,
-    width: Metrics.screenWidth * 0.8,
+    width: Metrics.screenWidth * 0.6,
     backgroundColor: 'white',
     borderRadius: 10,
     alignSelf: 'center',

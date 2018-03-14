@@ -113,6 +113,7 @@ class PhotoModal extends Component {
               <Icon
                 name="arrow-left"
                 type="entypo"
+                size={50}
                 color="blue"
               />
             </TouchableOpacity>
@@ -125,6 +126,7 @@ class PhotoModal extends Component {
               <Icon
                 name="arrow-right"
                 type="entypo"
+                size={50}
                 color="blue"
               />
             </TouchableOpacity>

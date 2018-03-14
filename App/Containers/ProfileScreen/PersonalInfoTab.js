@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 // Components
-import { View, TouchableOpacity, Text, Button, TextInput, ScrollView } from 'react-native'
+import { View, TouchableOpacity, Text, Button, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native'
 import InfoRow from './InfoRow'
 
 // Libraries
@@ -41,7 +41,8 @@ class PersonalInfoTab extends Component {
     const { userData, editableData, toggleChangePasswordModal } = this.props
 
     return (
-      <View style={styles.personalInfoContainer}>
+      <KeyboardAvoidingView
+        behavior="padding" style={styles.personalInfoContainer}>
         <InfoRow
           rowLabel='NAME'
           field="name"
@@ -105,7 +106,7 @@ class PersonalInfoTab extends Component {
           secureText={true}
           toggleChangePasswordModal={toggleChangePasswordModal}
           updateInfo={this.packageEditProfile}/>
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
