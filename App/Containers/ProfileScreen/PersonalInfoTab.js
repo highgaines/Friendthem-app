@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 
 // Components
-import { View, TouchableOpacity, Text, Button, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native'
+import { View, TouchableOpacity, Text, Button, TextInput, ScrollView } from 'react-native'
 import InfoRow from './InfoRow'
 
 // Libraries
 import { Icon } from 'react-native-elements'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 // Redux
 import { connect } from 'react-redux'
@@ -41,8 +42,9 @@ class PersonalInfoTab extends Component {
     const { userData, editableData, toggleChangePasswordModal } = this.props
 
     return (
-      <KeyboardAvoidingView
-        behavior="padding" style={styles.personalInfoContainer}>
+      <KeyboardAwareScrollView
+        extraScrollHeight={100}
+        style={styles.personalInfoContainer}>
         <InfoRow
           rowLabel='NAME'
           field="name"
@@ -106,7 +108,7 @@ class PersonalInfoTab extends Component {
           secureText={true}
           toggleChangePasswordModal={toggleChangePasswordModal}
           updateInfo={this.packageEditProfile}/>
-      </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
     )
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, Button, TextInput, View, Switch, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
+import { Text, Button, TextInput, View, Switch, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
 import ModalSelector from 'react-native-modal-selector'
 import styles from '../Styles/PersonalInfoTabStyles'
@@ -62,7 +62,6 @@ export default class InfoRow extends Component {
           field === 'age'
           ? null
           : isEditing ?
-
             <TextInput
               keyboardType={field === 'age' || field === 'phone_number' ? 'numeric' : undefined}
               testID={`input-${field}`}
@@ -74,9 +73,7 @@ export default class InfoRow extends Component {
               autoFocus
               onChangeText={input => this.handleChange(input)}
             />
-
             :
-
               <TouchableOpacity
                 onPress={editPressCallback}
                 >
@@ -86,7 +83,6 @@ export default class InfoRow extends Component {
                     {secureText || flipSwitch ? '********' : userInfo}
                   </Text>
                 </TouchableOpacity>
-
           }
 
         {
