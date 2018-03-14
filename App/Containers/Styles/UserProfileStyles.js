@@ -13,7 +13,7 @@ export default StyleSheet.create({
     zIndex: 1000
   },
   profileHeader: {
-    height: 230,
+    height: 220,
     width: '100%',
     alignItems: 'center',
     marginTop: 30,

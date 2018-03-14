@@ -14,16 +14,20 @@ export default MyPicturesModal = ({ imageObj, toggle, visible}) => {
 
   return(
     <Modal
-      animationIn="slideInUp" animationOut="slideOutDown"
+      animationIn="slideInUp"
+      animationOut="slideOutDown"
       onBackdropPress={toggle}
       isVisible={visible}>
-      <View style={styles.fullScreen}>
+      <TouchableOpacity
+        onPress={toggle}
+        style={styles.fullScreen}
+      >
         <CachedImage
           mutable
           source={{uri: imageObj.url}}
           style={styles.expandedImage}
         />
-      </View>
+      </TouchableOpacity>
     </Modal>
   )
 }

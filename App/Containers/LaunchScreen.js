@@ -226,6 +226,8 @@ class LaunchScreen extends Component {
                   <ConnectButton
                     title='Start With Email'
                     color='#fff'
+                    name='email-outline'
+                    type='material-community'
                     containerStyle={styles.button}
                     textStyle={styles.buttonTextStyle}
                     onPressCallback={() => navigate('RegisterUserScreen')}

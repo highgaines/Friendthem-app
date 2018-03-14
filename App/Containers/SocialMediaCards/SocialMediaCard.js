@@ -115,6 +115,8 @@ export default class SocialMediaCard extends Component {
           </Text>
 
           <Text
+            ellipsizeMode="tail"
+            numberOfLines={1}
             style={this.determineConnectedStatus() ?
               styles.userName : synced ?
                 styles.userNameInverted : styles.unsyncedUserName

@@ -25,6 +25,7 @@ import SuperConnectBar from '../SuperConnectScreen/SuperConnectBar'
 import ScrollWheel from './ScrollWheel'
 import FeedContainer from '../SocialFeed/FeedContainer'
 import MyPicturesModal from './MyPicturesModal'
+import * as Animatable from 'react-native-animatable'
 
 // Constants
 import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
@@ -81,13 +82,15 @@ class FriendProfileScreen extends Component {
       return this.renderPictures()
     } else{
       return(
-        <View style={{ height: 366 }}>
+        <Animatable.View
+          animation="slideInLeft"
+          style={{ height: 366 }}>
           <FeedContainer
             platform={platform}
             userId={friendInfo.id}
             friendInfo={friendInfo}
           />
-        </View>
+        </Animatable.View>
       )
     }
   }
@@ -139,9 +142,11 @@ class FriendProfileScreen extends Component {
     }
 
     return (
-    <ScrollView contentContainerStyle={styles.socialAccountContainer}>
+    <Animatable.View
+      animation="slideInLeft"
+      style={styles.socialAccountContainer}>
       {mappedPictures}
-    </ScrollView>
+    </Animatable.View>
     )
   }
 
