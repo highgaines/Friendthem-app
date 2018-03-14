@@ -117,7 +117,7 @@ class FriendProfileScreen extends Component {
           <TouchableOpacity
             key={imageObj.id}
             style={styles.myPicsCard}
-            onPress={() => this.handlePicturePush(imageObj)}>
+            onPress={() => this.handlePicturePush(friendInfo.pictures)}>
             <CachedImage
               style={{ width: '100%', height: 120, borderRadius: 10}}
               source={{uri: imageObj.url}}
@@ -263,7 +263,7 @@ class FriendProfileScreen extends Component {
     return (
         <View style={{ alignItems: 'center' }}>
           <MyPicturesModal
-            imageObj={currentPic}
+            imageObjects={currentPic}
             visible={myPicturesModalVisible}
             toggle={this.toggleMyPicturesModal}
           />
