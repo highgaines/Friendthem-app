@@ -334,7 +334,7 @@ class FriendProfileScreen extends Component {
               />
             </View>
 
-            { platform === 'profile' ? <View>
+            { platform === 'profile' ? <View style={styles.scrollContainer}>
               <SocialMediaCardContainer
                 fromFriendProfile={true}
                 connection={connection}
