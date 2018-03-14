@@ -30,7 +30,7 @@ import MyPicturesModal from './MyPicturesModal'
 import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
 
 // Images
-import { Images } from '../../Themes';
+import { Images } from '../../Themes'
 
 // Styles
 import styles from '../Styles/UserProfileStyles'
@@ -256,7 +256,7 @@ class FriendProfileScreen extends Component {
     const backAction =  NavigationActions.back()
 
     return (
-        <View style={{ alignItems: 'center' }}>
+        <View style={{ alignItems: 'center', marginBottom: -50, paddingBottom: -50 }}>
           <MyPicturesModal
             imageObj={currentPic}
             visible={myPicturesModalVisible}

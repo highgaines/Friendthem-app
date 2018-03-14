@@ -29,6 +29,7 @@ const mapNavigationStateParamsToProps = (SomeComponent) => {
         }
     }
 }
+
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
   LaunchScreen: { screen: LaunchScreen },

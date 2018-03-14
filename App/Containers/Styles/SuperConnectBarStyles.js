@@ -5,12 +5,11 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   buttonContainer: {
     justifyContent: 'center',
-    width: '100%',
     flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'center',
     position: 'absolute',
-    bottom: 0,
-    left: 0,
-    top: 200,
+    top: Metrics.screenHeight * 0.28
   },
   friendThemButton: {
     width: 170,
