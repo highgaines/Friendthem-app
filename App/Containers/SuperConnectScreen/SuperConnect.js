@@ -12,7 +12,7 @@ import ButtonsContainer from './ButtonsContainer'
 import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer';
 import SuperConnectActions, { superConnectPlatform } from '../../Redux/SuperConnectStore'
 import FriendStoreActions, { checkFriendConnection } from '../../Redux/FriendStore'
-import { MANUAL_CONNECT_PLATFORMS, SOCIAL_MEDIA_DATA } from '../../Utils/constants'
+import { MANUAL_CONNECT_PLATFORMS, SOCIAL_MEDIA_DATA, isIOS } from '../../Utils/constants'
 
 class SuperConnect extends Component {
   constructor(props) {
@@ -69,9 +69,13 @@ class SuperConnect extends Component {
   deepLinkToPlatform = (platformName) => {
     const { friendInfo, platforms } = this.props
     const profile = friendInfo.social_profiles.find(profile => profile.provider === platformName)
-    const userIdentifier = platformName === 'facebook' ? profile.uid : profile.username
-    const deepLinkPlatform = SOCIAL_MEDIA_DATA[platformName].superConnectDeepLink
-    const deepLinkURL = `${deepLinkPlatform}${userIdentifier}`
+    const isSnapchat = platformName === 'snapchat'
+    const userIdentifier = platformName === 'facebook' || isSnapchat ? profile.uid : profile.username
+    const deepLinkPlatform = isIOS || isSnapchat ?
+      SOCIAL_MEDIA_DATA[platformName].superConnectDeepLink
+      :
+      SOCIAL_MEDIA_DATA[platformName].androidConnectDeepLink(userIdentifier)
+    const deepLinkURL = isIOS || isSnapchat ? `${deepLinkPlatform}${userIdentifier}` : deepLinkPlatform
 
     Linking.canOpenURL(deepLinkURL).then(response => {
       if (response) {

@@ -108,7 +108,7 @@ class UserProfileScreen extends Component {
     if (authRedirectUrl && !prevProps.authRedirectUrl && currentPlatform) {
       const platformName = currentPlatform === 'google-oauth2' ? 'youtube' : currentPlatform
       const deepLinkBase = isIOS ? socialMediaData[platformName].deepLinkUrl : socialMediaData[platformName].androidDeepLinkUrl
-      const deepLinkAuth = `${deepLinkBase}${authRedirectUrl.split('.com/')[1]}`
+      const deepLinkAuth = isIOS ? `${deepLinkBase}${authRedirectUrl.split('.com/')[1]}` : `${deepLinkBase}${authRedirectUrl.split('?')[1]}`
 
       this.setState({externalAuth: true})
 
