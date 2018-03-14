@@ -84,7 +84,6 @@ export default class InfoRow extends Component {
                   </Text>
                 </TouchableOpacity>
           }
-
         {
           showSwitch ?
           <Switch
