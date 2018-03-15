@@ -5,12 +5,12 @@ import { ifIphoneX } from '../../Themes/Helpers'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: ifIphoneX({
-    height: Metrics.screenHeight * 0.4,
+    height: Metrics.screenHeight * 0.6,
     width: Metrics.screenWidth * 0.75,
     borderRadius: 10,
     alignSelf: 'center',
   },{
-    height: Metrics.screenHeight * 0.45,
+    height: Metrics.screenHeight * 0.5,
     width: Metrics.screenWidth * 0.75,
     backgroundColor: 'white',
     borderRadius: 10,
@@ -54,6 +54,7 @@ export default StyleSheet.create({
     justifyContent: 'center'
   },
   buttonGroup: {
+    bottom: 20,
     flexDirection: 'row',
     width: Metrics.screenWidth * 0.7,
     justifyContent: 'space-between',

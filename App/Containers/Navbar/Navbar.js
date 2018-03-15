@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, Image, Keyboard } from 'react-native'
+import { View, Text, TouchableOpacity, Image, Keyboard, Platform } from 'react-native'
 
 // Libraries
 import { Icon } from 'react-native-elements'
@@ -139,7 +139,7 @@ class Navbar extends Component {
 
     const ipxIcon = {'bottom': 15}
     const renderIpxIcon = ifIphoneX(ipxIcon, '')
-
+    const peopleNearbyIconStyles = Platform.OS === 'ios' ? styles.peopleNearbyIcon : styles.peopleNearbyIconAndroid
     if (this.state.keyboardHidden) {
       return(
           <View
@@ -177,11 +177,11 @@ class Navbar extends Component {
               <View
                 style={[styles.container, this.selectedStyleRender('NearbyUsersScreen')]}>
                 <Image
-                  style={[styles.peopleNearbyIcon, renderIpxIcon]}
+                  style={[peopleNearbyIconStyles, renderIpxIcon]}
                   source={Images.peopleNearbyIcon}
                   />
                 <Text
-                  style={[styles.iconText, {top: 27}, this.determineCurrentScreen('NearbyUsersScreen') ?
+                  style={[styles.iconText, {top: Platform.OS === 'ios' ? 27 : 35}, this.determineCurrentScreen('NearbyUsersScreen') ?
                   {color: '#ff00e1'} :
                   '' ]}>
                   Nearby
