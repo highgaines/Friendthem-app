@@ -114,7 +114,8 @@ class SuperConnect extends Component {
       setManualPlatforms,
       userId,
       connection,
-      setFriendInfo
+      setFriendInfo,
+      checkFriendConnection
      } = this.props
     const { userInputRequiredPlatforms, manualPlatformsList } = this.state
     const checkConnection = platform => connection.find(element => element.provider === platform)
