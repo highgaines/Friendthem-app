@@ -8,6 +8,7 @@ import SocialMediaCard from '../SocialMediaCards/SocialMediaCard'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import AuthStoreActions, { loginByFacebook } from '../../Redux/AuthStore'
+import UserStoreActions, { getUserInfo } from '../../Redux/UserStore'
 import FBStoreActions from '../../Redux/FBStore';
 
 // Libraries
@@ -48,7 +49,7 @@ class SocialMediaCardContainer extends Component {
   }
 
   handleFBLogin = () => {
-    const { loginComplete } = this.props
+    const { loginComplete, getUserInfo, accessToken } = this.props
     const userPermissions = ["public_profile", "user_friends", "email"]
 
     LoginManager.logInWithReadPermissions(userPermissions).then((result) => {
@@ -172,7 +173,8 @@ const mapDispatchToProps = dispatch => {
     ...bindActionCreators({
       loginByFacebook,
       loginComplete,
-      logoutComplete
+      logoutComplete,
+      getUserInfo
     }, dispatch)
   }
 }
