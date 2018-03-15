@@ -17,12 +17,12 @@ export default StyleSheet.create({
     backgroundColor: 'transparent',
     marginTop: 50,
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     alignItems: 'center'
   },
   searchIcon: {
-    alignItems: 'flex-start',
-    marginLeft: 20
+    position: 'absolute',
+    right: 10
   },
   searchForm: {
     height: 35,
@@ -57,15 +57,13 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'Montserrat'
   },
-  backIcon: {
-    alignItems: 'flex-end'
-  },
   tabContainer: {
     height: 40,
     width: 250,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
+    alignSelf: 'center',
     borderRadius: 50,
     backgroundColor: Colors.friendThemBlue,
     shadowOpacity: 0.5,

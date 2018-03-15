@@ -47,8 +47,6 @@ class SearchBar extends Component {
 
     return(
         <View style={styles.searchBar}>
-          <View style={styles.backIcon}>
-          </View>
         { searchMode
           ? this.renderSearchForm()
           : <View style={styles.tabContainer}>

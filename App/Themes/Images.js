@@ -47,7 +47,7 @@ const images = {
   cameraIconSmall: require('../Images/Icons/camera-icon-small.png'),
 
   // Images
-  geolocationPNG: require('../Images/Permission-Location.png'),
+  geolocationPNG: require('../Images/permissionLocation.png'),
   notificationsSVG: require('../Images/notificationpngbell.png'),
   noPicSVG: require('../Images/nopic-svg.png'),
   lightbulbPNG: require('../Images/Icons/lightbulb.png'),
