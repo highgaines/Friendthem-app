@@ -141,7 +141,8 @@ class SuperConnect extends Component {
           userInfo: this.props.userInfo,
           friendInfo: this.props.friendInfo,
           navigation: this.props.navigation,
-          setFriendInfo: setFriendInfo
+          setFriendInfo: setFriendInfo,
+          updateConnectionInfo: () => checkFriendConnection(apiAccessToken, friendInfo.id)
         })
       }
   }

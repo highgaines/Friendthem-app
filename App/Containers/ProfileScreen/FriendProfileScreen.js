@@ -5,11 +5,12 @@ import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity, AppStat
 
 // Libraries
 import { CachedImage } from 'react-native-img-cache';
-import LinearGradient from 'react-native-linear-gradient';
-import { Icon } from 'react-native-elements';
-import FBSDK, { LoginManager } from 'react-native-fbsdk';
 import Communications from 'react-native-communications';
 import Contacts from 'react-native-contacts';
+import Geocoder from 'react-native-geocoder';
+import FBSDK, { LoginManager } from 'react-native-fbsdk';
+import { Icon } from 'react-native-elements';
+import LinearGradient from 'react-native-linear-gradient';
 import { NavigationActions } from 'react-navigation'
 
 // Redux
@@ -50,7 +51,8 @@ class FriendProfileScreen extends Component {
       feedContainer: false,
       socialMediaData: SOCIAL_MEDIA_DATA,
       syncedCardColors: SYNCED_CARD_COLORS,
-      selectedSocialMedia: ['facebook']
+      selectedSocialMedia: ['facebook'],
+      userLastLocation: null,
     }
   }
 
@@ -66,10 +68,17 @@ class FriendProfileScreen extends Component {
 
   componentDidMount = () => {
     const { apiAccessToken, friendInfo, checkFriendConnection, loggedIn, getMyPics } = this.props
+    const { last_location } = friendInfo
 
     if (apiAccessToken && loggedIn) {
       checkFriendConnection(apiAccessToken, friendInfo.id)
     }
+    if (last_location) {
+      Geocoder.geocodePosition(last_location).then(res =>
+        this.setState({ userLastLocation: `${res[0].subAdminArea}, ${res[0].adminArea}`})
+      )
+    }
+
   }
 
   componentWillUnmount = () => {
@@ -248,7 +257,8 @@ class FriendProfileScreen extends Component {
       platform,
       currentPic,
       currentPicIdx,
-      myPicturesModalVisible
+      myPicturesModalVisible,
+      userLastLocation
     } = this.state
 
     const socialPlatforms = friendInfo
@@ -314,7 +324,7 @@ class FriendProfileScreen extends Component {
                       </Text>
                       <View style={{ flexDirection: 'row', marginTop: 7, justifyContent: 'space-around'}}>
                         {
-                          friendInfo.location
+                          userLastLocation
                           ? <Icon
                               name='location'
                               type='entypo'
@@ -324,7 +334,7 @@ class FriendProfileScreen extends Component {
                           : null
                         }
                         <Text style={{ color: '#fff', fontWeight: '500', backgroundColor: 'transparent', marginLeft: 7}}>
-                          {friendInfo.location}
+                          {userLastLocation}
                         </Text>
                       </View>
                     </View>
