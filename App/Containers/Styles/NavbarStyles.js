@@ -42,6 +42,14 @@ export default StyleSheet.create({
     bottom: 0,
     zIndex: 200
   },
+  peopleNearbyIconAndroid: {
+    alignSelf: 'center',
+    position: 'absolute',
+    zIndex: 200,
+    height: 80,
+    width: 80,
+    top: -15
+  },
   selectedScreen: {
     borderColor: '#ff00e1',
     borderBottomWidth: 2
