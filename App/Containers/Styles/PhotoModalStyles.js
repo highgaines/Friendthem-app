@@ -7,15 +7,14 @@ export default StyleSheet.create({
   container: ifIphoneX({
     height: Metrics.screenHeight * 0.4,
     width: Metrics.screenWidth * 0.75,
-    backgroundColor: 'white',
     borderRadius: 10,
     alignSelf: 'center',
   },{
-    height: Metrics.screenHeight * 0.4,
-    width: Metrics.screenWidth * 0.6,
+    height: Metrics.screenHeight * 0.45,
+    width: Metrics.screenWidth * 0.75,
     backgroundColor: 'white',
     borderRadius: 10,
-    alignSelf: 'center',
+    alignSelf: 'center'
   }),
   fullScreen: {
     height: Metrics.screenHeight * 0.7,
