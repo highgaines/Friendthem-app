@@ -102,9 +102,10 @@ class UserProfileScreen extends Component {
   }
 
   componentDidUpdate = prevProps => {
-    const { apiAccessToken, authRedirectUrl, refreshingToken, getUserInfo, getUserTokens, fetching } = this.props
+    const { apiAccessToken, authRedirectUrl, refreshingToken, getUserInfo, getUserTokens, fetching, fbAuthToken } = this.props
     const { socialMediaData, currentPlatform } = this.state
     const doneFetching = prevProps.fetching && !fetching
+    const updatedAuth = prevProps.apiAccessToken !== apiAccessToken
 
     if (authRedirectUrl && !prevProps.authRedirectUrl && currentPlatform) {
       const platformName = currentPlatform === 'google-oauth2' ? 'youtube' : currentPlatform
@@ -127,7 +128,7 @@ class UserProfileScreen extends Component {
       }
     }
 
-    if (!refreshingToken && prevProps.refreshingToken || doneFetching) {
+    if (!refreshingToken && prevProps.refreshingToken || doneFetching || updatedAuth) {
       getUserInfo(apiAccessToken)
       getUserTokens(apiAccessToken)
     }
@@ -139,8 +140,8 @@ class UserProfileScreen extends Component {
   }
 
   togglePhotoModal = (isProfile = true, pictureId) => {
-    this.setState(
-      { showFbPhotoModal: !this.state.showFbPhotoModal,
+    this.setState({
+        showFbPhotoModal: !this.state.showFbPhotoModal,
         isProfile: isProfile,
         editingPictureId: pictureId
       })
@@ -163,9 +164,10 @@ class UserProfileScreen extends Component {
     const { userId, apiAccessToken } = this.props
 
     this.setState({currentPlatform: platform})
-    this.props.socialMediaAuth(platform, userId, apiAccessToken).then( () =>
-    this.props.socialMediaAuthErrors(apiAccessToken)
-    )
+    this.props.socialMediaAuth(platform, userId, apiAccessToken).then( () => {
+      this.props.socialMediaAuthErrors(apiAccessToken)
+      this.props.getUserInfo(apiAccessToken)
+    })
   }
 
   socialPlatformPresent = (provider) => {

@@ -11,7 +11,7 @@ class FBLogin extends Component {
 
   handleFBLogin = () => {
 
-    const userPermissions = ["public_profile", "user_friends", "email", "user_photos"]
+    const userPermissions = ["public_profile", "user_friends", "email", "user_photos", "user_posts"]
     const { handleLoading, handleLoadingComplete } = this.props
     handleLoading()
     LoginManager.logInWithReadPermissions(userPermissions).then((result) => {
