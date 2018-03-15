@@ -8,6 +8,7 @@ import Analytics from 'analytics-react-native'
 
 // Components
 import LogoutModal from './LogoutModal'
+import FriendThemModal from '../UtilityComponents/FriendThemModal'
 
 // Redux
 import { connect } from 'react-redux'
@@ -136,14 +137,14 @@ class Navbar extends Component {
     const ipxNav = {'height': 70}
     const renderIpxNav = ifIphoneX(ipxNav, '')
 
-    const ipxIcon = {'bottom': 20}
+    const ipxIcon = {'bottom': 15}
     const renderIpxIcon = ifIphoneX(ipxIcon, '')
 
     if (this.state.keyboardHidden) {
       return(
           <View
             testID='navbar'
-            style={[this.props.navbarStyle || styles.navbarRow, { marginTop: this.props.margin }, renderIpxNav]}>
+            style={[this.props.navbarStyle || styles.navbarRow, { marginTop: this.props.margin, alignItems: 'center', justifyContent: 'center' }, renderIpxNav]}>
             <TouchableOpacity
               testID='profile-navbar-button'
               style={styles.button} onPress={this.goToProfile}>
@@ -180,7 +181,7 @@ class Navbar extends Component {
                   source={Images.peopleNearbyIcon}
                   />
                 <Text
-                  style={[styles.iconText, {top: 35, zIndex: 99}, this.determineCurrentScreen('NearbyUsersScreen') ?
+                  style={[styles.iconText, {top: 27}, this.determineCurrentScreen('NearbyUsersScreen') ?
                   {color: '#ff00e1'} :
                   '' ]}>
                   Nearby
@@ -219,11 +220,12 @@ class Navbar extends Component {
                   '' ]}> Settings </Text>
                 </View>
             </TouchableOpacity>
-            <LogoutModal
-              showModal={this.state.logoutModalOpen}
-              logOut={this.logOut}
+            <FriendThemModal
+              modalVisible={this.state.logoutModalOpen}
+              okActionCallback={this.logOut}
+              logout={true}
               toggleModal={this.toggleModal}
-              modalStyle={styles.modal}
+              text='Would you like to log out of Friendthem?'
             />
           </View>
       )

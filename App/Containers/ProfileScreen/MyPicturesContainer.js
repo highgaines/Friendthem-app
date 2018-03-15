@@ -7,6 +7,7 @@ import { Icon } from 'react-native-elements'
 import { uploadToAWS, uploadToAWS2 } from '../../Utils/functions'
 import ImagePicker from 'react-native-image-picker'
 import FbPhotoModal from './FbPhotoModal'
+import * as Animatable from 'react-native-animatable';
 import * as Progress from 'react-native-progress'
 
 // Redux
@@ -113,35 +114,37 @@ class MyPicturesContainer extends Component {
         // use AWS upload function here to send uri
         let source = response.uri
         let callback = primary ? editPic : addPic
-        uploadToAWS2(source, id, callback, pictureId, uploadProgress, accessToken)
+        let newUrlId = primary ? Date.now() : null
+        uploadToAWS2(source, id, callback, pictureId, uploadProgress, accessToken, newUrlId)
       }
     })
   }
 
   renderImages = () => {
     const { myPictures } = this.props
-
     if (myPictures && myPictures.length) {
+
       return myPictures.map( (imageObj, idx) => {
+
         return(
-          <TouchableOpacity
-            key={idx}
-            onPress={() => this.handleImagePress(imageObj.id, true)}
-            style={styles.myPicsCard}
-            >
-              <Image
-                style={{ width: '100%', height: 120, borderRadius: 10}}
-                source={{uri: imageObj.url}}
-              />
-            <View style={{ backgroundColor: 'blue', borderRadius: 50, borderColor: 'white', borderWidth: 2, padding: 3, position: 'absolute', top: '78%', right: 5}}>
-              <Icon
-                name="edit"
-                type="entypo"
-                size={12}
-                color="white"
-              />
-            </View>
-            </TouchableOpacity>
+            <TouchableOpacity
+              key={imageObj.url}
+              onPress={() => this.handleImagePress(imageObj.id, true)}
+              style={styles.myPicsCard}
+              >
+                <Image
+                  style={{ width: '100%', height: 120, borderRadius: 10}}
+                  source={{uri: imageObj.url}}
+                />
+                <View style={{ backgroundColor: 'blue', borderRadius: 50, borderColor: 'white', borderWidth: 2, padding: 3, position: 'absolute', top: '78%', right: 5}}>
+                  <Icon
+                    name="edit"
+                    type="entypo"
+                    size={12}
+                    color="white"
+                  />
+                </View>
+              </TouchableOpacity>
           )
         })
       }

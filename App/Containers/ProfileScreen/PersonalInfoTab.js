@@ -6,6 +6,7 @@ import InfoRow from './InfoRow'
 
 // Libraries
 import { Icon } from 'react-native-elements'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 // Redux
 import { connect } from 'react-redux'
@@ -35,13 +36,15 @@ class PersonalInfoTab extends Component {
 
   updatePrivacy = (field, status) => {
     this.packageEditProfile(field, status);
-  };
+  }
 
   render() {
     const { userData, editableData, toggleChangePasswordModal } = this.props
 
     return (
-      <View style={styles.personalInfoContainer}>
+      <KeyboardAwareScrollView
+        extraScrollHeight={100}
+        style={styles.personalInfoContainer}>
         <InfoRow
           rowLabel='NAME'
           field="name"
@@ -105,7 +108,7 @@ class PersonalInfoTab extends Component {
           secureText={true}
           toggleChangePasswordModal={toggleChangePasswordModal}
           updateInfo={this.packageEditProfile}/>
-      </View>
+      </KeyboardAwareScrollView>
     )
   }
 }

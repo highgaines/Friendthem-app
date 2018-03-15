@@ -23,6 +23,9 @@ export default StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row'
   },
+  spacing: {
+    marginTop: 20
+  },
   button: {
     width: 120,
     height: 40,

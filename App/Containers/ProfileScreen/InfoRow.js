@@ -63,7 +63,7 @@ export default class InfoRow extends Component {
           ? null
           : isEditing ?
             <TextInput
-              keyboardType={field === 'age' ? 'numeric' : undefined}
+              keyboardType={field === 'age' || field === 'phone_number' ? 'numeric' : undefined}
               testID={`input-${field}`}
               value={this.state.input}
               style={styles.form}
@@ -72,16 +72,18 @@ export default class InfoRow extends Component {
               onBlur={this.handleSubmit}
               autoFocus
               onChangeText={input => this.handleChange(input)}
-            /> :
-            <TouchableOpacity
-              onPress={editPressCallback}
-              >
-              <Text
-                testID={`input-display-${field}`}
-                style={styles.rowTextContent}>
-                {secureText || flipSwitch ? '********' : userInfo}
-              </Text>
-            </TouchableOpacity> }
+            />
+            :
+              <TouchableOpacity
+                onPress={editPressCallback}
+                >
+                  <Text
+                    testID={`input-display-${field}`}
+                    style={styles.rowTextContent}>
+                    {secureText || flipSwitch ? '********' : userInfo}
+                  </Text>
+                </TouchableOpacity>
+          }
         {
           showSwitch ?
           <Switch

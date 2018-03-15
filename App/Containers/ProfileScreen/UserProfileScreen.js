@@ -10,6 +10,7 @@ import TimerMixin from 'react-timer-mixin'
 import ImagePicker from 'react-native-image-picker'
 import { uploadToAWS } from '../../Utils/functions'
 import { NavigationActions } from 'react-navigation'
+import * as Animatable from 'react-native-animatable'
 
 // Components
 import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer'
@@ -37,7 +38,7 @@ import styles from '../Styles/UserProfileStyles'
 import { ifIphoneX } from '../../Themes/Helpers'
 
 // Constants
-import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
+import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS, isIOS } from '../../Utils/constants'
 
 // Env
 import envConfig from '../../../envConfig'
@@ -90,7 +91,7 @@ class UserProfileScreen extends Component {
   }
 
   componentWillUpdate = (nextProps, nextState) => {
-    const { getUserTokens, apiAccessToken } = this.props
+    const { getUserInfo, apiAccessToken } = this.props
     const { externalAuth, appState } = this.state
     const returningToApp = appState.match(/inactive|background/) && nextState.appState === 'active'
 
@@ -107,8 +108,8 @@ class UserProfileScreen extends Component {
 
     if (authRedirectUrl && !prevProps.authRedirectUrl && currentPlatform) {
       const platformName = currentPlatform === 'google-oauth2' ? 'youtube' : currentPlatform
-      const deepLinkBase = socialMediaData[platformName].deepLinkUrl
-      const deepLinkAuth = `${deepLinkBase}${authRedirectUrl.split('.com/')[1]}`
+      const deepLinkBase = isIOS ? socialMediaData[platformName].deepLinkUrl : socialMediaData[platformName].androidDeepLinkUrl
+      const deepLinkAuth = isIOS ? `${deepLinkBase}${authRedirectUrl.split('.com/')[1]}` : `${deepLinkBase}${authRedirectUrl.split('?')[1]}`
 
       this.setState({externalAuth: true})
 
@@ -283,29 +284,34 @@ class UserProfileScreen extends Component {
 
     if (tab === "Networks") {
       return (
-        <SocialMediaCardContainer
-          fromUserProfile={true}
-          platformSelected={(platform) => false}
-          snapchatCallback={this.toggleSnapchatModal}
-          onPressCallback={(platform) => this.authenticateSocialMedia(platform)}
-          platformSynced={((socialMedia) => this.socialPlatformPresent(socialMedia))}
-        />
+        <Animatable.View animation="slideInLeft">
+          <SocialMediaCardContainer
+            fromUserProfile={true}
+            platformSelected={(platform) => false}
+            snapchatCallback={this.toggleSnapchatModal}
+            onPressCallback={(platform) => this.authenticateSocialMedia(platform)}
+            platformSynced={((socialMedia) => this.socialPlatformPresent(socialMedia))}
+          />
+        </Animatable.View>
       )
     } else if (tab === "Info") {
-      const ipxInfoTab = ifIphoneX({ 'height': 480}, {'height': 366})
       return(
-        <ScrollView style={ipxInfoTab}>
+        <ScrollView style={styles.scrollContainer}>
+          <Animatable.View animation="slideInLeft">
           <PersonalInfoTab
             toggleChangePasswordModal={this.toggleChangePasswordModal}
           />
+        </Animatable.View>
         </ScrollView>
       )
     } else if (tab === "Pics") {
       return (
-      <MyPicturesContainer
-        userInfo={userInfo}
-        togglePhotoModal={this.togglePhotoModal}
-      />
+        <Animatable.View animation="slideInLeft">
+          <MyPicturesContainer
+            userInfo={userInfo}
+            togglePhotoModal={this.togglePhotoModal}
+          />
+        </Animatable.View>
       )
     }
   }

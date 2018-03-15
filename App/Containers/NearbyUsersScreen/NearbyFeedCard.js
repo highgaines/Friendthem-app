@@ -10,6 +10,7 @@ import ScrollWheel from '../ProfileScreen/ScrollWheel'
 import FeedCard from '../SocialFeed/FeedCard'
 import ConnectButton from '../SuperConnectScreen/ConnectButton'
 import SocialMediaCard from '../SocialMediaCards/SocialMediaCard'
+import MyPicturesModal from '../ProfileScreen/MyPicturesModal'
 
 // Libraries
 import { Icon } from 'react-native-elements'
@@ -23,7 +24,7 @@ import { fetchFeed } from '../../Redux/SocialFeedStore'
 import { getMyPics } from '../../Redux/UserStore'
 
 // Constants
-import { SYNCED_CARD_COLORS } from '../../Utils/constants'
+import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS, isIOS } from '../../Utils/constants'
 
 // Images
 import { Images } from '../../Themes'
@@ -39,7 +40,10 @@ class NearbyFeedCard extends Component {
 
     this.state = {
       platform: 'profile',
-      loadInThisCard: false
+      loadInThisCard: false,
+      showModal: false,
+      currentPics: '',
+      currentPicIdx: 0
     }
   }
 
@@ -151,17 +155,27 @@ class NearbyFeedCard extends Component {
     }
   }
 
+  handlePicturePush = (imageObjs, idx) => {
+    const { showModal, currentPics } = this.state
+
+    this.setState({ showModal: true, currentPics: imageObjs, currentPicIdx: idx })
+  }
+
   renderPictures = () => {
     const { friendData } = this.props
     let mappedPictures
 
     if (friendData && friendData.pictures) {
-      mappedPictures = friendData.pictures.map( imageObj => {
+      mappedPictures = friendData.pictures.map( (imageObj, idx) => {
         return(
-          <CachedImage
-            style={styles.myPicsCard}
-            source={{uri: imageObj.url}}
-          />
+          <TouchableOpacity
+            onPress={() => this.handlePicturePush(friendData.pictures, idx)}
+            style={styles.myPicsCard}>
+            <CachedImage
+              style={{ height: '100%', width: '100%', 'borderRadius': 10}}
+              source={{uri: imageObj.url}}
+            />
+          </TouchableOpacity>
         )
       })
     } else {
@@ -215,13 +229,25 @@ class NearbyFeedCard extends Component {
     }
   }
 
+  toggleMyPicturesModal = () => {
+    const { showModal } = this.state
+
+    this.setState({ showModal: !showModal })
+  }
+
   render = () => {
     const { friendData, loading, setFriendInfo } = this.props
-    const { platform } = this.state
+    const { platform, currentPics, showModal, currentPicIdx } = this.state
     const socialPlatforms = friendData.social_profiles.map(prof => prof.provider)
 
     return(
       <LazyloadView style={styles.nearbyFeedCardContainer}>
+        <MyPicturesModal
+          imageObjects={currentPics}
+          visible={showModal}
+          toggle={this.toggleMyPicturesModal}
+          xOffset={(1787/5) * (currentPicIdx)}
+        />
         <LazyloadView style={styles.header}>
           <LinearGradient
             colors={['#2aa5c0','#5664bd', '#9011ba', '#b31c85', '#e73436']}

@@ -24,7 +24,7 @@ export const SOCIAL_MEDIA_DATA = {
     deepLinkUrl: 'fb://',
     androidDeepLinkUrl: 'intent://#Intent;package=com.facebook.katana;scheme=fb://profile/;end',
     superConnectDeepLink: 'fb://profile/',
-    androidConnectDeepLink: (userId) => `intent://#Intent;package=com.facebook.katana;scheme=fb://page/${userId}?referrer=app_link;end`
+    androidConnectDeepLink: (userId) => `fb://page/${userId}?referrer=app_link;end`
   },
   instagram: {
     deepLinkUrl: 'instagram://',
@@ -35,7 +35,7 @@ export const SOCIAL_MEDIA_DATA = {
   },
   twitter: {
     deepLinkUrl: 'twitter://',
-    androidDeepLinkUrl: 'intent://twitter.com/#Intent;package=com.twitter.android;scheme=https;end',
+    androidDeepLinkUrl: 'intent://twitter.com/oauth/authenticate#Intent;package=com.twitter.android;scheme=https;end?',
     userNamePath: 'screen_name'
   },
   youtube: {
@@ -45,8 +45,7 @@ export const SOCIAL_MEDIA_DATA = {
   snapchat: {
     deepLinkUrl: 'snapchat://',
     androidDeepLinkUrl: 'snapchat://',
-    superConnectDeepLink: 'snapchat://add/',
-    androidConnectDeepLink: 'snapchat://add/'
+    superConnectDeepLink: 'snapchat://add/'
   }
 }
 

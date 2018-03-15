@@ -29,7 +29,7 @@ class SocialMediaCardContainer extends Component {
     this.state = {
       currentPlatform: '',
       socialMediaData: SOCIAL_MEDIA_DATA,
-      syncedCardColors: SYNCED_CARD_COLORS,
+      syncedCardColors: SYNCED_CARD_COLORS
     }
   }
 
@@ -145,7 +145,6 @@ class SocialMediaCardContainer extends Component {
                 userName={userName}
                 syncedBGColor={syncedCardColors[socialPlatform]}
                 selected={isSelected}
-
               />
             )
           } else {

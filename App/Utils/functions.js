@@ -33,12 +33,12 @@ export const uploadToAWS = async (uri, userId, callback, data, token) => {
 }
 
 
-export const uploadToAWS2 = async (uri, userId, callback, pictureId, uploadProgress, token) => {
+export const uploadToAWS2 = async (uri, userId, callback, pictureId, uploadProgress, token, newUrlId) => {
 
   const file = {
     // `uri` can also be a file system path (i.e. file://)
     uri: uri,
-    name: `my-pictures-${userId}-${pictureId}.png`,
+    name: `my-pictures-${userId}-${newUrlId ? newUrlId : pictureId}.png`,
     type: "image/png"
   }
   const { AWSAccessKeyID, AWSSecretKey } = envConfig.Development

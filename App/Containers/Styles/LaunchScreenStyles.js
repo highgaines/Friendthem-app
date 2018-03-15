@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
+import { Metrics, ApplicationStyles, Fonts, Colors } from '../../Themes/'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
@@ -43,18 +43,31 @@ export default StyleSheet.create({
     fontFamily: Fonts.type.base,
   },
   button: {
-    width: Metrics.screenWidth * 0.60,
+    width: Metrics.screenWidth * 0.63,
     height: 47,
     alignItems: 'center',
     flexDirection: 'row',
     marginLeft: 40,
     backgroundColor: '#030ab0',
     borderRadius: 100,
+    justifyContent: 'space-around',
+    shadowOpacity: 0.30,
+    shadowRadius: 1,
+    shadowColor: 'black',
+    shadowOffset: { height: 0, width: 1 }
+  },
+  fbButton: {
+    backgroundColor: Colors.facebook,
+    width: Metrics.screenWidth * 0.63,
+    height: 47,
+    alignItems: 'center',
+    flexDirection: 'row',
+    borderRadius: 100,
     justifyContent: 'center',
     shadowOpacity: 0.30,
-    shadowRadius: 5,
+    shadowRadius: 1,
     shadowColor: 'black',
-    shadowOffset: { height: 5, width: 10 }
+    shadowOffset: { height: 0, width: 1 }
   },
   buttonTextStyle: {
     color: 'white',

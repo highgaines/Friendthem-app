@@ -2,7 +2,8 @@ import AppNavigation from '../Navigation/AppNavigation'
 
 export const reducer = (state, action) => {
   const newState = AppNavigation.router.getStateForAction(action, state)
-  const prevScreenIndex = determineRouteIndex(action.routeName, newState.routes || state.routes)
+  const stateRouteCheck = newState && newState.routes ? newState : state
+  const prevScreenIndex = determineRouteIndex(action.routeName, stateRouteCheck.routes)
 
   if (newState && prevScreenIndex > -1 && prevScreenIndex != newState.index) {
     const updatedRoutes = [...newState.routes.slice(0, prevScreenIndex), ...newState.routes.slice(prevScreenIndex + 1)]

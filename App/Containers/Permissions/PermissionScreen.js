@@ -124,15 +124,24 @@ class PermissionScreen extends Component {
 
     return (
           <View style={styles.container}>
-            <Text style={[styles.text, { fontSize: 18 }]}>
-               {this.determineTitle()}
-             </Text>
-            <Text style={[styles.text, { fontSize: 14 }]}>
-              {this.determineText()}
-             </Text>
-             <Image
-               source={this.determineImage()}
-               />
+            <View>
+              <Text style={[styles.text, { fontSize: 18 }]}>
+                {this.determineTitle()}
+              </Text>
+            </View>
+
+            <View style={styles.spacing}>
+              <Text style={[styles.text, { fontSize: 14 }]}>
+                {this.determineText()}
+              </Text>
+            </View>
+
+            <View style={styles.spacing}>
+              <Image
+                source={this.determineImage()}
+              />
+            </View>
+
              <View testID={'button_container'} style={styles.buttonContainer}>
                <ConnectButton
                  testID={'connect_button_not_now'}
