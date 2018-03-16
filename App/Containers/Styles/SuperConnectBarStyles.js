@@ -51,5 +51,8 @@ export default StyleSheet.create({
     height: 40,
     borderRadius: 100,
     justifyContent: 'center'
+  },
+  buttonIconStyle: {
+    right: 13
   }
 })

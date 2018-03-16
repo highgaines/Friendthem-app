@@ -105,6 +105,11 @@ class SuperConnect extends Component {
     await this.props.superConnectPlatform(platName, apiAccessToken, friendId)
   }
 
+  toggleNoneSelectedAlert = () => {
+    console.log('reached')
+    alert('Please select at least one social media platform to connect on!')
+  }
+
   superConnectPromiseLoop = () => {
     const {
       selectedSocialMedia,
@@ -121,6 +126,11 @@ class SuperConnect extends Component {
     const checkConnection = platform => connection.find(element => element.provider === platform)
     let platform = ''
     let tempUserInputArr = []
+    console.log('reached inside superConnectPromiseLoop', selectedSocialMedia)
+    if (!selectedSocialMedia.length) {
+      this.toggleNoneSelectedAlert()
+      return
+    }
 
     for (let i = 0; i < selectedSocialMedia.length; i++) {
       platform = selectedSocialMedia[i].provider
@@ -213,6 +223,7 @@ class SuperConnect extends Component {
             superConnectPromiseLoop={selectedSocialMedia.length ?
               this.superConnectPromiseLoop : () => false
             }
+
             copy={this.props.copy}
             navigation={navigation}
             allPlatformsSynced={allPlatformsSynced}
