@@ -229,21 +229,23 @@ class FriendProfileScreen extends Component {
     const { selectedSocialMedia } = this.state
     const platformIndex = selectedSocialMedia.findIndex(socialMedia => socialMedia === platformName)
 
-    if (platformIndex < 0) {
-      this.setState({ selectedSocialMedia: [...selectedSocialMedia, platformName] })
-    } else {
-      const updatedSocialMediaList = [
-        ...selectedSocialMedia.slice(0, platformIndex),
-        ...selectedSocialMedia.slice(platformIndex + 1)
-      ]
+    if (this.socialPlatformPresent(platformName)) {
+      if (platformIndex < 0) {
+        this.setState({ selectedSocialMedia: [...selectedSocialMedia, platformName] })
+      } else {
+        const updatedSocialMediaList = [
+          ...selectedSocialMedia.slice(0, platformIndex),
+          ...selectedSocialMedia.slice(platformIndex + 1)
+        ]
 
-      this.setState({ selectedSocialMedia: updatedSocialMediaList })
+        this.setState({ selectedSocialMedia: updatedSocialMediaList })
+      }
     }
   }
 
   getSCEligiblePlatforms = () => {
     return this.props.friendInfo &&
-    this.props.friendInfo.social_profiles && this.props.friendInfo.social_profiles.map( obj => obj.provider) || [];
+    this.props.friendInfo.social_profiles && this.props.friendInfo.social_profiles.filter( obj => obj.provider && this.socialPlatformPresent(obj.provider)) || [];
   }
 
   render() {
@@ -364,7 +366,7 @@ class FriendProfileScreen extends Component {
                 setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
                 superConnect={(platformsSelected, copy) => {
                  setSuperConnectPlatforms(platformsSelected, copy)
-                 navigation.navigate('SuperConnectScreen', { copy: copy})}
+                 navigation.navigate('SuperConnectScreen', { copy: copy })}
                }
                 selected={this.state.selectedSocialMedia}
                 userData={userInfo}
