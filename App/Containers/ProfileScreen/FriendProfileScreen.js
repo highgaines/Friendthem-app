@@ -61,7 +61,6 @@ class FriendProfileScreen extends Component {
 
   componentWillMount = () => {
     const { apiAccessToken, navigation, getUserInfo, loggedIn, getUserTokens, setSuperConnectPlatforms } = this.props
-    this.setState(this.initialState)
 
     if (apiAccessToken && loggedIn) {
       getUserTokens(apiAccessToken)
