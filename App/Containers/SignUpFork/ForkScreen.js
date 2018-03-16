@@ -99,9 +99,9 @@ class ForkScreen extends Component {
 
   directToNearbyUsers = () => {
     const { navigate } = this.props.navigation
-    const { users, navigation, setFriendInfo } = this.props
-
-    navigate('NearbyUsersScreen', { navigation: navigation, welcomeTutorialVisible: true })
+    const { users, navigation, setFriendInfo, userInfo } = this.props
+    const hasSocialProfiles = userInfo.social_profiles && userInfo.social_profiles.length ? false : true
+    navigate('NearbyUsersScreen', { navigation: navigation, welcomeTutorialVisible: hasSocialProfiles })
   }
 
   render() {
@@ -114,8 +114,9 @@ class ForkScreen extends Component {
               />
               {
                 userInfo.picture ?
-                <CachedImage
+                <Image
                   style={styles.userImageContainer}
+                  resizeMethod='scale'
                   source={userInfo.picture ? {uri: `${userInfo.picture}`} : Images.noPicSVG}
                 />
                 :

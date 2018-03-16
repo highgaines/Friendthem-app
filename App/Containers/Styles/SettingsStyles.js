@@ -85,7 +85,7 @@ export default StyleSheet.create({
     height: Metrics.screenHeight * 1.2
   },
   logOutButton: {
-    backgroundColor: 'blue',
+    backgroundColor: Colors.buttonBlue,
     width: 150,
     alignSelf: 'center',
     top: 30,

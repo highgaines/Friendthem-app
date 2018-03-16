@@ -6,7 +6,7 @@ export default StyleSheet.create({
   navbarRow: {
     justifyContent: 'space-around',
     alignItems: 'center',
-    width: '100%',
+    width: Metrics.screenWidth,
     backgroundColor: 'black',
     height: 60,
     flexDirection: 'row'

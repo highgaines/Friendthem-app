@@ -19,8 +19,7 @@ export default StyleSheet.create({
     shadowRadius: 5,
     shadowColor: 'black',
     shadowOffset: { height: 6, width: 10 },
-    marginTop: 15,
-    justifyContent: 'center'
+    marginTop: 15
   },
   buttonTextStyle: {
     color: '#ffffff',
