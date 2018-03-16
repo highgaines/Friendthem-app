@@ -102,6 +102,7 @@ class NotificationsContainer extends Component {
                   </View>
                 )}
                 rightOpenValue={-150}
+                previewRowKey={this.props.notifications && this.props.notifications.length ? this.props.notifications[0].id : 0}
               />
         </View>
       </View>

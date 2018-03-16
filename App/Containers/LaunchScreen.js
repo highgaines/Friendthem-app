@@ -219,7 +219,7 @@ class LaunchScreen extends Component {
                   </View>
                   )
                 :
-                <View>
+                <View style={{ justifyContent: 'center', alignItems: 'center'}}>
                   <FBLogin
                     loggedIn={!!fbAuthToken}
                     handleLoading={this.handleLoading}

@@ -47,7 +47,6 @@ export default StyleSheet.create({
     height: 47,
     alignItems: 'center',
     flexDirection: 'row',
-    marginLeft: 40,
     backgroundColor: '#030ab0',
     borderRadius: 100,
     justifyContent: 'space-around',
