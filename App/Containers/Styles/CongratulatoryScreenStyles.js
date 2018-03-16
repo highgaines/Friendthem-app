@@ -144,10 +144,10 @@ export default StyleSheet.create({
     borderRadius: 75,
     backgroundColor: Colors.friendThemBlue,
     flexDirection: 'row',
-    marginLeft: 20,
     alignItems: 'center',
     color: 'white',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    alignSelf: 'center'
   },
   connectButtonText: {
     justifyContent: 'center',
