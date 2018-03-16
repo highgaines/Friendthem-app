@@ -40,16 +40,16 @@ class MyPicturesContainer extends Component {
 
   componentWillMount = () => {
     const { getMyPics, accessToken } = this.props
-    getMyPics(accessToken)
+    getMyPics(accessToken).then( resp => this.displayHelp() )
   }
 
-  componentDidMount = () => {
+  displayHelp = () => {
     const { togglePicturesHelp, myPictures } = this.props
-    if (myPictures && myPictures.length > 1 && myPictures.length < 6) {
+    if (myPictures && myPictures.length < 6) {
+      console.log('here')
       setTimeout(() => togglePicturesHelp(), 800)
     }
   }
-
 
   handleImagePress = (pictureId=null, primary) => {
     const { id } = this.props.userInfo

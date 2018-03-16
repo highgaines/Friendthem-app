@@ -11,7 +11,7 @@ export default StyleSheet.create({
   },
   modalContainer: {
     justifyContent: 'center',
-    alignItems: 'stretch',
+    alignItems: 'center',
     padding: 20,
     backgroundColor: 'rgba(0,0,0, 0.8)',
     width: '100%',
