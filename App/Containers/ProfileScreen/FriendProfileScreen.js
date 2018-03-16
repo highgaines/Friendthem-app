@@ -51,7 +51,7 @@ class FriendProfileScreen extends Component {
       feedContainer: false,
       socialMediaData: SOCIAL_MEDIA_DATA,
       syncedCardColors: SYNCED_CARD_COLORS,
-      selectedSocialMedia: ['facebook'],
+      selectedSocialMedia: [],
       userLastLocation: null,
     }
   }
@@ -78,7 +78,17 @@ class FriendProfileScreen extends Component {
         this.setState({ userLastLocation: `${res[0].subAdminArea}, ${res[0].adminArea}`})
       )
     }
+  }
 
+  componentDidUpdate = (prevProps, prevState) => {
+    const { userInfo } = this.props
+    const { selectedSocialMedia } = this.state
+
+    if (userInfo && userInfo.social_profiles.length && !selectedSocialMedia.length) {
+      this.setState({
+        selectedSocialMedia: [userInfo.social_profiles[0].provider]
+      })
+    }
   }
 
   componentWillUnmount = () => {
