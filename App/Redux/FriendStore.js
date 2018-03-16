@@ -65,15 +65,21 @@ const handleUserLogout = (state, action) => {
 }
 
 const handleFriendConnectionRequest = (state, action) => {
-  return state.set({ fetching: true })
+  return state.set("fetching", true)
 }
 
 const handleFriendConnectionSuccess = (state, action) => {
-  return state.merge({ connection: action.response.data})
+  return state.merge({
+    connection: action.response.data,
+    fetching: false
+  })
 }
 
 const handleFriendConnectionFailure = (state, action) => {
-  return state.set('connection', Immutable([]))
+  return state.merge({
+    connection: Immutable([]),
+    fetching: false
+  })
 }
 
 /* ------------- Hookup Reducers To Types ------------- */

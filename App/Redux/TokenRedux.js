@@ -21,7 +21,8 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   platforms: [],
-  authRedirectUrl: null
+  authRedirectUrl: null,
+  fetchingTokens: false
 })
 
 export const getUserTokens = (accessToken) => {
@@ -54,11 +55,14 @@ const handleSocialMediaSuccess = (state, action) => {
 }
 
 const handleGetUserTokenRequest = (state, action) => {
-  return state;
+  return state.set('fetchingTokens', true);
 }
 
 const handleGetUserTokenSuccess = (state, action) => {
-  return state.set('platforms', action.data);
+  return state.merge({
+    platforms: action.data,
+    fetchingTokens: false
+  });
 }
 
 const handleGetUserTokenFailure = (state, action) => {

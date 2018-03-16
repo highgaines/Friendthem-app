@@ -206,8 +206,8 @@ class SuperConnect extends Component {
           friendPlatforms={friendInfo.social_profiles}
           onPressCallback={(platform) => togglePlatform(platform)}
           platformSynced={platform => this.socialPlatformPresent(platform)}
-          platformSelected={socialMedia =>
-            selectedSocialMedia.includes(socialMedia)
+          platformSelected={platform =>
+            selectedSocialMedia.find(socialMedia => socialMedia.provider === platform)
           } />
         <View style={{ alignItems: 'center' }}>
           <ButtonsContainer
