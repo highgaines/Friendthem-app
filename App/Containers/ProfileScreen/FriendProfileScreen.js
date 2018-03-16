@@ -270,14 +270,17 @@ class FriendProfileScreen extends Component {
   getSCEligiblePlatforms = () => {
     return this.props.friendInfo &&
     this.props.friendInfo.social_profiles &&
-    this.props.friendInfo.social_profiles.filter( obj => obj.provider && this.socialPlatformPresent(obj.provider)) || [];
+    this.props.friendInfo.social_profiles.filter( obj =>
+      obj.provider && this.socialPlatformPresent(obj.provider) &&
+      !this.props.connection.find(connect => connect.provider === obj.provider)
+    ) || [];
   }
 
   navigateToSuperConnectScreen = (platformsSelected, copy) => {
     const { navigation, setSuperConnectPlatforms } = this.props
 
    if (platformsSelected.length) {
-     setSuperConnectPlatforms(platformsSelected, copy)
+     setSuperConnectPlatforms(this.getSCEligiblePlatforms(), copy)
      this.setState(this.initialState, () => navigation.navigate('SuperConnectScreen', { copy: copy }))
 
    }

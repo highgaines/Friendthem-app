@@ -124,7 +124,7 @@ class SuperConnect extends Component {
     let tempUserInputArr = []
 
     for (let i = 0; i < selectedSocialMedia.length; i++) {
-      platform = selectedSocialMedia[i]
+      platform = selectedSocialMedia[i].provider
 
       if (checkConnection(platform)) {
         continue
