@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, Button, TouchableOpacity } from 'react-native';
+import { View, Text, Button, TouchableOpacity, Image } from 'react-native';
 
 // Libraries
 import Modal from 'react-native-modal'
-import Image from 'react-native-remote-svg';
+
+// Components
+import ConnectButton from '../SuperConnectScreen/ConnectButton'
 
 // Images
 import { Images } from '../../Themes';
@@ -11,26 +13,30 @@ import { Images } from '../../Themes';
 // Styles
 import styles from '../Styles/TutorialScreenStyles';
 
-export default PickSocialMediaModal = props => {
-  const { showModal, triggerModal } = props
+export default HelpModal = props => {
+  const { modalVisible, triggerModal, text } = props
 
   return (
       <Modal
-        visible={showModal}
         animationIn='slideInUp'
         animationOut='slideOutDown'
         onBackdropPress={triggerModal}
+        isVisible={modalVisible}
         >
           <View style={styles.modal}>
               <Image
-                width={20}
-                height={20}
+                style={{ width: 100, height: 100 }}
                 source={Images.Friendster}
               />
             <Text style={styles.modalText}>
-              My name is Friendster and I'm here to help you get the most out of the app! Let's get you started by syncing up all your social media accounts.
+              {text}
             </Text>
-            <Button title="CLOSE" onPress={triggerModal}/>
+            <ConnectButton
+              title="CLOSE"
+              containerStyle={styles.button}
+              textStyle={styles.buttonTextStyle}
+              onPressCallback={triggerModal}
+            />
           </View>
       </Modal>
   )

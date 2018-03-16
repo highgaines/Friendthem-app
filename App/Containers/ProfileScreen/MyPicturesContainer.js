@@ -38,10 +38,16 @@ class MyPicturesContainer extends Component {
     }
   }
 
-  componentDidMount = () => {
-    // call action to hit backend and fetch pictures here
+  componentWillMount = () => {
     const { getMyPics, accessToken } = this.props
     getMyPics(accessToken)
+  }
+
+  componentDidMount = () => {
+    const { togglePicturesHelp, myPictures } = this.props
+    if (myPictures && myPictures.length > 1 && myPictures.length < 6) {
+      setTimeout(() => togglePicturesHelp(), 800)
+    }
   }
 
 
