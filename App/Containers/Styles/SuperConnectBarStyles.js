@@ -10,6 +10,7 @@ export default StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     left: 0,
+    alignSelf: 'center',
     top: Metrics.screenHeight - (Metrics.screenHeight * .705),
   },
   friendThemButton: {
@@ -51,5 +52,8 @@ export default StyleSheet.create({
     height: 40,
     borderRadius: 100,
     justifyContent: 'center'
+  },
+  buttonIconStyle: {
+    right: 13
   }
 })

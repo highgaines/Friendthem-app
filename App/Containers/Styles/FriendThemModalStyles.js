@@ -9,7 +9,6 @@ export default StyleSheet.create({
     overflow: 'hidden',
     alignItems: 'center',
     marginTop: 15,
-    marginLeft: 20,
     backgroundColor: 'white',
     borderRadius: 20
   },

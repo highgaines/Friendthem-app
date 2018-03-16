@@ -106,9 +106,11 @@ export default StyleSheet.create({
     marginLeft: 10
   },
   switchStyle: {
-    left: 110
+    position: 'absolute',
+    right: 25
   },
   ghostSwitchStyle: {
-    left: 170
+    position: 'absolute',
+    right: 25
   }
 })
