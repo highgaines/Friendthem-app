@@ -106,7 +106,6 @@ class SuperConnect extends Component {
   }
 
   toggleNoneSelectedAlert = () => {
-    console.log('reached')
     alert('Please select at least one social media platform to connect on!')
   }
 
@@ -126,7 +125,7 @@ class SuperConnect extends Component {
     const checkConnection = platform => connection.find(element => element.provider === platform)
     let platform = ''
     let tempUserInputArr = []
-    console.log('reached inside superConnectPromiseLoop', selectedSocialMedia)
+
     if (!selectedSocialMedia.length) {
       this.toggleNoneSelectedAlert()
       return
