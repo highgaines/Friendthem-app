@@ -14,6 +14,7 @@ import Navbar from '../Navbar/Navbar';
 // Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import FriendStoreActions from '../../Redux/FriendStore'
 import NotificationStoreActions from '../../Redux/NotificationStore';
 import { fetchNotifications, deleteRowAction, deleteNotification } from '../../Redux/NotificationStore';
 
@@ -46,7 +47,15 @@ class NotificationsContainer extends Component {
     deleteNotification(accessToken, id).then( () => fetchNotifications(accessToken) )
   }
 
+  handleNotificationPress = friendData => {
+    const { setFriendInfo, navigation } = this.props
+
+    setFriendInfo(friendData)
+    navigation.navigate('FriendProfileScreen')
+  }
+
   render() {
+
     return(
       <View>
         <Header title='Notifications' />
@@ -60,9 +69,14 @@ class NotificationsContainer extends Component {
           </View>
           <SwipeListView
             useFlatList
+            keyExtractor={(item, index) => item.id}
+            previewOpenValue={-150}
             data={this.props.notifications ? this.props.notifications : []}
             renderItem={ (data, rowMap) => (
-              <View style={styles.rowFront}>
+              <TouchableOpacity
+                key={data.id}
+                activeOpacity={1}
+                onPress={() => this.handleNotificationPress(data.item.sender)} style={styles.rowFront}>
                 <Image
                   style={styles.profileImage}
                   source={data.item.sender.picture ? {uri: data.item.sender.picture} : Images.noPicSVG}
@@ -73,7 +87,7 @@ class NotificationsContainer extends Component {
                 <Text style={styles.message}>
                   {`would like to super connect with you!`}
                 </Text>
-              </View>
+              </TouchableOpacity>
             )}
             renderHiddenItem={ (data, rowMap) => (
               <View style={styles.rowBack}>
@@ -116,8 +130,14 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
+  const { setFriendInfo } = FriendStoreActions
   return {
-    ...bindActionCreators({ fetchNotifications, deleteRowAction, deleteNotification }, dispatch)
+    ...bindActionCreators({
+      fetchNotifications,
+      deleteRowAction,
+      deleteNotification,
+      setFriendInfo
+    }, dispatch)
   }
 }
 

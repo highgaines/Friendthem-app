@@ -21,6 +21,25 @@ class PersonalInfoTab extends Component {
     super(props)
   }
 
+  componentDidMount = () => {
+    this.determineEmptyFields()
+  }
+
+  determineEmptyFields = () => {
+    const { editableData, toggleInfoHelp } = this.props
+    let count = 0
+
+    Object.values(editableData).forEach( value => {
+      if( value === null ) {
+        count++
+      }
+    })
+
+    if( count > 3 ){
+      setTimeout(() => toggleInfoHelp(), 800)
+    }
+  }
+
   packageEditProfile = (field, content) => {
     const { updateInfoRequest, editableData, accessToken } = this.props
 
