@@ -46,7 +46,8 @@ class FriendThemModal extends Component {
       animationIn='slideInUp'
       animationOut='slideOutDown'
       onBackdropPress={toggleModal}
-      isVisible={modalVisible}>
+      isVisible={modalVisible}
+      style={{alignSelf: 'center'}}>
         <View style={styles.containerModal}>
           <LinearGradient
             colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
