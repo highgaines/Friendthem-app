@@ -36,6 +36,7 @@ class SuperConnect extends Component {
 
   componentDidMount = () => {
     AppState.addEventListener('change', this._handleAppStateChange);
+    console.log(this.props.selectedSocialMedia)
   }
 
   componentDidUpdate = (prevProps, prevState) => {
