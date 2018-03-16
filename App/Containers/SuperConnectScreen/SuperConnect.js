@@ -186,7 +186,7 @@ class SuperConnect extends Component {
     const { userInfo, friendInfo, navigation, selectedSocialMedia, togglePlatform, platforms, copy, connection } = this.props
     const { bannerVisible, bannerName, bannerPlatform } = this.state
     const { social_profiles, first_name } = friendInfo
-    const allPlatformsSynced = social_profiles.length && connection.length === social_profiles.length
+    const allPlatformsSynced = social_profiles.length && connection.length >= social_profiles.length
 
     if (allPlatformsSynced  && !bannerVisible) {
       this.toggleConnectivityBanner(first_name, 'on all shared accounts')
