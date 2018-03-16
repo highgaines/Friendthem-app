@@ -4,19 +4,15 @@ import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
+    bottom: 70,
     width: 340,
     height: 140,
-    marginBottom: 40,
-    marginLeft: 20,
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    backgroundColor: '#030ab0'
+    backgroundColor: '#030ab0',
+    alignSelf: 'center'
   },
   button: {
     width: 130,

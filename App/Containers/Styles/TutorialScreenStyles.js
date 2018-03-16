@@ -45,7 +45,6 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
-    marginLeft: 45,
     borderRadius: 30,
     borderWidth: 1,
     borderColor: 'black',

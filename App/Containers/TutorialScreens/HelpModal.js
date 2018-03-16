@@ -22,6 +22,7 @@ export default HelpModal = props => {
         animationOut='slideOutDown'
         onBackdropPress={triggerModal}
         isVisible={modalVisible}
+        style={{alignSelf: 'center'}}
         >
           <View style={styles.modal}>
               <Image
