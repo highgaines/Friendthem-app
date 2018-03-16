@@ -258,6 +258,13 @@ class FriendProfileScreen extends Component {
     this.props.friendInfo.social_profiles && this.props.friendInfo.social_profiles.filter( obj => obj.provider && this.socialPlatformPresent(obj.provider)) || [];
   }
 
+  navigateToSuperConnectScreen = (platformsSelected, copy) => {
+   if (platformsSelected.length) {
+     setSuperConnectPlatforms(platformsSelected, copy)
+     navigation.navigate('SuperConnectScreen', { copy: copy })
+   }
+  }
+
   render() {
     const { friendInfo, connection, superConnect, navigation, setSuperConnectPlatforms, userInfo, userId } = this.props
 
@@ -374,10 +381,7 @@ class FriendProfileScreen extends Component {
               />
               <SuperConnectBar
                 setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
-                superConnect={(platformsSelected, copy) => {
-                 setSuperConnectPlatforms(platformsSelected, copy)
-                 navigation.navigate('SuperConnectScreen', { copy: copy })}
-               }
+                superConnect={(platformsSelected, copy) => this.navigateToSuperConnectScreen(platformsSelected, copy)}
                 selected={this.state.selectedSocialMedia}
                 userData={userInfo}
                 platforms={this.getSCEligiblePlatforms()}
