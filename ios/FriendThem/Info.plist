@@ -89,7 +89,7 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>FriendThem would like to access your calendar so that we may inform you about upcoming events</string>
 	<key>NSCameraUsageDescription</key>
-	<string>FriendThem would like to use your camera</string>
+	<string>FriendThem would like to use your camera to enable you to add photos you take directly to your profile.</string>
 	<key>NSContactsUsageDescription</key>
 	<string>FriendThem would like to access your contacts in order to better connect you with the people you know.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
@@ -103,7 +103,7 @@
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>FriendThem would like to save photos to your photo gallery</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>FriendThem would like access to your photo gallery</string>
+	<string>FriendThem would like access to your photo gallery to enable you to add photos from your device to your profile.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>FriendThem would like to access Speech Recognition in order to make this app more accessible to a wider audience.</string>
 	<key>UIAppFonts</key>

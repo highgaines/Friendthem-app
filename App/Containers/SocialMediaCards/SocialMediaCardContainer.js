@@ -28,7 +28,6 @@ class SocialMediaCardContainer extends Component {
     super(props)
 
     this.state = {
-      currentPlatform: '',
       socialMediaData: SOCIAL_MEDIA_DATA,
       syncedCardColors: SYNCED_CARD_COLORS
     }
@@ -50,7 +49,7 @@ class SocialMediaCardContainer extends Component {
 
   handleFBLogin = () => {
     const { loginComplete, getUserInfo, accessToken } = this.props
-    const userPermissions = ["public_profile", "user_friends", "email"]
+    const userPermissions = ["public_profile", "user_friends", "email", "user_photos", "user_posts"]
 
     LoginManager.logInWithReadPermissions(userPermissions).then((result) => {
       if (result.isCancelled) {

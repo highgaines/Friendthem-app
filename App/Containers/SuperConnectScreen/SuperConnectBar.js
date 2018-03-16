@@ -10,8 +10,6 @@ const analytics = new Analytics(envConfig.Development.SegmentAPIKey)
 
 export default class SuperConnectBar extends Component {
   navigateToSuperConnect = (platforms, copy) => {
-
-    this.props.setSuperConnectPlatforms()
     this.props.superConnect(platforms, copy)
     analytics.track({
       userId: this.props.userId,

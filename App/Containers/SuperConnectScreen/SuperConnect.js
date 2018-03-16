@@ -123,7 +123,7 @@ class SuperConnect extends Component {
     let tempUserInputArr = []
 
     for (let i = 0; i < selectedSocialMedia.length; i++) {
-      platform = selectedSocialMedia[i]
+      platform = selectedSocialMedia[i].provider
 
       if (checkConnection(platform)) {
         continue
@@ -186,7 +186,7 @@ class SuperConnect extends Component {
     const { userInfo, friendInfo, navigation, selectedSocialMedia, togglePlatform, platforms, copy, connection } = this.props
     const { bannerVisible, bannerName, bannerPlatform } = this.state
     const { social_profiles, first_name } = friendInfo
-    const allPlatformsSynced = social_profiles.length && connection.length === social_profiles.length
+    const allPlatformsSynced = social_profiles.length && connection.length >= social_profiles.length
 
     if (allPlatformsSynced  && !bannerVisible) {
       this.toggleConnectivityBanner(first_name, 'on all shared accounts')
@@ -205,8 +205,8 @@ class SuperConnect extends Component {
           friendPlatforms={friendInfo.social_profiles}
           onPressCallback={(platform) => togglePlatform(platform)}
           platformSynced={platform => this.socialPlatformPresent(platform)}
-          platformSelected={socialMedia =>
-            selectedSocialMedia.includes(socialMedia)
+          platformSelected={platform =>
+            selectedSocialMedia.find(socialMedia => socialMedia.provider === platform)
           } />
         <View style={{ alignItems: 'center' }}>
           <ButtonsContainer

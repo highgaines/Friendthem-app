@@ -51,16 +51,20 @@ class FriendProfileScreen extends Component {
       feedContainer: false,
       socialMediaData: SOCIAL_MEDIA_DATA,
       syncedCardColors: SYNCED_CARD_COLORS,
-      selectedSocialMedia: ['facebook'],
+      selectedSocialMedia: [],
       userLastLocation: null,
+      selectedPlatformsUpdated: false
     }
+
+    this.initialState = this.state
   }
 
   componentWillMount = () => {
-    const { apiAccessToken, navigation, getUserInfo, loggedIn, getUserTokens } = this.props
+    const { apiAccessToken, navigation, getUserInfo, loggedIn, getUserTokens, setSuperConnectPlatforms } = this.props
 
     if (apiAccessToken && loggedIn) {
       getUserTokens(apiAccessToken)
+      setSuperConnectPlatforms([])
     } else {
       navigation.navigate('LaunchScreen')
     }
@@ -78,11 +82,28 @@ class FriendProfileScreen extends Component {
         this.setState({ userLastLocation: `${res[0].subAdminArea}, ${res[0].adminArea}`})
       )
     }
+  }
 
+  componentDidUpdate = (prevProps, prevState) => {
+    const { userInfo, connection, friendInfo, fetching, fetchingTokens } = this.props
+    const { selectedSocialMedia, selectedPlatformsUpdated } = this.state
+    const componentUpdated = !fetching && !fetchingTokens && !selectedPlatformsUpdated
+
+    if (userInfo && userInfo.social_profiles.length && !selectedSocialMedia.length && componentUpdated) {
+      const nonSelectedPlatform = userInfo.social_profiles.find(profile =>
+        !connection.find(connect => connect.provider === profile.provider) &&
+        friendInfo.social_profiles.find(friendProf => friendProf.provider === profile.provider)
+      )
+
+      this.setState({
+        selectedSocialMedia: nonSelectedPlatform ? [nonSelectedPlatform.provider] : [],
+        selectedPlatformsUpdated: true
+      })
+    }
   }
 
   componentWillUnmount = () => {
-    this.setState({ showFriendster: false })
+    this.setState(this.initialState)
   }
 
   renderPlatformContainer = platform => {
@@ -226,24 +247,42 @@ class FriendProfileScreen extends Component {
   }
 
   toggleSocialMediaSelection = (platformName) => {
+    const { connection } = this.props
     const { selectedSocialMedia } = this.state
     const platformIndex = selectedSocialMedia.findIndex(socialMedia => socialMedia === platformName)
+    const connectionPresent = () => connection.find(platform => platform.provider === platformName)
 
-    if (platformIndex < 0) {
-      this.setState({ selectedSocialMedia: [...selectedSocialMedia, platformName] })
-    } else {
-      const updatedSocialMediaList = [
-        ...selectedSocialMedia.slice(0, platformIndex),
-        ...selectedSocialMedia.slice(platformIndex + 1)
-      ]
+    if (this.socialPlatformPresent(platformName) && !connectionPresent()) {
+      if (platformIndex < 0) {
+        this.setState({ selectedSocialMedia: [...selectedSocialMedia, platformName] })
+      } else {
+        const updatedSocialMediaList = [
+          ...selectedSocialMedia.slice(0, platformIndex),
+          ...selectedSocialMedia.slice(platformIndex + 1)
+        ]
 
-      this.setState({ selectedSocialMedia: updatedSocialMediaList })
+        this.setState({ selectedSocialMedia: updatedSocialMediaList })
+      }
     }
   }
 
   getSCEligiblePlatforms = () => {
     return this.props.friendInfo &&
-    this.props.friendInfo.social_profiles && this.props.friendInfo.social_profiles.map( obj => obj.provider) || [];
+    this.props.friendInfo.social_profiles &&
+    this.props.friendInfo.social_profiles.filter( obj =>
+      obj.provider && this.socialPlatformPresent(obj.provider) &&
+      !this.props.connection.find(connect => connect.provider === obj.provider)
+    ) || [];
+  }
+
+  navigateToSuperConnectScreen = (platformsSelected, copy) => {
+    const { navigation, setSuperConnectPlatforms } = this.props
+
+   if (platformsSelected.length) {
+     setSuperConnectPlatforms(this.getSCEligiblePlatforms(), copy)
+     this.setState(this.initialState, () => navigation.navigate('SuperConnectScreen', { copy: copy }))
+
+   }
   }
 
   render() {
@@ -362,10 +401,7 @@ class FriendProfileScreen extends Component {
               />
               <SuperConnectBar
                 setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
-                superConnect={(platformsSelected, copy) => {
-                 setSuperConnectPlatforms(platformsSelected, copy)
-                 navigation.navigate('SuperConnectScreen', { copy: copy})}
-               }
+                superConnect={(platformsSelected, copy) => this.navigateToSuperConnectScreen(platformsSelected, copy)}
                 selected={this.state.selectedSocialMedia}
                 userData={userInfo}
                 platforms={this.getSCEligiblePlatforms()}
@@ -389,6 +425,8 @@ const mapStateToProps = state => ({
   apiAccessToken: state.authStore.accessToken,
   loggedIn: state.authStore.loggedIn,
   platforms: state.tokenStore.platforms,
+  fetching: state.friendStore.fetching,
+  fetchingTokens: state.tokenStore.fetchingTokens
 })
 
 const mapDispatchToProps = dispatch => {
