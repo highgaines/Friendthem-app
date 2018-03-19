@@ -78,20 +78,11 @@ class ConnectivityCard extends Component {
                 colors={[progressColor, 'gray']}
                 backgroundColor='#ddd'
               />
-              {
-                friendData.picture ?
-                <ImageCircle
-                  size={75}
-                  source={`${friendData.picture}`}
-                  extraStyles={{ position: 'absolute'}}
-                />
-                :
-                <ImageCircle
-                  size={75}
-                  source={Images.noPicSVG}
-                  extraStyles={{ position: 'absolute'}}
-                />
-              }
+              <ImageCircle
+                size={75}
+                source={`${friendData.picture}`}
+                extraStyles={{ position: 'absolute'}}
+              />
             </View>
             <View style={styles.percentIndicator} >
               <Image
