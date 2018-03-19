@@ -40,7 +40,7 @@ class NearbyUsers extends Component {
     this.state = {
       input: '',
       feedView: false,
-      welcomeTutorialVisible: props.welcomeTutorialVisible
+      welcomeTutorialVisible: !props.userSocialProfiles.length
     }
   }
 
@@ -168,6 +168,7 @@ const mapStateToProps = state => ({
   locationPermission: state.permissionsStore.nativeGeolocation,
   users: state.friendStore.users,
   customGeolocationPermission: state.permissionsStore.locationPermissionsGranted,
+  userSocialProfiles: state.userStore.userData.social_profiles
 })
 
 const mapDispatchToProps = dispatch => {
