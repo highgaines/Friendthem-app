@@ -51,7 +51,6 @@ export default class MyPicturesModal extends Component {
         <ScrollView
           horizontal
           ref={scrollView => {
-            console.log(scrollView)
             if (scrollView !== null && this.scrollView !== scrollView){
               this.scrollView = scrollView
               setTimeout(() => scrollView.scrollTo({x: newXOffset, y: 0, animated: false}), 200)
