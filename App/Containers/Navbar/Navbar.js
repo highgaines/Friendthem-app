@@ -225,6 +225,7 @@ class Navbar extends Component {
               okActionCallback={this.logOut}
               logout={true}
               toggleModal={this.toggleModal}
+              headerText='Log Out'
               text='Would you like to log out of Friendthem?'
             />
           </View>

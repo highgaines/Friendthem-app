@@ -39,7 +39,7 @@ class NearbyFeedCard extends Component {
     super(props)
 
     this.state = {
-      platform: 'profile',
+      platform: 'camera',
       loadInThisCard: false,
       showModal: false,
       currentPics: '',

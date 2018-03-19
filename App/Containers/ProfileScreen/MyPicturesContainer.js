@@ -46,7 +46,6 @@ class MyPicturesContainer extends Component {
   displayHelp = () => {
     const { togglePicturesHelp, myPictures } = this.props
     if (myPictures && myPictures.length < 6) {
-      console.log('here')
       setTimeout(() => togglePicturesHelp(), 800)
     }
   }

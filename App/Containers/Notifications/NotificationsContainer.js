@@ -69,7 +69,7 @@ class NotificationsContainer extends Component {
           </View>
           <SwipeListView
             useFlatList
-            keyExtractor={(item, index) => item.id}
+            keyExtractor={(item, index) => `${item.id}`}
             previewOpenValue={-150}
             data={this.props.notifications ? this.props.notifications : []}
             renderItem={ (data, rowMap) => (
@@ -116,7 +116,7 @@ class NotificationsContainer extends Component {
                   </View>
                 )}
                 rightOpenValue={-150}
-                previewRowKey={this.props.notifications && this.props.notifications.length ? this.props.notifications[0].id : 0}
+                previewRowKey={this.props.notifications && this.props.notifications.length ? `${this.props.notifications[0].id}` : '0'}
               />
         </View>
       </View>

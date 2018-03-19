@@ -4,6 +4,7 @@ import { ScrollView, Text, View, TouchableOpacity, Linking } from 'react-native'
 // Libraries
 import { CachedImage } from "react-native-img-cache";
 import { LazyloadScrollView, LazyloadView } from 'react-native-lazyload-deux'
+import * as Animatable from 'react-native-animatable'
 
 // Components
 import UserCard from './UserCard'
@@ -40,12 +41,12 @@ export default function UsersContainer(props) {
   }
 
   return(
-    <LazyloadScrollView contentContainerStyle={arePeopleNearby ? styles.container : [styles.container, {justifyContent: 'center'}]}>
+    <ScrollView contentContainerStyle={arePeopleNearby ? styles.container : [styles.container, {justifyContent: 'center'}]}>
       {
         users.length
         ? userCards
         :
-        <LazyloadView style={styles.noNearbyUsersContainer}>
+        <Animatable.View animation="fadeIn" style={styles.noNearbyUsersContainer}>
           <CachedImage
             source={Images.characterFriendThem}
             style={styles.mainImage}
@@ -83,7 +84,7 @@ export default function UsersContainer(props) {
               </Text>
             </TouchableOpacity>
           </LazyloadView>
-        </LazyloadView> }
-    </LazyloadScrollView>
+        </Animatable.View> }
+    </ScrollView>
   )
 }
