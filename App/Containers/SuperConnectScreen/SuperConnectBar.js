@@ -20,8 +20,14 @@ export default class SuperConnectBar extends Component {
     })
   }
 
+  mapPlatforms = (platforms) => {
+    return platforms.map(platform => {
+      return { provider: platform }
+    })
+  }
+
   render() {
-    const { iphoneXStyle, platforms } = this.props
+    const { iphoneXStyle, platforms, selected } = this.props
 
     const superConnectCopy = 'Are you sure you would like to Super Connect on all platforms with'
 
@@ -35,7 +41,7 @@ export default class SuperConnectBar extends Component {
           color='#ffffff'
           title='FRIENDTHEM'
           onPressCallback={() =>
-            this.navigateToSuperConnect(this.props.selected, friendThemCopy)}
+            this.navigateToSuperConnect(this.mapPlatforms(selected), friendThemCopy)}
           containerStyle={styles.friendThemButton}
           textStyle={styles.buttonTextStyle}/>
 

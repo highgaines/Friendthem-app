@@ -97,11 +97,10 @@ class ForkScreen extends Component {
     )
   }
 
-  directToNearbyUsers = () => {
-    const { navigate } = this.props.navigation
+  directToUserProfile = () => {
     const { users, navigation, setFriendInfo, userInfo } = this.props
-    const hasSocialProfiles = userInfo.social_profiles && userInfo.social_profiles.length ? false : true
-    navigate('NearbyUsersScreen', { navigation: navigation, welcomeTutorialVisible: hasSocialProfiles })
+
+    navigation.navigate('UserProfileScreen', { navigation: navigation })
   }
 
   render() {
@@ -139,7 +138,7 @@ class ForkScreen extends Component {
                   title='GO TO MY PROFILE'
                   containerStyle={styles.button}
                   textStyle={styles.buttonTextStyle}
-                  onPressCallback={this.directToNearbyUsers}
+                  onPressCallback={this.directToUserProfile}
                 />
               </View>
             </View>

@@ -85,6 +85,7 @@ export default class SocialMediaCard extends Component {
     return (
       <TouchableOpacity
         style={cardStyle}
+        disabled={readOnly || connectedWithVisitor}
         activeOpacity={readOnly ? 1 : 0.2 }
         onPress={this.onPressFunctionality()}
       >
