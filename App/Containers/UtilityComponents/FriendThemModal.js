@@ -68,7 +68,7 @@ class FriendThemModal extends Component {
                   name="logout"
                   type="material-community"
                   color="#fff"
-                  size={55}
+                  size={50}
                 />
               : null
             }
@@ -77,7 +77,7 @@ class FriendThemModal extends Component {
                   name="error"
                   type="material-icons"
                   color="#fff"
-                  size={55}
+                  size={50}
                 />
               : null
             }
