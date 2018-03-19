@@ -268,7 +268,7 @@ class FriendProfileScreen extends Component {
 
   getSCEligiblePlatforms = () => {
     const { friendInfo, connection } = this.props
-    return friendInfo && friendInfo.social_profiles &&
+    return friendInfo && connection.length && friendInfo.social_profiles &&
       friendInfo.social_profiles.filter(obj =>
       obj.provider && this.socialPlatformPresent(obj.provider) &&
       !connection.find(connect => connect.provider === obj.provider)
