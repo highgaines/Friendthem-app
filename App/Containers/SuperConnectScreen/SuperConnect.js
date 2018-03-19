@@ -9,9 +9,10 @@ import { SocialIcon } from 'react-native-elements'
 import ConnectBar from './ConnectBar'
 import ConnectivityBanner from '../UtilityComponents/ConnectivityBanner'
 import ButtonsContainer from './ButtonsContainer'
-import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer';
+import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer'
 import SuperConnectActions, { superConnectPlatform } from '../../Redux/SuperConnectStore'
 import FriendStoreActions, { checkFriendConnection } from '../../Redux/FriendStore'
+import InviteUsersStoreActions, { fetchConnectivityData } from '../../Redux/InviteUsersStore'
 import { MANUAL_CONNECT_PLATFORMS, SOCIAL_MEDIA_DATA, isIOS } from '../../Utils/constants'
 
 class SuperConnect extends Component {
@@ -39,7 +40,7 @@ class SuperConnect extends Component {
   }
 
   componentDidUpdate = (prevProps, prevState) => {
-    const { apiAccessToken, friendInfo, platforms, setManualPlatforms, setFriendInfo, checkFriendConnection } = this.props
+    const { apiAccessToken, friendInfo, platforms, setManualPlatforms, setFriendInfo, checkFriendConnection, fetchConnectivityData } = this.props
     const { userInputRequiredPlatforms, manualPlatformIndex } = this.state
     const manualPlatformsUpdated = userInputRequiredPlatforms.length && !prevState.userInputRequiredPlatforms.length
     const maxIndex = manualPlatformIndex === userInputRequiredPlatforms.length
@@ -56,7 +57,8 @@ class SuperConnect extends Component {
           friendInfo: this.props.friendInfo,
           navigation: this.props.navigation,
           setFriendInfo: setFriendInfo,
-          updateConnectionInfo: () => checkFriendConnection(apiAccessToken, friendInfo.id)
+          updateConnectionInfo: () => checkFriendConnection(apiAccessToken, friendInfo.id),
+          loadConnectivityData: () => fetchConnectivityData(apiAccessToken)
         })
     }
   }
@@ -119,7 +121,8 @@ class SuperConnect extends Component {
       userId,
       connection,
       setFriendInfo,
-      checkFriendConnection
+      checkFriendConnection,
+      fetchConnectivityData
      } = this.props
     const { userInputRequiredPlatforms, manualPlatformsList } = this.state
     const checkConnection = platform => connection.find(element => element.provider === platform)
@@ -152,7 +155,8 @@ class SuperConnect extends Component {
           friendInfo: this.props.friendInfo,
           navigation: this.props.navigation,
           setFriendInfo: setFriendInfo,
-          updateConnectionInfo: () => checkFriendConnection(apiAccessToken, friendInfo.id)
+          updateConnectionInfo: () => checkFriendConnection(apiAccessToken, friendInfo.id),
+          loadConnectivityData: () => fetchConnectivityData(apiAccessToken)
         })
       }
   }
@@ -255,7 +259,8 @@ const mapDispatchToProps = dispatch => {
       setManualPlatforms,
       superConnectPlatform,
       setFriendInfo,
-      checkFriendConnection
+      checkFriendConnection,
+      fetchConnectivityData
     }, dispatch)
   }
 }
