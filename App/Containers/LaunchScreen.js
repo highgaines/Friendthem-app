@@ -105,7 +105,8 @@ class LaunchScreen extends Component {
 
   checkPermissions = () => {
     const { setGeoPermission, setNotifPermission, setNativeContactsPermission } = this.props
-    Permissions.check('location', { type: 'always' }).then(response => {
+    Permissions.check('location', { type: 'whenInUse' }).then(response => {
+      console.log(response)
       if (response === 'authorized') {
         setGeoPermission(true)
       }
