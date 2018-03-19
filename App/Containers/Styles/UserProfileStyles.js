@@ -10,7 +10,8 @@ export default StyleSheet.create({
     elevation: 3,
     shadowOffset: { width: 0, height: 5},
     shadowOpacity: 0.5,
-    zIndex: 1000
+    zIndex: 1000,
+    paddingTop: 30
   },
   profileHeader: {
     height: 220,
