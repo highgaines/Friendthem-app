@@ -8,11 +8,12 @@ export default StyleSheet.create({
     height: Metrics.screenHeight * 0.6,
     width: Metrics.screenWidth * 0.75,
     borderRadius: 10,
+    backgroundColor: 'transparent',
     alignSelf: 'center',
   },{
     height: Metrics.screenHeight * 0.5,
     width: Metrics.screenWidth * 0.75,
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     borderRadius: 10,
     alignSelf: 'center'
   }),

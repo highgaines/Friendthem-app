@@ -26,8 +26,8 @@ import ConfirmPasswordChangeModal from './ConfirmPasswordChangeModal'
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import UserStoreActions, { getUserInfo, updateInfo, updateSnapInfo, updateInfoRequest, getFBPhotos, clearAuthErrors } from '../../Redux/UserStore'
-import AuthStoreActions, { socialMediaAuth, socialMediaAuthErrors } from '../../Redux/AuthStore'
+import UserStoreActions, { getUserInfo, updateInfo, updateSnapInfo, updateInfoRequest, getFBPhotos } from '../../Redux/UserStore'
+import AuthStoreActions, { socialMediaAuth, socialMediaAuthErrors, clearAuthErrors } from '../../Redux/AuthStore'
 import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
 
 // Images
@@ -93,12 +93,15 @@ class UserProfileScreen extends Component {
   }
 
   componentWillUpdate = (nextProps, nextState) => {
-    const { getUserInfo, apiAccessToken } = this.props
+    const { getUserInfo, apiAccessToken, socialMediaAuthErrors } = this.props
     const { externalAuth, appState } = this.state
     const returningToApp = appState.match(/inactive|background/) && nextState.appState === 'active'
 
     if (externalAuth && returningToApp) {
-      this.setState({externalAuth: false}, () => getUserInfo(apiAccessToken))
+      this.setState({externalAuth: false}, () => {
+        getUserInfo(apiAccessToken)
+        socialMediaAuthErrors(apiAccessToken)
+      })
     }
 
   }
@@ -177,7 +180,6 @@ class UserProfileScreen extends Component {
 
     this.setState({currentPlatform: platform})
     this.props.socialMediaAuth(platform, userId, apiAccessToken).then( () => {
-      this.props.socialMediaAuthErrors(apiAccessToken)
       this.props.getUserInfo(apiAccessToken)
     })
   }
@@ -270,6 +272,18 @@ class UserProfileScreen extends Component {
     })
   }
 
+  authErrorMessage = () => {
+    const { authErrors } = this.props
+    let errorMsg
+
+    if (authErrors && authErrors.length) {
+      let { message } = authErrors[0]
+      errorMsg = message
+    }
+
+    return errorMsg || 'We encountered an error when we tried syncing one of your accounts'
+  }
+
   toggleErrorModal = () => {
     const { showErrorModal } = this.state
     this.setState({ showErrorModal: !showErrorModal })
@@ -339,6 +353,7 @@ class UserProfileScreen extends Component {
       userInterests,
       userLocation,
       navigation,
+      clearAuthErrors,
       apiAccessToken,
       getUserInfo,
       getUserTokens,
@@ -433,9 +448,10 @@ class UserProfileScreen extends Component {
             <FriendThemModal
               modalVisible={showErrorModal}
               toggleModal={this.toggleErrorModal}
+              auth={true}
               headerText='Whoops!'
-              text='We encountered an error when we tried syncing one of your accounts'
-              okActionCallback={this.props.clearAuthErors}
+              text={this.authErrorMessage()}
+              okActionCallback={clearAuthErrors}
             />
             <View
               testID='tab-selection-container'
@@ -516,6 +532,7 @@ class UserProfileScreen extends Component {
 const mapStateToProps = state => ({
   apiAccessToken: state.authStore.accessToken,
   authRedirectUrl: state.tokenStore.authRedirectUrl,
+  authErrors: state.authStore.authErrors,
   editableData: state.userStore.editableData,
   fbAuthToken: state.fbStore.fbAccessToken,
   fetching: state.userStore.fetching,

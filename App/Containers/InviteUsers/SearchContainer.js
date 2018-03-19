@@ -86,6 +86,7 @@ class SearchContainer extends Component {
         <LazyloadScrollView contentContainerStyle={styles.searchContainer}>
           {this.renderSearchForm()}
           <FlatList
+            keyExtractor={(item) => item.recordID}
             data={searchableContactList}
             renderItem={({item}) => (
               <UserCard

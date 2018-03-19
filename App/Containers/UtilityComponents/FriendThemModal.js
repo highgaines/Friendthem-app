@@ -38,7 +38,7 @@ class FriendThemModal extends Component {
   }
 
   render() {
-    const { modalVisible, toggleModal, snapchat, headerText, text, form, logout } = this.props
+    const { modalVisible, toggleModal, snapchat, headerText, text, form, logout, auth } = this.props
     const { input } = this.state
 
     return (
@@ -68,7 +68,16 @@ class FriendThemModal extends Component {
                   name="logout"
                   type="material-community"
                   color="#fff"
-                  size={55}
+                  size={50}
+                />
+              : null
+            }
+            { auth
+              ? <Icon
+                  name="error"
+                  type="material-icons"
+                  color="#fff"
+                  size={50}
                 />
               : null
             }
