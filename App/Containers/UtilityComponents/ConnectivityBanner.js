@@ -11,7 +11,7 @@ export default ConnectivityBanner = props => {
       <Image source={Images.friendThemLogoNoText} style={styles.bannerLogo}/>
       <Text
         style={styles.bannerText}>You are already connected with
-          <Text style={styles.bannerStrongText}>{` ${props.name}`}</Text> on {props.platform}
+          <Text style={styles.bannerStrongText}>{` ${props.name}`}</Text> {props.platform}
       </Text>
     </View>
   )
