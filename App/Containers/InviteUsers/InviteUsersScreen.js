@@ -31,8 +31,7 @@ class InviteUsersScreen extends Component {
 
     this.state = {
       networkTabSelected: false,
-      showModal: false,
-      orderUpdated: false
+      showModal: false
     }
   }
 
@@ -146,7 +145,7 @@ const mapStateToProps = state => ({
   accessToken: state.authStore.accessToken,
   friends: state.inviteUsersStore.connectivityData,
   myFriends: _.orderBy(state.inviteUsersStore.myFriends, ['connection_percentage'], ['desc']),
-  contacts: state.inviteUsersStore.contactList,
+  contacts: state.inviteUsersStore.contactList
 })
 
 const mapDispatchToProps = dispatch => {
