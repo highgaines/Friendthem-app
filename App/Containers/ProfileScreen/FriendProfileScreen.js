@@ -281,7 +281,7 @@ class FriendProfileScreen extends Component {
     const { navigation, setSuperConnectPlatforms } = this.props
 
    if (platformsSelected.length) {
-     setSuperConnectPlatforms(this.getSCEligiblePlatforms(), copy)
+     setSuperConnectPlatforms(platformsSelected, copy)
      this.setState(this.initialState, () => navigation.navigate('SuperConnectScreen', { copy: copy }))
 
    }
