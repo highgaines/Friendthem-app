@@ -51,7 +51,7 @@ export default StyleSheet.create({
   socialAccountContainer: {
     flexWrap: 'wrap',
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-start',
     flexDirection: 'row'
   },
   myPicsCard: {

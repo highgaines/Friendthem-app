@@ -26,7 +26,8 @@ export const INITIAL_STATE = Immutable({
   contactList: [],
   myFriends: [],
   selectedUser: '',
-  connectivityData: []
+  connectivityData: [],
+  fetchingData: false
 })
 
 /* ------------- Actions ------------- */

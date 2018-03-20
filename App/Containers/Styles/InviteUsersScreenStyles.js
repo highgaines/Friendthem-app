@@ -59,7 +59,7 @@ export default StyleSheet.create({
   userContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     padding: 5,
     paddingBottom: 170
   },

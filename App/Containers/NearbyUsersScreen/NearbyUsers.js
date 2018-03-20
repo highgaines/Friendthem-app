@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
+import { ScrollView, Text, Image, View, TouchableOpacity, ActivityIndicator } from 'react-native'
 
 // Components
 import SearchBar from './SearchBar'
@@ -116,8 +116,16 @@ class NearbyUsers extends Component {
   };
 
   render() {
-    const { users, navigation, locationPermission } = this.props
+    const { users, navigation, locationPermission, fetching } = this.props
     const { input, feedView, welcomeTutorialVisible } = this.state
+
+    if (!feedView && fetching) {
+      return(
+        <View style={{ margin: '30%'}}>
+          <ActivityIndicator size="large" color="#0000ff"/>
+        </View>
+      )
+    }
 
     return(
       <View
@@ -168,7 +176,8 @@ const mapStateToProps = state => ({
   locationPermission: state.permissionsStore.nativeGeolocation,
   users: state.friendStore.users,
   customGeolocationPermission: state.permissionsStore.locationPermissionsGranted,
-  userSocialProfiles: state.userStore.userData.social_profiles
+  userSocialProfiles: state.userStore.userData.social_profiles,
+  fetching: state.inviteUsersStore.fetchingData
 })
 
 const mapDispatchToProps = dispatch => {
