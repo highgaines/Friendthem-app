@@ -12,6 +12,7 @@ import { NavigationActions } from 'react-navigation'
 // Redux
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import AuthStoreActions, { logoutUser } from '../../Redux/AuthStore'
 import FBStoreActions, { fbLogoutComplete } from '../../Redux/FBStore'
 import UserStoreActions, { updateSettings, getUserInfo } from '../../Redux/UserStore'
 
@@ -25,6 +26,7 @@ import { Images } from '../../Themes'
 
 // Constants
 import { TERMS_AND_CONDITIONS } from '../../Utils/legal'
+import { resetStackAction } from '../../Utils/functions'
 
 // Styles
 import styles from '../Styles/SettingsStyles'
@@ -46,12 +48,13 @@ class SettingsScreen extends Component {
   }
 
   logOut = () => {
-    const { toggleModal, fbLogoutComplete, navigation } = this.props
+    const { toggleModal, fbLogoutComplete, navigation, logoutUser } = this.props
 
     toggleModal()
     LoginManager.logOut()
     fbLogoutComplete()
-    navigation.navigate('LaunchScreen')
+    logoutUser()
+    navigation.dispatch(resetStackAction)
   }
 
   handleReportProblem = () => {
@@ -274,7 +277,12 @@ const mapDispatchToProps = dispatch => {
   const { fbLogoutComplete } = FBStoreActions
 
   return {
-    ...bindActionCreators({ fbLogoutComplete, updateSettings, getUserInfo }, dispatch)
+    ...bindActionCreators({
+      fbLogoutComplete,
+      updateSettings,
+      getUserInfo,
+      logoutUser
+    }, dispatch)
   }
 }
 

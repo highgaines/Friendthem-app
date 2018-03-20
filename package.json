@@ -34,6 +34,7 @@
     "auth0": "^2.9.1",
     "code-push-cli": "^2.1.6",
     "convert-time": "^0.3.0",
+    "deep-equal": "^1.0.1",
     "format-json": "^1.0.3",
     "identity-obj-proxy": "^3.0.0",
     "jest-enzyme": "^4.2.0",
