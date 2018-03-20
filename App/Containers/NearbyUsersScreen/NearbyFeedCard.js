@@ -165,7 +165,7 @@ class NearbyFeedCard extends Component {
     const { friendData } = this.props
     let mappedPictures
 
-    if (friendData && friendData.pictures) {
+    if (friendData && friendData.pictures && friendData.pictures.length) {
       mappedPictures = friendData.pictures.map( (imageObj, idx) => {
         return(
           <TouchableOpacity
@@ -179,7 +179,7 @@ class NearbyFeedCard extends Component {
         )
       })
     } else {
-      return mappedPictures = <View style={{ justifyContent: 'center', alignItems: 'center'}}>
+      mappedPictures = <View style={{ justifyContent: 'center', alignItems: 'center'}}>
         <Text style={{ fontSize: 16, fontWeight: '500', textAlign: 'center'}}>
           Whoops! Looks this user has not set up My Pictures yet!
         </Text>
