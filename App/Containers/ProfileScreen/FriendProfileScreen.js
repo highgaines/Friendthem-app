@@ -140,7 +140,7 @@ class FriendProfileScreen extends Component {
 
   renderPictures = () => {
     const { friendInfo } = this.props
-    let mappedPictures
+    let mappedPictures = []
 
     if (friendInfo && friendInfo.pictures && friendInfo.pictures.length) {
       mappedPictures = friendInfo.pictures.map( (imageObj, idx) => {
