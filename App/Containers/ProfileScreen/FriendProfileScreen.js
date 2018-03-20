@@ -12,6 +12,7 @@ import FBSDK, { LoginManager } from 'react-native-fbsdk';
 import { Icon } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import { NavigationActions } from 'react-navigation'
+import _ from 'lodash'
 
 // Redux
 import FBStoreActions from '../../Redux/FBStore'
@@ -238,14 +239,7 @@ class FriendProfileScreen extends Component {
   socialPlatformPresent = (provider) => {
     const { platforms, userInfo } = this.props
 
-    switch (provider) {
-      case 'snapchat':
-        return userInfo.social_profiles.find(elem => elem.provider === 'snapchat')
-      case 'youtube':
-        return platforms.find(platformObj => platformObj.provider === 'google-oauth2')
-      default:
-        return platforms.find(platformObj => platformObj.provider === provider)
-    }
+    return userInfo.social_profiles.find(platformObj => platformObj.provider === provider)
   }
 
   toggleSocialMediaSelection = (platformName) => {
@@ -278,13 +272,12 @@ class FriendProfileScreen extends Component {
   }
 
   navigateToSuperConnectScreen = (platformsSelected, copy) => {
-    const { navigation, setSuperConnectPlatforms } = this.props
-
-   if (platformsSelected.length) {
-     setSuperConnectPlatforms(platformsSelected, copy)
-     this.setState(this.initialState, () => navigation.navigate('SuperConnectScreen', { copy: copy }))
-
-   }
+    const { navigation, setSuperConnectPlatforms, connection, userInfo, friendInfo } = this.props
+    const fullyConnected = !_.difference(friendInfo.social_profiles.map(prof => prof.provider).asMutable(), connection.map(prof => prof.provider).asMutable()).length
+    if (platformsSelected.length || fullyConnected) {
+      setSuperConnectPlatforms(platformsSelected, copy)
+      this.setState(this.initialState, () => navigation.navigate('SuperConnectScreen', { copy: copy }))
+    }
   }
 
   render() {
