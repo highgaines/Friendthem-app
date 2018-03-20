@@ -273,7 +273,10 @@ class FriendProfileScreen extends Component {
 
   navigateToSuperConnectScreen = (platformsSelected, copy) => {
     const { navigation, setSuperConnectPlatforms, connection, userInfo, friendInfo } = this.props
-    const fullyConnected = !_.difference(friendInfo.social_profiles.map(prof => prof.provider).asMutable(), connection.map(prof => prof.provider).asMutable()).length
+    const fullyConnected = !_.difference(
+      friendInfo.social_profiles.map(prof => prof.provider).asMutable(),
+      connection.map(prof => prof.provider).asMutable()).length
+
     if (platformsSelected.length || fullyConnected) {
       setSuperConnectPlatforms(platformsSelected, copy)
       this.setState(this.initialState, () => navigation.navigate('SuperConnectScreen', { copy: copy }))
