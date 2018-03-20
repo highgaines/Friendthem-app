@@ -88,8 +88,10 @@ class FriendProfileScreen extends Component {
     const { userInfo, connection, friendInfo, fetching, fetchingTokens } = this.props
     const { selectedSocialMedia, selectedPlatformsUpdated } = this.state
     const componentUpdated = !fetching && !fetchingTokens && !selectedPlatformsUpdated
+    const dataPresent = userInfo && userInfo.social_profiles && userInfo.social_profiles.length &&
+                        friendInfo && friendInfo.social_profiles && friendInfo.social_profiles.length
 
-    if (userInfo && userInfo.social_profiles.length && !selectedSocialMedia.length && componentUpdated) {
+    if (dataPresent && !selectedSocialMedia.length && componentUpdated && connection) {
       const nonSelectedPlatform = userInfo.social_profiles.find(profile =>
         !connection.find(connect => connect.provider === profile.provider) &&
         friendInfo.social_profiles.find(friendProf => friendProf.provider === profile.provider)
@@ -174,7 +176,7 @@ class FriendProfileScreen extends Component {
     <Animatable.View
       animation="slideInLeft"
       style={styles.socialAccountContainer}>
-      {mappedPictures}
+      {mappedPictures && mappedPictures.length ? mappedPictures.slice(0, 6) : null}
     </Animatable.View>
     )
   }

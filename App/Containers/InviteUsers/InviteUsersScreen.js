@@ -10,6 +10,7 @@ import InviteUsersStoreActions, { selectUser, fetchConnectivityData, storeContac
 import Reactotron from 'reactotron-react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Contacts from 'react-native-contacts'
+import _ from 'lodash'
 
 // Components
 import InviteUsersHeader from './InviteUsersHeader'
@@ -49,7 +50,7 @@ class InviteUsersScreen extends Component {
     return myFriends && myFriends.map( (friend, idx) => {
       return (
         <ConnectivityCard
-          key={idx}
+          key={`${idx} - ${friend.connection_percentage}`}
           name={friend.first_name ? friend.first_name : "BOB"}
           image={`${friend.picture}`}
           friendData={friend}
@@ -143,7 +144,7 @@ const mapStateToProps = state => ({
   nav: state.nav,
   accessToken: state.authStore.accessToken,
   friends: state.inviteUsersStore.connectivityData,
-  myFriends: state.inviteUsersStore.myFriends,
+  myFriends: _.orderBy(state.inviteUsersStore.myFriends, ['connection_percentage'], ['desc']),
   contacts: state.inviteUsersStore.contactList
 })
 

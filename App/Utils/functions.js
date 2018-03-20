@@ -1,8 +1,9 @@
-import { RNS3 } from 'react-native-aws3';
-import envConfig from '../../envConfig';
-import OneSignal from 'react-native-onesignal';
-import Contacts from 'react-native-contacts';
-import { PermissionsAndroid } from 'react-native';
+import { RNS3 } from 'react-native-aws3'
+import envConfig from '../../envConfig'
+import OneSignal from 'react-native-onesignal'
+import Contacts from 'react-native-contacts'
+import { PermissionsAndroid } from 'react-native'
+import { NavigationActions } from 'react-navigation'
 
 export const uploadToAWS = async (uri, userId, callback, data, token) => {
 
@@ -118,3 +119,8 @@ export const RequestLocationPermission = async (setLocationInterval) => {
     console.warn(err)
   }
 }
+
+export const resetStackAction = NavigationActions.reset({
+  index: 0,
+  actions: [NavigationActions.navigate({ routeName: 'LaunchScreen' })]
+})
