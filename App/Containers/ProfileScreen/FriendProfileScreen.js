@@ -176,7 +176,7 @@ class FriendProfileScreen extends Component {
     <Animatable.View
       animation="slideInLeft"
       style={styles.socialAccountContainer}>
-      {mappedPictures && mappedPictures.length ? mappedPictures.slice(0, 6) : null}
+      {mappedPictures && mappedPictures.length ? mappedPictures.slice(0, 6) : mappedPictures}
     </Animatable.View>
     )
   }
