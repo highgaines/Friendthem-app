@@ -8,7 +8,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    paddingBottom: 20
+    paddingBottom: 75
   },
   socialAccountContainer: {
     paddingHorizontal: 10,
