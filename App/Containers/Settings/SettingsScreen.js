@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Image, View, TouchableOpacity, Switch } from 'react-native'
+import { ScrollView, Text, Image, View, TouchableOpacity, Switch, Linking } from 'react-native'
 
 // Librarires
 import LinearGradient from 'react-native-linear-gradient'
@@ -63,6 +63,10 @@ class SettingsScreen extends Component {
 
   handleSuggestion = () => {
     Communications.email(['support@friendthem.com'], null, null, 'Offer A Suggestion', 'Please give us some detailed feedback on how we can make our app better here...')
+  }
+
+  handlePermissions = () => {
+    Linking.openURL('app-settings:')
   }
 
   toggleSilenceNotification = () => {
@@ -188,6 +192,21 @@ class SettingsScreen extends Component {
             />
             <Text style={styles.sectionItemText}>
               Offer a Suggestion
+            </Text>
+            <Image
+              source={Images.rightArrow}
+              style={styles.rightArrow}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.sectionItem}
+            onPress={this.handlePermissions}
+            >
+            <Image
+              source={Images.lightbulbPNG}
+            />
+            <Text style={styles.sectionItemText}>
+              Access Phone Permissions
             </Text>
             <Image
               source={Images.rightArrow}
