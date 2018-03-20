@@ -115,7 +115,7 @@ class FriendProfileScreen extends Component {
       return(
         <Animatable.View
           animation="slideInLeft"
-          style={{ height: 366 }}>
+          style={styles.scrollContainer}>
           <FeedContainer
             platform={platform}
             userId={friendInfo.id}
@@ -174,7 +174,7 @@ class FriendProfileScreen extends Component {
     <Animatable.View
       animation="slideInLeft"
       style={styles.socialAccountContainer}>
-      {mappedPictures ? mappedPictures.slice(0, 6) : null}
+      {mappedPictures.slice(0, 6)}
     </Animatable.View>
     )
   }
@@ -267,11 +267,11 @@ class FriendProfileScreen extends Component {
   }
 
   getSCEligiblePlatforms = () => {
-    const { friendInfo, connection } = this.props
-    return friendInfo && connection && friendInfo.social_profiles &&
-      friendInfo.social_profiles.filter(obj =>
+    return this.props.friendInfo &&
+    this.props.friendInfo.social_profiles &&
+    this.props.friendInfo.social_profiles.filter( obj =>
       obj.provider && this.socialPlatformPresent(obj.provider) &&
-      !connection.find(connect => connect.provider === obj.provider)
+      !this.props.connection.find(connect => connect.provider === obj.provider)
     ) || [];
   }
 
@@ -279,7 +279,7 @@ class FriendProfileScreen extends Component {
     const { navigation, setSuperConnectPlatforms } = this.props
 
    if (platformsSelected.length) {
-     setSuperConnectPlatforms(platformsSelected, copy)
+     setSuperConnectPlatforms(this.getSCEligiblePlatforms(), copy)
      this.setState(this.initialState, () => navigation.navigate('SuperConnectScreen', { copy: copy }))
 
    }
@@ -331,7 +331,6 @@ class FriendProfileScreen extends Component {
                     color='#FFF'
                     onPress={() => navigation.dispatch(backAction) }
                   />
-
                 </View>
                 <View style={styles.profHeaderTop}>
                       <TouchableOpacity onPress={this.handleCall}>
