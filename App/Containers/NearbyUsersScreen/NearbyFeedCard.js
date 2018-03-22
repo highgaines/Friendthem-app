@@ -27,7 +27,7 @@ import { getMyPics } from '../../Redux/UserStore'
 import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS, isIOS } from '../../Utils/constants'
 
 // Images
-import { Images } from '../../Themes'
+import { Images, Metrics } from '../../Themes'
 
 // Styles
 import styles from '../Styles/FeedCardStyles'
@@ -172,7 +172,7 @@ class NearbyFeedCard extends Component {
             onPress={() => this.handlePicturePush(friendData.pictures, idx)}
             style={styles.myPicsCard}>
             <CachedImage
-              style={{ height: '100%', width: '100%', 'borderRadius': 10}}
+              style={{ height: '100%', width: Metrics.screenWidth * 0.3, 'borderRadius': 10}}
               source={{uri: imageObj.url}}
             />
           </TouchableOpacity>
