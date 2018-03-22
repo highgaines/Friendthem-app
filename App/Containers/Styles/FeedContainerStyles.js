@@ -8,7 +8,7 @@ export default StyleSheet.create({
     paddingBottom: 100
   },
   nearbyFeedContainer: {
-    padding: 10,
+    padding: 10
   },
   profileLinkButton: {
     position: 'absolute',

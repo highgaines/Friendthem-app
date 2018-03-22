@@ -22,7 +22,7 @@ export default StyleSheet.create({
     padding: 150
   },
   nearbyFeedCardContainer: {
-    width: Metrics.screenWidth * 0.95,
+    width: Metrics.screenWidth,
     backgroundColor: 'transparent',
     shadowOffset: {
       width: 0,
@@ -51,7 +51,7 @@ export default StyleSheet.create({
   socialAccountContainer: {
     flexWrap: 'wrap',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     flexDirection: 'row'
   },
   myPicsCard: {
