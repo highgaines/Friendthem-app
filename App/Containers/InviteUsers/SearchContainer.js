@@ -24,7 +24,19 @@ class SearchContainer extends Component {
 
     this.state = {
       input: '',
-      searchableContactList: props.contactList
+      searchableContactList: props.contactList,
+      contactListUpdated: false
+    }
+  }
+
+  componentDidUpdate = (prevProps) => {
+    const { contactList } = this.props
+
+    if (contactList.length > prevProps.contactList.length) {
+      this.setState({
+        searchableContactList: contactList,
+        contactListUpdated: !this.state.contactListUpdated
+      })
     }
   }
 
@@ -79,17 +91,19 @@ class SearchContainer extends Component {
   }
 
   render() {
-    const { triggerModal, selectUser } = this.props;
-    const { searchableContactList } = this.state;
-
+    const { triggerModal, selectUser, contactList } = this.props;
+    const { searchableContactList, contactListUpdated } = this.state;
+    console.log(contactListUpdated)
     return (
         <LazyloadScrollView contentContainerStyle={styles.searchContainer}>
           {this.renderSearchForm()}
           <FlatList
             keyExtractor={(item) => item.recordID}
             data={searchableContactList}
-            renderItem={({item}) => (
+            extraData={contactListUpdated}
+            renderItem={({item, index}) => (
               <UserCard
+                key={index}
                 firstName={item.givenName}
                 lastName={item.familyName}
                 phoneNumbers={item.phoneNumbers}
