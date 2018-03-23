@@ -30,22 +30,9 @@ export default UserCard = ({
     return phoneNumbers[0] ? phoneNumbers[0].number : null
   }
 
-  const determineAnyEmail = () => {
-    return emailAddresses[0] ? emailAddresses[0].email : null
-  }
-
   const handleTextInvite = () => {
     let phoneNumber = determineMobileNumber()
-    Communications.textWithoutEncoding(phoneNumber, 'Friend Them is Great! Download it here! https://apple.co/2Dm46dF')
-  }
-
-  const handleEmailInvite = () => {
-    let emailAddress = determineAnyEmail()
-    if (emailAddress) {
-      Communications.email(emailAddress, 'Friend Them is Great! Download it here! https://apple.co/2Dm46dF')
-    } else {
-      alert(`You do not have an e-mail on file for ${firstName}`)
-    }
+    Communications.textWithoutEncoding(phoneNumber, 'There’s got to be a better way.. check out this new awesome app! https://apple.co/2Dm46dF')
   }
 
   return (
@@ -61,14 +48,6 @@ export default UserCard = ({
           onPress={() => handleTextInvite()}>
           <Image
             source={Images.textMessageIcon}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.inviteRowContent}
-          onPress={() => handleEmailInvite()}>
-          <Image
-            style={{ width: 37, height: 37 }}
-            source={Images.emailIcon}
           />
         </TouchableOpacity>
       </View>
