@@ -31,13 +31,19 @@ class SearchBar extends Component {
         underlineColorAndroid='rgba(0,0,0,0)'
         style={styles.searchForm}
         onChangeText={input => this.props.handleChange(input)}
+        autoCorrect={false}
         value={this.props.input}
+        ref='SearchForm'
       />
     )
   }
 
   toggleSearch = () => {
-    this.setState({ searchMode: !this.state.searchMode })
+    const { searchMode } = this.state
+
+    this.setState({ searchMode: !searchMode },
+      searchMode ? this.props.handleChange('') : () => this.refs.SearchForm.focus()
+    )
   }
 
   render = () => {
@@ -64,6 +70,7 @@ class SearchBar extends Component {
               type='evilicon'
               size={36}
               color='#FFF'
+              underlayColor={'transparent'}
               onPress={this.toggleSearch}
             />
           </View>
