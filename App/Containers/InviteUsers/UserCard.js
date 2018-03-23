@@ -39,7 +39,7 @@ export default UserCard = ({
     <View style={styles.userCardContainer}>
 
       <View style={styles.infoColumn}>
-        <Text style={styles.userNameText}> {`${firstName ? firstName : null} ${lastName ? lastName : null}`} </Text>
+        <Text style={styles.userNameText}> {`${firstName ? firstName : ''} ${lastName ? lastName : ''}`} </Text>
       </View>
 
       <View style={styles.sendButtonColumn}>

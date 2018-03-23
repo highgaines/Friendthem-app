@@ -24,6 +24,7 @@ import Navbar from '../Navbar/Navbar'
 import styles from '../Styles/InviteUsersScreenStyles'
 
 import { LazyloadScrollView, LazyloadView, LazyloadImage } from 'react-native-lazyload-deux'
+import { RequestContactsPermission } from '../../Utils/functions'
 
 class InviteUsersScreen extends Component {
   constructor(props) {
@@ -39,8 +40,21 @@ class InviteUsersScreen extends Component {
     this.setState({ showModal: !this.state.showModal })
   }
 
+  componentWillMount = () => {
+    const { storeContactInfo } = this.props
+
+    Contacts.getAll( (err, contacts) => {
+      if (err === 'denied') {
+        console.log('DENIED')
+      } else {
+        storeContactInfo(contacts)
+      }
+    })
+  }
+
   componentDidMount = () => {
     const { fetchMyFriendsData, fetchConnectivityData, accessToken, storeContactInfo } = this.props
+
     fetchMyFriendsData(accessToken)
   }
 
