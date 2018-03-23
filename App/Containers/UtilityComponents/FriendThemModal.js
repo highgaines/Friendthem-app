@@ -9,7 +9,7 @@ import Modal from 'react-native-modal'
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import UserStoreActions, { updateSnapInfo } from '../../Redux/UserStore'
+import UserStoreActions, { updateSnapInfo, editSnapInfo } from '../../Redux/UserStore'
 
 // Styles
 import styles from '../Styles/FriendThemModalStyles'
@@ -24,9 +24,11 @@ class FriendThemModal extends Component {
   }
 
   submitSnapHandle = () => {
-    const { submitText, toggleModal, accessToken, updateSnapInfo } = this.props
+    const { submitText, toggleModal, accessToken, updateSnapInfo, replaceSnapHandle, editSnapInfo } = this.props
 
-    updateSnapInfo('snapchat', this.state.input, accessToken)
+    replaceSnapHandle ? editSnapInfo('snapchat', this.state.input, accessToken)
+      : updateSnapInfo('snapchat', this.state.input, accessToken)
+
     toggleModal()
   }
 
@@ -128,13 +130,17 @@ class FriendThemModal extends Component {
 
 const mapStateToProps = (state) => ({
   userId: state.userStore.userId,
-  accessToken: state.authStore.accessToken
+  accessToken: state.authStore.accessToken,
+  replaceSnapHandle: state.userStore.userData.social_profiles.find(profile =>
+    profile.provider === 'snapchat'
+  ),
 })
 
 const mapDispatchToProps = dispatch => {
   return {
     ...bindActionCreators({
-      updateSnapInfo
+      updateSnapInfo,
+      editSnapInfo
     }, dispatch)
   }
 }

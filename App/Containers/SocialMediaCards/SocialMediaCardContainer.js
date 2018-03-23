@@ -138,7 +138,7 @@ class SocialMediaCardContainer extends Component {
                 synced={isSynced}
                 connectedWithVisitor={isSynced && fromFriendProfile ? this.checkConnection(socialPlatform) : null}
                 readOnly={isSynced && fromUserProfile}
-                socialAuth={(!isSynced && fromFriendProfile) ?
+                socialAuth={(!isSynced && fromFriendProfile) && (!fromUserProfile && socialPlatform === 'snapchat') ?
                   () => null : this.determineSocialAuth(socialPlatform)
                 }
                 platformAuth={isYoutube ? 'google-oauth2' : socialPlatform}

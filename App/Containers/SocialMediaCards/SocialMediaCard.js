@@ -22,10 +22,11 @@ export default class SocialMediaCard extends Component {
   }
 
   onPressFunctionality = () => {
-    const { readOnly, connectedWithVisitor, toggleBanner, cardPressed } = this.props
+    const { readOnly, connectedWithVisitor, toggleBanner, cardPressed, platformName, fromUserProfile } = this.props
+    const userSnapchat = fromUserProfile && platformName === 'Snapchat'
 
-    return connectedWithVisitor ?
-      toggleBanner : readOnly ?
+    return connectedWithVisitor && !userSnapchat ?
+      toggleBanner : readOnly && !userSnapchat ?
         null : this.handlePush
   }
 
@@ -78,6 +79,8 @@ export default class SocialMediaCard extends Component {
       readOnly,
       syncedBGColor
     }  = this.props
+    const userSnapchat = fromUserProfile && platformName === 'Snapchat'
+
     const cardStyle = this.determineConnectedStatus() ?
        [styles.cardSelected, { backgroundColor: syncedBGColor }] : synced ?
          styles.invertedCard : styles.cardUnselected
@@ -85,7 +88,7 @@ export default class SocialMediaCard extends Component {
     return (
       <TouchableOpacity
         style={cardStyle}
-        disabled={readOnly || connectedWithVisitor}
+        disabled={(readOnly || connectedWithVisitor) && !userSnapchat}
         activeOpacity={readOnly ? 1 : 0.2 }
         onPress={this.onPressFunctionality()}
       >
