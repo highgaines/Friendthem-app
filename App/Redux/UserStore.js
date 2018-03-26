@@ -38,6 +38,9 @@ const { Types, Creators } = createActions({
   updateSnapRequest: null,
   updateSnapSuccess: null,
   updateSnapFailure: null,
+  editSnapRequest: null,
+  editSnapSuccess: null,
+  editSnapFailure: null,
   updatePasswordRequest: null,
   updatePasswordSuccess: null,
   updatePasswordFailure: null,
@@ -333,6 +336,33 @@ export const updateSnapInfo = (provider, username, accessToken) => {
   }
 }
 
+export const editSnapInfo = (provider, username, accessToken) => {
+  const headers = new Headers()
+  headers.append('Authorization', `Bearer ${accessToken}`)
+  headers.append('Content-Type', 'application/json')
+
+  const body = {
+    provider: provider,
+    username: username
+  }
+
+  const init = {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify(body)
+  }
+
+  return {
+    types: [
+      Types.EDIT_SNAP_REQUEST,
+      Types.EDIT_SNAP_SUCCESS,
+      Types.EDIT_SNAP_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi('social_profile/', init, dispatch)
+  }
+}
+
 // USER SETTINGS - GHOST MODE AND SILENCE NOTIFICATIONS
 
 export const updateSettings = (accessToken, setting, mode) => {
@@ -485,6 +515,20 @@ const handleUpdateSnapFailure = (state, action) => {
   return state.set('fetching', false);
 }
 
+const handleEditSnapRequest = (state, action) => {
+  return state.set('fetching', true);
+}
+
+const handleEditSnapSuccess = (state, action) => {
+  return state
+    .set('fetching', false)
+    .setIn(['userData', 'snapHandle'], action.data.username);
+}
+
+const handleEditSnapFailure = (state, action) => {
+  return state.set('fetching', false);
+}
+
 const handleUpdateSettingsRequest = (state, action) => {
   return state.set('fetching', true);
 }
@@ -633,6 +677,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.UPDATE_SNAP_REQUEST]: handleUpdateSnapRequest,
   [Types.UPDATE_SNAP_SUCCESS]: handleUpdateSnapSuccess,
   [Types.UPDATE_SNAP_FAILURE]: handleUpdateSnapFailure,
+  [Types.EDIT_SNAP_REQUEST]: handleEditSnapRequest,
+  [Types.EDIT_SNAP_SUCCESS]: handleEditSnapSuccess,
+  [Types.EDIT_SNAP_FAILURE]: handleEditSnapFailure,
   [Types.UPDATE_PASSWORD_REQUEST]: handleUpdatePWRequest,
   [Types.UPDATE_PASSWORD_SUCCESS]: handleUpdatePWSuccess,
   [Types.UPDATE_PASSWORD_FAILURE]: handleUpdatePWFailure,
