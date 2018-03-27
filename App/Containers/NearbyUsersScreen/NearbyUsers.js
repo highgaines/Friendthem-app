@@ -53,7 +53,6 @@ class NearbyUsers extends Component {
       setLocationInterval
     } = this.props
 
-    fetchConnectivityData(accessToken)
     if (customGeolocationPermission && !locationPermission) {
       if (isIOS) {
         Permissions.request('location', { type: 'whenInUse' }).then(response => {
@@ -64,14 +63,17 @@ class NearbyUsers extends Component {
       } else if (isAndroid) {
         RequestLocationPermission(setLocationInterval)
       }
+      fetchConnectivityData(accessToken)
     }
   }
 
   componentDidMount = () => {
-    const { updateUserPosition, accessToken } = this.props
+    const { updateUserPosition, accessToken, fetchConnectivityData } = this.props
+
     if (accessToken) {
       navigator.geolocation.getCurrentPosition((position) => {
-        updateUserPosition(accessToken, position.coords)
+        updateUserPosition(accessToken, position.coords),
+        fetchConnectivityData(accessToken)
       },
         (error) => this.setState({ error: error.message }),
         { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
@@ -83,7 +85,8 @@ class NearbyUsers extends Component {
   locationInterval = () => {
     const { accessToken, updateUserPosition } = this.props
     navigator.geolocation.getCurrentPosition((position) => {
-      updateUserPosition(accessToken, position.coords)
+      updateUserPosition(accessToken, position.coords),
+      fetchConnectivityData(accessToken)
     },
       (error) => this.setState({ error: error.message }),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
