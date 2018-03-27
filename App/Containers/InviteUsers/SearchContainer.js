@@ -93,7 +93,7 @@ class SearchContainer extends Component {
   render() {
     const { triggerModal, selectUser, contactList } = this.props;
     const { searchableContactList, contactListUpdated } = this.state;
-    console.log(contactListUpdated)
+
     return (
         <LazyloadScrollView contentContainerStyle={styles.searchContainer}>
           {this.renderSearchForm()}
