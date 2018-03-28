@@ -9,7 +9,7 @@ import { sendInviteToUser } from '../../Redux/InviteUsersStore'
 
 // Libraries
 import { Icon } from 'react-native-elements';
-
+import _ from 'lodash'
 // Styles
 import styles from '../Styles/SearchBarStyles';
 
@@ -119,7 +119,7 @@ class SearchContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  contactList: state.inviteUsersStore.contactList
+  contactList: _.sortBy(state.inviteUsersStore.contactList, ['givenName'])
 })
 
 const mapDispatchToProps = dispatch => ({
