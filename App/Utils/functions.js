@@ -2,7 +2,7 @@ import { RNS3 } from 'react-native-aws3'
 import envConfig from '../../envConfig'
 import OneSignal from 'react-native-onesignal'
 import Contacts from 'react-native-contacts'
-import { PermissionsAndroid } from 'react-native'
+import { PermissionsAndroid, Linking } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 
 export const uploadToAWS = async (uri, userId, callback, data, token) => {
@@ -126,3 +126,27 @@ export const resetStackAction = NavigationActions.reset({
 })
 
 export const capitalizeWord = word => `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`
+
+export const testDeepLinkAbility = (platform, deepLink, userIdentifier) => {
+  Linking.canOpenURL(deepLink).then(resp => {
+    if (resp) {
+      () => Linking.openURL(deepLink)
+    } else {
+        switch (platform) {
+          case 'facebook':
+            return Linking.openURL(`https://${platform}.com/${userIdentifier}`)
+          case 'twitter':
+            return Linking.openURL(`https://${platform}.com/${userIdentifier}`)
+          case 'instagram':
+            return Linking.openURL(`https://${platform}.com/${userIdentifier}`)
+          case 'youtube':
+            return Linking.openURL(`https://${platform}.com/channel/${userIdentifier}`)
+          case 'snapchat':
+            return Linking.openURL(`https://${platform}.com/`)
+          default:
+            return ''
+        }
+      }
+    }
+  )
+}
