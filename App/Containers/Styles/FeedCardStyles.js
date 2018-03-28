@@ -22,7 +22,7 @@ export default StyleSheet.create({
     padding: 150
   },
   nearbyFeedCardContainer: {
-    width: Metrics.screenWidth,
+    width: Metrics.screenWidth * .96,
     backgroundColor: 'transparent',
     shadowOffset: {
       width: 0,
@@ -161,10 +161,5 @@ export default StyleSheet.create({
     height: Metrics.screenWidth * 0.70,
     width: Metrics.screenWidth * 0.85,
     marginBottom: 5
-  },
-  deepLinkButtonContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1
   },
 })

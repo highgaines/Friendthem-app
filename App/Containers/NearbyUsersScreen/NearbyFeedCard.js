@@ -300,7 +300,7 @@ class NearbyFeedCard extends Component {
                 }
                 <Text style={styles.location}> New York, NY </Text>
               </LazyloadView>
-              <LazyloadView style={styles.deepLinkButtonContainer}>
+              <LazyloadView style={[styles.deepLinkButtonContainer, { marginRight: 10}]}>
                 {this.renderDeeplinkButton()}
               </LazyloadView>
             </LazyloadView>

@@ -65,7 +65,7 @@ class ScrollWheel extends Component {
               {
                 socialPlatforms && socialPlatforms.includes('google-oauth2')
                 ? <TouchableOpacity onPress={() => handlePlatformChange('youtube')}>
-                  <SMPlatformCircle platform="youtube" size={70}/>
+                  <SMPlatformCircle platform="youtube" size={52}/>
                   <Text style={selected === 'youtube' ? [styles.text, { color: 'white'}] : styles.text}> Youtube </Text>
                 </TouchableOpacity>
                 : null
@@ -73,7 +73,7 @@ class ScrollWheel extends Component {
               {
                 socialPlatforms && socialPlatforms.includes('snapchat')
                 ? <TouchableOpacity onPress={() => handlePlatformChange('snapchat')}>
-                  <SMPlatformCircle platform="snapchat" size={70}/>
+                  <SMPlatformCircle platform="snapchat" size={52}/>
                   <Text style={selected === 'snapchat' ? [styles.text, { color: 'white'}] : styles.text}> Snapchat </Text>
                 </TouchableOpacity>
                 : null
