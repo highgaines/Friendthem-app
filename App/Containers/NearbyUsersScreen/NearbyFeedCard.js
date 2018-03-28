@@ -25,6 +25,7 @@ import { getMyPics } from '../../Redux/UserStore'
 
 // Constants
 import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS, isIOS } from '../../Utils/constants'
+import { capitalizeWord } from '../../Utils/functions'
 
 // Images
 import { Images, Metrics } from '../../Themes'
@@ -109,7 +110,7 @@ class NearbyFeedCard extends Component {
 
         return(
           <ConnectButton
-            title="Instagram"
+            title="Go to Instagram"
             linearGradient={true}
             gradientColors={
               [
@@ -120,7 +121,7 @@ class NearbyFeedCard extends Component {
               '#fec052'
             ]}
             gradientStyles={{
-              'width': 80,
+              'width': 100,
               'height': 30,
               'borderRadius': 30,
               'justifyContent': 'center'
@@ -134,7 +135,7 @@ class NearbyFeedCard extends Component {
       const fbUid = this.pullUid('facebook')
         return(
           <ConnectButton
-            title="Facebook"
+            title="Go to Facebook"
             color={SYNCED_CARD_COLORS.facebook}
             containerStyle={[styles.deepLinkButton, styles.facebookDeeplinkButton]}
             textStyle={styles.deepLinkText}
@@ -145,12 +146,32 @@ class NearbyFeedCard extends Component {
       const twitterUsername = this.pullUsername('twitter')
         return(
           <ConnectButton
-            title="Twitter"
+            title="Go to Twitter"
             color={SYNCED_CARD_COLORS.twitter}
             containerStyle={[styles.deepLinkButton, styles.twitterDeeplinkButton]}
             textStyle={styles.deepLinkText}
             onPressCallback={() => Linking.openURL(`twitter://user?screen_name=${twitterUsername}`)}
           />
+        )
+      case 'youtube':
+      const youtubeUsername = this.pullUsername('google-oauth2')
+        return (
+          <ConnectButton
+            title="Go to Youtube"
+            color={SYNCED_CARD_COLORS.youtube}
+            containerStyle={[styles.deepLinkButton, styles.youtubeDeeplinkButton]}
+            textStyle={styles.deepLinkText}
+            onPressCallback={() => Linking.openURL(`twitter://user/${youtubeUsername}`)} />
+        )
+      case 'snapchat':
+      const snapchatUsername = this.pullUsername('snapchat')
+        return (
+          <ConnectButton
+            title="Go to Snapchat"
+            color={SYNCED_CARD_COLORS.youtube}
+            containerStyle={[styles.deepLinkButton, styles.snapchatDeeplinkButton]}
+            textStyle={styles.deepLinkText}
+            onPressCallback={() => Linking.openURL(`snapchat://user/${snapchatUsername}`)} />
         )
     }
   }
@@ -216,14 +237,10 @@ class NearbyFeedCard extends Component {
     } else if (filteredFeed) {
       return (<View style={{ marginTop: 20, justifyContent: 'flex-start', alignItems: 'center', padding: 10}}>
         <Text style={{ fontSize: 16, fontWeight: '500', textAlign: 'center'}}>
-          Whoops! No content available to display!
+          {`View content on ${capitalizeWord(platform)}`}
         </Text>
-        <View style={{ padding: 20 }}>
-          <Icon
-            name="emoji-sad"
-            type="entypo"
-            size={100}
-          />
+        <View style={styles.deepLinkButtonContainer}>
+          {this.renderDeeplinkButton(platform)}
         </View>
       </View>)
     }

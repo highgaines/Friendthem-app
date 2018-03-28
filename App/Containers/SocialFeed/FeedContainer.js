@@ -17,6 +17,7 @@ import SocialFeedStoreActions, { fetchFeed } from '../../Redux/SocialFeedStore'
 
 // Constants
 import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
+import { capitalizeWord } from '../../Utils/functions'
 
 // Images
 import { Images } from '../../Themes';
@@ -129,6 +130,26 @@ class FeedContainer extends Component {
             onPressCallback={() => Linking.openURL(`twitter://user?screen_name=${twitterUsername}`)}
           />
         )
+      case 'youtube':
+      const youtubeUsername = this.pullUsername('google-oauth2')
+        return (
+          <ConnectButton
+            title="Go to Youtube"
+            color={SYNCED_CARD_COLORS.youtube}
+            containerStyle={[styles.deepLinkButton, styles.youtubeDeeplinkButton]}
+            textStyle={styles.deepLinkText}
+            onPressCallback={() => Linking.openURL(`twitter://user/${youtubeUsername}`)} />
+        )
+      case 'snapchat':
+      const snapchatUsername = this.pullUsername('snapchat')
+        return (
+          <ConnectButton
+            title="Go to Snapchat"
+            color={SYNCED_CARD_COLORS.youtube}
+            containerStyle={[styles.deepLinkButton, styles.snapchatDeeplinkButton]}
+            textStyle={styles.deepLinkText}
+            onPressCallback={() => Linking.openURL(`snapchat://user/${snapchatUsername}`)} />
+        )
     }
   }
 
@@ -139,7 +160,7 @@ class FeedContainer extends Component {
     ? userFeedArr.map( (item, idx) => <FeedCard key={idx} item={item}/>)
     : <View style={{top: 100}}>
         <Text style={{ fontSize: 16, fontWeight: '500', textAlign: 'center'}}>
-          Whoops! There is no content to render!
+          {`View content on ${capitalizeWord(platform)}`}
         </Text>
         <View style={styles.deepLinkButtonContainer}>
           {this.renderDeeplinkButton(platform)}

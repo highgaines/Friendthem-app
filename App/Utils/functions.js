@@ -124,3 +124,5 @@ export const resetStackAction = NavigationActions.reset({
   index: 0,
   actions: [NavigationActions.navigate({ routeName: 'LaunchScreen' })]
 })
+
+export const capitalizeWord = word => `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`

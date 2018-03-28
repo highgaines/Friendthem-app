@@ -73,7 +73,7 @@ export default StyleSheet.create({
     flex: 1
   },
   deepLinkButton: {
-    width: 80,
+    width: 100,
     height: 30,
     alignItems: 'center',
     flexDirection: 'row',
@@ -94,6 +94,12 @@ export default StyleSheet.create({
   },
   twitterDeeplinkButton: {
     backgroundColor: Colors.twitter
+  },
+  youtubeDeeplinkButton: {
+    backgroundColor: Colors.youtube
+  },
+  snapchatDeeplinkButton: {
+    backgroundColor: Colors.snapchat
   },
   header: {
     shadowColor: 'black',
@@ -155,5 +161,10 @@ export default StyleSheet.create({
     height: Metrics.screenWidth * 0.70,
     width: Metrics.screenWidth * 0.85,
     marginBottom: 5
-  }
+  },
+  deepLinkButtonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1
+  },
 })
