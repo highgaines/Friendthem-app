@@ -278,7 +278,7 @@ class FriendProfileScreen extends Component {
       connection.map(prof => prof.provider).asMutable()).length
 
     if (platformsSelected.length || fullyConnected) {
-      setSuperConnectPlatforms(platformsSelected, copy)
+      setSuperConnectPlatforms(_.sortBy(platformsSelected, ['provider']), copy)
       this.setState(this.initialState, () => navigation.navigate('SuperConnectScreen', { copy: copy }))
     }
   }
