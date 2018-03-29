@@ -22,7 +22,7 @@ export default function UserCard(props) {
       style={styles.card}
       onPress={setFriendInfo}>
       <ImageCircle
-        size={75}
+        size={95}
         source={picture}
       />
       <LazyloadView style={styles.cardText}>
