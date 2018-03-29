@@ -110,52 +110,54 @@ class SocialMediaCardContainer extends Component {
     } = this.state
 
     return (
-      <ScrollView contentContainerStyle={styles.socialAccountContainer}>
-      {
-        Object.keys(socialMediaData).map((socialPlatform, idx) => {
-          const isYoutube = socialPlatform === 'youtube'
-          const currentPlatform = platformSynced(isYoutube ? 'google-oauth2' : socialPlatform)
-          const isSelected = platformSelected(isYoutube ? 'google-oauth2': socialPlatform)
-          const isSynced = !!currentPlatform
-          const capitalizeName = (name) => name[0].toUpperCase() + name.slice(1)
-          const friendPlatfromPresent = fromFriendProfile && friendPlatforms ?
-          friendPlatforms && friendPlatforms.find(socialElem => {
-            if (isYoutube) {
-              return socialElem.provider === 'google-oauth2'
-            } else {
-              return socialElem.provider === socialPlatform
-            }
-          }) : true
-          const userName = currentPlatform || !fromFriendProfile ?
-            this.socialPlatformUsername(isYoutube ? 'google-oauth2' : socialPlatform)
-            :
-            friendPlatfromPresent ? friendPlatfromPresent.username : null
+      <View style={{ height: '100%', paddingBottom: 10 }}>
+        <ScrollView contentContainerStyle={styles.socialAccountContainer}>
+        {
+          Object.keys(socialMediaData).map((socialPlatform, idx) => {
+            const isYoutube = socialPlatform === 'youtube'
+            const currentPlatform = platformSynced(isYoutube ? 'google-oauth2' : socialPlatform)
+            const isSelected = platformSelected(isYoutube ? 'google-oauth2': socialPlatform)
+            const isSynced = !!currentPlatform
+            const capitalizeName = (name) => name[0].toUpperCase() + name.slice(1)
+            const friendPlatfromPresent = fromFriendProfile && friendPlatforms ?
+            friendPlatforms && friendPlatforms.find(socialElem => {
+              if (isYoutube) {
+                return socialElem.provider === 'google-oauth2'
+              } else {
+                return socialElem.provider === socialPlatform
+              }
+            }) : true
+            const userName = currentPlatform || !fromFriendProfile ?
+              this.socialPlatformUsername(isYoutube ? 'google-oauth2' : socialPlatform)
+              :
+              friendPlatfromPresent ? friendPlatfromPresent.username : null
 
-          if (friendPlatfromPresent) {
-            return (
-              <SocialMediaCard
-                key={idx}
-                fromUserProfile={fromUserProfile}
-                platformName={capitalizeName(socialPlatform)}
-                toggleBanner={() => toggleBanner(friendData.first_name, capitalizeName(socialPlatform), 3000)}
-                synced={isSynced}
-                connectedWithVisitor={isSynced && fromFriendProfile ? this.checkConnection(socialPlatform) : null}
-                readOnly={isSynced && fromUserProfile}
-                socialAuth={(!isSynced && fromFriendProfile) && (!fromUserProfile && socialPlatform === 'snapchat') ?
-                  () => null : this.determineSocialAuth(socialPlatform)
-                }
-                platformAuth={isYoutube ? 'google-oauth2' : socialPlatform}
-                userName={userName}
-                syncedBGColor={syncedCardColors[socialPlatform]}
-                selected={isSelected}
-              />
-            )
-          } else {
-            return null
-          }
-        })
-      }
-      </ScrollView>
+            if (friendPlatfromPresent) {
+              return (
+                <SocialMediaCard
+                  key={idx}
+                  fromUserProfile={fromUserProfile}
+                  platformName={capitalizeName(socialPlatform)}
+                  toggleBanner={() => toggleBanner(friendData.first_name, capitalizeName(socialPlatform), 3000)}
+                  synced={isSynced}
+                  connectedWithVisitor={isSynced && fromFriendProfile ? this.checkConnection(socialPlatform) : null}
+                  readOnly={isSynced && fromUserProfile}
+                  socialAuth={(!isSynced && fromFriendProfile) && (!fromUserProfile && socialPlatform === 'snapchat') ?
+                    () => null : this.determineSocialAuth(socialPlatform)
+                  }
+                  platformAuth={isYoutube ? 'google-oauth2' : socialPlatform}
+                  userName={userName}
+                  syncedBGColor={syncedCardColors[socialPlatform]}
+                  selected={isSelected}
+                />
+              )
+            } else {
+              return null
+            }
+          })
+        }
+        </ScrollView>
+      </View>
     )
   }
 }

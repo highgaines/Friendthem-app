@@ -229,7 +229,6 @@ class SuperConnect extends Component {
             superConnectPromiseLoop={selectedSocialMedia.length ?
               this.superConnectPromiseLoop : () => false
             }
-
             copy={this.props.copy}
             navigation={navigation}
             allPlatformsSynced={allPlatformsSynced}

@@ -406,7 +406,10 @@ class FriendProfileScreen extends Component {
                 iphoneXStyle={ifIphoneX({'top': 300}, '')}
               />
             </View> :
-             this.renderPlatformContainer(platform)  }
+            <View style={styles.scrollContainer}>
+             { this.renderPlatformContainer(platform) }
+            </View>
+           }
         </View>
     )
   }
