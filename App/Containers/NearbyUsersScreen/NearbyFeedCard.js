@@ -25,6 +25,7 @@ import { getMyPics } from '../../Redux/UserStore'
 
 // Constants
 import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS, isIOS } from '../../Utils/constants'
+import { capitalizeWord, testDeepLinkAbility } from '../../Utils/functions'
 
 // Images
 import { Images, Metrics } from '../../Themes'
@@ -105,11 +106,13 @@ class NearbyFeedCard extends Component {
 
     switch(platform) {
       case 'instagram':
-      const igUid = this.pullUid('instagram')
+        const igUid = this.pullUid('instagram')
+        const igUserName = this.pullUsername('instagram')
+        const instaDeepLink = `instagram://user?id=${igUid}`
 
         return(
           <ConnectButton
-            title="Instagram"
+            title="Go to Instagram"
             linearGradient={true}
             gradientColors={
               [
@@ -120,37 +123,66 @@ class NearbyFeedCard extends Component {
               '#fec052'
             ]}
             gradientStyles={{
-              'width': 80,
+              'width': 100,
               'height': 30,
               'borderRadius': 30,
               'justifyContent': 'center'
             }}
             containerStyle={styles.deepLinkButton}
             textStyle={styles.deepLinkText}
-            onPressCallback={() => Linking.openURL(`instagram://user?id=${igUid}`)}
+            onPressCallback={() => testDeepLinkAbility('instagram', instaDeepLink, igUserName)}
           />
         )
       case 'facebook':
-      const fbUid = this.pullUid('facebook')
+        const fbUid = this.pullUid('facebook')
+        const fbDeepLink = `fb://profile/${fbUid}`
+
         return(
           <ConnectButton
-            title="Facebook"
+            title="Go to Facebook"
             color={SYNCED_CARD_COLORS.facebook}
             containerStyle={[styles.deepLinkButton, styles.facebookDeeplinkButton]}
             textStyle={styles.deepLinkText}
-            onPressCallback={() => Linking.openURL(`fb://profile/${fbUid}`)}
+            onPressCallback={() => testDeepLinkAbility('facebook', fbDeepLink, fbUid)}
           />
         )
       case 'twitter':
-      const twitterUsername = this.pullUsername('twitter')
+        const twitterUsername = this.pullUsername('twitter')
+        const twitterDeepLink = `twitter://user?screen_name=${twitterUsername}`
+
         return(
           <ConnectButton
-            title="Twitter"
+            title="Go to Twitter"
             color={SYNCED_CARD_COLORS.twitter}
             containerStyle={[styles.deepLinkButton, styles.twitterDeeplinkButton]}
             textStyle={styles.deepLinkText}
-            onPressCallback={() => Linking.openURL(`twitter://user?screen_name=${twitterUsername}`)}
+            onPressCallback={() => testDeepLinkAbility('twitter', twitterDeepLink, twitterUsername)}
           />
+        )
+      case 'youtube':
+        const youtubeData = friendData.social_profiles.find(platform => platform.provider === 'google-oauth2')
+        const youtubeChannel = youtubeData ? youtubeData.youtube_channel : ''
+        const youtubeDeeplink = `vnd.youtube://www.youtube.com/channel/${youtubeChannel}`
+
+        return (
+          <ConnectButton
+            title="Go to Youtube"
+            color={SYNCED_CARD_COLORS.youtube}
+            containerStyle={[styles.deepLinkButton, styles.youtubeDeeplinkButton]}
+            textStyle={styles.deepLinkText}
+            onPressCallback={() => testDeepLinkAbility('youtube', youtubeDeeplink, youtubeChannel)} />
+        )
+      case 'snapchat':
+        const snapchatUsername = this.pullUsername('snapchat')
+        const snapChatDeepLink = `snapchat://add/${snapchatUsername}`
+
+        return (
+          <ConnectButton
+            title="Go to Snapchat"
+            color={SYNCED_CARD_COLORS.youtube}
+            containerStyle={[styles.deepLinkButton, styles.snapchatDeeplinkButton]}
+            textStyle={styles.deepLinkText}
+            onPressCallback={() => testDeepLinkAbility('snapchat', snapChatDeepLink, snapchatUsername)} />
         )
     }
   }
@@ -169,6 +201,7 @@ class NearbyFeedCard extends Component {
       mappedPictures = friendData.pictures.map( (imageObj, idx) => {
         return(
           <TouchableOpacity
+            key={idx}
             onPress={() => this.handlePicturePush(friendData.pictures, idx)}
             style={styles.myPicsCard}>
             <CachedImage
@@ -214,16 +247,12 @@ class NearbyFeedCard extends Component {
     } else if (filteredFeed && filteredFeed.length) {
       return filteredFeed.map( (feedObj, idx) => <FeedCard key={idx} item={feedObj}/> )
     } else if (filteredFeed) {
-      return (<View style={{ marginTop: 20, justifyContent: 'flex-start', alignItems: 'center', padding: 10}}>
+      return (<View style={{ marginTop: 20, justifyContent: 'center', alignItems: 'center', padding: 10}}>
         <Text style={{ fontSize: 16, fontWeight: '500', textAlign: 'center'}}>
-          Whoops! No content available to display!
+          {`View content on ${capitalizeWord(platform)}`}
         </Text>
-        <View style={{ padding: 20 }}>
-          <Icon
-            name="emoji-sad"
-            type="entypo"
-            size={100}
-          />
+        <View style={styles.deepLinkButtonContainer}>
+          {this.renderDeeplinkButton(platform)}
         </View>
       </View>)
     }
@@ -271,7 +300,7 @@ class NearbyFeedCard extends Component {
                 }
                 <Text style={styles.location}> New York, NY </Text>
               </LazyloadView>
-              <LazyloadView style={styles.deepLinkButtonContainer}>
+              <LazyloadView style={[styles.deepLinkButtonContainer, { marginRight: 10}]}>
                 {this.renderDeeplinkButton()}
               </LazyloadView>
             </LazyloadView>
@@ -286,11 +315,11 @@ class NearbyFeedCard extends Component {
             socialPlatforms={socialPlatforms}
           />
       </LazyloadView>
-        <LazyloadView style={{ flex: 1, backgroundColor: 'white'}}>
+        <LazyloadView style={{ flex: 1, backgroundColor: 'white', alignItems: 'center'}}>
           <LazyloadScrollView
             horizontal={platform === 'profile' || platform === 'camera' ? false : true}
             showsHorizontalScrollIndicator
-            contentContainerStyle={[styles.contentContainer, platform === 'profile' ? { 'flex': 1, 'flexWrap': 'wrap', 'justifyContent': 'flex-start' } : '']}
+            contentContainerStyle={[styles.contentContainer, platform === 'profile' ? { 'flex': 1, 'flexWrap': 'wrap', 'justifyContent': 'center' } : '']}
           >
             {loading && this.state.loadInThisCard
               ? <LazyloadView style={styles.loading}>

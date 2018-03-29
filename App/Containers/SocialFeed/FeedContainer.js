@@ -17,6 +17,7 @@ import SocialFeedStoreActions, { fetchFeed } from '../../Redux/SocialFeedStore'
 
 // Constants
 import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
+import { capitalizeWord, testDeepLinkAbility } from '../../Utils/functions'
 
 // Images
 import { Images } from '../../Themes';
@@ -77,60 +78,91 @@ class FeedContainer extends Component {
   }
 
   renderDeeplinkButton = platform => {
-    const { friendData } = this.props
+      const { friendInfo } = this.props
 
-    switch(platform) {
-      case 'instagram':
-      const igUid = this.pullUid('instagram')
+      switch(platform) {
+        case 'instagram':
+          const igUid = this.pullUid('instagram')
+          const igUserName = this.pullUsername('instagram')
+          const instaDeepLink = `instagram://user?id=${igUid}`
 
-        return(
-          <ConnectButton
-            title="Go to Instagram"
-            linearGradient={true}
-            gradientColors={
-              [
-              '#9011ba',
-              '#b31c85',
-              '#dc3369',
-              '#ed384d',
-              '#fec052'
-            ]}
-            gradientStyles={{
-              'width': 150,
-              'height': 50,
-              'marginTop': 20,
-              'borderRadius': 30,
-              'justifyContent': 'center'
-            }}
-            containerStyle={styles.deepLinkButton}
-            textStyle={styles.deepLinkText}
-            onPressCallback={() => Linking.openURL(`instagram://user?id=${igUid}`)}
-          />
-        )
-      case 'facebook':
-      const fbUid = this.pullUid('facebook')
-        return(
-          <ConnectButton
-            title="Go to Facebook"
-            color={SYNCED_CARD_COLORS.facebook}
-            containerStyle={[styles.deepLinkButton, styles.facebookDeeplinkButton]}
-            textStyle={styles.deepLinkText}
-            onPressCallback={() => Linking.openURL(`fb://profile/${fbUid}`)}
-          />
-        )
-      case 'twitter':
-      const twitterUsername = this.pullUsername('twitter')
-        return(
-          <ConnectButton
-            title="Go to Twitter"
-            color={SYNCED_CARD_COLORS.twitter}
-            containerStyle={[styles.deepLinkButton, styles.twitterDeeplinkButton]}
-            textStyle={styles.deepLinkText}
-            onPressCallback={() => Linking.openURL(`twitter://user?screen_name=${twitterUsername}`)}
-          />
-        )
+          return(
+            <ConnectButton
+              title="Go to Instagram"
+              linearGradient={true}
+              gradientColors={
+                [
+                '#9011ba',
+                '#b31c85',
+                '#dc3369',
+                '#ed384d',
+                '#fec052'
+              ]}
+              gradientStyles={{
+                'width': 150,
+                'height': 50,
+                'marginTop': 20,
+                'borderRadius': 30,
+                'justifyContent': 'center'
+              }}
+              containerStyle={styles.deepLinkButton}
+              textStyle={styles.deepLinkText}
+              onPressCallback={() => testDeepLinkAbility('instagram', instaDeepLink, igUserName)}
+            />
+          )
+        case 'facebook':
+          const fbUid = this.pullUid('facebook')
+          const fbDeepLink = `fb://profile/${fbUid}`
+
+          return(
+            <ConnectButton
+              title="Go to Facebook"
+              color={SYNCED_CARD_COLORS.facebook}
+              containerStyle={[styles.deepLinkButton, styles.facebookDeeplinkButton]}
+              textStyle={styles.deepLinkText}
+              onPressCallback={() => testDeepLinkAbility('facebook', fbDeepLink, fbUid)}
+            />
+          )
+        case 'twitter':
+          const twitterUsername = this.pullUsername('twitter')
+          const twitterDeepLink = `twitter://user?screen_name=${twitterUsername}`
+
+          return(
+            <ConnectButton
+              title="Go to Twitter"
+              color={SYNCED_CARD_COLORS.twitter}
+              containerStyle={[styles.deepLinkButton, styles.twitterDeeplinkButton]}
+              textStyle={styles.deepLinkText}
+              onPressCallback={() => testDeepLinkAbility('twitter', twitterDeepLink, twitterUsername)}
+            />
+          )
+        case 'youtube':
+          const youtubeData = friendInfo.social_profiles.find(platform => platform.provider === 'google-oauth2')
+          const youtubeChannel = youtubeData ? youtubeData.youtube_channel : ''
+          const youtubeDeeplink = `vnd.youtube://www.youtube.com/channel/${youtubeChannel}`
+
+          return (
+            <ConnectButton
+              title="Go to Youtube"
+              color={SYNCED_CARD_COLORS.youtube}
+              containerStyle={[styles.deepLinkButton, styles.youtubeDeeplinkButton]}
+              textStyle={styles.deepLinkText}
+              onPressCallback={() => testDeepLinkAbility('youtube', youtubeDeeplink, youtubeChannel)} />
+          )
+        case 'snapchat':
+          const snapchatUsername = this.pullUsername('snapchat')
+          const snapChatDeepLink = `snapchat://add/${snapchatUsername}`
+
+          return (
+            <ConnectButton
+              title="Go to Snapchat"
+              color={SYNCED_CARD_COLORS.youtube}
+              containerStyle={[styles.deepLinkButton, styles.snapchatDeeplinkButton]}
+              textStyle={styles.deepLinkText}
+              onPressCallback={() => testDeepLinkAbility('snapchat', snapChatDeepLink, snapchatUsername)} />
+          )
+      }
     }
-  }
 
   renderFeedCards = platform => {
     const { userId, feed } = this.props
@@ -139,7 +171,7 @@ class FeedContainer extends Component {
     ? userFeedArr.map( (item, idx) => <FeedCard key={idx} item={item}/>)
     : <View style={{top: 100}}>
         <Text style={{ fontSize: 16, fontWeight: '500', textAlign: 'center'}}>
-          Whoops! There is no content to render!
+          {`View content on ${capitalizeWord(platform)}`}
         </Text>
         <View style={styles.deepLinkButtonContainer}>
           {this.renderDeeplinkButton(platform)}

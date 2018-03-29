@@ -30,6 +30,14 @@ class ScrollWheel extends Component {
             showsHorizontalScrollIndicator={false}
           >
             <View style={styles.platforms}>
+              <TouchableOpacity onPress={() => handleBackToProfile()}>
+              <SMPlatformCircle platform="profile" size={65}/>
+              <Text style={selected === 'profile' ? [styles.text, { color: 'white'}] : styles.text}> Platforms </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 5 }} onPress={() => handlePlatformChange('camera')}>
+              <SMPlatformCircle platform="camera" size={50}/>
+              <Text style={selected === 'camera' ? [styles.text, { color: 'white'}] : styles.text}> My Pictures </Text>
+              </TouchableOpacity>
               {
                 socialPlatforms && socialPlatforms.includes('facebook')
                 ? <TouchableOpacity onPress={() => handlePlatformChange('facebook')}>
@@ -46,15 +54,30 @@ class ScrollWheel extends Component {
                 </TouchableOpacity>
                 : null
               }
-              <TouchableOpacity onPress={() => handleBackToProfile()}>
-                <SMPlatformCircle platform="profile" size={65}/>
-                <Text style={selected === 'profile' ? [styles.text, { color: 'white'}] : styles.text}> Platforms </Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 5 }} onPress={() => handlePlatformChange('camera')}>
-                <SMPlatformCircle platform="camera" size={50}/>
-                <Text style={selected === 'camera' ? [styles.text, { color: 'white'}] : styles.text}> My Pictures </Text>
-              </TouchableOpacity>
-
+              {
+                socialPlatforms && socialPlatforms.includes('instagram')
+                ? <TouchableOpacity onPress={() => handlePlatformChange('instagram')}>
+                  <SMPlatformCircle platform="instagram" size={70}/>
+                  <Text style={selected === 'instagram' ? [styles.text, { color: 'white'}] : styles.text}> Instagram </Text>
+                </TouchableOpacity>
+                : null
+              }
+              {
+                socialPlatforms && socialPlatforms.includes('google-oauth2')
+                ? <TouchableOpacity onPress={() => handlePlatformChange('youtube')}>
+                  <SMPlatformCircle platform="youtube" size={52}/>
+                  <Text style={selected === 'youtube' ? [styles.text, { color: 'white'}] : styles.text}> Youtube </Text>
+                </TouchableOpacity>
+                : null
+              }
+              {
+                socialPlatforms && socialPlatforms.includes('snapchat')
+                ? <TouchableOpacity onPress={() => handlePlatformChange('snapchat')}>
+                  <SMPlatformCircle platform="snapchat" size={52}/>
+                  <Text style={selected === 'snapchat' ? [styles.text, { color: 'white'}] : styles.text}> Snapchat </Text>
+                </TouchableOpacity>
+                : null
+              }
             </View>
           </ScrollView>
     )

@@ -57,4 +57,10 @@ export default StyleSheet.create({
   twitterDeeplinkButton: {
     backgroundColor: Colors.twitter
   },
+  youtubeDeeplinkButton: {
+    backgroundColor: Colors.youtube
+  },
+  snapchatDeeplinkButton: {
+    backgroundColor: Colors.snapchat
+  }
 })
