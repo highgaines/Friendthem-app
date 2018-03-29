@@ -92,15 +92,15 @@ class SocialMediaCardContainer extends Component {
 
   render() {
     const {
-      platforms,
-      onPressCallback,
-      snapchatCallback,
-      platformSynced,
       fromFriendProfile,
       fromUserProfile,
       friendPlatforms,
       friendData,
+      onPressCallback,
+      platforms,
+      platformSynced,
       platformSelected,
+      snapchatCallback,
       toggleBanner,
     } = this.props
     const {
@@ -118,15 +118,18 @@ class SocialMediaCardContainer extends Component {
           const isSelected = platformSelected(isYoutube ? 'google-oauth2': socialPlatform)
           const isSynced = !!currentPlatform
           const capitalizeName = (name) => name[0].toUpperCase() + name.slice(1)
-          const userName = currentPlatform ? this.socialPlatformUsername(isYoutube ? 'google-oauth2' : socialPlatform) : null
           const friendPlatfromPresent = fromFriendProfile && friendPlatforms ?
-            friendPlatforms && friendPlatforms.find(socialElem => {
-              if (isYoutube) {
-                return socialElem.provider === 'google-oauth2'
-              } else {
-                return socialElem.provider === socialPlatform
-              }
-            }) : true
+          friendPlatforms && friendPlatforms.find(socialElem => {
+            if (isYoutube) {
+              return socialElem.provider === 'google-oauth2'
+            } else {
+              return socialElem.provider === socialPlatform
+            }
+          }) : true
+          const userName = currentPlatform || !fromFriendProfile ?
+            this.socialPlatformUsername(isYoutube ? 'google-oauth2' : socialPlatform)
+            :
+            friendPlatfromPresent ? friendPlatfromPresent.username : null
 
           if (friendPlatfromPresent) {
             return (
