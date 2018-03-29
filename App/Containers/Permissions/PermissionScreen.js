@@ -100,7 +100,7 @@ class PermissionScreen extends Component {
     const { permissionType } = this.props
 
     return permissionType === 'geolocation' ?
-    'See all the new cool people around you. Without access, Friendthem is no fun. Check your phone settings to make changes.' :
+    'See all the new cool people around you. Without access, friendthem is no fun. Check your phone settings to make changes.' :
     'To let you know about recent activity and make sure you dont miss any connections! You can silence notifications in your settings.'
   }
 

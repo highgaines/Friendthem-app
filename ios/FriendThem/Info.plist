@@ -2,159 +2,159 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
-	<key>CFBundleDisplayName</key>
-	<string>Friendthem</string>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleShortVersionString</key>
-	<string>11.4.9</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb191012727596336</string>
-				<string>FriendThem</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>None</string>
-			<key>CFBundleURLName</key>
-			<string>com.FriendThem.app</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>org.reactjs.native.FriendThem</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.googleusercontent.apps.595911831950-6lnct4nnui472l34e6asij2rnrjbdcmj</string>
-			</array>
-		</dict>
-	</array>
-	<key>CFBundleVersion</key>
-	<string>37</string>
-	<key>CodePushDeploymentKey</key>
-	<string>g7k0ocqVaUUVLvbquNuRP-QnOi-Qfda3ef3e-5a38-4dfe-9133-1afc3eb3b7df</string>
-	<key>FacebookAppID</key>
-	<string>191012727596336</string>
-	<key>FacebookDisplayName</key>
-	<string>FriendThem</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>fbapi</string>
-		<string>fb-messenger-api</string>
-		<string>fb-messenger-share-api</string>
-		<string>fbauth2</string>
-		<string>fbshareextension</string>
-		<string>instagram</string>
-		<string>fb</string>
-		<string>snapchat</string>
-	</array>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>localhost</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-		</dict>
-	</dict>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>FriendThem would like to make suggestions based on your profile.</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>FriendThem would like to access your Bluetooth in order to determine if friends are in range</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>FriendThem would like to access your calendar so that we may inform you about upcoming events</string>
-	<key>NSCameraUsageDescription</key>
-	<string>FriendThem would like to use your camera to enable you to add photos you take directly to your profile.</string>
-	<key>NSContactsUsageDescription</key>
-	<string>FriendThem would like to access your contacts in order to better connect you with the people you know.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>FriendThem would like to know your location so that we can better connect you with the people around you.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>FriendThem would like to know your location so that we can better connect you with the people around you.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>FriendThem would like to know your location so that we can better connect you with the people around you.</string>
-	<key>NSMotionUsageDescription</key>
-	<string>FriendThem would like to access the motion data on your device.</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>FriendThem would like to save photos to your photo gallery</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>FriendThem would like access to your photo gallery to enable you to add photos from your device to your profile.</string>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>FriendThem would like to access Speech Recognition in order to make this app more accessible to a wider audience.</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Entypo.ttf</string>
-		<string>EvilIcons.ttf</string>
-		<string>Feather.ttf</string>
-		<string>FontAwesome.ttf</string>
-		<string>Foundation.ttf</string>
-		<string>Ionicons.ttf</string>
-		<string>MaterialCommunityIcons.ttf</string>
-		<string>MaterialIcons.ttf</string>
-		<string>Octicons.ttf</string>
-		<string>SimpleLineIcons.ttf</string>
-		<string>Zocial.ttf</string>
-		<string>Montserrat-Black.tff</string>
-		<string>Montserrat-BlackItalic.tff</string>
-		<string>Montserrat-Bold.ttf</string>
-		<string>Montserrat-BoldItalic.ttf</string>
-		<string>Montserrat-ExtraBold.ttf</string>
-		<string>Montserrat-ExtraBoldItalic.ttf</string>
-		<string>Montserrat-ExtraLight.ttf</string>
-		<string>Montserrat-ExtraLightItalic.ttf</string>
-		<string>Montserrat-Italic.ttf</string>
-		<string>Montserrat-Light.ttf</string>
-		<string>Montserrat-LightItalic.ttf</string>
-		<string>Montserrat-Medium.ttf</string>
-		<string>Montserrat-MediumItalic.ttf</string>
-		<string>Montserrat-Regular.ttf</string>
-		<string>Montserrat-SemiBold.ttf</string>
-		<string>Montserrat-SemiBoldItalic.ttf</string>
-		<string>Montserrat-Thin.ttf</string>
-		<string>Montserrat-ThinItalic.ttf</string>
-	</array>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-	</array>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-	<key>kTCCServiceMediaLibrary</key>
-	<string>FriendThem would like to access Apple Music to make suggestions based on your profile.</string>
+  <key>CFBundleDevelopmentRegion</key>
+  <string>en</string>
+  <key>CFBundleDisplayName</key>
+  <string>Friendthem</string>
+  <key>CFBundleExecutable</key>
+  <string>$(EXECUTABLE_NAME)</string>
+  <key>CFBundleIdentifier</key>
+  <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+  <key>CFBundleInfoDictionaryVersion</key>
+  <string>6.0</string>
+  <key>CFBundleName</key>
+  <string>$(PRODUCT_NAME)</string>
+  <key>CFBundlePackageType</key>
+  <string>APPL</string>
+  <key>CFBundleShortVersionString</key>
+  <string>11.4.9</string>
+  <key>CFBundleSignature</key>
+  <string>????</string>
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>fb191012727596336</string>
+        <string>FriendThem</string>
+      </array>
+    </dict>
+    <dict>
+      <key>CFBundleTypeRole</key>
+      <string>None</string>
+      <key>CFBundleURLName</key>
+      <string>com.FriendThem.app</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>org.reactjs.native.FriendThem</string>
+      </array>
+    </dict>
+    <dict>
+      <key>CFBundleTypeRole</key>
+      <string>Editor</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>com.googleusercontent.apps.595911831950-6lnct4nnui472l34e6asij2rnrjbdcmj</string>
+      </array>
+    </dict>
+  </array>
+  <key>CFBundleVersion</key>
+  <string>37</string>
+  <key>CodePushDeploymentKey</key>
+  <string>g7k0ocqVaUUVLvbquNuRP-QnOi-Qfda3ef3e-5a38-4dfe-9133-1afc3eb3b7df</string>
+  <key>FacebookAppID</key>
+  <string>191012727596336</string>
+  <key>FacebookDisplayName</key>
+  <string>FriendThem</string>
+  <key>LSApplicationQueriesSchemes</key>
+  <array>
+    <string>fbapi</string>
+    <string>fb-messenger-api</string>
+    <string>fb-messenger-share-api</string>
+    <string>fbauth2</string>
+    <string>fbshareextension</string>
+    <string>instagram</string>
+    <string>fb</string>
+    <string>snapchat</string>
+  </array>
+  <key>LSRequiresIPhoneOS</key>
+  <true/>
+  <key>NSAppTransportSecurity</key>
+  <dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+    <key>NSExceptionDomains</key>
+    <dict>
+      <key>localhost</key>
+      <dict>
+        <key>NSExceptionAllowsInsecureHTTPLoads</key>
+        <true/>
+      </dict>
+    </dict>
+  </dict>
+  <key>NSAppleMusicUsageDescription</key>
+  <string>friendthem would like to make suggestions based on your profile.</string>
+  <key>NSBluetoothPeripheralUsageDescription</key>
+  <string>friendthem would like to access your Bluetooth in order to determine if friends are in range</string>
+  <key>NSCalendarsUsageDescription</key>
+  <string>friendthem would like to access your calendar so that we may inform you about upcoming events</string>
+  <key>NSCameraUsageDescription</key>
+  <string>friendthem would like to use your camera to enable you to add photos you take directly to your profile.</string>
+  <key>NSContactsUsageDescription</key>
+  <string>friendthem would like to access your contacts in order to better connect you with the people you know.</string>
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>friendthem would like to know your location so that we can better connect you with the people around you.</string>
+  <key>NSLocationAlwaysUsageDescription</key>
+  <string>friendthem would like to know your location so that we can better connect you with the people around you.</string>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>friendthem would like to know your location so that we can better connect you with the people around you.</string>
+  <key>NSMotionUsageDescription</key>
+  <string>friendthem would like to access the motion data on your device.</string>
+  <key>NSPhotoLibraryAddUsageDescription</key>
+  <string>friendthem would like to save photos to your photo gallery</string>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>Friendthem would like access to your photo gallery to enable you to add photos from your device to your profile.</string>
+  <key>NSSpeechRecognitionUsageDescription</key>
+  <string>friendthem would like to access Speech Recognition in order to make this app more accessible to a wider audience.</string>
+  <key>UIAppFonts</key>
+  <array>
+    <string>Entypo.ttf</string>
+    <string>EvilIcons.ttf</string>
+    <string>Feather.ttf</string>
+    <string>FontAwesome.ttf</string>
+    <string>Foundation.ttf</string>
+    <string>Ionicons.ttf</string>
+    <string>MaterialCommunityIcons.ttf</string>
+    <string>MaterialIcons.ttf</string>
+    <string>Octicons.ttf</string>
+    <string>SimpleLineIcons.ttf</string>
+    <string>Zocial.ttf</string>
+    <string>Montserrat-Black.tff</string>
+    <string>Montserrat-BlackItalic.tff</string>
+    <string>Montserrat-Bold.ttf</string>
+    <string>Montserrat-BoldItalic.ttf</string>
+    <string>Montserrat-ExtraBold.ttf</string>
+    <string>Montserrat-ExtraBoldItalic.ttf</string>
+    <string>Montserrat-ExtraLight.ttf</string>
+    <string>Montserrat-ExtraLightItalic.ttf</string>
+    <string>Montserrat-Italic.ttf</string>
+    <string>Montserrat-Light.ttf</string>
+    <string>Montserrat-LightItalic.ttf</string>
+    <string>Montserrat-Medium.ttf</string>
+    <string>Montserrat-MediumItalic.ttf</string>
+    <string>Montserrat-Regular.ttf</string>
+    <string>Montserrat-SemiBold.ttf</string>
+    <string>Montserrat-SemiBoldItalic.ttf</string>
+    <string>Montserrat-Thin.ttf</string>
+    <string>Montserrat-ThinItalic.ttf</string>
+  </array>
+  <key>UIBackgroundModes</key>
+  <array>
+    <string>remote-notification</string>
+  </array>
+  <key>UILaunchStoryboardName</key>
+  <string>LaunchScreen</string>
+  <key>UIRequiredDeviceCapabilities</key>
+  <array>
+    <string>armv7</string>
+  </array>
+  <key>UISupportedInterfaceOrientations</key>
+  <array>
+    <string>UIInterfaceOrientationPortrait</string>
+  </array>
+  <key>UIViewControllerBasedStatusBarAppearance</key>
+  <false/>
+  <key>kTCCServiceMediaLibrary</key>
+  <string>friendthem would like to access Apple Music to make suggestions based on your profile.</string>
 </dict>
 </plist>

@@ -74,7 +74,7 @@ export const RequestContactsPermission =
       PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
       {
         'title': 'Access to Contacts',
-        'message': 'Friendthem would like access to your contacts so you can manage them all in one place.'
+        'message': 'friendthem would like access to your contacts so you can manage them all in one place.'
       }
     )
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
@@ -100,7 +100,7 @@ export const RequestLocationPermission = async (setLocationInterval) => {
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
       {
         'title': 'Access to Location',
-        'message': 'Friendthem would like access to your location so you can connect with nearby users.'
+        'message': 'friendthem would like access to your location so you can connect with nearby users.'
       }
     )
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
