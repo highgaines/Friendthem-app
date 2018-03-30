@@ -93,7 +93,7 @@ class ForkScreen extends Component {
       updateUserPosition(accessToken, position.coords)
     },
       (error) => this.setState({ error: error.message }),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+      { enableHighAccuracy: true }
     )
   }
 
