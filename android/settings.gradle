@@ -31,5 +31,7 @@ include ':react-native-config'
 project(':react-native-config').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-config/android')
 include ':react-native-auth0'
 project(':react-native-auth0').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-auth0/android')
+include ':react-native-device-settings'
+project(':react-native-device-settings').projectDir = new File(settingsDir, '../node_modules/react-native-device-settings/android')
 
 include ':app'

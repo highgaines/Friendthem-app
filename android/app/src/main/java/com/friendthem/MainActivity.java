@@ -2,6 +2,7 @@ package com.friendthem;
 
 import com.facebook.react.ReactActivity;
 import android.content.Intent;
+import com.rjblopes.opensettings.OpenSettingsPackage;
 
 public class MainActivity extends ReactActivity {
 

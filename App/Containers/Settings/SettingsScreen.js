@@ -8,6 +8,7 @@ import FBSDK, { LoginManager } from 'react-native-fbsdk'
 import Communications from 'react-native-communications'
 import Modal from 'react-native-modal'
 import { NavigationActions } from 'react-navigation'
+import DeviceSettings from 'react-native-device-settings'
 
 // Redux
 import { bindActionCreators } from 'redux'
@@ -26,6 +27,7 @@ import { Images } from '../../Themes'
 
 // Constants
 import { TERMS_AND_CONDITIONS } from '../../Utils/legal'
+import { isAndroid } from '../../Utils/constants'
 import { resetStackAction } from '../../Utils/functions'
 
 // Styles
@@ -66,7 +68,11 @@ class SettingsScreen extends Component {
   }
 
   handlePermissions = () => {
-    Linking.openURL('app-settings:')
+    if (isAndroid) {
+      DeviceSettings.app()
+    } else {
+        Linking.openURL('app-settings:')
+    }
   }
 
   toggleSilenceNotification = () => {

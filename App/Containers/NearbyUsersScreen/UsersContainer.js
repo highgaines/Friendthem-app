@@ -5,6 +5,7 @@ import { ScrollView, Text, View, TouchableOpacity, Linking } from 'react-native'
 import { CachedImage } from "react-native-img-cache";
 import { LazyloadScrollView, LazyloadView } from 'react-native-lazyload-deux'
 import * as Animatable from 'react-native-animatable'
+import DeviceSettings from 'react-native-device-settings'
 
 // Components
 import UserCard from './UserCard'
@@ -15,6 +16,9 @@ import styles from '../Styles/UsersContainerStyles'
 
 // Images
 import { Images } from '../../Themes'
+
+// Constants
+import { isAndroid } from '../../Utils/constants'
 
 export default function UsersContainer(props) {
   const { users, navigation, locationPermission, viewFriendProfile } = props
@@ -36,7 +40,11 @@ export default function UsersContainer(props) {
     if (locationPermission) {
       navigation.navigate('InviteUsersScreen')
     } else {
-        Linking.openURL('app-settings:')
+        if (isAndroid) {
+          DeviceSettings.app()
+        } else {
+            Linking.openURL('app-settings:')
+        }
     }
   }
 
