@@ -155,6 +155,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-android-open-settings')
     compile project(':react-native-geocoder')
     compile project(':react-native-code-push')
     compile project(':react-native-fetch-blob')

@@ -21,8 +21,9 @@ export default Footer = props => {
           >
           <Text style={{
             color: 'white',
-            fontSize: 12,
-            alignSelf: 'center'
+            fontSize: 13,
+            alignSelf: 'center',
+            marginTop: 10
           }}>
             Choose another login option
           </Text>

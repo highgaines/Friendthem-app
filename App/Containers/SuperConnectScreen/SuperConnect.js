@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import FBSDK, { AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk'
 import LinearGradient from 'react-native-linear-gradient'
 import { SocialIcon } from 'react-native-elements'
+import _ from 'lodash'
 
 import ConnectBar from './ConnectBar'
 import ConnectivityBanner from '../UtilityComponents/ConnectivityBanner'
@@ -202,7 +203,8 @@ class SuperConnect extends Component {
     const { userInfo, friendInfo, navigation, selectedSocialMedia, togglePlatform, platforms, copy, connection } = this.props
     const { bannerVisible, bannerName, bannerPlatform } = this.state
     const { social_profiles, first_name } = friendInfo
-    const allPlatformsSynced = social_profiles.length && connection.length >= social_profiles.length
+    const commonSocialMediaLength = _.intersectionBy(userInfo.social_profiles, social_profiles, 'provider').length
+    const allPlatformsSynced = commonSocialMediaLength && connection.length >= commonSocialMediaLength
 
     if (allPlatformsSynced  && !bannerVisible) {
       this.toggleConnectivityBanner(first_name, 'on all shared accounts')

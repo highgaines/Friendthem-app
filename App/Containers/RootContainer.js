@@ -10,7 +10,7 @@ import withAppStateChange from '../HOCs/withAppStateChange';
 
 // Actions
 import { refreshAuthToken } from '../Redux/AuthStore'
-import { updateUserPosition} from '../Redux/UserStore'
+import { updateUserPosition } from '../Redux/UserStore'
 
 // Styles
 import styles from './Styles/RootContainerStyles'
