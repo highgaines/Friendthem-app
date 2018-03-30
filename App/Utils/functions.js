@@ -130,7 +130,6 @@ export const capitalizeWord = word => `${word.slice(0, 1).toUpperCase()}${word.s
 
 export const testDeepLinkAbility = (platform, deepLink, userIdentifier) => {
   Linking.canOpenURL(deepLink).then(resp => {
-    debugger
     if (resp) {
       if (Platform.OS === 'ios' || platform !== 'facebook') {
         return Linking.openURL(deepLink)
