@@ -8,7 +8,7 @@ import FBSDK, { LoginManager } from 'react-native-fbsdk'
 import Communications from 'react-native-communications'
 import Modal from 'react-native-modal'
 import { NavigationActions } from 'react-navigation'
-import DeviceSettings from 'react-native-device-settings'
+import AndroidOpenSettings from 'react-native-android-open-settings'
 
 // Redux
 import { bindActionCreators } from 'redux'
@@ -69,7 +69,7 @@ class SettingsScreen extends Component {
 
   handlePermissions = () => {
     if (isAndroid) {
-      DeviceSettings.app()
+      AndroidOpenSettings.appDetailsSettings()
     } else {
         Linking.openURL('app-settings:')
     }
