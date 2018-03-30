@@ -84,7 +84,7 @@ class FeedContainer extends Component {
         case 'instagram':
           const igUid = this.pullUid('instagram')
           const igUserName = this.pullUsername('instagram')
-          const instaDeepLink = `instagram://user?id=${igUid}`
+          const instaDeepLink = `instagram://user?username=${igUserName}`
 
           return(
             <ConnectButton

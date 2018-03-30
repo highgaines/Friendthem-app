@@ -39,7 +39,7 @@ export default StyleSheet.create({
     color: '#ffffff',
     fontSize: 12,
     fontWeight: 'bold',
-    marginLeft: 7,
+    marginLeft: 5,
     fontFamily: Fonts.type.base,
   },
   buttonViewStyle: {

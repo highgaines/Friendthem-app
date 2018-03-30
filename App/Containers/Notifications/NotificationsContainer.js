@@ -57,9 +57,9 @@ class NotificationsContainer extends Component {
   render() {
 
     return(
-      <View>
+      <View style={{height: '100%'}}>
         <Header title='Notifications' />
-        <View style={styles.listContainer}>
+        <ScrollView style={styles.listContainer}>
           <View
             testID='notification-container'
             style={styles.sectionTitle}>
@@ -118,7 +118,7 @@ class NotificationsContainer extends Component {
                 rightOpenValue={-150}
                 previewRowKey={this.props.notifications && this.props.notifications.length ? `${this.props.notifications[0].id}` : '0'}
               />
-        </View>
+        </ScrollView>
       </View>
     )
   }

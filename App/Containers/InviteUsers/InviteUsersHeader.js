@@ -16,7 +16,7 @@ export default InviteUsersHeader = props => {
           color="#000"
         />
         <Text style={styles.firstRowText}>
-          Invite friends to join Friend Them!
+          Invite friends to join friendthem!
         </Text>
       </View>
     </View>

@@ -99,7 +99,7 @@ class SettingsScreen extends Component {
   }
 
   renderEmailLinks = () => {
-    const EMAIL_LINKS = ["Join Team Friendthem", "Build Your Following", "Be a Friend of the Week", "Share a Story"];
+    const EMAIL_LINKS = ["Join Team friendthem", "Build Your Following", "Be a Friend of the Week", "Share a Story"];
 
     return EMAIL_LINKS.map((linkTitle, index) => (
       <TouchableOpacity

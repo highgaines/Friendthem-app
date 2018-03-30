@@ -55,7 +55,7 @@ export default class InviteUsersModal extends Component {
             </LinearGradient>
             <View style={styles.header}>
               <Text style={styles.headerText}>
-                Download Friendthem to fill out your super profile and connect with all of your friends! https://itunes.apple.com/us/app/friendthem/id422255598?ls=1&mt=8
+                Download friendthem to fill out your super profile and connect with all of your friends! https://itunes.apple.com/us/app/friendthem/id422255598?ls=1&mt=8
               </Text>
             </View>
             <View style={styles.requestsContainer}>

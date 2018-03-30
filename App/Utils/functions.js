@@ -2,8 +2,9 @@ import { RNS3 } from 'react-native-aws3'
 import envConfig from '../../envConfig'
 import OneSignal from 'react-native-onesignal'
 import Contacts from 'react-native-contacts'
-import { PermissionsAndroid, Linking } from 'react-native'
+import { PermissionsAndroid, Linking, Platform } from 'react-native'
 import { NavigationActions } from 'react-navigation'
+import { SOCIAL_MEDIA_DATA } from './constants'
 
 export const uploadToAWS = async (uri, userId, callback, data, token) => {
 
@@ -74,7 +75,7 @@ export const RequestContactsPermission =
       PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
       {
         'title': 'Access to Contacts',
-        'message': 'Friendthem would like access to your contacts so you can manage them all in one place.'
+        'message': 'friendthem would like access to your contacts so you can manage them all in one place.'
       }
     )
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
@@ -100,7 +101,7 @@ export const RequestLocationPermission = async (setLocationInterval) => {
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
       {
         'title': 'Access to Location',
-        'message': 'Friendthem would like access to your location so you can connect with nearby users.'
+        'message': 'friendthem would like access to your location so you can connect with nearby users.'
       }
     )
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
@@ -129,8 +130,14 @@ export const capitalizeWord = word => `${word.slice(0, 1).toUpperCase()}${word.s
 
 export const testDeepLinkAbility = (platform, deepLink, userIdentifier) => {
   Linking.canOpenURL(deepLink).then(resp => {
+    debugger
     if (resp) {
-      return Linking.openURL(deepLink)
+      if (Platform.OS === 'ios' || platform !== 'facebook') {
+        return Linking.openURL(deepLink)
+      } else {
+        const androidDeepLink = SOCIAL_MEDIA_DATA[platform].androidConnectDeepLink(userIdentifier)
+        return Linking.openURL(androidDeepLink)
+      }
     } else {
         switch (platform) {
           case 'facebook':

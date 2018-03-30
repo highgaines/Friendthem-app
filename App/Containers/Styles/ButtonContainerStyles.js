@@ -4,9 +4,10 @@ import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
-    bottom: 70,
+    position: 'absolute',
+    bottom: Metrics.screenHeight * .435,
     width: 340,
-    height: 140,
+    height: 120,
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center',

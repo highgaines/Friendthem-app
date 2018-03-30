@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>11.4.9</string>
+	<string>11.5.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -49,7 +49,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>37</string>
+	<string>38</string>
 	<key>CodePushDeploymentKey</key>
 	<string>g7k0ocqVaUUVLvbquNuRP-QnOi-Qfda3ef3e-5a38-4dfe-9133-1afc3eb3b7df</string>
 	<key>FacebookAppID</key>
@@ -83,29 +83,29 @@
 		</dict>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>FriendThem would like to make suggestions based on your profile.</string>
+	<string>friendthem would like to make suggestions based on your profile.</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>FriendThem would like to access your Bluetooth in order to determine if friends are in range</string>
+	<string>friendthem would like to access your Bluetooth in order to determine if friends are in range</string>
 	<key>NSCalendarsUsageDescription</key>
-	<string>FriendThem would like to access your calendar so that we may inform you about upcoming events</string>
+	<string>friendthem would like to access your calendar so that we may inform you about upcoming events</string>
 	<key>NSCameraUsageDescription</key>
-	<string>FriendThem would like to use your camera to enable you to add photos you take directly to your profile.</string>
+	<string>friendthem would like to use your camera to enable you to add photos you take directly to your profile.</string>
 	<key>NSContactsUsageDescription</key>
-	<string>FriendThem would like to access your contacts in order to better connect you with the people you know.</string>
+	<string>friendthem would like to access your contacts in order to better connect you with the people you know.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>FriendThem would like to know your location so that we can better connect you with the people around you.</string>
+	<string>friendthem would like to know your location so that we can better connect you with the people around you.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>FriendThem would like to know your location so that we can better connect you with the people around you.</string>
+	<string>friendthem would like to know your location so that we can better connect you with the people around you.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>FriendThem would like to know your location so that we can better connect you with the people around you.</string>
+	<string>friendthem would like to know your location so that we can better connect you with the people around you.</string>
 	<key>NSMotionUsageDescription</key>
-	<string>FriendThem would like to access the motion data on your device.</string>
+	<string>friendthem would like to access the motion data on your device.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>FriendThem would like to save photos to your photo gallery</string>
+	<string>friendthem would like to save photos to your photo gallery</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>FriendThem would like access to your photo gallery to enable you to add photos from your device to your profile.</string>
+	<string>Friendthem would like access to your photo gallery to enable you to add photos from your device to your profile.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>FriendThem would like to access Speech Recognition in order to make this app more accessible to a wider audience.</string>
+	<string>friendthem would like to access Speech Recognition in order to make this app more accessible to a wider audience.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
@@ -155,6 +155,6 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>kTCCServiceMediaLibrary</key>
-	<string>FriendThem would like to access Apple Music to make suggestions based on your profile.</string>
+	<string>friendthem would like to access Apple Music to make suggestions based on your profile.</string>
 </dict>
 </plist>

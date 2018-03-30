@@ -113,8 +113,7 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    width: Metrics.screenWidth,
-    height: Platform.OS === 'ios' ? Metrics.screenHeight * 0.6 : Metrics.screenHeight * 0.55
+    width: Metrics.screenWidth
   },
   progressBarContainer: {
     width: Metrics.screenWidth,
@@ -183,6 +182,6 @@ export default StyleSheet.create({
     left: 60
   },
   scrollContainer: {
-    height: Platform.OS === 'ios' ? Metrics.screenHeight * 0.6 : Metrics.screenHeight * 0.55
+    height: Platform.OS === 'ios' ? Metrics.screenHeight * 0.6 : Metrics.screenHeight * 0.55,
   }
 })
