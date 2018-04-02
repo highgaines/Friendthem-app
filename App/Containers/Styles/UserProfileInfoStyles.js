@@ -5,10 +5,11 @@ import { isIpad } from '../../Utils/constants'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   scrollContainerStyle: {
-    height: Metrics.screenHeight * 2,
+    height: Metrics.screenHeight * (isIpad ? 1.5 : 1),
     flex: 1
   },
   userInfoView: {
+    height: Metrics.screenHeight * (isIpad ? 1.5 : 1),
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center'
