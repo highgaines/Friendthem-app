@@ -142,7 +142,7 @@ class LoginScreen extends Component {
               color='#fff'
               iconStyle={styles.buttonIcon}/>
           </TouchableOpacity>
-          <View style={{ marginTop: 75 }}>
+          <View style={styles.footerOffset}>
             <Footer
               navigationCallback={() =>
                 this.props.navigation.navigate('RegisterUserScreen')

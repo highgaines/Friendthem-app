@@ -27,8 +27,8 @@ export default StyleSheet.create({
     marginTop: 20
   },
   iPadImage: {
-    height: 60,
-    width: 60
+    height: 220,
+    width: 220
   },
   button: {
     width: 120,

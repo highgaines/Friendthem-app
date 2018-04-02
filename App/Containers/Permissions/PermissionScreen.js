@@ -139,7 +139,10 @@ class PermissionScreen extends Component {
 
             <View style={styles.spacing}>
               <Image
-                style={isIpad ? styles.iPadImage : ''}
+                style={
+                  isIpad && permissionType === 'geolocation' ? styles.iPadImage
+                  : ''
+                }
                 source={this.determineImage()}
               />
             </View>

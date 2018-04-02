@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
 import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
+import { isIpad } from '../../Utils/constants'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
@@ -69,13 +70,13 @@ export default StyleSheet.create({
     borderBottomRightRadius: 10
   },
   platformName: {
-    fontSize: 16,
+    fontSize: isIpad ? 13 : 16,
     fontWeight: 'bold',
     color: '#FFFFFF',
     fontFamily: Fonts.type.base,
   },
   unsyncedPlatformName: {
-    fontSize: 16,
+    fontSize: isIpad ? 13 : 16,
     fontWeight: 'bold',
     color: '#adadad',
     fontFamily: Fonts.type.base,
