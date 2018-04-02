@@ -26,6 +26,10 @@ export default StyleSheet.create({
   spacing: {
     marginTop: 20
   },
+  iPadImage: {
+    height: 60,
+    width: 60
+  },
   button: {
     width: 120,
     height: 40,

@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import { isIpad } from '../../Utils/constants'
 import { Metrics, ApplicationStyles, Fonts, Colors } from '../../Themes/'
 
 export default StyleSheet.create({
@@ -33,6 +34,10 @@ export default StyleSheet.create({
   },
   linearGradient: {
     flex: 1
+  },
+  section: {
+    height: Metrics.screenHeight / 6,
+    marginTop: '10%'
   },
   title: {
     marginTop: 100,
@@ -73,5 +78,9 @@ export default StyleSheet.create({
     fontSize: 14,
     fontWeight: '700',
     marginLeft: 3
+  },
+  buttonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })

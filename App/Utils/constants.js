@@ -3,11 +3,15 @@
 import { Images } from '../Themes';
 import Permissions from 'react-native-permissions'
 import { NavigationActions } from 'react-navigation'
-import { Platform } from 'react-native'
+import { Platform, Dimensions } from 'react-native'
 
 /************************ PLATFORM ************************/
 export const isIOS = Platform.OS === 'ios'
 export const isAndroid = Platform.OS === 'android'
+
+const { height, width } = Dimensions.get('window')
+
+export const isIpad = isIOS && (height/width < 1.6)
 
 /************************ DATA ************************/
 

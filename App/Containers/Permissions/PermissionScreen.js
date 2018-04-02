@@ -22,6 +22,7 @@ import NotificationStoreActions, { registerForPushNotif } from '../../Redux/Noti
 
 // Images
 import { Images } from '../../Themes';
+import { isIpad } from '../../Utils/constants'
 
 // Styles
 import styles from '../Styles/PermissionsScreenStyles';
@@ -138,6 +139,7 @@ class PermissionScreen extends Component {
 
             <View style={styles.spacing}>
               <Image
+                style={isIpad ? styles.iPadImage : ''}
                 source={this.determineImage()}
               />
             </View>
