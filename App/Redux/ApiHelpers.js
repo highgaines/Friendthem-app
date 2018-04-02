@@ -1,3 +1,5 @@
+import envConfig from '../../envConfig'
+import AuthStoreActions from '../Redux/AuthStore'
 /**
  *
  * @param {string} url
@@ -5,7 +7,6 @@
  * @param {function} dispatch
  * @returns {Promise}
  */
-import envConfig from '../../envConfig'
 
 export function fetchFromApi(url, init, dispatch) {
   return new Promise((resolve, reject) => {
@@ -17,14 +18,14 @@ export function fetchFromApi(url, init, dispatch) {
             if (response.url === buildApiUrl('token/')) {
               // Login failed
               resolve(response);
+            } else {
+              dispatch(AuthStoreActions.logoutUser());
             }
             // Access denied (Token has expired)
             return reject(response);
           case 400:
           case 403:
-            return reject(response);
           case 404:
-            return reject(response);
           case 409:
           case 500:
             return reject(response);
