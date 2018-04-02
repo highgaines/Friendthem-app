@@ -39,6 +39,7 @@ import { storeContactInfo } from '../Redux/InviteUsersStore'
 
 // Images
 import { Images } from '../Themes'
+import { isIpad } from '../Utils/constants'
 
 // Styles
 import styles from './Styles/LaunchScreenStyles'
@@ -211,7 +212,7 @@ class LaunchScreen extends Component {
                 Life Happens when people connect
               </Text>
             </View>
-            <View style={styles.section} >
+            <View style={isIpad ? styles.section : ''}>
               {loading
                 ? (
                   <View style={styles.loading, { marginTop: 40 }}>

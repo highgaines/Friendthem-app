@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
 import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
+import { isIpad } from '../../Utils/constants'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
@@ -34,7 +35,7 @@ export default StyleSheet.create({
     zIndex: 99
   },
   button: {
-    width: 80
+    width: isIpad ? 70 : 80,
   },
   peopleNearbyIcon: {
     alignSelf: 'center',

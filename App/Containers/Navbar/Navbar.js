@@ -140,6 +140,7 @@ class Navbar extends Component {
     const ipxIcon = {'bottom': 15}
     const renderIpxIcon = ifIphoneX(ipxIcon, '')
     const peopleNearbyIconStyles = Platform.OS === 'ios' ? styles.peopleNearbyIcon : styles.peopleNearbyIconAndroid
+
     if (this.state.keyboardHidden) {
       return(
           <View

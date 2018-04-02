@@ -1,10 +1,15 @@
 import { StyleSheet } from 'react-native'
 import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
+import { isIpad } from '../../Utils/constants'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
+  scrollContainerStyle: {
+    height: Metrics.screenHeight * (isIpad ? 1.5 : 1),
+    flex: 1
+  },
   userInfoView: {
-    height: '100%',
+    height: Metrics.screenHeight * (isIpad ? 1.5 : 1),
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center'
@@ -18,7 +23,7 @@ export default StyleSheet.create({
     marginTop: 30
   },
   friendThemLoginIcon: {
-    marginTop: 150,
+    marginTop: isIpad ? 50 : 150,
     marginBottom: 25
   },
   formText: {
@@ -106,5 +111,8 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'transparent'
+  },
+  footerOffset: {
+    marginTop: isIpad ? 15 : 75
   }
 })

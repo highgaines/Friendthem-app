@@ -13,6 +13,8 @@ import styles from '../Styles/UserCardStyles'
 
 // Images
 import { Images } from '../../Themes'
+import { isIpad } from '../../Utils/constants'
+
 
 export default function UserCard(props) {
   const { picture, name, fbUrl, setFriendInfo } = props
@@ -22,7 +24,7 @@ export default function UserCard(props) {
       style={styles.card}
       onPress={setFriendInfo}>
       <ImageCircle
-        size={95}
+        size={isIpad ? 85 : 95}
         source={picture}
       />
       <LazyloadView style={styles.cardText}>
