@@ -110,7 +110,7 @@ class SocialMediaCardContainer extends Component {
     } = this.state
 
     return (
-      <View style={{ height: '100%', paddingBottom: 10 }}>
+      <View style={styles.socialCardScrollContainer}>
         <ScrollView contentContainerStyle={styles.socialAccountContainer}>
         {
           Object.keys(socialMediaData).map((socialPlatform, idx) => {

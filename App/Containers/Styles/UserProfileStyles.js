@@ -109,11 +109,11 @@ export default StyleSheet.create({
     backgroundColor: '#143a7a'
   },
   socialAccountContainer: {
+    flex: 1,
     flexWrap: 'wrap',
     paddingHorizontal: 10,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    width: Metrics.screenWidth
   },
   progressBarContainer: {
     width: Metrics.screenWidth,
@@ -183,5 +183,9 @@ export default StyleSheet.create({
   },
   scrollContainer: {
     height: Platform.OS === 'ios' ? Metrics.screenHeight * 0.6 : Metrics.screenHeight * 0.55,
+  },
+  socialCardScrollContainer: {
+    height: '100%',
+    paddingBottom: 10,
   }
 })
