@@ -5,6 +5,7 @@ import { View, TouchableOpacity, Text, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import InviteUsersStoreActions, { selectUser, fetchConnectivityData, storeContactInfo, fetchMyFriendsData } from '../../Redux/InviteUsersStore'
+import UserStoreActions, { updateTutorialStatus } from '../../Redux/UserStore'
 
 // Libraries
 import Reactotron from 'reactotron-react-native'
@@ -19,12 +20,14 @@ import InviteUsersModal from './InviteUsersModal'
 import UsersContainer from '../NearbyUsersScreen/UsersContainer'
 import ConnectivityCard from './ConnectivityCard'
 import Navbar from '../Navbar/Navbar'
+import SuperConnectTutorial from '../TutorialScreens/SuperConnectTutorial'
 
 // Styles
 import styles from '../Styles/InviteUsersScreenStyles'
 
 import { LazyloadScrollView, LazyloadView, LazyloadImage } from 'react-native-lazyload-deux'
 import { RequestContactsPermission } from '../../Utils/functions'
+import { Images } from '../../Themes'
 
 class InviteUsersScreen extends Component {
   constructor(props) {
@@ -32,6 +35,8 @@ class InviteUsersScreen extends Component {
 
     this.state = {
       networkTabSelected: false,
+      showInviteTutorial: !props.inviteTutorialComplete,
+      showConnectivityTutorial: !props.connectivityTutorialComplete,
       showModal: false
     }
   }
@@ -58,6 +63,14 @@ class InviteUsersScreen extends Component {
     fetchMyFriendsData(accessToken)
   }
 
+  completeTutorial = (stateKey, databaseKey) => {
+    const { accessToken, updateTutorialStatus } = this.props
+
+    this.setState({ [stateKey]: false}, () => {
+        updateTutorialStatus(accessToken, databaseKey, true)
+    })
+  }
+
   renderConnectivityCards = () => {
     const { myFriends, navigation } = this.props
 
@@ -76,7 +89,7 @@ class InviteUsersScreen extends Component {
   }
 
   render() {
-    const { networkTabSelected, showModal } = this.state
+    const { networkTabSelected, showModal, showInviteTutorial, showConnectivityTutorial } = this.state
     const {
       myFriends,
       selectUser,
@@ -88,68 +101,80 @@ class InviteUsersScreen extends Component {
 
     const pluralizeFriends = myFriends && myFriends.length === 1 ? '' : 's'
     const pluralizeContacts = contacts && contacts.length === 1 ? '' : 's'
+    const tutorialVisible = showInviteTutorial && !networkTabSelected ||
+      showConnectivityTutorial && networkTabSelected
 
     return (
-      <LazyloadView style={[{ flex: 1 }, this.state.showModal ? { opacity: 0.1 } : '']}>
-        <LinearGradient
-          colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
-          start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
-          locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
-          style={styles.headerGradient}>
-          <LazyloadView>
-            <Text style={styles.friendCount}>
-              {myFriends && contacts && networkTabSelected ?
-                `${myFriends.length} friend${pluralizeFriends}`
-                :
-                `${contacts.length} friend${pluralizeContacts}` }
-            </Text>
-          </LazyloadView>
-          <LazyloadView style={styles.tabSelectionContainer}>
-            <TouchableOpacity
-              onPress={() => this.setState({ networkTabSelected: false })}
-              style={[styles.tabItem, networkTabSelected ? null : styles.selected]}>
-              <Text
-                style={[styles.tabText, networkTabSelected ? null : styles.selectedText]}
-                >
-                MY NETWORK
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.setState({ networkTabSelected: true })}
-              style={[styles.tabItem, networkTabSelected ? styles.selected : null]}>
-              <Text
-                style={[styles.tabText, networkTabSelected ? styles.selectedText : null]}
-                >
-                  ON FRIENDTHEM
+      !tutorialVisible ?
+          <LazyloadView style={[{ flex: 1 }, this.state.showModal ? { opacity: 0.1 } : '']}>
+            <LinearGradient
+              colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
+              start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
+              locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
+              style={styles.headerGradient}>
+              <LazyloadView>
+                <Text style={styles.friendCount}>
+                  {myFriends && contacts && networkTabSelected ?
+                    `${myFriends.length} friend${pluralizeFriends}`
+                    :
+                    `${contacts.length} friend${pluralizeContacts}` }
                 </Text>
-              </TouchableOpacity>
+              </LazyloadView>
+              <LazyloadView style={styles.tabSelectionContainer}>
+                <TouchableOpacity
+                  onPress={() => this.setState({ networkTabSelected: false })}
+                  style={[styles.tabItem, networkTabSelected ? null : styles.selected]}>
+                  <Text
+                    style={[styles.tabText, networkTabSelected ? null : styles.selectedText]}
+                    >
+                    MY NETWORK
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => this.setState({ networkTabSelected: true })}
+                  style={[styles.tabItem, networkTabSelected ? styles.selected : null]}>
+                  <Text
+                    style={[styles.tabText, networkTabSelected ? styles.selectedText : null]}
+                    >
+                      ON FRIENDTHEM
+                    </Text>
+                  </TouchableOpacity>
+              </LazyloadView>
+            </LinearGradient>
+            {!networkTabSelected ?
+              <LazyloadView style={{ flex: 1}}>
+                <InviteUsersHeader />
+                <SearchContainer
+                  triggerModal={this.triggerModal}
+                  selectUser={selectUser}
+                />
+            </LazyloadView> :
+              <LazyloadView>
+                <Text
+                  style={{
+                      padding: 10,
+                      fontFamily: 'montserrat',
+                      fontWeight: "600",
+                      opacity: .5
+                    }}>
+                  Connectivity
+                </Text>
+                <LazyloadScrollView contentContainerStyle={styles.userContainer}>
+                  {this.renderConnectivityCards()}
+                </LazyloadScrollView>
+              </LazyloadView>
+            }
           </LazyloadView>
-        </LinearGradient>
-        {!networkTabSelected ?
-          <LazyloadView style={{ flex: 1}}>
-            <InviteUsersHeader />
-            <SearchContainer
-              triggerModal={this.triggerModal}
-              selectUser={selectUser}
-            />
-        </LazyloadView> :
-          <LazyloadView>
-            <Text
-              style={{
-                  padding: 10,
-                  fontFamily: 'montserrat',
-                  fontWeight: "600",
-                  opacity: .5
-                }}>
-              Connectivity
-            </Text>
-            <LazyloadScrollView contentContainerStyle={styles.userContainer}>
-              {this.renderConnectivityCards()}
-            </LazyloadScrollView>
-          </LazyloadView>
-        }
-
-      </LazyloadView>
+        :
+        <SuperConnectTutorial
+          onPressFunction={
+            networkTabSelected ?
+              () => this.completeTutorial('showConnectivityTutorial', 'connection_tutorial')
+            :
+              () => this.completeTutorial('showInviteTutorial', 'invite_tutorial')
+          }
+          bgImage={networkTabSelected ? Images.connectivityTutorial : Images.inviteTutorial}
+        />
     )
   }
 }
@@ -159,7 +184,9 @@ const mapStateToProps = state => ({
   accessToken: state.authStore.accessToken,
   friends: state.inviteUsersStore.connectivityData,
   myFriends: _.orderBy(state.inviteUsersStore.myFriends, ['connection_percentage'], ['desc']),
-  contacts: state.inviteUsersStore.contactList
+  contacts: state.inviteUsersStore.contactList,
+  inviteTutorialComplete: state.userStore.editableData.invite_tutorial,
+  connectivityTutorialComplete: state.userStore.editableData.connection_tutorial
 })
 
 const mapDispatchToProps = dispatch => {
@@ -169,7 +196,8 @@ const mapDispatchToProps = dispatch => {
       selectUser,
       fetchConnectivityData,
       storeContactInfo,
-      fetchMyFriendsData
+      fetchMyFriendsData,
+      updateTutorialStatus
     }, dispatch)
   }
 }

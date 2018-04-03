@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, View, TouchableOpacity, Linking } from 'react-native'
+import { ScrollView, Text, View, TouchableOpacity, Linking, RefreshControl } from 'react-native'
 
 // Libraries
 import { CachedImage } from "react-native-img-cache";
@@ -21,7 +21,7 @@ import { Images } from '../../Themes'
 import { isAndroid } from '../../Utils/constants'
 
 export default function UsersContainer(props) {
-  const { users, navigation, locationPermission, viewFriendProfile } = props
+  const { users, navigation, locationPermission, viewFriendProfile, refreshing, onRefresh } = props
 
   const userCards =
     users.map( (userObj,i) =>
@@ -49,7 +49,15 @@ export default function UsersContainer(props) {
   }
 
   return(
-    <ScrollView contentContainerStyle={arePeopleNearby ? styles.container : [styles.container, {justifyContent: 'center'}]}>
+    <ScrollView
+      contentContainerStyle={arePeopleNearby ? styles.container : [styles.container, {justifyContent: 'center'}]}
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+        />
+      }
+      >
       {
         users.length
         ? userCards

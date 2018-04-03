@@ -69,11 +69,18 @@ const images = {
   Friendster: require('../Images/Friendster.png'),
   snapChatLogo: require('../Images/Icons/snapIcon.png'),
   characterFriendThem: require('../Images/characterFriendThem.png'),
+  friendsterTutorialLogo: require('../Images/Icons/friendthem-modal-logo.png'),
 
   // Emblems
   emblemColor: require('../Images/Icons/emblem-color.png'),
   emblemGreen: require('../Images/Icons/emblem-green.png'),
-  friendThemLogoNoText: require('../Images/logowithouttext3.png')
+  friendThemLogoNoText: require('../Images/logowithouttext3.png'),
+
+  //Background Images
+  scTutorialOne: require('../Images/AddFriendTutorialOne.png'),
+  scTutorialTwo: require('../Images/AddFriendTutorialTwo.png'),
+  inviteTutorial: require('../Images/friendthem-invite-tutorial.png'),
+  connectivityTutorial: require('../Images/friendthem-connectivity-tutorial.png')
 }
 
 export default images

@@ -40,7 +40,7 @@ class NearbyUsers extends Component {
     this.state = {
       input: '',
       feedView: false,
-      welcomeTutorialVisible: !props.userSocialProfiles.length
+      refreshing: false
     }
   }
 
@@ -78,6 +78,14 @@ class NearbyUsers extends Component {
         { enableHighAccuracy: true }
       )
     }
+  }
+
+  onRefresh = () => {
+    const { fetchConnectivityData, accessToken } = this.props
+    this.setState({refreshing: true})
+    fetchConnectivityData(accessToken).then(() => {
+      this.setState({refreshing: false})
+    })
   }
 
 
@@ -118,7 +126,7 @@ class NearbyUsers extends Component {
 
   render() {
     const { users, navigation, locationPermission, fetching } = this.props
-    const { input, feedView, welcomeTutorialVisible } = this.state
+    const { input, feedView, refreshing } = this.state
 
     if (!feedView && fetching) {
       return(
@@ -151,21 +159,13 @@ class NearbyUsers extends Component {
                 navigation={navigation}
                 locationPermission={locationPermission}
                 viewFriendProfile={this.viewFriendProfile}
+                refreshing={refreshing}
+                onRefresh={this.onRefresh}
               />
             : <NearbyFeedContainer
               input={input}
               filterUsers={this.filterUsers}
               viewFriendProfile={this.viewFriendProfile}/>
-        }
-        {
-          welcomeTutorialVisible
-          ? <WelcomeScreen
-              visible={welcomeTutorialVisible}
-              closeModal={this.toggleWelcomeTutorial}
-              navigation={navigation}
-              toggleWelcomeTutorial={this.toggleWelcomeTutorial}
-            />
-          : null
         }
       </View>
     )

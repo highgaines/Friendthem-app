@@ -13,6 +13,7 @@ import { Icon } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import { NavigationActions } from 'react-navigation'
 import _ from 'lodash'
+import * as Animatable from 'react-native-animatable'
 
 // Redux
 import FBStoreActions from '../../Redux/FBStore'
@@ -27,7 +28,7 @@ import SuperConnectBar from '../SuperConnectScreen/SuperConnectBar'
 import ScrollWheel from './ScrollWheel'
 import FeedContainer from '../SocialFeed/FeedContainer'
 import MyPicturesModal from './MyPicturesModal'
-import * as Animatable from 'react-native-animatable'
+import TutorialModal from '../TutorialScreens/TutorialModal'
 
 // Constants
 import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
@@ -54,7 +55,9 @@ class FriendProfileScreen extends Component {
       syncedCardColors: SYNCED_CARD_COLORS,
       selectedSocialMedia: [],
       userLastLocation: null,
-      selectedPlatformsUpdated: false
+      selectedPlatformsUpdated: false,
+      showTutorialModal: !props.userInfo.social_profiles.length,
+      showSuperConnectModal: false
     }
 
     this.initialState = this.state
@@ -281,14 +284,32 @@ class FriendProfileScreen extends Component {
     }
   }
 
+  closeModalNavigation = (modalName) => {
+    this.setState({ [modalName]: false}, () =>
+      this.props.navigation.navigate('UserProfileScreen')
+    )
+  }
+
+  superConnectCallback = (platformsSelected, copy, connectType) => {
+    const { userInfo } = this.props
+
+    if (userInfo.social_profiles.length === 1 && connectType === 'superconnect') {
+      this.setState({ showSuperConnectModal: true })
+    } else {
+      this.navigateToSuperConnectScreen(platformsSelected, copy)
+    }
+  }
+
   render() {
     const { friendInfo, connection, superConnect, navigation, setSuperConnectPlatforms, userInfo, userId } = this.props
 
     const {
       showModal,
+      showTutorialModal,
       socialMediaData,
       syncedCardColors,
       selectedSocialMedia,
+      showSuperConnectModal,
       platform,
       currentPic,
       currentPicIdx,
@@ -312,6 +333,20 @@ class FriendProfileScreen extends Component {
             visible={myPicturesModalVisible}
             xOffset={(1787/5) * (currentPicIdx)}
             toggle={this.toggleMyPicturesModal}
+          />
+          <TutorialModal
+            modalVisible={showTutorialModal}
+            toggleModal={() => this.setState({ showTutorialModal: !showTutorialModal})}
+            buttonText={'Add Accounts'}
+            tutorialCopy={"Sorry, you cannot connect with friends if you do not have any accounts synced to your profile."}
+            buttonCallback={() => this.closeModalNavigation('showTutorialModal')}
+            />
+          <TutorialModal
+            modalVisible={showSuperConnectModal}
+            toggleModal={() => this.setState({ showSuperConnectModal: !showSuperConnectModal })}
+            buttonText={'Add Accounts'}
+            tutorialCopy={"Sorry, it is not a super connect unless you have at least 2 accounts synced to your profile. You can select the friendthem option or you can use the button below to navigate to your profile and sync more accounts."}
+            buttonCallback={() => this.closeModalNavigation('showSuperConnectModal')}
           />
           <View style={styles.profile}>
             <LinearGradient
@@ -396,7 +431,7 @@ class FriendProfileScreen extends Component {
               />
               <SuperConnectBar
                 setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
-                superConnect={(platformsSelected, copy) => this.navigateToSuperConnectScreen(platformsSelected, copy)}
+                superConnect={(platforms, copy, connectType) => this.superConnectCallback(platforms, copy, connectType)}
                 selected={this.state.selectedSocialMedia}
                 userData={userInfo}
                 platforms={this.getSCEligiblePlatforms()}
@@ -424,7 +459,7 @@ const mapStateToProps = state => ({
   loggedIn: state.authStore.loggedIn,
   platforms: state.tokenStore.platforms,
   fetching: state.friendStore.fetching,
-  fetchingTokens: state.tokenStore.fetchingTokens
+  fetchingTokens: state.tokenStore.fetchingTokens,
 })
 
 const mapDispatchToProps = dispatch => {

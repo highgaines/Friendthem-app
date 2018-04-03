@@ -49,6 +49,7 @@ class FriendThemModal extends Component {
       animationOut='slideOutDown'
       onBackdropPress={toggleModal}
       isVisible={modalVisible}
+      avoidKeyboard={true}
       style={{alignSelf: 'center'}}>
         <View style={styles.containerModal}>
           <LinearGradient

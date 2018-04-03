@@ -69,5 +69,53 @@ export default StyleSheet.create({
     fontFamily: 'montserrat',
     fontWeight: '700',
     marginVertical: 10
+  },
+  tutorialContainer: {
+    height: Metrics.screenHeight,
+    width: Metrics.screenWidth
+  },
+  tutorialBackgroundImage: {
+    height: '100%',
+    width: '100%'
+  },
+  tutorialModalContainer: {
+    height: Metrics.screenHeight,
+    width: Metrics.screenWidth,
+  },
+  tutorialModal: {
+    alignSelf: 'center'
+  },
+  tutorialModalContent: {
+    width: Metrics.screenWidth * .8,
+    height: Metrics.screenHeight * .42,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 20,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff'
+  },
+  tutorialModalImage: {
+    position: 'relative',
+    top: -15
+  },
+  tutorialModalCopy: {
+    textAlign: 'center',
+    fontSize: 15,
+    fontWeight: '400'
+  },
+  tutorialModalButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '20%',
+    width: '65%',
+    marginTop: '10%',
+    borderRadius: 100,
+    backgroundColor: '#030AB0'
+  },
+  tutorialModalButtonText: {
+    color: 'white',
+    fontSize: 16
   }
 })
