@@ -40,7 +40,6 @@ class NearbyUsers extends Component {
     this.state = {
       input: '',
       feedView: false,
-      welcomeTutorialVisible: !props.userSocialProfiles.length,
       refreshing: false
     }
   }
@@ -127,7 +126,7 @@ class NearbyUsers extends Component {
 
   render() {
     const { users, navigation, locationPermission, fetching } = this.props
-    const { input, feedView, welcomeTutorialVisible, refreshing } = this.state
+    const { input, feedView, refreshing } = this.state
 
     if (!feedView && fetching) {
       return(
@@ -167,16 +166,6 @@ class NearbyUsers extends Component {
               input={input}
               filterUsers={this.filterUsers}
               viewFriendProfile={this.viewFriendProfile}/>
-        }
-        {
-          welcomeTutorialVisible
-          ? <WelcomeScreen
-              visible={welcomeTutorialVisible}
-              closeModal={this.toggleWelcomeTutorial}
-              navigation={navigation}
-              toggleWelcomeTutorial={this.toggleWelcomeTutorial}
-            />
-          : null
         }
       </View>
     )

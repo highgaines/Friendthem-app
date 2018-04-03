@@ -500,7 +500,7 @@ class UserProfileScreen extends Component {
            <HelpModal
              triggerModal={this.triggerFriendster}
              modalVisible={this.state.showSyncHelp}
-             text={"My name is Friendster and I'm here to help you get the most out of the app! Let's get you started by syncing up all your social media accounts. Press on a Social Platform card to begin."}
+             text={"Welcome to Friendthem! Let's get you started by syncing up all your social media accounts. Press on a Social Platform card to begin."}
            />
            <HelpModal
              triggerModal={this.triggerPicturesHelp}
