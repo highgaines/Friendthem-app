@@ -59,7 +59,8 @@ class LaunchScreen extends Component {
     this.state = {
       user: '',
       loading: false,
-      error: null
+      error: null,
+      permissionTypes: Permissions.getTypes()
     }
   }
 
@@ -72,8 +73,9 @@ class LaunchScreen extends Component {
 
   }
 
-  componentWillUpdate = nextProps => {
+  componentWillUpdate = (nextProps, nextState) => {
     const { fbAuthToken, navigation, nativeGeolocation, nativeNotifications, nativeContactsPermission } = this.props
+    const { permissionTypes } = this.state
 
     if (!fbAuthToken && nextProps.fbAuthToken && this.state.loading) {
       this.getFbProfile(nextProps.fbAuthToken)
@@ -81,22 +83,19 @@ class LaunchScreen extends Component {
     }
 
     if (nextProps.loggedIn && nextProps.routeName === 'LaunchScreen') {
-      if (!nativeGeolocation) {
+      if (!permissionTypes.includes('location')) {
           nextProps.navigation.navigate('PermissionScreen', {
               permissionType: 'geolocation',
               navigation: navigation
             })
-      } else if (!nativeNotifications) {
+      } else if (!permissionTypes.includes('notification')) {
           navigation.navigate('PermissionScreen', {
             permissionType: 'notifications',
             navigation: navigation
           })
-      } else if (!nativeContactsPermission) {
-          nextProps.navigation.navigate('ForkScreen')
       } else {
-          nextProps.navigation.navigate('NearbyUsersScreen')
+          nextProps.navigation.navigate('ForkScreen')
       }
-
     }
 
   }
@@ -119,8 +118,9 @@ class LaunchScreen extends Component {
     }
   }
 
-  checkPermissions = () => {
+  checkPermissions = async () => {
     const { setGeoPermission, setNotifPermission, setNativeContactsPermission } = this.props
+
     Permissions.check('location', { type: 'whenInUse' }).then(response => {
       if (response === 'authorized') {
         setGeoPermission(true)
@@ -149,8 +149,8 @@ class LaunchScreen extends Component {
   }
 
   getFbProfile = accessToken => {
-
     const { fbUserInfo, navigation, loginByFacebook, nativeGeolocation, nativeNotifications } = this.props
+    const { permissionTypes } = this.state
 
     const responseInfoCallback = (error, result) => {
       if (error) {
@@ -158,18 +158,18 @@ class LaunchScreen extends Component {
         return error
       } else {
         fbUserInfo(result)
-        if (!nativeGeolocation) {
-          navigation.navigate('PermissionScreen', {
-            permissionType: 'geolocation',
-            navigation: navigation
-          })
-        } else if (!nativeNotifications) {
-          navigation.navigate('PermissionScreen', {
-            permissionType: 'notifications',
-            navigation: navigation
-          })
-        } else {
-          navigation.navigate('ForkScreen')
+        if (!permissionTypes.includes('location')) {
+            nextProps.navigation.navigate('PermissionScreen', {
+                permissionType: 'geolocation',
+                navigation: navigation
+              })
+        } else if (!permissionTypes.includes('notification')) {
+            navigation.navigate('PermissionScreen', {
+              permissionType: 'notifications',
+              navigation: navigation
+            })
+        } else if (!permissionTypes.includes('contacts')) {
+            nextProps.navigation.navigate('ForkScreen')
         }
       }
     }
