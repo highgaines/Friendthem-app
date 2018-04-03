@@ -32,7 +32,7 @@ import { Images } from '../../Themes'
 class InviteUsersScreen extends Component {
   constructor(props) {
     super(props)
-    console.log(props)
+
     this.state = {
       networkTabSelected: false,
       showInviteTutorial: !props.inviteTutorialComplete,
@@ -103,7 +103,7 @@ class InviteUsersScreen extends Component {
     const pluralizeContacts = contacts && contacts.length === 1 ? '' : 's'
     const tutorialVisible = showInviteTutorial && !networkTabSelected ||
       showConnectivityTutorial && networkTabSelected
-    console.log(tutorialVisible, networkTabSelected)
+
     return (
       !tutorialVisible ?
           <LazyloadView style={[{ flex: 1 }, this.state.showModal ? { opacity: 0.1 } : '']}>
