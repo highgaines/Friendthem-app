@@ -56,7 +56,8 @@ class FriendProfileScreen extends Component {
       selectedSocialMedia: [],
       userLastLocation: null,
       selectedPlatformsUpdated: false,
-      showTutorialModal: !props.userInfo.social_profiles.length
+      showTutorialModal: !props.userInfo.social_profiles.length,
+      showSuperConnectModal: false
     }
 
     this.initialState = this.state
@@ -283,8 +284,8 @@ class FriendProfileScreen extends Component {
     }
   }
 
-  closeModalNavigation = () => {
-    this.setState({ showTutorialModal: false}, () =>
+  closeModalNavigation = (modalName) => {
+    this.setState({ [modalName]: false}, () =>
       this.props.navigation.navigate('UserProfileScreen')
     )
   }
@@ -298,6 +299,7 @@ class FriendProfileScreen extends Component {
       socialMediaData,
       syncedCardColors,
       selectedSocialMedia,
+      showSuperConnectModal,
       platform,
       currentPic,
       currentPicIdx,
@@ -313,6 +315,10 @@ class FriendProfileScreen extends Component {
     const renderIpxHeader = ifIphoneX(ipxHeader, '')
 
     const backAction =  NavigationActions.back()
+    const superConnectCallback = userInfo.social_profiles.length === 1 ?
+    () => this.setState({ showSuperConnectModal: true })
+    :
+    (platformsSelected, copy) => this.navigateToSuperConnectScreen(platformsSelected, copy)
 
     return (
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -326,9 +332,16 @@ class FriendProfileScreen extends Component {
             modalVisible={showTutorialModal}
             toggleModal={() => this.setState({ showTutorialModal: !showTutorialModal})}
             buttonText={'Add Accounts'}
-            tutorialCopy={"Sorry, you cannot connect with friends if you don't have any accounts synced to your profile."}
-            buttonCallback={this.closeModalNavigation}
+            tutorialCopy={"Sorry, you cannot connect with friends if you do not have any accounts synced to your profile."}
+            buttonCallback={() => this.closeModalNavigation('showTutorialModal')}
             />
+          <TutorialModal
+            modalVisible={showSuperConnectModal}
+            toggleModal={() => this.setState({ showSuperConnectModal: !showSuperConnectModal })}
+            buttonText={'Add Accounts'}
+            tutorialCopy={"Sorry, it is not a super connect unless you have at least 2 accounts synced to your profile. You can select the friendthem option or you can use the button below to navigate to your profile and sync more accounts."}
+            buttonCallback={() => this.closeModalNavigation('showSuperConnectModal')}
+          />
           <View style={styles.profile}>
             <LinearGradient
               colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
@@ -412,7 +425,7 @@ class FriendProfileScreen extends Component {
               />
               <SuperConnectBar
                 setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
-                superConnect={(platformsSelected, copy) => this.navigateToSuperConnectScreen(platformsSelected, copy)}
+                superConnect={superConnectCallback}
                 selected={this.state.selectedSocialMedia}
                 userData={userInfo}
                 platforms={this.getSCEligiblePlatforms()}

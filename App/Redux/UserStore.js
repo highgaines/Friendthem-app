@@ -47,6 +47,9 @@ const { Types, Creators } = createActions({
   updateSettingsRequest: null,
   updateSettingsSuccess: null,
   updateSettingsFailure: null,
+  updateTutorialRequest: null,
+  updateTutorialSuccess: null,
+  updateTutorialFailure: null,
   logoutUser: null,
 })
 
@@ -418,6 +421,33 @@ export const updatePassword = (accessToken, oldPassword, newPassword) => {
     ],
     shouldCallApi: state => true,
     callApi: dispatch => fetchFromApi('auth/change_password/', init, dispatch)
+  }
+}
+
+export const updateTutorialStatus = (accessToken, tutorialName, completed) => {
+  const headers = new Headers()
+  headers.append('Authorization', `Bearer ${accessToken}`)
+  headers.append('Content-Type', 'application/json')
+
+  const body = {
+    `${tutorialName}`: completed
+  }
+
+  const init = {
+    method: 'PATCH',
+    headers: headers
+    body: JSON.stringify(body),
+
+  }
+
+  return {
+    types: [
+      Types.UPDATE_TUTORIAL_REQUEST,
+      Types.UPDATE_TUTORIAL_SUCCESS,
+      Types.UPDATE_TUTORIAL_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi('/profile/tutorial/', init, dispatch)
   }
 }
 
