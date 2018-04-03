@@ -11,10 +11,14 @@ import ConnectBar from './ConnectBar'
 import ConnectivityBanner from '../UtilityComponents/ConnectivityBanner'
 import ButtonsContainer from './ButtonsContainer'
 import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer'
+import SuperConnectTutorial from '../TutorialScreens/SuperConnectTutorial'
+import UserStoreActions, { updateInfoRequest } from '../../Redux/UserStore'
 import SuperConnectActions, { superConnectPlatform } from '../../Redux/SuperConnectStore'
 import FriendStoreActions, { checkFriendConnection } from '../../Redux/FriendStore'
 import InviteUsersStoreActions, { fetchConnectivityData, fetchMyFriendsData } from '../../Redux/InviteUsersStore'
 import { MANUAL_CONNECT_PLATFORMS, SOCIAL_MEDIA_DATA, isIOS } from '../../Utils/constants'
+
+import { Images } from '../../Themes'
 
 class SuperConnect extends Component {
   constructor(props) {
@@ -30,7 +34,9 @@ class SuperConnect extends Component {
       userInputRequiredPlatforms: [],
       appState: AppState.currentState,
       manualPlatformsList: MANUAL_CONNECT_PLATFORMS,
-      manualPlatformIndex: 0
+      manualPlatformIndex: 0,
+      tutorialInProgress: false,
+      tutorialIndex: 0
     }
 
     this.initialState = this.state
@@ -38,6 +44,7 @@ class SuperConnect extends Component {
 
   componentDidMount = () => {
     AppState.addEventListener('change', this._handleAppStateChange);
+    this.toggleTutorial()
   }
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -51,6 +58,7 @@ class SuperConnect extends Component {
         this.deepLinkToPlatform(userInputRequiredPlatforms[manualPlatformIndex])
       }
     }
+
     if (maxIndex && manualPlatformIndex === prevState.manualPlatformIndex && userInputRequiredPlatforms.length) {
         this.setState(this.setState(this.initialState), () => setManualPlatforms([]))
         this.props.navigation.navigate('CongratulatoryScreen', {
@@ -111,6 +119,12 @@ class SuperConnect extends Component {
 
   toggleNoneSelectedAlert = () => {
     alert('Please select at least one social media platform to connect on!')
+  }
+
+  toggleTutorial = () => {
+    if (!this.props.tutorialComplete) {
+      this.setState({ tutorialInProgress: true })
+    }
   }
 
   superConnectPromiseLoop = () => {
@@ -199,18 +213,34 @@ class SuperConnect extends Component {
     }
   }
 
+  completeSuperConnectTutorial = () => {
+    const { apiAccessToken, updateInfoRequest, userInfo } = this.props
+
+    this.setState({ tutorialInProgress: false}, () =>
+      updateInfoRequest(userInfo, 'tutorial_complete', true, apiAccessToken)
+    )
+  }
+
   render() {
     const { userInfo, friendInfo, navigation, selectedSocialMedia, togglePlatform, platforms, copy, connection } = this.props
-    const { bannerVisible, bannerName, bannerPlatform } = this.state
+    const { bannerVisible, bannerName, bannerPlatform, tutorialIndex, tutorialInProgress } = this.state
     const { social_profiles, first_name } = friendInfo
     const commonSocialMediaLength = _.intersectionBy(userInfo.social_profiles, social_profiles, 'provider').length
     const allPlatformsSynced = commonSocialMediaLength && connection.length >= commonSocialMediaLength
+    const tutorialCallback = !tutorialIndex ?
+      () => this.setState({ tutorialIndex: tutorialIndex + 1 }) : this.completeSuperConnectTutorial
 
     if (allPlatformsSynced  && !bannerVisible) {
       this.toggleConnectivityBanner(first_name, 'on all shared accounts')
     }
 
-    return(
+    return (
+      tutorialInProgress ?
+        <SuperConnectTutorial
+          tutorialIndex={tutorialIndex}
+          onPressFunction={tutorialCallback}
+        />
+      :
       <View style={{ flex: 1 }}>
         <ConnectBar copy={copy} userData={userInfo} friendInfo={friendInfo}/>
         {
@@ -250,7 +280,8 @@ const mapStateToProps = state => ({
   connection: state.friendStore.connection,
   fbAuthToken: state.fbStore.fbAccessToken,
   apiAccessToken: state.authStore.accessToken,
-  selectedSocialMedia: state.superConnect.selectedSocialMedia
+  selectedSocialMedia: state.superConnect.selectedSocialMedia,
+  tutorialComplete: state.userStore.editableData.tutorial_complete
 })
 
 const mapDispatchToProps = dispatch => {
@@ -265,7 +296,8 @@ const mapDispatchToProps = dispatch => {
       setFriendInfo,
       checkFriendConnection,
       fetchMyFriendsData,
-      fetchConnectivityData
+      fetchConnectivityData,
+      updateInfoRequest
     }, dispatch)
   }
 }

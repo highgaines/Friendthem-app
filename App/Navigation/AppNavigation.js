@@ -16,6 +16,7 @@ import SettingsScreen from '../Containers/Settings/SettingsScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import InviteUsersScreen from '../Containers/InviteUsers/InviteUsersScreen'
 import PermissionScreen from '../Containers/Permissions/PermissionScreen'
+import SuperConnectTutorial from '../Containers/TutorialScreens/SuperConnectTutorial'
 
 // Styles
 import styles from './Styles/NavigationStyles'
@@ -62,6 +63,9 @@ const PrimaryNav = StackNavigator({
   },
   PermissionScreen: {
     screen: mapNavigationStateParamsToProps(PermissionScreen)
+  },
+  SCTutorialScreens: {
+    screen: mapNavigationStateParamsToProps(SuperConnectTutorial)
   }
 }, {
   // Default config for all screens

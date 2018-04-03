@@ -79,6 +79,7 @@ export const INITIAL_STATE = Immutable({
     hobbies: [],
     hometown: '',
     phone_number: '',
+    tutorial_complete: false
   },
   userPhotos: {},
   ghostModeOn: true,

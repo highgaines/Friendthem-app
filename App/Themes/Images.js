@@ -73,7 +73,11 @@ const images = {
   // Emblems
   emblemColor: require('../Images/Icons/emblem-color.png'),
   emblemGreen: require('../Images/Icons/emblem-green.png'),
-  friendThemLogoNoText: require('../Images/logowithouttext3.png')
+  friendThemLogoNoText: require('../Images/logowithouttext3.png'),
+
+  //Background Images
+  scTutorialOne: require('../Images/AddFriendTutorialOne.png'),
+  scTutorialTwo: require('../Images/AddFriendTutorialTwo.png'),
 }
 
 export default images

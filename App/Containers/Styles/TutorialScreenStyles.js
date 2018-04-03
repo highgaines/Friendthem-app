@@ -69,5 +69,13 @@ export default StyleSheet.create({
     fontFamily: 'montserrat',
     fontWeight: '700',
     marginVertical: 10
+  },
+  tutorialContainer: {
+    height: Metrics.screenHeight,
+    width: Metrics.screenWidth
+  },
+  tutorialBackgroundImage: {
+    height: '100%',
+    width: '100%'
   }
 })
