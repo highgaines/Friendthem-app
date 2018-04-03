@@ -16,7 +16,6 @@ export default WelcomeScreen = props => {
         animationType={'slide'}
         transparent={true}
         onRequestClose={toggleWelcomeTutorial}
-        avoidKeyboard={true}
         >
           <View style={styles.modalContainer}>
             <Image
