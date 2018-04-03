@@ -69,6 +69,7 @@ const images = {
   Friendster: require('../Images/Friendster.png'),
   snapChatLogo: require('../Images/Icons/snapIcon.png'),
   characterFriendThem: require('../Images/characterFriendThem.png'),
+  friendsterTutorialLogo: require('../Images/Icons/friendthem-modal-logo.png'),
 
   // Emblems
   emblemColor: require('../Images/Icons/emblem-color.png'),

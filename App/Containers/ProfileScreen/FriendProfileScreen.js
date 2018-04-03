@@ -13,6 +13,7 @@ import { Icon } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import { NavigationActions } from 'react-navigation'
 import _ from 'lodash'
+import * as Animatable from 'react-native-animatable'
 
 // Redux
 import FBStoreActions from '../../Redux/FBStore'
@@ -27,7 +28,7 @@ import SuperConnectBar from '../SuperConnectScreen/SuperConnectBar'
 import ScrollWheel from './ScrollWheel'
 import FeedContainer from '../SocialFeed/FeedContainer'
 import MyPicturesModal from './MyPicturesModal'
-import * as Animatable from 'react-native-animatable'
+import TutorialModal from '../TutorialScreens/TutorialModal'
 
 // Constants
 import { SOCIAL_MEDIA_DATA, SYNCED_CARD_COLORS } from '../../Utils/constants'
@@ -54,7 +55,8 @@ class FriendProfileScreen extends Component {
       syncedCardColors: SYNCED_CARD_COLORS,
       selectedSocialMedia: [],
       userLastLocation: null,
-      selectedPlatformsUpdated: false
+      selectedPlatformsUpdated: false,
+      showTutorialModal: !props.userInfo.social_profiles.length
     }
 
     this.initialState = this.state
@@ -281,11 +283,18 @@ class FriendProfileScreen extends Component {
     }
   }
 
+  closeModalNavigation = () => {
+    this.setState({ showTutorialModal: false}, () =>
+      this.props.navigation.navigate('UserProfileScreen')
+    )
+  }
+
   render() {
     const { friendInfo, connection, superConnect, navigation, setSuperConnectPlatforms, userInfo, userId } = this.props
 
     const {
       showModal,
+      showTutorialModal,
       socialMediaData,
       syncedCardColors,
       selectedSocialMedia,
@@ -313,6 +322,13 @@ class FriendProfileScreen extends Component {
             xOffset={(1787/5) * (currentPicIdx)}
             toggle={this.toggleMyPicturesModal}
           />
+          <TutorialModal
+            modalVisible={showTutorialModal}
+            toggleModal={() => this.setState({ showTutorialModal: !showTutorialModal})}
+            buttonText={'Add Accounts'}
+            tutorialCopy={"Sorry, you cannot connect with friends if you don't have any accounts synced to your profile."}
+            buttonCallback={this.closeModalNavigation}
+            />
           <View style={styles.profile}>
             <LinearGradient
               colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
@@ -424,7 +440,7 @@ const mapStateToProps = state => ({
   loggedIn: state.authStore.loggedIn,
   platforms: state.tokenStore.platforms,
   fetching: state.friendStore.fetching,
-  fetchingTokens: state.tokenStore.fetchingTokens
+  fetchingTokens: state.tokenStore.fetchingTokens,
 })
 
 const mapDispatchToProps = dispatch => {
