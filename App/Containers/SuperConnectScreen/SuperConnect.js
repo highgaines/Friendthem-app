@@ -12,7 +12,7 @@ import ConnectivityBanner from '../UtilityComponents/ConnectivityBanner'
 import ButtonsContainer from './ButtonsContainer'
 import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer'
 import SuperConnectTutorial from '../TutorialScreens/SuperConnectTutorial'
-import UserStoreActions, { updateInfoRequest } from '../../Redux/UserStore'
+import UserStoreActions, { updateTutorialStatus } from '../../Redux/UserStore'
 import SuperConnectActions, { superConnectPlatform } from '../../Redux/SuperConnectStore'
 import FriendStoreActions, { checkFriendConnection } from '../../Redux/FriendStore'
 import InviteUsersStoreActions, { fetchConnectivityData, fetchMyFriendsData } from '../../Redux/InviteUsersStore'
@@ -214,10 +214,10 @@ class SuperConnect extends Component {
   }
 
   completeSuperConnectTutorial = () => {
-    const { apiAccessToken, updateInfoRequest, userInfo } = this.props
+    const { apiAccessToken, updateTutorialStatus } = this.props
 
     this.setState({ tutorialInProgress: false}, () =>
-      updateInfoRequest(userInfo, 'tutorial_complete', true, apiAccessToken)
+      updateTutorialStatus(apiAccessToken, 'tutorial_complete', true)
     )
   }
 
@@ -237,8 +237,8 @@ class SuperConnect extends Component {
     return (
       tutorialInProgress ?
         <SuperConnectTutorial
-          tutorialIndex={tutorialIndex}
           onPressFunction={tutorialCallback}
+          bgImage={!tutorialIndex ? Images.scTutorialOne : Images.scTutorialTwo}
         />
       :
       <View style={{ flex: 1 }}>
@@ -297,7 +297,7 @@ const mapDispatchToProps = dispatch => {
       checkFriendConnection,
       fetchMyFriendsData,
       fetchConnectivityData,
-      updateInfoRequest
+      updateTutorialStatus
     }, dispatch)
   }
 }

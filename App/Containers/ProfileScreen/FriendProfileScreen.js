@@ -290,6 +290,16 @@ class FriendProfileScreen extends Component {
     )
   }
 
+  superConnectCallback = (platformsSelected, copy, connectType) => {
+    const { userInfo } = this.props
+    console.log(userInfo, platformsSelected, copy, connectType)
+    if (userInfo.social_profiles.length === 1 && connectType === 'superconnect') {
+      this.setState({ showSuperConnectModal: true })
+    } else {
+      this.navigateToSuperConnectScreen(platformsSelected, copy)
+    }
+  }
+
   render() {
     const { friendInfo, connection, superConnect, navigation, setSuperConnectPlatforms, userInfo, userId } = this.props
 
@@ -315,10 +325,6 @@ class FriendProfileScreen extends Component {
     const renderIpxHeader = ifIphoneX(ipxHeader, '')
 
     const backAction =  NavigationActions.back()
-    const superConnectCallback = userInfo.social_profiles.length === 1 ?
-    () => this.setState({ showSuperConnectModal: true })
-    :
-    (platformsSelected, copy) => this.navigateToSuperConnectScreen(platformsSelected, copy)
 
     return (
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -425,7 +431,7 @@ class FriendProfileScreen extends Component {
               />
               <SuperConnectBar
                 setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
-                superConnect={superConnectCallback}
+                superConnect={(platforms, copy, connectType) => this.superConnectCallback(platforms, copy, connectType)}
                 selected={this.state.selectedSocialMedia}
                 userData={userInfo}
                 platforms={this.getSCEligiblePlatforms()}

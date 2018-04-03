@@ -7,7 +7,7 @@ export const reducer = (state, action) => {
 
   if (action.type === 'LOGOUT_USER') {
     const resetRoutes = [...newState.routes.slice(0, 1)]
-    console.log('hit')
+
     return {
       ...newState,
       index: 0,

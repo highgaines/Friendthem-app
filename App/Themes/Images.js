@@ -79,6 +79,8 @@ const images = {
   //Background Images
   scTutorialOne: require('../Images/AddFriendTutorialOne.png'),
   scTutorialTwo: require('../Images/AddFriendTutorialTwo.png'),
+  inviteTutorial: require('../Images/friendthem-invite-tutorial.png'),
+  connectivityTutorial: require('../Images/friendthem-connectivity-tutorial.png')
 }
 
 export default images

@@ -9,8 +9,8 @@ import envConfig from '../../../envConfig'
 const analytics = new Analytics(envConfig.Development.SegmentAPIKey)
 
 export default class SuperConnectBar extends Component {
-  navigateToSuperConnect = (platforms, copy) => {
-    this.props.superConnect(platforms, copy)
+  navigateToSuperConnect = (platforms, copy, connectType) => {
+    this.props.superConnect(platforms, copy, connectType)
     analytics.track({
       userId: this.props.userId,
       event: 'Super Connect Request',
@@ -41,7 +41,7 @@ export default class SuperConnectBar extends Component {
           color='#ffffff'
           title='FRIENDTHEM'
           onPressCallback={() =>
-            this.navigateToSuperConnect(this.mapPlatforms(selected), friendThemCopy)}
+            this.navigateToSuperConnect(this.mapPlatforms(selected), friendThemCopy, 'friendthem')}
           containerStyle={styles.friendThemButton}
           textStyle={styles.buttonTextStyle}/>
 
@@ -50,7 +50,7 @@ export default class SuperConnectBar extends Component {
           type='font-awesome'
           color='#ffffff'
           title='SUPER CONNECT'
-          onPressCallback={() => this.navigateToSuperConnect(platforms, superConnectCopy)}
+          onPressCallback={() => this.navigateToSuperConnect(platforms, superConnectCopy, 'superconnect')}
           containerStyle={styles.superConnectButton}
           textStyle={styles.buttonTextStyle}/>
       </View>

@@ -82,7 +82,9 @@ export const INITIAL_STATE = Immutable({
     hobbies: [],
     hometown: '',
     phone_number: '',
-    tutorial_complete: false
+    tutorial_complete: false,
+    invite_tutorial: false,
+    connectivity_tutorial: false
   },
   userPhotos: {},
   ghostModeOn: true,
@@ -430,12 +432,12 @@ export const updateTutorialStatus = (accessToken, tutorialName, completed) => {
   headers.append('Content-Type', 'application/json')
 
   const body = {
-    `${tutorialName}`: completed
+    [tutorialName]: completed
   }
 
   const init = {
     method: 'PATCH',
-    headers: headers
+    headers: headers,
     body: JSON.stringify(body),
 
   }
@@ -675,6 +677,23 @@ const handleProgressUpdate = (state, action) => {
   return state.merge({ updateProgress: data })
 }
 
+/*------ Edit Tutorial Completion Status Reducers ------*/
+
+const handleUpdateTutorialRequest = (state, action) => {
+  return state
+}
+
+const handleUpdateTutorialSuccess = (state, action) => {
+  const { data } = action.response
+  const updatedEditableData = { ...state.editableData, ...data }
+
+  return state.set('editableData', updatedEditableData)
+}
+
+const handleUpdateTutorialFailure = (state, action) => {
+  return state
+}
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -717,5 +736,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.UPDATE_SETTINGS_REQUEST]: handleUpdateSettingsRequest,
   [Types.UPDATE_SETTINGS_SUCCESS]: handleUpdateSettingsSuccess,
   [Types.UPDATE_SETTINGS_FAILURE]: handleUpdateSettingsFailure,
+  [Types.UPDATE_TUTORIAL_REQUEST]: handleUpdateTutorialRequest,
+  [Types.UPDATE_TUTORIAL_SUCCESS]: handleUpdateTutorialSuccess,
+  [Types.UPDATE_TUTORIAL_FAILURE]: handleUpdateTutorialFailure,
   [Types.LOGOUT_USER]: handleUserLogout,
 })
