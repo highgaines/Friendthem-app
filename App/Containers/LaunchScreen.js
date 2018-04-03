@@ -73,7 +73,7 @@ class LaunchScreen extends Component {
   }
 
   componentWillUpdate = nextProps => {
-    const { fbAuthToken } = this.props
+    const { fbAuthToken, navigation, nativeGeolocation, nativeNotifications, nativeContactsPermission } = this.props
 
     if (!fbAuthToken && nextProps.fbAuthToken && this.state.loading) {
       this.getFbProfile(nextProps.fbAuthToken)
@@ -81,7 +81,22 @@ class LaunchScreen extends Component {
     }
 
     if (nextProps.loggedIn && nextProps.routeName === 'LaunchScreen') {
-      nextProps.navigation.navigate('NearbyUsersScreen')
+      if (!nativeGeolocation) {
+          nextProps.navigation.navigate('PermissionScreen', {
+              permissionType: 'geolocation',
+              navigation: navigation
+            })
+      } else if (!nativeNotifications) {
+          navigation.navigate('PermissionScreen', {
+            permissionType: 'notifications',
+            navigation: navigation
+          })
+      } else if (!nativeContactsPermission) {
+          nextProps.navigation.navigate('ForkScreen')
+      } else {
+          nextProps.navigation.navigate('NearbyUsersScreen')
+      }
+
     }
 
   }
@@ -254,6 +269,7 @@ const mapStateToProps = state => ({
   fbAuthToken: state.fbStore.fbAccessToken,
   nativeGeolocation: state.permissionsStore.nativeGeolocation,
   nativeNotifications: state.permissionsStore.nativeNotifications,
+  nativeContactsPermission: state.permissionsStore.nativeContactsPermission,
   contactList: state.inviteUsersStore.contactList,
   customNotificationPermission: state.permissionsStore.notificationPermissionsGranted
 })
