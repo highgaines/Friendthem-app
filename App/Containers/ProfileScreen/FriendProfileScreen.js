@@ -292,7 +292,7 @@ class FriendProfileScreen extends Component {
 
   superConnectCallback = (platformsSelected, copy, connectType) => {
     const { userInfo } = this.props
-    console.log(userInfo, platformsSelected, copy, connectType)
+
     if (userInfo.social_profiles.length === 1 && connectType === 'superconnect') {
       this.setState({ showSuperConnectModal: true })
     } else {
