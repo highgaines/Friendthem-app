@@ -60,7 +60,6 @@ class LaunchScreen extends Component {
       user: '',
       loading: false,
       error: null,
-      permissionTypes: Permissions.getTypes()
     }
   }
 
@@ -70,11 +69,10 @@ class LaunchScreen extends Component {
     if (this.props.loggedIn) {
       this.props.navigation.navigate('NearbyUsersScreen')
     }
-
   }
 
   componentWillUpdate = (nextProps, nextState) => {
-    const { fbAuthToken, navigation, nativeGeolocation, nativeNotifications, nativeContactsPermission } = this.props
+    const { fbAuthToken, navigation, nativeGeolocation, nativeNotifications, nativeContactsPermission, routeName } = this.props
     const { permissionTypes } = this.state
 
     if (!fbAuthToken && nextProps.fbAuthToken && this.state.loading) {
@@ -82,14 +80,14 @@ class LaunchScreen extends Component {
       this.handleLoadingComplete()
     }
 
-    if (nextProps.loggedIn && nextProps.routeName === 'LaunchScreen') {
-      if (!permissionTypes.includes('location')) {
+    if (nextProps.loggedIn && nextProps.routeName === 'LaunchScreen' && routeName !== 'PermissionScreen') {
+      if (!nativeGeolocation) {
           nextProps.navigation.navigate('PermissionScreen', {
               permissionType: 'geolocation',
               navigation: navigation
             })
-      } else if (!permissionTypes.includes('notification')) {
-          navigation.navigate('PermissionScreen', {
+      } else if (!nativeNotifications) {
+          nextProps.navigation.navigate('PermissionScreen', {
             permissionType: 'notifications',
             navigation: navigation
           })
@@ -118,23 +116,17 @@ class LaunchScreen extends Component {
     }
   }
 
-  checkPermissions = async () => {
+  checkPermissions = () => {
     const { setGeoPermission, setNotifPermission, setNativeContactsPermission } = this.props
 
-    Permissions.check('location', { type: 'whenInUse' }).then(response => {
-      if (response === 'authorized') {
+    Permissions.checkMultiple(['notification', 'location', 'contacts']).then(response => {
+      if (response.location === 'authorized') {
         setGeoPermission(true)
       }
-    })
-    if (isIOS) {
-      Permissions.check('notification').then(response => {
-        if (response === 'authorized') {
-          setNotifPermission(true)
-        }
-      })
-    }
-    Contacts.checkPermission( (err, permission) => {
-      if (permission === 'authorized') {
+      if (response.notification === 'authorized' && isIOS) {
+        setNotifPermission(true)
+      }
+      if (response.contacts === 'authorized') {
         setNativeContactsPermission(true)
       }
     })
@@ -158,18 +150,18 @@ class LaunchScreen extends Component {
         return error
       } else {
         fbUserInfo(result)
-        if (!permissionTypes.includes('location')) {
-            nextProps.navigation.navigate('PermissionScreen', {
+        if (!nativeGeolocation) {
+            navigation.navigate('PermissionScreen', {
                 permissionType: 'geolocation',
                 navigation: navigation
               })
-        } else if (!permissionTypes.includes('notification')) {
+        } else if (!nativeNotifications) {
             navigation.navigate('PermissionScreen', {
               permissionType: 'notifications',
               navigation: navigation
             })
-        } else if (!permissionTypes.includes('contacts')) {
-            nextProps.navigation.navigate('ForkScreen')
+        } else {
+            navigation.navigate('ForkScreen')
         }
       }
     }
@@ -240,6 +232,7 @@ class LaunchScreen extends Component {
                     loggedIn={!!fbAuthToken}
                     handleLoading={this.handleLoading}
                     handleLoadingComplete={this.handleLoadingComplete}
+                    checkPermissions={this.checkPermissions}
                   />
                   <ConnectButton
                     title='Start With Email'
