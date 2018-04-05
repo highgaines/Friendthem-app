@@ -40,7 +40,8 @@ class NearbyUsers extends Component {
     this.state = {
       input: '',
       feedView: false,
-      refreshing: false
+      refreshing: false,
+      permissionTypes: Permissions.getTypes()
     }
   }
 

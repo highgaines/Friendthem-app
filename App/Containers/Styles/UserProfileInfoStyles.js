@@ -5,11 +5,12 @@ import { isIpad } from '../../Utils/constants'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   scrollContainerStyle: {
-    height: Metrics.screenHeight * (isIpad ? 1.5 : 1),
+    height: Metrics.screenHeight * (isIpad ? 1.5 : 1.3),
+    width: Metrics.screenWidth,
     flex: 1
   },
   userInfoView: {
-    height: Metrics.screenHeight * (isIpad ? 1.5 : 1),
+    height: Metrics.screenHeight * (isIpad ? 1.5 : 1.3),
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center'
@@ -72,7 +73,7 @@ export default StyleSheet.create({
     width: 175,
     height: 50,
     borderRadius: 50,
-    marginBottom: 40,
+    marginBottom: 20,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -113,6 +114,6 @@ export default StyleSheet.create({
     backgroundColor: 'transparent'
   },
   footerOffset: {
-    marginTop: isIpad ? 15 : 75
+    marginTop: isIpad ? 15 : 30
   }
 })

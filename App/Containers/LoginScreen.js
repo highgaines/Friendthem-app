@@ -88,72 +88,74 @@ class LoginScreen extends Component {
 
   render() {
     return (
-      <View style={styles.userInfoView}>
-        <LinearGradient
-          colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
-          start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
-          locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
-          style={styles.linearGradient}>
-          <Image
-            style={styles.friendThemLoginIcon}
-            source={require('../Images/logo-friendthem-text.png')}/>
-          <Text style={styles.loginFormText}>
-            LOG IN
-          </Text>
-          <TextInput
-            testID={'email_input'}
-            style={styles.formInput}
-            onChangeText={(textValue) => this.updateState(textValue, 'userEmail')}
-            placeholder='Email Address'
-            autoCapitalize={'none'}
-            autoCorrect={false}
-            autoFocus={true}
-            underlineColorAndroid='rgba(0,0,0,0)'
-            placeholderFontColor='#85919a'>
-          </TextInput>
-          <TextInput
-            testID={'password_input'}
-            style={styles.formInput}
-            onChangeText={(textValue) => this.updateState(textValue, 'userPassword')}
-            secureTextEntry={true}
-            autoCorrect={false}
-            underlineColorAndroid='rgba(0,0,0,0)'
-            placeholder='Password'
-            placeholderFontColor='#85919a'>
-          </TextInput>
-          <CheckBox
-            containerStyle={styles.checkboxContainer}
-            textStyle={styles.loginCheckBoxText}
-            title="Remember Me"
-            uncheckedIcon='square'
-            uncheckedColor='#fff'
-            checkedIcon='check-square'
-            checkedColor='#fff'
-            onIconPress={() => this.setState({checkBoxChecked: !this.state.checkBoxChecked})}
-            checked={this.state.checkBoxChecked}/>
-          <TouchableOpacity
-            testID={'start_button'}
-            style={[styles.loginButtonStyle, { marginTop: 20 }]}
-            onPress={() => this.loginRequest()}>
-            <Text style={styles.buttonText}>START</Text>
-            <Icon
-              name='arrow-right'
-              type='feather'
-              color='#fff'
-              iconStyle={styles.buttonIcon}/>
-          </TouchableOpacity>
-          <View style={styles.footerOffset}>
-            <Footer
-              navigationCallback={() =>
-                this.props.navigation.navigate('RegisterUserScreen')
-              }
-              launchScreenNavigation={
-                () => this.props.navigation.navigate('LaunchScreen')
-              }
-              onLoginScreen={true}
-              styles={styles}/>
-          </View>
-        </LinearGradient>
+      <View style={styles.scrollContainerStyle}>
+        <ScrollView contentContainerStyle={styles.userInfoView}>
+          <LinearGradient
+            colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
+            start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
+            locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
+            style={styles.linearGradient}>
+            <Image
+              style={styles.friendThemLoginIcon}
+              source={require('../Images/logo-friendthem-text.png')}/>
+            <Text style={styles.loginFormText}>
+              LOG IN
+            </Text>
+            <TextInput
+              testID={'email_input'}
+              style={styles.formInput}
+              onChangeText={(textValue) => this.updateState(textValue, 'userEmail')}
+              placeholder='Email Address'
+              autoCapitalize={'none'}
+              autoCorrect={false}
+              autoFocus={true}
+              underlineColorAndroid='rgba(0,0,0,0)'
+              placeholderFontColor='#85919a'>
+            </TextInput>
+            <TextInput
+              testID={'password_input'}
+              style={styles.formInput}
+              onChangeText={(textValue) => this.updateState(textValue, 'userPassword')}
+              secureTextEntry={true}
+              autoCorrect={false}
+              underlineColorAndroid='rgba(0,0,0,0)'
+              placeholder='Password'
+              placeholderFontColor='#85919a'>
+            </TextInput>
+            <CheckBox
+              containerStyle={styles.checkboxContainer}
+              textStyle={styles.loginCheckBoxText}
+              title="Remember Me"
+              uncheckedIcon='square'
+              uncheckedColor='#fff'
+              checkedIcon='check-square'
+              checkedColor='#fff'
+              onIconPress={() => this.setState({checkBoxChecked: !this.state.checkBoxChecked})}
+              checked={this.state.checkBoxChecked}/>
+            <TouchableOpacity
+              testID={'start_button'}
+              style={[styles.loginButtonStyle, { marginTop: 20 }]}
+              onPress={() => this.loginRequest()}>
+              <Text style={styles.buttonText}>START</Text>
+              <Icon
+                name='arrow-right'
+                type='feather'
+                color='#fff'
+                iconStyle={styles.buttonIcon}/>
+            </TouchableOpacity>
+            <View style={styles.footerOffset}>
+              <Footer
+                navigationCallback={() =>
+                  this.props.navigation.navigate('RegisterUserScreen')
+                }
+                launchScreenNavigation={
+                  () => this.props.navigation.navigate('LaunchScreen')
+                }
+                onLoginScreen={true}
+                styles={styles}/>
+            </View>
+          </LinearGradient>
+        </ScrollView>
       </View>
     )
   }

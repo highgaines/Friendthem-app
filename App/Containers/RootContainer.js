@@ -3,6 +3,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { View, StatusBar, AppState, Platform } from 'react-native'
 
+import Permissions from 'react-native-permissions'
+
 import ReduxNavigation from '../Navigation/ReduxNavigation'
 import ReduxPersist from '../Config/ReduxPersist'
 import Navbar from './Navbar/Navbar'
@@ -15,6 +17,7 @@ import { updateUserPosition } from '../Redux/UserStore'
 // Styles
 import styles from './Styles/RootContainerStyles'
 
+import { isIOS, isAndroid } from '../Utils/constants'
 const ACTIVE = "active";
 
 class RootContainer extends Component {
@@ -73,12 +76,14 @@ const mapStateToProps = state => ({
 });
 
 // wraps dispatch to create nicer functions to call within our component
-const mapDispatchToProps = (dispatch) => ({
-  ...bindActionCreators({
-    refreshAuthToken,
-    updateUserPosition
-  }, dispatch)
-});
+const mapDispatchToProps = dispatch => {
+  return {
+    ...bindActionCreators({
+      refreshAuthToken,
+      updateUserPosition,
+    }, dispatch)
+  }
+};
 
 export default connect(
   mapStateToProps,

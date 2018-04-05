@@ -59,7 +59,7 @@ class LaunchScreen extends Component {
     this.state = {
       user: '',
       loading: false,
-      error: null
+      error: null,
     }
   }
 
@@ -69,34 +69,31 @@ class LaunchScreen extends Component {
     if (this.props.loggedIn) {
       this.props.navigation.navigate('NearbyUsersScreen')
     }
-
   }
 
-  componentWillUpdate = nextProps => {
-    const { fbAuthToken, navigation, nativeGeolocation, nativeNotifications, nativeContactsPermission } = this.props
+  componentWillUpdate = (nextProps, nextState) => {
+    const { fbAuthToken, navigation, nativeGeolocation, nativeNotifications, nativeContactsPermission, routeName } = this.props
+    const { permissionTypes } = this.state
 
     if (!fbAuthToken && nextProps.fbAuthToken && this.state.loading) {
       this.getFbProfile(nextProps.fbAuthToken)
       this.handleLoadingComplete()
     }
 
-    if (nextProps.loggedIn && nextProps.routeName === 'LaunchScreen') {
+    if (nextProps.loggedIn && nextProps.routeName === 'LaunchScreen' && routeName !== 'PermissionScreen') {
       if (!nativeGeolocation) {
           nextProps.navigation.navigate('PermissionScreen', {
               permissionType: 'geolocation',
               navigation: navigation
             })
       } else if (!nativeNotifications) {
-          navigation.navigate('PermissionScreen', {
+          nextProps.navigation.navigate('PermissionScreen', {
             permissionType: 'notifications',
             navigation: navigation
           })
-      } else if (!nativeContactsPermission) {
-          nextProps.navigation.navigate('ForkScreen')
       } else {
-          nextProps.navigation.navigate('NearbyUsersScreen')
+          nextProps.navigation.navigate('ForkScreen')
       }
-
     }
 
   }
@@ -121,20 +118,15 @@ class LaunchScreen extends Component {
 
   checkPermissions = () => {
     const { setGeoPermission, setNotifPermission, setNativeContactsPermission } = this.props
-    Permissions.check('location', { type: 'whenInUse' }).then(response => {
-      if (response === 'authorized') {
+
+    Permissions.checkMultiple(['notification', 'location', 'contacts']).then(response => {
+      if (response.location === 'authorized') {
         setGeoPermission(true)
       }
-    })
-    if (isIOS) {
-      Permissions.check('notification').then(response => {
-        if (response === 'authorized') {
-          setNotifPermission(true)
-        }
-      })
-    }
-    Contacts.checkPermission( (err, permission) => {
-      if (permission === 'authorized') {
+      if (response.notification === 'authorized' && isIOS) {
+        setNotifPermission(true)
+      }
+      if (response.contacts === 'authorized') {
         setNativeContactsPermission(true)
       }
     })
@@ -149,8 +141,8 @@ class LaunchScreen extends Component {
   }
 
   getFbProfile = accessToken => {
-
     const { fbUserInfo, navigation, loginByFacebook, nativeGeolocation, nativeNotifications } = this.props
+    const { permissionTypes } = this.state
 
     const responseInfoCallback = (error, result) => {
       if (error) {
@@ -159,17 +151,17 @@ class LaunchScreen extends Component {
       } else {
         fbUserInfo(result)
         if (!nativeGeolocation) {
-          navigation.navigate('PermissionScreen', {
-            permissionType: 'geolocation',
-            navigation: navigation
-          })
+            navigation.navigate('PermissionScreen', {
+                permissionType: 'geolocation',
+                navigation: navigation
+              })
         } else if (!nativeNotifications) {
-          navigation.navigate('PermissionScreen', {
-            permissionType: 'notifications',
-            navigation: navigation
-          })
+            navigation.navigate('PermissionScreen', {
+              permissionType: 'notifications',
+              navigation: navigation
+            })
         } else {
-          navigation.navigate('ForkScreen')
+            navigation.navigate('ForkScreen')
         }
       }
     }
@@ -240,6 +232,7 @@ class LaunchScreen extends Component {
                     loggedIn={!!fbAuthToken}
                     handleLoading={this.handleLoading}
                     handleLoadingComplete={this.handleLoadingComplete}
+                    checkPermissions={this.checkPermissions}
                   />
                   <ConnectButton
                     title='Start With Email'
