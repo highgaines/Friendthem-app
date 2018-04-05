@@ -106,8 +106,8 @@ android {
         applicationId "com.friendthem"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 8
-        versionName "11.5.3"
+        versionCode 9
+        versionName "11.6.1"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }

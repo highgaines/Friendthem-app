@@ -6,6 +6,7 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   scrollContainerStyle: {
     height: Metrics.screenHeight * (isIpad ? 1.5 : 1.3),
+    width: Metrics.screenWidth,
     flex: 1
   },
   userInfoView: {

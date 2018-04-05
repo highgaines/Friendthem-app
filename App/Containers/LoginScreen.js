@@ -89,7 +89,7 @@ class LoginScreen extends Component {
   render() {
     return (
       <View style={styles.scrollContainerStyle}>
-        <ScrollView style={styles.userInfoView}>
+        <ScrollView contentContainerStyle={styles.userInfoView}>
           <LinearGradient
             colors={['#e73436', '#b31c85', '#9011ba', '#5664bd', '#2aa5c0']}
             start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
