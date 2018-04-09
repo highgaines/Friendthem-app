@@ -14,6 +14,8 @@ import UserStoreActions, { updateSnapInfo, editSnapInfo } from '../../Redux/User
 // Styles
 import styles from '../Styles/FriendThemModalStyles'
 
+import isIOS from '../../Utils/constants'
+
 class FriendThemModal extends Component {
   constructor(props) {
     super(props)
@@ -49,7 +51,7 @@ class FriendThemModal extends Component {
       animationOut='slideOutDown'
       onBackdropPress={toggleModal}
       isVisible={modalVisible}
-      avoidKeyboard={true}
+      avoidKeyboard={isIOS ? true : false}
       style={{alignSelf: 'center'}}>
         <View style={styles.containerModal}>
           <LinearGradient
