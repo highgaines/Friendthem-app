@@ -24,13 +24,22 @@ class RegisterUserScreen extends Component {
   }
 
   componentDidUpdate = prevProps => {
-    const { userInfoAdded, navigation } = this.props
+    const { userInfoAdded, navigation, nativeGeolocation, nativeNotifications } = this.props
 
     if (userInfoAdded && !prevProps.userInfoAdded) {
-      navigation.navigate('PermissionScreen', {
-        permissionType: 'geolocation',
-        navigation: navigation,
-      })
+      if (!nativeGeolocation) {
+        navigation.navigate('PermissionScreen', {
+          permissionType: 'geolocation',
+          navigation: navigation,
+        })
+      } else if (!nativeNotifications) {
+        navigation.navigate('PermissionScreen', {
+          permissionType: 'notifications',
+          navigation: navigation,
+        })
+      } else {
+        navigation.navigate('ForkScreen')
+      }
     }
   }
 
@@ -161,7 +170,9 @@ class RegisterUserScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  userInfoAdded: state.authStore.userInfoAdded
+  userInfoAdded: state.authStore.userInfoAdded,
+  nativeGeolocation: state.permissionsStore.nativeGeolocation,
+  nativeNotifications: state.permissionsStore.nativeNotifications,
 })
 
 const mapDispatchToProps = dispatch => {
