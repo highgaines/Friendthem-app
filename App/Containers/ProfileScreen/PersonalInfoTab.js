@@ -65,10 +65,15 @@ class PersonalInfoTab extends Component {
         extraScrollHeight={100}
         style={styles.personalInfoContainer}>
         <InfoRow
-          rowLabel='NAME'
-          field="name"
+          rowLabel='FIRST NAME'
+          field="first_name"
           updateInfo={this.packageEditProfile}
-          userInfo={`${userData.first_name || ''} ${userData.last_name || ''}`}/>
+          userInfo={`${userData.first_name || ''}`}/>
+        <InfoRow
+          rowLabel='LAST NAME'
+          field="last_name"
+          updateInfo={this.packageEditProfile}
+          userInfo={`${userData.last_name || ''}`}/>
         <InfoRow
           rowLabel='HOBBIES'
           field="hobbies"
