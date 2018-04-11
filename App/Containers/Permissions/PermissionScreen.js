@@ -36,15 +36,19 @@ class PermissionScreen extends Component {
     }
   }
 
-  // console logs for testing purposes
-  componentWillMount = () => {
-    OneSignal.addEventListener('received', this.onReceived)
-    OneSignal.addEventListener('opened', this.onOpened)
-    OneSignal.addEventListener('registered', this.onRegistered)
-    OneSignal.addEventListener('ids', this.onIds)
+  componentDidUpdate = prevProps => {
+    const { accessToken } = this.props
+
+    if (accessToken && !prevProps.accessToken) {
+      OneSignal.addEventListener('received', this.onReceived)
+      OneSignal.addEventListener('opened', this.onOpened)
+      OneSignal.addEventListener('registered', this.onRegistered)
+      OneSignal.addEventListener('ids', this.onIds)
+    }
   }
 
   componentWillUnmount = () => {
+    console.log('hit')
     OneSignal.removeEventListener('received', this.onReceived)
     OneSignal.removeEventListener('opened', this.onOpened)
     OneSignal.removeEventListener('registered', this.onRegistered)
@@ -69,7 +73,9 @@ class PermissionScreen extends Component {
   onIds = device => {
     const { accessToken, registerForPushNotif } = this.props
     console.log('Device Info:', device)
-    registerForPushNotif(accessToken, device.userId)
+    if (accessToken) {
+      registerForPushNotif(accessToken, device.userId)
+    }
   }
 
   handleNotNow = () => {
@@ -84,13 +90,18 @@ class PermissionScreen extends Component {
       permissionType,
       storeContactInfo,
       grantLocationPermission,
-      grantNotificationPermission
+      grantNotificationPermission,
+      nativeNotifications
     } = this.props
     const { navigate } = navigation
 
     if (permissionType === 'geolocation') {
       grantLocationPermission(true)
-      navigate('PermissionScreen', { permissionType: 'notifications', navigation: navigation })
+      if (!nativeNotifications) {
+        navigate('PermissionScreen', { permissionType: 'notifications', navigation: navigation })
+      } else {
+          navigate('ForkScreen', { navigation: navigation })
+      }
     } else {
       grantNotificationPermission(true)
       navigate('ForkScreen', { navigation: navigation })
@@ -171,7 +182,8 @@ class PermissionScreen extends Component {
 
 const mapStateToProps = state => {
   return {
-    accessToken: state.authStore.accessToken
+    accessToken: state.authStore.accessToken,
+    nativeNotifications: state.permissionsStore.nativeNotifications,
   }
 }
 
