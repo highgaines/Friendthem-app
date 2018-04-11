@@ -111,7 +111,8 @@ class SocialMediaCardContainer extends Component {
 
     return (
       <View style={styles.socialCardScrollContainer}>
-        <ScrollView contentContainerStyle={styles.socialAccountContainer}>
+        <ScrollView
+          contentContainerStyle={styles.socialAccountContainer}>
         {
           Object.keys(socialMediaData).map((socialPlatform, idx) => {
             const isYoutube = socialPlatform === 'youtube'
