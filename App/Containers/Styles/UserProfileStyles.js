@@ -187,7 +187,7 @@ export default StyleSheet.create({
     height: Platform.OS === 'ios' ? Metrics.screenHeight * 0.6 : Metrics.screenHeight * 0.55,
   },
   socialCardScrollContainer: {
-    height: 300,
+    height: '100%',
     width: Metrics.screenWidth,
     paddingBottom: 10,
   }
