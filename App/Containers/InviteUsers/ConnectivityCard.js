@@ -28,9 +28,10 @@ class ConnectivityCard extends Component {
 
   handlePress = () => {
     const { setFriendInfo, navigation, friendData } = this.props
-
-    setFriendInfo(friendData)
-    navigation.navigate('FriendProfileScreen')
+    if (friendData){
+      setFriendInfo(friendData)
+      navigation.navigate('FriendProfileScreen')
+    }
   }
 
   // will need to finish coding out conditional

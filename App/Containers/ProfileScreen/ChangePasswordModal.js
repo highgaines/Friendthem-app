@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, TextInput, View, Button, TouchableOpacity } from 'react-native'
 import Image from 'react-native-remote-svg'
+
 // Libraries
 import LinearGradient from 'react-native-linear-gradient'
 import { Icon } from 'react-native-elements'
@@ -14,6 +15,9 @@ import UserStoreActions, { updateSnapInfo, updatePassword } from '../../Redux/Us
 // Styles
 import styles from '../Styles/ChangePasswordModalStyles'
 import { Images } from '../../Themes'
+
+// Constants
+import { isIOS } from '../../Utils/constants'
 
 class FriendThemModal extends Component {
   constructor(props) {
@@ -89,6 +93,7 @@ class FriendThemModal extends Component {
       <Modal
       animationIn='slideInUp'
       animationOut='slideOutDown'
+      avoidKeyboard={isIOS ? true : false}
       onBackdropPress={toggleChangePasswordModal}
       isVisible={modalVisible}>
         <View style={styles.containerModal}>
@@ -153,13 +158,13 @@ class FriendThemModal extends Component {
               style={styles.textInput}
               value={this.state.confirmPassword}
               onChangeText={this.onChangeConfirmPassword}
-              />
+            />
             <TouchableOpacity
               onPress={this.toggleConfirmPassword}
               style={styles.showEye}>
               <Image
                 source={Images.showEye}
-                />
+              />
             </TouchableOpacity>
           </View>
           <View style={styles.buttonGroup}>

@@ -109,12 +109,13 @@ export default StyleSheet.create({
     backgroundColor: '#143a7a'
   },
   socialAccountContainer: {
-    flex: 1,
     flexWrap: 'wrap',
     paddingHorizontal: 10,
+    paddingBottom: 30,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    width: '100%'
+    width: '100%',
+    height: '120%'
   },
   progressBarContainer: {
     width: Metrics.screenWidth,
@@ -142,6 +143,7 @@ export default StyleSheet.create({
     backgroundColor: 'transparent',
     color: '#fff',
     marginTop: 5,
+    paddingHorizontal: 20,
     fontFamily: Fonts.type.base,
     fontWeight: '600'
   },

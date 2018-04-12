@@ -388,9 +388,11 @@ class FriendProfileScreen extends Component {
                       <Text style={styles.profileHometownText}>
                         {friendInfo.hometown}
                       </Text>
-                      <Text style={styles.interestsText}>
-                        {friendInfo.hobbies ? friendInfo.hobbies.join(' | ') : ''}
-                      </Text>
+                      <View style={{ horizontalPadding: 40 }}>
+                        <Text numberOfLines={1} style={styles.interestsText}>
+                          {friendInfo.hobbies ? friendInfo.hobbies.join(' | ') : ''}
+                        </Text>
+                      </View>
                       <View style={{ flexDirection: 'row', marginTop: 7, justifyContent: 'space-around'}}>
                         {
                           userLastLocation
