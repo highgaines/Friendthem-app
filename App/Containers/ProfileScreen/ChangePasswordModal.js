@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, TextInput, View, Button, TouchableOpacity } from 'react-native'
 import Image from 'react-native-remote-svg'
+
 // Libraries
 import LinearGradient from 'react-native-linear-gradient'
 import { Icon } from 'react-native-elements'
@@ -89,6 +90,7 @@ class FriendThemModal extends Component {
       <Modal
       animationIn='slideInUp'
       animationOut='slideOutDown'
+      avoidKeyboard={true}
       onBackdropPress={toggleChangePasswordModal}
       isVisible={modalVisible}>
         <View style={styles.containerModal}>
@@ -143,25 +145,25 @@ class FriendThemModal extends Component {
                 />
             </TouchableOpacity>
           </View>
-          <View style={[styles.entryContainer, {borderBottomWidth: 1}]}>
-            <Text style={styles.sectionHead}>
-              Confirm Password
-            </Text>
-            <TextInput
-              underlineColorAndroid='rgba(0,0,0,0)'
-              secureTextEntry={this.state.isConfirmPasswordHidden}
-              style={styles.textInput}
-              value={this.state.confirmPassword}
-              onChangeText={this.onChangeConfirmPassword}
+            <View style={[styles.entryContainer, {borderBottomWidth: 1}]}>
+              <Text style={styles.sectionHead}>
+                Confirm Password
+              </Text>
+              <TextInput
+                underlineColorAndroid='rgba(0,0,0,0)'
+                secureTextEntry={this.state.isConfirmPasswordHidden}
+                style={styles.textInput}
+                value={this.state.confirmPassword}
+                onChangeText={this.onChangeConfirmPassword}
               />
-            <TouchableOpacity
-              onPress={this.toggleConfirmPassword}
-              style={styles.showEye}>
-              <Image
-                source={Images.showEye}
+              <TouchableOpacity
+                onPress={this.toggleConfirmPassword}
+                style={styles.showEye}>
+                <Image
+                  source={Images.showEye}
                 />
-            </TouchableOpacity>
-          </View>
+              </TouchableOpacity>
+            </View>
           <View style={styles.buttonGroup}>
             <TouchableOpacity
               onPress={toggleChangePasswordModal}
