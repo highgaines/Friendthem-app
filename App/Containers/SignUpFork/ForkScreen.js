@@ -16,7 +16,7 @@ import ConnectButton from '../SuperConnectScreen/ConnectButton'
 import LinearGradientWrapper from '../../HOCs/LinearGradientWrapper'
 
 // Libraries
-import {CachedImage} from "react-native-img-cache";
+import { CachedImage } from "react-native-img-cache";
 import { SocialIcon } from 'react-native-elements'
 import Permissions from 'react-native-permissions'
 import { Icon } from 'react-native-elements'

@@ -16,6 +16,9 @@ import UserStoreActions, { updateSnapInfo, updatePassword } from '../../Redux/Us
 import styles from '../Styles/ChangePasswordModalStyles'
 import { Images } from '../../Themes'
 
+// Constants
+import { isIOS } from '../../Utils/constants'
+
 class FriendThemModal extends Component {
   constructor(props) {
     super(props)
@@ -90,7 +93,7 @@ class FriendThemModal extends Component {
       <Modal
       animationIn='slideInUp'
       animationOut='slideOutDown'
-      avoidKeyboard={true}
+      avoidKeyboard={isIOS ? true : false}
       onBackdropPress={toggleChangePasswordModal}
       isVisible={modalVisible}>
         <View style={styles.containerModal}>
