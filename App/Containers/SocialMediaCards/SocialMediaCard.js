@@ -92,13 +92,7 @@ export default class SocialMediaCard extends Component {
         activeOpacity={readOnly ? 1 : 0.2 }
         onPress={this.onPressFunctionality()}
       >
-        {
-          this.determineConnectedStatus() ?
-          <Icon
-            name='check-circle'
-            type='font-awesome'
-            color={'green'}
-            containerStyle={styles.checkIcon} /> : selected ?
+        { !this.determineConnectedStatus() && selected ?
             <Icon
               name='check-circle'
               type='font-awesome'
