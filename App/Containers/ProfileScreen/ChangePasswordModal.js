@@ -145,25 +145,25 @@ class FriendThemModal extends Component {
                 />
             </TouchableOpacity>
           </View>
-            <View style={[styles.entryContainer, {borderBottomWidth: 1}]}>
-              <Text style={styles.sectionHead}>
-                Confirm Password
-              </Text>
-              <TextInput
-                underlineColorAndroid='rgba(0,0,0,0)'
-                secureTextEntry={this.state.isConfirmPasswordHidden}
-                style={styles.textInput}
-                value={this.state.confirmPassword}
-                onChangeText={this.onChangeConfirmPassword}
+          <View style={[styles.entryContainer, {borderBottomWidth: 1}]}>
+            <Text style={styles.sectionHead}>
+              Confirm Password
+            </Text>
+            <TextInput
+              underlineColorAndroid='rgba(0,0,0,0)'
+              secureTextEntry={this.state.isConfirmPasswordHidden}
+              style={styles.textInput}
+              value={this.state.confirmPassword}
+              onChangeText={this.onChangeConfirmPassword}
+            />
+            <TouchableOpacity
+              onPress={this.toggleConfirmPassword}
+              style={styles.showEye}>
+              <Image
+                source={Images.showEye}
               />
-              <TouchableOpacity
-                onPress={this.toggleConfirmPassword}
-                style={styles.showEye}>
-                <Image
-                  source={Images.showEye}
-                />
-              </TouchableOpacity>
-            </View>
+            </TouchableOpacity>
+          </View>
           <View style={styles.buttonGroup}>
             <TouchableOpacity
               onPress={toggleChangePasswordModal}
