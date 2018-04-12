@@ -92,7 +92,7 @@ class LaunchScreen extends Component {
             navigation: navigation
           })
       } else {
-          nextProps.navigation.navigate('ForkScreen')
+          nextProps.navigation.navigate('NearbyUsersScreen')
       }
     }
 
@@ -162,7 +162,7 @@ class LaunchScreen extends Component {
               navigation: navigation
             })
         } else if (isLaunchScreen) {
-            navigation.navigate('ForkScreen')
+            navigation.navigate('NearbyUsersScreen')
         }
       }
     }

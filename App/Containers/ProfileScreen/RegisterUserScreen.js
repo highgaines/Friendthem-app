@@ -38,7 +38,7 @@ class RegisterUserScreen extends Component {
           navigation: navigation,
         })
       } else {
-        navigation.navigate('ForkScreen')
+        navigation.navigate('NearbyUsersScreen')
       }
     }
   }
