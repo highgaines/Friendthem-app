@@ -64,6 +64,8 @@ class NearbyUsers extends Component {
       } else if (isAndroid) {
         RequestLocationPermission(setLocationInterval)
       }
+    }
+    if (accessToken) {
       fetchConnectivityData(accessToken)
     }
   }
@@ -78,6 +80,14 @@ class NearbyUsers extends Component {
         (error) => this.setState({ error: error.message }),
         { enableHighAccuracy: true }
       )
+    }
+  }
+
+  componentWillUpdate = nextProps => {
+    const { accessToken, fetchConnectivityData } = this.props
+
+    if (!accessToken && nextProps.accessToken) {
+      fetchConnectivityData(nextProps.accessToken)
     }
   }
 

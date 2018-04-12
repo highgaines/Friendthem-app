@@ -47,7 +47,7 @@ class LoginScreen extends Component {
 
     if (loggedIn && !prevProps.loggedIn) {
       if (permissionsGranted) {
-        navigation.navigate('ForkScreen')
+        navigation.navigate('NearbyUsersScreen')
       } else if (!locationPermission) {
           navigation.navigate('PermissionScreen', {
             permissionType: 'geolocation', navigation: navigation

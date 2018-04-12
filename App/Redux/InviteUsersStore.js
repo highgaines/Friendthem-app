@@ -87,8 +87,11 @@ export const fetchMyFriendsData = (accessToken) => {
 /* ------------- Reducers ------------- */
 
 const handleStoreContactInfo = (state, action) => {
-  const { data } = action.payload
-  return state.merge({ contactList: data })
+  const contacts = action.payload.data.filter(contact =>
+    contact.givenName || contact.familyName
+  )
+
+  return state.merge({ contactList: contacts })
 }
 
 const handleSelectUser = (state, action) => {
