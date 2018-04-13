@@ -26,6 +26,7 @@ import UserStoreActions, {
 // Styles
 import styles from '../Styles/UserProfileStyles'
 import { ifIphoneX } from '../../Themes/Helpers'
+import { isIOS } from '../../Utils/constants'
 import { Metrics } from '../../Themes/'
 
 class MyPicturesContainer extends Component {
@@ -127,6 +128,7 @@ class MyPicturesContainer extends Component {
 
   renderImages = () => {
     const { myPictures } = this.props
+
     if (myPictures && myPictures.length) {
 
       return myPictures.map( (imageObj, idx) => {
@@ -183,7 +185,7 @@ class MyPicturesContainer extends Component {
 
     return fetchingMyPics
     ? <View style={{ marginTop: 20 }}> <ActivityIndicator size="large" color="#0000ff" /> </View>
-    : <View style={styles.socialAccountContainer}>
+    : <View style={isIOS ? styles.socialAccountContainer : styles.socialAccountContainerAndroid}>
         {this.renderImages()}
         { myPictures && myPictures.length < 6 ? this.renderAddImageCard() : null}
         { uploadProgressNumber > 0 && uploadProgressNumber < 1

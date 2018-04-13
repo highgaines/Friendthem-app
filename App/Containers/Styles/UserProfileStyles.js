@@ -117,6 +117,12 @@ export default StyleSheet.create({
     width: '100%',
     height: '120%'
   },
+  socialAccountContainerAndroid: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    paddingHorizontal: 10,
+    width: '100%'
+  },
   progressBarContainer: {
     width: Metrics.screenWidth,
     marginTop: 20,
