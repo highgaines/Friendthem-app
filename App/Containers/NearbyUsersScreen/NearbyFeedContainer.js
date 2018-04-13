@@ -59,7 +59,7 @@ class NearbyFeedContainer extends Component {
 
     return(
       <LazyloadScrollView contentContainerStyle={styles.nearbyFeedContainer}>
-        {nearbyUsers.length
+        {nearbyUsers.length || !loading
           ? this.renderFeedCards()
           : <View style={{alignSelf: 'center', top: 100}}>
             <Text>
@@ -73,7 +73,7 @@ class NearbyFeedContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    loading: state.socialFeed.fetching,
+    loading: state.socialFeed.fetchingData,
     accessToken: state.authStore.accessToken,
     nearbyUsers: state.inviteUsersStore.connectivityData
   }

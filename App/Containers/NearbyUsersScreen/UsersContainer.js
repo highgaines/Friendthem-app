@@ -21,7 +21,7 @@ import { Images } from '../../Themes'
 import { isAndroid } from '../../Utils/constants'
 
 export default function UsersContainer(props) {
-  const { users, navigation, locationPermission, viewFriendProfile, refreshing, onRefresh } = props
+  const { users, navigation, locationPermission, viewFriendProfile, refreshing, onRefresh, fetching } = props
 
   const userCards =
     users.map( (userObj,i) =>
@@ -59,7 +59,7 @@ export default function UsersContainer(props) {
       }
       >
       {
-        users.length
+        users.length && !fetching
         ? userCards
         :
         <Animatable.View animation="fadeIn" style={styles.noNearbyUsersContainer}>

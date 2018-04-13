@@ -310,6 +310,8 @@ class FriendProfileScreen extends Component {
       syncedCardColors,
       selectedSocialMedia,
       showSuperConnectModal,
+      fetching,
+      fetchingTokens,
       platform,
       currentPic,
       currentPicIdx,
@@ -325,6 +327,14 @@ class FriendProfileScreen extends Component {
     const renderIpxHeader = ifIphoneX(ipxHeader, '')
 
     const backAction =  NavigationActions.back()
+
+    if(fetching || fetchingTokens){
+      return(
+        <View style={{height: '30%', justifyContent: 'center'}}>
+          <ActivityIndicator size="large" color="#0000ff"/>
+        </View>
+      )
+    }
 
     return (
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>

@@ -141,7 +141,7 @@ class NearbyUsers extends Component {
 
     if (!feedView && fetching) {
       return(
-        <View style={{ margin: '30%'}}>
+        <View style={{ margin: '40%'}}>
           <ActivityIndicator size="large" color="#0000ff"/>
         </View>
       )
@@ -168,6 +168,7 @@ class NearbyUsers extends Component {
             ? <UsersContainer
                 users={input.length ? this.filterUsers(users) : users}
                 navigation={navigation}
+                fetching={fetching}
                 locationPermission={locationPermission}
                 viewFriendProfile={this.viewFriendProfile}
                 refreshing={refreshing}

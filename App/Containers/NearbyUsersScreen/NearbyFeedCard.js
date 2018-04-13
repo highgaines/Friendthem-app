@@ -265,7 +265,7 @@ class NearbyFeedCard extends Component {
   }
 
   render = () => {
-    const { friendData, loading, setFriendInfo } = this.props
+    const { friendData, fetching, setFriendInfo } = this.props
     const { platform, currentPics, showModal, currentPicIdx } = this.state
     const socialPlatforms = friendData.social_profiles.map(prof => prof.provider)
 
@@ -321,7 +321,7 @@ class NearbyFeedCard extends Component {
             showsHorizontalScrollIndicator
             contentContainerStyle={[styles.contentContainer, platform === 'profile' ? { 'flex': 1, 'flexWrap': 'wrap', 'justifyContent': 'center' } : '']}
           >
-            {loading && this.state.loadInThisCard
+            {fetching && this.state.loadInThisCard
               ? <LazyloadView style={styles.loading}>
                   <ActivityIndicator
                     size="large"
@@ -341,7 +341,7 @@ const mapStateToProps = state => {
   return {
     accessToken: state.authStore.accessToken,
     feed: state.socialFeed.feed,
-    loading: state.socialFeed.fetching,
+    fetching: state.socialFeed.fetching,
     userData: state.userStore.userData
   }
 }

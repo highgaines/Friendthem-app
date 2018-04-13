@@ -65,7 +65,7 @@ const handleUserLogout = (state, action) => {
 }
 
 const handleFriendConnectionRequest = (state, action) => {
-  return state.set("fetching", true)
+  return state.merge({fetching: true})
 }
 
 const handleFriendConnectionSuccess = (state, action) => {
