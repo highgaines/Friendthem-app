@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity } from 'react-native'
+import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity, ActivityIndicator } from 'react-native'
 
 // Components
 import SocialMediaCard from '../SocialMediaCards/SocialMediaCard'
@@ -95,6 +95,7 @@ class SocialMediaCardContainer extends Component {
       fromFriendProfile,
       fromUserProfile,
       friendPlatforms,
+      fetching,
       friendData,
       onPressCallback,
       platforms,
@@ -108,6 +109,14 @@ class SocialMediaCardContainer extends Component {
       syncedCardColors,
       selectedSocialMedia
     } = this.state
+
+    if (fetching) {
+      return (
+        <View style={{ height: '30%', justifyContent: 'center'}}>
+          <ActivityIndicator size="large" color="#0000ff"/>
+        </View>
+      )
+    }
 
     return (
       <View style={styles.socialCardScrollContainer}>
@@ -166,6 +175,7 @@ class SocialMediaCardContainer extends Component {
 const mapStateToProps = state => ({
   userId: state.userStore.userId,
   userInfo: state.userStore.userData,
+  fetching: state.authStore.fetching,
   friendData: state.friendStore.friendData,
   platforms: state.tokenStore.platforms,
   fbAuthToken: state.fbStore.fbAccessToken,

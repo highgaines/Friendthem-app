@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, Image, View, TouchableOpacity, ListView } from 'react-native';
+import { ScrollView, Text, Image, View, TouchableOpacity, ListView, ActivityIndicator } from 'react-native';
 
 // Libraries
 import LinearGradient from 'react-native-linear-gradient';
@@ -55,6 +55,15 @@ class NotificationsContainer extends Component {
   }
 
   render() {
+    const { fetching } = this.props
+
+    if (fetching) {
+      return (
+        <View style={{ height: '30%', justifyContent: 'center'}}>
+            <ActivityIndicator size="large" color="#0000ff"/>
+        </View>
+      )
+    }
 
     return(
       <View style={{height: '100%'}}>
@@ -126,7 +135,8 @@ class NotificationsContainer extends Component {
 
 const mapStateToProps = state => ({
   notifications: state.notificationStore.notifications,
-  accessToken: state.authStore.accessToken
+  accessToken: state.authStore.accessToken,
+  fetching: state.notificationStore.fetching
 })
 
 const mapDispatchToProps = dispatch => {

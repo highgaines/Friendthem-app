@@ -359,6 +359,7 @@ class UserProfileScreen extends Component {
       getUserTokens,
       platforms,
       updateInfo,
+      fetching,
       isFetchingInitialUser,
       userPhotos,
       fetchingMyPics
@@ -394,7 +395,7 @@ class UserProfileScreen extends Component {
           start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
           locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
           >
-            {isFetchingInitialUser
+            {isFetchingInitialUser || fetching
               ? <View style={[styles.profileHeader, { height: 150, justifyContent: 'center'}]}>
                   <ActivityIndicator size="large" color="#0000ff"/>
                 </View>

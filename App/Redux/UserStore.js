@@ -623,7 +623,7 @@ const handleGetMyPicsRequest = (state, action) => {
 }
 
 const handleGetMyPicsSuccess = (state, action) => {
-  return state.set('myPictures', action.data)
+  return state.set('myPictures', action.data).set('fetchingMyPics', false)
 }
 
 const handleGetMyPicsFailure = (state, action) => {

@@ -43,6 +43,7 @@ export const INITIAL_STATE = Immutable({
   accessToken: null,
   tokenType: null,
   scope: null,
+  fetching: false,
   refreshToken: null,
   expiresIn: null,
   userInfoAdded: false,
@@ -285,15 +286,15 @@ const loginFailure = (state = INITIAL_STATE, action) => {
 }
 
 const handleSocialMediaAuthRequest = (state, action) => {
-  return state;
+  return state.set('fetching', true);
 }
 
 const handleSocialMediaAuthSuccess = (state, action) => {
-  return state;
+  return state.set('fetching', false);
 }
 
 const handleSocialMediaAuthFailure = (state, action) => {
-  return state;
+  return state.set('fetching', false);
 }
 
 const handleRefreshAuthTokenRequest = (state, action) => {

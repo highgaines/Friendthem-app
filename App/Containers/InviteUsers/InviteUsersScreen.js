@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, ScrollView } from 'react-native'
+import { View, TouchableOpacity, Text, ScrollView, ActivityIndicator } from 'react-native'
 
 // Redux
 import { connect } from 'react-redux'
@@ -94,6 +94,7 @@ class InviteUsersScreen extends Component {
       myFriends,
       selectUser,
       navigation,
+      fetching,
       fetchConnectivityData,
       accessToken,
       contacts
@@ -103,6 +104,14 @@ class InviteUsersScreen extends Component {
     const pluralizeContacts = contacts && contacts.length === 1 ? '' : 's'
     const tutorialVisible = showInviteTutorial && !networkTabSelected ||
       showConnectivityTutorial && networkTabSelected
+
+    if (fetching) {
+      return(
+        <View style={{ height: '50%', justifyContent: 'center'}}>
+            <ActivityIndicator size="large" color="#0000ff"/>
+        </View>
+      )
+    }
 
     return (
       !tutorialVisible ?
@@ -184,6 +193,7 @@ const mapStateToProps = state => ({
   accessToken: state.authStore.accessToken,
   friends: state.inviteUsersStore.connectivityData,
   myFriends: _.orderBy(state.inviteUsersStore.myFriends, ['connection_percentage'], ['desc']),
+  fetching: state.inviteUsersStore.fetchingData,
   contacts: state.inviteUsersStore.contactList,
   inviteTutorialComplete: state.userStore.editableData.invite_tutorial,
   connectivityTutorialComplete: state.userStore.editableData.connection_tutorial
