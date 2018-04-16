@@ -9,6 +9,11 @@ import ScreenTracking from './ScreenTrackingMiddleware'
 import apiMiddleware from './ApiMiddleware'
 import { createNetworkMiddleware } from 'react-native-offline'
 
+const offlineConfig = {
+  regexActionType: /.*FAILURE/,
+  actionTypes: ['FETCH_OFFLINE_MODE']
+}
+
 // creates the store
 export default (rootReducer, rootSaga) => {
   /* ------------- Redux Configuration ------------- */

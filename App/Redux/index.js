@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import configureStore from './CreateStore'
 import rootSaga from '../Sagas/'
+import { reducer as network } from 'react-native-offline';
 
 /* ------------- Assemble The Reducers ------------- */
 export const reducers = combineReducers({
@@ -14,7 +15,8 @@ export const reducers = combineReducers({
   permissionsStore: require('./PermissionsStore').reducer,
   tokenStore: require('./TokenRedux').reducer,
   superConnect: require('./SuperConnectStore').reducer,
-  socialFeed: require('./SocialFeedStore').reducer
+  socialFeed: require('./SocialFeedStore').reducer,
+  network: network
 })
 
 export default () => {
