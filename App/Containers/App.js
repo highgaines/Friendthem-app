@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import RootContainer from './RootContainer'
 import createStore from '../Redux'
 import codePush from "react-native-code-push"
+import { withNetworkConnectivity } from 'react-native-offline'
 
 let codePushOptions = {
   checkFrequency: Platform.OS == 'ios' ? codePush.CheckFrequency.ON_APP_RESUME : null,
@@ -15,6 +16,13 @@ let codePushOptions = {
 
 // create our store
 const store = createStore()
+
+const RootApp = withNetworkConnectivity({
+  withRedux: true,
+  timeout: 2000,
+  pingServerUrl: 'https://google.com',
+  withExtraHeadRequest: true
+})(RootContainer)
 
 /**
  * Provides an entry point into our application.  Both index.ios.js and index.android.js
@@ -30,7 +38,7 @@ class App extends Component {
     console.disableYellowBox = true
     return (
       <Provider store={store}>
-        <RootContainer />
+        <RootApp />
       </Provider>
     )
   }
