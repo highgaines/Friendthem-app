@@ -184,7 +184,7 @@ class NearbyUsers extends Component {
 const mapStateToProps = state => ({
   accessToken: state.authStore.accessToken,
   locationPermission: state.permissionsStore.nativeGeolocation,
-  users: state.friendStore.users,
+  users: state.friendStore.users.filter(user => !!user.picture),
   customGeolocationPermission: state.permissionsStore.locationPermissionsGranted,
   userSocialProfiles: state.userStore.userData.social_profiles,
   fetching: state.inviteUsersStore.fetchingData
