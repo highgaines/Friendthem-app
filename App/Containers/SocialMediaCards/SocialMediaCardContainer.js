@@ -143,7 +143,7 @@ class SocialMediaCardContainer extends Component {
               :
               friendPlatformPresent ? friendPlatformPresent.username : null
             const isClickable = currentPlatform && fromFriendProfile && friendPlatformPresent && isSynced && isFriendthem
-            console.log(isClickable, onPressCallback)
+
             if (friendPlatformPresent) {
               return (
                 <SocialMediaCard
