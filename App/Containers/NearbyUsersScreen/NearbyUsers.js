@@ -59,6 +59,7 @@ class NearbyUsers extends Component {
         Permissions.request('location', { type: 'whenInUse' }).then(response => {
           if(response === 'authorized') {
             setLocationInterval()
+            this.locationInterval()
           }
         })
       } else if (isAndroid) {
@@ -66,6 +67,7 @@ class NearbyUsers extends Component {
       }
     }
     if (accessToken) {
+      this.locationInterval()
       fetchConnectivityData(accessToken)
     }
   }
@@ -74,12 +76,7 @@ class NearbyUsers extends Component {
     const { updateUserPosition, accessToken, fetchConnectivityData } = this.props
 
     if (accessToken) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        updateUserPosition(accessToken, position.coords).then(resp => fetchConnectivityData(accessToken))
-      },
-        (error) => this.setState({ error: error.message }),
-        { enableHighAccuracy: true }
-      )
+      this.locationInterval()
     }
   }
 
@@ -106,7 +103,7 @@ class NearbyUsers extends Component {
       updateUserPosition(accessToken, position.coords).then(resp => fetchConnectivityData(accessToken))
     },
       (error) => this.setState({ error: error.message }),
-      { enableHighAccuracy: true }
+      {enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
     )
   }
 
