@@ -21,7 +21,8 @@ const RootApp = withNetworkConnectivity({
   withRedux: true,
   timeout: 2000,
   pingServerUrl: 'https://google.com',
-  withExtraHeadRequest: true
+  withExtraHeadRequest: true,
+  checkConnectionInterval: 5000,
 })(RootContainer)
 
 /**

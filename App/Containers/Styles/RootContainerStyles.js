@@ -19,5 +19,26 @@ export default StyleSheet.create({
     width: 200,
     height: 200,
     alignSelf: 'center'
+  },
+  offlineModal: {
+    alignItems: 'center',
+  },
+  modalView: {
+    width: Metrics.screenWidth * .95,
+    height: Metrics.screenHeight * .15,
+    position: 'absolute',
+    top: 30,
+    backgroundColor: 'gray',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10
+  },
+  modalText: {
+    padding: '3%',
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 15,
+    fontWeight: "500",
+    lineHeight: 16
   }
 })
