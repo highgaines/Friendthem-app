@@ -6,6 +6,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Reactotron from 'reactotron-react-native';
 import { Icon } from 'react-native-elements';
 import { SwipeListView } from 'react-native-swipe-list-view';
+import _ from 'lodash'
 
 // Components
 import Header from './Header';
@@ -55,7 +56,8 @@ class NotificationsContainer extends Component {
   }
 
   render() {
-    const { fetching } = this.props
+    const { fetching, notifications } = this.props
+    const sortedNotifications = _.orderBy(notifications, ['created_at', 'id'], ['desc', 'desc'])
 
     if (fetching) {
       return (
@@ -80,7 +82,7 @@ class NotificationsContainer extends Component {
             useFlatList
             keyExtractor={(item, index) => `${item.id}`}
             previewOpenValue={-150}
-            data={this.props.notifications ? this.props.notifications : []}
+            data={notifications ? sortedNotifications : []}
             renderItem={ (data, rowMap) => (
               <TouchableOpacity
                 key={data.id}
