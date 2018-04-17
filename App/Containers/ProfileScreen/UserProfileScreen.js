@@ -315,6 +315,7 @@ class UserProfileScreen extends Component {
         <Animatable.View animation="slideInLeft">
           <SocialMediaCardContainer
             fromUserProfile={true}
+            fromFriendProfile={false}
             platformSelected={(platform) => false}
             snapchatCallback={this.toggleSnapchatModal}
             onPressCallback={(platform) => this.authenticateSocialMedia(platform)}
