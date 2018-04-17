@@ -61,7 +61,7 @@ const handleSetSelectedSocialMedia = (state, action) => {
 const handleTogglePlatform = (state, action) => {
   const { platformName } = action
   const { selectedSocialMedia } = state
-  const itemIndex = selectedSocialMedia.findIndex(socialMedia => socialMedia === platformName)
+  const itemIndex = selectedSocialMedia.findIndex(socialMedia => socialMedia === platformName || socialMedia.provider === platformName.provider)
 
   if (itemIndex < 0) {
     return state.update('selectedSocialMedia', selectedMedia => selectedMedia.concat([platformName]));

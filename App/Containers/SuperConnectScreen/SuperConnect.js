@@ -222,7 +222,7 @@ class SuperConnect extends Component {
   }
 
   render() {
-    const { userInfo, friendInfo, navigation, selectedSocialMedia, togglePlatform, platforms, copy, connection } = this.props
+    const { userInfo, friendInfo, navigation, selectedSocialMedia, togglePlatform, platforms, copy, connection, isFriendthem } = this.props
     const { bannerVisible, bannerName, bannerPlatform, tutorialIndex, tutorialInProgress } = this.state
     const { social_profiles, first_name } = friendInfo
     const commonSocialMediaLength = _.intersectionBy(userInfo.social_profiles, social_profiles, 'provider').length
@@ -248,6 +248,7 @@ class SuperConnect extends Component {
         }
         <SocialMediaCardContainer
           fromFriendProfile={true}
+          isFriendthem={isFriendthem}
           toggleBanner={this.toggleConnectivityBanner}
           connection={connection}
           friendPlatforms={friendInfo.social_profiles}

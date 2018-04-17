@@ -97,6 +97,7 @@ class SocialMediaCardContainer extends Component {
       friendPlatforms,
       fetching,
       friendData,
+      isFriendthem,
       onPressCallback,
       platforms,
       platformSynced,
@@ -129,7 +130,7 @@ class SocialMediaCardContainer extends Component {
             const isSelected = platformSelected(isYoutube ? 'google-oauth2': socialPlatform)
             const isSynced = !!currentPlatform
             const capitalizeName = (name) => name[0].toUpperCase() + name.slice(1)
-            const friendPlatfromPresent = fromFriendProfile && friendPlatforms ?
+            const friendPlatformPresent = fromFriendProfile && friendPlatforms ?
             friendPlatforms && friendPlatforms.find(socialElem => {
               if (isYoutube) {
                 return socialElem.provider === 'google-oauth2'
@@ -140,9 +141,10 @@ class SocialMediaCardContainer extends Component {
             const userName = currentPlatform || !fromFriendProfile ?
               this.socialPlatformUsername(isYoutube ? 'google-oauth2' : socialPlatform)
               :
-              friendPlatfromPresent ? friendPlatfromPresent.username : null
+              friendPlatformPresent ? friendPlatformPresent.username : null
+            const isClickable = currentPlatform && fromFriendProfile && friendPlatformPresent && isSynced && isFriendthem
 
-            if (friendPlatfromPresent) {
+            if (friendPlatformPresent) {
               return (
                 <SocialMediaCard
                   key={idx}
@@ -152,7 +154,8 @@ class SocialMediaCardContainer extends Component {
                   synced={isSynced}
                   connectedWithVisitor={isSynced && fromFriendProfile ? this.checkConnection(socialPlatform) : null}
                   readOnly={isSynced && fromUserProfile}
-                  socialAuth={(!isSynced && fromFriendProfile) && (!fromUserProfile && socialPlatform === 'snapchat') ?
+                  socialAuth={isClickable ? () => onPressCallback({provider: isYoutube ? 'google-oauth2' : socialPlatform}) :
+                    ((!isSynced && fromFriendProfile) && (!fromUserProfile && socialPlatform === 'snapchat')) ?
                     () => null : this.determineSocialAuth(socialPlatform)
                   }
                   platformAuth={isYoutube ? 'google-oauth2' : socialPlatform}

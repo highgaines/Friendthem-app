@@ -274,13 +274,14 @@ class FriendProfileScreen extends Component {
     ) || [];
   }
 
-  navigateToSuperConnectScreen = (platformsSelected, copy) => {
+  navigateToSuperConnectScreen = (platformsSelected, copy, connectType) => {
     const { navigation, setSuperConnectPlatforms, connection, userInfo, friendInfo } = this.props
     const fullyConnected =  _.intersectionBy(userInfo.social_profiles, friendInfo.social_profiles, 'provider').length === connection.length
+    const isFriendthem = connectType === 'friendthem'
 
     if (platformsSelected.length || fullyConnected) {
       setSuperConnectPlatforms(_.sortBy(platformsSelected, ['provider']), copy)
-      this.setState(this.initialState, () => navigation.navigate('SuperConnectScreen', { copy: copy }))
+      this.setState(this.initialState, () => navigation.navigate('SuperConnectScreen', { copy: copy, isFriendthem: isFriendthem }))
     }
   }
 
@@ -296,7 +297,7 @@ class FriendProfileScreen extends Component {
     if (userInfo.social_profiles.length === 1 && connectType === 'superconnect') {
       this.setState({ showSuperConnectModal: true })
     } else {
-      this.navigateToSuperConnectScreen(platformsSelected, copy)
+      this.navigateToSuperConnectScreen(platformsSelected, copy, connectType)
     }
   }
 
@@ -398,7 +399,7 @@ class FriendProfileScreen extends Component {
                       <Text style={styles.profileHometownText}>
                         {friendInfo.hometown}
                       </Text>
-                      <View style={{ horizontalPadding: 40 }}>
+                      <View>
                         <Text numberOfLines={1} style={styles.interestsText}>
                           {friendInfo.hobbies ? friendInfo.hobbies.join(' | ') : ''}
                         </Text>

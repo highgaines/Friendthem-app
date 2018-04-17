@@ -149,7 +149,7 @@ export default StyleSheet.create({
     backgroundColor: 'transparent',
     color: '#fff',
     marginTop: 5,
-    paddingHorizontal: 20,
+    paddingHorizontal: 40,
     fontFamily: Fonts.type.base,
     fontWeight: '600'
   },
