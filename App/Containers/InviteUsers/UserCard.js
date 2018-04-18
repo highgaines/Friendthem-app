@@ -8,6 +8,7 @@ import ImageCircle from '../UtilityComponents/ImageCircle';
 // Libraries
 import * as Animatable from 'react-native-animatable';
 import Communications from 'react-native-communications';
+import SendSMS from 'react-native-sms'
 
 // Styles
 import styles from '../Styles/InviteUserCardStyles';
@@ -32,7 +33,14 @@ export default UserCard = ({
 
   const handleTextInvite = () => {
     let phoneNumber = determineMobileNumber()
-    Communications.textWithoutEncoding(phoneNumber, 'There’s got to be a better way.. check out this new awesome app! https://apple.co/2Dm46dF')
+
+    SendSMS.send({
+      body: 'There’s got to be a better way.. check out this new awesome app! https://apple.co/2Dm46dF',
+      recipients: [phoneNumber],
+      successTypes: ['sent', 'queued']
+    }, (completed, cancelled, error) => {
+      console.log('SMS Callback: completed: ' + completed + ' cancelled: ' + cancelled + 'error: ' + error)
+    })
   }
 
   return (

@@ -84,6 +84,33 @@ export const fetchMyFriendsData = (accessToken) => {
   }
 }
 
+export const createUserInvite = (accessToken, phoneNumber) => {
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('Authorization', `Bearer ${accessToken}`)
+
+  const body = {
+    phone_number: phoneNumber
+  }
+
+  const init = {
+    method: 'GET',
+    headers,
+    body: JSON.stringify(body)
+  }
+
+  return {
+    types: [
+      Types.CREATE_USER_INVITE_REQUEST,
+      Types.CREATE_USER_INVITE_SUCCESS,
+      Types.CREATE_USER_INVITE_FAILURE,
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi('/', init, dispatch)
+  }
+
+}
+
 /* ------------- Reducers ------------- */
 
 const handleStoreContactInfo = (state, action) => {
@@ -133,6 +160,10 @@ const handleGetFriendsSuccess = (state, action) => {
 const handleGetFriendsFailure = (state, action) => {
   return state.merge({ fetchingData: false })
 }
+
+// Invite Contact Reducers
+
+
 
 /* ------------- Hookup Reducers To Types ------------- */
 
