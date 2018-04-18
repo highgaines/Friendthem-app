@@ -41,7 +41,8 @@ class NearbyUsers extends Component {
       input: '',
       feedView: false,
       refreshing: false,
-      permissionTypes: Permissions.getTypes()
+      permissionTypes: Permissions.getTypes(),
+      isLocationActive: true
     }
   }
 
@@ -103,7 +104,11 @@ class NearbyUsers extends Component {
       updateUserPosition(accessToken, position.coords).then(resp =>
          fetchConnectivityData(accessToken))
     },
-      (error) => this.setState({ error: error.message }),
+      (error) => {
+        if (error.message === 'Location services disabled.') {
+          this.setState({ isLocationActive: false })
+        }
+      },
       {enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
     )
   }
@@ -136,6 +141,7 @@ class NearbyUsers extends Component {
   render() {
     const { users, navigation, locationPermission, fetching } = this.props
     const { input, feedView, refreshing } = this.state
+    const orderedUsers = _.orderBy(users, ['featured'], ['desc'])
 
     if (!feedView && fetching) {
       return(
@@ -164,7 +170,7 @@ class NearbyUsers extends Component {
           </View>
           : !feedView
             ? <UsersContainer
-                users={input.length ? this.filterUsers(users) : users}
+                users={input.length ? this.filterUsers(users) : orderedUsers}
                 navigation={navigation}
                 fetching={fetching}
                 locationPermission={locationPermission}
