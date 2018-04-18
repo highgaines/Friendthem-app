@@ -7,6 +7,12 @@ import Config from '../Config/DebugConfig'
 import createSagaMiddleware from 'redux-saga'
 import ScreenTracking from './ScreenTrackingMiddleware'
 import apiMiddleware from './ApiMiddleware'
+import { createNetworkMiddleware } from 'react-native-offline'
+
+const offlineConfig = {
+  regexActionType: /.*FAILURE/,
+  actionTypes: ['FETCH_OFFLINE_MODE']
+}
 
 // creates the store
 export default (rootReducer, rootSaga) => {
@@ -14,6 +20,10 @@ export default (rootReducer, rootSaga) => {
 
   const middleware = []
   const enhancers = []
+
+  /* ------------- react-native-offline ------------- */
+  const networkMiddleware = createNetworkMiddleware(offlineConfig)
+  middleware.push(networkMiddleware)
 
   /* ------------- Analytics Middleware ------------- */
   middleware.push(ScreenTracking)
