@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, View, TouchableOpacity, Linking, RefreshControl } from 'react-native'
+import { View, TouchableOpacity, RefreshControl, FlatList } from 'react-native'
 
 // Libraries
-import { CachedImage } from "react-native-img-cache";
 import { LazyloadScrollView, LazyloadView } from 'react-native-lazyload-deux'
-import * as Animatable from 'react-native-animatable'
-import AndroidOpenSettings from 'react-native-android-open-settings'
 
 // Components
 import UserCard from './UserCard'
@@ -20,87 +17,70 @@ import { Images } from '../../Themes'
 // Constants
 import { isAndroid } from '../../Utils/constants'
 
-export default function UsersContainer(props) {
-  const { users, navigation, locationPermission, viewFriendProfile, refreshing, onRefresh, fetching } = props
-
-  const userCards =
-    users.map( (userObj,i) =>
-      <UserCard
-        key={i}
-        picture={userObj.picture}
-        name={userObj.first_name}
-        fbUrl={userObj.fbUrl}
-        setFriendInfo={() => viewFriendProfile(userObj)}
-      />
-    )
-
-  const arePeopleNearby = users.length
-
-  const buttonAction = () => {
-    if (locationPermission) {
-      navigation.navigate('InviteUsersScreen')
-    } else {
-        if (isAndroid) {
-          AndroidOpenSettings.appDetailsSettings()
-        } else {
-            Linking.openURL('app-settings:')
-        }
-    }
+export default class UsersContainer extends Component {
+  state = {
+    refreshing: false
   }
 
-  return(
-    <ScrollView
-      contentContainerStyle={arePeopleNearby ? styles.container : [styles.container, {justifyContent: 'center'}]}
-      refreshControl={
-        <RefreshControl
+  renderUsers = () => {
+
+    const {
+      users,
+      navigation,
+      locationPermission,
+      viewFriendProfile,
+      refreshing,
+      onRefresh,
+      fetching
+    } = this.props
+
+    const styling = {
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingBottom: '30%'
+    }
+
+    return(
+      <View style={{ height: 500 }}>
+        <FlatList
+          contentContainerStyle={styling}
+          keyExtractor={(item) => item.id}
           refreshing={refreshing}
           onRefresh={onRefresh}
-        />
-      }
-      >
-      {
-        users.length && !fetching
-        ? userCards
-        :
-        <Animatable.View animation="fadeIn" style={styles.noNearbyUsersContainer}>
-          <CachedImage
-            source={Images.characterFriendThem}
-            style={styles.mainImage}
+          maxToRenderPerBatch={12}
+          data={users}
+          removeClippedSubviews={true}
+          numColumns={3}
+          renderItem={({item, index}) => (
+            <UserCard
+              key={index}
+              picture={item.picture}
+              name={item.first_name}
+              fbUrl={item.fbUrl}
+              setFriendInfo={() => viewFriendProfile(item)}
             />
-          <Text style={styles.boldMainText}>
-            NO PEOPLE NEARBY?
-          </Text>
-          <Text style={styles.locationMessage}>
-            {
-              locationPermission ?
-              "It looks like there are no users in your area at the moment."
-              :
-              "It looks like you don't have your location services turned on."
-            }
-            <Text style={styles.deepLinkText}>
-              { } {locationPermission ? "Invite someone to try Friendthem?" : "Jump to settings to turn on?"}
-            </Text>
-          </Text>
-          <LazyloadView style={styles.buttonGroup}>
-            <TouchableOpacity style={styles.optionButton}>
-              <Text style={styles.buttonText}>
-                NO, THANKS :(
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={
-                locationPermission ?
-                () => navigation.navigate('InviteUsers')
-                :
-                () => Linking.openURL('app-settings:')
-              }
-              style={styles.optionButton}>
-              <Text style={styles.buttonText}>
-                YES, LET'S GO :)
-              </Text>
-            </TouchableOpacity>
-          </LazyloadView>
-        </Animatable.View> }
-    </ScrollView>
-  )
+          )}
+        />
+      </View>
+    )
+  }
+
+  checkNearby = () => {
+    const { navigation, locationPermission, fetching } = this.props
+
+    return !fetching || users.length
+    ? this.renderUsers()
+    : <NoPeopleNearby
+      locationPermission={locationPermission}
+      navigation={navigation}
+    />
+  }
+
+  render = () => {
+    return(
+      <View>
+        {this.checkNearby()}
+      </View>
+    )
+  }
 }

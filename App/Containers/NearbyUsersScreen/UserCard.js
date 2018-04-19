@@ -23,10 +23,12 @@ export default function UserCard(props) {
     <TouchableOpacity
       style={styles.card}
       onPress={setFriendInfo}>
-      <ImageCircle
-        size={isIpad ? 85 : 95}
-        source={picture}
-      />
+      <View style={{ justifyContent: 'center', alignItems: 'center'}}>
+        <ImageCircle
+          size={isIpad ? 85 : 95}
+          source={picture}
+        />
+      </View>
       <LazyloadView style={styles.cardText}>
         <Text
           style={{ fontFamily: 'Montserrat', fontSize: 13 }}

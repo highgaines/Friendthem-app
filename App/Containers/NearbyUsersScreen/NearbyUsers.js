@@ -100,7 +100,8 @@ class NearbyUsers extends Component {
   locationInterval = () => {
     const { accessToken, updateUserPosition } = this.props
     navigator.geolocation.getCurrentPosition((position) => {
-      updateUserPosition(accessToken, position.coords).then(resp => fetchConnectivityData(accessToken))
+      updateUserPosition(accessToken, position.coords).then(resp =>
+         fetchConnectivityData(accessToken))
     },
       (error) => this.setState({ error: error.message }),
       {enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
@@ -148,7 +149,7 @@ class NearbyUsers extends Component {
       <View
         testID={'nearby_users_container'} style={[styles.nearbyUsersContainer]}>
         <SearchBar
-          numUsers={users.length}
+          numUsers={users ? users.length : 0}
           navigation={navigation}
           handleChange={this.handleChange}
           input={this.state.input}
