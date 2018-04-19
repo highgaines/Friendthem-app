@@ -10,13 +10,14 @@ import { sendInviteToUser } from '../../Redux/InviteUsersStore'
 // Libraries
 import { Icon } from 'react-native-elements';
 import _ from 'lodash'
+import { LazyloadScrollView } from 'react-native-lazyload-deux'
+
 // Styles
 import styles from '../Styles/SearchBarStyles';
 
 // Components
 import UserCard from './UserCard';
 
-import { LazyloadScrollView } from 'react-native-lazyload-deux'
 
 class SearchContainer extends Component {
   constructor(props) {
