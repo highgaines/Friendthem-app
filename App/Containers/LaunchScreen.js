@@ -120,6 +120,7 @@ class LaunchScreen extends Component {
     const { setGeoPermission, setNotifPermission, setNativeContactsPermission } = this.props
 
     Permissions.checkMultiple(['notification', 'location', 'contacts']).then(response => {
+      console.log(response.location)
       if (response.location === 'authorized') {
         setGeoPermission(true)
       }
