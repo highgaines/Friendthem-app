@@ -7,6 +7,7 @@ import { LazyloadScrollView, LazyloadView } from 'react-native-lazyload-deux'
 // Components
 import UserCard from './UserCard'
 import SocialMediaCard from '../SocialMediaCards/SocialMediaCard'
+import NoPeopleNearby from './NoPeopleNearby'
 
 // Styles
 import styles from '../Styles/UsersContainerStyles'
@@ -27,6 +28,7 @@ export default class UsersContainer extends Component {
     const {
       users,
       navigation,
+      isActiveLocation,
       locationPermission,
       viewFriendProfile,
       refreshing,
@@ -36,7 +38,6 @@ export default class UsersContainer extends Component {
 
     const styling = {
       justifyContent: 'center',
-      alignItems: 'center',
       paddingBottom: '30%'
     }
 
@@ -70,12 +71,13 @@ export default class UsersContainer extends Component {
   }
 
   checkNearby = () => {
-    const { navigation, locationPermission, fetching } = this.props
+    const { navigation, locationPermission, fetching, isActiveLocation } = this.props
 
-    return !fetching || users.length
+    return (!fetching || users.length) && isActiveLocation && locationPermission
     ? this.renderUsers()
     : <NoPeopleNearby
       locationPermission={locationPermission}
+      isActiveLocation={isActiveLocation}
       navigation={navigation}
     />
   }

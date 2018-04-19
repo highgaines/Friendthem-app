@@ -18,7 +18,7 @@ export default StyleSheet.create({
   noNearbyUsersContainer: {
     alignItems: 'center',
     top: Metrics.screenHeight * 0.1,
-    width: Metrics.screenWidth * 0.85
+    width: Metrics.screenWidth,
   },
   boldMainText: {
     alignSelf: 'center',
@@ -60,6 +60,7 @@ export default StyleSheet.create({
   },
   mainImage: {
     height: 158,
-    width: 186
+    width: 186,
+    alignSelf: 'center'
   }
 })
