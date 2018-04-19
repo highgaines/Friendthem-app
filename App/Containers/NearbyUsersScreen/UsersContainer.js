@@ -15,7 +15,7 @@ import styles from '../Styles/UsersContainerStyles'
 import { Images } from '../../Themes'
 
 // Constants
-import { isAndroid } from '../../Utils/constants'
+import { isAndroid, isIOS } from '../../Utils/constants'
 
 export default class UsersContainer extends Component {
   state = {
