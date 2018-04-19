@@ -130,10 +130,18 @@ class NearbyUsers extends Component {
     },
       (error) => {
         console.log(error, 3)
-        if (error.code === 2) {
-          this.setState({ isActiveLocation: false })
-        } else if (error.code === 1) {
-          setGeoPermission(false)
+        if (isIOS) {
+          if (error.code === 2) {
+            this.setState({ isActiveLocation: false })
+          } else if (error.code === 1) {
+            setGeoPermission(false)
+          }
+        } else if (isAndroid) {
+            if (error.code === 1) {
+              this.setState({ isActiveLocation: false })
+            } else if (error.code === 1) {
+              setGeoPermission(false)
+            }
         }
       },
       { enableHighAccuracy: false, timeout: 10000, maximumAge: 3000 }
