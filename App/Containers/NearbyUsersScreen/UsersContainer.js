@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, RefreshControl, FlatList } from 'react-native'
+import { View, TouchableOpacity, FlatList } from 'react-native'
 
 // Libraries
 import { LazyloadScrollView, LazyloadView } from 'react-native-lazyload-deux'
