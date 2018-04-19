@@ -13,11 +13,20 @@ import styles from '../Styles/UsersContainerStyles'
 // Images
 import { Images } from '../../Themes'
 
+// Constants
+import { isAndroid, isIOS } from '../../Utils/constants'
+
 export default function NoPeopleNearby({ isActiveLocation, locationPermission, navigation }) {
 
   const buttonAction = () => {
-    if (locationPermission) {
+    if (locationPermission && isActiveLocation) {
       navigation.navigate('InviteUsers')
+    } else if (!isActiveLocation && !locationPermission) {
+      if (isAndroid) {
+        AndroidOpenSettings.locationSourceSettings()
+      } else {
+        Linking.openURL('App-prefs:Privacy')
+      }
     } else {
         if (isAndroid) {
           AndroidOpenSettings.appDetailsSettings()
@@ -31,7 +40,9 @@ export default function NoPeopleNearby({ isActiveLocation, locationPermission, n
     if (isActiveLocation && locationPermission) {
       return "It looks like there are no users in your area at the moment."
     } else if (!isActiveLocation && !locationPermission) {
-      return "It looks like you don't have your location services turned on. Click 'Let's Go' to be redirected to your settings. Then click on Privacy to get to your location setting!"
+      const locationInstruction = "It looks like you don't have your location services turned on. Click 'Let's Go' to be redirected to your settings."
+      const subInstruction = isIOS ? "Then click on Privacy to get to your location setting!" : ""
+      return locationInstruction + subInstruction
     } else {
       return "It looks like you haven't granted friendthem location permissions."
     }

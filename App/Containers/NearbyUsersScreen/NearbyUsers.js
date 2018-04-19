@@ -131,7 +131,7 @@ class NearbyUsers extends Component {
       (error) => {
         console.log(error, 3)
         if (isIOS) {
-          if (error.code === 2) {
+          if (error.code === 2 || error.code === 3) {
             this.setState({ isActiveLocation: false })
           } else if (error.code === 1) {
             setGeoPermission(false)
