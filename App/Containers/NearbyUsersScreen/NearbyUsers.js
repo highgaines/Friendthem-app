@@ -100,8 +100,8 @@ class NearbyUsers extends Component {
   locationInterval = () => {
     const { accessToken, updateUserPosition } = this.props
     navigator.geolocation.getCurrentPosition((position) => {
-      // updateUserPosition(accessToken, position.coords).then(resp => )
-         fetchConnectivityData(accessToken)
+      updateUserPosition(accessToken, position.coords).then(resp =>
+         fetchConnectivityData(accessToken))
     },
       (error) => this.setState({ error: error.message }),
       {enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
@@ -185,7 +185,7 @@ class NearbyUsers extends Component {
 const mapStateToProps = state => ({
   accessToken: state.authStore.accessToken,
   locationPermission: state.permissionsStore.nativeGeolocation,
-  users: state.friendStore.users,
+  users: state.friendStore.users.filter( user => !!user.picture),
   customGeolocationPermission: state.permissionsStore.locationPermissionsGranted,
   userSocialProfiles: state.userStore.userData.social_profiles,
   fetching: state.inviteUsersStore.fetchingData
