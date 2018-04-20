@@ -237,7 +237,8 @@ class NearbyFeedCard extends Component {
     if (platform === 'facebook') {
       return "Due to tightened restrictions from Facebook, this feature is currently unavailable."
     } else {
-      return `View content on ${capitalizeWord(platform)}`
+      return (
+        <Text>{`View content on ${capitalizeWord(platform)}`}</Text>)
     }
   }
 
@@ -255,8 +256,9 @@ class NearbyFeedCard extends Component {
     } else if (filteredFeed && filteredFeed.length) {
       return filteredFeed.map( (feedObj, idx) => <FeedCard key={idx} item={feedObj}/> )
     } else if (filteredFeed) {
-      return (<View style={{ marginTop: 20, justifyContent: 'center', alignItems: 'center', padding: 10}}>
-        <Text style={{ fontSize: 16, fontWeight: '500', textAlign: 'center'}}>
+      return (<View style={{ marginTop: 20, justifyContent: 'center', alignItems: 'center', padding: 10, width: 300}}>
+        <Text
+          style={{ fontSize: 16, fontWeight: '500'}}>
           {this.renderFeedMessage(platform)}
         </Text>
         <View style={styles.deepLinkButtonContainer}>
