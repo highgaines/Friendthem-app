@@ -17,6 +17,7 @@ export default StyleSheet.create({
   },
   noNearbyUsersContainer: {
     alignItems: 'center',
+    height: '92%',
     top: Metrics.screenHeight * 0.1,
     width: Metrics.screenWidth,
   },
@@ -62,5 +63,5 @@ export default StyleSheet.create({
     height: 158,
     width: 186,
     alignSelf: 'center'
-  }
+  },
 })

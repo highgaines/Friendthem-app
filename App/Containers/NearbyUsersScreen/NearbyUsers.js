@@ -22,7 +22,7 @@ import { bindActionCreators } from 'redux'
 import PermissionsStoreActions from '../../Redux/PermissionsStore'
 import FriendStoreActions from '../../Redux/FriendStore'
 import InviteUsersStoreActions, { fetchConnectivityData } from '../../Redux/InviteUsersStore'
-import UserStoreActions, { updateUserPosition } from '../../Redux/UserStore'
+import UserStoreActions, { updateUserPosition, getUserInfo } from '../../Redux/UserStore'
 
 // Images
 import { Images } from '../../Themes';
@@ -50,10 +50,16 @@ class NearbyUsers extends Component {
     const {
       accessToken,
       fetchConnectivityData,
+      getUserInfo,
       customGeolocationPermission,
       locationPermission,
-      setLocationInterval
+      setLocationInterval,
+      userInfo
     } = this.props
+
+    if (!userInfo) {
+      getUserInfo()
+    }
 
     if (customGeolocationPermission && !locationPermission) {
       if (isIOS) {
@@ -225,6 +231,7 @@ class NearbyUsers extends Component {
 }
 
 const mapStateToProps = state => ({
+  userInfo: state.userStore.userData,
   accessToken: state.authStore.accessToken,
   locationPermission: state.permissionsStore.nativeGeolocation,
   users: state.friendStore.users.filter(user => !!user.picture),
@@ -243,7 +250,8 @@ const mapDispatchToProps = dispatch => {
       setFriendInfo,
       fetchConnectivityData,
       setLocationInterval,
-      setGeoPermission
+      setGeoPermission,
+      getUserInfo
     }, dispatch)
   }
 }

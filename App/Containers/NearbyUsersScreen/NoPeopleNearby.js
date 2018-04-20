@@ -21,7 +21,7 @@ export default function NoPeopleNearby({ isActiveLocation, locationPermission, n
   const buttonAction = () => {
     if (locationPermission && isActiveLocation) {
       navigation.navigate('InviteUsers')
-    } else if (!isActiveLocation && !locationPermission) {
+    } else if (!isActiveLocation) {
       if (isAndroid) {
         AndroidOpenSettings.locationSourceSettings()
       } else {
@@ -39,7 +39,7 @@ export default function NoPeopleNearby({ isActiveLocation, locationPermission, n
   const locationPermissionStatus = () => {
     if (isActiveLocation && locationPermission) {
       return "It looks like there are no users in your area at the moment."
-    } else if (!isActiveLocation && !locationPermission) {
+    } else if (!isActiveLocation) {
       const locationInstruction = "It looks like you don't have your location services turned on. Click 'Let's Go' to be redirected to your settings."
       const subInstruction = isIOS ? "Then click on Privacy to get to your location setting!" : ""
       return locationInstruction + subInstruction
