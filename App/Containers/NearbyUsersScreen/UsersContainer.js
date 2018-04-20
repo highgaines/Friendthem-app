@@ -40,8 +40,12 @@ export default class UsersContainer extends Component {
       paddingBottom: '30%'
     }
 
+    const flatListContainer = {
+      height: 650
+    }
+
     return(
-      <View style={{ height: 500 }}>
+      <View style={flatListContainer}>
         <FlatList
           contentContainerStyle={styling}
           keyExtractor={(item) => item.id}
