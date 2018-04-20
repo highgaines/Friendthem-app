@@ -73,6 +73,7 @@ export default class SocialMediaCard extends Component {
       userName,
       inverted,
       synced,
+      unavailable,
       selected,
       socialAuth,
       connectedWithVisitor,
@@ -85,9 +86,11 @@ export default class SocialMediaCard extends Component {
        [styles.cardSelected, { backgroundColor: syncedBGColor }] : synced ?
          styles.invertedCard : styles.cardUnselected
 
+    const unavailableStyles = unavailable && !this.determineConnectedStatus() ? { backgroundColor: '#cecece'} : ''
+
     return (
       <TouchableOpacity
-        style={cardStyle}
+        style={[cardStyle, unavailableStyles]}
         disabled={(readOnly || connectedWithVisitor) && !userSnapchat}
         activeOpacity={readOnly ? 1 : 0.2 }
         onPress={this.onPressFunctionality()}

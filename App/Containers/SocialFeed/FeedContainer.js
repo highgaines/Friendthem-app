@@ -110,19 +110,21 @@ class FeedContainer extends Component {
               onPressCallback={() => testDeepLinkAbility('instagram', instaDeepLink, igUserName)}
             />
           )
-        case 'facebook':
-          const fbUid = this.pullUid('facebook')
-          const fbDeepLink = `fb://profile/${fbUid}`
-
-          return(
-            <ConnectButton
-              title="Go to Facebook"
-              color={SYNCED_CARD_COLORS.facebook}
-              containerStyle={[styles.deepLinkButton, styles.facebookDeeplinkButton]}
-              textStyle={styles.deepLinkText}
-              onPressCallback={() => testDeepLinkAbility('facebook', fbDeepLink, fbUid)}
-            />
-          )
+        // case 'facebook':
+        //   const fbUid = this.pullUid('facebook')
+        //   const fbDeepLink = `fb://profile/${fbUid}`
+        //
+        //   // inactive prop to remove facebook profile access from users
+        //   return(
+        //     <ConnectButton
+        //       title="Go to Facebook"
+        //       inactive={true}
+        //       color={SYNCED_CARD_COLORS.facebook}
+        //       containerStyle={[styles.deepLinkButton, styles.facebookDeeplinkButton]}
+        //       textStyle={styles.deepLinkText}
+        //       onPressCallback={() => testDeepLinkAbility('facebook', fbDeepLink, fbUid)}
+        //     />
+        //   )
         case 'twitter':
           const twitterUsername = this.pullUsername('twitter')
           const twitterDeepLink = `twitter://user?screen_name=${twitterUsername}`
@@ -164,6 +166,14 @@ class FeedContainer extends Component {
       }
     }
 
+  renderFeedMessage = platform => {
+    if (platform === 'facebook') {
+      return "Due to tightened restrictions from Facebook, this feature is currently unavailable."
+    } else {
+      return `View content on ${capitalizeWord(platform)}`
+    }
+  }
+
   renderFeedCards = platform => {
     const { userId, feed } = this.props
     const userFeedArr = feed[userId] && feed[userId][platform] ? feed[userId][platform] : []
@@ -171,13 +181,14 @@ class FeedContainer extends Component {
     ? userFeedArr.map( (item, idx) => <FeedCard key={idx} item={item}/>)
     : <View style={{top: 100}}>
         <Text style={{ fontSize: 16, fontWeight: '500', textAlign: 'center'}}>
-          {`View content on ${capitalizeWord(platform)}`}
+          {this.renderFeedMessage(platform)}
         </Text>
         <View style={styles.deepLinkButtonContainer}>
           {this.renderDeeplinkButton(platform)}
         </View>
       </View>
   }
+
 
   linkToProfile = url => {
     Linking.openURL(url)

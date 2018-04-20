@@ -251,6 +251,9 @@ class FriendProfileScreen extends Component {
     const platformIndex = selectedSocialMedia.findIndex(socialMedia => socialMedia === platformName)
     const connectionPresent = () => connection.find(platform => platform.provider === platformName)
 
+    // temporary fix for removing facebook from flow
+    const isFacebook = platformName === 'facebook'
+
     if (this.socialPlatformPresent(platformName) && !connectionPresent()) {
       if (platformIndex < 0) {
         this.setState({ selectedSocialMedia: [...selectedSocialMedia, platformName] })
@@ -336,6 +339,9 @@ class FriendProfileScreen extends Component {
         </View>
       )
     }
+
+    // temporary fix for removing facebook from super connect flow
+    const superConnectPlatforms = this.getSCEligiblePlatforms().filter( socialObj => socialObj.provider !== 'facebook')
 
     return (
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -447,7 +453,7 @@ class FriendProfileScreen extends Component {
                 superConnect={(platforms, copy, connectType) => this.superConnectCallback(platforms, copy, connectType)}
                 selected={this.state.selectedSocialMedia}
                 userData={userInfo}
-                platforms={this.getSCEligiblePlatforms()}
+                platforms={superConnectPlatforms}
                 userId={userId}
                 iphoneXStyle={ifIphoneX({'top': 300}, '')}
               />
