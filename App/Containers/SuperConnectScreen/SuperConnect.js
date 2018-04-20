@@ -234,6 +234,7 @@ class SuperConnect extends Component {
       this.toggleConnectivityBanner(first_name, 'on all shared accounts')
     }
 
+    console.log(selectedSocialMedia)
     return (
       tutorialInProgress ?
         <SuperConnectTutorial

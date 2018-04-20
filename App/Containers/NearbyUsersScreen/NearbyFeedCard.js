@@ -133,19 +133,19 @@ class NearbyFeedCard extends Component {
             onPressCallback={() => testDeepLinkAbility('instagram', instaDeepLink, igUserName)}
           />
         )
-      case 'facebook':
-        const fbUid = this.pullUid('facebook')
-        const fbDeepLink = `fb://profile/${fbUid}`
-
-        return(
-          <ConnectButton
-            title="Go to Facebook"
-            color={SYNCED_CARD_COLORS.facebook}
-            containerStyle={[styles.deepLinkButton, styles.facebookDeeplinkButton]}
-            textStyle={styles.deepLinkText}
-            onPressCallback={() => testDeepLinkAbility('facebook', fbDeepLink, fbUid)}
-          />
-        )
+      // case 'facebook':
+      //   const fbUid = this.pullUid('facebook')
+      //   const fbDeepLink = `fb://profile/${fbUid}`
+      //
+      //   return(
+      //     <ConnectButton
+      //       title="Go to Facebook"
+      //       color={SYNCED_CARD_COLORS.facebook}
+      //       containerStyle={[styles.deepLinkButton, styles.facebookDeeplinkButton]}
+      //       textStyle={styles.deepLinkText}
+      //       onPressCallback={() => testDeepLinkAbility('facebook', fbDeepLink, fbUid)}
+      //     />
+      //   )
       case 'twitter':
         const twitterUsername = this.pullUsername('twitter')
         const twitterDeepLink = `twitter://user?screen_name=${twitterUsername}`
@@ -233,6 +233,14 @@ class NearbyFeedCard extends Component {
     )
   }
 
+  renderFeedMessage = platform => {
+    if (platform === 'facebook') {
+      return "Due to tightened restrictions from Facebook, this feature is currently unavailable."
+    } else {
+      return `View content on ${capitalizeWord(platform)}`
+    }
+  }
+
   renderContent = () => {
     const { feed, friendData } = this.props
     const { platform } = this.state
@@ -249,7 +257,7 @@ class NearbyFeedCard extends Component {
     } else if (filteredFeed) {
       return (<View style={{ marginTop: 20, justifyContent: 'center', alignItems: 'center', padding: 10}}>
         <Text style={{ fontSize: 16, fontWeight: '500', textAlign: 'center'}}>
-          {`View content on ${capitalizeWord(platform)}`}
+          {this.renderFeedMessage(platform)}
         </Text>
         <View style={styles.deepLinkButtonContainer}>
           {this.renderDeeplinkButton(platform)}
