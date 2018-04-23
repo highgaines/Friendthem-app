@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>11.6.4</string>
+	<string>11.7</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -49,7 +49,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>51</string>
+	<string>52</string>
 	<key>CodePushDeploymentKey</key>
 	<string>g7k0ocqVaUUVLvbquNuRP-QnOi-Qfda3ef3e-5a38-4dfe-9133-1afc3eb3b7df</string>
 	<key>FacebookAppID</key>
@@ -91,13 +91,13 @@
 	<key>NSCameraUsageDescription</key>
 	<string>friendthem would like to use your camera to enable you to add photos you take directly to your profile.</string>
 	<key>NSContactsUsageDescription</key>
-	<string>friendthem would like to access your contacts in order to better connect you with the people you know.</string>
+	<string>friendthem would like access to your contacts so you can interact with them all in one place. Your contacts will not be shared without your permission.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>friendthem would like to know your location so that we can better connect you with the people around you.</string>
+	<string>friendthem would like to know your location so that we can better connect you with the people around you. Your location will not be shared without your permission.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>friendthem would like to know your location so that we can better connect you with the people around you.</string>
+	<string>friendthem would like to know your location so that we can better connect you with the people around you. Your location will not be shared without your permission.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>friendthem would like to know your location so that we can better connect you with the people around you.</string>
+	<string>friendthem would like to know your location so that we can better connect you with the people around you. Your location will not be shared without your permission.</string>
 	<key>NSMotionUsageDescription</key>
 	<string>friendthem would like to access the motion data on your device.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
