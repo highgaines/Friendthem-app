@@ -19,11 +19,13 @@ import { Images } from '../../Themes';
 export default UserCard = ({
   firstName,
   lastName,
+  accessToken,
   phoneNumbers,
   emailAddresses,
   userPlatforms,
   triggerModal,
-  selectUser
+  selectUser,
+  inviteUser
 }) => {
 
 
@@ -39,7 +41,10 @@ export default UserCard = ({
       recipients: [phoneNumber],
       successTypes: ['sent', 'queued']
     }, (completed, cancelled, error) => {
-      console.log('SMS Callback: completed: ' + completed + ' cancelled: ' + cancelled + 'error: ' + error)
+      if (completed) {
+        structuredPhoneNum = `+${phoneNumber.split(/[-)(\s]/).join('')}`
+        inviteUser(accessToken, structuredPhoneNum)
+      }
     })
   }
 

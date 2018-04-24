@@ -15,6 +15,9 @@ const { Types, Creators } = createActions({
     getFriendsSuccess: null,
     getFriendsFailure: null,
     logoutUser: null,
+    createUserInviteRequest: null,
+    createUserInviteSuccess: null,
+    createUserInviteFailure: null,
 })
 
 export const InviteUsers = Types
@@ -94,7 +97,7 @@ export const createUserInvite = (accessToken, phoneNumber) => {
   }
 
   const init = {
-    method: 'GET',
+    method: 'POST',
     headers,
     body: JSON.stringify(body)
   }
@@ -106,7 +109,7 @@ export const createUserInvite = (accessToken, phoneNumber) => {
       Types.CREATE_USER_INVITE_FAILURE,
     ],
     shouldCallApi: state => true,
-    callApi: dispatch => fetchFromApi('/', init, dispatch)
+    callApi: dispatch => fetchFromApi('/invites/', init, dispatch)
   }
 
 }
@@ -162,7 +165,15 @@ const handleGetFriendsFailure = (state, action) => {
 }
 
 // Invite Contact Reducers
-
+const handleInviteUserRequest = (state, action) => {
+  return state
+}
+const handleInviteUserSuccess = (state, action) => {
+  return state
+}
+const handleInviteUserFailure = (state, action) => {
+  return state
+}
 
 
 /* ------------- Hookup Reducers To Types ------------- */
@@ -176,5 +187,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGOUT_USER]: handleUserLogout,
   [Types.GET_FRIENDS_REQUEST]: handleGetFriendsRequest,
   [Types.GET_FRIENDS_SUCCESS]: handleGetFriendsSuccess,
-  [Types.GET_FRIENDS_FAILURE]: handleGetFriendsFailure
+  [Types.GET_FRIENDS_FAILURE]: handleGetFriendsFailure,
+  [Types.CREATE_USER_INVITE_REQUEST]: handleInviteUserRequest,
+  [Types.CREATE_USER_INVITE_SUCCESS]: handleInviteUserSuccess,
+  [Types.CREATE_USER_INVITE_FAILURE]: handleInviteUserFailure,
 })

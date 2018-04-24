@@ -4,8 +4,8 @@ import { ScrollView, Text, Image, TouchableOpacity, TextInput, View, FlatList } 
 // Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import InviteUsersStore from '../../Redux/InviteUsersStore'
-import { sendInviteToUser } from '../../Redux/InviteUsersStore'
+import InviteUsersStore, { createUserInvite } from '../../Redux/InviteUsersStore'
+
 
 // Libraries
 import { Icon } from 'react-native-elements';
@@ -92,7 +92,7 @@ class SearchContainer extends Component {
   }
 
   render() {
-    const { triggerModal, selectUser, contactList } = this.props;
+    const { triggerModal, selectUser, contactList, accessToken, createUserInvite } = this.props;
     const { searchableContactList, contactListUpdated } = this.state;
 
     return (
@@ -107,9 +107,11 @@ class SearchContainer extends Component {
                 key={index}
                 firstName={item.givenName}
                 lastName={item.familyName}
+                accessToken={accessToken}
                 phoneNumbers={item.phoneNumbers}
                 emailAddresses={item.emailAddresses}
                 triggerModal={triggerModal}
+                inviteUser={createUserInvite}
                 selectUser={selectUser}
               />
             )}
@@ -120,11 +122,12 @@ class SearchContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  contactList: _.sortBy(state.inviteUsersStore.contactList, ['givenName'])
+  contactList: _.sortBy(state.inviteUsersStore.contactList, ['givenName']),
+  accessToken: state.authStore.accessToken,
 })
 
 const mapDispatchToProps = dispatch => ({
-  ...bindActionCreators({ sendInviteToUser }, dispatch)
+  ...bindActionCreators({ createUserInvite }, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer)
