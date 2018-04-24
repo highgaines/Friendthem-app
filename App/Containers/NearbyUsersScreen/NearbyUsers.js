@@ -54,11 +54,12 @@ class NearbyUsers extends Component {
       customGeolocationPermission,
       locationPermission,
       setLocationInterval,
-      userInfo
+      userInfo,
+      userId
     } = this.props
 
-    if (!userInfo) {
-      getUserInfo()
+    if (!userId && accessToken) {
+      getUserInfo(accessToken)
     }
 
     if (customGeolocationPermission && !locationPermission) {
@@ -69,10 +70,9 @@ class NearbyUsers extends Component {
             this.locationInterval()
           } else if (response === 'denied') {
               navigator.geolocation.getCurrentPosition(resp =>
-                console.log(resp, 1),
+                this.locationInterval(),
                 err => {
                   if (err.code === 2) {
-                    console.log(err, 2)
                     this.setState({ isActiveLocation: false })
                   }
                 }
@@ -98,15 +98,15 @@ class NearbyUsers extends Component {
   }
 
   componentWillUpdate = (nextProps, nextState) => {
-    const { accessToken, fetchConnectivityData, locationPermission, setGeoPermission } = this.props
+    const { accessToken, fetchConnectivityData, locationPermission, setGeoPermission, userId, getUserInfo } = this.props
     const { appState, isActiveLocation } = this.state
 
-    if (!accessToken && nextProps.accessToken) {
+    if (!accessToken && nextProps.accessToken && !userId) {
+      getUserInfo(nextProps.accessToken)
       fetchConnectivityData(nextProps.accessToken)
     }
     if (!locationPermission || !isActiveLocation) {
       Permissions.check('location').then(response => {
-        console.log(response)
         if (response === 'authorized' || response === 'undetermined') {
           this.locationInterval()
         }
@@ -135,7 +135,6 @@ class NearbyUsers extends Component {
       )
     },
       (error) => {
-        console.log(error, 3)
         if (isIOS) {
           if (error.code === 2 || error.code === 3) {
             this.setState({ isActiveLocation: false })
@@ -150,7 +149,7 @@ class NearbyUsers extends Component {
             }
         }
       },
-      { enableHighAccuracy: false, timeout: 10000, maximumAge: 3000 }
+      { enableHighAccuracy: isIOS, timeout: 10000 }
     )
   }
 
@@ -232,6 +231,7 @@ class NearbyUsers extends Component {
 
 const mapStateToProps = state => ({
   userInfo: state.userStore.userData,
+  userId: state.userStore.userId,
   accessToken: state.authStore.accessToken,
   locationPermission: state.permissionsStore.nativeGeolocation,
   users: state.friendStore.users.filter(user => !!user.picture),
