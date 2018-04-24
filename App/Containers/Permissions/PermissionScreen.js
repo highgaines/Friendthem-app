@@ -48,7 +48,6 @@ class PermissionScreen extends Component {
   }
 
   componentWillUnmount = () => {
-    console.log('hit')
     OneSignal.removeEventListener('received', this.onReceived)
     OneSignal.removeEventListener('opened', this.onOpened)
     OneSignal.removeEventListener('registered', this.onRegistered)

@@ -68,6 +68,17 @@ export const NAVBAR_RENDER_OK = [
   'InviteUsers'
 ]
 
+export const IOS_PERMISSIONS = [
+  'notification',
+  'location',
+  'contacts'
+]
+
+export const ANDROID_PERMISSIONS = [
+  'location',
+  'contacts'
+]
+
 /************************ FUNCTIONS ************************/
 
 export const determineImage = (accountData) => {

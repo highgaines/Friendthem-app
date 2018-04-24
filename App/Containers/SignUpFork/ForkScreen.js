@@ -28,7 +28,7 @@ import { Images } from '../../Themes';
 
 // Styles
 import styles from '../Styles/ForkScreenStyles';
-import { determineImage } from '../../Utils/constants'
+import { determineImage, isIOS } from '../../Utils/constants'
 
 // Utils
 import { RequestContactsPermission } from '../../Utils/functions'
@@ -93,7 +93,7 @@ class ForkScreen extends Component {
       updateUserPosition(accessToken, position.coords)
     },
       (error) => this.setState({ error: error.message }),
-      {enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
+      {enableHighAccuracy: isIOS, timeout: 10000 }
     )
   }
 

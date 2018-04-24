@@ -14,6 +14,7 @@ import _ from 'lodash';
 // Components
 import Navbar from '../Navbar/Navbar'
 import WelcomeScreen from '../TutorialScreens/WelcomeScreen'
+import withAppStateChange from '../../HOCs/withAppStateChange';
 
 // Redux
 import { connect } from 'react-redux'
@@ -21,7 +22,7 @@ import { bindActionCreators } from 'redux'
 import PermissionsStoreActions from '../../Redux/PermissionsStore'
 import FriendStoreActions from '../../Redux/FriendStore'
 import InviteUsersStoreActions, { fetchConnectivityData } from '../../Redux/InviteUsersStore'
-import UserStoreActions, { updateUserPosition } from '../../Redux/UserStore'
+import UserStoreActions, { updateUserPosition, getUserInfo } from '../../Redux/UserStore'
 
 // Images
 import { Images } from '../../Themes';
@@ -41,7 +42,7 @@ class NearbyUsers extends Component {
       input: '',
       feedView: false,
       refreshing: false,
-      permissionTypes: Permissions.getTypes()
+      isActiveLocation: true
     }
   }
 
@@ -49,10 +50,17 @@ class NearbyUsers extends Component {
     const {
       accessToken,
       fetchConnectivityData,
+      getUserInfo,
       customGeolocationPermission,
       locationPermission,
-      setLocationInterval
+      setLocationInterval,
+      userInfo,
+      userId
     } = this.props
+
+    if (!userId && accessToken) {
+      getUserInfo(accessToken)
+    }
 
     if (customGeolocationPermission && !locationPermission) {
       if (isIOS) {
@@ -60,6 +68,15 @@ class NearbyUsers extends Component {
           if(response === 'authorized') {
             setLocationInterval()
             this.locationInterval()
+          } else if (response === 'denied') {
+              navigator.geolocation.getCurrentPosition(resp =>
+                this.locationInterval(),
+                err => {
+                  if (err.code === 2) {
+                    this.setState({ isActiveLocation: false })
+                  }
+                }
+              )
           }
         })
       } else if (isAndroid) {
@@ -80,11 +97,20 @@ class NearbyUsers extends Component {
     }
   }
 
-  componentWillUpdate = nextProps => {
-    const { accessToken, fetchConnectivityData } = this.props
+  componentWillUpdate = (nextProps, nextState) => {
+    const { accessToken, fetchConnectivityData, locationPermission, setGeoPermission, userId, getUserInfo } = this.props
+    const { appState, isActiveLocation } = this.state
 
-    if (!accessToken && nextProps.accessToken) {
+    if (!accessToken && nextProps.accessToken && !userId) {
+      getUserInfo(nextProps.accessToken)
       fetchConnectivityData(nextProps.accessToken)
+    }
+    if (!locationPermission || !isActiveLocation) {
+      Permissions.check('location').then(response => {
+        if (response === 'authorized' || response === 'undetermined') {
+          this.locationInterval()
+        }
+      })
     }
   }
 
@@ -98,13 +124,32 @@ class NearbyUsers extends Component {
 
 
   locationInterval = () => {
-    const { accessToken, updateUserPosition } = this.props
+    const { accessToken, updateUserPosition, setGeoPermission } = this.props
+
     navigator.geolocation.getCurrentPosition((position) => {
-      updateUserPosition(accessToken, position.coords).then(resp =>
-         fetchConnectivityData(accessToken))
+      setGeoPermission(true)
+      this.setState({ isActiveLocation: true }, () =>
+        updateUserPosition(accessToken, position.coords).then(resp =>
+          fetchConnectivityData(accessToken)
+        )
+      )
     },
-      (error) => this.setState({ error: error.message }),
-      {enableHighAccuracy: false, timeout: 10000, maximumAge: 3000}
+      (error) => {
+        if (isIOS) {
+          if (error.code === 2 || error.code === 3) {
+            this.setState({ isActiveLocation: false })
+          } else if (error.code === 1) {
+            setGeoPermission(false)
+          }
+        } else if (isAndroid) {
+            if (error.code === 1) {
+              this.setState({ isActiveLocation: false })
+            } else if (error.code === 1) {
+              setGeoPermission(false)
+            }
+        }
+      },
+      { enableHighAccuracy: isIOS, timeout: 10000 }
     )
   }
 
@@ -135,7 +180,8 @@ class NearbyUsers extends Component {
 
   render() {
     const { users, navigation, locationPermission, fetching } = this.props
-    const { input, feedView, refreshing } = this.state
+    const { input, feedView, refreshing, isActiveLocation } = this.state
+    const orderedUsers = _.orderBy(users, ['featured'], ['desc'])
 
     if (!feedView && fetching) {
       return(
@@ -164,13 +210,14 @@ class NearbyUsers extends Component {
           </View>
           : !feedView
             ? <UsersContainer
-                users={input.length ? this.filterUsers(users) : users}
+                users={input.length ? this.filterUsers(users) : orderedUsers}
                 navigation={navigation}
                 fetching={fetching}
                 locationPermission={locationPermission}
                 viewFriendProfile={this.viewFriendProfile}
                 refreshing={refreshing}
                 onRefresh={this.onRefresh}
+                isActiveLocation={isActiveLocation}
               />
             : <NearbyFeedContainer
               input={input}
@@ -183,6 +230,8 @@ class NearbyUsers extends Component {
 }
 
 const mapStateToProps = state => ({
+  userInfo: state.userStore.userData,
+  userId: state.userStore.userId,
   accessToken: state.authStore.accessToken,
   locationPermission: state.permissionsStore.nativeGeolocation,
   users: state.friendStore.users.filter(user => !!user.picture),
@@ -193,16 +242,18 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   const { setFriendInfo } = FriendStoreActions
-  const { setLocationInterval } = PermissionsStoreActions
+  const { setLocationInterval, setGeoPermission } = PermissionsStoreActions
 
   return {
     ...bindActionCreators({
       updateUserPosition,
       setFriendInfo,
       fetchConnectivityData,
-      setLocationInterval
+      setLocationInterval,
+      setGeoPermission,
+      getUserInfo
     }, dispatch)
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NearbyUsers)
+export default connect(mapStateToProps, mapDispatchToProps)(withAppStateChange(NearbyUsers))

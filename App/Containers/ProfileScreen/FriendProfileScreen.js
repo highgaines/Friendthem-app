@@ -82,8 +82,10 @@ class FriendProfileScreen extends Component {
       checkFriendConnection(apiAccessToken, friendInfo.id)
     }
     if (last_location) {
-      Geocoder.geocodePosition(last_location).then(res =>
-        this.setState({ userLastLocation: `${res[0].subAdminArea}, ${res[0].adminArea}`})
+      Geocoder.geocodePosition(last_location).then(res => {
+        const subArea = res[0].subAdminArea || res[0].locality || res[0].subLocality
+        this.setState({ userLastLocation: `${subArea}, ${res[0].adminArea}`})
+      }
       )
     }
   }

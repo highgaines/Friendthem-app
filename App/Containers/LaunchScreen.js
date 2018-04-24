@@ -39,7 +39,6 @@ import { storeContactInfo } from '../Redux/InviteUsersStore'
 
 // Images
 import { Images } from '../Themes'
-import { isIpad } from '../Utils/constants'
 
 // Styles
 import styles from './Styles/LaunchScreenStyles'
@@ -48,7 +47,7 @@ import { ifIphoneX } from '../Themes/Helpers'
 import navigationAware from '../Navigation/navigationAware'
 
 // Utils
-import { isIOS, isAndroid } from '../Utils/constants'
+import { isIOS, isAndroid, isIpad, IOS_PERMISSIONS, ANDROID_PERMISSIONS } from '../Utils/constants'
 import { RequestContactsPermission, RequestLocationPermission } from '../Utils/functions'
 import OneSignal from 'react-native-onesignal';
 
@@ -86,7 +85,7 @@ class LaunchScreen extends Component {
               permissionType: 'geolocation',
               navigation: navigation
             })
-      } else if (!nativeNotifications) {
+      } else if (!nativeNotifications && isIOS) {
           nextProps.navigation.navigate('PermissionScreen', {
             permissionType: 'notifications',
             navigation: navigation
@@ -118,12 +117,13 @@ class LaunchScreen extends Component {
 
   checkPermissions = () => {
     const { setGeoPermission, setNotifPermission, setNativeContactsPermission } = this.props
+    const osPermissionTypes = isIOS ? IOS_PERMISSIONS : ANDROID_PERMISSIONS
 
-    Permissions.checkMultiple(['notification', 'location', 'contacts']).then(response => {
+    Permissions.checkMultiple(osPermissionTypes).then(response => {
       if (response.location === 'authorized') {
         setGeoPermission(true)
       }
-      if (response.notification === 'authorized' && isIOS) {
+      if (response.notification === 'authorized' || !isIOS) {
         setNotifPermission(true)
       }
       if (response.contacts === 'authorized') {
@@ -156,7 +156,7 @@ class LaunchScreen extends Component {
                 permissionType: 'geolocation',
                 navigation: navigation
               })
-        } else if (!nativeNotifications && isLaunchScreen) {
+        } else if (!nativeNotifications && isLaunchScreen && isIOS) {
             navigation.navigate('PermissionScreen', {
               permissionType: 'notifications',
               navigation: navigation
