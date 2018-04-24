@@ -42,7 +42,7 @@ export default UserCard = ({
       successTypes: ['sent', 'queued']
     }, (completed, cancelled, error) => {
       if (completed) {
-        structuredPhoneNum = `+${phoneNumber.split(/[-)(\s]/).join('')}`
+        const structuredPhoneNum = `+${phoneNumber.split(/[-)(\s]/).join('')}`
         inviteUser(accessToken, structuredPhoneNum)
       }
     })
