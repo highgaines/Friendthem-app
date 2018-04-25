@@ -15,6 +15,9 @@ const { Types, Creators } = createActions({
     getFriendsSuccess: null,
     getFriendsFailure: null,
     logoutUser: null,
+    createUserInviteRequest: null,
+    createUserInviteSuccess: null,
+    createUserInviteFailure: null,
 })
 
 export const InviteUsers = Types
@@ -84,6 +87,33 @@ export const fetchMyFriendsData = (accessToken) => {
   }
 }
 
+export const createUserInvite = (accessToken, phoneNumber) => {
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/json')
+  headers.append('Authorization', `Bearer ${accessToken}`)
+
+  const body = {
+    phone_number: phoneNumber
+  }
+
+  const init = {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(body)
+  }
+
+  return {
+    types: [
+      Types.CREATE_USER_INVITE_REQUEST,
+      Types.CREATE_USER_INVITE_SUCCESS,
+      Types.CREATE_USER_INVITE_FAILURE,
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi('/invites/', init, dispatch)
+  }
+
+}
+
 /* ------------- Reducers ------------- */
 
 const handleStoreContactInfo = (state, action) => {
@@ -134,6 +164,18 @@ const handleGetFriendsFailure = (state, action) => {
   return state.merge({ fetchingData: false })
 }
 
+// Invite Contact Reducers
+const handleInviteUserRequest = (state, action) => {
+  return state
+}
+const handleInviteUserSuccess = (state, action) => {
+  return state
+}
+const handleInviteUserFailure = (state, action) => {
+  return state
+}
+
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -145,5 +187,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGOUT_USER]: handleUserLogout,
   [Types.GET_FRIENDS_REQUEST]: handleGetFriendsRequest,
   [Types.GET_FRIENDS_SUCCESS]: handleGetFriendsSuccess,
-  [Types.GET_FRIENDS_FAILURE]: handleGetFriendsFailure
+  [Types.GET_FRIENDS_FAILURE]: handleGetFriendsFailure,
+  [Types.CREATE_USER_INVITE_REQUEST]: handleInviteUserRequest,
+  [Types.CREATE_USER_INVITE_SUCCESS]: handleInviteUserSuccess,
+  [Types.CREATE_USER_INVITE_FAILURE]: handleInviteUserFailure,
 })
