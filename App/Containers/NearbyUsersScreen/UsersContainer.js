@@ -38,7 +38,9 @@ export default class UsersContainer extends Component {
 
     const styling = {
       justifyContent: 'center',
-      paddingBottom: '30%'
+      alignSelf: 'center',
+      paddingBottom: '30%',
+      marginHorizontal: '5%'
     }
 
     const flatListContainer = {
