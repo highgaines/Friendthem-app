@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity, AppState, ActionSheetIOS } from 'react-native'
+import { ScrollView, Text, Image, Modal, View, Button, TouchableOpacity, AppState, ActionSheetIOS, ActivityIndicator } from 'react-native'
 
 // Libraries
 import { CachedImage } from 'react-native-img-cache';
@@ -19,7 +19,7 @@ import * as Animatable from 'react-native-animatable'
 import FBStoreActions from '../../Redux/FBStore'
 import SuperConnectActions from '../../Redux/SuperConnectStore'
 import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
-import FriendStoreActions, { checkFriendConnection } from '../../Redux/FriendStore'
+import FriendStoreActions, { checkFriendConnection, getFriendScore } from '../../Redux/FriendStore'
 
 // Components
 import Navbar from '../Navbar/Navbar'
@@ -64,7 +64,7 @@ class FriendProfileScreen extends Component {
   }
 
   componentWillMount = () => {
-    const { apiAccessToken, navigation, getUserInfo, loggedIn, getUserTokens, setSuperConnectPlatforms } = this.props
+    const { apiAccessToken, navigation, getUserInfo, loggedIn, getUserTokens, setSuperConnectPlatforms, friendInfo } = this.props
 
     if (apiAccessToken && loggedIn) {
       getUserTokens(apiAccessToken)
@@ -75,7 +75,7 @@ class FriendProfileScreen extends Component {
   }
 
   componentDidMount = () => {
-    const { apiAccessToken, friendInfo, checkFriendConnection, loggedIn, getMyPics } = this.props
+    const { apiAccessToken, friendInfo, checkFriendConnection, loggedIn, getMyPics, getFriendScore } = this.props
     const { last_location } = friendInfo
 
     if (apiAccessToken && loggedIn) {
@@ -88,10 +88,13 @@ class FriendProfileScreen extends Component {
       }
       )
     }
+    if (friendInfo.id) {
+      getFriendScore(apiAccessToken, friendInfo.id)
+    }
   }
 
   componentDidUpdate = (prevProps, prevState) => {
-    const { userInfo, connection, friendInfo, fetching, fetchingTokens } = this.props
+    const { apiAccessToken, userInfo, connection, friendInfo, fetching, fetchingTokens, currentFriendScore } = this.props
     const { selectedSocialMedia, selectedPlatformsUpdated } = this.state
     const componentUpdated = !fetching && !fetchingTokens && !selectedPlatformsUpdated
     const dataPresent = userInfo && userInfo.social_profiles && userInfo.social_profiles.length &&
@@ -107,6 +110,9 @@ class FriendProfileScreen extends Component {
         selectedSocialMedia: nonSelectedPlatform ? [nonSelectedPlatform.provider] : [],
         selectedPlatformsUpdated: true
       })
+    }
+    if (friendInfo.id && currentFriendScore === null) {
+      getFriendScore(apiAccessToken, friendInfo.id)
     }
   }
 
@@ -307,21 +313,31 @@ class FriendProfileScreen extends Component {
   }
 
   render() {
-    const { friendInfo, connection, superConnect, navigation, setSuperConnectPlatforms, userInfo, userId } = this.props
+    const {
+      connection,
+      currentFriendScore,
+      fetchingScore,
+      friendInfo,
+      navigation,
+      setSuperConnectPlatforms,
+      superConnect,
+      userInfo,
+      userId
+    } = this.props
 
     const {
+      currentPic,
+      currentPicIdx,
+      fetching,
+      fetchingTokens,
+      myPicturesModalVisible,
+      platform,
       showModal,
       showTutorialModal,
       socialMediaData,
       syncedCardColors,
       selectedSocialMedia,
       showSuperConnectModal,
-      fetching,
-      fetchingTokens,
-      platform,
-      currentPic,
-      currentPicIdx,
-      myPicturesModalVisible,
       userLastLocation
     } = this.state
 
@@ -381,6 +397,15 @@ class FriendProfileScreen extends Component {
                     color='#FFF'
                     onPress={() => navigation.dispatch(backAction) }
                   />
+                </View>
+                <View style={styles.scoreContainer}>
+                {console.log(fetchingScore, currentFriendScore)}
+                { fetchingScore || !currentFriendScore ?
+                  <ActivityIndicator size='small' /> :
+                  <Text style={styles.scoreText}>
+                    {currentFriendScore.toLocaleString()}
+                  </Text>
+                }
                 </View>
                 <View style={styles.profHeaderTop}>
                       <TouchableOpacity onPress={this.handleCall}>
@@ -470,17 +495,18 @@ class FriendProfileScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  userInfo: state.userStore.userData,
-  userId: state.userStore.userId,
-  friendInfo: state.friendStore.friendData,
-  platforms: state.tokenStore.platforms,
-  connection: state.friendStore.connection,
-  fbAuthToken: state.fbStore.fbAccessToken,
   apiAccessToken: state.authStore.accessToken,
+  connection: state.friendStore.connection,
+  currentFriendScore: state.friendStore.currentFriendScore,
+  fbAuthToken: state.fbStore.fbAccessToken,
+  fetching: state.friendStore.fetching,
+  fetchingScore: state.friendStore.fetchingScore,
+  fetchingTokens: state.tokenStore.fetchingTokens,
+  friendInfo: state.friendStore.friendData,
   loggedIn: state.authStore.loggedIn,
   platforms: state.tokenStore.platforms,
-  fetching: state.friendStore.fetching,
-  fetchingTokens: state.tokenStore.fetchingTokens,
+  userId: state.userStore.userId,
+  userInfo: state.userStore.userData,
 })
 
 const mapDispatchToProps = dispatch => {
@@ -491,7 +517,8 @@ const mapDispatchToProps = dispatch => {
       fbLogoutComplete: logoutComplete,
       setSuperConnectPlatforms,
       checkFriendConnection,
-      getUserTokens
+      getUserTokens,
+      getFriendScore
     }, dispatch)
   }
 }

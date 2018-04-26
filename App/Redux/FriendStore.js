@@ -11,6 +11,9 @@ const { Types, Creators } = createActions({
   checkFriendConnectionRequest: null,
   checkFriendConnectionSuccess: null,
   checkFriendConnectionFailure: null,
+  getFriendScoreRequest: null,
+  getFriendScoreSuccess: null,
+  getFriendScoreFailure: null,
   logoutUser: null,
 })
 
@@ -23,7 +26,9 @@ export const INITIAL_STATE = Immutable({
   friendData: {},
   users: [],
   connection: [],
-  fetching: false
+  fetching: false,
+  fetchingScore: false,
+  currentFriendScore: null
 })
 
 /* ------------- Actions ------------- */
@@ -47,6 +52,27 @@ export const checkFriendConnection = (accessToken, friendUserId) => {
       shouldCallApi: state =>  true,
       callApi: dispatch => fetchFromApi(`connect/${friendUserId}/`, init, dispatch)
     }
+}
+
+export const getFriendScore = (accessToken, userId='') => {
+  const headers = new Headers()
+  headers.append('Authorization', `Bearer ${accessToken}`)
+  headers.append('Content-Type', 'application/json')
+
+  const init = {
+    method: 'GET',
+    headers
+  }
+
+  return {
+    types: [
+      Types.GET_FRIEND_SCORE_REQUEST,
+      Types.GET_FRIEND_SCORE_SUCCESS,
+      Types.GET_FRIEND_SCORE_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi(`competition/${userId}/`, init, dispatch)
+  }
 }
 
 /* ------------- Reducers ------------- */
@@ -82,6 +108,21 @@ const handleFriendConnectionFailure = (state, action) => {
   })
 }
 
+const handleGetFriendScoreRequest = (state, action) => {
+  return state.set('fetchingScore', true)
+}
+
+const handleGetFriendScoreSuccess = (state, action) => {
+  console.log(action)
+  return state.merge({
+    fetchingScore: false,
+    currentFriendScore: action.response.data.total_points
+  })
+}
+
+const handleGetFriendScoreFailure = (state, action) => {
+  return state.set('fetchingScore', false)
+}
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -90,5 +131,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGOUT_USER]: handleUserLogout,
   [Types.CHECK_FRIEND_CONNECTION_REQUEST]: handleFriendConnectionRequest,
   [Types.CHECK_FRIEND_CONNECTION_SUCCESS]: handleFriendConnectionSuccess,
-  [Types.CHECK_FRIEND_CONNECTION_FAILURE]: handleFriendConnectionFailure
+  [Types.CHECK_FRIEND_CONNECTION_FAILURE]: handleFriendConnectionFailure,
+  [Types.GET_FRIEND_SCORE_REQUEST]: handleGetFriendScoreRequest,
+  [Types.GET_FRIEND_SCORE_SUCCESS]: handleGetFriendScoreSuccess,
+  [Types.GET_FRIEND_SCORE_FAILURE]: handleGetFriendScoreFailure
 })

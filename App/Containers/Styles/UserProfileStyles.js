@@ -204,7 +204,8 @@ export default StyleSheet.create({
     right: Metrics.screenWidth * .05
   },
   scoreText: {
+    color: 'white',
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: '800',
   }
 })

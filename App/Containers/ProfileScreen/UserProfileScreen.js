@@ -416,7 +416,7 @@ class UserProfileScreen extends Component {
                   <View style={styles.scoreContainer}>
                   { fetchingScore ?
                     <ActivityIndicator size='small' /> :
-                    <Text style={styles.scoreText}>{userScore}</Text>
+                    <Text style={styles.scoreText}>{userScore.toLocaleString()}</Text>
                   }
                   </View>
                   <View style={styles.profHeaderTop}>
