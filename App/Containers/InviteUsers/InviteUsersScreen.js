@@ -1,11 +1,24 @@
 import React, { Component } from 'react'
+<<<<<<< HEAD
 import { View, TouchableOpacity, Text, ScrollView, ActivityIndicator, Linking, Alert, AppState } from 'react-native'
+=======
+import { View, TouchableOpacity, Text, ScrollView, ActivityIndicator } from 'react-native'
+import * as Animatable from 'react-native-animatable';
+>>>>>>> completes updates to on friendthem tab oof the friends screen
 
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+<<<<<<< HEAD
 import PermissionsStoreActions from '../../Redux/PermissionsStore'
 import InviteUsersStoreActions, { selectUser, fetchConnectivityData, storeContactInfo, fetchMyFriendsData } from '../../Redux/InviteUsersStore'
+=======
+import InviteUsersStoreActions, {
+  fetchConnectivityData,
+  selectUser,
+  storeContactInfo,
+  fetchMyFriendsData } from '../../Redux/InviteUsersStore'
+>>>>>>> completes updates to on friendthem tab oof the friends screen
 import UserStoreActions, { updateTutorialStatus } from '../../Redux/UserStore'
 
 // Libraries
@@ -43,9 +56,15 @@ class InviteUsersScreen extends Component {
       showInviteTutorial: !props.inviteTutorialComplete,
       showConnectivityTutorial: !props.connectivityTutorialComplete,
       showModal: false,
+      receivedConnects: [],
+      sentConnects:  [],
+      fullConnects: [],
+      friendsListCategorized: false,
       appState: AppState.currentState,
       returningToApp: false
     }
+
+    this.initialState = this.state
   }
 
   triggerModal = () => {
@@ -63,6 +82,7 @@ class InviteUsersScreen extends Component {
   }
 
   componentWillUnmount = () => {
+    this.setState(this.initialState)
     AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
@@ -93,6 +113,15 @@ class InviteUsersScreen extends Component {
 
     if (nextProps.nativeContactsPermission && !nativeContactsPermission) {
       fetchMyFriendsData(accessToken)
+    }
+  }
+
+  componentDidUpdate = () => {
+    const { myFriends } = this.props
+    const { friendsListCategorized } = this.state
+
+    if (myFriends.length && !friendsListCategorized) {
+      this.setState({friendsListCategorized: true}, this.categorizeFriendConnections)
     }
   }
 
@@ -149,18 +178,46 @@ class InviteUsersScreen extends Component {
     }
   }
 
+  categorizeFriendConnections = () => {
+    const { myFriends } = this.props
+    let receivedConnects = []
+    let sentConnects = []
+    let fullConnects = []
+
+    myFriends.forEach(friendInfo => {
+      switch (friendInfo.category) {
+        case 'received':
+          receivedConnects = [...receivedConnects, friendInfo]
+          break
+        case 'sent':
+          sentConnects = [...sentConnects, friendInfo]
+          break
+        case 'both':
+          fullConnects = [...fullConnects, friendInfo]
+          break
+        default:
+          break
+      }
+    })
+
+    this.setState({
+      receivedConnects,
+      sentConnects,
+      fullConnects,
+    })
+
   completeTutorial = (stateKey, databaseKey) => {
     const { accessToken, updateTutorialStatus } = this.props
 
     this.setState({ [stateKey]: false}, () => {
-        updateTutorialStatus(accessToken, databaseKey, true)
+      updateTutorialStatus(accessToken, databaseKey, true)
     })
   }
 
-  renderConnectivityCards = () => {
-    const { myFriends, navigation } = this.props
+  renderConnectivityCards = categorizedFriendList => {
+    const { navigation } = this.props
 
-    return myFriends && myFriends.map( (friend, idx) => {
+    return categorizedFriendList && categorizedFriendList.map((friend, idx) => {
       return (
         <ConnectivityCard
           key={`${idx} - ${friend.connection_percentage}`}
@@ -175,7 +232,15 @@ class InviteUsersScreen extends Component {
   }
 
   render() {
-    const { networkTabSelected, showModal, showInviteTutorial, showConnectivityTutorial } = this.state
+    const {
+      fullConnects,
+      networkTabSelected,
+      receivedConnects,
+      sentConnects,
+      showModal,
+      showInviteTutorial,
+      showConnectivityTutorial,
+    } = this.state
     const {
       myFriends,
       selectUser,
@@ -198,7 +263,7 @@ class InviteUsersScreen extends Component {
         </View>
       )
     }
-
+    console.log(fullConnects, receivedConnects, sentConnects)
     return (
       !tutorialVisible ?
           <LazyloadView style={[{ flex: 1 }, this.state.showModal ? { opacity: 0.1 } : '']}>
@@ -244,8 +309,9 @@ class InviteUsersScreen extends Component {
                   selectUser={selectUser}
                 />
             </LazyloadView> :
-              <LazyloadView style={{justifyContent: 'center', alignSelf: 'center'}}>
-                <Text
+              <LazyloadScrollView contentContainerStyle={styles.categorizedFriendListContainer}>
+                <Animatable.Text
+                  animation="slideInUp"
                   style={{
                       padding: 10,
                       fontFamily: 'montserrat',
@@ -253,11 +319,35 @@ class InviteUsersScreen extends Component {
                       opacity: .5
                     }}>
                   Connectivity
-                </Text>
-                <LazyloadScrollView contentContainerStyle={styles.userContainer}>
-                  {this.renderConnectivityCards()}
-                </LazyloadScrollView>
-              </LazyloadView>
+                </Animatable.Text>
+                <LazyloadView style={styles.userContainer}>
+                  {this.renderConnectivityCards(receivedConnects)}
+                </LazyloadView>
+                <Animatable.Text
+                  style={{
+                      padding: 10,
+                      fontFamily: 'montserrat',
+                      fontWeight: "600",
+                      opacity: .5
+                    }}>
+                  Connectivity
+                </Animatable.Text>
+                <LazyloadView style={styles.userContainer}>
+                  {this.renderConnectivityCards(sentConnects)}
+                </LazyloadView>
+                <Animatable.Text
+                  style={{
+                      padding: 10,
+                      fontFamily: 'montserrat',
+                      fontWeight: "600",
+                      opacity: .5
+                    }}>
+                  Connectivity
+                </Animatable.Text>
+                <LazyloadView style={styles.userContainer}>
+                  {this.renderConnectivityCards(fullConnects)}
+                </LazyloadView>
+              </LazyloadScrollView>
             }
           </LazyloadView>
         :
@@ -277,7 +367,6 @@ class InviteUsersScreen extends Component {
 const mapStateToProps = state => ({
   nav: state.nav,
   accessToken: state.authStore.accessToken,
-  friends: state.inviteUsersStore.connectivityData,
   myFriends: _.orderBy(state.inviteUsersStore.myFriends, ['connection_percentage'], ['desc']),
   fetching: state.inviteUsersStore.fetchingData,
   contacts: state.inviteUsersStore.contactList,

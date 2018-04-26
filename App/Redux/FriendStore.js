@@ -113,7 +113,6 @@ const handleGetFriendScoreRequest = (state, action) => {
 }
 
 const handleGetFriendScoreSuccess = (state, action) => {
-  console.log(action)
   return state.merge({
     fetchingScore: false,
     currentFriendScore: action.response.data.total_points

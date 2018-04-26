@@ -399,8 +399,7 @@ class FriendProfileScreen extends Component {
                   />
                 </View>
                 <View style={styles.scoreContainer}>
-                {console.log(fetchingScore, currentFriendScore)}
-                { fetchingScore || !currentFriendScore ?
+                { fetchingScore || currentFriendScore === null ?
                   <ActivityIndicator size='small' /> :
                   <Text style={styles.scoreText}>
                     {currentFriendScore.toLocaleString()}

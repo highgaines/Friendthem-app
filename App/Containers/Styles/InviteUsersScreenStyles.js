@@ -59,10 +59,11 @@ export default StyleSheet.create({
   userContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    flex: 3,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 5,
-    paddingBottom: 170
+    paddingBottom: 40
   },
   navbar: {
     justifyContent: 'space-around',
@@ -76,5 +77,9 @@ export default StyleSheet.create({
     backgroundColor: 'black',
     height: 60,
     flexDirection: 'row'
+  },
+  categorizedFriendListContainer: {
+    justifyContent: 'center',
+    alignSelf: 'center',
   }
 })
