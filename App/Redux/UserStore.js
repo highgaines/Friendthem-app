@@ -13,6 +13,9 @@ const { Types, Creators } = createActions({
   getUserRequest: null,
   getUserSuccess: null,
   getUserFailure: null,
+  getUserScoreRequest: null,
+  getUserScoreSuccess: null,
+  getUserScoreFailure: null,
   getFbPhotosRequest: null,
   getFbPhotosSuccess: null,
   getFbPhotosFailure: null,
@@ -60,6 +63,7 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   fetching: false,
+  fetchingScore: false,
   isFetchingInitialUser: false,
   userId: null,
   userData: {
@@ -87,6 +91,7 @@ export const INITIAL_STATE = Immutable({
     connectivity_tutorial: false
   },
   userPhotos: {},
+  userScore: 0,
   ghostModeOn: true,
   notificationsOn: true,
   passwordUpdated: false,
@@ -117,6 +122,29 @@ export const getUserInfo = (accessToken) => {
     ],
     shouldCallApi: state => true,
     callApi: dispatch => fetchFromApi('profile/me/', init, dispatch)
+  }
+}
+
+// GET USERS FRIENDTHEM SCORE
+
+export const getUserScore = (accessToken, userId='') => {
+  const headers = new Headers()
+  headers.append('Authorization', `Bearer ${accessToken}`)
+  headers.append('Content-Type', 'application/json')
+
+  const init = {
+    method: 'GET',
+    headers
+  }
+
+  return {
+    types: [
+      Types.GET_USER_SCORE_REQUEST,
+      Types.GET_USER_SCORE_SUCCESS,
+      Types.GET_USER_SCORE_FAILURE
+    ],
+    shouldCallApi: state => true,
+    callApi: dispatch => fetchFromApi(`competition/${userId}`, init, dispatch)
   }
 }
 
@@ -513,6 +541,22 @@ const handleUpdateUserFailure = (state, action) => {
 
 // ------------------------------------------------------------------------ //
 
+const handleGetUserScoreRequest = (state, action) => {
+  return state.set('fetchingScore', true)
+}
+
+const handleGetUserScoreSuccess = (state, action) => {
+  return state.merge({
+    fetchingScore: false,
+    userScore: action.response.data.total_points
+  })
+}
+
+const handleGetUserScoreFailure = (state, action) => {
+  return state.set('fetchingScore', false)
+}
+// ------------------------------------------------------------------------ //
+
 const handleUpdateUserPositionRequest = (state, action) => {
   return state.set('fetching', true);
 }
@@ -702,6 +746,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.GET_USER_REQUEST]: handleGetUserRequest,
   [Types.GET_USER_SUCCESS]: handleGetUserSuccess,
   [Types.GET_USER_FAILURE]: handleGetUserFailure,
+  [Types.GET_USER_SCORE_REQUEST]: handleGetUserScoreRequest,
+  [Types.GET_USER_SCORE_SUCCESS]: handleGetUserScoreSuccess,
+  [Types.GET_USER_SCORE_FAILURE]: handleGetUserScoreFailure,
   [Types.GET_FB_PHOTOS_REQUEST]: handleGetPhotosRequest,
   [Types.GET_FB_PHOTOS_SUCCESS]: handleGetPhotosSuccess,
   [Types.GET_FB_PHOTOS_FAILURE]: handleGetPhotosFailure,

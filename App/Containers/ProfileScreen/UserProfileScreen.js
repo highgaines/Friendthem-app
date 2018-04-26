@@ -26,7 +26,7 @@ import ConfirmPasswordChangeModal from './ConfirmPasswordChangeModal'
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import UserStoreActions, { getUserInfo, updateInfo, updateSnapInfo, updateInfoRequest, getFBPhotos } from '../../Redux/UserStore'
+import UserStoreActions, { getUserInfo, getUserScore, updateInfo, updateSnapInfo, updateInfoRequest, getFBPhotos } from '../../Redux/UserStore'
 import AuthStoreActions, { socialMediaAuth, socialMediaAuthErrors, clearAuthErrors } from '../../Redux/AuthStore'
 import TokenStoreActions, { getUserTokens } from '../../Redux/TokenRedux'
 
@@ -69,12 +69,13 @@ class UserProfileScreen extends Component {
 
 
   componentWillMount = () => {
-    const { apiAccessToken, navigation, getUserInfo, loggedIn, getUserTokens } = this.props
+    const { apiAccessToken, navigation, getUserInfo, loggedIn, getUserTokens, getUserScore } = this.props
     AppState.addEventListener('change', this._handleAppStateChange)
 
     if (apiAccessToken && loggedIn) {
       getUserInfo(apiAccessToken)
       getUserTokens(apiAccessToken)
+      getUserScore(apiAccessToken)
     } else {
       navigation.navigate('LaunchScreen')
     }
@@ -349,24 +350,27 @@ class UserProfileScreen extends Component {
 
   render() {
     const {
+      apiAccessToken,
+      clearAuthErrors,
+      fetching,
+      fetchingScore,
+      fetchingMyPics,
+      getUserInfo,
+      getUserTokens,
+      isFetchingInitialUser,
+      navigation,
+      platforms,
+      updateInfo,
       userId,
       userInfo,
       userInterests,
       userLocation,
-      navigation,
-      clearAuthErrors,
-      apiAccessToken,
-      getUserInfo,
-      getUserTokens,
-      platforms,
-      updateInfo,
-      fetching,
-      isFetchingInitialUser,
       userPhotos,
-      fetchingMyPics
+      userScore,
     } = this.props
 
     const {
+      editingPictureId,
       showSyncHelp,
       showPicturesHelp,
       showInfoHelp,
@@ -375,7 +379,6 @@ class UserProfileScreen extends Component {
       syncedCardColors,
       showErrorModal,
       tab,
-      editingPictureId
     } = this.state
 
     const {
@@ -409,6 +412,12 @@ class UserProfileScreen extends Component {
                       color='#FFF'
                       onPress={() => navigation.dispatch(backAction) }
                     />
+                  </View>
+                  <View style={styles.scoreContainer}>
+                  { fetchingScore ?
+                    <ActivityIndicator size='small' /> :
+                    <Text style={styles.scoreText}>{userScore}</Text>
+                  }
                   </View>
                   <View style={styles.profHeaderTop}>
                   {
@@ -502,7 +511,7 @@ class UserProfileScreen extends Component {
            <HelpModal
              triggerModal={this.triggerFriendster}
              modalVisible={this.state.showSyncHelp}
-             text={"Welcome to Friendthem! Let's get you started by syncing up all your social media accounts. Press on a Social Platform card to begin."}
+             text={"Welcome to Friendthem! Let`s get you started by syncing up all your social media accounts. Press on a Social Platform card to begin."}
            />
            <HelpModal
              triggerModal={this.triggerPicturesHelp}
@@ -512,7 +521,7 @@ class UserProfileScreen extends Component {
            <HelpModal
              triggerModal={this.triggerInfoHelp}
              modalVisible={this.state.showInfoHelp}
-             text={"Your profile information is incomplete! Let's update some of the fields here so that your profile visitors can get a better idea of who you are!"}
+             text={"Your profile information is incomplete! Let`s update some of the fields here so that your profile visitors can get a better idea of who you are!"}
            />
          <ConfirmPasswordChangeModal
            toggleModal={this.toggleConfirmPasswordModal}
@@ -539,6 +548,7 @@ const mapStateToProps = state => ({
   fbAuthToken: state.fbStore.fbAccessToken,
   fetching: state.userStore.fetching,
   fetchingMyPics: state.userStore.fetchingMyPics,
+  fetchingScore: state.userStore.fetchingScore,
   isFetchingInitialUser: state.userStore.isFetchingInitialUser,
   loggedIn: state.authStore.loggedIn,
   needsFetchTokens: state.tokenStore.needsFetchTokens,
@@ -546,9 +556,10 @@ const mapStateToProps = state => ({
   refreshingToken: state.authStore.refreshingToken,
   userId: state.userStore.userId,
   userInfo: state.userStore.userData,
-  userPhotos: state.userStore.userPhotos,
   userInterests: state.userStore.interests,
   userLocation: state.userStore.location,
+  userPhotos: state.userStore.userPhotos,
+  userScore: state.userStore.userScore
 })
 
 const mapDispatchToProps = dispatch => {
@@ -558,6 +569,7 @@ const mapDispatchToProps = dispatch => {
       clearAuthErrors,
       getFBPhotos,
       getUserInfo,
+      getUserScore,
       getUserTokens,
       updateInfo,
       updateInfoRequest,

@@ -197,5 +197,14 @@ export default StyleSheet.create({
     height: '100%',
     width: Metrics.screenWidth,
     paddingBottom: 10,
+  },
+  scoreContainer: {
+    position: 'absolute',
+    top: Metrics.screenHeight * .025,
+    right: Metrics.screenWidth * .05
+  },
+  scoreText: {
+    fontSize: 16,
+    fontWeight: '600',
   }
 })
