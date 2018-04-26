@@ -158,7 +158,7 @@ class InviteUsersScreen extends Component {
                   selectUser={selectUser}
                 />
             </LazyloadView> :
-              <LazyloadView>
+              <LazyloadView style={{justifyContent: 'center', alignSelf: 'center'}}>
                 <Text
                   style={{
                       padding: 10,

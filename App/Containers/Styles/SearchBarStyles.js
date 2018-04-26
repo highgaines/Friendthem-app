@@ -4,7 +4,7 @@ import { Metrics, ApplicationStyles, Fonts, Colors } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   linearGradient: {
-    height: 100,
+    height: Metrics.screenHeight * .17,
     alignItems: 'stretch',
     justifyContent: 'space-between',
     paddingBottom: 25,
@@ -15,7 +15,7 @@ export default StyleSheet.create({
   },
   searchBar: {
     backgroundColor: 'transparent',
-    marginTop: 50,
+    marginTop: Metrics.screenHeight * .1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
