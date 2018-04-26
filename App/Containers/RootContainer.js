@@ -85,7 +85,7 @@ const mapStateToProps = state => ({
   refreshToken: state.authStore.refreshToken,
   accessToken: state.authStore.accessToken,
   authExpiration: state.authStore.authExpiration,
-  isConnected: state.network.isConnected
+  isConnected: state.network.isConnected,
 });
 
 // wraps dispatch to create nicer functions to call within our component

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View,
          TouchableOpacity, Button,
-         ActivityIndicator } from 'react-native'
+         ActivityIndicator, BackHandler } from 'react-native'
 
 // Libraries
 import { SocialIcon } from 'react-native-elements'
@@ -63,6 +63,8 @@ class LaunchScreen extends Component {
   }
 
   componentWillMount = () => {
+    BackHandler.addEventListener('hardwareBackPress', this.handleAndroidBackButtonPress);
+
     this.checkPermissions()
 
     if (this.props.loggedIn) {
@@ -195,6 +197,18 @@ class LaunchScreen extends Component {
     .start()
   }
 
+  handleAndroidBackButtonPress = () => {
+    const { routes, navigation } = this.props
+
+    if (routes && routes.length > 1) {
+      console.log('hit')
+      navigation.navigate(routes[routes.length - 2].routeName);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render () {
     const { navigate } = this.props.navigation
     const { users, fbAuthToken, logoutUser, fbLoginComplete } = this.props
@@ -267,7 +281,8 @@ const mapStateToProps = state => ({
   nativeNotifications: state.permissionsStore.nativeNotifications,
   nativeContactsPermission: state.permissionsStore.nativeContactsPermission,
   contactList: state.inviteUsersStore.contactList,
-  customNotificationPermission: state.permissionsStore.notificationPermissionsGranted
+  customNotificationPermission: state.permissionsStore.notificationPermissionsGranted,
+  routes: state.nav.routes
 })
 
 const mapDispatchToProps = dispatch => {
