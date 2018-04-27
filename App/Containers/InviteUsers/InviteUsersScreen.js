@@ -46,15 +46,17 @@ class InviteUsersScreen extends Component {
   }
 
   componentWillMount = () => {
-    const { storeContactInfo } = this.props
+    const { storeContactInfo, nativeContactsPermission } = this.props
 
-    Contacts.getAll( (err, contacts) => {
-      if (err === 'denied') {
-        console.log('DENIED')
-      } else {
-        storeContactInfo(contacts)
-      }
-    })
+    if (nativeContactsPermission) {
+      Contacts.getAll( (err, contacts) => {
+        if (err === 'denied') {
+          console.log('DENIED')
+        } else {
+          storeContactInfo(contacts)
+        }
+      })
+    }
   }
 
   componentDidMount = () => {
@@ -196,7 +198,8 @@ const mapStateToProps = state => ({
   fetching: state.inviteUsersStore.fetchingData,
   contacts: state.inviteUsersStore.contactList,
   inviteTutorialComplete: state.userStore.editableData.invite_tutorial,
-  connectivityTutorialComplete: state.userStore.editableData.connection_tutorial
+  connectivityTutorialComplete: state.userStore.editableData.connection_tutorial,
+  nativeContactsPermission: state.permissionsStore.nativeContactsPermission
 })
 
 const mapDispatchToProps = dispatch => {
