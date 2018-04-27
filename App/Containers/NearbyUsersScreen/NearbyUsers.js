@@ -53,6 +53,7 @@ class NearbyUsers extends Component {
       getUserInfo,
       customGeolocationPermission,
       locationPermission,
+      setGeoPermission,
       setLocationInterval,
       userInfo,
       userId
@@ -126,7 +127,7 @@ class NearbyUsers extends Component {
   locationInterval = () => {
     const { accessToken, updateUserPosition, nativeGeolocation } = this.props
 
-    if (iosIOS || nativeGeolocation) {
+    if (isIOS || nativeGeolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         setGeoPermission(true)
         this.setState({ isActiveLocation: true }, () =>
