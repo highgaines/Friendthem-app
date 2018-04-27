@@ -200,9 +200,8 @@ class LaunchScreen extends Component {
   handleAndroidBackButtonPress = () => {
     const { routes, navigation } = this.props
 
-    if (routes && routes.length > 1) {
-      console.log('hit')
-      navigation.navigate(routes[routes.length - 2].routeName);
+    if (routes && routes.length > 2) {
+      navigation.pop(1);
       return true;
     } else {
       return false;

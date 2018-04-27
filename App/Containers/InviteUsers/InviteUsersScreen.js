@@ -409,15 +409,16 @@ class InviteUsersScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  nav: state.nav,
   accessToken: state.authStore.accessToken,
-  myFriends: _.orderBy(state.inviteUsersStore.myFriends, ['connection_percentage'], ['desc']),
-  fetching: state.inviteUsersStore.fetchingData,
-  contacts: state.inviteUsersStore.contactList,
-  inviteTutorialComplete: state.userStore.editableData.invite_tutorial,
   connectivityTutorialComplete: state.userStore.editableData.connection_tutorial,
+  contacts: state.inviteUsersStore.contactList,
+  fetching: state.inviteUsersStore.fetchingData,
+  friends: state.inviteUsersStore.connectivityData,
+  inviteTutorialComplete: state.userStore.editableData.invite_tutorial,
+  myFriends: _.orderBy(state.inviteUsersStore.myFriends, ['connection_percentage'], ['desc']),
   nativeContactsPermission: state.permissionsStore.nativeContactsPermission,
-  userId: state.userStore.userId
+  nav: state.nav,
+  userId: state.userStore.userId,
 })
 
 const mapDispatchToProps = dispatch => {
