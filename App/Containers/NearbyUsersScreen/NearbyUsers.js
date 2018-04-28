@@ -101,14 +101,19 @@ class NearbyUsers extends Component {
   componentWillUpdate = (nextProps, nextState) => {
     const { accessToken, fetchConnectivityData, locationPermission, setGeoPermission, userId, getUserInfo } = this.props
     const { appState, isActiveLocation } = this.state
+    const locationPermissionsGranted = nextProps.locationPermission && !locationPermission
 
     if (!accessToken && nextProps.accessToken && !userId) {
       getUserInfo(nextProps.accessToken)
       fetchConnectivityData(nextProps.accessToken)
     }
-    if (!locationPermission || !isActiveLocation) {
+
+    if (!locationPermission || !isActiveLocation || locationPermissionsGranted) {
       Permissions.check('location').then(response => {
         if (response === 'authorized' || response === 'undetermined') {
+          if (response === 'authorized') {
+            setGeoPermission(true)
+          }
           this.locationInterval()
         }
       })
@@ -125,7 +130,7 @@ class NearbyUsers extends Component {
 
 
   locationInterval = () => {
-    const { accessToken, updateUserPosition, nativeGeolocation } = this.props
+    const { accessToken, updateUserPosition, nativeGeolocation, setGeoPermission } = this.props
 
     if (isIOS || nativeGeolocation) {
       navigator.geolocation.getCurrentPosition((position) => {

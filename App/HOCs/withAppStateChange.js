@@ -19,7 +19,13 @@ const withAppStateChange = Component => class extends Component {
   };
 
   _handleAppStateChange = nextAppState => {
-    this.setState({ appState: nextAppState });
+    const returningToApp = this.state.appState.match(/background/) &&
+                            nextAppState === 'active'
+
+    this.setState({
+      appState: nextAppState,
+      returningToApp
+     });
   };
 
   render() {

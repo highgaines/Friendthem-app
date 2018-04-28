@@ -8,8 +8,8 @@ import InviteUsersStore, { createUserInvite } from '../../Redux/InviteUsersStore
 
 
 // Libraries
-import { Icon } from 'react-native-elements';
 import _ from 'lodash'
+import { Icon } from 'react-native-elements';
 import { LazyloadScrollView } from 'react-native-lazyload-deux'
 
 // Styles
