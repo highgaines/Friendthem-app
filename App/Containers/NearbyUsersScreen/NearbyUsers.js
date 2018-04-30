@@ -40,7 +40,7 @@ class NearbyUsers extends Component {
 
     this.state = {
       input: '',
-      feedView: false,
+      feedView: true,
       refreshing: false,
       isActiveLocation: true
     }
