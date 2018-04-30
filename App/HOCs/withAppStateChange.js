@@ -7,6 +7,7 @@ const withAppStateChange = Component => class extends Component {
 
     this.state = {
       appState: AppState.currentState,
+      returningToApp: false
     }
   }
 
@@ -33,6 +34,7 @@ const withAppStateChange = Component => class extends Component {
       <Component
         {...this.props}
         appState={this.state.appState}
+        returningToApp={this.state.returningToApp}
       />
     )
   }

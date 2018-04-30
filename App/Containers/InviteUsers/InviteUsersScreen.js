@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, ScrollView, ActivityIndicator, Linking, Alert } from 'react-native'
+import { View, TouchableOpacity, Text, ScrollView, ActivityIndicator, Linking, Alert, AppState } from 'react-native'
 
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import PermissionsStoreActions, { setNativeContactsPermission } from '../../Redux/PermissionsStore'
+import PermissionsStoreActions from '../../Redux/PermissionsStore'
 import InviteUsersStoreActions, { selectUser, fetchConnectivityData, storeContactInfo, fetchMyFriendsData } from '../../Redux/InviteUsersStore'
 import UserStoreActions, { updateTutorialStatus } from '../../Redux/UserStore'
 
@@ -42,7 +42,9 @@ class InviteUsersScreen extends Component {
       networkTabSelected: false,
       showInviteTutorial: !props.inviteTutorialComplete,
       showConnectivityTutorial: !props.connectivityTutorialComplete,
-      showModal: false
+      showModal: false,
+      appState: AppState.currentState,
+      returningToApp: false
     }
   }
 
@@ -53,9 +55,15 @@ class InviteUsersScreen extends Component {
   componentWillMount = () => {
     const { fetchMyFriendsData, fetchConnectivityData, accessToken, storeContactInfo, setNativeContactsPermission } = this.props
 
+    AppState.addEventListener('change', this._handleAppStateChange);
+
     if (!this.props.nativeContactsPermission) {
       this.contactPermissionCheck(setNativeContactsPermission)
     }
+  }
+
+  componentWillUnmount = () => {
+    AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
   componentDidMount = () => {
@@ -70,7 +78,7 @@ class InviteUsersScreen extends Component {
         }
       })
     } else {
-      this.contactPermissionCheck(this.props.setNativeContactsPermission)
+      this.contactPermissionCheck()
     }
 
     fetchMyFriendsData(accessToken)
@@ -80,13 +88,23 @@ class InviteUsersScreen extends Component {
     const { accessToken, nativeContactsPermission, setNativeContactsPermission, fetchMyFriendsData } = this.props
 
     if (this.state.returningToApp && !nativeContactsPermission) {
-      this.contactPermissionCheck(this.props.setNativeContactsPermission)
+      this.contactPermissionCheck()
     }
 
     if (nextProps.nativeContactsPermission && !nativeContactsPermission) {
       fetchMyFriendsData(accessToken)
     }
   }
+
+  _handleAppStateChange = nextAppState => {
+    const returningToApp = this.state.appState.match(/background/) &&
+                            nextAppState === 'active'
+
+    this.setState({
+      appState: nextAppState,
+      returningToApp
+     });
+  };
 
   openAppSettings = () => {
     if (isAndroid) {
@@ -96,12 +114,13 @@ class InviteUsersScreen extends Component {
     }
   }
 
-  contactPermissionCheck = setNativeContactsPermission => {
+  contactPermissionCheck = () => {
+    const { setNativeContactsPermission, storeContactInfo } = this.props
+
     Permissions.check('contacts').then(resp => {
       if (resp === 'authorized') {
         setNativeContactsPermission(true)
         Contacts.getAll( (err, contacts) => {
-          console.log(contacts)
           if (err === 'denied') {
             console.log('DENIED')
           } else {
@@ -113,12 +132,22 @@ class InviteUsersScreen extends Component {
             'Contacts Permissions',
             'friendthem needs permissions to access your contacts in order to invite your friends to use the app!',
             [
-              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+              {text: 'Cancel', onPress: () => this.closeModalPermissionCheck(), style: 'cancel'},
               {text: 'App Permissions', onPress: this.openAppSettings}
-            ]
+            ],
+            {
+              onDismiss: () => this.closeModalPermissionCheck()
+            }
           )
       }
     })
+  }
+
+  closeModalPermissionCheck = () => {
+    console.log('Cancel Pressed')
+    if (!this.props.nativeContactsPermission) {
+      this.contactPermissionCheck()
+    }
   }
 
   completeTutorial = (stateKey, databaseKey) => {
@@ -259,7 +288,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
-
+  const { setNativeContactsPermission } = PermissionsStoreActions
   return {
     ...bindActionCreators({
       selectUser,
@@ -272,4 +301,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withAppStateChange(InviteUsersScreen))
+export default connect(mapStateToProps, mapDispatchToProps)(InviteUsersScreen)
