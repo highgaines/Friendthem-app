@@ -144,7 +144,6 @@ class InviteUsersScreen extends Component {
   }
 
   closeModalPermissionCheck = () => {
-    console.log('Cancel Pressed')
     if (!this.props.nativeContactsPermission) {
       this.contactPermissionCheck()
     }
