@@ -1,24 +1,16 @@
 import React, { Component } from 'react'
-<<<<<<< HEAD
 import { View, TouchableOpacity, Text, ScrollView, ActivityIndicator, Linking, Alert, AppState } from 'react-native'
-=======
-import { View, TouchableOpacity, Text, ScrollView, ActivityIndicator } from 'react-native'
 import * as Animatable from 'react-native-animatable';
->>>>>>> completes updates to on friendthem tab oof the friends screen
 
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-<<<<<<< HEAD
 import PermissionsStoreActions from '../../Redux/PermissionsStore'
-import InviteUsersStoreActions, { selectUser, fetchConnectivityData, storeContactInfo, fetchMyFriendsData } from '../../Redux/InviteUsersStore'
-=======
 import InviteUsersStoreActions, {
   fetchConnectivityData,
   selectUser,
   storeContactInfo,
   fetchMyFriendsData } from '../../Redux/InviteUsersStore'
->>>>>>> completes updates to on friendthem tab oof the friends screen
 import UserStoreActions, { updateTutorialStatus } from '../../Redux/UserStore'
 
 // Libraries
@@ -205,6 +197,7 @@ class InviteUsersScreen extends Component {
       sentConnects,
       fullConnects,
     })
+  }
 
   completeTutorial = (stateKey, databaseKey) => {
     const { accessToken, updateTutorialStatus } = this.props
@@ -263,7 +256,7 @@ class InviteUsersScreen extends Component {
         </View>
       )
     }
-    console.log(fullConnects, receivedConnects, sentConnects)
+
     return (
       !tutorialVisible ?
           <LazyloadView style={[{ flex: 1 }, this.state.showModal ? { opacity: 0.1 } : '']}>

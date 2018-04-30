@@ -398,12 +398,13 @@ class FriendProfileScreen extends Component {
                     onPress={() => navigation.dispatch(backAction) }
                   />
                 </View>
-                <View style={styles.scoreContainer}>
+                <View style={[styles.scoreContainer, { top: 0 }]}>
                 { fetchingScore || currentFriendScore === null ?
                   <ActivityIndicator size='small' /> :
+                  [<Image source={Images.friendthemPointsLogo} style={{height: 40, width: 40}}/>,
                   <Text style={styles.scoreText}>
                     {currentFriendScore.toLocaleString()}
-                  </Text>
+                  </Text>]
                 }
                 </View>
                 <View style={styles.profHeaderTop}>

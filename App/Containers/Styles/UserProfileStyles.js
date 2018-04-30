@@ -199,13 +199,17 @@ export default StyleSheet.create({
     paddingBottom: 10,
   },
   scoreContainer: {
+    flexDirection: 'row',
     position: 'absolute',
     top: Metrics.screenHeight * .025,
-    right: Metrics.screenWidth * .05
+    right: Metrics.screenWidth * .05,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   scoreText: {
     color: 'white',
     fontSize: 16,
     fontWeight: '800',
+    marginLeft: 7
   }
 })
