@@ -311,7 +311,7 @@ class InviteUsersScreen extends Component {
                       fontWeight: "600",
                       opacity: .5
                     }}>
-                  Connectivity
+                  {`${receivedConnects.length} received`}
                 </Animatable.Text>
                 <LazyloadView style={styles.userContainer}>
                   {this.renderConnectivityCards(receivedConnects)}
@@ -323,7 +323,7 @@ class InviteUsersScreen extends Component {
                       fontWeight: "600",
                       opacity: .5
                     }}>
-                  Connectivity
+                  {`${sentConnects.length} sent`}
                 </Animatable.Text>
                 <LazyloadView style={styles.userContainer}>
                   {this.renderConnectivityCards(sentConnects)}
@@ -335,7 +335,7 @@ class InviteUsersScreen extends Component {
                       fontWeight: "600",
                       opacity: .5
                     }}>
-                  Connectivity
+                  {`${fullConnects.length} fully connected friends`}
                 </Animatable.Text>
                 <LazyloadView style={styles.userContainer}>
                   {this.renderConnectivityCards(fullConnects)}
