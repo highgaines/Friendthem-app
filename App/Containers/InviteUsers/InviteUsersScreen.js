@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, ScrollView, ActivityIndicator } from 'react-native'
+import { View, TouchableOpacity, Text, ScrollView, ActivityIndicator, Linking, Alert, AppState } from 'react-native'
 
 // Redux
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import PermissionsStoreActions from '../../Redux/PermissionsStore'
 import InviteUsersStoreActions, { selectUser, fetchConnectivityData, storeContactInfo, fetchMyFriendsData } from '../../Redux/InviteUsersStore'
 import UserStoreActions, { updateTutorialStatus } from '../../Redux/UserStore'
 
 // Libraries
+import AndroidOpenSettings from 'react-native-android-open-settings'
+import Permissions from 'react-native-permissions'
 import Reactotron from 'reactotron-react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Contacts from 'react-native-contacts'
@@ -21,6 +24,7 @@ import UsersContainer from '../NearbyUsersScreen/UsersContainer'
 import ConnectivityCard from './ConnectivityCard'
 import Navbar from '../Navbar/Navbar'
 import SuperConnectTutorial from '../TutorialScreens/SuperConnectTutorial'
+import withAppStateChange from '../../HOCs/withAppStateChange.js'
 
 // Styles
 import styles from '../Styles/InviteUsersScreenStyles'
@@ -28,6 +32,7 @@ import styles from '../Styles/InviteUsersScreenStyles'
 import { LazyloadScrollView, LazyloadView, LazyloadImage } from 'react-native-lazyload-deux'
 import { RequestContactsPermission } from '../../Utils/functions'
 import { Images } from '../../Themes'
+import { isIOS, isAndroid } from '../../Utils/constants'
 
 class InviteUsersScreen extends Component {
   constructor(props) {
@@ -37,7 +42,9 @@ class InviteUsersScreen extends Component {
       networkTabSelected: false,
       showInviteTutorial: !props.inviteTutorialComplete,
       showConnectivityTutorial: !props.connectivityTutorialComplete,
-      showModal: false
+      showModal: false,
+      appState: AppState.currentState,
+      returningToApp: false
     }
   }
 
@@ -46,21 +53,100 @@ class InviteUsersScreen extends Component {
   }
 
   componentWillMount = () => {
-    const { storeContactInfo } = this.props
+    const { fetchMyFriendsData, fetchConnectivityData, accessToken, storeContactInfo, setNativeContactsPermission } = this.props
 
-    Contacts.getAll( (err, contacts) => {
-      if (err === 'denied') {
-        console.log('DENIED')
+    AppState.addEventListener('change', this._handleAppStateChange);
+
+    if (!this.props.nativeContactsPermission) {
+      this.contactPermissionCheck(setNativeContactsPermission)
+    }
+  }
+
+  componentWillUnmount = () => {
+    AppState.removeEventListener('change', this._handleAppStateChange);
+  }
+
+  componentDidMount = () => {
+    const { accessToken, storeContactInfo, nativeContactsPermission } = this.props
+
+    if (nativeContactsPermission) {
+      Contacts.getAll( (err, contacts) => {
+        if (err === 'denied') {
+          console.log('DENIED')
+        } else {
+          storeContactInfo(contacts)
+        }
+      })
+    } else {
+      this.contactPermissionCheck()
+    }
+
+    fetchMyFriendsData(accessToken)
+  }
+
+  componentWillUpdate = (nextProps, nextState) => {
+    const { accessToken, nativeContactsPermission, setNativeContactsPermission, fetchMyFriendsData } = this.props
+
+    if (this.state.returningToApp && !nativeContactsPermission) {
+      this.contactPermissionCheck()
+    }
+
+    if (nextProps.nativeContactsPermission && !nativeContactsPermission) {
+      fetchMyFriendsData(accessToken)
+    }
+  }
+
+  _handleAppStateChange = nextAppState => {
+    const returningToApp = this.state.appState.match(/background/) &&
+                            nextAppState === 'active'
+
+    this.setState({
+      appState: nextAppState,
+      returningToApp
+     });
+  };
+
+  openAppSettings = () => {
+    if (isAndroid) {
+      AndroidOpenSettings.appDetailsSettings()
+    } else {
+      Linking.openURL('app-settings:')
+    }
+  }
+
+  contactPermissionCheck = () => {
+    const { setNativeContactsPermission, storeContactInfo } = this.props
+
+    Permissions.check('contacts').then(resp => {
+      if (resp === 'authorized') {
+        setNativeContactsPermission(true)
+        Contacts.getAll( (err, contacts) => {
+          if (err === 'denied') {
+            console.log('DENIED')
+          } else {
+            storeContactInfo(contacts)
+          }
+        })
       } else {
-        storeContactInfo(contacts)
+          Alert.alert(
+            'Contacts Permissions',
+            'friendthem needs permissions to access your contacts in order to invite your friends to use the app!',
+            [
+              {text: 'Cancel', onPress: () => this.closeModalPermissionCheck(), style: 'cancel'},
+              {text: 'App Permissions', onPress: this.openAppSettings}
+            ],
+            {
+              onDismiss: () => this.closeModalPermissionCheck()
+            }
+          )
       }
     })
   }
 
-  componentDidMount = () => {
-    const { fetchMyFriendsData, fetchConnectivityData, accessToken, storeContactInfo } = this.props
-
-    fetchMyFriendsData(accessToken)
+  closeModalPermissionCheck = () => {
+    if (!this.props.nativeContactsPermission) {
+      this.contactPermissionCheck()
+    }
   }
 
   completeTutorial = (stateKey, databaseKey) => {
@@ -196,14 +282,16 @@ const mapStateToProps = state => ({
   fetching: state.inviteUsersStore.fetchingData,
   contacts: state.inviteUsersStore.contactList,
   inviteTutorialComplete: state.userStore.editableData.invite_tutorial,
-  connectivityTutorialComplete: state.userStore.editableData.connection_tutorial
+  connectivityTutorialComplete: state.userStore.editableData.connection_tutorial,
+  nativeContactsPermission: state.permissionsStore.nativeContactsPermission
 })
 
 const mapDispatchToProps = dispatch => {
-
+  const { setNativeContactsPermission } = PermissionsStoreActions
   return {
     ...bindActionCreators({
       selectUser,
+      setNativeContactsPermission,
       fetchConnectivityData,
       storeContactInfo,
       fetchMyFriendsData,

@@ -68,7 +68,8 @@ export const RequestContactsPermission =
   async (
     storeContactInfo,
     customNotificationPermission,
-    nativeNotifications
+    nativeNotifications,
+    setNativeContactsPermission
   ) => {
   try {
     const granted = await PermissionsAndroid.request(
@@ -79,8 +80,10 @@ export const RequestContactsPermission =
       }
     )
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      setNativeContactsPermission(true)
       Contacts.getAll( (err, contacts) => {
         if (err === 'denied') {
+          handleSetNativeContactsPermission(false)
           console.log('DENIED')
         } else {
           console.log('SUCCESS')
@@ -95,7 +98,7 @@ export const RequestContactsPermission =
   }
 }
 
-export const RequestLocationPermission = async (setLocationInterval) => {
+export const RequestLocationPermission = async (setLocationInterval, setGeoPermission) => {
   try {
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -105,6 +108,7 @@ export const RequestLocationPermission = async (setLocationInterval) => {
       }
     )
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      setGeoPermission(true)
       Contacts.getAll( (err, contacts) => {
         if (err === 'denied') {
           console.log('DENIED')
@@ -114,6 +118,7 @@ export const RequestLocationPermission = async (setLocationInterval) => {
         }
       })
     } else {
+      setGeoPermission(false)
       console.log("Location permission denied")
     }
   } catch (err) {

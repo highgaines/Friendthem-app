@@ -41,9 +41,9 @@ class ForkScreen extends Component {
       customNotificationPermission,
       getUserInfo,
       storeContactInfo,
-      accessToken
+      accessToken,
+      setNativeContactsPermission
     } = this.props
-
     if (accessToken) {
       getUserInfo(accessToken);
     }
@@ -64,7 +64,8 @@ class ForkScreen extends Component {
       RequestContactsPermission(
           storeContactInfo,
           customNotificationPermission,
-          nativeNotifications
+          nativeNotifications,
+          setNativeContactsPermission
       )
     }
 
@@ -157,9 +158,11 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
+  const { setNativeContactsPermission } = PermissionsStoreActions
   return {
     ...bindActionCreators({
       getUserInfo,
+      setNativeContactsPermission,
       storeContactInfo,
       updateUserPosition
     }, dispatch)

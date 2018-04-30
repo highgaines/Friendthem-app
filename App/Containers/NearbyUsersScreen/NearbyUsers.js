@@ -53,6 +53,7 @@ class NearbyUsers extends Component {
       getUserInfo,
       customGeolocationPermission,
       locationPermission,
+      setGeoPermission,
       setLocationInterval,
       userInfo,
       userId
@@ -80,7 +81,7 @@ class NearbyUsers extends Component {
           }
         })
       } else if (isAndroid) {
-        RequestLocationPermission(setLocationInterval)
+        RequestLocationPermission(setLocationInterval, setGeoPermission)
       }
     }
     if (accessToken) {
@@ -100,14 +101,19 @@ class NearbyUsers extends Component {
   componentWillUpdate = (nextProps, nextState) => {
     const { accessToken, fetchConnectivityData, locationPermission, setGeoPermission, userId, getUserInfo } = this.props
     const { appState, isActiveLocation } = this.state
+    const locationPermissionsGranted = nextProps.locationPermission && !locationPermission
 
     if (!accessToken && nextProps.accessToken && !userId) {
       getUserInfo(nextProps.accessToken)
       fetchConnectivityData(nextProps.accessToken)
     }
-    if (!locationPermission || !isActiveLocation) {
+
+    if (!locationPermission || !isActiveLocation || locationPermissionsGranted) {
       Permissions.check('location').then(response => {
         if (response === 'authorized' || response === 'undetermined') {
+          if (response === 'authorized') {
+            setGeoPermission(true)
+          }
           this.locationInterval()
         }
       })
@@ -124,33 +130,35 @@ class NearbyUsers extends Component {
 
 
   locationInterval = () => {
-    const { accessToken, updateUserPosition, setGeoPermission } = this.props
+    const { accessToken, updateUserPosition, nativeGeolocation, setGeoPermission } = this.props
 
-    navigator.geolocation.getCurrentPosition((position) => {
-      setGeoPermission(true)
-      this.setState({ isActiveLocation: true }, () =>
-        updateUserPosition(accessToken, position.coords).then(resp =>
-          fetchConnectivityData(accessToken)
+    if (isIOS || nativeGeolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setGeoPermission(true)
+        this.setState({ isActiveLocation: true }, () =>
+          updateUserPosition(accessToken, position.coords).then(resp =>
+            fetchConnectivityData(accessToken)
+          )
         )
-      )
-    },
-      (error) => {
-        if (isIOS) {
-          if (error.code === 2 || error.code === 3) {
-            this.setState({ isActiveLocation: false })
-          } else if (error.code === 1) {
-            setGeoPermission(false)
-          }
-        } else if (isAndroid) {
-            if (error.code === 1) {
+      },
+        (error) => {
+          if (isIOS) {
+            if (error.code === 2 || error.code === 3) {
               this.setState({ isActiveLocation: false })
             } else if (error.code === 1) {
               setGeoPermission(false)
             }
-        }
-      },
-      { enableHighAccuracy: isIOS, timeout: 10000 }
-    )
+          } else if (isAndroid) {
+              if (error.code === 1) {
+                this.setState({ isActiveLocation: false })
+              } else if (error.code === 1) {
+                setGeoPermission(false)
+              }
+          }
+        },
+        { enableHighAccuracy: isIOS, timeout: 10000 }
+      )
+    }
   }
 
   handleChange = input => {
@@ -237,7 +245,8 @@ const mapStateToProps = state => ({
   users: state.friendStore.users.filter(user => !!user.picture),
   customGeolocationPermission: state.permissionsStore.locationPermissionsGranted,
   userSocialProfiles: state.userStore.userData.social_profiles,
-  fetching: state.inviteUsersStore.fetchingData
+  fetching: state.inviteUsersStore.fetchingData,
+  nativeGeolocation: state.permissionsStore.nativeGeolocation
 })
 
 const mapDispatchToProps = dispatch => {

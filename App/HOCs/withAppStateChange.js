@@ -7,6 +7,7 @@ const withAppStateChange = Component => class extends Component {
 
     this.state = {
       appState: AppState.currentState,
+      returningToApp: false
     }
   }
 
@@ -19,7 +20,13 @@ const withAppStateChange = Component => class extends Component {
   };
 
   _handleAppStateChange = nextAppState => {
-    this.setState({ appState: nextAppState });
+    const returningToApp = this.state.appState.match(/background/) &&
+                            nextAppState === 'active'
+
+    this.setState({
+      appState: nextAppState,
+      returningToApp
+     });
   };
 
   render() {
@@ -27,6 +34,7 @@ const withAppStateChange = Component => class extends Component {
       <Component
         {...this.props}
         appState={this.state.appState}
+        returningToApp={this.state.returningToApp}
       />
     )
   }
