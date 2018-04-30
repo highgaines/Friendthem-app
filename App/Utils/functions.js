@@ -145,7 +145,7 @@ export const testDeepLinkAbility = (platform, deepLink, userIdentifier) => {
     } else {
         switch (platform) {
           case 'facebook':
-            return Linking.openURL(`https://${platform}.com/${userIdentifier}`)
+            return Linking.openURL(`https://m.${platform}.com/${userIdentifier}`)
           case 'twitter':
             return Linking.openURL(`https://${platform}.com/${userIdentifier}`)
           case 'instagram':

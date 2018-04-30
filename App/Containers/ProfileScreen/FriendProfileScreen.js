@@ -358,8 +358,8 @@ class FriendProfileScreen extends Component {
       )
     }
 
-    // temporary fix for removing facebook from super connect flow
-    const superConnectPlatforms = this.getSCEligiblePlatforms().filter( socialObj => socialObj.provider !== 'facebook')
+    // commented out while FB deeplink is functioning again
+    // const superConnectPlatforms = this.getSCEligiblePlatforms().filter( socialObj => socialObj.provider !== 'facebook')
 
     return (
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -480,7 +480,7 @@ class FriendProfileScreen extends Component {
                 superConnect={(platforms, copy, connectType) => this.superConnectCallback(platforms, copy, connectType)}
                 selected={this.state.selectedSocialMedia}
                 userData={userInfo}
-                platforms={superConnectPlatforms}
+                platforms={this.getSCEligiblePlatforms()}
                 userId={userId}
                 iphoneXStyle={ifIphoneX({'top': 300}, '')}
               />

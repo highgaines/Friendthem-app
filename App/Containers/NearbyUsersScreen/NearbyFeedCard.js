@@ -133,19 +133,19 @@ class NearbyFeedCard extends Component {
             onPressCallback={() => testDeepLinkAbility('instagram', instaDeepLink, igUserName)}
           />
         )
-      // case 'facebook':
-      //   const fbUid = this.pullUid('facebook')
-      //   const fbDeepLink = `fb://profile/${fbUid}`
-      //
-      //   return(
-      //     <ConnectButton
-      //       title="Go to Facebook"
-      //       color={SYNCED_CARD_COLORS.facebook}
-      //       containerStyle={[styles.deepLinkButton, styles.facebookDeeplinkButton]}
-      //       textStyle={styles.deepLinkText}
-      //       onPressCallback={() => testDeepLinkAbility('facebook', fbDeepLink, fbUid)}
-      //     />
-      //   )
+      case 'facebook':
+        const fbUid = this.pullUid('facebook')
+        const fbDeepLink = `fb://profile/${fbUid}`
+
+        return(
+          <ConnectButton
+            title="Go to Facebook"
+            color={SYNCED_CARD_COLORS.facebook}
+            containerStyle={[styles.deepLinkButton, styles.facebookDeeplinkButton]}
+            textStyle={styles.deepLinkText}
+            onPressCallback={() => testDeepLinkAbility('facebook', fbDeepLink, fbUid)}
+          />
+        )
       case 'twitter':
         const twitterUsername = this.pullUsername('twitter')
         const twitterDeepLink = `twitter://user?screen_name=${twitterUsername}`
@@ -233,14 +233,15 @@ class NearbyFeedCard extends Component {
     )
   }
 
-  renderFeedMessage = platform => {
-    if (platform === 'facebook') {
-      return "Due to tightened restrictions from Facebook, this feature is currently unavailable."
-    } else {
-      return (
-        <Text>{`View content on ${capitalizeWord(platform)}`}</Text>)
-    }
-  }
+  // code commented out since FB deeplink functionality has been restored
+  // renderFeedMessage = platform => {
+  //   if (platform === 'facebook') {
+  //     return "Due to tightened restrictions from Facebook, this feature is currently unavailable."
+  //   } else {
+  //     return (
+  //       <Text>{`View content on ${capitalizeWord(platform)}`}</Text>)
+  //   }
+  // }
 
   renderContent = () => {
     const { feed, friendData } = this.props
@@ -259,7 +260,7 @@ class NearbyFeedCard extends Component {
       return (<View style={{ marginTop: 20, justifyContent: 'center', alignItems: 'center', padding: 10, width: 300}}>
         <Text
           style={{ fontSize: 16, fontWeight: '500'}}>
-          {this.renderFeedMessage(platform)}
+          {`View content on ${capitalizeWord(platform)}`}
         </Text>
         <View style={styles.deepLinkButtonContainer}>
           {this.renderDeeplinkButton(platform)}
@@ -302,13 +303,13 @@ class NearbyFeedCard extends Component {
                 </TouchableOpacity>
               </LazyloadView>
               <LazyloadView style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'flex-start', padding: 5 }}>
-                <Text style={styles.name}> {`${friendData.first_name} ${friendData.last_name}`} </Text>
+                <Text style={styles.name}>{`${friendData.first_name} ${friendData.last_name}`} </Text>
                 {
                     friendData && friendData.hobbies && friendData.hobbies.length
-                    ? <Text style={styles.hobbies}>{ friendData.hobbies } </Text>
+                    ? <Text style={styles.hobbies}>{ friendData.hobbies }</Text>
                     : null
                 }
-                <Text style={styles.location}> New York, NY </Text>
+                <Text style={styles.location}>New York, NY</Text>
               </LazyloadView>
               <LazyloadView style={[styles.deepLinkButtonContainer, { marginRight: 10}]}>
                 {this.renderDeeplinkButton()}
