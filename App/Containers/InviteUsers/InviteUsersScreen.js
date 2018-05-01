@@ -42,6 +42,7 @@ import { LazyloadScrollView, LazyloadView, LazyloadImage } from 'react-native-la
 import { RequestContactsPermission } from '../../Utils/functions'
 import { Images } from '../../Themes'
 import { isIOS, isAndroid } from '../../Utils/constants'
+import envConfig from '../../../envConfig'
 
 class InviteUsersScreen extends Component {
   constructor(props) {
@@ -364,7 +365,7 @@ class InviteUsersScreen extends Component {
                   Have a friend scan this QR code to invite them to use the app!
                 </Text>
                 <QRCode
-                  value={`https://prod-friendthem-api.herokuapp.com/invites/check/${this.props.userId}`}
+                  value={`${envConfig.Development.appServerRootURL}/invites/check/${this.props.userId}/`}
                   size={200}
                   foregroundColor='black'
                   backgroundColor='white'/>
