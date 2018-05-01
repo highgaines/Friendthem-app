@@ -401,8 +401,8 @@ class FriendProfileScreen extends Component {
                 <View style={[styles.scoreContainer, { top: 0 }]}>
                 { fetchingScore || currentFriendScore === null ?
                   <ActivityIndicator size='small' /> :
-                  [<Image source={Images.friendthemPointsLogo} style={{height: 40, width: 40}}/>,
-                  <Text style={styles.scoreText}>
+                  [<Image key={0} source={Images.friendthemPointsLogo} style={{height: 40, width: 40}}/>,
+                  <Text key={1} style={styles.scoreText}>
                     {currentFriendScore.toLocaleString()}
                   </Text>]
                 }

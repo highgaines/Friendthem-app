@@ -141,7 +141,7 @@ class LaunchScreen extends Component {
   }
 
   getFbProfile = accessToken => {
-    const { fbUserInfo, navigation, loginByFacebook, nativeGeolocation, nativeNotifications, routeName } = this.props
+    const { fbUserInfo, navigation, loginByFacebook, nativeGeolocation, nativeNotifications, routeName, loggedIn } = this.props
     const { permissionTypes } = this.state
     const isLaunchScreen = routeName === 'LaunchScreen'
 
@@ -151,18 +151,20 @@ class LaunchScreen extends Component {
         return error
       } else {
         fbUserInfo(result)
-        if (!nativeGeolocation && isLaunchScreen) {
-            navigation.navigate('PermissionScreen', {
-                permissionType: 'geolocation',
+        if (loggedIn) {
+          if (!nativeGeolocation && isLaunchScreen) {
+              navigation.navigate('PermissionScreen', {
+                  permissionType: 'geolocation',
+                  navigation: navigation
+                })
+          } else if (!nativeNotifications && isLaunchScreen && isIOS) {
+              navigation.navigate('PermissionScreen', {
+                permissionType: 'notifications',
                 navigation: navigation
               })
-        } else if (!nativeNotifications && isLaunchScreen && isIOS) {
-            navigation.navigate('PermissionScreen', {
-              permissionType: 'notifications',
-              navigation: navigation
-            })
-        } else if (isLaunchScreen) {
-            navigation.navigate('NearbyUsersScreen')
+          } else if (isLaunchScreen) {
+              navigation.navigate('NearbyUsersScreen')
+          }
         }
       }
     }

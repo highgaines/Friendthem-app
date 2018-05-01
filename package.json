@@ -77,6 +77,7 @@
     "react-native-picker": "^4.3.5",
     "react-native-pie": "^0.4.0",
     "react-native-progress": "^3.4.0",
+    "react-native-qrcode": "^0.2.6",
     "react-native-remote-svg": "^1.0.1",
     "react-native-router-flux": "^4.0.0-beta.28",
     "react-native-sensitive-info": "^5.2.0",
