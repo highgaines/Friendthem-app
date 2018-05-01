@@ -67,14 +67,14 @@ export default function NoPeopleNearby({ isActiveLocation, locationPermission, n
         <LazyloadView style={styles.buttonGroup}>
           <TouchableOpacity style={styles.optionButton}>
             <Text style={styles.buttonText}>
-              NO, THANKS :(
+              NO, THANKS
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={buttonAction}
             style={styles.optionButton}>
             <Text style={styles.buttonText}>
-              YES, LET'S GO :)
+              YES, LET'S GO
             </Text>
           </TouchableOpacity>
         </LazyloadView>

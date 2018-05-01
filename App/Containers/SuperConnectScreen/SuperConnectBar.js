@@ -33,7 +33,8 @@ export default class SuperConnectBar extends Component {
 
     const friendThemCopy = 'Are you sure you would like to connect on the selected platforms with'
 
-    const selectedWithoutFB = selected.filter( platform => platform !== 'facebook')
+    // commented out while FB deeplink is functional
+    // const selectedWithoutFB = selected.filter( platform => platform !== 'facebook')
 
     return (
       <View style={[styles.buttonContainer, iphoneXStyle]}>
@@ -43,7 +44,7 @@ export default class SuperConnectBar extends Component {
           color='#ffffff'
           title='FRIENDTHEM'
           onPressCallback={() =>
-            this.navigateToSuperConnect(this.mapPlatforms(selectedWithoutFB), friendThemCopy, 'friendthem')}
+            this.navigateToSuperConnect(this.mapPlatforms(selected), friendThemCopy, 'friendthem')}
           containerStyle={styles.friendThemButton}
           textStyle={styles.buttonTextStyle}/>
 

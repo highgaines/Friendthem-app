@@ -154,8 +154,8 @@ class SocialMediaCardContainer extends Component {
                   toggleBanner={() => toggleBanner(friendData.first_name, capitalizeName(socialPlatform), 3000)}
                   synced={isSynced}
                   connectedWithVisitor={isSynced && fromFriendProfile ? this.checkConnection(socialPlatform) : null}
-                  readOnly={isSynced && fromUserProfile || isFacebook}
-                  unavailable={!fromUserProfile && isFacebook}
+                  readOnly={isSynced && fromUserProfile}
+                  // unavailable={!fromUserProfile && isFacebook}
                   socialAuth={isClickable ? () => onPressCallback({provider: isYoutube ? 'google-oauth2' : socialPlatform}) :
                     ((!isSynced && fromFriendProfile) && (!fromUserProfile && socialPlatform === 'snapchat')) ?
                     () => null : this.determineSocialAuth(socialPlatform)
@@ -163,7 +163,7 @@ class SocialMediaCardContainer extends Component {
                   platformAuth={isYoutube ? 'google-oauth2' : socialPlatform}
                   userName={userName}
                   syncedBGColor={syncedCardColors[socialPlatform]}
-                  selected={isSelected && !isFacebook}
+                  selected={isSelected}
                 />
               )
             } else {
