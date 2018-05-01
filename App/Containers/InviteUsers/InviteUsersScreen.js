@@ -14,21 +14,25 @@ import InviteUsersStoreActions, {
 import UserStoreActions, { updateTutorialStatus } from '../../Redux/UserStore'
 
 // Libraries
+import _ from 'lodash'
 import AndroidOpenSettings from 'react-native-android-open-settings'
+import Contacts from 'react-native-contacts'
+import { Icon } from 'react-native-elements'
+import LinearGradient from 'react-native-linear-gradient'
+import Modal from 'react-native-modal'
 import Permissions from 'react-native-permissions'
 import Reactotron from 'reactotron-react-native'
-import LinearGradient from 'react-native-linear-gradient'
-import Contacts from 'react-native-contacts'
-import _ from 'lodash'
+import QRCode from 'react-native-qrcode'
 
 // Components
-import InviteUsersHeader from './InviteUsersHeader'
-import SearchContainer from './SearchContainer'
-import InviteUsersModal from './InviteUsersModal'
-import UsersContainer from '../NearbyUsersScreen/UsersContainer'
+import ConnectButton from '../SuperConnectScreen/ConnectButton'
 import ConnectivityCard from './ConnectivityCard'
+import InviteUsersHeader from './InviteUsersHeader'
+import InviteUsersModal from './InviteUsersModal'
 import Navbar from '../Navbar/Navbar'
+import SearchContainer from './SearchContainer'
 import SuperConnectTutorial from '../TutorialScreens/SuperConnectTutorial'
+import UsersContainer from '../NearbyUsersScreen/UsersContainer'
 import withAppStateChange from '../../HOCs/withAppStateChange.js'
 
 // Styles
@@ -48,6 +52,7 @@ class InviteUsersScreen extends Component {
       showInviteTutorial: !props.inviteTutorialComplete,
       showConnectivityTutorial: !props.connectivityTutorialComplete,
       showModal: false,
+      showQRCode: false,
       receivedConnects: [],
       sentConnects:  [],
       fullConnects: [],
@@ -265,13 +270,19 @@ class InviteUsersScreen extends Component {
               start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
               locations={[0.1, 0.3, 0.5, 0.7, 1.0]}
               style={styles.headerGradient}>
-              <LazyloadView>
+              <LazyloadView style={{flexDirection: 'row'}}>
                 <Text style={styles.friendCount}>
                   {myFriends && contacts && networkTabSelected ?
                     `${myFriends.length} friend${pluralizeFriends}`
                     :
                     `${contacts.length} friend${pluralizeContacts}` }
                 </Text>
+                <Icon
+                  name='qrcode'
+                  color='#fff'
+                  type='font-awesome'
+                  onPress={() => this.setState({showQRCode: true})}
+                  containerStyle={styles.qrCodeContainer} />
               </LazyloadView>
               <LazyloadView style={styles.tabSelectionContainer}>
                 <TouchableOpacity
@@ -342,6 +353,32 @@ class InviteUsersScreen extends Component {
                 </LazyloadView>
               </LazyloadScrollView>
             }
+            <Modal
+              animationIn='slideInUp'
+              animationOut='slideOutDown'
+              underlayColor={'rgba(52, 52, 52, 0.8)'}
+              onBackdropPress={() => this.setState({showQRCode: false})}
+              isVisible={this.state.showQRCode}>
+              <View style={styles.qrContainerModal}>
+                <Text style={styles.qrModalText}>
+                  Have a friend scan this QR code to invite them to use the app!
+                </Text>
+                <QRCode
+                  value={`https://prod-friendthem-api.herokuapp.com/invites/check/${this.props.userId}`}
+                  size={200}
+                  foregroundColor='black'
+                  backgroundColor='white'/>
+                  <ConnectButton
+                    name='arrow-back'
+                    type='materialicons'
+                    color='#ffffff'
+                    title='Close'
+                    onPressCallback={() => this.setState({showQRCode: false})}
+                    containerStyle={styles.qrModalButton}
+                    linearGradient={true}
+                    textStyle={styles.qrButtonText}/>
+              </View>
+            </Modal>
           </LazyloadView>
         :
         <SuperConnectTutorial
@@ -365,7 +402,8 @@ const mapStateToProps = state => ({
   contacts: state.inviteUsersStore.contactList,
   inviteTutorialComplete: state.userStore.editableData.invite_tutorial,
   connectivityTutorialComplete: state.userStore.editableData.connection_tutorial,
-  nativeContactsPermission: state.permissionsStore.nativeContactsPermission
+  nativeContactsPermission: state.permissionsStore.nativeContactsPermission,
+  userId: state.userStore.userId
 })
 
 const mapDispatchToProps = dispatch => {

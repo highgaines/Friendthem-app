@@ -416,8 +416,8 @@ class UserProfileScreen extends Component {
                   <View style={styles.scoreContainer}>
                   { fetchingScore ?
                     <ActivityIndicator size='small' /> :
-                    [<Image source={Images.friendthemPointsLogo} style={{height: 40, width: 40}}/>,
-                    <Text style={styles.scoreText}>{userScore.toLocaleString()}</Text>]
+                    [<Image key={0} source={Images.friendthemPointsLogo} style={{height: 40, width: 40}}/>,
+                    <Text key={1} style={styles.scoreText}>{userScore.toLocaleString()}</Text>]
                   }
                   </View>
                   <View style={styles.profHeaderTop}>
