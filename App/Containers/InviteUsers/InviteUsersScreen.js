@@ -280,7 +280,8 @@ class InviteUsersScreen extends Component {
                 </Text>
                 <Icon
                   name='qrcode'
-                  color='#fff'
+                  color='#FFF'
+                  underlayColor={'transparent'}
                   type='font-awesome'
                   onPress={() => this.setState({showQRCode: true})}
                   containerStyle={styles.qrCodeContainer} />
