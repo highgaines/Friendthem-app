@@ -395,6 +395,7 @@ class FriendProfileScreen extends Component {
                     type='materialicons'
                     size={36}
                     color='#FFF'
+                    underlayColor={'transparent'}
                     onPress={() => navigation.dispatch(backAction) }
                   />
                 </View>
