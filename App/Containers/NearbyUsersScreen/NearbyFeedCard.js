@@ -48,6 +48,14 @@ class NearbyFeedCard extends Component {
     }
   }
 
+  componentWillMount = () => {
+    const { social_profiles, pictures } = this.props.friendData
+
+    if (!pictures.length) {
+      this.setState({platform: `${social_profiles[0].provider}`})
+    }
+  }
+
   componentDidUpdate = (prevProps, prevState) => {
     const { fetchFeed, friendData, accessToken, getMyPics } = this.props
     if (prevState.platform !== this.state.platform && this.state.platform !== 'camera') {
@@ -257,15 +265,17 @@ class NearbyFeedCard extends Component {
     } else if (filteredFeed && filteredFeed.length) {
       return filteredFeed.map( (feedObj, idx) => <FeedCard key={idx} item={feedObj}/> )
     } else if (filteredFeed) {
-      return (<View style={{ marginTop: 20, justifyContent: 'center', alignItems: 'center', padding: 10, width: 300}}>
-        <Text
-          style={{ fontSize: 16, fontWeight: '500'}}>
-          {`View content on ${capitalizeWord(platform)}`}
-        </Text>
-        <View style={styles.deepLinkButtonContainer}>
-          {this.renderDeeplinkButton(platform)}
+      return (
+        <View style={{ marginTop: 20, justifyContent: 'center', alignItems: 'center', padding: 10, width: 300}}>
+          <Text
+            style={{ fontSize: 16, fontWeight: '500'}}>
+            {`View content on ${capitalizeWord(platform)}`}
+          </Text>
+          <View style={styles.deepLinkButtonContainer}>
+            {this.renderDeeplinkButton(platform)}
+          </View>
         </View>
-      </View>)
+      )
     }
   }
 

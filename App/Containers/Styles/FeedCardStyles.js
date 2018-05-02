@@ -70,7 +70,8 @@ export default StyleSheet.create({
   deepLinkButtonContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1
+    flex: 1,
+    marginVertical: 15
   },
   deepLinkButton: {
     width: 100,
