@@ -85,7 +85,12 @@ class InviteUsersScreen extends Component {
   }
 
   componentDidMount = () => {
-    const { accessToken, storeContactInfo, nativeContactsPermission } = this.props
+    const {
+      accessToken,
+      fetchMyFriendsData,
+      nativeContactsPermission,
+      storeContactInfo,
+    } = this.props
 
     if (nativeContactsPermission) {
       Contacts.getAll( (err, contacts) => {
@@ -103,7 +108,12 @@ class InviteUsersScreen extends Component {
   }
 
   componentWillUpdate = (nextProps, nextState) => {
-    const { accessToken, nativeContactsPermission, setNativeContactsPermission, fetchMyFriendsData } = this.props
+    const {
+      accessToken,
+      fetchMyFriendsData,
+      nativeContactsPermission,
+      setNativeContactsPermission,
+     } = this.props
 
     if (this.state.returningToApp && !nativeContactsPermission) {
       this.contactPermissionCheck()
@@ -329,27 +339,29 @@ class InviteUsersScreen extends Component {
                 <LazyloadView style={styles.userContainer}>
                   {this.renderConnectivityCards(receivedConnects)}
                 </LazyloadView>
-                <Animatable.Text
-                  style={{
-                      padding: 10,
-                      fontFamily: 'montserrat',
-                      fontWeight: "600",
-                      opacity: .5
-                    }}>
-                  {`${sentConnects.length} sent`}
-                </Animatable.Text>
+                  <Animatable.Text
+                    animation="slideInUp"
+                    style={{
+                        padding: 10,
+                        fontFamily: 'montserrat',
+                        fontWeight: "600",
+                        opacity: .5
+                      }}>
+                    {`${sentConnects.length} sent`}
+                  </Animatable.Text>
                 <LazyloadView style={styles.userContainer}>
                   {this.renderConnectivityCards(sentConnects)}
                 </LazyloadView>
-                <Animatable.Text
-                  style={{
-                      padding: 10,
-                      fontFamily: 'montserrat',
-                      fontWeight: "600",
-                      opacity: .5
-                    }}>
-                  {`${fullConnects.length} fully connected friends`}
-                </Animatable.Text>
+                  <Animatable.Text
+                    animation="slideInUp"
+                    style={{
+                        padding: 10,
+                        fontFamily: 'montserrat',
+                        fontWeight: "600",
+                        opacity: .5
+                      }}>
+                    {`${fullConnects.length} fully connected friends`}
+                  </Animatable.Text>
                 <LazyloadView style={styles.userContainer}>
                   {this.renderConnectivityCards(fullConnects)}
                 </LazyloadView>
