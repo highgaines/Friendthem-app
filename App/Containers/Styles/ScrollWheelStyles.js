@@ -9,7 +9,8 @@ export default StyleSheet.create({
   },
   container: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingHorizontal: 15,
   },
   platforms: {
     flexDirection: 'row',

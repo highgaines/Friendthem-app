@@ -79,10 +79,6 @@ class NearbyFeedCard extends Component {
     )
   }
 
-  handleGoToProfile = () => {
-    this.setState({ platform: 'profile'})
-  }
-
   handlePlatformChange = platform => {
     this.setState({ platform: platform, loadInThisCard: true })
     setTimeout(() => this.setState({ loadInThisCard: false }), 2000)
@@ -330,7 +326,7 @@ class NearbyFeedCard extends Component {
         <LazyloadView style={styles.scrollWheel}>
           <ScrollWheel
             handlePlatformChange={this.handlePlatformChange}
-            handleBackToProfile={this.handleGoToProfile}
+            handleBackToProfile={this.props.setFriendInfo}
             selected={platform}
             profilePic={friendData.image}
             socialPlatforms={socialPlatforms}
