@@ -226,7 +226,7 @@ class NearbyFeedCard extends Component {
         </Text>
         <View style={{ padding: 20 }}>
           <Icon
-            name="emoji-sad"
+            name="camera"
             type="entypo"
             size={100}
           />
