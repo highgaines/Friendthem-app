@@ -25,7 +25,7 @@ export default SMPlatformCircle = ({size, extraStyles, platform, light, button})
         case 'youtube':
           return Images.youtubeIcon
         default:
-          return Images.friendster
+          return Images.socialWheelLogo
       }
   }
 
@@ -33,7 +33,7 @@ export default SMPlatformCircle = ({size, extraStyles, platform, light, button})
     if (platform === "camera") {
       return { borderWidth: 2, borderColor: 'white', borderRadius: size/2, marginVertical: 10 }
     } else if (platform === "profile") {
-      return { marginVertical: 2 }
+      return { marginVertical: 10 }
     } else if (platform === 'snapchat' || platform === 'youtube') {
       return { margin: 7.5 }
     }

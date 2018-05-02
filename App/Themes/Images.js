@@ -2,7 +2,6 @@
 const images = {
   logo: require('../Images/ir.png'),
   mainLogo: require('../Images/logo.png'),
-  launch: require('../Images/launch-icon.png'),
   tileBg: require('../Images/tile_bg.png'),
   background: require('../Images/BG.png'),
   buttonBackground: require('../Images/button-bg.png'),
@@ -76,6 +75,7 @@ const images = {
   emblemColor: require('../Images/Icons/emblem-color.png'),
   emblemGreen: require('../Images/Icons/emblem-green.png'),
   friendThemLogoNoText: require('../Images/logowithouttext3.png'),
+  socialWheelLogo: require('../Images/Icons/social-wheel-friendthem-logo.png'),
 
   //Background Images
   scTutorialOne: require('../Images/AddFriendTutorialOne.png'),

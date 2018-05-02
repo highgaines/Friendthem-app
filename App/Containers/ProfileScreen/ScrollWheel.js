@@ -31,12 +31,12 @@ class ScrollWheel extends Component {
           >
             <View style={styles.platforms}>
               <TouchableOpacity onPress={() => handleBackToProfile()}>
-              <SMPlatformCircle platform="profile" size={65}/>
-              <Text style={selected === 'profile' ? [styles.text, { color: 'white'}] : styles.text}> Platforms </Text>
+                <SMPlatformCircle platform="profile" size={50}/>
+                <Text style={selected === 'profile' ? [styles.text, { color: 'white'}] : styles.text}> Profile </Text>
               </TouchableOpacity>
               <TouchableOpacity style={{ alignItems: 'center', marginHorizontal: 5 }} onPress={() => handlePlatformChange('camera')}>
-              <SMPlatformCircle platform="camera" size={50}/>
-              <Text style={selected === 'camera' ? [styles.text, { color: 'white'}] : styles.text}> My Pictures </Text>
+                <SMPlatformCircle platform="camera" size={50}/>
+                <Text style={selected === 'camera' ? [styles.text, { color: 'white'}] : styles.text}> My Pictures </Text>
               </TouchableOpacity>
               {
                 socialPlatforms && socialPlatforms.includes('facebook')

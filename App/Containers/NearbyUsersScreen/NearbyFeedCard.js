@@ -80,7 +80,7 @@ class NearbyFeedCard extends Component {
   }
 
   handleGoToProfile = () => {
-    this.setState({ platform: 'profile'})
+    this.props.setFriendInfo()
   }
 
   handlePlatformChange = platform => {
