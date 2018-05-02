@@ -332,11 +332,11 @@ class NearbyFeedCard extends Component {
             socialPlatforms={socialPlatforms}
           />
       </LazyloadView>
-        <LazyloadView style={{ flex: 1, backgroundColor: 'white', alignItems: 'center'}}>
+        <LazyloadView style={[{ flex: 1, backgroundColor: 'white'}, platform !== 'camera' && {alignItems: 'center'}]}>
           <LazyloadScrollView
             horizontal={platform === 'profile' || platform === 'camera' ? false : true}
             showsHorizontalScrollIndicator
-            contentContainerStyle={[styles.contentContainer, platform === 'profile' ? { 'flex': 1, 'flexWrap': 'wrap', 'justifyContent': 'center' } : '']}
+            contentContainerStyle={styles.contentContainer}
           >
             {fetching && this.state.loadInThisCard
               ? <LazyloadView style={styles.loading}>

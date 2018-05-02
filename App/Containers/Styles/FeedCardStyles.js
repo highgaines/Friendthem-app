@@ -45,21 +45,21 @@ export default StyleSheet.create({
   },
   contentContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    padding: 10,
+    padding: 5
   },
   socialAccountContainer: {
     flexWrap: 'wrap',
     alignItems: 'flex-start',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     flexDirection: 'row',
     flexGrow: 1,
     flexShrink: 1,
   },
   myPicsCard: {
     height: 120,
-    width: Metrics.screenWidth * .2,
+    width: Metrics.screenWidth * .3,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -67,8 +67,7 @@ export default StyleSheet.create({
     shadowRadius: 5,
     shadowColor: 'black',
     shadowOffset: { height: 0, width: 0 },
-    marginHorizontal: 15,
-    marginBottom: 10,
+    margin: 2
   },
   deepLinkButtonContainer: {
     justifyContent: 'center',
