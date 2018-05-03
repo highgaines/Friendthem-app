@@ -408,6 +408,7 @@ class UserProfileScreen extends Component {
                     <Icon
                       name='arrow-back'
                       type='materialicons'
+                      underlayColor={'transparent'}
                       size={36}
                       color='#FFF'
                       onPress={() => navigation.dispatch(backAction) }
