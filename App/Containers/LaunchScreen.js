@@ -16,7 +16,6 @@ import Permissions from 'react-native-permissions'
 import Contacts from 'react-native-contacts'
 import * as Animatable from 'react-native-animatable'
 import { CachedImage } from "react-native-img-cache"
-import DeviceUUID from 'react-native-device-uuid'
 
 // Components
 import ConnectButton from './SuperConnectScreen/ConnectButton'
@@ -84,11 +83,6 @@ class LaunchScreen extends Component {
     const { permissionTypes } = this.state
     const routeLength = nav.routes.length
     const topLevelRoute = nav.routes[routeLength - 1].routeName
-
-
-    DeviceUUID.getUUID().then((uuid) => {
-      alert(uuid);
-    });
 
     if (!fbAuthToken && nextProps.fbAuthToken && this.state.loading) {
       this.getFbProfile(nextProps.fbAuthToken)

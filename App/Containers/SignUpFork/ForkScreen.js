@@ -135,7 +135,6 @@ class ForkScreen extends Component {
     const { accessToken, registerForPushNotif } = this.props
     debugger
     if (accessToken) {
-      console.log(device)
       registerForPushNotif(accessToken, device.userId)
     }
   }
