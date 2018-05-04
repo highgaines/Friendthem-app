@@ -71,11 +71,6 @@ class InviteUsersScreen extends Component {
     this.setState({ showModal: !this.state.showModal })
   }
 
-  shouldComponentUpdate = () => {
-    console.log(this.state.appState.match(/active/))
-    return this.state.appState.match(/active/)
-  }
-
   componentWillMount = () => {
     const { fetchMyFriendsData, fetchConnectivityData, accessToken, storeContactInfo, setNativeContactsPermission } = this.props
 

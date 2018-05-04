@@ -47,7 +47,7 @@ class ForkScreen extends Component {
     } = this.props
     if (accessToken) {
       getUserInfo(accessToken);
-
+      console.log('hit')
       OneSignal.addEventListener('received', this.onReceived)
       OneSignal.addEventListener('opened', this.onOpened)
       OneSignal.addEventListener('registered', this.onRegistered)
@@ -133,8 +133,9 @@ class ForkScreen extends Component {
 
   onIds = device => {
     const { accessToken, registerForPushNotif } = this.props
-
+    debugger
     if (accessToken) {
+      console.log(device)
       registerForPushNotif(accessToken, device.userId)
     }
   }
