@@ -104,6 +104,28 @@ class ForkScreen extends Component {
     navigation.navigate('UserProfileScreen', { navigation: navigation })
   }
 
+  onReceived = (notification) => {
+    console.log("Notification Received!", notification)
+  }
+
+  onOpened = openResult => {
+    console.log('Message:', openResult.notification.payload.body)
+    console.log('Data:', openResult.notification.payload.additionalData)
+    console.log('isActive:', openResult.notification.isAppInFocus)
+    console.log('openResult:', openResult)
+  }
+
+  onRegistered = notifData => {
+    console.log("Device had been registered for push notifications!", notifData)
+  }
+
+  onIds = device => {
+    const { accessToken, registerForPushNotif } = this.props
+    if (accessToken) {
+      registerForPushNotif(accessToken, device.userId)
+    }
+  }
+
   render() {
     const { navigate, userInfo } = this.props
 
