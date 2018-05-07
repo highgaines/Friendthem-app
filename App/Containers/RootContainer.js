@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { View, StatusBar, AppState, Platform, Text } from 'react-native'
+import { View, StatusBar, AppState, Platform, Text, ActivityIndicator } from 'react-native'
 
 import Permissions from 'react-native-permissions'
 import Modal from 'react-native-modal'
@@ -73,19 +73,25 @@ class RootContainer extends Component {
   render () {
     return (
       <View style={styles.applicationView}>
-        <StatusBar barStyle='light-content' />
-        <Modal isVisible={!this.props.isConnected} children={this.renderModal()} style={styles.offlineModal} />
-        <ReduxNavigation />
+        {
+          this.props.rehydrating ?
+            <ActivityIndicator size="large" color="#0000ff" />
+            :
+            [<StatusBar barStyle='light-content' />,
+            <Modal isVisible={!this.props.isConnected} children={this.renderModal()} style={styles.offlineModal} />,
+            <ReduxNavigation />]
+        }
       </View>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  refreshToken: state.authStore.refreshToken,
   accessToken: state.authStore.accessToken,
   authExpiration: state.authStore.authExpiration,
-  isConnected: state.network.isConnected,
+  refreshToken: state.authStore.refreshToken,
+  rehydrating: state.authStore.rehydrating,
+  isConnected: state.network.isConnected
 });
 
 // wraps dispatch to create nicer functions to call within our component
