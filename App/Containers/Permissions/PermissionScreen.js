@@ -36,47 +36,6 @@ class PermissionScreen extends Component {
     }
   }
 
-  componentDidUpdate = prevProps => {
-    const { accessToken } = this.props
-
-    if (accessToken && !prevProps.accessToken) {
-      OneSignal.addEventListener('received', this.onReceived)
-      OneSignal.addEventListener('opened', this.onOpened)
-      OneSignal.addEventListener('registered', this.onRegistered)
-      OneSignal.addEventListener('ids', this.onIds)
-    }
-  }
-
-  componentWillUnmount = () => {
-    OneSignal.removeEventListener('received', this.onReceived)
-    OneSignal.removeEventListener('opened', this.onOpened)
-    OneSignal.removeEventListener('registered', this.onRegistered)
-    OneSignal.removeEventListener('ids', this.onIds)
-  }
-
-  onReceived = (notification) => {
-    console.log("Notification Received!", notification)
-  }
-
-  onOpened = openResult => {
-    console.log('Message:', openResult.notification.payload.body)
-    console.log('Data:', openResult.notification.payload.additionalData)
-    console.log('isActive:', openResult.notification.isAppInFocus)
-    console.log('openResult:', openResult)
-  }
-
-  onRegistered = notifData => {
-    console.log("Device had been registered for push notifications!", notifData)
-  }
-
-  onIds = device => {
-    const { accessToken, registerForPushNotif } = this.props
-    console.log('Device Info:', device)
-    if (accessToken) {
-      registerForPushNotif(accessToken, device.userId)
-    }
-  }
-
   handleNotNow = () => {
     // redux action to continue WITHOUT gelocation
     this.props.navigation.navigate('LaunchScreen')

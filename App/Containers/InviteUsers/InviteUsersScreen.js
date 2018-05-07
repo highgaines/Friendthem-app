@@ -49,6 +49,8 @@ class InviteUsersScreen extends Component {
     super(props)
 
     this.state = {
+      alertOpen: false,
+      modalDismissed: false,
       networkTabSelected: false,
       showInviteTutorial: !props.inviteTutorialComplete,
       showConnectivityTutorial: !props.connectivityTutorialComplete,
@@ -164,7 +166,8 @@ class InviteUsersScreen extends Component {
             storeContactInfo(contacts)
           }
         })
-      } else {
+      } else if (!this.state.alertOpen && !this.state.modalDismissed) {
+          this.setState({ alertOpen: true })
           Alert.alert(
             'Contacts Permissions',
             'friendthem needs permissions to access your contacts in order to invite your friends to use the app!',
@@ -184,6 +187,10 @@ class InviteUsersScreen extends Component {
     if (!this.props.nativeContactsPermission) {
       this.contactPermissionCheck()
     }
+    this.setState({
+      alertOpen: false,
+      modalDismissed: true
+    })
   }
 
   categorizeFriendConnections = () => {

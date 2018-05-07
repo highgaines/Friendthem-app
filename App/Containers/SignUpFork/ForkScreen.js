@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux'
 import PermissionsStoreActions from '../../Redux/PermissionsStore'
 import UserStoreActions, { updateUserPosition, getUserInfo } from '../../Redux/UserStore'
 import { storeContactInfo } from '../../Redux/InviteUsersStore'
+import NotificationStoreActions, { registerForPushNotif } from '../../Redux/NotificationStore'
 
 // Components
 import ConnectButton from '../SuperConnectScreen/ConnectButton'
@@ -46,6 +47,11 @@ class ForkScreen extends Component {
     } = this.props
     if (accessToken) {
       getUserInfo(accessToken);
+      console.log('hit')
+      OneSignal.addEventListener('received', this.onReceived)
+      OneSignal.addEventListener('opened', this.onOpened)
+      OneSignal.addEventListener('registered', this.onRegistered)
+      OneSignal.addEventListener('ids', this.onIds)
     }
 
     if (Platform.OS === 'ios') {
@@ -76,7 +82,7 @@ class ForkScreen extends Component {
 
     if (!locationIntervalRunning && nextProps.locationIntervalRunning) {
       this.locationInterval()
-      setInterval(this.locationInterval, 18000000)
+      setInterval(this.locationInterval, 1800000)
     }
     if (locationIntervalRunning && !nextProps.locationIntervalRunning) {
       clearInterval(this.locationInterval)
@@ -86,6 +92,12 @@ class ForkScreen extends Component {
     }
   }
 
+  componentWillUnmount = () => {
+    OneSignal.removeEventListener('received', this.onReceived)
+    OneSignal.removeEventListener('opened', this.onOpened)
+    OneSignal.removeEventListener('registered', this.onRegistered)
+    OneSignal.removeEventListener('ids', this.onIds)
+  }
 
   locationInterval = () => {
     const { accessToken, updateUserPosition } = this.props
@@ -121,6 +133,7 @@ class ForkScreen extends Component {
 
   onIds = device => {
     const { accessToken, registerForPushNotif } = this.props
+
     if (accessToken) {
       registerForPushNotif(accessToken, device.userId)
     }
@@ -186,7 +199,8 @@ const mapDispatchToProps = dispatch => {
       getUserInfo,
       setNativeContactsPermission,
       storeContactInfo,
-      updateUserPosition
+      updateUserPosition,
+      registerForPushNotif
     }, dispatch)
   }
 }

@@ -15,7 +15,7 @@ import FBSDK, {
 import Permissions from 'react-native-permissions'
 import Contacts from 'react-native-contacts'
 import * as Animatable from 'react-native-animatable'
-import { CachedImage } from "react-native-img-cache";
+import { CachedImage } from "react-native-img-cache"
 
 // Components
 import ConnectButton from './SuperConnectScreen/ConnectButton'
@@ -65,21 +65,33 @@ class LaunchScreen extends Component {
   componentWillMount = () => {
     this.checkPermissions()
 
-    if (this.props.loggedIn) {
+    if (this.props.loggedIn && this.props.nav.routes.length <= 2) {
       this.props.navigation.navigate('NearbyUsersScreen')
     }
   }
 
+  shouldComponentUpdate = () => {
+    const { nav } = this.props
+    const routeLength = nav.routes.length
+    const topLevelRoute = nav.routes[routeLength - 1].routeName
+
+    return topLevelRoute === 'LaunchScreen'
+  }
+
   componentWillUpdate = (nextProps, nextState) => {
-    const { fbAuthToken, navigation, nativeGeolocation, nativeNotifications, nativeContactsPermission, routeName } = this.props
+    const { fbAuthToken, navigation, nativeGeolocation, nativeNotifications, nativeContactsPermission, routeName, nav } = this.props
     const { permissionTypes } = this.state
+    const routeLength = nav.routes.length
+    const topLevelRoute = nav.routes[routeLength - 1].routeName
 
     if (!fbAuthToken && nextProps.fbAuthToken && this.state.loading) {
       this.getFbProfile(nextProps.fbAuthToken)
       this.handleLoadingComplete()
     }
 
-    if (nextProps.loggedIn && nextProps.routeName === 'LaunchScreen' && routeName !== 'PermissionScreen') {
+    if (topLevelRoute === 'InviteUsers') {
+      return
+    } else if (nextProps.loggedIn && nextProps.routeName === 'LaunchScreen' && routeName !== 'PermissionScreen') {
       if (!nativeGeolocation) {
           nextProps.navigation.navigate('PermissionScreen', {
               permissionType: 'geolocation',
