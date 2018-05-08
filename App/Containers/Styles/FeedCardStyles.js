@@ -24,12 +24,6 @@ export default StyleSheet.create({
   nearbyFeedCardContainer: {
     width: Metrics.screenWidth * .96,
     backgroundColor: 'transparent',
-    shadowOffset: {
-      width: 0,
-      height: 0
-    },
-    shadowColor: 'black',
-    shadowOpacity: 0.5,
     marginBottom: 10
   },
   nearbyFeedCardHeader: {
@@ -38,9 +32,6 @@ export default StyleSheet.create({
      padding: 20,
      backgroundColor: 'transparent',
      elevation: 3,
-     shadowColor: 'black',
-     shadowOffset: { width: 0, height: 0 },
-     shadowOpacity: 0.5,
      zIndex: 99
   },
   contentContainer: {
@@ -53,6 +44,14 @@ export default StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
+    flexDirection: 'row',
+    flexGrow: 1,
+    flexShrink: 1,
+  },
+  myPicsContainer: {
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'center',
     flexDirection: 'row',
     flexGrow: 1,
     flexShrink: 1,
@@ -82,10 +81,6 @@ export default StyleSheet.create({
     flexDirection: 'row',
     borderRadius: 30,
     justifyContent: 'center',
-    shadowOpacity: 0.30,
-    shadowRadius: 5,
-    shadowColor: 'black',
-    shadowOffset: { height: 5, width: 10 }
   },
   deepLinkText: {
     color: 'white',
@@ -105,9 +100,6 @@ export default StyleSheet.create({
     backgroundColor: Colors.snapchat
   },
   header: {
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 5},
-    shadowOpacity: 0.5,
     zIndex: 99
   },
   name: {

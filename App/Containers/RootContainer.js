@@ -77,9 +77,9 @@ class RootContainer extends Component {
           this.props.rehydrating ?
             <ActivityIndicator size="large" color="#0000ff" />
             :
-            [<StatusBar barStyle='light-content' />,
+            <StatusBar barStyle='light-content' />,
             <Modal isVisible={!this.props.isConnected} children={this.renderModal()} style={styles.offlineModal} />,
-            <ReduxNavigation />]
+            <ReduxNavigation />
         }
       </View>
     )

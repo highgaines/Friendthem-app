@@ -32,7 +32,8 @@ const { Types, Creators } = createActions({
   refreshAuthTokenRequest: null,
   refreshAuthTokenSuccess: null,
   refreshAuthTokenFailure: null,
-  rehydrate: null
+  rehydrate: null,
+  logoutComplete: null,
 })
 
 export const AuthTypes = Types
@@ -235,7 +236,7 @@ export const refreshAuthToken = refreshToken => {
 /* -------- Reducers -------- */
 
 const handleUserLogout = (state, action) => {
-  return INITIAL_STATE;
+  return Immutable({...INITIAL_STATE, rehydrating: false});
 }
 
 const registerAccountRequest = (state = INITIAL_STATE, action) => {
@@ -338,6 +339,10 @@ const handleClearAuthErrors = (state, action) => {
   return state.set('authErrors', Immutable([]))
 }
 
+const handleLogoutComplete = (state, action) => {
+  return state.set('rehydrating', false)
+}
+
 const handleRehydrationComplete = (state, action) => {
   return Immutable({ ...state, ...action.payload.authStore, rehydrating: false})
 }
@@ -348,6 +353,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.AUTH_ERRORS_FAILURE]: handleAuthErrorsFailure,
   [Types.AUTH_ERROR_CLEAR]: handleClearAuthErrors,
   [Types.LOGOUT_USER]: handleUserLogout,
+  [Types.LOGOUT_COMPLETE]: handleLogoutComplete,
   [Types.LOGIN_REQUEST]: loginRequest,
   [Types.LOGIN_SUCCESS]: loginSuccess,
   [Types.LOGIN_FAILURE]: loginFailure,

@@ -72,12 +72,12 @@ class LaunchScreen extends Component {
     }
   }
 
-  shouldComponentUpdate = () => {
-    const { nav } = this.props
+  shouldComponentUpdate = (nextProps) => {
+    const { nav, fbAuthToken } = this.props
     const routeLength = nav.routes.length
     const topLevelRoute = nav.routes[routeLength - 1].routeName
 
-    return topLevelRoute === 'LaunchScreen'
+    return topLevelRoute === 'LaunchScreen' || fbAuthToken !== nextProps.fbAuthToken
   }
 
   componentWillUpdate = (nextProps, nextState) => {
