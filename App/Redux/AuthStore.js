@@ -339,7 +339,7 @@ const handleClearAuthErrors = (state, action) => {
 }
 
 const handleRehydrationComplete = (state, action) => {
-  return { ...state, ...action.payload.authStore, rehydrate: false}
+  return Immutable({ ...state, ...action.payload.authStore, rehydrating: false})
 }
 
 export const reducer = createReducer(INITIAL_STATE, {

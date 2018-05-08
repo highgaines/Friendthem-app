@@ -42,7 +42,7 @@ export default class SuperConnectBar extends Component {
           name='people'
           type='simple-line-icons'
           color='#ffffff'
-          title='FRIENDTHEM'
+          title='CONNECT'
           onPressCallback={() =>
             this.navigateToSuperConnect(this.mapPlatforms(selected), friendThemCopy, 'friendthem')}
           containerStyle={styles.friendThemButton}

@@ -229,9 +229,13 @@ class NearbyUsers extends Component {
                 isActiveLocation={isActiveLocation}
               />
             : <NearbyFeedContainer
-              input={input}
-              filterUsers={this.filterUsers}
-              viewFriendProfile={this.viewFriendProfile}/>
+                fetching={fetching}
+                filterUsers={this.filterUsers}
+                input={input}
+                isActiveLocation={isActiveLocation}
+                locationPermission={locationPermission}
+                navigation={navigation}
+                viewFriendProfile={this.viewFriendProfile}/>
         }
       </View>
     )

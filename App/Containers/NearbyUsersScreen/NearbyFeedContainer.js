@@ -4,6 +4,7 @@ import { ScrollView, View, TouchableOpacity, Text, Button, ActivityIndicator } f
 
 // Components
 import NearbyFeedCard from './NearbyFeedCard'
+import NoPeopleNearby from './NoPeopleNearby'
 
 // Libraries
 import { Icon } from 'react-native-elements'
@@ -54,13 +55,25 @@ class NearbyFeedContainer extends Component {
     })
   }
 
+  checkLocationPermission = () => {
+    const { navigation, locationPermission, fetching, isActiveLocation } = this.props
+
+    return isActiveLocation && locationPermission
+    ? this.renderFeedCards()
+    : <NoPeopleNearby
+      locationPermission={locationPermission}
+      isActiveLocation={isActiveLocation}
+      navigation={navigation}
+    />
+  }
+
   render = () => {
     const { loading, nearbyUsers } = this.props
 
     return(
       <LazyloadScrollView contentContainerStyle={styles.nearbyFeedContainer}>
         {nearbyUsers.length || !loading
-          ? this.renderFeedCards()
+          ? this.checkLocationPermission()
           : <View style={{alignSelf: 'center', top: 100}}>
             <Text>
               There are no users nearby.
