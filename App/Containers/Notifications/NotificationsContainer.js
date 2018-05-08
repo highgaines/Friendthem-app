@@ -29,6 +29,10 @@ class NotificationsContainer extends Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      rowOpen: false
+    }
+
 }
 
   componentWillMount = () => {
@@ -70,7 +74,8 @@ class NotificationsContainer extends Component {
     return(
       <View style={{height: '100%'}}>
         <Header title='Notifications' />
-        <ScrollView style={styles.listContainer}>
+        <View
+          style={styles.listContainer}>
           <View
             testID='notification-container'
             style={styles.sectionTitle}>
@@ -79,10 +84,14 @@ class NotificationsContainer extends Component {
             </Text>
           </View>
           <SwipeListView
-            useFlatList
+            useFlatList={true}
+            scrollEnabled={!this.state.rowOpen}
             keyExtractor={(item, index) => `${item.id}`}
             previewOpenValue={-150}
             data={notifications ? sortedNotifications : []}
+            onRowDidOpen={() => this.setState({ rowOpen: true })}
+            onRowDidClose={() => this.setState({ rowOpen: false })}
+            closeOnScroll={false}
             renderItem={ (data, rowMap) => (
               <TouchableOpacity
                 key={data.id}
@@ -95,8 +104,8 @@ class NotificationsContainer extends Component {
                 <Text style={styles.userName}>
                   {data.item.sender.first_name}
                 </Text>
-                <Text style={styles.message}>
-                  {`would like to super connect with you!`}
+                <Text style={styles.message} numberOfLines={1}>
+                  {`super connected with you! Click to view!`}
                 </Text>
               </TouchableOpacity>
             )}
@@ -129,7 +138,7 @@ class NotificationsContainer extends Component {
                 rightOpenValue={-150}
                 previewRowKey={this.props.notifications && this.props.notifications.length ? `${this.props.notifications[0].id}` : '0'}
               />
-        </ScrollView>
+        </View>
       </View>
     )
   }
