@@ -25,7 +25,8 @@ export default UserCard = ({
   userPlatforms,
   triggerModal,
   selectUser,
-  inviteUser
+  inviteUser,
+  userSocialProfiles
 }) => {
 
 
@@ -33,11 +34,22 @@ export default UserCard = ({
     return phoneNumbers[0] ? phoneNumbers[0].number : null
   }
 
+  const constructSocialMediaLinkText = () => {
+    return userSocialProfiles.reduce((finalText, socialProfile, idx, array) => {
+      if (idx === 0) {
+        return finalText += `Hey! Check out my social media profiles:\n ${idx + 1}.) ${socialProfile.provider} - there would ideally be a link here.\n`
+      } else {
+        return finalText += ` ${idx + 1}.) ${socialProfile.provider} - there would ideally be a link here.\n`
+      }
+    }, '')
+  }
+
   const handleTextInvite = () => {
     let phoneNumber = determineMobileNumber()
+    const socialMediaLinkText = constructSocialMediaLinkText()
 
     SendSMS.send({
-      body: 'There’s got to be a better way.. check out this new awesome app! https://apple.co/2Dm46dF',
+      body: socialMediaLinkText,
       recipients: [phoneNumber],
       successTypes: ['sent', 'queued']
     }, (completed, cancelled, error) => {

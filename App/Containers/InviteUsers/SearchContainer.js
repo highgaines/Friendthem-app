@@ -113,6 +113,7 @@ class SearchContainer extends Component {
                 triggerModal={triggerModal}
                 inviteUser={createUserInvite}
                 selectUser={selectUser}
+                userSocialProfiles={this.props.userSocialProfiles}
               />
             )}
           />
@@ -124,6 +125,7 @@ class SearchContainer extends Component {
 const mapStateToProps = state => ({
   contactList: _.sortBy(state.inviteUsersStore.contactList, ['givenName']),
   accessToken: state.authStore.accessToken,
+  userSocialProfiles: state.userStore.userData.social_profiles
 })
 
 const mapDispatchToProps = dispatch => ({
