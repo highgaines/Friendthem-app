@@ -73,6 +73,7 @@ class NearbyUsers extends Component {
               navigator.geolocation.getCurrentPosition(resp =>
                 this.locationInterval(),
                 err => {
+                  console.log(err)
                   if (err.code === 2) {
                     this.setState({ isActiveLocation: false })
                   }
