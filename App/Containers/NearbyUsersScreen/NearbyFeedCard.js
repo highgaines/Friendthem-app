@@ -163,7 +163,7 @@ class NearbyFeedCard extends Component {
             onPressCallback={() => testDeepLinkAbility('twitter', twitterDeepLink, twitterUsername)}
           />
         )
-      case 'youtube':
+      case 'google-oauth2':
         const youtubeData = friendData.social_profiles.find(platform => platform.provider === 'google-oauth2')
         const youtubeChannel = youtubeData ? youtubeData.youtube_channel : ''
         const youtubeDeeplink = `vnd.youtube://www.youtube.com/channel/${youtubeChannel}`
@@ -231,7 +231,7 @@ class NearbyFeedCard extends Component {
     }
 
     return (
-    <View style={styles.socialAccountContainer}>
+    <View style={styles.myPicsContainer}>
       {mappedPictures}
     </View>
     )

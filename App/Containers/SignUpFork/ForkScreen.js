@@ -47,7 +47,6 @@ class ForkScreen extends Component {
     } = this.props
     if (accessToken) {
       getUserInfo(accessToken);
-      console.log('hit')
       OneSignal.addEventListener('received', this.onReceived)
       OneSignal.addEventListener('opened', this.onOpened)
       OneSignal.addEventListener('registered', this.onRegistered)

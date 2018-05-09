@@ -3,6 +3,7 @@ import { fetchFromApi } from './ApiHelpers'
 import Immutable from 'seamless-immutable'
 import envConfig from '../../envConfig'
 import Analytics from 'analytics-react-native'
+import { REHYDRATE } from 'redux-persist/constants'
 
 const analytics = new Analytics(envConfig.Development.SegmentAPIKey)
 /* ------ Types and Action Creators ------ */
@@ -30,7 +31,9 @@ const { Types, Creators } = createActions({
   socialMediaAuthFailure: null,
   refreshAuthTokenRequest: null,
   refreshAuthTokenSuccess: null,
-  refreshAuthTokenFailure: null
+  refreshAuthTokenFailure: null,
+  rehydrate: null,
+  logoutComplete: null,
 })
 
 export const AuthTypes = Types
@@ -50,7 +53,8 @@ export const INITIAL_STATE = Immutable({
   authError: false,
   redirectUrl: null,
   authErrors: [],
-  refreshingToken: false
+  refreshingToken: false,
+  rehydrating: true
 })
 
 
@@ -232,7 +236,7 @@ export const refreshAuthToken = refreshToken => {
 /* -------- Reducers -------- */
 
 const handleUserLogout = (state, action) => {
-  return INITIAL_STATE;
+  return Immutable({...INITIAL_STATE, rehydrating: false});
 }
 
 const registerAccountRequest = (state = INITIAL_STATE, action) => {
@@ -335,12 +339,21 @@ const handleClearAuthErrors = (state, action) => {
   return state.set('authErrors', Immutable([]))
 }
 
+const handleLogoutComplete = (state, action) => {
+  return state.set('rehydrating', false)
+}
+
+const handleRehydrationComplete = (state, action) => {
+  return Immutable({ ...state, ...action.payload.authStore, rehydrating: false})
+}
+
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.AUTH_ERRORS_REQUEST]: handleAuthErrorsRequest,
   [Types.AUTH_ERRORS_SUCCESS]: handleAuthErrorsSuccess,
   [Types.AUTH_ERRORS_FAILURE]: handleAuthErrorsFailure,
   [Types.AUTH_ERROR_CLEAR]: handleClearAuthErrors,
   [Types.LOGOUT_USER]: handleUserLogout,
+  [Types.LOGOUT_COMPLETE]: handleLogoutComplete,
   [Types.LOGIN_REQUEST]: loginRequest,
   [Types.LOGIN_SUCCESS]: loginSuccess,
   [Types.LOGIN_FAILURE]: loginFailure,
@@ -355,5 +368,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.SOCIAL_MEDIA_AUTH_FAILURE]: handleSocialMediaAuthFailure,
   [Types.REFRESH_AUTH_TOKEN_REQUEST]: handleRefreshAuthTokenRequest,
   [Types.REFRESH_AUTH_TOKEN_SUCCESS]: handleRefreshAuthTokenSuccess,
-  [Types.REFRESH_AUTH_TOKEN_FAILURE]: handleRefreshAuthTokenFailure
+  [Types.REFRESH_AUTH_TOKEN_FAILURE]: handleRefreshAuthTokenFailure,
+  [REHYDRATE]: handleRehydrationComplete
 })

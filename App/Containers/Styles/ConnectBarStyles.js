@@ -4,14 +4,15 @@ import { Metrics, ApplicationStyles, Fonts } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
+
+  },
+  linearGradient: {
+    height: 230,
+    paddingHorizontal: 30,
     shadowOpacity: 0.75,
     shadowRadius: 5,
     shadowColor: 'black',
     shadowOffset: { height: 0, width: 0 }
-  },
-  linearGradient: {
-    height: 230,
-    paddingHorizontal: 30
   },
   rows: {
     flex: 3,

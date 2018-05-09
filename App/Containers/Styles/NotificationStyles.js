@@ -29,6 +29,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     height: 80,
+    width: Metrics.screenWidth
   },
   rowBack: {
     alignItems: 'center',
@@ -67,13 +68,14 @@ export default StyleSheet.create({
   },
   message: {
     fontSize: 11,
-    marginLeft: 7
+    marginLeft: 4,
+    width: Metrics.screenWidth * .59
   },
   userName: {
     fontWeight: '800'
   },
   sectionTitle: {
-    height: 60,
+    height: Metrics.screenHeight * .075,
     backgroundColor: 'white',
     justifyContent: 'center',
     paddingLeft: 15,
@@ -83,6 +85,7 @@ export default StyleSheet.create({
   sectionTitleText: {
     color: Colors.medGray,
     opacity: 0.8,
-    fontSize: 16
+    fontSize: 17,
+    fontWeight: '800'
   }
 })

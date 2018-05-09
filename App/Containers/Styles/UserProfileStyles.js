@@ -19,10 +19,6 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginTop: 30,
     backgroundColor: 'transparent',
-    shadowOpacity: 0.25,
-    shadowRadius: 5,
-    shadowColor: 'black',
-    shadowOffset: { height: 6, width: 10 },
     zIndex: 99
   },
   backIcon: {

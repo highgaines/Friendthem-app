@@ -367,7 +367,7 @@ class InviteUsersScreen extends Component {
                         fontWeight: "600",
                         opacity: .5
                       }}>
-                    {`${fullConnects.length} fully connected friends`}
+                    {`${fullConnects.length} fully connected friend${pluralizeFriends}`}
                   </Animatable.Text>
                 <LazyloadView style={styles.userContainer}>
                   {this.renderConnectivityCards(fullConnects)}
