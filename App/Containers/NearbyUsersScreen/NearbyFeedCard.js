@@ -312,10 +312,10 @@ class NearbyFeedCard extends Component {
                 <Text style={styles.name}>{`${friendData.first_name} ${friendData.last_name}`} </Text>
                 {
                     friendData && friendData.hobbies && friendData.hobbies.length
-                    ? <Text style={styles.hobbies}>{ friendData.hobbies }</Text>
+                    ? <Text style={styles.hobbies}>{ friendData.hobbies.join(', ') }</Text>
                     : null
                 }
-                <Text style={styles.location}>New York, NY</Text>
+                <Text style={styles.location}>{ friendData.hometown }</Text>
               </LazyloadView>
               <LazyloadView style={[styles.deepLinkButtonContainer, { marginRight: 10}]}>
                 {this.renderDeeplinkButton()}
