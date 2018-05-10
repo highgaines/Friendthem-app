@@ -281,6 +281,14 @@ class NearbyFeedCard extends Component {
     this.setState({ showModal: !showModal })
   }
 
+  removeCountryFromAddressIfUSA = addressString => {
+    splitStringArray = addressString.split(',')
+    if (addressString.includes('USA')) {
+      return `${splitStringArray[0]}, ${splitStringArray[1]}`
+    }
+    return addressString
+  }
+
   render = () => {
     const { friendData, fetching, setFriendInfo } = this.props
     const { platform, currentPics, showModal, currentPicIdx } = this.state
@@ -315,7 +323,13 @@ class NearbyFeedCard extends Component {
                     ? <Text style={styles.hobbies}>{ friendData.hobbies.join(', ') }</Text>
                     : null
                 }
-                <Text style={styles.location}>{ friendData.hometown }</Text>
+                <Text style={styles.location}>
+                { friendData.address ?
+                  this.removeCountryFromAddressIfUSA(friendData.address)
+                  :
+                  friendData.hometown
+                }
+                </Text>
               </LazyloadView>
               <LazyloadView style={[styles.deepLinkButtonContainer, { marginRight: 10}]}>
                 {this.renderDeeplinkButton()}
