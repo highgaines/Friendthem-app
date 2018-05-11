@@ -62,7 +62,7 @@ export const MANUAL_CONNECT_PLATFORMS = [
   'facebook',
   'snapchat',
   'instagram',
-  'linkedin'
+  'linkedin-oauth2'
 ]
 
 export const NAVBAR_RENDER_OK = [

@@ -80,31 +80,29 @@ class SuperConnect extends Component {
 
   deepLinkToPlatform = (platformName) => {
     const { friendInfo, platforms } = this.props
-    const isLinkedIn = platformName === 'linkedin'
-    const profile = friendInfo.social_profiles.find(profile => profile.provider === isLinkedIn ? 'linkedin-oauth2' : platformName)
+    const isLinkedIn = platformName === 'linkedin-oauth2'
     const isSnapchat = platformName === 'snapchat'
+    const profile = friendInfo.social_profiles.find(profile => profile.provider === platformName)
     const userIdentifier = platformName === 'facebook' || isSnapchat ? profile.uid : profile.username
-    const deepLinkPlatform = isIOS || isSnapchat ?
-      SOCIAL_MEDIA_DATA[platformName].superConnectDeepLink
-      :
-      SOCIAL_MEDIA_DATA[platformName].androidConnectDeepLink(userIdentifier)
-    const deepLinkURL = isIOS || isSnapchat ? `${deepLinkPlatform}${userIdentifier}` : deepLinkPlatform
 
     if (isLinkedIn) {
-      const profileURL = friendInfo.social_profiles.find(profile =>
-        profile.provider === 'linkedin-oauth2'
-      ).profile_url
+      Linking.openURL(profile.profile_url)
+    } else {
+      const deepLinkPlatform = isIOS || isSnapchat ?
+        SOCIAL_MEDIA_DATA[platformName].superConnectDeepLink
+        :
+        SOCIAL_MEDIA_DATA[platformName].androidConnectDeepLink(userIdentifier)
+      const deepLinkURL = isIOS || isSnapchat ? `${deepLinkPlatform}${userIdentifier}` : deepLinkPlatform
 
-      Linking.openURL(profileURL)
+      Linking.canOpenURL(deepLinkURL).then(response => {
+        if (response) {
+          Linking.openURL(deepLinkURL)
+        } else {
+          Linking.openURL(`https:/${platformName}.com/${userIdentifier}`)
+        }
+      })
     }
 
-    Linking.canOpenURL(deepLinkURL).then(response => {
-      if (response) {
-        Linking.openURL(deepLinkURL)
-      } else {
-        Linking.openURL(`https:/${platformName}.com/${userIdentifier}`)
-      }
-    })
   }
 
   _handleAppStateChange = (nextAppState) => {
@@ -122,7 +120,7 @@ class SuperConnect extends Component {
   }
 
   asyncSuperConnectPlatform = async (platform, apiAccessToken, friendId) => {
-    const platName = platform === 'google-oauth2' ? "youtube" : platform === 'linkedin' ? 'linkedin-oauth2' : platform
+    const platName = platform === 'google-oauth2' ? "youtube" : platform === 'linkedin-oauth2' ? 'linkedin' : platform
     await this.props.superConnectPlatform(platName, apiAccessToken, friendId)
   }
 
