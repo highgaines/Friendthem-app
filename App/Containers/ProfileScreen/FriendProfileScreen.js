@@ -249,8 +249,9 @@ class FriendProfileScreen extends Component {
 
   socialPlatformPresent = (provider) => {
     const { platforms, userInfo } = this.props
+    const providerCheck = provider === 'linkedin' ? 'linkedin-oauth2' : provider
 
-    return userInfo.social_profiles.find(platformObj => platformObj.provider === provider)
+    return userInfo.social_profiles.find(platformObj => platformObj.provider === providerCheck)
   }
 
   toggleSocialMediaSelection = (platformName) => {

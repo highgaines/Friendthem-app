@@ -80,7 +80,8 @@ class SuperConnect extends Component {
 
   deepLinkToPlatform = (platformName) => {
     const { friendInfo, platforms } = this.props
-    const profile = friendInfo.social_profiles.find(profile => profile.provider === platformName)
+    const isLinkedIn = platformName === 'linkedin'
+    const profile = friendInfo.social_profiles.find(profile => profile.provider === isLinkedIn ? 'linkedin-oauth2' : platformName)
     const isSnapchat = platformName === 'snapchat'
     const userIdentifier = platformName === 'facebook' || isSnapchat ? profile.uid : profile.username
     const deepLinkPlatform = isIOS || isSnapchat ?
@@ -88,6 +89,14 @@ class SuperConnect extends Component {
       :
       SOCIAL_MEDIA_DATA[platformName].androidConnectDeepLink(userIdentifier)
     const deepLinkURL = isIOS || isSnapchat ? `${deepLinkPlatform}${userIdentifier}` : deepLinkPlatform
+
+    if (isLinkedIn) {
+      const profileURL = friendInfo.social_profiles.find(profile =>
+        profile.provider === 'linkedin-oauth2'
+      ).profile_url
+
+      Linking.openURL(profileURL)
+    }
 
     Linking.canOpenURL(deepLinkURL).then(response => {
       if (response) {
@@ -113,7 +122,7 @@ class SuperConnect extends Component {
   }
 
   asyncSuperConnectPlatform = async (platform, apiAccessToken, friendId) => {
-    const platName = platform === 'google-oauth2' ? "youtube" : platform
+    const platName = platform === 'google-oauth2' ? "youtube" : platform === 'linkedin' ? 'linkedin-oauth2' : platform
     await this.props.superConnectPlatform(platName, apiAccessToken, friendId)
   }
 
@@ -187,6 +196,8 @@ class SuperConnect extends Component {
         return userInfo.social_profiles.find(elem => elem.provider === 'snapchat')
       case 'youtube':
         return platforms.find(platformObj => platformObj.provider === 'google-oauth2')
+      case 'linkedin':
+        return platforms.find(platformObj => platformObj.provider === 'linkedin-oauth2')
       default:
         return platforms.find(platformObj => platformObj.provider === provider)
     }

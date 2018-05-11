@@ -80,7 +80,8 @@ class SocialMediaCardContainer extends Component {
 
   socialPlatformUsername = (platform) => {
     const { social_profiles } = this.props.fromFriendProfile ? this.props.friendData : this.props.userInfo
-    const currentPlatform = social_profiles ? social_profiles.find(profile => profile.provider === platform) : null
+    const updatedPlatform = platform === 'linkedin' ? 'linkedin-oauth2' : platform
+    const currentPlatform = social_profiles ? social_profiles.find(profile => profile.provider === updatedPlatform) : null
 
     return currentPlatform ? currentPlatform.username : null
   }
@@ -135,6 +136,8 @@ class SocialMediaCardContainer extends Component {
             friendPlatforms && friendPlatforms.find(socialElem => {
               if (isYoutube) {
                 return socialElem.provider === 'google-oauth2'
+              } else if (socialPlatform === 'linkedin') {
+                return socialElem.provider === 'linkedin-oauth2'
               } else {
                 return socialElem.provider === socialPlatform
               }
@@ -155,7 +158,6 @@ class SocialMediaCardContainer extends Component {
                   synced={isSynced}
                   connectedWithVisitor={isSynced && fromFriendProfile ? this.checkConnection(socialPlatform) : null}
                   readOnly={isSynced && fromUserProfile}
-                  // unavailable={!fromUserProfile && isFacebook}
                   socialAuth={isClickable ? () => onPressCallback({provider: isYoutube ? 'google-oauth2' : socialPlatform}) :
                     ((!isSynced && fromFriendProfile) && (!fromUserProfile && socialPlatform === 'snapchat')) ?
                     () => null : this.determineSocialAuth(socialPlatform)

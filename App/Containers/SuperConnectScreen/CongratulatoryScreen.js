@@ -15,13 +15,12 @@ import styles from '../Styles/CongratulatoryScreenStyles';
 import { determineImage } from '../../Utils/constants'
 
 export default CongratulatoryScreen = props => {
-  const { userInfo,friendInfo, navigation, setFriendInfo, updateConnectionInfo, loadConnectivityData, updateFriendData } = props;
+  const { userInfo,friendInfo, navigation, setFriendInfo, updateConnectionInfo, loadConnectivityData, updateFriendData } = props
   const fullFriendName = `${friendInfo.first_name} ${friendInfo.last_name}`
-
   const handleNavigation = () => {
-    updateConnectionInfo()
-    updateFriendData()
-    setFriendInfo(friendInfo)
+    // updateConnectionInfo()
+    // updateFriendData()
+    // setFriendInfo(friendInfo)
     navigation.pop(2)
   }
 
