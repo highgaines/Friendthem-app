@@ -129,7 +129,7 @@ class SocialMediaCardContainer extends Component {
             const isYoutube = socialPlatform === 'youtube'
             const isFacebook = socialPlatform === 'facebook'
             const currentPlatform = platformSynced(isYoutube ? 'google-oauth2' : socialPlatform)
-            const isSelected = platformSelected(isYoutube ? 'google-oauth2': socialPlatform)
+            const isSelected = platformSelected(isYoutube ? 'google-oauth2': socialPlatform === 'linkedin' ? 'linkedin-oauth2' : socialPlatform)
             const isSynced = !!currentPlatform
             const capitalizeName = (name) => name[0].toUpperCase() + name.slice(1)
             const friendPlatformPresent = fromFriendProfile && friendPlatforms ?

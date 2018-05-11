@@ -260,9 +260,6 @@ class FriendProfileScreen extends Component {
     const platformIndex = selectedSocialMedia.findIndex(socialMedia => socialMedia === platformName)
     const connectionPresent = () => connection.find(platform => platform.provider === platformName)
 
-    // temporary fix for removing facebook from flow
-    const isFacebook = platformName === 'facebook'
-
     if (this.socialPlatformPresent(platformName) && !connectionPresent()) {
       if (platformIndex < 0) {
         this.setState({ selectedSocialMedia: [...selectedSocialMedia, platformName] })
@@ -358,9 +355,6 @@ class FriendProfileScreen extends Component {
         </View>
       )
     }
-
-    // commented out while FB deeplink is functioning again
-    // const superConnectPlatforms = this.getSCEligiblePlatforms().filter( socialObj => socialObj.provider !== 'facebook')
 
     return (
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -473,9 +467,9 @@ class FriendProfileScreen extends Component {
                 connection={connection}
                 toggleBanner={() => console.log('') }
                 friendPlatforms={friendInfo.social_profiles}
-                onPressCallback={(platform) => this.toggleSocialMediaSelection(platform)}
+                onPressCallback={(platform) => this.toggleSocialMediaSelection(platform === 'linkedin' ? 'linkedin-oauth2' : platform)}
                 platformSynced={socialMedia => this.socialPlatformPresent(socialMedia)}
-                platformSelected={socialMedia => selectedSocialMedia.includes(socialMedia)}
+                platformSelected={socialMedia => selectedSocialMedia.includes(socialMedia === 'linkedin' ? 'linkedin-oauth2' : socialMedia)}
               />
               <SuperConnectBar
                 setSuperConnectPlatforms={() => setSuperConnectPlatforms(selectedSocialMedia)}
