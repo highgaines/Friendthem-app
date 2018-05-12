@@ -11,6 +11,7 @@ import ImagePicker from 'react-native-image-picker'
 import { uploadToAWS } from '../../Utils/functions'
 import { NavigationActions } from 'react-navigation'
 import * as Animatable from 'react-native-animatable'
+import _ from 'lodash'
 
 // Components
 import SocialMediaCardContainer from '../SocialMediaCards/SocialMediaCardContainer'
@@ -22,6 +23,7 @@ import FriendThemModal from '../UtilityComponents/FriendThemModal'
 import ChangePasswordModal from './ChangePasswordModal'
 import FbPhotoModal from './FbPhotoModal'
 import ConfirmPasswordChangeModal from './ConfirmPasswordChangeModal'
+import SuperTextConnect from './SuperTextConnect'
 
 // Redux
 import { connect } from 'react-redux'
@@ -304,6 +306,23 @@ class UserProfileScreen extends Component {
     }
   }
 
+  buildProfileMessageText = () => {
+    const { socialMediaData } = this.state
+
+    return this.props.userInfo.social_profiles.reduce((msgContent, profile) => {
+      const provider = profile.provider
+      if (provider === 'linkedin-oauth2') {
+        return msgContent += `LinkedIn: ${profile.profile_url} \n\n`
+      } else {
+        const byUID = provider === 'facebook' || provider === 'snapchat'
+        const userIdentifier = byUID ? profile.uid : profile.username
+        const providerName = provider === 'google-oauth2' ? 'youtube' : provider
+
+        return msgContent += `${_.capitalize(providerName)}: https://www.${providerName}.com/${userIdentifier} \n\n`
+      }
+    }, '')
+  }
+
   // test action to fetch errors during authentication
   getErrors = () => {
     const { apiAccessToken } = this.props
@@ -316,16 +335,22 @@ class UserProfileScreen extends Component {
 
     if (tab === "Networks") {
       return (
-        <Animatable.View animation="slideInLeft">
-          <SocialMediaCardContainer
-            fromUserProfile={true}
-            fromFriendProfile={false}
-            platformSelected={(platform) => false}
-            snapchatCallback={this.toggleSnapchatModal}
-            onPressCallback={(platform) => this.authenticateSocialMedia(platform)}
-            platformSynced={((socialMedia) => this.socialPlatformPresent(socialMedia))}
+        <View>
+          <Animatable.View animation="slideInLeft">
+            <SocialMediaCardContainer
+              fromUserProfile={true}
+              fromFriendProfile={false}
+              platformSelected={(platform) => false}
+              snapchatCallback={this.toggleSnapchatModal}
+              onPressCallback={(platform) => this.authenticateSocialMedia(platform)}
+              platformSynced={((socialMedia) => this.socialPlatformPresent(socialMedia))}
+            />
+          </Animatable.View>
+          <SuperTextConnect
+            userId={userInfo.id}
+            profileLinks={this.buildProfileMessageText()}
           />
-        </Animatable.View>
+        </View>
       )
     } else if (tab === "Info") {
       return(
