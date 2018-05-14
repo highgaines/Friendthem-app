@@ -55,5 +55,30 @@ export default StyleSheet.create({
   },
   buttonIconStyle: {
     right: 13
+  },
+  superTextConnectContainer: {
+    width: Metrics.screenWidth * .65,
+    height: Metrics.screenHeight * .08,
+    top: Metrics.screenHeight * .4,
+    right: Metrics.screenWidth * .175,
+    borderRadius: Metrics.screenWidth * .16,
+    position: 'absolute',
+    backgroundColor: '#19c531',
+  },
+  superTextConnectIcon: {
+    width: Metrics.screenWidth * .1,
+    position: 'relative',
+    left: 25,
+    top: '30%'
+  },
+  superTextConnectText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '800',
+    width: '65%',
+    position: 'relative',
+    left: '25%',
+    bottom: '22%'
+
   }
 })
