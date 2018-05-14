@@ -36,7 +36,8 @@ class FeedContainer extends Component {
       fetchFeed,
       userId,
       accessToken,
-      loading
+      loading,
+      friendInfo
     } = this.props
 
     fetchFeed(accessToken, userId, platform)
@@ -75,6 +76,17 @@ class FeedContainer extends Component {
     if (filtered[0]) {
       return filtered[0].username
     }
+  }
+
+  pullLinkedInURL = () => {
+    const { friendInfo } = this.props
+    let linkedInURL
+    friendInfo.social_profiles.forEach( profile => {
+      if(profile.provider === 'linkedin-oauth2') {
+        linkedInURL = profile.profile_url
+      }
+    })
+    return linkedInURL
   }
 
   renderDeeplinkButton = platform => {
@@ -162,6 +174,17 @@ class FeedContainer extends Component {
               containerStyle={[styles.deepLinkButton, styles.snapchatDeeplinkButton]}
               textStyle={styles.deepLinkText}
               onPressCallback={() => testDeepLinkAbility('snapchat', snapChatDeepLink, snapchatUsername)} />
+          )
+        case 'linkedin':
+          const linkedInURL = this.pullLinkedInURL()
+
+          return (
+            <ConnectButton
+              title="Go to LinkedIn"
+              color={SYNCED_CARD_COLORS.linkedin}
+              containerStyle={[styles.deepLinkButton, styles.linkedInDeepLinkButton]}
+              textStyle={styles.deepLinkText}
+              onPressCallback={() => Linking.openURL(linkedInURL)} />
           )
       }
     }

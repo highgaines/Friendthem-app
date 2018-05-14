@@ -24,6 +24,8 @@ export default SMPlatformCircle = ({size, extraStyles, platform, light, button})
           return Images.cameraIcon
         case 'youtube':
           return Images.youtubeIcon
+        case 'linkedin':
+          return Images.linkedInIcon
         default:
           return Images.socialWheelLogo
       }
