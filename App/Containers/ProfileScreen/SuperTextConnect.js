@@ -12,7 +12,7 @@ export default function SuperTextConnect(props) {
 
   const sendProfileMessage = () => {
     const messageIntro = 'Check out my profiles! \n\n'
-    const messageAppLink = `That's a lot of links, friendthem can help make connect even easier! Download it here: ${envConfig.Development.appServerRootURL}/invites/check/${userId}/`
+    const messageAppLink = `That's a lot of links, friendthem can help make connecting even easier! Download it here: ${envConfig.Development.appServerRootURL}/invites/check/${userId}/`
 
     Communications.text(null, `${messageIntro}${profileLinks}${messageAppLink}`)
   }
