@@ -178,9 +178,10 @@ class UserProfileScreen extends Component {
 
   authenticateSocialMedia = platform => {
     const { userId, apiAccessToken } = this.props
+    const updatedPlatform = platform === 'linkedin' ? 'linkedin-oauth2' : platform
 
     this.setState({currentPlatform: platform})
-    this.props.socialMediaAuth(platform, userId, apiAccessToken).then( () => {
+    this.props.socialMediaAuth(updatedPlatform, userId, apiAccessToken).then( () => {
       this.props.getUserInfo(apiAccessToken)
     })
   }
@@ -193,6 +194,8 @@ class UserProfileScreen extends Component {
         return userInfo.social_profiles.filter( profile => profile.provider === 'snapchat').length
       case 'youtube':
         return userInfo.social_profiles.find(platformObj => platformObj.provider === 'google-oauth2')
+      case 'linkedin':
+        return userInfo.social_profiles.find(platformObj => platformObj.provider === 'linkedin-oauth2')
       default:
         return userInfo.social_profiles.find(platformObj => platformObj.provider === provider)
     }

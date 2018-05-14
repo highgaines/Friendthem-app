@@ -80,22 +80,29 @@ class SuperConnect extends Component {
 
   deepLinkToPlatform = (platformName) => {
     const { friendInfo, platforms } = this.props
-    const profile = friendInfo.social_profiles.find(profile => profile.provider === platformName)
+    const isLinkedIn = platformName === 'linkedin-oauth2'
     const isSnapchat = platformName === 'snapchat'
+    const profile = friendInfo.social_profiles.find(profile => profile.provider === platformName)
     const userIdentifier = platformName === 'facebook' || isSnapchat ? profile.uid : profile.username
-    const deepLinkPlatform = isIOS || isSnapchat ?
-      SOCIAL_MEDIA_DATA[platformName].superConnectDeepLink
-      :
-      SOCIAL_MEDIA_DATA[platformName].androidConnectDeepLink(userIdentifier)
-    const deepLinkURL = isIOS || isSnapchat ? `${deepLinkPlatform}${userIdentifier}` : deepLinkPlatform
 
-    Linking.canOpenURL(deepLinkURL).then(response => {
-      if (response) {
-        Linking.openURL(deepLinkURL)
-      } else {
-        Linking.openURL(`https:/${platformName}.com/${userIdentifier}`)
-      }
-    })
+    if (isLinkedIn) {
+      Linking.openURL(profile.profile_url)
+    } else {
+      const deepLinkPlatform = isIOS || isSnapchat ?
+        SOCIAL_MEDIA_DATA[platformName].superConnectDeepLink
+        :
+        SOCIAL_MEDIA_DATA[platformName].androidConnectDeepLink(userIdentifier)
+      const deepLinkURL = isIOS || isSnapchat ? `${deepLinkPlatform}${userIdentifier}` : deepLinkPlatform
+
+      Linking.canOpenURL(deepLinkURL).then(response => {
+        if (response) {
+          Linking.openURL(deepLinkURL)
+        } else {
+          Linking.openURL(`https:/${platformName}.com/${userIdentifier}`)
+        }
+      })
+    }
+
   }
 
   _handleAppStateChange = (nextAppState) => {
@@ -113,7 +120,7 @@ class SuperConnect extends Component {
   }
 
   asyncSuperConnectPlatform = async (platform, apiAccessToken, friendId) => {
-    const platName = platform === 'google-oauth2' ? "youtube" : platform
+    const platName = platform === 'google-oauth2' ? "youtube" : platform === 'linkedin-oauth2' ? 'linkedin' : platform
     await this.props.superConnectPlatform(platName, apiAccessToken, friendId)
   }
 
@@ -187,6 +194,8 @@ class SuperConnect extends Component {
         return userInfo.social_profiles.find(elem => elem.provider === 'snapchat')
       case 'youtube':
         return platforms.find(platformObj => platformObj.provider === 'google-oauth2')
+      case 'linkedin':
+        return platforms.find(platformObj => platformObj.provider === 'linkedin-oauth2')
       default:
         return platforms.find(platformObj => platformObj.provider === provider)
     }

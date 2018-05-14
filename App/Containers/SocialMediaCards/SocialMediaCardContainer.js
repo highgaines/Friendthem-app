@@ -80,7 +80,8 @@ class SocialMediaCardContainer extends Component {
 
   socialPlatformUsername = (platform) => {
     const { social_profiles } = this.props.fromFriendProfile ? this.props.friendData : this.props.userInfo
-    const currentPlatform = social_profiles ? social_profiles.find(profile => profile.provider === platform) : null
+    const updatedPlatform = platform === 'linkedin' ? 'linkedin-oauth2' : platform
+    const currentPlatform = social_profiles ? social_profiles.find(profile => profile.provider === updatedPlatform) : null
 
     return currentPlatform ? currentPlatform.username : null
   }
@@ -128,13 +129,15 @@ class SocialMediaCardContainer extends Component {
             const isYoutube = socialPlatform === 'youtube'
             const isFacebook = socialPlatform === 'facebook'
             const currentPlatform = platformSynced(isYoutube ? 'google-oauth2' : socialPlatform)
-            const isSelected = platformSelected(isYoutube ? 'google-oauth2': socialPlatform)
+            const isSelected = platformSelected(isYoutube ? 'google-oauth2': socialPlatform === 'linkedin' ? 'linkedin-oauth2' : socialPlatform)
             const isSynced = !!currentPlatform
             const capitalizeName = (name) => name[0].toUpperCase() + name.slice(1)
             const friendPlatformPresent = fromFriendProfile && friendPlatforms ?
             friendPlatforms && friendPlatforms.find(socialElem => {
               if (isYoutube) {
                 return socialElem.provider === 'google-oauth2'
+              } else if (socialPlatform === 'linkedin') {
+                return socialElem.provider === 'linkedin-oauth2'
               } else {
                 return socialElem.provider === socialPlatform
               }
@@ -155,7 +158,6 @@ class SocialMediaCardContainer extends Component {
                   synced={isSynced}
                   connectedWithVisitor={isSynced && fromFriendProfile ? this.checkConnection(socialPlatform) : null}
                   readOnly={isSynced && fromUserProfile}
-                  // unavailable={!fromUserProfile && isFacebook}
                   socialAuth={isClickable ? () => onPressCallback({provider: isYoutube ? 'google-oauth2' : socialPlatform}) :
                     ((!isSynced && fromFriendProfile) && (!fromUserProfile && socialPlatform === 'snapchat')) ?
                     () => null : this.determineSocialAuth(socialPlatform)

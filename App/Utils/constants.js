@@ -20,7 +20,8 @@ export const SYNCED_CARD_COLORS = {
   twitter: '#28a9e0',
   instagram: '#9E2BB0',
   snapchat: '#feec01',
-  youtube:  '#ff0000'
+  youtube:  '#ff0000',
+  linkedin: '#0176b5'
 }
 
 export const SOCIAL_MEDIA_DATA = {
@@ -50,13 +51,18 @@ export const SOCIAL_MEDIA_DATA = {
     deepLinkUrl: 'snapchat://',
     androidDeepLinkUrl: 'snapchat://',
     superConnectDeepLink: 'snapchat://add/'
+  },
+  linkedin: {
+    deepLinkUrl: 'voyager://in/',
+    androidDeepLinkUrl: 'voyager://in/'
   }
 }
 
 export const MANUAL_CONNECT_PLATFORMS = [
   'facebook',
   'snapchat',
-  'instagram'
+  'instagram',
+  'linkedin-oauth2'
 ]
 
 export const NAVBAR_RENDER_OK = [

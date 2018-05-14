@@ -10,7 +10,7 @@ import apiMiddleware from './ApiMiddleware'
 import { createNetworkMiddleware } from 'react-native-offline'
 
 const offlineConfig = {
-  regexActionType: /.*FAILURE/,
+  regexActionType: /.*REQUEST/,
   actionTypes: ['FETCH_OFFLINE_MODE']
 }
 
