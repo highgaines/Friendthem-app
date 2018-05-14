@@ -57,28 +57,21 @@ export default StyleSheet.create({
     right: 13
   },
   superTextConnectContainer: {
-    width: Metrics.screenWidth * .65,
-    height: Metrics.screenHeight * .08,
+    flex: 1,
+    alignSelf: 'center',
     top: Metrics.screenHeight * .4,
-    right: Metrics.screenWidth * .175,
-    borderRadius: Metrics.screenWidth * .16,
     position: 'absolute',
+    padding: 12,
+    borderRadius: 30,
     backgroundColor: '#19c531',
   },
   superTextConnectIcon: {
-    width: Metrics.screenWidth * .1,
-    position: 'relative',
-    left: 25,
-    top: '30%'
+    width: 20,
+    marginRight: 10
   },
   superTextConnectText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: '800',
-    width: '65%',
-    position: 'relative',
-    left: '25%',
-    bottom: '22%'
-
+    fontWeight: '800'
   }
 })

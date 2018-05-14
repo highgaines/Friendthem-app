@@ -7,8 +7,7 @@ import envConfig from '../../../envConfig'
 
 import styles from '../Styles/SuperConnectBarStyles'
 
-export default function SuperTextConnect(props) {
-  const { profileLinks, userId } = props
+export default function SuperTextConnect({ profileLinks, userId }) {
 
   const sendProfileMessage = () => {
     const messageIntro = 'Check out my profiles! \n\n'
@@ -18,7 +17,9 @@ export default function SuperTextConnect(props) {
   }
   return (
     <View style={styles.superTextConnectContainer}>
-      <TouchableOpacity onPress={sendProfileMessage}>
+      <TouchableOpacity
+        style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}
+        onPress={sendProfileMessage}>
         <Icon
           name='md-mail'
           type='ionicon'

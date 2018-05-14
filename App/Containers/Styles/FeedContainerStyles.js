@@ -62,5 +62,8 @@ export default StyleSheet.create({
   },
   snapchatDeeplinkButton: {
     backgroundColor: Colors.snapchat
+  },
+  linkedInDeepLinkButton: {
+    backgroundColor: Colors.linkedin
   }
 })

@@ -5,6 +5,7 @@ const colors = {
   twitter: '#1DA1F2',
   youtube: '#ff0000',
   snapchat: '#feec01',
+  linkedin: '#0176b5',
   transparent: 'rgba(0,0,0,0)',
   silver: '#F7F7F7',
   steel: '#CCCCCC',

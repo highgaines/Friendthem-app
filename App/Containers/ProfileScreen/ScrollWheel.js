@@ -22,6 +22,7 @@ class ScrollWheel extends Component {
 
   render() {
     const { handlePlatformChange, handleBackToProfile, selected, profilePic, socialPlatforms } = this.props
+
     return (
           <ScrollView
             style={styles.scrollContainer}
@@ -75,6 +76,14 @@ class ScrollWheel extends Component {
                 ? <TouchableOpacity onPress={() => handlePlatformChange('snapchat')}>
                   <SMPlatformCircle platform="snapchat" size={52}/>
                   <Text style={selected === 'snapchat' ? [styles.text, { color: 'white'}] : styles.text}> Snapchat </Text>
+                </TouchableOpacity>
+                : null
+              }
+              {
+                socialPlatforms && socialPlatforms.includes('linkedin-oauth2')
+                ? <TouchableOpacity onPress={() => handlePlatformChange('linkedin')}>
+                  <SMPlatformCircle platform="linkedin" size={72}/>
+                  <Text style={selected === 'linkedin' ? [styles.text, { color: 'white'}] : styles.text}> LinkedIn </Text>
                 </TouchableOpacity>
                 : null
               }
