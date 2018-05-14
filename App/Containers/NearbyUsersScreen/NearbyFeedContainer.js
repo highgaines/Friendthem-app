@@ -9,6 +9,7 @@ import NoPeopleNearby from './NoPeopleNearby'
 // Libraries
 import { Icon } from 'react-native-elements'
 import Image from 'react-native-remote-svg'
+import { LazyloadScrollView } from 'react-native-lazyload-deux'
 
 // Redux
 import { connect } from 'react-redux'
@@ -23,7 +24,6 @@ import { Images } from '../../Themes'
 // Styles
 import styles from '../Styles/FeedContainerStyles'
 
-import { LazyloadScrollView } from 'react-native-lazyload-deux'
 
 class NearbyFeedContainer extends Component {
   constructor(props){
