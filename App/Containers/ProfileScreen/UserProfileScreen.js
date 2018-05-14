@@ -315,10 +315,14 @@ class UserProfileScreen extends Component {
         return msgContent += `LinkedIn: ${profile.profile_url} \n\n`
       } else {
         const byUID = provider === 'facebook' || provider === 'snapchat'
-        const userIdentifier = byUID ? profile.uid : profile.username
+        const userIdentifier = byUID ? profile.uid : provider === 'google-oauth2' ? `channel/${profile.youtube_channel}` : profile.username
         const providerName = provider === 'google-oauth2' ? 'youtube' : provider
 
-        return msgContent += `${_.capitalize(providerName)}: https://www.${providerName}.com/${userIdentifier} \n\n`
+        if (provider === 'snapchat') {
+          return msgContent += `${_.capitalize(providerName)}: https://www.snapchat.com/add/${userIdentifier} \n\n`
+        } else {
+          return msgContent += `${_.capitalize(providerName)}: https://www.${providerName}.com/${userIdentifier} \n\n`
+        }
       }
     }, '')
   }
