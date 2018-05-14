@@ -1,7 +1,8 @@
 import AppNavigation from '../Navigation/AppNavigation'
+import Immutable from 'seamless-immutable'
 
 export const reducer = (state, action) => {
-  const newState = AppNavigation.router.getStateForAction(action, state)
+  const newState = AppNavigation.router.getStateForAction(action, state ? Immutable.asMutable(state) : state)
   const stateRouteCheck = newState && newState.routes ? newState : state
   const prevScreenIndex = determineRouteIndex(action.routeName, stateRouteCheck.routes)
 
