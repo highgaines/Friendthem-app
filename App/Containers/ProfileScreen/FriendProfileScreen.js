@@ -374,7 +374,7 @@ class FriendProfileScreen extends Component {
             modalVisible={showSuperConnectModal}
             toggleModal={() => this.setState({ showSuperConnectModal: !showSuperConnectModal })}
             buttonText={'Add Accounts'}
-            tutorialCopy={"Sorry, it is not a super connect unless you have at least 2 accounts synced to your profile. You can select the friendthem option or you can use the button below to navigate to your profile and sync more accounts."}
+            tutorialCopy={"Sorry, it is not a super connect unless you have at least 2 accounts synced to your profile. You can select the friendthem™ option or you can use the button below to navigate to your profile and sync more accounts."}
             buttonCallback={() => this.closeModalNavigation('showSuperConnectModal')}
           />
           <View style={styles.profile}>

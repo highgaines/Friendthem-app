@@ -63,7 +63,7 @@ class RootContainer extends Component {
     return (
       <View style={styles.modalView}>
         <Text style={styles.modalText}>
-          The friendthem app requires internet connectivity to function correctly.
+          The friendthem™ app requires internet connectivity to function correctly.
           Please try again when you have service or connect to a WiFi network.
         </Text>
       </View>

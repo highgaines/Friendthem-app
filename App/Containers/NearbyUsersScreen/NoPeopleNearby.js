@@ -44,7 +44,7 @@ export default function NoPeopleNearby({ isActiveLocation, locationPermission, n
       const subInstruction = isIOS ? "Then click on Privacy to get to your location setting!" : ""
       return locationInstruction + subInstruction
     } else {
-      return "It looks like you haven't granted friendthem location permissions."
+      return "It looks like you haven't granted friendthem™ location permissions."
     }
   }
 
