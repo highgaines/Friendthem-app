@@ -95,7 +95,7 @@ class SuperConnect extends Component {
       const deepLinkURL = isIOS || isSnapchat ? `${deepLinkPlatform}${userIdentifier}` : deepLinkPlatform
 
       Linking.canOpenURL(deepLinkURL).then(response => {
-        if (response) {
+        if (response && platformName !== 'facebook') {
           Linking.openURL(deepLinkURL)
         } else {
           Linking.openURL(`https:/${platformName}.com/${userIdentifier}`)
